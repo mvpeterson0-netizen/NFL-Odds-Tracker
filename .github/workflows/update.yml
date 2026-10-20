@@ -1,0 +1,86 @@
+name: update
+
+on:
+  schedule:
+    # Every 15 minutes at off-peak minutes (GitHub delays runs at the top of the hour).
+    # The 60-minute pull window (2.5-3.5 h before kickoff) gets ~4 chances.
+    - cron: "8,23,38,53 * * * *"
+  workflow_dispatch:
+    inputs:
+      force_build:
+        description: "Rebuild site data even if nothing changed"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ["site/**", "pipeline/**", ".github/workflows/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  actions: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      site_changed: ${{ steps.run.outputs.site_changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run pipeline
+        id: run
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          FORCE_BUILD: ${{ (inputs.force_build || github.event_name == 'push') && '1' || '0' }}
+        run: python -m pipeline.run
+
+      - name: Commit data and run log
+        if: always()
+        run: |
+          git config user.name "prop-tracker-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data site/data
+          if git diff --cached --quiet; then
+            echo "nothing to commit"; exit 0
+          fi
+          git commit -q -m "data: scheduled update $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            sleep 5
+          done
+          echo "push failed"; exit 1
+
+      - name: Keep schedule enabled
+        # GitHub disables scheduled workflows in public repos after 60 days without activity.
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/update.yml/enable" || true
+
+      - name: Upload site
+        if: steps.run.outputs.site_changed == 'true' || github.event_name != 'schedule'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: update
+    if: needs.update.outputs.site_changed == 'true' || github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

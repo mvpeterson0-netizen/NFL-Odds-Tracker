@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NFL Prop Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">NFL Prop Tracker <span class="muted">2026</span></div>
+  <nav id="tabs">
+    <a href="#/board" data-tab="board">Board</a>
+    <a href="#/leads" data-tab="leads">Leads</a>
+    <a href="#/slots" data-tab="slots">Slots</a>
+    <a href="#/log" data-tab="log">Log &amp; sources</a>
+  </nav>
+  <div id="status" class="status">Loading…</div>
+</header>
+<div id="stale" class="stale" hidden></div>
+<main id="app"><p class="muted pad">Loading data…</p></main>
+<footer class="foot muted">
+  Stats, injuries, snaps, depth charts and rosters: <a href="https://github.com/nflverse/nflverse-data">nflverse</a> (CC-BY 4.0).
+  Lines: <a href="https://the-odds-api.com">The Odds API</a> (DraftKings, FanDuel), captured about 3 hours before kickoff — not closing lines.
+  Research tool only; flagged props are leads, not predictions.
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
