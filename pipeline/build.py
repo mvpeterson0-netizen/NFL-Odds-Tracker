@@ -11,6 +11,7 @@ from statistics import mean, median
 
 from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso, read_csv, to_float, utcnow,
                      write_json)
+from .defense import DefenseRanks, as_fields
 from .nflverse import Data, load_sources
 from .odds import CAPTURES_PATH, PULL_LOG_PATH, WINDOW_CLOSE, WINDOW_OPEN
 from .slots import update_slots
@@ -104,6 +105,7 @@ def build(log):
     d = Data()
     slots = update_slots(d)
     name_index = build_name_index(d)
+    dranks = DefenseRanks(d, MARKETS)
     now = utcnow()
 
     games = [g for g in d.games if g.get("kickoff_utc")]
@@ -241,7 +243,7 @@ def build(log):
             pulls = pulls_by_game.get(gid, [])
             ok_pull = next((p for p in pulls if p["status"] == "ok"), None)
             for mid, okey, col, _label, _pos in mkts:
-                m = {}
+                m = as_fields(dranks.asof(g["kickoff_utc"], opp, pos, col))
                 if played is True:
                     m["act"] = stat_value(st, col) if st else 0.0
                     if m["act"] is None:
@@ -382,6 +384,9 @@ def build(log):
         "games": {g["game_id"]: {"wk": int(g["week"]), "home": g["home_team"], "away": g["away_team"],
                                  "ko": g["kickoff_utc"], "final": g.get("result", "") != "",
                                  "type": g.get("game_type", ""), "loc": g.get("location", "")} for g in games},
+        "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
+                          for mid, _ok, col, _l, poss in MARKETS if pos in poss}
+                    for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},
         "sources": sources,
         "odds": {"captures": len(caps_all), "games_captured": len({p["game_id"] for p in last_ok}),
                  "last_capture_utc": max((p["attempted_utc"] for p in last_ok), default=""),
