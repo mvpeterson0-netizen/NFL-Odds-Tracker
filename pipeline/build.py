@@ -12,6 +12,7 @@ from statistics import mean, median
 from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso, read_csv, to_float, utcnow,
                      write_json)
 from .defense import DefenseRanks, as_fields
+from .weather import load as load_weather
 from .nflverse import Data, load_sources
 from .odds import CAPTURES_PATH, PULL_LOG_PATH, WINDOW_CLOSE, WINDOW_OPEN
 from .slots import update_slots
@@ -358,6 +359,16 @@ def build(log):
             cur = int(g["week"])
             break
     sources = load_sources()
+    wx = load_weather()
+
+    def wx_out(gid):
+        w = wx.get(gid)
+        if not w:
+            return None
+        keys = ["roof", "note", "fc_fetched_utc", "fc_temp_f", "fc_wind_mph", "fc_gust_mph", "fc_precip_in",
+                "fc_precip_prob", "obs_temp_f", "obs_wind_mph", "obs_gust_mph", "obs_precip_in"]
+        return {k: w.get(k, "") for k in keys if w.get(k, "") != ""}
+
     caps_all = read_csv(CAPTURES_PATH)
     last_ok = [p for p in pull_rows if p["status"] == "ok"]
     credits = next((p["credits_remaining"] for p in reversed(pull_rows) if p.get("credits_remaining")), "")
@@ -383,7 +394,8 @@ def build(log):
         "leads": leads[:40],
         "games": {g["game_id"]: {"wk": int(g["week"]), "home": g["home_team"], "away": g["away_team"],
                                  "ko": g["kickoff_utc"], "final": g.get("result", "") != "",
-                                 "type": g.get("game_type", ""), "loc": g.get("location", "")} for g in games},
+                                 "type": g.get("game_type", ""), "loc": g.get("location", ""),
+                                 "stadium": g.get("stadium", ""), "wx": wx_out(g["game_id"])} for g in games},
         "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},
