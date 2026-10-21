@@ -33,6 +33,25 @@
     }
     return out;
   }
+  // Targets (WR / TE / RB): last played game, last 3 played games, and season average over starts.
+  const TGT_POS = ["WR", "TE", "RB"];
+  function targets(pid, pos, beforeWk) {
+    if (!TGT_POS.includes(pos)) return null;
+    const played = (D.rows[pid] || []).filter((r) => r.wk < beforeWk && r.final && r.played === true && r.tgt != null);
+    if (!played.length) return { n: 0 };
+    const last = played[played.length - 1];
+    const starts = played.filter((r) => STARTER_SLOTS.includes(r.slot));
+    return { n: played.length, last: last.tgt, lastWk: last.wk, lastShare: last.tshare,
+             last3: mean(played.slice(-3).map((r) => r.tgt)), avg: starts.length ? mean(starts.map((r) => r.tgt)) : null, nStarts: starts.length };
+  }
+  const pctS = (v) => (v == null ? "" : ` (${Math.round(v * 100)}%)`);
+  function tgtLine(t) {
+    if (!t) return "";
+    if (!t.n) return `<div class="mtgt muted">Targets: no games yet</div>`;
+    return `<div class="mtgt" title="Last game: week ${t.lastWk}. Share = his share of the team's targets. Season avg counts starts only.">` +
+      `Targets <b>${num(t.last, 0)}</b> last${pctS(t.lastShare)} · <b>${num(t.last3)}</b> last 3 · <b>${t.avg == null ? "—" : num(t.avg)}</b> avg</div>`;
+  }
+
   function trendHtml(f, big) {
     if (f.trend == null) return `<span class="na" title="Fewer than ${TREND_RULES.minGames} starts">—</span>`;
     const t = f.trend > 0 ? ["↑", "Rising", "up"] : f.trend < 0 ? ["↓", "Falling", "down"] : ["→", "Steady", "flat"];
@@ -101,7 +120,7 @@
         rows += `<div class="mrow"><span class="mlab">${esc(mk.label)}</span><span>${lineHtml(m)}</span><span>${f.avg == null ? `<span class="na">—</span>` : num(f.avg)}</span><span>${oppHtml(m)}</span><span>${trendHtml(f)}</span></div>`;
       }
       h += `<a class="mcard" href="#/player/${s.pid}">
-        <div class="mcard-h">${headshot(s.pid, 40)}<div><div class="mname">${esc(s.name)}</div><div class="muted small">${esc(s.team)} · <span class="chip ${s.change ? "chg" : ""}">${s.slot}${s.change ? " ↺" : ""}</span></div></div><span class="mchev">›</span></div>
+        <div class="mcard-h">${headshot(s.pid, 40)}<div><div class="mname">${esc(s.name)}</div><div class="muted small">${esc(s.team)} · <span class="chip ${s.change ? "chg" : ""}">${s.slot}${s.change ? " ↺" : ""}</span></div>${tgtLine(targets(s.pid, pos, wk))}</div><span class="mchev">›</span></div>
         <div class="mrow mhead"><span></span><span>LINE</span><span>AVG</span><span>OPP</span><span>TREND</span></div>${rows}</a>`;
     }
     return h + `</section>`;
@@ -129,6 +148,7 @@
         <div><span>OPP</span>${oppHtml(m)}${m && m.dav != null ? `<small>${num(m.dav)}/g allowed</small>` : ""}</div>
         <div><span>TREND</span>${trendHtml(f, true)}</div>
       </div>
+      ${cur ? tgtLine(targets(pid, p.pos, cur.wk)).replace('class="mtgt', 'class="mtgt mtgt-big') : ""}
       <div class="panel"><h3>${esc(mk.label)} by week</h3><div class="chart">${chartSVG(rows, mid, { W: 400, H: 230, L: 30, R: 26, T: 26, B: 24, fs: 12, edgeAbove: true })}</div>
         <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Snapshot</span></div></div>`;
     // Line movement for this week's game
@@ -139,13 +159,14 @@
       h += `</div></div>`;
     }
     // Game log
-    h += `<div class="panel"><h3>Game log</h3><div class="mlog"><div class="mlog-r mhead"><span>Wk</span><span>Opp</span><span>Line</span><span>Act</span><span>Snap</span></div>`;
+    const showT = TGT_POS.includes(p.pos);
+    h += `<div class="panel"><h3>Game log</h3><div class="mlog"><div class="mlog-r mhead ${showT ? "t" : ""}"><span>Wk</span><span>Opp</span><span>Line</span><span>Act</span>${showT ? "<span>Tgt</span>" : ""}<span>Snap</span></div>`;
     for (const r of [...rows].reverse()) {
       const mm = r.m[mid] || {};
       const w = D.games[r.gid] && D.games[r.gid].wx ? wxSummary(D.games[r.gid].wx) : null;
       const em = D.games[r.gid] && D.games[r.gid].wx && D.games[r.gid].wx.roof === "dome" ? "🏟️" : w ? (w.label.match(/\p{Extended_Pictographic}/u) || [""])[0] : "";
-      h += `<div class="mlog-r"><span>${r.wk}</span><span>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} ${oppHtml(mm)} ${em}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
-        <span>${lineHtml(mm)}</span><span>${actualCell(r, mm)}</span><span>${snapCell(r)}</span></div>`;
+      h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} ${oppHtml(mm)} ${em}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
+        <span>${lineHtml(mm)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0)}</span>` : ""}<span>${snapCell(r)}</span></div>`;
     }
     h += `</div></div>`;
     // Context
@@ -153,7 +174,7 @@
     h += `<div class="panel"><h3>Matchup &amp; context</h3><div class="body mlist">
       ${m && m.drk != null ? `<div>${drankCell(m, p.pos, mk, cur.opp)}</div><div class="muted small">${esc(cur.opp)} allowed ${num(m.dav)} ${p.pos} ${esc(mk.label.toLowerCase())} per game in ${m.dn} games (rank ${m.drk} of ${m.dof}; 1 = fewest).</div>` : ""}
       ${cur ? `<div>Weather: ${wxCell(cur.gid)}</div>` : ""}
-      ${cur && usageCell(cur, p.pos) ? `<div>Last game usage: ${usageCell(cur, p.pos)}</div>` : ""}
+      ${(() => { const lp = rows.filter((r) => cur && r.wk < cur.wk && r.final && r.played === true).pop(); const u = lp ? usageCell(lp, p.pos) : ""; return u ? `<div>Last game usage (W${lp.wk}): ${u}</div>` : ""; })()}
       ${notesTxt ? `<div class="muted small">${notesTxt}</div>` : ""}
       <div class="muted small"><a href="#/guide">How AVG, OPP, trend and weather labels work</a></div>
     </div></div></div>`;
