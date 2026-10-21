@@ -45,12 +45,28 @@ function lineCell(m) {
   switch (m.lstat) {
     case "ok": return `<b>${num(m.line)}</b>`;
     case "not_collected": return NA("not collected");
-    case "pending": return `<span class="na" title="Pull scheduled ${esc(fmtTime(m.pull_open))}">pending</span>`;
+    case "pending":
+      if (m.early && m.early.line != null) return `<b class="snap" title="${esc(earlyTip(m.early))}">${num(m.early.line)}</b> <span class="chip snapchip" title="${esc(earlyTip(m.early))}">FD early</span>`;
+      return `<span class="na" title="Pull scheduled ${esc(fmtTime(m.pull_open))}">pending</span>`;
     case "no_pregame": return `<span class="na" title="${esc(m.lnote)}">no pre-game line</span>`;
     case "not_offered": return `<span class="na" title="${esc(m.lnote)}">not offered</span>`;
     case "not_requested": return `<span class="na" title="${esc(m.lnote)}">not requested</span>`;
     default: return NA();
   }
+}
+function earlyTip(e) {
+  return `FanDuel early-week snapshot, seen ${fmtTime(e.cap)}. Not the pre-game line: it is replaced by the official pre-game line (The Odds API) about 3 hours before kickoff, and is never graded. Source: ${e.src || "FanDuel"}`;
+}
+function ouCell(m, side) {
+  const k = side === "o" ? "op" : "up";
+  if (m && m.lstat === "ok") return odds(m[k]);
+  if (m && m.lstat === "pending" && m.early && m.early.line != null) return `<span class="snap">${odds(m.early[k])}</span>`;
+  return "";
+}
+function earlyNote(m) {
+  if (!m || !m.early || m.lstat !== "ok" || m.early.line == null) return "";
+  const d = m.line - m.early.line;
+  return `<div class="muted" title="${esc(earlyTip(m.early))}">Early FD ${num(m.early.line)} (${odds(m.early.op)}/${odds(m.early.up)}) · move ${d > 0 ? "+" : ""}${num(d)}</div>`;
 }
 function actualCell(r, m) {
   if (m && m.act != null) return `<b>${num(m.act)}</b>`;
@@ -63,9 +79,10 @@ function resultCell(m) {
   return `<span class="res ${m.res}">${m.res === "pending" ? "pending" : m.res}</span>`;
 }
 function capCell(m) {
+  if (m && m.lstat === "pending" && m.early && m.early.line != null) return `FanDuel · <span title="${esc(m.early.cap)}">${fmtTime(m.early.cap)}</span> <span class="muted">(early snapshot)</span>`;
   if (!m || m.lstat !== "ok") return "";
   const late = m.inwin === "no" ? ` <span class="chip" title="Captured outside the 2.5–3.5 h window">${esc(m.mins)} min pre</span>` : "";
-  return `${esc(m.book)} · <span title="${esc(m.cap)}">${fmtTime(m.cap)}</span>${late}`;
+  return `${esc(m.book)} · <span title="${esc(m.cap)}">${fmtTime(m.cap)}</span>${late}${earlyNote(m)}`;
 }
 function ordinal(n) { const v = n % 100; return n + (["th", "st", "nd", "rd"][(v - 20) % 10] || ["th", "st", "nd", "rd"][v] || "th"); }
 function drankCell(m, pos, mk, opp) {
@@ -204,8 +221,8 @@ function viewBoard() {
         <td>${esc(mk.label)}</td>
         <td class="small">${drankCell(m, pos, mk, r.opp)}</td>
         <td class="num">${lineCell(m)}</td>
-        <td class="num">${m && m.lstat === "ok" ? odds(m.op) : ""}</td>
-        <td class="num">${m && m.lstat === "ok" ? odds(m.up) : ""}</td>
+        <td class="num">${ouCell(m, "o")}</td>
+        <td class="num">${ouCell(m, "u")}</td>
         <td class="small">${capCell(m)}</td>
         <td class="num">${actualCell(r, m)}</td>
         <td>${resultCell(m)}</td>
@@ -316,8 +333,8 @@ function viewPlayer(pid) {
       <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
       <td class="small">${wxCell(r.gid)}</td>
       <td>${esc(r.slot) || '<span class="muted small">not slotted</span>'}</td>
-      <td class="num">${lineCell(m)}</td><td class="num">${m && m.lstat === "ok" ? odds(m.op) : ""}</td>
-      <td class="num">${m && m.lstat === "ok" ? odds(m.up) : ""}</td><td class="small">${capCell(m)}${m && m.alt ? m.alt.map((a) => `<div class="muted">${esc(a.book)}: ${num(a.line)} (${a.op > 0 ? "+" : ""}${a.op ?? "?"}/${a.up > 0 ? "+" : ""}${a.up ?? "?"})</div>`).join("") : ""}</td>
+      <td class="num">${lineCell(m)}</td><td class="num">${ouCell(m, "o")}</td>
+      <td class="num">${ouCell(m, "u")}</td><td class="small">${capCell(m)}${m && m.alt ? m.alt.map((a) => `<div class="muted">${esc(a.book)}: ${num(a.line)} (${a.op > 0 ? "+" : ""}${a.op ?? "?"}/${a.up > 0 ? "+" : ""}${a.up ?? "?"})</div>`).join("") : ""}</td>
       <td class="num">${actualCell(r, m)}</td><td>${resultCell(m)}</td><td class="num">${snapCell(r)}</td>
       <td class="small">${usageCell(r, p.pos)}</td><td class="note">${notes(r, m, null)}</td></tr>`;
   }

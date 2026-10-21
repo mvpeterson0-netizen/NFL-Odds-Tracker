@@ -139,6 +139,22 @@ def build(log):
                               "name": c["player_book_name"]})
             continue
         caps_by[(c["game_id"], c["gsis_id"], c["market"])].append(c)
+    # FanDuel early-week snapshots (experimental; display only, never graded)
+    fd_by = {}
+    for c in read_csv(DATA / "fd_snapshots.csv"):
+        g = games_by_id.get(c.get("game_id", ""))
+        if not g:
+            continue
+        pid = c.get("gsis_id") or ""
+        if not pid:
+            k = norm_name(c.get("player_book_name", ""))
+            pid = name_index.get(g["home_team"], {}).get(k) or name_index.get(g["away_team"], {}).get(k) or ""
+        cap = parse_iso(c.get("captured_utc", ""))
+        if not pid or cap is None or cap >= parse_iso(g["kickoff_utc"]):
+            continue
+        key = (c["game_id"], pid, c["market"])
+        if key not in fd_by or c["captured_utc"] > fd_by[key]["captured_utc"]:
+            fd_by[key] = c
     pull_rows = read_csv(PULL_LOG_PATH)
     pulls_by_game = defaultdict(list)
     for p in pull_rows:
@@ -284,6 +300,11 @@ def build(log):
                                       + (f" (books returning props: {books})" if books else ""))
                         if inj_txt:
                             m["lnote"] += f"; {inj_txt}"
+                fd = fd_by.get((gid, pid, okey))
+                if fd:
+                    m["early"] = {"book": "FanDuel", "line": to_float(fd["line"]), "op": to_float(fd["over_price"]),
+                                  "up": to_float(fd["under_price"]), "cap": fd["captured_utc"],
+                                  "src": fd.get("source_url", "")}
                 if m.get("lstat") == "ok":
                     if played is True and m.get("act") is not None and m.get("line") is not None:
                         a, ln = m["act"], m["line"]

@@ -77,3 +77,6 @@ table.wrap td { white-space: normal; }
 .drk { font-weight: 600; }
 .drk.tough { color: var(--under); } .drk.easy { color: var(--over); }
 .wxline { max-width: 230px; white-space: normal; }
+.snap { font-style: italic; color: var(--muted); }
+b.snap { color: var(--ink); }
+.snapchip { background: var(--warn-bg); color: var(--warn-ink); }
