@@ -1,0 +1,77 @@
+name: fanduel-snapshot
+
+# EXPERIMENTAL early-week FanDuel snapshot. See scrapers/fanduel_snapshot.py for the caveats
+# (FanDuel's Terms of Use prohibit automated access; this may stop working without warning).
+# Separate from the main `update` workflow: it never touches the Odds API captures, and if it
+# fails the rest of the app keeps running normally.
+
+on:
+  schedule:
+    - cron: "8 15 * * 1"  # Mondays 15:08 UTC (10:08 AM CDT / 9:08 AM CST)
+  workflow_dispatch:
+  push:
+    # TEMPORARY: discovery run on the feature branch (saves raw responses as an artifact only).
+    # Remove before merging.
+    branches: [feat/fanduel-snapshots]
+    paths: ["scrapers/**", ".github/workflows/fanduel.yml"]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: fanduel
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install headless browser
+        run: |
+          pip install playwright==1.48.0
+          python -m playwright install --with-deps chromium
+
+      - name: Take snapshot
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            python scrapers/fanduel_snapshot.py --out .fd_raw
+          else
+            python scrapers/fanduel_snapshot.py --out .fd_raw --no-write
+          fi
+
+      - name: Save raw responses for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fanduel-raw-${{ github.run_id }}
+          path: .fd_raw
+          retention-days: 14
+
+      - name: Commit snapshot and log
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "prop-tracker-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/fd_snapshots.csv data/fd_snapshot_log.csv 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "nothing to commit"; exit 0
+          fi
+          git commit -q -m "data: FanDuel early-week snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && break
+            sleep 7
+          done
+
+      - name: Rebuild the site with the new snapshot
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update.yml -f force_build=true || true
