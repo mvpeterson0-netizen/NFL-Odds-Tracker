@@ -2,7 +2,7 @@
 // NFL Prop Tracker front end. Reads data/data.json (built by the GitHub Action). No external libraries.
 
 let D = null;
-const S = { tab: "board", wk: null, game: "", team: "", pos: "", q: "", slotWk: null, slotTeam: "", market: {}, showAn: false };
+const S = { tab: "board", defMk: "WR:rec_yds", defAsc: true, wk: null, game: "", team: "", pos: "", q: "", slotWk: null, slotTeam: "", market: {}, showAn: false };
 const SLOT_ORDER = ["QB1", "RB1", "RB2", "WR1", "WR2", "WR3", "TE1", "TE2"];
 const app = document.getElementById("app");
 
@@ -599,6 +599,46 @@ function viewGuide() {
   </tbody></table></div></div>`;
 }
 
+// ---------- Defense ranks tab ----------
+function defMarkets() {
+  const out = [];
+  for (const pos of ["QB", "RB", "WR", "TE"]) for (const m of D.markets) if (m.pos.includes(pos)) out.push({ key: `${pos}:${m.id}`, pos, m });
+  return out;
+}
+function viewDefense() {
+  const list = defMarkets();
+  if (!list.some((x) => x.key === S.defMk)) S.defMk = list[0].key;
+  const sel = list.find((x) => x.key === S.defMk);
+  const tbl = ((D.defrank || {})[sel.pos] || {})[sel.m.id] || {};
+  // This week's opponent for each defense (from the current week's schedule)
+  const facing = {};
+  for (const [gid, g] of Object.entries(D.games)) if (g.wk === D.current_week) {
+    facing[g.home] = { opp: g.away, ha: "vs.", ko: g.ko };
+    facing[g.away] = { opp: g.home, ha: "@", ko: g.ko };
+  }
+  const rows = Object.entries(tbl).map(([team, v]) => ({ team, rk: v[0], avg: v[1], n: v[2], of: v[3] }));
+  rows.sort((a, b) => (S.defAsc ? a.rk - b.rk : b.rk - a.rk) || a.team.localeCompare(b.team));
+  const of = rows.length ? rows[0].of : 32, q = Math.round(of / 4);
+  const stats = (D.sources || {}).stats;
+  let h = `<div class="gamebar" role="group" aria-label="Choose a market">` + list.map((x) =>
+    `<button class="gchip ${x.key === S.defMk ? "on" : ""}" data-dm="${x.key}"><b>${x.pos}</b><span class="muted small">${esc(x.m.label)}</span></button>`).join("") + `</div>
+    <p class="callout">How each defense ranks in <b>${sel.pos} ${esc(sel.m.label.toLowerCase())} allowed per game</b> this season.
+    1 = fewest allowed (toughest), ${of} = most allowed. Counts every game with published stats, so it updates automatically as each week's stats arrive
+    ${stats ? `(nflverse stats last updated ${esc(stats.last_updated)})` : ""}. "This week" is who each defense plays in week ${D.current_week}.</p>`;
+  if (!rows.length) return h + `<p class="muted">No games with stats yet.</p>`;
+  h += `<div class="panel scroll"><table class="dtable"><thead><tr>
+    <th class="num"><button class="sortb" id="d-sort" title="Reverse order">Rank ${S.defAsc ? "▲" : "▼"}</button></th><th>Defense</th>
+    <th class="num">${esc(sel.m.label)} allowed / game</th><th class="num">Games</th><th>This week</th></tr></thead><tbody>`;
+  for (const r of rows) {
+    const cls = r.n < 3 ? "" : r.rk <= q ? "tough" : r.rk > of - q ? "easy" : "";
+    const f = facing[r.team];
+    h += `<tr><td class="num"><span class="drk ${cls}">${ordinal(r.rk)}</span></td><td><b>${esc(r.team)}</b></td>
+      <td class="num">${num(r.avg)}</td><td class="num">${r.n}</td>
+      <td>${f ? `${f.ha} ${esc(f.opp)} <span class="muted small">${fmtTime(f.ko)}</span>` : `<span class="muted small">bye</span>`}</td></tr>`;
+  }
+  return h + `</tbody></table></div><p class="muted small">Ties share a rank. Red = top quarter (toughest), green = bottom quarter (most allowed). Same numbers as the Opp D rank column on the Board, which uses only games before each matchup.</p>`;
+}
+
 // ---------- routing ----------
 let LIVE = null;
 function render() {
@@ -616,6 +656,7 @@ function render() {
   else if (tab === "slots") app.innerHTML = viewSlots();
   else if (tab === "log") app.innerHTML = viewLog(LIVE);
   else if (tab === "guide") app.innerHTML = viewGuide();
+  else if (tab === "defense") app.innerHTML = viewDefense();
   else app.innerHTML = viewBoard();
   bind(tab, arg);
   if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
@@ -630,6 +671,8 @@ function bind(tab, arg) {
   on("s-wk", "change", (e) => { S.slotWk = +e.target.value; render(); });
   on("s-team", "change", (e) => { S.slotTeam = e.target.value; render(); });
   on("an-toggle", "click", () => { S.showAn = !S.showAn; render(); });
+  document.querySelectorAll("[data-dm]").forEach((b) => b.addEventListener("click", () => { S.defMk = b.dataset.dm; render(); }));
+  on("d-sort", "click", () => { S.defAsc = !S.defAsc; render(); });
   document.querySelectorAll("[data-note]").forEach((b) => b.addEventListener("click", () => {
     const nr = b.closest("tr").nextElementSibling;
     if (nr && nr.classList.contains("noterow")) { nr.hidden = !nr.hidden; b.classList.toggle("on", !nr.hidden); }
