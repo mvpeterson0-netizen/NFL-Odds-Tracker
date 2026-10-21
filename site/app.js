@@ -168,6 +168,11 @@ function wxCell(gid) {
   if (ko > now) return `<span class="na" title="Open-Meteo forecasts reach 16 days ahead">forecast not out yet</span>`;
   return `<span class="na" title="Open-Meteo's observed archive has about a 5-day delay">observed weather pending</span>`;
 }
+function headshot(pid, size) {
+  const p = playerById[pid];
+  if (!p || !p.img) return `<span class="hs none" style="width:${size}px;height:${size}px"></span>`;
+  return `<img class="hs" src="${esc(p.img)}" alt="" width="${size}" height="${size}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'hs none',style:'width:${size}px;height:${size}px'}))">`;
+}
 function usageCell(r, pos) {
   if (pos === "QB") return "";
   const parts = [];
@@ -268,7 +273,7 @@ function viewBoard() {
         ${newGame ? `<td class="gamecell" rowspan="${span[r.gid]}"><div class="gwrap"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></div></td>` : ""}
         <td>${first ? esc(s.team) : ""}</td>
         <td>${first ? `<span class="chip ${s.change ? "chg" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
-        <td>${first ? `<a href="#/player/${s.pid}">${esc(s.name)}</a>` : ""}</td>
+        <td>${first ? `<a class="pname" href="#/player/${s.pid}">${headshot(s.pid, 28)}${esc(s.name)}</a>` : ""}</td>
         <td>${esc(mk.label)}</td>
         <td class="small">${drankCell(m, pos, mk, r.opp)}</td>
         <td class="num">${lineCell(m)}</td>
@@ -390,7 +395,7 @@ function viewPlayer(pid) {
   const mid = S.market[pid] && ms.some((m) => m.id === S.market[pid]) ? S.market[pid] : ms[0].id;
   const curSlot = [...D.slots].filter((s) => s.pid === pid).sort((a, b) => b.wk - a.wk)[0];
   let h = `<p class="small"><a href="#/board">← Board</a></p>
-    <div class="ph"><h2>${esc(p.name)}</h2><span class="chip">${esc(p.team)} · ${esc(p.pos)}</span>
+    <div class="ph">${headshot(pid, 72)}<h2>${esc(p.name)}</h2><span class="chip">${esc(p.team)} · ${esc(p.pos)}</span>
     ${curSlot ? `<span class="muted">Week ${curSlot.wk}: <b>${curSlot.slot}</b> — ${esc(curSlot.basis)}</span>` : ""}</div>
     ${curSlot && curSlot.change ? `<p class="callout">Slot change: ${esc(curSlot.change)}</p>` : ""}
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
