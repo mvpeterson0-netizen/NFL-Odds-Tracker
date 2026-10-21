@@ -47,7 +47,7 @@ th, td { padding: 5px 9px; border-bottom: 1px solid var(--line); text-align: lef
 th { font-size: 12px; color: var(--muted); font-weight: 600; background: var(--panel); }
 tr:hover td { background: var(--hover); }
 td.num, th.num { text-align: right; }
-td.note { white-space: normal; color: var(--muted); font-size: 12px; max-width: 360px; }
+td.note { white-space: normal; color: var(--muted); font-size: 12px; max-width: 360px; min-width: 260px; }
 tr.grp td { border-top: 2px solid var(--line); }
 .res { font-weight: 650; text-transform: uppercase; font-size: 12px; letter-spacing: .03em; }
 .res.over { color: var(--over); } .res.under { color: var(--under); } .res.push { color: var(--push); }
