@@ -100,3 +100,10 @@ td.wrapcell { white-space: normal; }
 .hs { border-radius: 50%; object-fit: cover; object-position: top; background: var(--chip); vertical-align: middle; flex: 0 0 auto; display: inline-block; }
 a.pname { display: inline-flex; align-items: center; gap: 8px; }
 .ph .hs { align-self: center; }
+/* compact desktop player table */
+.ptable td { vertical-align: middle; }
+.wxc { white-space: nowrap; }
+button.info { padding: 0 6px; border: 0; background: transparent; color: var(--muted); font-size: 15px; line-height: 1; cursor: pointer; }
+button.info:hover, button.info.on { color: var(--accent); background: transparent; }
+tr.noterow td { border-top: 0; padding-top: 0; }
+tr.noterow td.note { max-width: none; }

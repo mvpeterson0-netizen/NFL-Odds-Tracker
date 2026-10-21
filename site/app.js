@@ -397,6 +397,63 @@ function analysisPanel(pid, mid, rows) {
   return h;
 }
 
+// ---------- compact cells for the desktop player table ----------
+const BOOK_ABBR = { DraftKings: "DK", FanDuel: "FD" };
+function wxCompact(gid) {
+  const g = D.games[gid]; if (!g) return "";
+  const w = g.wx || {};
+  if (w.roof === "dome") return `<span class="wxb dome" title="Fixed-roof stadium (${esc(g.stadium)}). Weather does not apply.">Dome</span>`;
+  const v = g.wx ? wxValues(w) : null;
+  if (!v) {
+    const future = new Date(g.ko).getTime() > Date.now();
+    return `<span class="na" title="${future ? "Open-Meteo forecasts reach about 16 days ahead" : "Observed weather arrives about 6 days after the game"}">${future ? "forecast not out yet" : "pending"}</span>`;
+  }
+  const s = wxSummary(w);
+  const rain = v.pr == null ? "–" : v.pr === 0 ? "0" : String(v.pr).replace(/^0\./, ".");
+  const tip = `${v.kind === "obs" ? "Observed" : `Forecast (fetched ${fmtTime(w.fc_fetched_utc)})`}: ${v.t}°F, wind ${v.wind} mph` +
+    (v.gust != null ? ` (gusts ${v.gust} mph)` : "") + `, ${v.pr ?? "?"} in precipitation over the kickoff hour + next 3 h` +
+    (v.pp != null ? ` (${v.pp}% chance)` : "") + (w.roof === "retractable" ? ". Retractable-roof stadium" : "") +
+    `. ${s.label}: ${s.why}. Label rules are on the Guide tab.`;
+  return `<span class="wxc" title="${esc(tip)}"><a href="#/guide" class="wxb ${s.nice ? "nice" : "bad"}">${esc(s.label)}</a> · ${v.t} · ${v.wind}mph · ${rain}in</span>`;
+}
+function lineCompact(m) {
+  if (m && m.lstat === "not_collected") return `<span class="na" title="Game was played before line collection began (10/20/2026)">N/A</span>`;
+  return lineCell(m);
+}
+function oddsCompact(m) {
+  if (m && m.lstat === "ok") return `${odds(m.op)} / ${odds(m.up)}`;
+  const sn = m && m.lstat === "pending" ? latestSnap(m) : null;
+  return sn ? `<span class="snap">${odds(sn.op)} / ${odds(sn.up)}</span>` : "";
+}
+function bookCompact(m) {
+  const strip = (x) => String(x).replace(/<[^>]+>/g, "");
+  if (m && m.lstat === "ok") {
+    const moves = (m.snaps || []).map((x) => `${x.label} ${num(x.line)} (${x.book}, ${fmtTime(x.cap)})`).join("; ");
+    const alts = (m.alt || []).map((a) => `${a.book} ${num(a.line)} (${strip(odds(a.op))}/${strip(odds(a.up))})`).join("; ");
+    const tip = `${m.book}, captured ${fmtTime(m.cap)}` + (m.mins ? ` (${m.mins} min before kickoff)` : "") +
+      (alts ? `. Also: ${alts}` : "") + (moves ? `. Earlier: ${moves}` : "");
+    return `<span title="${esc(tip)}">${esc(BOOK_ABBR[m.book] || m.book)} · Pre</span>`;
+  }
+  const sn = m && m.lstat === "pending" ? latestSnap(m) : null;
+  if (!sn) return "";
+  const tip = (m.snaps || []).map((x) => `${x.label}: ${num(x.line)} (${x.book}, ${fmtTime(x.cap)})`).join("; ") + ". Snapshot, not graded.";
+  return `<span title="${esc(tip)}">${esc(BOOK_ABBR[sn.book] || sn.book)} · ${esc(sn.label)}</span>`;
+}
+function snapUse(r, pos) {
+  const parts = [];
+  const sc = snapCell(r);
+  if (sc) parts.push(sc);
+  if (pos === "RB") {
+    if (r.car != null) parts.push(`${num(r.car, 0)} car`);
+    if (r.tgt != null) parts.push(`${num(r.tgt, 0)} tgt`);
+  } else if (pos !== "QB" && r.tgt != null) parts.push(`${num(r.tgt, 0)} tgt`);
+  return parts.join(" · ");
+}
+function actualCompact(r, m) {
+  if (r.played === false) return `<span class="na" title="${esc(r.dnp || "Did not play")}">DNP</span>`;
+  return actualCell(r, m);
+}
+
 function viewPlayer(pid) {
   const p = playerById[pid];
   if (!p) return `<p>Player not found. <a href="#/board">Back to board</a></p>`;
@@ -410,21 +467,24 @@ function viewPlayer(pid) {
     ${curSlot && curSlot.change ? `<p class="callout">Slot change: ${esc(curSlot.change)}</p>` : ""}
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
-    <div class="panel"><div class="chart">${chartSVG(rows, mid)}</div>
+    <div class="panel"><div class="chart">${chartSVG(rows, mid, { edgeAbove: true })}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM), until the pre-game line arrives</span></div></div>
-    <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th>Weather</th><th>Slot</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
-    <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
-    <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
+    <div class="panel scroll"><table class="ptable"><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th title="Label · temperature (°F) · wind · precipitation. Hover for details.">Weather</th><th>Slot</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
+    <th class="num" title="Over / Under odds">Odds</th><th title="Book · which pull (hover for the exact time and line movement)">Book</th><th class="num">Actual</th><th>Result</th>
+    <th class="num" title="Offensive snap share · usage (targets; carries for RBs)">Snap · use</th><th></th></tr></thead><tbody>`;
   for (const r of rows) {
     const m = r.m[mid];
-    h += `<tr><td>${r.wk}</td><td>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} <span class="muted small">${fmtTime(r.ko)}</span></td>
+    const nt = notes(r, m, null);
+    h += `<tr><td>${r.wk}</td><td title="${esc(fmtTime(r.ko))}">${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)}</td>
       <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
-      <td class="small">${wxCell(r.gid)}</td>
-      <td>${esc(r.slot) || '<span class="muted small">not slotted</span>'}</td>
-      <td class="num">${lineCell(m)}</td><td class="num">${ouCell(m, "o")}</td>
-      <td class="num">${ouCell(m, "u")}</td><td class="small">${capCell(m)}${m && m.alt ? m.alt.map((a) => `<div class="muted">${esc(a.book)}: ${num(a.line)} (${a.op > 0 ? "+" : ""}${a.op ?? "?"}/${a.up > 0 ? "+" : ""}${a.up ?? "?"})</div>`).join("") : ""}</td>
-      <td class="num">${actualCell(r, m)}</td><td>${resultCell(m)}</td><td class="num">${snapCell(r)}</td>
-      <td class="small">${usageCell(r, p.pos)}</td><td class="note">${notes(r, m, null)}</td></tr>`;
+      <td class="small">${wxCompact(r.gid)}</td>
+      <td>${r.slot ? esc(r.slot) : '<span class="na">N/A</span>'}</td>
+      <td class="num">${lineCompact(m)}</td><td class="num">${oddsCompact(m)}</td>
+      <td class="small">${bookCompact(m)}</td>
+      <td class="num">${actualCompact(r, m)}</td><td>${resultCell(m)}</td>
+      <td class="num small">${snapUse(r, p.pos)}</td>
+      <td>${nt ? `<button class="info" data-note title="Show notes" aria-label="Show notes">ⓘ</button>` : ""}</td></tr>`;
+    if (nt) h += `<tr class="noterow" hidden><td></td><td colspan="11" class="note">${nt}</td></tr>`;
   }
   h += `</tbody></table></div>`;
   if (S.showAn) h += analysisPanel(pid, mid, rows);
@@ -570,6 +630,10 @@ function bind(tab, arg) {
   on("s-wk", "change", (e) => { S.slotWk = +e.target.value; render(); });
   on("s-team", "change", (e) => { S.slotTeam = e.target.value; render(); });
   on("an-toggle", "click", () => { S.showAn = !S.showAn; render(); });
+  document.querySelectorAll("[data-note]").forEach((b) => b.addEventListener("click", () => {
+    const nr = b.closest("tr").nextElementSibling;
+    if (nr && nr.classList.contains("noterow")) { nr.hidden = !nr.hidden; b.classList.toggle("on", !nr.hidden); }
+  }));
   document.querySelectorAll("[data-mid]").forEach((b) => b.addEventListener("click", () => { S.market[arg] = b.dataset.mid; render(); }));
 }
 
