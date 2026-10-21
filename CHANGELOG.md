@@ -9,3 +9,4 @@
 - 2026-10-20 · PR: scheduled snapshot pulls · Extra Odds API pulls for line movement: Monday 8 AM CT (hourly until props are posted), Thursday 2 PM, Sunday 8 AM. Shown with a yellow Mon/Thu/Sun AM chip until the graded pre-game line (~3 h before kickoff) arrives, then as movement (Mon → Thu → Sun AM → Pre). Never graded; only uses credits not needed for pre-game pulls.
 - 2026-10-20 · PR: merged game cells · Board shows each game once, in one cell spanning all of that game's rows; thicker line between games, thin line between players. UI only.
 - 2026-10-20 · PR: pinned game info · Board table scrolls in its own box; column headers and the current game's info stay pinned while scrolling. UI only.
+- 2026-10-20 · PR: weather labels + Guide tab · One-glance weather label per game (Nice, Rainy, Snowy, Windy, Freezing, Cold, Hot, combined with &; Dome). Triggers listed on a new Guide tab, generated from the same thresholds the labels use. UI only.

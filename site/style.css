@@ -89,3 +89,9 @@ tr.plr td:not(.gamecell) { border-top: 1px solid var(--line); }
 .panel.board thead th { position: sticky; top: 0; z-index: 3; box-shadow: inset 0 -1px 0 var(--line); }
 .panel.board td.gamecell { padding: 0; }
 .panel.board .gwrap { position: sticky; top: 30px; padding: 6px 9px; background: var(--panel); z-index: 1; }
+.wxb { display: inline-block; padding: 0 7px; border-radius: 9px; font-size: 12px; font-weight: 600; margin: 2px 0; text-decoration: none; }
+.wxb:hover { text-decoration: none; filter: brightness(1.1); }
+.wxb.nice { background: color-mix(in srgb, var(--over) 18%, transparent); color: var(--over); }
+.wxb.bad { background: var(--warn-bg); color: var(--warn-ink); }
+.wxb.dome { background: var(--chip); color: var(--muted); }
+td.wrapcell { white-space: normal; }
