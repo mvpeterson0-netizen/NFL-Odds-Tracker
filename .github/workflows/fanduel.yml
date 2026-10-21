@@ -42,9 +42,9 @@ jobs:
       - name: Take snapshot
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            python scrapers/fanduel_snapshot.py --out .fd_raw
+            python scrapers/fanduel_snapshot.py --out fd_raw
           else
-            python scrapers/fanduel_snapshot.py --out .fd_raw --no-write
+            python scrapers/fanduel_snapshot.py --out fd_raw --no-write
           fi
 
       - name: Save raw responses for inspection
@@ -52,8 +52,20 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: fanduel-raw-${{ github.run_id }}
-          path: .fd_raw
+          path: fd_raw
           retention-days: 14
+
+      - name: Publish discovery output to the fd-discovery branch (feature branch only)
+        if: github.ref != 'refs/heads/main'
+        run: |
+          git config user.name "prop-tracker-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/disc && cp -r fd_raw /tmp/disc/
+          git checkout -q --orphan fd-discovery
+          git rm -rq --cached . && git clean -fdxq -e fd_raw
+          find fd_raw -name 'resp_*.json' -size +2M -delete
+          git add fd_raw && git commit -q -m "FanDuel discovery output ${{ github.run_id }}"
+          git push -q -f origin fd-discovery
 
       - name: Commit snapshot and log
         if: github.ref == 'refs/heads/main'
