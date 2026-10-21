@@ -8,3 +8,4 @@
 - 2026-10-20 · PR: API key rotation · Supports up to 6 Odds API keys (ODDS_API_KEY, ODDS_API_KEY_2..6); each pull uses the first key with enough credits and falls back to the next if one is rejected. Pull log notes the key number, never the key.
 - 2026-10-20 · PR: scheduled snapshot pulls · Extra Odds API pulls for line movement: Monday 8 AM CT (hourly until props are posted), Thursday 2 PM, Sunday 8 AM. Shown with a yellow Mon/Thu/Sun AM chip until the graded pre-game line (~3 h before kickoff) arrives, then as movement (Mon → Thu → Sun AM → Pre). Never graded; only uses credits not needed for pre-game pulls.
 - 2026-10-20 · PR: merged game cells · Board shows each game once, in one cell spanning all of that game's rows; thicker line between games, thin line between players. UI only.
+- 2026-10-20 · PR: pinned game info · Board table scrolls in its own box; column headers and the current game's info stay pinned while scrolling. UI only.
