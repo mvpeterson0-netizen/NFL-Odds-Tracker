@@ -14,7 +14,7 @@ from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso
 from .defense import DefenseRanks, as_fields
 from .weather import load as load_weather
 from .nflverse import Data, load_sources
-from .odds import CAPTURES_PATH, PULL_LOG_PATH, WINDOW_CLOSE, WINDOW_OPEN
+from .odds import CAPTURES_PATH, PULL_LOG_PATH, SNAPSHOTS, WINDOW_CLOSE, WINDOW_OPEN, ptype
 from .slots import update_slots
 
 MARKETS = [
@@ -126,6 +126,7 @@ def build(log):
 
     # Captures and pull log
     caps_by = defaultdict(list)
+    snaps_by = defaultdict(list)  # (game, player, market, pull_type) -> captures (line-movement snapshots)
     unmatched = []
     for c in read_csv(CAPTURES_PATH):
         if not c.get("gsis_id"):
@@ -138,11 +139,15 @@ def build(log):
             unmatched.append({"game_id": c["game_id"], "book": c["book"], "market": c["market"],
                               "name": c["player_book_name"]})
             continue
-        caps_by[(c["game_id"], c["gsis_id"], c["market"])].append(c)
+        if ptype(c) == "pregame":
+            caps_by[(c["game_id"], c["gsis_id"], c["market"])].append(c)
+        else:
+            snaps_by[(c["game_id"], c["gsis_id"], c["market"], ptype(c))].append(c)
     pull_rows = read_csv(PULL_LOG_PATH)
     pulls_by_game = defaultdict(list)
     for p in pull_rows:
-        pulls_by_game[p["game_id"]].append(p)
+        if ptype(p) == "pregame":
+            pulls_by_game[p["game_id"]].append(p)
 
     # Tracked players
     players = {}
@@ -284,6 +289,16 @@ def build(log):
                                       + (f" (books returning props: {books})" if books else ""))
                         if inj_txt:
                             m["lnote"] += f"; {inj_txt}"
+                snaps = []
+                for t, (label, *_r) in SNAPSHOTS.items():
+                    sc = snaps_by.get((gid, pid, okey, t))
+                    if sc:
+                        sm, _alts = choose_main(sc)
+                        snaps.append({"t": t, "label": label, "line": to_float(sm["line"]),
+                                      "op": to_float(sm["over_price"]), "up": to_float(sm["under_price"]),
+                                      "book": BOOK_NAMES.get(sm["book"], sm["book"]), "cap": sm["captured_utc"]})
+                if snaps:
+                    m["snaps"] = snaps
                 if m.get("lstat") == "ok":
                     if played is True and m.get("act") is not None and m.get("line") is not None:
                         a, ln = m["act"], m["line"]
@@ -370,7 +385,7 @@ def build(log):
         return {k: w.get(k, "") for k in keys if w.get(k, "") != ""}
 
     caps_all = read_csv(CAPTURES_PATH)
-    last_ok = [p for p in pull_rows if p["status"] == "ok"]
+    last_ok = [p for p in pull_rows if p["status"] == "ok" and ptype(p) == "pregame"]
     credits = next((p["credits_remaining"] for p in reversed(pull_rows) if p.get("credits_remaining")), "")
     runs = []
     for f in sorted((DATA / "runs").glob("*.csv"))[-2:]:
@@ -400,7 +415,9 @@ def build(log):
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},
         "sources": sources,
-        "odds": {"captures": len(caps_all), "games_captured": len({p["game_id"] for p in last_ok}),
+        "odds": {"captures": sum(1 for c in caps_all if ptype(c) == "pregame"),
+                 "snapshot_captures": sum(1 for c in caps_all if ptype(c) != "pregame"),
+                 "games_captured": len({p["game_id"] for p in last_ok}),
                  "last_capture_utc": max((p["attempted_utc"] for p in last_ok), default=""),
                  "credits_remaining": credits},
         "pull_log": pull_rows[-300:],

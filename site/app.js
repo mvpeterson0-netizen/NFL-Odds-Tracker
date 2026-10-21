@@ -45,12 +45,34 @@ function lineCell(m) {
   switch (m.lstat) {
     case "ok": return `<b>${num(m.line)}</b>`;
     case "not_collected": return NA("not collected");
-    case "pending": return `<span class="na" title="Pull scheduled ${esc(fmtTime(m.pull_open))}">pending</span>`;
+    case "pending": {
+      const sn = latestSnap(m);
+      if (sn) return `<b class="snap" title="${esc(snapTip(m))}">${num(sn.line)}</b> <span class="chip snapchip" title="${esc(snapTip(m))}">${esc(sn.label)}</span>`;
+      return `<span class="na" title="Pull scheduled ${esc(fmtTime(m.pull_open))}">pending</span>`;
+    }
     case "no_pregame": return `<span class="na" title="${esc(m.lnote)}">no pre-game line</span>`;
     case "not_offered": return `<span class="na" title="${esc(m.lnote)}">not offered</span>`;
     case "not_requested": return `<span class="na" title="${esc(m.lnote)}">not requested</span>`;
     default: return NA();
   }
+}
+function latestSnap(m) { return m && m.snaps && m.snaps.length ? m.snaps[m.snaps.length - 1] : null; }
+function snapTip(m) {
+  const lines = (m.snaps || []).map((x) => `${x.label} (${fmtTime(x.cap)}, ${x.book}): ${num(x.line)}  ${odds(x.op).replace(/<[^>]+>/g, "")}/${odds(x.up).replace(/<[^>]+>/g, "")}`);
+  return "Line-movement snapshots (not graded):\n" + lines.join("\n") +
+    (m.lstat === "pending" ? "\nThe official pre-game line (~3 h before kickoff) replaces these and is the one graded." : "");
+}
+function ouCell(m, side) {
+  const k = side === "o" ? "op" : "up";
+  if (m && m.lstat === "ok") return odds(m[k]);
+  const sn = m && m.lstat === "pending" ? latestSnap(m) : null;
+  return sn ? `<span class="snap">${odds(sn[k])}</span>` : "";
+}
+function moveNote(m) {
+  if (!m || !m.snaps || !m.snaps.length || m.lstat !== "ok") return "";
+  const path = m.snaps.map((x) => `${esc(x.label)} ${num(x.line)}`).join(" → ") + ` → Pre ${num(m.line)}`;
+  const d = m.line - m.snaps[0].line;
+  return `<div class="muted" title="${esc(snapTip(m))}">${path} (${d > 0 ? "+" : ""}${num(d)})</div>`;
 }
 function actualCell(r, m) {
   if (m && m.act != null) return `<b>${num(m.act)}</b>`;
@@ -63,9 +85,12 @@ function resultCell(m) {
   return `<span class="res ${m.res}">${m.res === "pending" ? "pending" : m.res}</span>`;
 }
 function capCell(m) {
+  const sn = m && m.lstat === "pending" ? latestSnap(m) : null;
+  if (sn) return `${esc(sn.book)} · <span title="${esc(sn.cap)}">${fmtTime(sn.cap)}</span> <span class="muted">(${esc(sn.label)} snapshot)</span>` +
+    (m.snaps.length > 1 ? `<div class="muted">${m.snaps.map((x) => `${esc(x.label)} ${num(x.line)}`).join(" → ")}</div>` : "");
   if (!m || m.lstat !== "ok") return "";
   const late = m.inwin === "no" ? ` <span class="chip" title="Captured outside the 2.5–3.5 h window">${esc(m.mins)} min pre</span>` : "";
-  return `${esc(m.book)} · <span title="${esc(m.cap)}">${fmtTime(m.cap)}</span>${late}`;
+  return `${esc(m.book)} · <span title="${esc(m.cap)}">${fmtTime(m.cap)}</span>${late}${moveNote(m)}`;
 }
 function ordinal(n) { const v = n % 100; return n + (["th", "st", "nd", "rd"][(v - 20) % 10] || ["th", "st", "nd", "rd"][v] || "th"); }
 function drankCell(m, pos, mk, opp) {
@@ -181,11 +206,11 @@ function viewBoard() {
     <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
     <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
     <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label>
-    <span class="muted small">${items.length} players · lines are the pre-game line (~3h before kickoff), not closing lines · Opp D rank: 1 = toughest, 32 = most allowed</span>
+    <span class="muted small">${items.length} players · graded lines are the pre-game line (~3h before kickoff), not closing lines; yellow chips are earlier snapshots (Mon / Thu / Sun AM) · Opp D rank: 1 = toughest, 32 = most allowed</span>
   </div>`;
   if (!items.length) return html + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
   html += `<div class="panel scroll"><table><thead><tr>
-    <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num">Pre-game line (~3h)</th>
+    <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
   let lastGid = null;
@@ -204,8 +229,8 @@ function viewBoard() {
         <td>${esc(mk.label)}</td>
         <td class="small">${drankCell(m, pos, mk, r.opp)}</td>
         <td class="num">${lineCell(m)}</td>
-        <td class="num">${m && m.lstat === "ok" ? odds(m.op) : ""}</td>
-        <td class="num">${m && m.lstat === "ok" ? odds(m.up) : ""}</td>
+        <td class="num">${ouCell(m, "o")}</td>
+        <td class="num">${ouCell(m, "u")}</td>
         <td class="small">${capCell(m)}</td>
         <td class="num">${actualCell(r, m)}</td>
         <td>${resultCell(m)}</td>
@@ -307,7 +332,7 @@ function viewPlayer(pid) {
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
     <div class="panel"><div class="chart">${chartSVG(rows, mid)}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span></div></div>
-    <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th>Weather</th><th>Slot</th><th class="num">Pre-game line (~3h)</th>
+    <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th>Weather</th><th>Slot</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
   for (const r of rows) {
@@ -316,8 +341,8 @@ function viewPlayer(pid) {
       <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
       <td class="small">${wxCell(r.gid)}</td>
       <td>${esc(r.slot) || '<span class="muted small">not slotted</span>'}</td>
-      <td class="num">${lineCell(m)}</td><td class="num">${m && m.lstat === "ok" ? odds(m.op) : ""}</td>
-      <td class="num">${m && m.lstat === "ok" ? odds(m.up) : ""}</td><td class="small">${capCell(m)}${m && m.alt ? m.alt.map((a) => `<div class="muted">${esc(a.book)}: ${num(a.line)} (${a.op > 0 ? "+" : ""}${a.op ?? "?"}/${a.up > 0 ? "+" : ""}${a.up ?? "?"})</div>`).join("") : ""}</td>
+      <td class="num">${lineCell(m)}</td><td class="num">${ouCell(m, "o")}</td>
+      <td class="num">${ouCell(m, "u")}</td><td class="small">${capCell(m)}${m && m.alt ? m.alt.map((a) => `<div class="muted">${esc(a.book)}: ${num(a.line)} (${a.op > 0 ? "+" : ""}${a.op ?? "?"}/${a.up > 0 ? "+" : ""}${a.up ?? "?"})</div>`).join("") : ""}</td>
       <td class="num">${actualCell(r, m)}</td><td>${resultCell(m)}</td><td class="num">${snapCell(r)}</td>
       <td class="small">${usageCell(r, p.pos)}</td><td class="note">${notes(r, m, null)}</td></tr>`;
   }
@@ -371,7 +396,7 @@ function viewLog(live) {
     <div class="panel"><h3>Prop collection</h3><div class="body kv">
       <div>Collection started</div><div>${fmtTime(D.collection_start_utc)}</div>
       <div>Games with a pre-game line</div><div>${D.odds.games_captured}</div>
-      <div>Stored lines</div><div>${D.odds.captures}</div>
+      <div>Stored lines (pre-game / snapshots)</div><div>${D.odds.captures} / ${D.odds.snapshot_captures ?? 0}</div>
       <div>Last capture</div><div>${D.odds.last_capture_utc ? fmtTime(D.odds.last_capture_utc) : NA("none yet")}</div>
       <div>API credits remaining</div><div>${D.odds.credits_remaining || NA("unknown until first pull")}</div>
       <div>Site data built</div><div>${fmtTime(D.generated_utc)}</div>
@@ -381,10 +406,11 @@ function viewLog(live) {
     for (const r of live.slice(0, 15)) h += `<tr><td>${fmtTime(r.run_started_at || r.created_at)}</td><td>${esc(r.event)}</td><td>${esc(r.conclusion || r.status)}</td><td><a href="${esc(r.html_url)}">log</a></td></tr>`;
     h += `</tbody></table></div>`;
   }
-  h += `<div class="panel scroll"><h3>Pull log (one pre-game pull per game)</h3><table><thead><tr><th>Game</th><th>Status</th><th>Attempted</th><th class="num">Min before KO</th><th>In window</th><th>Markets</th><th class="num">Lines</th><th class="num">Credits used / left</th><th>Note</th></tr></thead><tbody>`;
+  h += `<div class="panel scroll"><h3>Pull log (snapshots: Mon / Thu / Sun AM; graded line: pre-game ~3 h before kickoff)</h3><table><thead><tr><th>Game</th><th>Type</th><th>Status</th><th>Attempted</th><th class="num">Min before KO</th><th>In window</th><th>Markets</th><th class="num">Lines</th><th class="num">Credits used / left</th><th>Note</th></tr></thead><tbody>`;
   const pl = [...D.pull_log].reverse();
-  if (!pl.length) h += `<tr><td colspan="9" class="muted">No pulls yet. The first pull runs about 3 hours before the next kickoff.</td></tr>`;
-  for (const p of pl) h += `<tr><td>${esc(gameLabel(p.game_id))}</td><td>${esc(p.status)}</td><td class="small">${fmtTime(p.attempted_utc)}</td><td class="num">${esc(p.minutes_before_kickoff)}</td><td>${esc(p.in_window)}</td><td class="small mono">${esc((p.markets || "").replace(/player_/g, ""))}</td><td class="num">${esc(p.outcomes)}</td><td class="num">${esc(p.credits_last)} / ${esc(p.credits_remaining)}</td><td class="note">${esc(p.note)}</td></tr>`;
+  if (!pl.length) h += `<tr><td colspan="10" class="muted">No pulls yet. The first pull runs about 3 hours before the next kickoff.</td></tr>`;
+  const PT = { pregame: "Pre-game", mon: "Mon", thu: "Thu", sun: "Sun AM" };
+  for (const p of pl) h += `<tr><td>${esc(gameLabel(p.game_id))}</td><td>${esc(PT[p.pull_type || "pregame"] || p.pull_type)}</td><td>${esc(p.status)}</td><td class="small">${fmtTime(p.attempted_utc)}</td><td class="num">${esc(p.minutes_before_kickoff)}</td><td>${esc(p.in_window)}</td><td class="small mono">${esc((p.markets || "").replace(/player_/g, ""))}</td><td class="num">${esc(p.outcomes)}</td><td class="num">${esc(p.credits_last)} / ${esc(p.credits_remaining)}</td><td class="note">${esc(p.note)}</td></tr>`;
   h += `</tbody></table></div>`;
   if (D.unmatched.length) {
     h += `<div class="panel scroll"><h3>Lines not matched to a player</h3><table><thead><tr><th>Game</th><th>Book</th><th>Market</th><th>Name from book</th></tr></thead><tbody>`;
