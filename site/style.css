@@ -107,3 +107,5 @@ button.info { padding: 0 6px; border: 0; background: transparent; color: var(--m
 button.info:hover, button.info.on { color: var(--accent); background: transparent; }
 tr.noterow td { border-top: 0; padding-top: 0; }
 tr.noterow td.note { max-width: none; }
+.dtable { width: auto; min-width: 560px; }
+button.sortb { border: 0; background: transparent; padding: 0; font: inherit; font-size: 12px; color: var(--muted); font-weight: 600; }
