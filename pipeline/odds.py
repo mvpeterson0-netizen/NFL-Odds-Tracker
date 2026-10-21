@@ -4,9 +4,16 @@ One successful pull per game, targeted 2.5-3.5 hours before kickoff. If no run
 lands in that window, the next run before kickoff takes it and the real capture
 time is recorded. Nothing is ever pulled at or after kickoff.
 
-Quota guard (free plan, 500 credits/month): the 5 core markets are always
+Quota guard (free plan, 500 credits/month per key): the 5 core markets are always
 requested. The 2 optional QB markets are added only when the remaining credits
-still cover the core markets for every remaining game this month plus a reserve.
+(summed across all keys) still cover the core markets for every remaining game
+this month plus a reserve.
+
+Several API keys can be supplied (ODDS_API_KEY, ODDS_API_KEY_2 ... _6). Each run
+checks every key's remaining credits with the free events call, then uses the
+first key that has enough for the pull; if a key is rejected or runs dry, the
+next key is tried. Keys are never logged; the pull log notes which key number
+was used.
 """
 from __future__ import annotations
 
@@ -120,9 +127,12 @@ def _main_line_rows(event, game_id, pull_type, captured, ko, mins, in_window, na
     return rows
 
 
-def run(key, games, name_index_for_game, log):
+def run(keys, games, name_index_for_game, log):
     """Execute due pulls. Returns True if any data/log rows were written."""
-    if not key:
+    if isinstance(keys, str):
+        keys = [keys]
+    keys = [k for k in (keys or []) if k]
+    if not keys:
         log.append("odds: ODDS_API_KEY not set; skipped")
         return False
     now = utcnow()
@@ -138,10 +148,33 @@ def run(key, games, name_index_for_game, log):
     if not due:
         return wrote
 
-    events, h = fetch_events(key)
-    ev_last, remaining = _headers_credits(h)
-    log.append(f"odds: events call cost={ev_last or '?'} remaining={remaining or '?'}")
-    remaining_n = int(remaining) if remaining.isdigit() else None
+    # Check every key (the events call is free). Keep the events list from the first key that works.
+    events, left = None, {}
+    for i, k in enumerate(keys, 1):
+        try:
+            ev, h = fetch_events(k)
+        except RuntimeError as ex:
+            log.append(f"odds: key #{i} events call failed ({str(ex)[:80]})")
+            continue
+        _l, rem = _headers_credits(h)
+        left[i] = int(rem) if rem.isdigit() else None
+        if events is None:
+            events = ev
+    if events is None:
+        raise RuntimeError("Odds API events call failed with every key")
+    log.append("odds: credits left " + ", ".join(f"key #{i}={v if v is not None else '?'}" for i, v in left.items()))
+
+    def total_left():
+        known = [v for v in left.values() if v is not None]
+        return sum(known) if known else None
+
+    def pick(cost, skip=()):
+        for i, v in left.items():
+            if i not in skip and (v is None or v >= cost):
+                return i
+        return None
+
+    remaining_n = total_left()
     pulls = _pulls_by_game()
 
     for g in sorted(due, key=lambda x: x["kickoff_utc"]):
@@ -176,21 +209,47 @@ def run(key, games, name_index_for_game, log):
                 wrote = True
                 continue
 
-        params = {"apiKey": key, "bookmakers": ",".join(BOOKS), "markets": ",".join(markets),
-                  "oddsFormat": "american", "dateFormat": "iso"}
-        body, h, status = http_get(f"{API}/sports/{SPORT}/events/{e['id']}/odds", params)
+        tried = []
+        while True:
+            ki = pick(len(markets), skip=tried)
+            if ki is None and len(markets) > len(CORE):
+                ki = pick(len(CORE), skip=tried)
+                if ki is not None:
+                    markets = list(CORE)  # this key can only afford the core markets
+            if ki is None:
+                break
+            tried.append(ki)
+            params = {"apiKey": keys[ki - 1], "bookmakers": ",".join(BOOKS), "markets": ",".join(markets),
+                      "oddsFormat": "american", "dateFormat": "iso"}
+            body, h, status = http_get(f"{API}/sports/{SPORT}/events/{e['id']}/odds", params)
+            _last, rem = _headers_credits(h)
+            if rem.isdigit():
+                left[ki] = int(rem)
+            if status in (401, 429):  # key rejected or out of credits: try the next one
+                left[ki] = 0
+                log.append(f"odds: key #{ki} rejected (HTTP {status}); trying next key")
+                continue
+            break
+        if not tried:
+            append_csv(PULL_LOG_PATH, [{**base, "event_id": e["id"], "status": "quota",
+                                        "credits_remaining": total_left() or 0,
+                                        "note": "no API key has enough credits left"}], PULL_FIELDS)
+            log.append(f"odds: {g['game_id']} skipped, no key has credits")
+            wrote = True
+            continue
         captured = utcnow()
         last, remaining = _headers_credits(h)
-        if remaining.isdigit():
-            remaining_n = int(remaining)
+        remaining_n = total_left()
+        remaining = "" if remaining_n is None else str(remaining_n)
         mins = round((ko - captured).total_seconds() / 60)
         in_window = "yes" if WINDOW_CLOSE <= (ko - captured) <= WINDOW_OPEN else "no"
         row = {**base, "event_id": e["id"], "markets": " ".join(markets), "credits_last": last,
                "credits_remaining": remaining, "minutes_before_kickoff": mins, "in_window": in_window,
                "attempted_utc": iso(captured)}
+        keynote = f"key #{tried[-1]}" + (f" ({left[tried[-1]]} left on it)" if left.get(tried[-1]) is not None else "")
         if status != 200:
             append_csv(PULL_LOG_PATH, [{**row, "status": "error",
-                                        "note": f"HTTP {status}: {body[:150].decode('utf-8', 'replace')}"}],
+                                        "note": f"HTTP {status}: {body[:150].decode('utf-8', 'replace')}; {keynote}"}],
                        PULL_FIELDS)
             log.append(f"odds: {g['game_id']} HTTP {status}")
             wrote = True
@@ -212,7 +271,7 @@ def run(key, games, name_index_for_game, log):
         append_csv(CAPTURES_PATH, caps, CAPTURE_FIELDS)
         books = sorted({c["book"] for c in caps})
         unmatched = sorted({c["player_book_name"] for c in caps if not c["gsis_id"]})
-        note = f"books: {','.join(books)}"
+        note = f"books: {','.join(books)}; {keynote}"
         if unmatched:
             note += f"; unmatched names: {', '.join(unmatched)}"
         append_csv(PULL_LOG_PATH, [{**row, "status": "ok", "outcomes": len(caps), "note": note}], PULL_FIELDS)

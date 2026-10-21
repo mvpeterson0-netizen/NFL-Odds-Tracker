@@ -42,7 +42,9 @@ def main() -> int:
             merged.update(name_index.get(g["home_team"], {}))
             return merged
 
-        odds_changed = odds.run(os.environ.get("ODDS_API_KEY", "").strip(), games, idx_for, log)
+        keys = [os.environ.get("ODDS_API_KEY", "").strip()] + \
+               [os.environ.get(f"ODDS_API_KEY_{n}", "").strip() for n in range(2, 7)]
+        odds_changed = odds.run(keys, games, idx_for, log)
 
         weather_changed = weather.refresh(games, log)
 
