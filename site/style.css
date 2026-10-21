@@ -95,3 +95,8 @@ tr.plr td:not(.gamecell) { border-top: 1px solid var(--line); }
 .wxb.bad { background: var(--warn-bg); color: var(--warn-ink); }
 .wxb.dome { background: var(--chip); color: var(--muted); }
 td.wrapcell { white-space: normal; }
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand img { border-radius: 7px; display: block; }
+.hs { border-radius: 50%; object-fit: cover; object-position: top; background: var(--chip); vertical-align: middle; flex: 0 0 auto; display: inline-block; }
+a.pname { display: inline-flex; align-items: center; gap: 8px; }
+.ph .hs { align-self: center; }

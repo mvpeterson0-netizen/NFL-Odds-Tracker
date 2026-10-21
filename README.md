@@ -1,4 +1,4 @@
-# NFL Prop Tracker (2026)
+# Stix: NFL Prop Tracker (2026)
 
 A research site for NFL player props. For each team's QB1, RB1–2, WR1–3 and TE1–2 it shows, game by game,
 the pre-game prop line (captured ~3 hours before kickoff), the odds, the actual result, and over / under / push / void,

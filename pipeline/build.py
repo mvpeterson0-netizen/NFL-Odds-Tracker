@@ -364,8 +364,24 @@ def build(log):
 
     leads.sort(key=lambda x: -abs(x["pct5"] or 0))
 
+    # Headshot URL from nflverse (latest weekly roster row, else latest stats row). Images load from NFL's CDN.
+    shots = {}
+    for (gid, g), st in d.stats.items():
+        if st.get("headshot_url"):
+            shots[g] = (-1, st["headshot_url"])
+    for (w, g), rr in d.roster.items():
+        if rr.get("headshot_url") and (g not in shots or w > shots[g][0]):
+            shots[g] = (w, rr["headshot_url"])
+
+    def headshot(pid):
+        url = shots.get(pid, (0, ""))[1]
+        return url if url.startswith("https://") else ""
+
     for p in players.values():
         p.pop("_w", None)
+        img = headshot(p["id"])
+        if img:
+            p["img"] = img
 
     weeks_with_games = sorted({int(g["week"]) for g in games})
     cur = None
