@@ -102,10 +102,46 @@ function drankCell(m, pos, mk, opp) {
   const cls = m.dn < 3 ? "" : m.drk <= Math.round(m.dof / 4) ? "tough" : m.drk > m.dof - Math.round(m.dof / 4) ? "easy" : "";
   return `<span class="drk ${cls}" title="${esc(tip)}">${ordinal(m.drk)}</span> <span class="muted small">${num(m.dav)}/g${m.dn < 3 ? ` · ${m.dn} gm` : ""}</span>`;
 }
+// Weather summary labels. These thresholds are the single source for both the labels and the Guide tab.
+const WX_RULES = {
+  rainIn: 0.05,      // precipitation (in) over kickoff hour + next 3 h
+  rainProb: 50,      // forecast chance of precipitation (%)
+  snowIn: 0.02,      // precipitation (in) that counts as snow when cold
+  snowTempF: 34,     // at or below this temperature, precipitation is labeled Snowy
+  windMph: 15,       // sustained wind at kickoff (mph)
+  gustMph: 25,       // wind gusts at kickoff (mph)
+  freezingF: 32,     // at or below: Freezing
+  coldF: 40,         // at or below: Cold
+  hotF: 85,          // at or above: Hot
+};
+function wxValues(w) {
+  const p = w.obs_temp_f != null ? "obs" : w.fc_temp_f != null ? "fc" : null;
+  if (!p) return null;
+  const n = (k) => (w[`${p}_${k}`] == null ? null : Number(w[`${p}_${k}`]));
+  return { kind: p, t: n("temp_f"), wind: n("wind_mph"), gust: n("gust_mph"), pr: n("precip_in"), pp: p === "fc" ? n("precip_prob") : null };
+}
+function wxSummary(w) {
+  const v = wxValues(w); if (!v) return null;
+  const R = WX_RULES, out = [], why = [];
+  const wetAmt = v.pr != null && v.pr >= R.rainIn, wetProb = v.pp != null && v.pp >= R.rainProb;
+  if (v.t != null && v.t <= R.snowTempF && ((v.pr != null && v.pr >= R.snowIn) || wetProb)) { out.push("Snowy"); why.push(`${v.t}°F with ${v.pr ?? 0} in precip${v.pp != null ? ` / ${v.pp}% chance` : ""}`); }
+  else if (wetAmt || wetProb) { out.push("Rainy"); why.push(wetAmt ? `${v.pr} in precip` : `${v.pp}% chance of precip`); }
+  if ((v.wind != null && v.wind >= R.windMph) || (v.gust != null && v.gust >= R.gustMph)) { out.push("Windy"); why.push(`wind ${v.wind} mph, gusts ${v.gust ?? "?"} mph`); }
+  if (v.t != null && v.t <= R.freezingF) { out.push("Freezing"); why.push(`${v.t}°F`); }
+  else if (v.t != null && v.t <= R.coldF) { out.push("Cold"); why.push(`${v.t}°F`); }
+  else if (v.t != null && v.t >= R.hotF) { out.push("Hot"); why.push(`${v.t}°F`); }
+  const label = out.length ? out.join(" & ") : "Nice";
+  return { label, nice: !out.length, why: out.length ? why.join("; ") : "no trigger met", kind: v.kind };
+}
+function wxBadge(w, roof) {
+  const s = wxSummary(w); if (!s) return "";
+  const tip = `${s.label}: ${s.why} (${s.kind === "obs" ? "observed" : "forecast"}). Triggers are on the Guide tab.` + (roof ? " Retractable roof: may be closed." : "");
+  return `<a href="#/guide" class="wxb ${s.nice ? "nice" : "bad"}" title="${esc(tip)}">${esc(s.label)}${roof ? " (roof?)" : ""}</a> `;
+}
 function wxCell(gid) {
   const g = D.games[gid]; if (!g) return "";
   const w = g.wx || {};
-  if (w.roof === "dome") return `<span class="wx muted" title="Fixed-roof stadium (${esc(g.stadium)})">Dome</span>`;
+  if (w.roof === "dome") return `<a href="#/guide" class="wxb dome" title="Fixed-roof stadium (${esc(g.stadium)}). Weather does not apply.">Dome</a>`;
   if (!g.wx) return NA("no data");
   if (w.note) return `<span class="na" title="${esc(g.stadium)}">no data (${esc(w.note)})</span>`;
   const roof = w.roof === "retractable" ? "Retractable roof (open/closed unknown) · " : "";
@@ -120,11 +156,12 @@ function wxCell(gid) {
   const obs = fmt("obs"), fc = fmt("fc");
   const ko = new Date(g.ko).getTime(), now = Date.now();
   const src = "Open-Meteo, at the stadium: temperature and wind at the kickoff hour, precipitation summed over the kickoff hour + next 3 hours.";
-  if (obs) return `<span class="wx" title="${esc(roof + "Observed. Gusts " + (w.obs_gust_mph ?? "?") + " mph. " + (fc ? "Last pre-game forecast: " + fc + ". " : "") + src)}"><span class="muted">Obs</span> ${esc(obs)}</span>`;
+  const badge = wxBadge(w, !!roof);
+  if (obs) return badge + `<span class="wx" title="${esc(roof + "Observed. Gusts " + (w.obs_gust_mph ?? "?") + " mph. " + (fc ? "Last pre-game forecast: " + fc + ". " : "") + src)}"><span class="muted">Obs</span> ${esc(obs)}</span>`;
   if (fc) {
     const pre = ko > now ? "Fcst" : "Last fcst";
     const tip = roof + `Forecast fetched ${fmtTime(w.fc_fetched_utc)}. Gusts ${w.fc_gust_mph ?? "?"} mph. ` + (ko > now ? "Refreshed every ~3 h until kickoff. " : "Observed values appear about 6 days after the game. ") + src;
-    return `<span class="wx" title="${esc(tip)}"><span class="muted">${pre}</span> ${esc(fc)}</span>`;
+    return badge + `<span class="wx" title="${esc(tip)}"><span class="muted">${pre}</span> ${esc(fc)}</span>`;
   }
   if (ko > now) return `<span class="na" title="Open-Meteo forecasts reach 16 days ahead">forecast not out yet</span>`;
   return `<span class="na" title="Open-Meteo's observed archive has about a 5-day delay">observed weather pending</span>`;
@@ -426,6 +463,32 @@ function viewLog(live) {
   return h + `</tbody></table></div>`;
 }
 
+function viewGuide() {
+  const R = WX_RULES;
+  const row = (label, cls, rule) => `<tr><td><span class="wxb ${cls}">${label}</span></td><td class="wrapcell">${rule}</td></tr>`;
+  return `<div class="panel"><h3>Weather labels</h3><div class="body">
+    <p class="callout">Each game's weather gets a one-glance label from the numbers below. Several can apply at once and are joined with "&amp;" (for example <b>Rainy &amp; Windy</b>). If none apply, the label is <b>Nice</b>. Past games use observed weather; upcoming games use the latest forecast. Hover a label on the Board to see which values triggered it.</p>
+    <table class="wrap"><thead><tr><th>Label</th><th>Triggered when</th></tr></thead><tbody>
+    ${row("Rainy", "bad", `Precipitation of <b>${R.rainIn} in or more</b> over the kickoff hour and next 3 hours, <b>or</b> a forecast chance of precipitation of <b>${R.rainProb}% or more</b>.`)}
+    ${row("Snowy", "bad", `Temperature at kickoff of <b>${R.snowTempF}°F or colder</b> with <b>${R.snowIn} in or more</b> of precipitation (or a ${R.rainProb}%+ chance). Replaces Rainy.`)}
+    ${row("Windy", "bad", `Sustained wind at kickoff of <b>${R.windMph} mph or more</b>, <b>or</b> gusts of <b>${R.gustMph} mph or more</b>.`)}
+    ${row("Freezing", "bad", `Temperature at kickoff of <b>${R.freezingF}°F or colder</b>.`)}
+    ${row("Cold", "bad", `Temperature at kickoff of <b>${R.coldF}°F or colder</b> (and above ${R.freezingF}°F).`)}
+    ${row("Hot", "bad", `Temperature at kickoff of <b>${R.hotF}°F or hotter</b>.`)}
+    ${row("Nice", "nice", "None of the above.")}
+    ${row("Dome", "dome", "Fixed-roof stadium. Weather does not apply.")}
+    ${row("… (roof?)", "bad", "Retractable-roof stadium. The label describes the weather outside; the roof may be closed (open/closed is not known in advance).")}
+    </tbody></table>
+    <p class="muted small">These thresholds are this app's own rules of thumb for flagging games worth a closer look. They are not an official standard and not a prediction of how weather affects any stat. Weather data: Open-Meteo, at the stadium: temperature and wind at the kickoff hour, precipitation summed over the kickoff hour + next 3 hours.</p>
+  </div></div>
+  <div class="panel"><h3>Other symbols</h3><div class="body"><table class="wrap"><tbody>
+    <tr><td><span class="chip snapchip">Mon</span> <span class="chip snapchip">Thu</span> <span class="chip snapchip">Sun AM</span></td><td class="wrapcell">Line-movement snapshots (Monday 8 AM, Thursday 2 PM, Sunday 8 AM Central). Shown until the pre-game line arrives; never graded.</td></tr>
+    <tr><td><b>Line</b> (no chip)</td><td class="wrapcell">Pre-game line captured about 3 hours before kickoff. This is the line that is graded over / under / push / void.</td></tr>
+    <tr><td><span class="drk tough">5th</span> / <span class="drk easy">28th</span></td><td class="wrapcell">Opp D rank: how the opponent ranks in that stat against that position, using only games before that game. 1 = fewest allowed (toughest), 32 = most allowed. Colored only after 3+ games: red = top quarter (toughest), green = bottom quarter.</td></tr>
+    <tr><td><span class="chip chg">WR2 ↺</span></td><td class="wrapcell">The player's slot changed from the prior week (hover for the reason).</td></tr>
+  </tbody></table></div></div>`;
+}
+
 // ---------- routing ----------
 let LIVE = null;
 function render() {
@@ -436,6 +499,7 @@ function render() {
   else if (tab === "leads") app.innerHTML = viewLeads();
   else if (tab === "slots") app.innerHTML = viewSlots();
   else if (tab === "log") app.innerHTML = viewLog(LIVE);
+  else if (tab === "guide") app.innerHTML = viewGuide();
   else app.innerHTML = viewBoard();
   bind(tab, arg);
 }
