@@ -3,3 +3,4 @@
 - 2026-10-20 · V1.0 · Baseline: pipeline, site, scheduled workflow (tag `V1.0`).
 - 2026-10-20 · PR: game selector row · Board shows a row of the selected week's games; click one to show only that game's players. UI only.
 - 2026-10-20 · PR: opponent defense rank · New "Opp D rank" column on the Board and player pages: how the opponent ranks (1 = fewest allowed) in that stat against that position, using only games before each game; current-season rank on hover. Computed from nflverse stats.
+- 2026-10-20 · PR: game weather · Temperature, wind and precipitation for every game from Open-Meteo (free, no key): forecast until kickoff, observed values about 6 days after; domes labeled. New derived file data/weather.csv. A weather outage never fails the run.

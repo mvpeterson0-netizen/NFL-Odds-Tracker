@@ -77,6 +77,33 @@ function drankCell(m, pos, mk, opp) {
   const cls = m.dn < 3 ? "" : m.drk <= Math.round(m.dof / 4) ? "tough" : m.drk > m.dof - Math.round(m.dof / 4) ? "easy" : "";
   return `<span class="drk ${cls}" title="${esc(tip)}">${ordinal(m.drk)}</span> <span class="muted small">${num(m.dav)}/g${m.dn < 3 ? ` · ${m.dn} gm` : ""}</span>`;
 }
+function wxCell(gid) {
+  const g = D.games[gid]; if (!g) return "";
+  const w = g.wx || {};
+  if (w.roof === "dome") return `<span class="wx muted" title="Fixed-roof stadium (${esc(g.stadium)})">Dome</span>`;
+  if (!g.wx) return NA("no data");
+  if (w.note) return `<span class="na" title="${esc(g.stadium)}">no data (${esc(w.note)})</span>`;
+  const roof = w.roof === "retractable" ? "Retractable roof (open/closed unknown) · " : "";
+  const fmt = (p) => {
+    const t = w[p + "_temp_f"], wd = w[p + "_wind_mph"], pr = w[p + "_precip_in"], pp = w[p + "_precip_prob"];
+    if (t == null) return null;
+    let x = `${t}°F · wind ${wd} mph`;
+    if (pr != null) x += ` · ${pr} in precip`;
+    if (pp != null) x += ` (${pp}% chance)`;
+    return x;
+  };
+  const obs = fmt("obs"), fc = fmt("fc");
+  const ko = new Date(g.ko).getTime(), now = Date.now();
+  const src = "Open-Meteo, at the stadium: temperature and wind at the kickoff hour, precipitation summed over the kickoff hour + next 3 hours.";
+  if (obs) return `<span class="wx" title="${esc(roof + "Observed. Gusts " + (w.obs_gust_mph ?? "?") + " mph. " + (fc ? "Last pre-game forecast: " + fc + ". " : "") + src)}"><span class="muted">Obs</span> ${esc(obs)}</span>`;
+  if (fc) {
+    const pre = ko > now ? "Fcst" : "Last fcst";
+    const tip = roof + `Forecast fetched ${fmtTime(w.fc_fetched_utc)}. Gusts ${w.fc_gust_mph ?? "?"} mph. ` + (ko > now ? "Refreshed every ~3 h until kickoff. " : "Observed values appear about 6 days after the game. ") + src;
+    return `<span class="wx" title="${esc(tip)}"><span class="muted">${pre}</span> ${esc(fc)}</span>`;
+  }
+  if (ko > now) return `<span class="na" title="Open-Meteo forecasts reach 16 days ahead">forecast not out yet</span>`;
+  return `<span class="na" title="Open-Meteo's observed archive has about a 5-day delay">observed weather pending</span>`;
+}
 function usageCell(r, pos) {
   if (pos === "QB") return "";
   const parts = [];
@@ -170,7 +197,7 @@ function viewBoard() {
       const first = i === 0;
       const grp = first && r.gid !== lastGid ? "grp" : "";
       html += `<tr class="${grp}">
-        <td>${first ? `${esc(gameLabel(r.gid))}<div class="muted small">${fmtTime(r.ko)}</div>` : ""}</td>
+        <td>${first ? `${esc(gameLabel(r.gid))}<div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div>` : ""}</td>
         <td>${first ? esc(s.team) : ""}</td>
         <td>${first ? `<span class="chip ${s.change ? "chg" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
         <td>${first ? `<a href="#/player/${s.pid}">${esc(s.name)}</a>` : ""}</td>
@@ -280,13 +307,14 @@ function viewPlayer(pid) {
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
     <div class="panel"><div class="chart">${chartSVG(rows, mid)}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span></div></div>
-    <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th>Slot</th><th class="num">Pre-game line (~3h)</th>
+    <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th>Weather</th><th>Slot</th><th class="num">Pre-game line (~3h)</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
   for (const r of rows) {
     const m = r.m[mid];
     h += `<tr><td>${r.wk}</td><td>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} <span class="muted small">${fmtTime(r.ko)}</span></td>
       <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
+      <td class="small">${wxCell(r.gid)}</td>
       <td>${esc(r.slot) || '<span class="muted small">not slotted</span>'}</td>
       <td class="num">${lineCell(m)}</td><td class="num">${m && m.lstat === "ok" ? odds(m.op) : ""}</td>
       <td class="num">${m && m.lstat === "ok" ? odds(m.up) : ""}</td><td class="small">${capCell(m)}${m && m.alt ? m.alt.map((a) => `<div class="muted">${esc(a.book)}: ${num(a.line)} (${a.op > 0 ? "+" : ""}${a.op ?? "?"}/${a.up > 0 ? "+" : ""}${a.up ?? "?"})</div>`).join("") : ""}</td>
