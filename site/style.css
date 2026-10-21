@@ -80,3 +80,7 @@ table.wrap td { white-space: normal; }
 .snap { font-style: italic; color: var(--muted); }
 b.snap { color: var(--ink); }
 .snapchip { background: var(--warn-bg); color: var(--warn-ink); }
+td.gamecell { background: var(--panel); border-right: 1px solid var(--line); }
+tr:hover td.gamecell { background: var(--panel); }
+tr.grp td { border-top: 2px solid var(--muted); }
+tr.plr td:not(.gamecell) { border-top: 1px solid var(--line); }
