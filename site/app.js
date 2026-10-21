@@ -130,13 +130,15 @@ function wxSummary(w) {
   if (v.t != null && v.t <= R.freezingF) { out.push("Freezing"); why.push(`${v.t}°F`); }
   else if (v.t != null && v.t <= R.coldF) { out.push("Cold"); why.push(`${v.t}°F`); }
   else if (v.t != null && v.t >= R.hotF) { out.push("Hot"); why.push(`${v.t}°F`); }
-  const label = out.length ? out.join(" & ") : "Nice";
+  const EMOJI = { Rainy: "🌧️", Snowy: "❄️", Windy: "💨", Nice: "☀️" };
+  const parts = out.length ? out : ["Nice"];
+  const label = parts.map((x) => (EMOJI[x] ? `${EMOJI[x]} ${x}` : x)).join(" & ");
   return { label, nice: !out.length, why: out.length ? why.join("; ") : "no trigger met", kind: v.kind };
 }
 function wxBadge(w, roof) {
   const s = wxSummary(w); if (!s) return "";
-  const tip = `${s.label}: ${s.why} (${s.kind === "obs" ? "observed" : "forecast"}). Triggers are on the Guide tab.` + (roof ? " Retractable roof: may be closed." : "");
-  return `<a href="#/guide" class="wxb ${s.nice ? "nice" : "bad"}" title="${esc(tip)}">${esc(s.label)}${roof ? " (roof?)" : ""}</a> `;
+  const tip = `${s.label}: ${s.why} (${s.kind === "obs" ? "observed" : "forecast"}). Triggers are on the Guide tab.` + (roof ? " Retractable-roof stadium." : "");
+  return `<a href="#/guide" class="wxb ${s.nice ? "nice" : "bad"}" title="${esc(tip)}">${esc(s.label)}</a> `;
 }
 function wxCell(gid) {
   const g = D.games[gid]; if (!g) return "";
@@ -144,7 +146,7 @@ function wxCell(gid) {
   if (w.roof === "dome") return `<a href="#/guide" class="wxb dome" title="Fixed-roof stadium (${esc(g.stadium)}). Weather does not apply.">Dome</a>`;
   if (!g.wx) return NA("no data");
   if (w.note) return `<span class="na" title="${esc(g.stadium)}">no data (${esc(w.note)})</span>`;
-  const roof = w.roof === "retractable" ? "Retractable roof (open/closed unknown) · " : "";
+  const roof = w.roof === "retractable" ? "Retractable-roof stadium · " : "";
   const fmt = (p) => {
     const t = w[p + "_temp_f"], wd = w[p + "_wind_mph"], pr = w[p + "_precip_in"], pp = w[p + "_precip_prob"];
     if (t == null) return null;
@@ -285,23 +287,35 @@ function viewBoard() {
   return html;
 }
 
+function niceStep(range, target = 5) {
+  const raw = range / target, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  for (const f of [1, 2, 2.5, 5, 10]) if (raw <= f * mag) return f * mag;
+  return 10 * mag;
+}
 function chartSVG(rows, mid) {
-  const pts = rows.map((r) => ({ wk: r.wk, act: r.m[mid]?.act ?? null, line: r.m[mid]?.lstat === "ok" ? r.m[mid].line : null, r }));
-  const vals = pts.flatMap((p) => [p.act, p.line]).filter((v) => v != null);
+  // act = actual stat; line = graded pre-game line; proj = latest snapshot shown until the pre-game line exists
+  const pts = rows.map((r) => {
+    const m = r.m[mid] || {};
+    const sn = m.lstat === "pending" ? latestSnap(m) : null;
+    return { wk: r.wk, r, m, act: m.act ?? null, line: m.lstat === "ok" ? m.line : null,
+             proj: sn && sn.line != null ? sn : null };
+  });
+  const vals = pts.flatMap((p) => [p.act, p.line, p.proj ? p.proj.line : null]).filter((v) => v != null);
   if (!vals.length) return `<p class="muted pad">No data to chart yet.</p>`;
-  const W = 900, H = 220, L = 44, R = 12, T = 12, B = 30;
-  const max = Math.max(...vals) * 1.1 || 1, min = 0;
+  const W = 1200, H = 280, L = 48, R = 70, T = 22, B = 30;
+  const top = Math.max(...vals);
+  const step = niceStep(top || 1);
+  const max = Math.ceil((top * 1.08) / step) * step || step, min = 0;
   const xs = (i) => L + (pts.length === 1 ? (W - L - R) / 2 : (i * (W - L - R)) / (pts.length - 1));
   const ys = (v) => T + (H - T - B) * (1 - (v - min) / (max - min));
+  const fmtTick = (v) => (Number.isInteger(v) ? String(v) : v.toFixed(step < 1 ? 1 : 1));
   let g = "";
-  const ticks = 4;
-  for (let i = 0; i <= ticks; i++) {
-    const v = min + ((max - min) * i) / ticks;
+  for (let v = min; v <= max + 1e-9; v += step) {
     g += `<line x1="${L}" x2="${W - R}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--line)"/>
-      <text x="${L - 6}" y="${ys(v) + 4}" text-anchor="end" font-size="11" fill="var(--muted)">${Math.round(v)}</text>`;
+      <text x="${L - 8}" y="${ys(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">${fmtTick(v)}</text>`;
   }
   pts.forEach((p, i) => {
-    g += `<text x="${xs(i)}" y="${H - 10}" text-anchor="middle" font-size="11" fill="var(--muted)">W${p.wk}</text>`;
+    g += `<text x="${xs(i)}" y="${H - 8}" text-anchor="middle" font-size="12" fill="var(--muted)">W${p.wk}</text>`;
   });
   // actual line (breaks at DNP / not played)
   let path = "", pen = false;
@@ -311,15 +325,25 @@ function chartSVG(rows, mid) {
   });
   g += `<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;
   pts.forEach((p, i) => {
-    if (p.act != null) g += `<circle cx="${xs(i)}" cy="${ys(p.act)}" r="4" fill="var(--accent)"><title>W${p.wk} actual ${num(p.act)}</title></circle>`;
+    const x = xs(i);
     if (p.line != null) {
-      const res = p.r.m[mid].res;
+      const res = p.m.res;
       const col = res === "over" ? "var(--over)" : res === "under" ? "var(--under)" : "var(--ink)";
-      g += `<line x1="${xs(i) - 12}" x2="${xs(i) + 12}" y1="${ys(p.line)}" y2="${ys(p.line)}" stroke="${col}" stroke-width="3"><title>W${p.wk} pre-game line ${num(p.line)}</title></line>`;
+      g += `<line x1="${x - 14}" x2="${x + 14}" y1="${ys(p.line)}" y2="${ys(p.line)}" stroke="${col}" stroke-width="3"><title>W${p.wk} pre-game line ${num(p.line)} (${esc(p.m.book || "")})</title></line>
+        <text x="${x + 18}" y="${ys(p.line) + 4}" font-size="12" font-weight="600" fill="${col}">${num(p.line)}</text>`;
     }
-    if (p.r.played === false) g += `<text x="${xs(i)}" y="${ys(min) - 6}" text-anchor="middle" font-size="10" fill="var(--muted)">DNP</text>`;
+    if (p.proj) {
+      const y = ys(p.proj.line);
+      g += `<line x1="${x - 14}" x2="${x + 14}" y1="${y}" y2="${y}" stroke="var(--warn-ink)" stroke-width="3" stroke-dasharray="4 3"><title>W${p.wk} ${esc(p.proj.label)} snapshot ${num(p.proj.line)} (${esc(p.proj.book)}, ${esc(fmtTime(p.proj.cap))}). Not graded; replaced by the pre-game line.</title></line>
+        <text x="${x + 18}" y="${y + 4}" font-size="12" font-weight="600" fill="var(--warn-ink)">${num(p.proj.line)} ${esc(p.proj.label)}</text>`;
+    }
+    if (p.act != null) {
+      g += `<circle cx="${x}" cy="${ys(p.act)}" r="4.5" fill="var(--accent)"><title>W${p.wk} actual ${num(p.act)}</title></circle>
+        <text x="${x}" y="${ys(p.act) - 9}" text-anchor="middle" font-size="12" fill="var(--accent)">${num(p.act)}</text>`;
+    }
+    if (p.r.played === false) g += `<text x="${x}" y="${ys(min) - 6}" text-anchor="middle" font-size="11" fill="var(--muted)">DNP</text>`;
   });
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img">${g}</svg>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img">${g}</svg>`;
 }
 
 function analysisPanel(pid, mid, rows) {
@@ -372,7 +396,7 @@ function viewPlayer(pid) {
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
     <div class="panel"><div class="chart">${chartSVG(rows, mid)}</div>
-    <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span></div></div>
+    <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM), until the pre-game line arrives</span></div></div>
     <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th>Weather</th><th>Slot</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
@@ -467,17 +491,16 @@ function viewGuide() {
   const R = WX_RULES;
   const row = (label, cls, rule) => `<tr><td><span class="wxb ${cls}">${label}</span></td><td class="wrapcell">${rule}</td></tr>`;
   return `<div class="panel"><h3>Weather labels</h3><div class="body">
-    <p class="callout">Each game's weather gets a one-glance label from the numbers below. Several can apply at once and are joined with "&amp;" (for example <b>Rainy &amp; Windy</b>). If none apply, the label is <b>Nice</b>. Past games use observed weather; upcoming games use the latest forecast. Hover a label on the Board to see which values triggered it.</p>
+    <p class="callout">Each game's weather gets a one-glance label from the numbers below. Several can apply at once and are joined with "&amp;" (for example <b>🌧️ Rainy &amp; 💨 Windy</b>). If none apply, the label is <b>Nice</b>. Past games use observed weather; upcoming games use the latest forecast. Hover a label on the Board to see which values triggered it.</p>
     <table class="wrap"><thead><tr><th>Label</th><th>Triggered when</th></tr></thead><tbody>
-    ${row("Rainy", "bad", `Precipitation of <b>${R.rainIn} in or more</b> over the kickoff hour and next 3 hours, <b>or</b> a forecast chance of precipitation of <b>${R.rainProb}% or more</b>.`)}
-    ${row("Snowy", "bad", `Temperature at kickoff of <b>${R.snowTempF}°F or colder</b> with <b>${R.snowIn} in or more</b> of precipitation (or a ${R.rainProb}%+ chance). Replaces Rainy.`)}
-    ${row("Windy", "bad", `Sustained wind at kickoff of <b>${R.windMph} mph or more</b>, <b>or</b> gusts of <b>${R.gustMph} mph or more</b>.`)}
+    ${row("🌧️ Rainy", "bad", `Precipitation of <b>${R.rainIn} in or more</b> over the kickoff hour and next 3 hours, <b>or</b> a forecast chance of precipitation of <b>${R.rainProb}% or more</b>.`)}
+    ${row("❄️ Snowy", "bad", `Temperature at kickoff of <b>${R.snowTempF}°F or colder</b> with <b>${R.snowIn} in or more</b> of precipitation (or a ${R.rainProb}%+ chance). Replaces Rainy.`)}
+    ${row("💨 Windy", "bad", `Sustained wind at kickoff of <b>${R.windMph} mph or more</b>, <b>or</b> gusts of <b>${R.gustMph} mph or more</b>.`)}
     ${row("Freezing", "bad", `Temperature at kickoff of <b>${R.freezingF}°F or colder</b>.`)}
     ${row("Cold", "bad", `Temperature at kickoff of <b>${R.coldF}°F or colder</b> (and above ${R.freezingF}°F).`)}
     ${row("Hot", "bad", `Temperature at kickoff of <b>${R.hotF}°F or hotter</b>.`)}
-    ${row("Nice", "nice", "None of the above.")}
+    ${row("☀️ Nice", "nice", "None of the above.")}
     ${row("Dome", "dome", "Fixed-roof stadium. Weather does not apply.")}
-    ${row("… (roof?)", "bad", "Retractable-roof stadium. The label describes the weather outside; the roof may be closed (open/closed is not known in advance).")}
     </tbody></table>
     <p class="muted small">These thresholds are this app's own rules of thumb for flagging games worth a closer look. They are not an official standard and not a prediction of how weather affects any stat. Weather data: Open-Meteo, at the stadium: temperature and wind at the kickoff hour, precipitation summed over the kickoff hour + next 3 hours.</p>
   </div></div>
@@ -557,11 +580,29 @@ async function status() {
     document.getElementById("status").textContent = "No data";
     return;
   }
-  D.players.forEach((p) => (playerById[p.id] = p));
-  D.markets.forEach((m) => (mkt[m.id] = m));
+  index();
   S.wk = D.current_week || D.weeks[D.weeks.length - 1];
   S.slotWk = S.wk;
   window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
   render();
   status();
+  // Pick up new lines / snapshots / stats without a manual reload: check for new site data every 5 minutes.
+  setInterval(async () => {
+    try {
+      const r = await fetch(`data/data.json?t=${Date.now()}`, { cache: "no-store" });
+      if (!r.ok) return;
+      const nd = await r.json();
+      if (nd.generated_utc === D.generated_utc) return;
+      D = nd; index();
+      const typing = document.activeElement && document.activeElement.id === "f-q";
+      const board = document.querySelector(".panel.board"), keep = board ? board.scrollTop : 0;
+      if (!typing) { render(); const b2 = document.querySelector(".panel.board"); if (b2) b2.scrollTop = keep; }
+      status();
+    } catch { /* try again next time */ }
+  }, 5 * 60 * 1000);
 })();
+function index() {
+  for (const k in playerById) delete playerById[k];
+  D.players.forEach((p) => (playerById[p.id] = p));
+  D.markets.forEach((m) => (mkt[m.id] = m));
+}
