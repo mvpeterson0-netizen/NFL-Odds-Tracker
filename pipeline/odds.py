@@ -14,12 +14,20 @@ checks every key's remaining credits with the free events call, then uses the
 first key that has enough for the pull; if a key is rejected or runs dry, the
 next key is tried. Keys are never logged; the pull log notes which key number
 was used.
+
+Snapshot pulls (line movement; displayed, never graded), per NFL week, Central time:
+  mon  - from Monday 8:00 AM, every hour until the books return props
+  thu  - Thursday 2:00 PM (retried hourly, up to 3 tries, if nothing comes back)
+  sun  - Sunday 8:00 AM (same retry rule)
+Each applies to that week's games that have not kicked off. Snapshot pulls only
+spend credits that are not needed for the remaining pre-game pulls this month.
 """
 from __future__ import annotations
 
 import json
 from collections import defaultdict
-from datetime import timedelta
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 from .common import (DATA, TEAM_NAME_TO_ABBR, append_csv, http_get, iso, norm_name, parse_iso, read_csv,
                      redact, utcnow, COLLECTION_START_UTC)
@@ -34,6 +42,12 @@ WINDOW_CLOSE = timedelta(hours=2, minutes=30)
 RESERVE_CREDITS = 15
 MAX_ATTEMPTS = 4
 
+CT = ZoneInfo("America/Chicago")
+# pull type -> (label, days after the week's Monday, hour, minute) in Central time
+SNAPSHOTS = {"mon": ("Mon", 0, 8, 0), "thu": ("Thu", 3, 14, 0), "sun": ("Sun AM", 6, 8, 0)}
+SNAP_RETRY = timedelta(hours=1)
+SNAP_MAX_TRIES = 3  # for thu/sun; mon keeps trying hourly until it gets props (or the thu pull starts)
+
 CAPTURES_PATH = DATA / "prop_captures.csv"
 PULL_LOG_PATH = DATA / "pull_log.csv"
 CAPTURE_FIELDS = ["game_id", "event_id", "pull_type", "captured_utc", "kickoff_utc", "minutes_before_kickoff",
@@ -44,11 +58,66 @@ PULL_FIELDS = ["game_id", "event_id", "pull_type", "status", "attempted_utc", "k
                "note"]
 
 
-def _pulls_by_game():
+def ptype(r):
+    return r.get("pull_type") or "pregame"
+
+
+def _pulls_by_game(pull_type="pregame"):
     out = defaultdict(list)
     for r in read_csv(PULL_LOG_PATH):
-        out[r["game_id"]].append(r)
+        if ptype(r) == pull_type:
+            out[r["game_id"]].append(r)
     return out
+
+
+def week_monday(week_games):
+    """8:00 AM Central on the Monday on or before the week's first kickoff."""
+    first = min(parse_iso(g["kickoff_utc"]) for g in week_games).astimezone(CT)
+    d = first.date() - timedelta(days=first.weekday())
+    return datetime(d.year, d.month, d.day, 8, 0, tzinfo=CT)
+
+
+def snapshot_anchor(week_games, t):
+    _label, days, hh, mm = SNAPSHOTS[t]
+    mon = week_monday(week_games)
+    d = (mon + timedelta(days=days)).date()
+    return datetime(d.year, d.month, d.day, hh, mm, tzinfo=CT)
+
+
+def plan_snapshots(games, now=None):
+    """Return [(game, pull_type)] snapshot pulls due now."""
+    now = now or utcnow()
+    by_week = defaultdict(list)
+    for g in games:
+        if parse_iso(g.get("kickoff_utc", "")) and g.get("week"):
+            by_week[g["week"]].append(g)
+    logs = {t: _pulls_by_game(t) for t in SNAPSHOTS}
+    due = []
+    for wk, wg in by_week.items():
+        anchors = {t: snapshot_anchor(wg, t) for t in SNAPSHOTS}
+        for g in wg:
+            ko = parse_iso(g["kickoff_utc"])
+            if ko <= now or ko < COLLECTION_START_UTC:
+                continue
+            for t in SNAPSHOTS:
+                if now < anchors[t]:
+                    continue
+                if t == "mon" and now >= anchors["thu"]:
+                    continue  # the Thursday pull takes over
+                if t == "thu" and now >= anchors["sun"] and ko > anchors["sun"]:
+                    continue  # Sunday pull takes over for Sunday/Monday games
+                rows = logs[t].get(g["game_id"], [])
+                if _has_ok(rows):
+                    continue
+                tries = [r for r in rows if r["status"] in ("empty", "error")]
+                if tries:
+                    last = parse_iso(tries[-1].get("attempted_utc", ""))
+                    if last and now - last < SNAP_RETRY:
+                        continue
+                    if t != "mon" and len(tries) >= SNAP_MAX_TRIES:
+                        continue
+                due.append((g, t))
+    return due
 
 
 def _has_ok(rows):
@@ -145,7 +214,8 @@ def run(keys, games, name_index_for_game, log):
         }], PULL_FIELDS)
         log.append(f"odds: {g['game_id']} kicked off with no pre-game line (logged as missed)")
         wrote = True
-    if not due:
+    snaps = plan_snapshots(games, now)
+    if not due and not snaps:
         return wrote
 
     # Check every key (the events call is free). Keep the events list from the first key that works.
@@ -177,13 +247,15 @@ def run(keys, games, name_index_for_game, log):
     remaining_n = total_left()
     pulls = _pulls_by_game()
 
-    for g in sorted(due, key=lambda x: x["kickoff_utc"]):
+    jobs = [(g, "pregame") for g in sorted(due, key=lambda x: x["kickoff_utc"])] + \
+           sorted(snaps, key=lambda x: x[0]["kickoff_utc"])
+    for g, pt in jobs:
         ko = parse_iso(g["kickoff_utc"])
         now = utcnow()
         if ko <= now:
             continue
         e = match_event(g, events)
-        base = {"game_id": g["game_id"], "pull_type": "pregame", "attempted_utc": iso(now),
+        base = {"game_id": g["game_id"], "pull_type": pt, "attempted_utc": iso(now),
                 "kickoff_utc": g["kickoff_utc"]}
         if e is None:
             append_csv(PULL_LOG_PATH, [{**base, "status": "error", "note": "event not found in Odds API events list"}],
@@ -194,7 +266,22 @@ def run(keys, games, name_index_for_game, log):
 
         # Quota guard
         markets = list(CORE)
-        if remaining_n is not None:
+        if pt != "pregame":
+            # Snapshots only use credits the remaining pre-game pulls this month don't need.
+            if remaining_n is not None:
+                month = ko.strftime("%Y-%m")
+                later = [x for x in games if x.get("kickoff_utc", "")[:7] == month
+                         and parse_iso(x["kickoff_utc"]) > now and not _has_ok(pulls.get(x["game_id"], []))]
+                spare = remaining_n - (len(CORE) * len(later) + RESERVE_CREDITS)
+                if spare >= len(CORE) + len(OPTIONAL):
+                    markets += OPTIONAL
+                elif spare < len(CORE):
+                    log.append(f"odds: {g['game_id']} {pt} snapshot skipped to protect pre-game pulls "
+                               f"({remaining_n} credits left)")
+                    continue
+            else:
+                markets += OPTIONAL
+        elif remaining_n is not None:
             month = ko.strftime("%Y-%m")
             later = [x for x in games if x["game_id"] != g["game_id"] and x.get("kickoff_utc", "")[:7] == month
                      and parse_iso(x["kickoff_utc"]) > now and not _has_ok(pulls.get(x["game_id"], []))]
@@ -242,7 +329,7 @@ def run(keys, games, name_index_for_game, log):
         remaining_n = total_left()
         remaining = "" if remaining_n is None else str(remaining_n)
         mins = round((ko - captured).total_seconds() / 60)
-        in_window = "yes" if WINDOW_CLOSE <= (ko - captured) <= WINDOW_OPEN else "no"
+        in_window = ("yes" if WINDOW_CLOSE <= (ko - captured) <= WINDOW_OPEN else "no") if pt == "pregame" else "n/a"
         row = {**base, "event_id": e["id"], "markets": " ".join(markets), "credits_last": last,
                "credits_remaining": remaining, "minutes_before_kickoff": mins, "in_window": in_window,
                "attempted_utc": iso(captured)}
@@ -260,12 +347,12 @@ def run(keys, games, name_index_for_game, log):
             wrote = True
             continue
         event = json.loads(body)
-        caps = _main_line_rows(event, g["game_id"], "pregame", captured, ko, mins, in_window,
+        caps = _main_line_rows(event, g["game_id"], pt, captured, ko, mins, in_window,
                                name_index_for_game(g))
         if not caps:
             append_csv(PULL_LOG_PATH, [{**row, "status": "empty", "outcomes": 0,
                                         "note": "no player prop outcomes returned"}], PULL_FIELDS)
-            log.append(f"odds: {g['game_id']} returned no props (cost {last})")
+            log.append(f"odds: {g['game_id']} {pt} returned no props (cost {last})")
             wrote = True
             continue
         append_csv(CAPTURES_PATH, caps, CAPTURE_FIELDS)
@@ -275,8 +362,9 @@ def run(keys, games, name_index_for_game, log):
         if unmatched:
             note += f"; unmatched names: {', '.join(unmatched)}"
         append_csv(PULL_LOG_PATH, [{**row, "status": "ok", "outcomes": len(caps), "note": note}], PULL_FIELDS)
-        pulls[g["game_id"]].append({"status": "ok"})
-        log.append(f"odds: {g['game_id']} captured {len(caps)} lines {mins} min before kickoff "
+        if pt == "pregame":
+            pulls[g["game_id"]].append({"status": "ok"})
+        log.append(f"odds: {g['game_id']} {pt} captured {len(caps)} lines {mins} min before kickoff "
                    f"(cost {last}, remaining {remaining})")
         wrote = True
     return wrote
