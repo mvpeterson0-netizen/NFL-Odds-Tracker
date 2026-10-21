@@ -209,7 +209,7 @@ function viewBoard() {
     <span class="muted small">${items.length} players · graded lines are the pre-game line (~3h before kickoff), not closing lines; yellow chips are earlier snapshots (Mon / Thu / Sun AM) · Opp D rank: 1 = toughest, 32 = most allowed</span>
   </div>`;
   if (!items.length) return html + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
-  html += `<div class="panel scroll"><table><thead><tr>
+  html += `<div class="panel scroll board"><table><thead><tr>
     <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
@@ -226,7 +226,7 @@ function viewBoard() {
       const newGame = first && r.gid !== lastGid;
       const grp = newGame ? "grp" : first ? "plr" : "";
       html += `<tr class="${grp}">
-        ${newGame ? `<td class="gamecell" rowspan="${span[r.gid]}"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></td>` : ""}
+        ${newGame ? `<td class="gamecell" rowspan="${span[r.gid]}"><div class="gwrap"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></div></td>` : ""}
         <td>${first ? esc(s.team) : ""}</td>
         <td>${first ? `<span class="chip ${s.change ? "chg" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
         <td>${first ? `<a href="#/player/${s.pid}">${esc(s.name)}</a>` : ""}</td>
