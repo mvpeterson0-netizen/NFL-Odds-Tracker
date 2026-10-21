@@ -67,6 +67,16 @@ function capCell(m) {
   const late = m.inwin === "no" ? ` <span class="chip" title="Captured outside the 2.5–3.5 h window">${esc(m.mins)} min pre</span>` : "";
   return `${esc(m.book)} · <span title="${esc(m.cap)}">${fmtTime(m.cap)}</span>${late}`;
 }
+function ordinal(n) { const v = n % 100; return n + (["th", "st", "nd", "rd"][(v - 20) % 10] || ["th", "st", "nd", "rd"][v] || "th"); }
+function drankCell(m, pos, mk, opp) {
+  if (!m || m.drk == null) return `<span class="na" title="No games by ${esc(opp)} before this game yet">no data</span>`;
+  const cur = ((D.defrank || {})[pos] || {})[mk.id] || {};
+  const c = cur[opp];
+  const tip = `${opp} allowed ${num(m.dav)} ${pos} ${mk.label.toLowerCase()} per game in its ${m.dn} game${m.dn === 1 ? "" : "s"} before this one. ` +
+    `Rank ${m.drk} of ${m.dof} (1 = fewest allowed, toughest).` + (c ? ` Current season: ${ordinal(c[0])} (${num(c[1])}/g, ${c[2]} gm).` : "");
+  const cls = m.dn < 3 ? "" : m.drk <= Math.round(m.dof / 4) ? "tough" : m.drk > m.dof - Math.round(m.dof / 4) ? "easy" : "";
+  return `<span class="drk ${cls}" title="${esc(tip)}">${ordinal(m.drk)}</span> <span class="muted small">${num(m.dav)}/g${m.dn < 3 ? ` · ${m.dn} gm` : ""}</span>`;
+}
 function usageCell(r, pos) {
   if (pos === "QB") return "";
   const parts = [];
@@ -144,11 +154,11 @@ function viewBoard() {
     <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
     <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
     <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label>
-    <span class="muted small">${items.length} players · lines are the pre-game line (~3h before kickoff), not closing lines</span>
+    <span class="muted small">${items.length} players · lines are the pre-game line (~3h before kickoff), not closing lines · Opp D rank: 1 = toughest, 32 = most allowed</span>
   </div>`;
   if (!items.length) return html + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
   html += `<div class="panel scroll"><table><thead><tr>
-    <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th class="num">Pre-game line (~3h)</th>
+    <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num">Pre-game line (~3h)</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
   let lastGid = null;
@@ -165,6 +175,7 @@ function viewBoard() {
         <td>${first ? `<span class="chip ${s.change ? "chg" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
         <td>${first ? `<a href="#/player/${s.pid}">${esc(s.name)}</a>` : ""}</td>
         <td>${esc(mk.label)}</td>
+        <td class="small">${drankCell(m, pos, mk, r.opp)}</td>
         <td class="num">${lineCell(m)}</td>
         <td class="num">${m && m.lstat === "ok" ? odds(m.op) : ""}</td>
         <td class="num">${m && m.lstat === "ok" ? odds(m.up) : ""}</td>
@@ -269,12 +280,13 @@ function viewPlayer(pid) {
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
     <div class="panel"><div class="chart">${chartSVG(rows, mid)}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span></div></div>
-    <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th>Slot</th><th class="num">Pre-game line (~3h)</th>
+    <div class="panel scroll"><table><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th>Slot</th><th class="num">Pre-game line (~3h)</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
   for (const r of rows) {
     const m = r.m[mid];
     h += `<tr><td>${r.wk}</td><td>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} <span class="muted small">${fmtTime(r.ko)}</span></td>
+      <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
       <td>${esc(r.slot) || '<span class="muted small">not slotted</span>'}</td>
       <td class="num">${lineCell(m)}</td><td class="num">${m && m.lstat === "ok" ? odds(m.op) : ""}</td>
       <td class="num">${m && m.lstat === "ok" ? odds(m.up) : ""}</td><td class="small">${capCell(m)}${m && m.alt ? m.alt.map((a) => `<div class="muted">${esc(a.book)}: ${num(a.line)} (${a.op > 0 ? "+" : ""}${a.op ?? "?"}/${a.up > 0 ? "+" : ""}${a.up ?? "?"})</div>`).join("") : ""}</td>
