@@ -27,7 +27,7 @@ FIELDS = ["game_id", "stadium", "roof",
           "fc_fetched_utc", "fc_temp_f", "fc_wind_mph", "fc_gust_mph", "fc_precip_in", "fc_precip_prob",
           "obs_fetched_utc", "obs_temp_f", "obs_wind_mph", "obs_gust_mph", "obs_precip_in",
           "note"]
-FORECAST_HORIZON = timedelta(days=16)
+FORECAST_HORIZON = timedelta(days=15)  # Open-Meteo allows end_date up to ~16 days out
 FORECAST_REFRESH = timedelta(hours=3)
 ARCHIVE_DELAY = timedelta(days=6)
 ARCHIVE_RETRY = timedelta(hours=20)
@@ -159,6 +159,8 @@ def _refresh(games, log) -> bool:
             lat, lon, _ = STADIUMS[stadium]
             start = min(ko for _, ko in items)
             end = max(ko for _, ko in items) + timedelta(hours=GAME_HOURS)
+            if kind == "fc":
+                end = min(end, now + FORECAST_HORIZON)
             try:
                 series = _fetch(url, lat, lon, start, end, forecast=(kind == "fc"))
                 calls += 1
