@@ -1,0 +1,72 @@
+/* Stix phone layout. Loaded only on screens <= 760px wide (media attribute in index.html),
+   so nothing here can affect the desktop layout. */
+body { font-size: 15px; -webkit-text-size-adjust: 100%; }
+.top { flex-wrap: wrap; gap: 6px 12px; padding: 8px 12px; padding-top: max(8px, env(safe-area-inset-top)); }
+.brand { font-size: 17px; }
+.brand .muted { display: none; }
+.status { order: 2; margin-left: auto; font-size: 11px; max-width: 55%; text-align: right; }
+#tabs { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+#tabs::-webkit-scrollbar { display: none; }
+#tabs a { white-space: nowrap; padding: 6px 10px; }
+.stale { padding: 8px 12px; font-size: 13px; }
+main { padding: 10px 12px 32px; }
+.foot { padding: 0 12px 24px; }
+.grid2 { grid-template-columns: 1fr; }
+.panel.scroll { -webkit-overflow-scrolling: touch; }
+
+/* filters: 2 x 2 grid */
+.mfilters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mfilters label { min-width: 0; }
+.mfilters select, .mfilters input[type=search] { min-width: 0; width: 100%; font-size: 16px; padding: 8px; }
+.mnote { margin: 4px 0 10px; }
+.gamebar { margin: 0 -12px 6px; padding: 2px 12px 10px; }
+
+/* game sections */
+.mgame { margin-bottom: 18px; }
+.mgame-h { position: sticky; top: 0; z-index: 4; background: var(--bg); padding: 8px 2px 6px;
+  border-bottom: 2px solid var(--muted); margin-bottom: 8px; display: flex; flex-direction: column; gap: 2px; }
+
+/* player cards */
+.mcard { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 10px 12px; margin-bottom: 10px; color: var(--ink); }
+.mcard:hover, .mcard:active { text-decoration: none; background: var(--hover); }
+.mcard-h { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.mname { font-weight: 650; font-size: 16px; }
+.mchev { margin-left: auto; font-size: 24px; color: var(--muted); }
+.mrow { display: grid; grid-template-columns: 1.25fr 1.15fr 0.7fr 0.6fr 0.95fr; gap: 6px; align-items: center;
+  padding: 5px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; font-size: 14px; }
+.mrow > span:nth-child(n+2) { text-align: right; }
+.mrow.mhead { border-top: 0; padding: 0 0 2px; font-size: 10px; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.mlab { color: var(--muted); font-size: 13px; }
+.mrow .chip { font-size: 10px; padding: 0 5px; }
+.mtrend { font-weight: 700; }
+.mtrend.up { color: var(--over); } .mtrend.down { color: var(--under); } .mtrend.flat { color: var(--muted); }
+.musage { display: block; font-size: 10px; color: var(--muted); }
+.musage.mixed { color: var(--warn-ink); }
+
+/* player page */
+.mplayer { animation: mslide .18s ease-out; }
+@keyframes mslide { from { transform: translateY(16px); opacity: .4; } to { transform: none; opacity: 1; } }
+.mp-top { margin-bottom: 6px; }
+.mback { font-size: 16px; display: inline-block; padding: 4px 0; }
+.mp-h { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+.mp-h h2 { margin: 0; font-size: 22px; }
+.mtabs { display: flex; gap: 6px; overflow-x: auto; margin: 6px 0 10px; }
+.mtabs button { white-space: nowrap; padding: 8px 12px; font-size: 14px; }
+.mtiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+.mtiles > div { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px;
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; }
+.mtiles > div > span:first-child { font-size: 10px; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.mtiles b { font-size: 18px; }
+.mtiles small { font-size: 10px; color: var(--muted); }
+.mtiles .chip { font-size: 10px; }
+.mlist > div { padding: 4px 0; }
+.mlog { font-size: 13px; }
+.mlog-r { display: grid; grid-template-columns: 0.4fr 2.2fr 1.1fr 0.7fr 0.7fr; gap: 6px; padding: 7px 12px;
+  border-top: 1px solid var(--line); align-items: center; font-variant-numeric: tabular-nums; }
+.mlog-r > span:nth-child(n+3) { text-align: right; }
+.mlog-r.mhead { border-top: 0; font-size: 10px; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.mlog-r .chip { font-size: 10px; padding: 0 5px; }
+.chart { padding: 6px 4px 2px; }
+.legend { flex-wrap: wrap; gap: 6px 12px; }
+.wxline { max-width: none; }

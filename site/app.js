@@ -114,6 +114,14 @@ const WX_RULES = {
   coldF: 40,         // at or below: Cold
   hotF: 85,          // at or above: Hot
 };
+// Trend + season average rules (used by the phone cards and listed on the Guide tab).
+const STARTER_SLOTS = ["QB1", "RB1", "WR1", "WR2", "WR3", "TE1"];
+const TREND_RULES = {
+  lastN: 3,          // compare the last N started games ...
+  pct: 10,           // ... to the season average: >= +10% Rising, <= -10% Falling, otherwise Steady
+  minGames: 4,       // fewer started games than this: no trend ("—"); needs more than lastN so the comparison means something
+  usagePct: 10,      // usage (target share for WR/TE, snap share for RB) moving >= 10% the same way backs the trend
+};
 function wxValues(w) {
   const p = w.obs_temp_f != null ? "obs" : w.fc_temp_f != null ? "fc" : null;
   if (!p) return null;
@@ -297,7 +305,7 @@ function niceStep(range, target = 5) {
   for (const f of [1, 2, 2.5, 5, 10]) if (raw <= f * mag) return f * mag;
   return 10 * mag;
 }
-function chartSVG(rows, mid) {
+function chartSVG(rows, mid, o = {}) {
   // act = actual stat; line = graded pre-game line; proj = latest snapshot shown until the pre-game line exists
   const pts = rows.map((r) => {
     const m = r.m[mid] || {};
@@ -307,7 +315,9 @@ function chartSVG(rows, mid) {
   });
   const vals = pts.flatMap((p) => [p.act, p.line, p.proj ? p.proj.line : null]).filter((v) => v != null);
   if (!vals.length) return `<p class="muted pad">No data to chart yet.</p>`;
-  const W = 1200, H = 280, L = 48, R = 70, T = 22, B = 30;
+  const { W = 1200, H = 280, L = 48, R = 70, T = 22, B = 30, fs = 12, edgeAbove = false } = o; // phone view passes a smaller canvas
+  // edgeAbove: put line/snapshot labels above the marker for the last week so they are not cut off on narrow charts
+  const lbl = (i, x, y) => (edgeAbove && i === pts.length - 1 ? `x="${x}" y="${y - 9}" text-anchor="middle"` : `x="${x + 18}" y="${y + 4}"`);
   const top = Math.max(...vals);
   const step = niceStep(top || 1);
   const max = Math.ceil((top * 1.08) / step) * step || step, min = 0;
@@ -317,10 +327,10 @@ function chartSVG(rows, mid) {
   let g = "";
   for (let v = min; v <= max + 1e-9; v += step) {
     g += `<line x1="${L}" x2="${W - R}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--line)"/>
-      <text x="${L - 8}" y="${ys(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">${fmtTick(v)}</text>`;
+      <text x="${L - 8}" y="${ys(v) + 4}" text-anchor="end" font-size="${fs}" fill="var(--muted)">${fmtTick(v)}</text>`;
   }
   pts.forEach((p, i) => {
-    g += `<text x="${xs(i)}" y="${H - 8}" text-anchor="middle" font-size="12" fill="var(--muted)">W${p.wk}</text>`;
+    g += `<text x="${xs(i)}" y="${H - 8}" text-anchor="middle" font-size="${fs}" fill="var(--muted)">W${p.wk}</text>`;
   });
   // actual line (breaks at DNP / not played)
   let path = "", pen = false;
@@ -335,18 +345,18 @@ function chartSVG(rows, mid) {
       const res = p.m.res;
       const col = res === "over" ? "var(--over)" : res === "under" ? "var(--under)" : "var(--ink)";
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${ys(p.line)}" y2="${ys(p.line)}" stroke="${col}" stroke-width="3"><title>W${p.wk} pre-game line ${num(p.line)} (${esc(p.m.book || "")})</title></line>
-        <text x="${x + 18}" y="${ys(p.line) + 4}" font-size="12" font-weight="600" fill="${col}">${num(p.line)}</text>`;
+        <text ${lbl(i, x, ys(p.line))} font-size="${fs}" font-weight="600" fill="${col}">${num(p.line)}</text>`;
     }
     if (p.proj) {
       const y = ys(p.proj.line);
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${y}" y2="${y}" stroke="var(--warn-ink)" stroke-width="3" stroke-dasharray="4 3"><title>W${p.wk} ${esc(p.proj.label)} snapshot ${num(p.proj.line)} (${esc(p.proj.book)}, ${esc(fmtTime(p.proj.cap))}). Not graded; replaced by the pre-game line.</title></line>
-        <text x="${x + 18}" y="${y + 4}" font-size="12" font-weight="600" fill="var(--warn-ink)">${num(p.proj.line)} ${esc(p.proj.label)}</text>`;
+        <text ${lbl(i, x, y)} font-size="${fs}" font-weight="600" fill="var(--warn-ink)">${num(p.proj.line)} ${esc(p.proj.label)}</text>`;
     }
     if (p.act != null) {
       g += `<circle cx="${x}" cy="${ys(p.act)}" r="4.5" fill="var(--accent)"><title>W${p.wk} actual ${num(p.act)}</title></circle>
-        <text x="${x}" y="${ys(p.act) - 9}" text-anchor="middle" font-size="12" fill="var(--accent)">${num(p.act)}</text>`;
+        <text x="${x}" y="${ys(p.act) - 9}" text-anchor="middle" font-size="${fs}" fill="var(--accent)">${num(p.act)}</text>`;
     }
-    if (p.r.played === false) g += `<text x="${x}" y="${ys(min) - 6}" text-anchor="middle" font-size="11" fill="var(--muted)">DNP</text>`;
+    if (p.r.played === false) g += `<text x="${x}" y="${ys(min) - 6}" text-anchor="middle" font-size="${fs - 1}" fill="var(--muted)">DNP</text>`;
   });
   return `<svg viewBox="0 0 ${W} ${H}" role="img">${g}</svg>`;
 }
@@ -509,6 +519,18 @@ function viewGuide() {
     </tbody></table>
     <p class="muted small">These thresholds are this app's own rules of thumb for flagging games worth a closer look. They are not an official standard and not a prediction of how weather affects any stat. Weather data: Open-Meteo, at the stadium: temperature and wind at the kickoff hour, precipitation summed over the kickoff hour + next 3 hours.</p>
   </div></div>
+  <div class="panel"><h3>Season average and trend (phone player cards)</h3><div class="body">
+    <table class="wrap"><thead><tr><th>Item</th><th>Rule</th></tr></thead><tbody>
+    <tr><td><b>Starts</b></td><td class="wrapcell">A game counts as a start when the player's pre-game slot was a starting spot: <b>${STARTER_SLOTS.join(", ")}</b> (slots come from the depth chart and recent snap share; see the Slots tab), and he played. Our data sources have no official "started" field, so this is the app's definition.</td></tr>
+    <tr><td><b>AVG</b> (season average)</td><td class="wrapcell">Average of the stat over every <b>start</b> this season before the upcoming game. Games he didn't start or didn't play are left out. Shows "—" with no starts yet.</td></tr>
+    <tr><td><b>↑ Rising</b></td><td class="wrapcell">Average of his last <b>${TREND_RULES.lastN} starts</b> is <b>${TREND_RULES.pct}% or more above</b> his season average.</td></tr>
+    <tr><td><b>↓ Falling</b></td><td class="wrapcell">Average of his last ${TREND_RULES.lastN} starts is <b>${TREND_RULES.pct}% or more below</b> his season average.</td></tr>
+    <tr><td><b>→ Steady</b></td><td class="wrapcell">Within ±${TREND_RULES.pct}% of his season average.</td></tr>
+    <tr><td><b>—</b></td><td class="wrapcell">Fewer than <b>${TREND_RULES.minGames} starts</b>: not enough to call a trend.</td></tr>
+    <tr><td><b>usage ↑ / usage ↓</b></td><td class="wrapcell">Shown next to Rising or Falling when his usage over the same last ${TREND_RULES.lastN} starts moved <b>${TREND_RULES.usagePct}% or more</b> the same way vs. his season average: <b>target share</b> for WR/TE, <b>snap share</b> for RB (not used for QB). <b>mixed</b> means usage moved the opposite way.</td></tr>
+    </tbody></table>
+    <p class="muted small">Rules of thumb for spotting a player whose recent production differs from his season, not predictions.</p>
+  </div></div>
   <div class="panel"><h3>Other symbols</h3><div class="body"><table class="wrap"><tbody>
     <tr><td><span class="chip snapchip">Mon</span> <span class="chip snapchip">Thu</span> <span class="chip snapchip">Sun AM</span></td><td class="wrapcell">Line-movement snapshots (Monday 8 AM, Thursday 2 PM, Sunday 8 AM Central). Shown until the pre-game line arrives; never graded.</td></tr>
     <tr><td><b>Line</b> (no chip)</td><td class="wrapcell">Pre-game line captured about 3 hours before kickoff. This is the line that is graded over / under / push / void.</td></tr>
@@ -523,13 +545,20 @@ function render() {
   const hash = location.hash || "#/board";
   const [, tab, arg] = hash.split("/");
   document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab)));
-  if (tab === "player") app.innerHTML = viewPlayer(arg);
+  // Phone layout (mobile.js) may take over the Board and player pages on narrow screens.
+  // If it is missing or throws, the normal desktop view renders instead.
+  let mobileHtml = null;
+  try { if (window.STIX_MOBILE && window.STIX_MOBILE.active()) mobileHtml = window.STIX_MOBILE.render(tab, arg); }
+  catch (e) { console.error("mobile view failed; showing desktop view", e); mobileHtml = null; }
+  if (mobileHtml != null) app.innerHTML = mobileHtml;
+  else if (tab === "player") app.innerHTML = viewPlayer(arg);
   else if (tab === "leads") app.innerHTML = viewLeads();
   else if (tab === "slots") app.innerHTML = viewSlots();
   else if (tab === "log") app.innerHTML = viewLog(LIVE);
   else if (tab === "guide") app.innerHTML = viewGuide();
   else app.innerHTML = viewBoard();
   bind(tab, arg);
+  if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };
