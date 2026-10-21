@@ -213,6 +213,9 @@ function viewBoard() {
     <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
+  // Rows per game, so the Game cell can span every row of that game.
+  const span = {};
+  for (const { s, r } of items) span[r.gid] = (span[r.gid] || 0) + marketsFor(s.slot.slice(0, 2)).length;
   let lastGid = null;
   for (const { s, r } of items) {
     const pos = s.slot.slice(0, 2);
@@ -220,9 +223,10 @@ function viewBoard() {
     ms.forEach((mk, i) => {
       const m = r.m[mk.id];
       const first = i === 0;
-      const grp = first && r.gid !== lastGid ? "grp" : "";
+      const newGame = first && r.gid !== lastGid;
+      const grp = newGame ? "grp" : first ? "plr" : "";
       html += `<tr class="${grp}">
-        <td>${first ? `${esc(gameLabel(r.gid))}<div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div>` : ""}</td>
+        ${newGame ? `<td class="gamecell" rowspan="${span[r.gid]}"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></td>` : ""}
         <td>${first ? esc(s.team) : ""}</td>
         <td>${first ? `<span class="chip ${s.change ? "chg" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
         <td>${first ? `<a href="#/player/${s.pid}">${esc(s.name)}</a>` : ""}</td>
