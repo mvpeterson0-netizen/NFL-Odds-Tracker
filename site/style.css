@@ -70,3 +70,7 @@ tr.grp td { border-top: 2px solid var(--line); }
 .scroll { overflow-x: auto; }
 .callout { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
 table.wrap td { white-space: normal; }
+.gamebar { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 10px; margin-bottom: 4px; scrollbar-width: thin; }
+.gchip { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; flex: 0 0 auto; padding: 6px 12px;
+  border-radius: 8px; text-align: left; line-height: 1.25; }
+.gchip.on { background: var(--chip); border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }

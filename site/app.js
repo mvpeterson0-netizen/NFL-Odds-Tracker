@@ -2,7 +2,7 @@
 // NFL Prop Tracker front end. Reads data/data.json (built by the GitHub Action). No external libraries.
 
 let D = null;
-const S = { tab: "board", wk: null, team: "", pos: "", q: "", slotWk: null, slotTeam: "", market: {}, showAn: false };
+const S = { tab: "board", wk: null, game: "", team: "", pos: "", q: "", slotWk: null, slotTeam: "", market: {}, showAn: false };
 const SLOT_ORDER = ["QB1", "RB1", "RB2", "WR1", "WR2", "WR3", "TE1", "TE2"];
 const app = document.getElementById("app");
 
@@ -106,9 +106,27 @@ function teamOptions(val) {
   return `<option value="">All teams</option>` + teams.map((t) => `<option ${t === val ? "selected" : ""}>${t}</option>`).join("");
 }
 
+function gamesFor(wk) {
+  return Object.entries(D.games).filter(([, g]) => g.wk === wk)
+    .sort((a, b) => a[1].ko.localeCompare(b[1].ko) || a[0].localeCompare(b[0]));
+}
+function gameBar(wk) {
+  const gs = gamesFor(wk);
+  if (!gs.length) return "";
+  const chip = (gid, label, sub, extra = "") =>
+    `<button class="gchip ${S.game === gid ? "on" : ""}" data-gid="${esc(gid)}" ${extra}>${label}${sub ? `<span class="muted small">${sub}</span>` : ""}</button>`;
+  let h = `<div class="gamebar" role="group" aria-label="Filter by game">` + chip("", "All games", `${gs.length} games`);
+  for (const [gid, g] of gs) {
+    const when = new Date(g.ko).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" });
+    h += chip(gid, `<b>${esc(g.away)} @ ${esc(g.home)}</b>`, g.final ? "Final" : esc(when), `title="${esc(fmtTime(g.ko))}"`);
+  }
+  return h + `</div>`;
+}
+
 function viewBoard() {
   const wk = S.wk;
   const q = S.q.trim().toLowerCase();
+  if (S.game && !(D.games[S.game] && D.games[S.game].wk === wk)) S.game = "";
   let slots = slotsFor(wk);
   if (S.team) slots = slots.filter((s) => s.team === S.team);
   if (S.pos) slots = slots.filter((s) => s.slot.startsWith(S.pos));
@@ -117,10 +135,11 @@ function viewBoard() {
   for (const s of slots) {
     const r = rowFor(s.pid, wk);
     if (!r) continue;
+    if (S.game && r.gid !== S.game) continue;
     items.push({ s, r, ko: r.ko });
   }
   items.sort((a, b) => a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot));
-  let html = `<div class="filters">
+  let html = gameBar(wk) + `<div class="filters">
     <label>Week ${weekSelect("f-wk", wk)}</label>
     <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
     <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
@@ -352,7 +371,8 @@ function render() {
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };
-  on("f-wk", "change", (e) => { S.wk = +e.target.value; render(); });
+  on("f-wk", "change", (e) => { S.wk = +e.target.value; S.game = ""; render(); });
+  document.querySelectorAll("[data-gid]").forEach((b) => b.addEventListener("click", () => { S.game = b.dataset.gid; render(); }));
   on("f-team", "change", (e) => { S.team = e.target.value; render(); });
   on("f-pos", "change", (e) => { S.pos = e.target.value; render(); });
   on("f-q", "input", (e) => { S.q = e.target.value; clearTimeout(bind.t); bind.t = setTimeout(() => { render(); const el = document.getElementById("f-q"); el.focus(); el.setSelectionRange(el.value.length, el.value.length); }, 200); });
