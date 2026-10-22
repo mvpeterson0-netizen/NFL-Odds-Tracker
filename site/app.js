@@ -605,6 +605,11 @@ function viewLog(live) {
 }
 
 function viewGuide() {
+  return `<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
+    <section id="g-guide"><h2 class="gsec">Guide</h2>${guideBody()}</section>
+    <section id="g-log"><h2 class="gsec">Log &amp; sources</h2>${viewLog(LIVE)}</section>`;
+}
+function guideBody() {
   const R = WX_RULES;
   const row = (label, cls, rule) => `<tr><td><span class="wxb ${cls}">${label}</span></td><td class="wrapcell">${rule}</td></tr>`;
   return `<div class="panel"><h3>Weather labels</h3><div class="body">
@@ -623,7 +628,7 @@ function viewGuide() {
   </div></div>
   <div class="panel"><h3>Season average and trend (phone player cards)</h3><div class="body">
     <table class="wrap"><thead><tr><th>Item</th><th>Rule</th></tr></thead><tbody>
-    <tr><td><b>Starts</b></td><td class="wrapcell">A game counts as a start when the player's pre-game slot was a starting spot: <b>${STARTER_SLOTS.join(", ")}</b> (slots come from the depth chart and recent snap share; see the Slots tab), and he played. Our data sources have no official "started" field, so this is the app's definition.</td></tr>
+    <tr><td><b>Starts</b></td><td class="wrapcell">A game counts as a start when the player's pre-game slot was a starting spot: <b>${STARTER_SLOTS.join(", ")}</b> (slots come from the depth chart and recent snap share; see the Slots section at the top of this page), and he played. Our data sources have no official "started" field, so this is the app's definition.</td></tr>
     <tr><td><b>AVG</b> (season average)</td><td class="wrapcell">Average of the stat over every <b>start</b> this season before the upcoming game. Games he didn't start or didn't play are left out. Shows "—" with no starts yet.</td></tr>
     <tr><td><b>↑ Rising</b></td><td class="wrapcell">Average of his last <b>${TREND_RULES.lastN} starts</b> is <b>${TREND_RULES.pct}% or more above</b> his season average.</td></tr>
     <tr><td><b>↓ Falling</b></td><td class="wrapcell">Average of his last ${TREND_RULES.lastN} starts is <b>${TREND_RULES.pct}% or more below</b> his season average.</td></tr>
@@ -693,7 +698,7 @@ let LIVE = null;
 function render() {
   const hash = location.hash || "#/board";
   const [, tab, arg] = hash.split("/");
-  document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab)));
+  document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "slots" || tab === "log" ? "guide" : tab)));
   // Phone layout (mobile.js) may take over the Board and player pages on narrow screens.
   // If it is missing or throws, the normal desktop view renders instead.
   let mobileHtml = null;
@@ -702,9 +707,7 @@ function render() {
   if (mobileHtml != null) app.innerHTML = mobileHtml;
   else if (tab === "player") app.innerHTML = viewPlayer(arg);
   else if (tab === "leads") app.innerHTML = viewLeads();
-  else if (tab === "slots") app.innerHTML = viewSlots();
-  else if (tab === "log") app.innerHTML = viewLog(LIVE);
-  else if (tab === "guide") app.innerHTML = viewGuide();
+  else if (tab === "guide" || tab === "slots" || tab === "log") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
   else if (tab === "search") {
     // Search lives in search.js; if it is missing or throws, show a message instead of breaking the app.
@@ -713,6 +716,8 @@ function render() {
   }
   else app.innerHTML = viewBoard();
   bind(tab, arg);
+  // Old Slots / Log links now open the Guide page at that section.
+  if (tab === "slots" || tab === "log") setTimeout(() => { const el = document.getElementById(tab === "log" ? "g-log" : "g-slots"); if (el) el.scrollIntoView(); }, 0);
   if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
   if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
 }
@@ -763,7 +768,7 @@ async function status() {
     if (Date.now() - new Date(D.generated_utc).getTime() > 30 * 3600000) warn.push(`Data may be stale: last data build was ${ago(D.generated_utc)}.`);
   }
   if (warn.length) { stale.hidden = false; stale.textContent = "⚠ " + warn.join(" "); st.classList.add("bad"); }
-  if ((location.hash || "").startsWith("#/log")) render();
+  if (/^#\/(guide|log|slots)/.test(location.hash || "")) render();
 }
 
 (async function init() {
@@ -808,7 +813,20 @@ async function status() {
     } catch { /* try again next time */ }
   }, 5 * 60 * 1000);
 })();
+// Display-only team abbreviations: nflverse uses "LA" for the Rams; the app shows "LAR".
+// Stored data (CSV files, captured lines, game ids) keeps nflverse codes; only the in-memory copy is relabeled.
+const TEAM_DISPLAY = { LA: "LAR" };
+function relabelTeams() {
+  const t = (x) => TEAM_DISPLAY[x] || x;
+  D.players.forEach((p) => (p.team = t(p.team)));
+  Object.values(D.games).forEach((g) => { g.home = t(g.home); g.away = t(g.away); });
+  Object.values(D.rows).forEach((rs) => rs.forEach((r) => { if (r.team) r.team = t(r.team); if (r.opp) r.opp = t(r.opp); }));
+  D.slots.forEach((s) => (s.team = t(s.team)));
+  for (const byMk of Object.values(D.defrank || {})) for (const tbl of Object.values(byMk))
+    for (const [k, nk] of Object.entries(TEAM_DISPLAY)) if (k in tbl && !(nk in tbl)) { tbl[nk] = tbl[k]; delete tbl[k]; }
+}
 function index() {
+  relabelTeams();
   for (const k in playerById) delete playerById[k];
   D.players.forEach((p) => (playerById[p.id] = p));
   D.markets.forEach((m) => (mkt[m.id] = m));
