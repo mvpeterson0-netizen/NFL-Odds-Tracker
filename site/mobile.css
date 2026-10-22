@@ -89,3 +89,12 @@ main { padding: 10px 12px 32px; }
 .srch form { flex-wrap: wrap; }
 .srch form input[type=search] { flex: 1 1 100%; }
 .srch form button { flex: 1; }
+/* Search builder on phones: each row's controls wrap into a grid */
+.builder { padding: 8px; }
+.brow { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: 100%; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.brow select, .brow input { width: 100%; font-size: 16px; }
+.brow .bw { display: flex; align-items: center; gap: 6px; }
+.brow .bw input { flex: 1; }
+.brow .bl { font-size: 13px; white-space: nowrap; }
+.brow button.brm { justify-self: end; }
+.bgroup { align-items: stretch; }
