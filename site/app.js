@@ -657,8 +657,14 @@ function render() {
   else if (tab === "log") app.innerHTML = viewLog(LIVE);
   else if (tab === "guide") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
+  else if (tab === "search") {
+    // Search lives in search.js; if it is missing or throws, show a message instead of breaking the app.
+    try { app.innerHTML = window.STIX_SEARCH ? window.STIX_SEARCH.view(arg) : `<p class="pad">Search didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">Search hit an error on that request. Try rewording it, or <a href="#/search">see the examples</a>.</p>`; }
+  }
   else app.innerHTML = viewBoard();
   bind(tab, arg);
+  if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
   if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
