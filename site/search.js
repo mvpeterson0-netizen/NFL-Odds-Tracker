@@ -104,6 +104,24 @@
       return out;
     }
     const st = findStat(seg, ctx.pos);
+    // stat vs his line: "last 3 games average is less than his current prop line"
+    if (/\b(line|prop)\b/.test(seg)) {
+      const ln = seg.match(/\b(?:last|past|previous|recent)\s+(\d+)\b/);
+      const avgW = /\b(averag\w*|avg|per game)\b/.test(seg), eachW = /\b(each|every)\b/.test(seg);
+      if ((ln || avgW) && /\b(than|to|vs\.?|versus|below|above|under|over)\b[^.]{0,40}?\b(line|prop)\b/.test(seg)) {
+        let stat = st && st.stat;
+        if (!stat) {
+          stat = ctx.pos.length === 1 ? DEFAULT_YDS[ctx.pos[0]] : null;
+          if (!stat) { out.note = `which stat should be compared to the line? Pick it in the row: "${seg.trim()}"`; return out; }
+          out.note = `no stat named; assumed ${STATS[stat].label} (change it in the row)`;
+        }
+        if (!STATS[stat].market) { out.note = `there are no lines for ${STATS[stat].label}: "${seg.trim()}"`; return out; }
+        const opm = findOp(seg);
+        const n = ln ? Number(ln[1]) : null;
+        out.cond = { row: true, m: n ? (eachW ? "each" : "avgN") : "avg", stat, n: n || 3, op: opm && opm.op !== "between" ? opm.op : "<", cmp: "line", pct: 100 };
+        return out;
+      }
+    }
     // line vs average: "line below his average", "line is under his season average"
     if (/\bline\b/.test(seg)) {
       const op = findOp(seg);
@@ -178,186 +196,258 @@
     return spec;
   }
 
+  // ---------- rows (the builder's model) ----------
+  // row = { m, stat, n, op, cmp, val, val2, cn, pct }
+  //   m   (what to measure): "avg" season avg over starts | "avgN" last n games avg | "each" each of last n games
+  //                          | "line" his current line | "move" line move this week | "opp" opponent defense rank
+  //   op  : "<" "<=" ">" ">=" "=" "between"
+  //   cmp (compare to): "num" (val, or val..val2 for between) | "line" | "avg" | "avgN" (cn games); scaled by pct %
+  const MEASURES = [["avg", "Season avg (starts)"], ["avgN", "Last N games avg"], ["each", "Each of last N games"],
+    ["line", "Current line"], ["move", "Line move this week"], ["opp", "Opp D rank"]];
+  const CMPS = [["num", "a number"], ["line", "his current line"], ["avg", "his season avg"], ["avgN", "his last N avg"]];
+  const OPS = [["<", "<"], ["<=", "≤"], [">", ">"], [">=", "≥"], ["=", "="], ["between", "between"]];
+  const MARKET_STATS = Object.keys(STATS).filter((k) => STATS[k].market);
+  const needsMarket = (m) => m === "line" || m === "move" || m === "opp";
+  const newRow = () => ({ m: "avgN", stat: "rec", n: 3, op: "<", cmp: "line", val: 0, val2: 0, cn: 3, pct: 100 });
+
+  function toRow(c) {
+    if (c.row) { const r = { ...newRow(), ...c }; delete r.row; return r; }
+    const base = { ...newRow(), stat: c.stat, op: c.op, pct: 100 };
+    const num = (r) => (c.op === "between" ? { ...r, op: "between", cmp: "num", val: c.val[0], val2: c.val[1] } : { ...r, cmp: "num", val: c.val });
+    if (c.kind === "avg") return num({ ...base, m: "avg" });
+    if (c.kind === "avgN") return num({ ...base, m: "avgN", n: c.n });
+    if (c.kind === "each") return num({ ...base, m: "each", n: c.n });
+    if (c.kind === "line") return num({ ...base, m: "line" });
+    if (c.kind === "lineAvg") return { ...base, m: "line", cmp: "avg" };
+    if (c.kind === "opp") return { ...base, m: "opp", op: "between", cmp: "num", val: c.lo, val2: c.hi, oppPos: c.pos || null };
+    return base;
+  }
+
   // ---------- engine ----------
-  const cmp = (v, op, x) => op === "<" ? v < x : op === "<=" ? v <= x : op === ">" ? v > x : op === ">=" ? v >= x : op === "=" ? v === x : op === "between" ? v >= x[0] && v <= x[1] : false;
+  const cmp = (v, op, x, x2) => op === "<" ? v < x : op === "<=" ? v <= x : op === ">" ? v > x : op === ">=" ? v >= x : op === "=" ? v === x : op === "between" ? v >= Math.min(x, x2) && v <= Math.max(x, x2) : false;
   const mean = (a) => (a.length ? a.reduce((s, x) => s + x, 0) / a.length : null);
-  const opTxt = { "<": "<", "<=": "≤", ">": ">", ">=": "≥", "=": "=" };
-  const valTxt = (c) => (c.op === "between" ? `${c.val[0]}–${c.val[1]}` : `${opTxt[c.op]} ${c.val}`);
-
-  function describe(c) {
-    const s = STATS[c.stat].label;
-    if (c.kind === "avg") return `season avg ${s} ${valTxt(c)} (starts)`;
-    if (c.kind === "avgN") return `avg ${s} ${valTxt(c)} over last ${c.n} games`;
-    if (c.kind === "each") return `${s} ${valTxt(c)} in each of last ${c.n} games`;
-    if (c.kind === "opp") return `opponent ranked ${c.lo}–${c.hi} vs ${c.pos || "his position"} ${s} (1 = fewest allowed)`;
-    if (c.kind === "line") return `this week's ${s} line ${valTxt(c)}`;
-    if (c.kind === "lineAvg") return `this week's ${s} line ${opTxt[c.op]} his season avg`;
-    return JSON.stringify(c);
-  }
-
-  function evalCond(c, ctx) {
-    const st = STATS[c.stat];
-    const { prior, starts, cur, pos } = ctx;
-    if (c.kind === "avg" || c.kind === "lineAvg") {
-      const vals = starts.map((r) => st.get(r)).filter((v) => v != null);
-      if (!vals.length) return { ok: false, show: "no starts" };
-      const a = mean(vals);
-      if (c.kind === "avg") return { ok: cmp(a, c.op, c.val), show: `${num(a)} avg (${vals.length} st)` };
-      const ln = lineOf(cur, c.stat);
-      if (ln == null) return { ok: false, show: "no line yet" };
-      return { ok: cmp(ln.v, c.op, a), show: `${num(ln.v)} ${ln.lab} vs ${num(a)} avg` };
-    }
-    if (c.kind === "avgN" || c.kind === "each") {
-      const last = prior.slice(-c.n);
-      const vals = last.map((r) => st.get(r));
-      if (last.length < c.n || vals.some((v) => v == null)) return { ok: false, show: `only ${last.length} games` };
-      if (c.kind === "avgN") { const a = mean(vals); return { ok: cmp(a, c.op, c.val), show: `${num(a)} avg (${vals.map((v) => num(v, 0)).join(", ")})` }; }
-      return { ok: vals.every((v) => cmp(v, c.op, c.val)), show: vals.map((v) => num(v, 0)).join(", ") };
-    }
-    if (c.kind === "opp") {
-      if (!cur) return { ok: false, show: "no game" };
-      const p = c.pos || pos;
-      const v = (((D.defrank || {})[p] || {})[st.market] || {})[cur.opp];
-      if (!v) return { ok: false, show: `no ${p} rank` };
-      return { ok: v[0] >= c.lo && v[0] <= c.hi, show: `${cur.opp} ${ordinal(v[0])} (${num(v[1])}/g)` };
-    }
-    if (c.kind === "line") {
-      const ln = lineOf(cur, c.stat);
-      if (ln == null) return { ok: false, show: "no line yet" };
-      return { ok: cmp(ln.v, c.op, c.val), show: `${num(ln.v)} ${ln.lab}` };
-    }
-    return { ok: false, show: "?" };
-  }
+  const opTxt = Object.fromEntries(OPS);
   function lineOf(cur, stat) {
-    const m = cur && cur.m[STATS[stat].market];
+    const m = cur && STATS[stat].market && cur.m[STATS[stat].market];
     if (!m) return null;
-    if (m.lstat === "ok" && m.line != null) return { v: m.line, lab: "Pre" };
+    if (m.lstat === "ok" && m.line != null) return { v: m.line, lab: "Pre", m };
     const sn = m.snaps && m.snaps.length ? m.snaps[m.snaps.length - 1] : null;
-    return sn && sn.line != null ? { v: sn.line, lab: sn.label } : null;
+    return sn && sn.line != null ? { v: sn.line, lab: sn.label, m } : null;
+  }
+  function seasonAvg(stat, ctx) { const v = ctx.starts.map((r) => STATS[stat].get(r)).filter((x) => x != null); return v.length ? { v: mean(v), n: v.length } : null; }
+  function lastN(stat, n, ctx) {
+    const last = ctx.prior.slice(-n); const v = last.map((r) => STATS[stat].get(r));
+    return last.length < n || v.some((x) => x == null) ? null : v;
+  }
+  // the right-hand side as a number (or null if unknown)
+  function rhs(row, ctx) {
+    const k = (row.pct ?? 100) / 100;
+    if (row.cmp === "num") return { v: Number(row.val), v2: Number(row.val2), txt: row.op === "between" ? `${row.val}–${row.val2}` : `${row.val}` };
+    if (row.cmp === "line") { const l = lineOf(ctx.cur, row.stat); return l ? { v: l.v * k, base: l.v, txt: `${pf(row)}line ${num(l.v)} ${l.lab}` } : null; }
+    if (row.cmp === "avg") { const a = seasonAvg(row.stat, ctx); return a ? { v: a.v * k, base: a.v, txt: `${pf(row)}avg ${num(a.v)}` } : null; }
+    if (row.cmp === "avgN") { const v = lastN(row.stat, row.cn, ctx); return v ? { v: mean(v) * k, base: mean(v), txt: `${pf(row)}last ${row.cn} avg ${num(mean(v))}` } : null; }
+    return null;
+  }
+  const pf = (row) => ((row.pct ?? 100) !== 100 ? `${row.pct}% of ` : "");
+  const gapTxt = (a, b) => (b ? ` (${a - b >= 0 ? "+" : ""}${Math.round(((a - b) / Math.abs(b)) * 100)}%)` : "");
+
+  function evalRow(row, ctx) {
+    const st = STATS[row.stat];
+    if (!st) return { ok: false, show: "pick a stat" };
+    if (needsMarket(row.m) && !st.market) return { ok: false, show: `no lines for ${st.label}` };
+    const R = row.m === "opp" ? { v: Number(row.val), v2: Number(row.val2), txt: row.op === "between" ? `${row.val}–${row.val2}` : `${row.val}` } : rhs(row, ctx);
+    if (!R) return { ok: false, show: row.cmp === "line" ? "no line yet" : "not enough games" };
+    const test = (x) => cmp(x, row.op, R.v, R.v2);
+    if (row.m === "each") {
+      const v = lastN(row.stat, row.n, ctx);
+      if (!v) return { ok: false, show: `fewer than ${row.n} games` };
+      return { ok: v.every(test), show: `${v.map((x) => num(x, 0)).join(", ")} vs ${R.txt}` };
+    }
+    let L, lt;
+    if (row.m === "avg") { const a = seasonAvg(row.stat, ctx); if (!a) return { ok: false, show: "no starts" }; L = a.v; lt = `${num(a.v)} avg (${a.n} st)`; }
+    else if (row.m === "avgN") { const v = lastN(row.stat, row.n, ctx); if (!v) return { ok: false, show: `fewer than ${row.n} games` }; L = mean(v); lt = `${num(L)} (${v.map((x) => num(x, 0)).join(", ")})`; }
+    else if (row.m === "line") { const l = lineOf(ctx.cur, row.stat); if (!l) return { ok: false, show: "no line yet" }; L = l.v; lt = `${num(l.v)} ${l.lab}`; }
+    else if (row.m === "move") {
+      const l = lineOf(ctx.cur, row.stat); const first = l && l.m.snaps && l.m.snaps.length ? l.m.snaps[0] : null;
+      if (!l || !first || (l.lab !== "Pre" && l.m.snaps.length < 2)) return { ok: false, show: "needs 2 lines this week" };
+      L = l.v - first.line; lt = `${L > 0 ? "+" : ""}${num(L)} (${first.label} ${num(first.line)} → ${l.lab} ${num(l.v)})`;
+    }
+    else if (row.m === "opp") {
+      if (!ctx.cur) return { ok: false, show: "no game" };
+      const p = row.oppPos || ctx.pos; const v = (((D.defrank || {})[p] || {})[st.market] || {})[ctx.cur.opp];
+      if (!v) return { ok: false, show: `no ${p} rank` };
+      L = v[0]; lt = `${ctx.cur.opp} ${ordinal(v[0])} (${num(v[1])}/g)`;
+    }
+    // gap is always shown against the line/average itself (not the % threshold), e.g. 25.7 vs line 31.5 = -18%
+    const gap = row.cmp !== "num" ? gapTxt(L, R.base) : "";
+    return { ok: test(L), show: `${lt} vs ${R.txt}${gap}`, gap: row.cmp !== "num" && R.base ? (L - R.base) / Math.abs(R.base) : null };
   }
 
   function run(spec, near = false) {
-    const wk = D.current_week;
-    const out = [];
+    const wk = D.current_week, out = [];
     for (const s of D.slots.filter((x) => x.wk === wk)) {
       const pos = s.slot.slice(0, 2);
       if (spec.pos.length && !spec.pos.includes(pos)) continue;
+      if (spec.team && s.team !== spec.team) continue;
       const rows = D.rows[s.pid] || [];
       const cur = rows.find((r) => r.wk === wk);
+      if (spec.game && (!cur || cur.gid !== spec.game)) continue;
       const prior = rows.filter((r) => r.wk < wk && r.final && r.played === true);
-      const starts = prior.filter((r) => STARTER_SLOTS.includes(r.slot));
-      const ctx = { prior, starts, cur, pos };
-      const results = spec.groups.map((g) => g.map((c) => evalCond(c, ctx)));
+      const ctx = { prior, starts: prior.filter((r) => STARTER_SLOTS.includes(r.slot)), cur, pos };
+      const results = spec.groups.map((g) => g.map((row) => evalRow(row, ctx)));
       const misses = results.filter((g) => !g.some((x) => x.ok)).length;
       if (misses === 0 || (near && misses === 1 && spec.groups.length > 1)) out.push({ s, cur, results, misses });
     }
-    out.sort((a, b) => (a.cur ? a.cur.ko : "").localeCompare(b.cur ? b.cur.ko : "") || a.s.team.localeCompare(b.s.team) || SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot));
     return out;
   }
 
-  // ---------- view ----------
-  const EXAMPLES = [
-    "RBs who average 1.0 reception per game or 3 targets per game but had less than 2 catches in each of the last 3 games and are facing a bottom 10 defense vs RB receptions",
-    "WRs averaging at least 6 targets per game facing a bottom 8 defense vs WR receiving yards",
-    "TEs with 4 or more receptions in each of the last 3 games",
-    "RBs averaging 15 carries per game whose rushing yards line is below their average",
-    "QBs facing a top 5 defense vs QB passing yards",
-    "WRs with a target share over 25 averaged over the last 3 games",
-  ];
-  let LAST = { text: "", spec: null, rows: [] };
-  function view(arg, edited) {
-    const text = arg ? decodeURIComponent(arg) : "";
-    let h = `<div class="srch"><form id="s-form"><input type="search" id="s-q" placeholder="Describe the players you want, e.g. RBs averaging 3 targets per game facing a bottom 10 defense vs RB receptions" value="${esc(text)}" autocomplete="off"><button type="submit">Search</button>${text ? `<button type="button" id="s-clear" class="sclear" title="Clear the search box and all filters">Clear all</button>` : ""}</form>`;
-    if (!text) {
-      h += `<p class="callout">Type a thesis in plain English. Stix turns it into exact filters (shown below the box so you can check how it read you) and lists every player in this week's games who passes them all.</p>
-        <div class="panel"><h3>Try one</h3><div class="body sx">${EXAMPLES.map((e) => `<a href="#/search/${encodeURIComponent(e)}">${esc(e)}</a>`).join("")}</div></div>
-        ${helpPanel()}</div>`;
-      return h;
+  // ---------- builder UI ----------
+  let SPEC = null, TEXT = "", NOTES = [], IGN = [], SORT = "time";
+  const opt = (pairs, v) => pairs.map(([k, l]) => `<option value="${k}" ${String(k) === String(v) ? "selected" : ""}>${esc(l)}</option>`).join("");
+  const statOpts = (row) => opt((needsMarket(row.m) ? MARKET_STATS : Object.keys(STATS)).map((k) => [k, STATS[k].label]), row.stat);
+  function rowHtml(row, gi, ri) {
+    const id = `${gi}.${ri}`;
+    const nIn = (key, v) => `<input type="number" min="1" max="17" class="bn" data-k="${key}" value="${v}" title="games">`;
+    let h = `<div class="brow" data-id="${id}">`;
+    h += `<select data-k="m">${opt(MEASURES, row.m)}</select>`;
+    if (row.m === "avgN" || row.m === "each") h += `<label class="bw"><span class="bl">last</span>${nIn("n", row.n)}<span class="bl">games</span></label>`;
+    h += `<select data-k="stat">${statOpts(row)}</select>`;
+    h += `<select data-k="op">${opt(OPS, row.op)}</select>`;
+    if (row.m === "opp" || row.m === "move") row.cmp = "num";
+    if (row.m !== "opp" && row.m !== "move") h += `<select data-k="cmp">${opt(row.m === "line" ? CMPS.filter(([k]) => k !== "line") : CMPS, row.cmp)}</select>`;
+    if (row.cmp === "num") {
+      h += `<input type="number" step="0.5" class="bv" data-k="val" value="${row.val}">`;
+      if (row.op === "between") h += `<label class="bw"><span class="bl">and</span><input type="number" step="0.5" class="bv" data-k="val2" value="${row.val2}"></label>`;
+    } else {
+      if (row.cmp === "avgN") h += `<label class="bw"><span class="bl">last</span>${nIn("cn", row.cn)}<span class="bl">games</span></label>`;
+      h += `<label class="bw" title="percent of the value on the left, e.g. 90 = 90% of his line"><input type="number" step="5" min="1" class="bp" data-k="pct" value="${row.pct ?? 100}"><span class="bl">% of it</span></label>`;
     }
-    const spec = edited || parse(text);
-    const all = spec.groups.length ? run(spec, true) : [];
-    const rows = all.filter((x) => x.misses === 0);
-    const nearRows = all.filter((x) => x.misses === 1);
-    LAST = { text, spec, rows };
-    h += `<div class="schips">${spec.pos.length ? `<span class="schip pos">${spec.pos.join(" or ")}</span>` : `<span class="schip pos">all positions</span>`}`;
-    spec.groups.forEach((g, gi) => {
-      h += (gi || spec.pos.length || true ? `<span class="sand">AND</span>` : "") + `<span class="sgroup">` +
-        g.map((c, ci) => `<span class="schip" title="${esc(JSON.stringify(c))}">${esc(describe(c))} <button class="sx-rm" data-g="${gi}" data-c="${ci}" title="Remove this filter">×</button></span>`).join(`<span class="sor">OR</span>`) + `</span>`;
+    if (row.m === "opp") h += `<span class="bl muted">1 = fewest allowed</span>`;
+    return h + `<button type="button" class="brm" data-rm="${id}" title="Remove this row">×</button></div>`;
+  }
+  function builderHtml() {
+    const teams = [...new Set(D.slots.filter((x) => x.wk === D.current_week).map((x) => x.team))].sort();
+    const games = gamesFor(D.current_week);
+    let h = `<div class="builder"><div class="btop">
+      <span class="bpos">${["QB", "RB", "WR", "TE"].map((p) => `<label><input type="checkbox" data-pos="${p}" ${SPEC.pos.includes(p) ? "checked" : ""}> ${p}</label>`).join("")}</span>
+      <select id="b-team"><option value="">All teams</option>${teams.map((t) => `<option ${t === SPEC.team ? "selected" : ""}>${t}</option>`).join("")}</select>
+      <select id="b-game"><option value="">All games</option>${games.map(([gid, g]) => `<option value="${gid}" ${gid === SPEC.game ? "selected" : ""}>${esc(g.away)} @ ${esc(g.home)}</option>`).join("")}</select></div>`;
+    SPEC.groups.forEach((g, gi) => {
+      h += `${gi ? `<div class="band">AND</div>` : ""}<div class="bgroup">` + g.map((row, ri) => (ri ? `<div class="bor">OR</div>` : "") + rowHtml(row, gi, ri)).join("") +
+        `<button type="button" class="badd" data-or="${gi}">+ OR</button></div>`;
     });
-    h += `</div>`;
-    if (spec.notes.length) h += `<p class="snote">How I read it: ${spec.notes.map(esc).join(" · ")}</p>`;
-    if (spec.ignored.length) h += `<p class="snote warn">Not understood (ignored): ${spec.ignored.map((x) => `“${esc(x)}”`).join(" · ")}. Try rewording; see the examples below.</p>`;
-    if (!spec.groups.length) return h + `<p class="muted">No filters recognized. ${helpLink()}</p>${helpPanel()}</div>`;
-    h += `<p class="muted small">${rows.length} player${rows.length === 1 ? "" : "s"} in week ${D.current_week} match every filter. Values shown are what each player was checked on. ${helpLink()}</p>`;
-    const flat = spec.groups.flat();
-    // Which prop lines to show: the markets named in the filters (targets/snap/share have no props);
-    // if no filter names a market, show every market tracked for that player's position.
-    const named = [...new Set(flat.map((c) => STATS[c.stat].market).filter(Boolean))];
-    const marketsFor2 = (pos) => (named.length ? named : D.markets.filter((m) => m.pos.includes(pos)).map((m) => m.id));
-    const lineHtmlS = (cur, mid) => {
-      const m = cur && cur.m[mid];
-      const label = mkt[mid] ? mkt[mid].label : mid;
-      if (!m) return `<div class="sline"><span class="muted">${esc(label)}:</span> <span class="na">not tracked</span></div>`;
-      const sn = m.lstat === "pending" && m.snaps && m.snaps.length ? m.snaps[m.snaps.length - 1] : null;
-      if (m.lstat === "ok") return `<div class="sline" title="Graded pre-game line, ${esc(m.book)}, ${esc(fmtTime(m.cap))}"><span class="muted">${esc(label)}:</span> <b>${num(m.line)}</b> <span class="chip">Pre</span> <span class="muted">${odds(m.op)} / ${odds(m.up)} · ${esc(BOOK_ABBR[m.book] || m.book)}</span></div>`;
-      if (sn) return `<div class="sline" title="Latest snapshot (not graded), ${esc(sn.book)}, ${esc(fmtTime(sn.cap))}. The pre-game line replaces it ~3 h before kickoff."><span class="muted">${esc(label)}:</span> <b>${num(sn.line)}</b> <span class="chip snapchip">${esc(sn.label)}</span> <span class="muted">${odds(sn.op)} / ${odds(sn.up)} · ${esc(BOOK_ABBR[sn.book] || sn.book)}</span></div>`;
-      return `<div class="sline"><span class="muted">${esc(label)}:</span> <span class="na" title="${esc(m.lnote || "")}">no line yet</span></div>`;
-    };
+    return h + `<div class="bbtns"><button type="button" class="badd" id="b-and">+ AND condition</button></div></div>`;
+  }
+  function resultsHtml() {
+    if (!SPEC.groups.length) return `<p class="muted">Add a condition to see players.</p>`;
+    const all = run(SPEC, true);
+    let rows = all.filter((x) => x.misses === 0);
+    const nearRows = all.filter((x) => x.misses === 1);
+    const gapOf = (x) => { for (const g of x.results) for (const r of g) if (r.gap != null) return r.gap; return null; };
+    const sorter = (list) => list.sort((a, b) => {
+      if (SORT !== "time") { const ga = gapOf(a), gb = gapOf(b); if (ga != null || gb != null) return SORT === "gapUp" ? (gb ?? -1e9) - (ga ?? -1e9) : (ga ?? 1e9) - (gb ?? 1e9); }
+      return (a.cur ? a.cur.ko : "").localeCompare(b.cur ? b.cur.ko : "") || a.s.team.localeCompare(b.s.team) || SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot);
+    });
+    rows = sorter(rows);
+    const flat = SPEC.groups.flat();
+    const head = (r) => { const mL = Object.fromEntries(MEASURES)[r.m]; return `${r.m === "avgN" || r.m === "each" ? mL.replace("N", r.n) : mL} ${STATS[r.stat] ? STATS[r.stat].label : ""}`; };
+    const named = [...new Set(flat.map((r) => STATS[r.stat] && STATS[r.stat].market).filter(Boolean))];
+    const lineCell = (cur, mid) => { const l = lineOf(cur, Object.keys(STATS).find((k) => STATS[k].market === mid)); const label = mkt[mid] ? mkt[mid].label : mid;
+      if (!cur || !cur.m[mid]) return `<div class="sline"><span class="muted">${esc(label)}:</span> <span class="na">not tracked</span></div>`;
+      if (!l) return `<div class="sline"><span class="muted">${esc(label)}:</span> <span class="na">no line yet</span></div>`;
+      const m = l.m, src = l.lab === "Pre" ? { op: m.op, up: m.up, book: m.book } : m.snaps[m.snaps.length - 1];
+      return `<div class="sline"><span class="muted">${esc(label)}:</span> <b>${num(l.v)}</b> <span class="chip ${l.lab === "Pre" ? "" : "snapchip"}">${esc(l.lab)}</span> <span class="muted">${odds(src.op)} / ${odds(src.up)} · ${esc(BOOK_ABBR[src.book] || src.book)}</span></div>`; };
     const table = (list) => {
-      let t = `<div class="panel scroll"><table class="stable"><thead><tr><th>Player</th><th>Game</th><th title="This week's line for the markets in your search: the graded pre-game line if captured, otherwise the latest Mon / Thu / Sun AM snapshot">Line</th>${flat.map((c) => `<th title="${esc(describe(c))}">${esc(shortHead(c))}</th>`).join("")}</tr></thead><tbody>`;
+      let t = `<div class="panel scroll"><table class="stable"><thead><tr><th>Player</th><th>Game</th><th>Line</th>${flat.map((r) => `<th>${esc(head(r))}</th>`).join("")}</tr></thead><tbody>`;
       for (const { s, cur, results } of list) {
-        const cells = results.flat();
+        const mids = named.length ? named : D.markets.filter((m) => m.pos.includes(s.slot.slice(0, 2))).map((m) => m.id);
         t += `<tr><td><a class="pname" href="#/player/${s.pid}">${headshot(s.pid, 28)}${esc(s.name)}</a> <span class="muted small">${esc(s.team)} · ${s.slot}</span></td>
-        <td>${cur ? `${cur.ha === "home" ? "vs." : "@"} ${esc(cur.opp)} <span class="muted small">${fmtTime(cur.ko)}</span>` : ""}</td>
-        <td class="slines">${marketsFor2(s.slot.slice(0, 2)).map((mid) => lineHtmlS(cur, mid)).join("")}</td>
-        ${cells.map((x, i) => `<td class="${x.ok ? "sok" : "sno"}" data-label="${esc(shortHead(flat[i]))}">${x.ok ? "✓" : "✗"} ${esc(x.show)}</td>`).join("")}</tr>`;
+          <td>${cur ? `${cur.ha === "home" ? "vs." : "@"} ${esc(cur.opp)} <span class="muted small">${fmtTime(cur.ko)}</span>` : ""}</td>
+          <td class="slines">${mids.map((mid) => lineCell(cur, mid)).join("")}</td>
+          ${results.flat().map((x, i) => `<td class="${x.ok ? "sok" : "sno"}" data-label="${esc(head(flat[i]))}">${x.ok ? "✓" : "✗"} ${esc(x.show)}</td>`).join("")}</tr>`;
       }
       return t + `</tbody></table></div>`;
     };
+    let h = `<div class="sres"><span class="muted small">${rows.length} player${rows.length === 1 ? "" : "s"} in week ${D.current_week} match every condition.</span>
+      <label class="small muted">Sort <select id="b-sort">${opt([["time", "Game time"], ["gapDown", "Biggest gap below"], ["gapUp", "Biggest gap above"]], SORT)}</select></label></div>`;
     if (rows.length) h += table(rows);
-    if (!rows.length && nearRows.length) {
-      h += `<h3 class="snear">Closest: ${nearRows.length} player${nearRows.length === 1 ? "" : "s"} who pass every filter but one</h3>
-        <p class="muted small">✗ marks the filter each one missed.</p>` + table(nearRows.slice(0, 40));
-    }
-    return h + `${helpPanel()}</div>`;
+    else if (nearRows.length) h += `<h3 class="snear">Closest: ${nearRows.length} player${nearRows.length === 1 ? "" : "s"} who pass every condition but one</h3><p class="muted small">✗ marks the condition each one missed.</p>` + table(sorter(nearRows).slice(0, 40));
+    return h;
   }
-  function shortHead(c) {
-    const s = STATS[c.stat].label;
-    return c.kind === "avg" ? `Avg ${s}` : c.kind === "avgN" ? `Last ${c.n} avg ${s}` : c.kind === "each" ? `Last ${c.n} ${s}` :
-      c.kind === "opp" ? `Opp vs ${c.pos || ""} ${s}` : c.kind === "lineAvg" ? `${s} line vs avg` : `${s} line`;
+  function view(arg) {
+    // state comes from the URL: #/search/b:<encoded spec> (builder) or #/search/<text> (typed shortcut)
+    let incoming = arg ? decodeURIComponent(arg) : "";
+    if (incoming.startsWith("b:")) {
+      try { const o = JSON.parse(decodeURIComponent(escape(atob(incoming.slice(2))))); SPEC = o.spec; TEXT = o.text || ""; NOTES = o.notes || []; IGN = o.ign || []; } catch { SPEC = null; }
+    } else if (incoming) {
+      const p = parse(incoming);
+      SPEC = { pos: p.pos, team: "", game: "", groups: p.groups.map((g) => g.map(toRow)) };
+      TEXT = incoming; NOTES = p.notes; IGN = p.ignored;
+    } else if (!SPEC) { SPEC = { pos: [], team: "", game: "", groups: [] }; TEXT = ""; NOTES = []; IGN = []; }
+    if (!SPEC) SPEC = { pos: [], team: "", game: "", groups: [] };
+    let h = `<div class="srch"><form id="s-form"><input type="search" id="s-q" placeholder="Optional: type a thesis to fill in the rows, e.g. RBs whose last 3 games average is below their rushing yards line" value="${esc(TEXT)}" autocomplete="off"><button type="submit">Fill rows</button>${SPEC.groups.length || TEXT ? `<button type="button" id="s-clear" class="sclear" title="Clear the search box and every condition">Clear all</button>` : ""}</form>`;
+    if (NOTES.length) h += `<p class="snote">How I read it: ${NOTES.map(esc).join(" · ")}</p>`;
+    if (IGN.length) h += `<p class="snote warn">Not understood (ignored): ${IGN.map((x) => `“${esc(x)}”`).join(" · ")}. Use the rows below instead.</p>`;
+    h += builderHtml();
+    h += `<div id="s-results">${resultsHtml()}</div>`;
+    if (!SPEC.groups.length) h += `<div class="panel"><h3>Try one</h3><div class="body sx">${EXAMPLES.map((e) => `<a href="#/search/${encodeURIComponent(e)}">${esc(e)}</a>`).join("")}</div></div>`;
+    return h + helpPanel() + `</div>`;
   }
-  const helpLink = () => `<a href="#/search">Examples &amp; what it understands</a>`;
-  function helpPanel() {
-    return `<div class="panel"><h3>What Search understands</h3><div class="body small">
-      <p><b>Positions:</b> QB, RB, WR, TE (or quarterbacks, running backs, receivers, tight ends).</p>
-      <p><b>Stats:</b> receptions/catches, targets, receiving yards, rushing yards, carries/rush attempts, passing yards, pass attempts, completions, snap share, target share.</p>
-      <p><b>Season average</b> ("averages 3 targets per game"): over his <b>starts</b> this season, same as AVG elsewhere. <b>Last N</b> ("in each of the last 3 games", "averaging 5 over the last 4 games"): his last N games <b>played</b>.</p>
-      <p><b>Comparisons:</b> at least / or more, at most / or fewer, more than / over, less than / under, between X and Y, exactly. No comparison means "at least".</p>
-      <p><b>Defense:</b> "facing a bottom 10 defense vs RB receptions" (most allowed: ranks 23–32), "top 5 defense vs WR receiving yards" (toughest: ranks 1–5), "defense ranked 20th or worse vs TE receptions". Uses this week's opponent and its current-season rank (the Defense tab).</p>
-      <p><b>Lines:</b> "receiving yards line under 50", "rushing yards line below his average". Uses the pre-game line if captured, otherwise the latest Mon/Thu/Sun AM snapshot.</p>
-      <p><b>Combining:</b> "and", "but", "while", commas = all must be true; "or" = either is enough within that part.</p>
-      <p class="muted">The parser is rule-based: it never guesses silently. Anything it reads with an assumption is listed under "How I read it", and anything it can't read is listed as ignored.</p>
-    </div></div>`;
+  function save() {
+    // keep the builder state in the address so Back / refresh / sharing a link restore it
+    const enc = btoa(unescape(encodeURIComponent(JSON.stringify({ spec: SPEC, text: TEXT, notes: NOTES, ign: IGN }))));
+    history.replaceState(null, "", `#/search/b:${encodeURIComponent(enc)}`);
   }
+  function refresh(full) {
+    save();
+    const app = document.getElementById("app");
+    if (full) { app.innerHTML = view(location.hash.split("/")[2]); bind(); return; }
+    document.getElementById("s-results").innerHTML = resultsHtml();
+    bindResults();
+  }
+  function bindResults() { const s = document.getElementById("b-sort"); if (s) s.addEventListener("change", (e) => { SORT = e.target.value; refresh(false); }); }
   function bind() {
     const f = document.getElementById("s-form");
-    const clr = document.getElementById("s-clear");
-    if (clr) clr.addEventListener("click", () => {
-      const q = document.getElementById("s-q"); if (q) q.value = "";
-      if (location.hash === "#/search") { document.getElementById("app").innerHTML = view(""); bind(); }
-      else location.hash = "#/search";
-      setTimeout(() => { const q2 = document.getElementById("s-q"); if (q2) q2.focus(); }, 0);
-    });
     if (f) f.addEventListener("submit", (e) => { e.preventDefault(); const q = document.getElementById("s-q").value.trim(); location.hash = q ? `#/search/${encodeURIComponent(q)}` : "#/search"; });
-    document.querySelectorAll(".sx-rm").forEach((b) => b.addEventListener("click", () => {
-      // Removing a chip re-runs the search without that filter (the box keeps your original text).
-      const spec = JSON.parse(JSON.stringify(LAST.spec));
-      const g = +b.dataset.g, c = +b.dataset.c;
-      spec.groups[g].splice(c, 1);
-      if (!spec.groups[g].length) spec.groups.splice(g, 1);
-      document.getElementById("app").innerHTML = view(encodeURIComponent(LAST.text), spec);
-      bind();
-    }));
+    const clr = document.getElementById("s-clear");
+    if (clr) clr.addEventListener("click", () => { SPEC = { pos: [], team: "", game: "", groups: [] }; TEXT = ""; NOTES = []; IGN = []; history.replaceState(null, "", "#/search"); document.getElementById("app").innerHTML = view(""); bind(); const q = document.getElementById("s-q"); if (q) q.focus(); });
+    const B = document.querySelector(".builder");
+    if (!B) return;
+    B.querySelectorAll("[data-pos]").forEach((c) => c.addEventListener("change", () => { const p = c.dataset.pos; SPEC.pos = c.checked ? [...new Set([...SPEC.pos, p])] : SPEC.pos.filter((x) => x !== p); refresh(false); }));
+    const bt = document.getElementById("b-team"), bg = document.getElementById("b-game");
+    if (bt) bt.addEventListener("change", () => { SPEC.team = bt.value; refresh(false); });
+    if (bg) bg.addEventListener("change", () => { SPEC.game = bg.value; refresh(false); });
+    B.querySelectorAll(".brow").forEach((el) => {
+      const [gi, ri] = el.dataset.id.split(".").map(Number);
+      el.querySelectorAll("[data-k]").forEach((inp) => inp.addEventListener("change", () => {
+        const row = SPEC.groups[gi][ri], k = inp.dataset.k;
+        row[k] = inp.type === "number" ? Number(inp.value) : inp.value;
+        if (k === "m" && needsMarket(row.m) && !STATS[row.stat].market) row.stat = "rec";
+        if (k === "m" && row.m === "opp") { row.op = "between"; row.val = 23; row.val2 = 32; }
+        // structure-changing fields redraw the builder; values just rerun the results
+        refresh(["m", "op", "cmp"].includes(k));
+      }));
+    });
+    B.querySelectorAll("[data-rm]").forEach((b) => b.addEventListener("click", () => { const [gi, ri] = b.dataset.rm.split(".").map(Number); SPEC.groups[gi].splice(ri, 1); if (!SPEC.groups[gi].length) SPEC.groups.splice(gi, 1); refresh(true); }));
+    B.querySelectorAll("[data-or]").forEach((b) => b.addEventListener("click", () => { SPEC.groups[+b.dataset.or].push(newRow()); refresh(true); }));
+    const add = document.getElementById("b-and");
+    if (add) add.addEventListener("click", () => { SPEC.groups.push([newRow()]); refresh(true); });
+    bindResults();
   }
-  window.STIX_SEARCH = { parse, run, describe, view, bind, STATS };
+  const EXAMPLES = [
+    "RBs whose last 3 games average is less than their rushing yards line",
+    "RBs who average 1.0 reception per game or 3 targets per game but had less than 2 catches in each of the last 3 games and are facing a bottom 10 defense vs RB receptions",
+    "WRs averaging at least 6 targets per game facing a bottom 8 defense vs WR receiving yards",
+    "TEs with 4 or more receptions in each of the last 3 games",
+    "QBs facing a top 5 defense vs QB passing yards",
+  ];
+  function helpPanel() {
+    return `<div class="panel"><h3>How the builder works</h3><div class="body small">
+      <p><b>Each row</b> = <i>what to measure</i> · <i>stat</i> · <i>comparison</i> · <i>compare to</i>. Rows in the same box are <b>OR</b> (any one is enough); separate boxes are <b>AND</b> (all must pass).</p>
+      <p><b>What to measure:</b> <b>Season avg</b> over his starts (pre-game slot QB1/RB1/WR1–3/TE1 and played) · <b>Last N games avg</b> and <b>Each of last N games</b> over games played · <b>Current line</b> (pre-game line if captured, otherwise the latest Mon/Thu/Sun AM snapshot; DraftKings first, then FanDuel) · <b>Line move this week</b> (current line minus the first line captured this week) · <b>Opp D rank</b> (this week's opponent, season rank vs his position in that stat; 1 = fewest allowed).</p>
+      <p><b>Compare to:</b> a number, <b>his current line</b>, <b>his season avg</b>, or <b>his last N avg</b>, optionally scaled by a percent (e.g. 90% of his current line). Results show the gap, e.g. "48.0 vs line 60.5 Thu (−21%)"; sort by the biggest gaps.</p>
+      <p><b>Typing</b> is optional: it fills the rows, and anything it can't read is listed so you can set it with the dropdowns. Searches cover this week's slotted players.</p>
+    </div></div>`;
+  }
+  window.STIX_SEARCH = { parse, run, evalRow, toRow, view, bind, STATS };
 })();
