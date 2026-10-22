@@ -70,3 +70,4 @@ run_utc,finished_utc,trigger,status,built,summary,error
 2026-10-21T23:28:38Z,2026-10-21T23:28:39Z,schedule,ok,no,,
 2026-10-21T23:30:13Z,2026-10-21T23:30:14Z,workflow_dispatch,ok,no,,
 2026-10-22T00:00:17Z,2026-10-22T00:02:42Z,workflow_dispatch,ok,yes,"weather: fc Lumen Field failed (GET failed after 2 attempts: https://api.open-meteo.com/v1/forecast?latitude=47.5952&longitude=-122.) | weather: 20 Open-Meteo calls, 1 failed | build: 349 players, 1744 slot rows, 0 leads, 0 unmatched lines, 32 unmapped snap rows",
+2026-10-22T00:30:13Z,2026-10-22T00:30:19Z,workflow_dispatch,ok,yes,"weather: 1 Open-Meteo calls | build: 349 players, 1744 slot rows, 0 leads, 0 unmatched lines, 32 unmapped snap rows",
