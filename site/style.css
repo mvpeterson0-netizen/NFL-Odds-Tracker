@@ -129,3 +129,4 @@ td.sok { color: var(--ink); } td.sno { color: var(--muted); }
 td.slines { white-space: nowrap; }
 .sline { padding: 1px 0; }
 .sline .chip { font-size: 11px; }
+.srch form button.sclear { font-weight: 500; color: var(--muted); }

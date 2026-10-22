@@ -20,3 +20,4 @@
 - 2026-10-21 · PR: lines in search results · Each search result shows this week's line for the markets named in the search (or all of the player's markets if none are named): graded pre-game line if captured, otherwise latest snapshot, with odds and book.
 - 2026-10-21 · PR: auto-update site · Deploy stamps the code files with a version (hash of the site code) and writes version.txt; open pages check it every 5 minutes and when the app comes back to the foreground, and reload when a new version is live. Fixes phones showing old code after an update.
 - 2026-10-21 · PR: Monday fill-in pulls · If fewer than 75% of a game's starters (QB1, RB1, WR1, WR2, TE1) have a Monday line, pull again every 12 hours until covered or the Thursday 2 PM snapshot. Snapshots now use each book's latest pull.
+- 2026-10-21 · PR: Search "Clear all" · One button clears the search box and every filter and returns to the starting Search screen; phone layout gives the search box its own row.

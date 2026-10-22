@@ -86,3 +86,6 @@ main { padding: 10px 12px 32px; }
 .stable td { border: 0; padding: 3px 8px; white-space: normal; }
 .stable td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); font-size: 12px; }
 .srch input[type=search] { font-size: 16px; }
+.srch form { flex-wrap: wrap; }
+.srch form input[type=search] { flex: 1 1 100%; }
+.srch form button { flex: 1; }
