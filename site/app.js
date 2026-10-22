@@ -674,13 +674,8 @@ function viewDefense() {
   const rows = Object.entries(tbl).map(([team, v]) => ({ team, rk: v[0], avg: v[1], n: v[2], of: v[3] }));
   rows.sort((a, b) => (S.defAsc ? a.rk - b.rk : b.rk - a.rk) || a.team.localeCompare(b.team));
   const of = rows.length ? rows[0].of : 32, q = Math.round(of / 4);
-  const stats = (D.sources || {}).stats;
   let h = `<div class="gamebar" role="group" aria-label="Choose a market">` + list.map((x) =>
-    `<button class="gchip ${x.key === S.defMk ? "on" : ""}" data-dm="${x.key}"><b>${x.pos}</b><span class="muted small">${esc(x.m.label)}</span></button>`).join("") + `</div>
-    <p class="callout">How each defense ranks in <b>${sel.pos} ${esc(sel.m.label.toLowerCase())} allowed per game</b> this season.
-    1 = fewest allowed (toughest), ${of} = most allowed. Counts every game with published stats, so it updates automatically as each week's stats arrive
-    ${stats ? `(nflverse stats last updated ${esc(stats.last_updated)})` : ""}. "This week" is who each defense plays in week ${D.current_week};
-    "Facing" lists that opponent's ${sel.pos}s and their current ${esc(sel.m.label.toLowerCase())} line (yellow chip = an earlier Mon / Thu / Sun AM snapshot, not the graded pre-game line).</p>`;
+    `<button class="gchip ${x.key === S.defMk ? "on" : ""}" data-dm="${x.key}"><b>${x.pos}</b><span class="muted small">${esc(x.m.label)}</span></button>`).join("") + `</div>`;
   if (!rows.length) return h + `<p class="muted">No games with stats yet.</p>`;
   h += `<div class="panel scroll"><table class="dtable"><thead><tr>
     <th class="num"><button class="sortb" id="d-sort" title="Reverse order">Rank ${S.defAsc ? "▲" : "▼"}</button></th><th>Defense</th>
