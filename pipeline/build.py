@@ -414,6 +414,28 @@ def build(log):
         return {k: w.get(k, "") for k in keys if w.get(k, "") != ""}
 
     caps_all = read_csv(CAPTURES_PATH)
+
+    # This week's pulls with the lines each one returned (Log tab). Lines are grouped by the exact
+    # capture time, which equals the pull's logged time.
+    wk_games = {g["game_id"] for g in games if cur is not None and int(g["week"]) == cur}
+    wk_pulls = [p for p in pull_rows if p["game_id"] in wk_games]
+    tracked = defaultdict(dict)  # game -> {gsis: [name, slot]}
+    for s_ in slots:
+        if cur is not None and int(s_["week"]) == cur:
+            for g in games:
+                if int(g["week"]) == cur and s_["team"] in (g["home_team"], g["away_team"]):
+                    tracked[g["game_id"]][s_["gsis_id"]] = [s_["player"], s_["slot"]]
+    pull_lines = defaultdict(list)
+    for c in caps_all:
+        if c["game_id"] in wk_games:
+            key = f'{c["game_id"]}|{ptype(c)}|{c["captured_utc"]}'
+            gs = c.get("gsis_id") or ""
+            if not gs:
+                g = games_by_id.get(c["game_id"])
+                k = norm_name(c["player_book_name"])
+                gs = (name_index.get(g["home_team"], {}).get(k) or name_index.get(g["away_team"], {}).get(k) or "") if g else ""
+            pull_lines[key].append([c["player_book_name"], gs, c["market"], BOOK_NAMES.get(c["book"], c["book"]),
+                                    to_float(c["line"]), to_float(c["over_price"]), to_float(c["under_price"])])
     last_ok = [p for p in pull_rows if p["status"] == "ok" and ptype(p) == "pregame"]
     credits = next((p["credits_remaining"] for p in reversed(pull_rows) if p.get("credits_remaining")), "")
     runs = []
@@ -450,6 +472,8 @@ def build(log):
                  "last_capture_utc": max((p["attempted_utc"] for p in last_ok), default=""),
                  "credits_remaining": credits},
         "pull_log": pull_rows[-300:],
+        "week_pulls": {"week": cur, "pulls": wk_pulls, "lines": pull_lines,
+                       "tracked": {g: [[pid, v[0], v[1]] for pid, v in t.items()] for g, t in tracked.items()}},
         "unmatched": unmatched[-100:],
         "runs": runs[-150:],
     }
