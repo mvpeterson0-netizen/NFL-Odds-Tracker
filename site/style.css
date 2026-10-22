@@ -171,7 +171,9 @@ button.badd { font-size: 12px; padding: 3px 10px; }
 .pk-btn { flex: 1; min-height: 40px; font-size: 15px; }
 .pk-btn.on { border: 2px solid var(--accent); color: var(--accent); font-weight: 600; }
 .pk-err { color: var(--under); }
-.pk-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 520px; margin-bottom: 6px; }
+.pk-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 720px; margin-bottom: 6px; }
+.pk-up { color: var(--over); }
+.pk-down { color: var(--under); }
 .pk-stat { border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
 .pk-stat span { display: block; font-size: 12px; color: var(--muted); }
 .pk-stat b { font-size: 22px; }

@@ -190,6 +190,18 @@
         <button type="submit">Save and connect</button> <span id="pk-msg" class="small pk-err"></span>
       </form></div></div>`;
   }
+  // Profit / loss on a flat $10 stake per pick that locked, at the odds saved with the pick.
+  // Win pays at those American odds, loss = −$10, push / void = $0. Missing odds → not counted (labeled, never guessed).
+  const STAKE = 10;
+  function profit(p, g) {
+    if (g.st === "push" || g.st === "void") return 0;
+    if (g.st !== "hit" && g.st !== "miss") return null;
+    if (g.st === "miss") return -STAKE;
+    const o = Number(p.odds);
+    if (!p.odds || !isFinite(o) || o === 0) return null;
+    return o > 0 ? (STAKE * o) / 100 : (STAKE * 100) / -o;
+  }
+  const money = (v) => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}$${Math.abs(v).toFixed(2)}`);
   function row(p, g) {
     const mk = mkt[p.mid];
     const gm = D.games[p.gid];
@@ -197,13 +209,15 @@
     const chip = { hit: `<span class="pk-res hit">Hit</span>`, miss: `<span class="pk-res miss">Miss</span>`, push: `<span class="pk-res">Push</span>`, void: `<span class="pk-res">Void</span>` }[g.st] || "";
     const right = g.st === "open" ? `<button class="pk-del" data-del="${esc(p.id)}" aria-label="Remove pick" title="Remove">✕</button>` : chip || `<span class="muted small">${esc(g.why || "")}</span>`;
     return `<div class="pk-row"><div><a class="pname" href="#/player/${esc(p.pid)}">${esc(p.name)}</a> · ${esc(mk ? mk.label : p.mid)} <span class="muted small">W${p.wk} ${esc(vs)} · ${fmtTime(p.ko)}</span>
-      <div class="small"><b>${sideWord(p.side)} ${lineNum(p.line)}</b> ${oddsTxt(p.odds)} <span class="muted">(${esc(p.src)}, ${esc(p.book)})</span>${g.act != null ? ` · actual <b>${lineNum(g.act)}</b>` : ""}${g.st === "void" ? ` <span class="muted">· ${esc(g.why)}</span>` : ""}</div></div>${right}</div>`;
+      <div class="small"><b>${sideWord(p.side)} ${lineNum(p.line)}</b> ${oddsTxt(p.odds)} <span class="muted">(${esc(p.src)}, ${esc(p.book)})</span>${g.act != null ? ` · actual <b>${lineNum(g.act)}</b>` : ""}${g.st === "void" ? ` <span class="muted">· ${esc(g.why)}</span>` : ""}${["hit", "miss", "push", "void"].includes(g.st) ? ` · <span class="${profit(p, g) > 0 ? "pk-up" : profit(p, g) < 0 ? "pk-down" : "muted"}">${profit(p, g) == null ? "P/L n/a (no odds saved)" : money(profit(p, g))}</span>` : ""}</div></div>${right}</div>`;
   }
   function rec(list) {
     const c = { hit: 0, miss: 0, push: 0 };
     for (const x of list) if (c[x.g.st] != null) c[x.g.st]++;
     const n = c.hit + c.miss;
-    return { txt: `${c.hit}–${c.miss}–${c.push}`, pct: n ? `${Math.round((c.hit / n) * 100)}%` : "—", n: c.hit + c.miss + c.push };
+    let pl = 0, noOdds = 0;
+    for (const x of list) { const v = profit(x.p, x.g); if (v == null) { if (x.g.st === "hit") noOdds++; } else pl += v; }
+    return { txt: `${c.hit}–${c.miss}–${c.push}`, pct: n ? `${Math.round((c.hit / n) * 100)}%` : "—", n: c.hit + c.miss + c.push, pl, noOdds, bets: list.length };
   }
   function view() {
     if (!enabled()) return setupView();
@@ -215,8 +229,11 @@
     const byMk = D.markets.map((m) => ({ m, r: rec(graded.filter((x) => x.p.mid === m.id)) })).filter((x) => x.r.n);
     const st = ST.syncing ? "Saving…" : ST.err ? `<span class="pk-err">Not synced: ${esc(ST.err)}</span> <button id="pk-retry">Retry</button>` :
       ST.dirty ? "Waiting to save" : ST.synced ? `Synced with GitHub ${ago(ST.synced)}` : "Not synced yet";
-    let h = `<div class="pk-stats"><div class="pk-stat"><span>Record (W–L–P)</span><b>${R.txt}</b></div><div class="pk-stat"><span>Hit rate</span><b>${R.pct}</b></div></div>
-      <p class="small muted">Overs ${O.txt} · Unders ${U.txt}${byMk.length ? " · " + byMk.map((x) => `${esc(x.m.label)} ${x.r.txt}`).join(" · ") : ""} · Hit rate leaves out pushes and voids · ${st}</p>`;
+    let h = `<div class="pk-stats"><div class="pk-stat"><span>Record (W–L–P)</span><b>${R.txt}</b></div><div class="pk-stat"><span>Hit rate</span><b>${R.pct}</b></div>
+      <div class="pk-stat"><span>Profit / loss</span><b class="${R.bets && R.pl > 0 ? "pk-up" : R.bets && R.pl < 0 ? "pk-down" : ""}">${R.bets ? money(R.pl) : "—"}</b></div></div>
+      <p class="small muted">Overs ${O.txt} (${money(O.pl)}) · Unders ${U.txt} (${money(U.pl)})${byMk.length ? " · " + byMk.map((x) => `${esc(x.m.label)} ${x.r.txt} (${money(x.r.pl)})`).join(" · ") : ""}
+      · P/L assumes $${STAKE} on every pick that locked, at the odds saved with it; pushes and voids are $0; picks still in progress aren't counted until graded${R.noOdds ? ` · ${R.noOdds} winning pick${R.noOdds === 1 ? "" : "s"} had no saved odds and ${R.noOdds === 1 ? "isn't" : "aren't"} counted` : ""}
+      · Hit rate leaves out pushes and voids · ${st}</p>`;
     const sec = (title, list, empty) => `<div class="panel"><h3>${title} (${list.length})</h3><div class="body">${list.length ? list.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">${empty}</p>`}</div></div>`;
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
     h += sec("Locked · game started", locked, "Picks move here at kickoff. They can't be changed or removed after that.");
