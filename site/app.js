@@ -733,8 +733,19 @@ async function status() {
   window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
   render();
   status();
+  // Site code version (version.txt is written at deploy). If a newer version goes live, reload to pick it up.
+  const getVer = async () => { try { const r = await fetch(`version.txt?t=${Date.now()}`, { cache: "no-store" }); return r.ok ? (await r.text()).trim() : null; } catch { return null; } };
+  let SITE_V = await getVer();
+  const checkVer = async () => {
+    const v = await getVer();
+    const typing = document.activeElement && document.activeElement.tagName === "INPUT";
+    if (SITE_V && v && v !== SITE_V && !typing) location.reload();
+    else if (!SITE_V && v) SITE_V = v;
+  };
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") checkVer(); });
   // Pick up new lines / snapshots / stats without a manual reload: check for new site data every 5 minutes.
   setInterval(async () => {
+    checkVer();
     try {
       const r = await fetch(`data/data.json?t=${Date.now()}`, { cache: "no-store" });
       if (!r.ok) return;
