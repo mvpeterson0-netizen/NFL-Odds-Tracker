@@ -385,6 +385,7 @@
       TEXT = incoming; NOTES = p.notes; IGN = p.ignored;
     } else if (!SPEC) { SPEC = { pos: [], team: "", game: "", groups: [] }; TEXT = ""; NOTES = []; IGN = []; }
     if (!SPEC) SPEC = { pos: [], team: "", game: "", groups: [] };
+    if (SPEC.team === "LA") SPEC.team = "LAR"; // older saved links used nflverse's "LA" for the Rams
     let h = `<div class="srch"><form id="s-form"><input type="search" id="s-q" placeholder="Optional: type a thesis to fill in the rows, e.g. RBs whose last 3 games average is below their rushing yards line" value="${esc(TEXT)}" autocomplete="off"><button type="submit">Fill rows</button>${SPEC.groups.length || TEXT ? `<button type="button" id="s-clear" class="sclear" title="Clear the search box and every condition">Clear all</button>` : ""}</form>`;
     if (NOTES.length) h += `<p class="snote">How I read it: ${NOTES.map(esc).join(" · ")}</p>`;
     if (IGN.length) h += `<p class="snote warn">Not understood (ignored): ${IGN.map((x) => `“${esc(x)}”`).join(" · ")}. Use the rows below instead.</p>`;
