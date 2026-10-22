@@ -267,7 +267,7 @@
   let LAST = { text: "", spec: null, rows: [] };
   function view(arg, edited) {
     const text = arg ? decodeURIComponent(arg) : "";
-    let h = `<div class="srch"><form id="s-form"><input type="search" id="s-q" placeholder="Describe the players you want, e.g. RBs averaging 3 targets per game facing a bottom 10 defense vs RB receptions" value="${esc(text)}" autocomplete="off"><button type="submit">Search</button></form>`;
+    let h = `<div class="srch"><form id="s-form"><input type="search" id="s-q" placeholder="Describe the players you want, e.g. RBs averaging 3 targets per game facing a bottom 10 defense vs RB receptions" value="${esc(text)}" autocomplete="off"><button type="submit">Search</button>${text ? `<button type="button" id="s-clear" class="sclear" title="Clear the search box and all filters">Clear all</button>` : ""}</form>`;
     if (!text) {
       h += `<p class="callout">Type a thesis in plain English. Stix turns it into exact filters (shown below the box so you can check how it read you) and lists every player in this week's games who passes them all.</p>
         <div class="panel"><h3>Try one</h3><div class="body sx">${EXAMPLES.map((e) => `<a href="#/search/${encodeURIComponent(e)}">${esc(e)}</a>`).join("")}</div></div>
@@ -341,6 +341,13 @@
   }
   function bind() {
     const f = document.getElementById("s-form");
+    const clr = document.getElementById("s-clear");
+    if (clr) clr.addEventListener("click", () => {
+      const q = document.getElementById("s-q"); if (q) q.value = "";
+      if (location.hash === "#/search") { document.getElementById("app").innerHTML = view(""); bind(); }
+      else location.hash = "#/search";
+      setTimeout(() => { const q2 = document.getElementById("s-q"); if (q2) q2.focus(); }, 0);
+    });
     if (f) f.addEventListener("submit", (e) => { e.preventDefault(); const q = document.getElementById("s-q").value.trim(); location.hash = q ? `#/search/${encodeURIComponent(q)}` : "#/search"; });
     document.querySelectorAll(".sx-rm").forEach((b) => b.addEventListener("click", () => {
       // Removing a chip re-runs the search without that filter (the box keeps your original text).
