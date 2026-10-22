@@ -467,6 +467,7 @@ function viewPlayer(pid) {
     ${curSlot && curSlot.change ? `<p class="callout">Slot change: ${esc(curSlot.change)}</p>` : ""}
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
+    ${pickBoxSafe(pid, mid)}
     <div class="panel"><div class="chart">${chartSVG(rows, mid, { edgeAbove: true })}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM), until the pre-game line arrives</span></div></div>
     <div class="panel scroll"><table class="ptable"><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th title="Label · temperature (°F) · wind · precipitation. Hover for details.">Weather</th><th>Slot</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
@@ -489,6 +490,11 @@ function viewPlayer(pid) {
   h += `</tbody></table></div>`;
   if (S.showAn) h += analysisPanel(pid, mid, rows);
   return h;
+}
+
+// My picks box (picks.js). Empty unless this browser has the owner's picks key; never breaks the page.
+function pickBoxSafe(pid, mid) {
+  try { return window.STIX_PICKS ? window.STIX_PICKS.box(pid, mid) : ""; } catch (e) { console.error("picks box failed", e); return ""; }
 }
 
 function viewLeads() {
@@ -709,6 +715,10 @@ function render() {
   else if (tab === "leads") app.innerHTML = viewLeads();
   else if (tab === "guide" || tab === "slots" || tab === "log") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
+  else if (tab === "picks") {
+    try { app.innerHTML = window.STIX_PICKS ? window.STIX_PICKS.view() : `<p class="pad">Picks didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">My picks hit an error. Try refreshing.</p>`; }
+  }
   else if (tab === "search") {
     // Search lives in search.js; if it is missing or throws, show a message instead of breaking the app.
     try { app.innerHTML = window.STIX_SEARCH ? window.STIX_SEARCH.view(arg) : `<p class="pad">Search didn't load. Try refreshing.</p>`; }
@@ -720,6 +730,7 @@ function render() {
   if (tab === "slots" || tab === "log") setTimeout(() => { const el = document.getElementById(tab === "log" ? "g-log" : "g-slots"); if (el) el.scrollIntoView(); }, 0);
   if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
   if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
+  if (window.STIX_PICKS) { try { window.STIX_PICKS.bind(tab, arg); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };
