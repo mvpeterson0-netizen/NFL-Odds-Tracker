@@ -183,3 +183,6 @@ button.badd { font-size: 12px; padding: 3px 10px; }
 .pk-del { min-width: 36px; min-height: 36px; }
 .pk-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
 .pk-form label { display: flex; flex-direction: column; font-size: 13px; gap: 4px; min-width: 240px; flex: 1; }
+
+/* Logo: quick taps without zooming (3 taps opens My picks) */
+header .brand { touch-action: manipulation; -webkit-user-select: none; user-select: none; }

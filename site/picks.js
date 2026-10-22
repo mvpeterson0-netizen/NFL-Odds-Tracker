@@ -252,6 +252,18 @@
   }
 
   window.STIX_PICKS = { enabled, box, view, bind, sync };
+  // Hidden way in: tap the Stix logo 3 times within ~1.5 s to open My picks (setup on a device without the key).
+  // Needed for the home-screen app, which has its own storage and no address bar.
+  (function logoTaps() {
+    const brand = document.querySelector("header .brand");
+    if (!brand) return;
+    let taps = [];
+    brand.addEventListener("click", () => {
+      const t = Date.now();
+      taps = taps.filter((x) => t - x < 1500).concat(t);
+      if (taps.length >= 3) { taps = []; location.hash = "#/picks"; }
+    });
+  })();
   // Keep devices in step: sync when the app comes back into view and every 5 minutes while open.
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && D) sync(); });
   setInterval(() => { if (document.visibilityState === "visible" && D) sync(); }, 5 * 60000);
