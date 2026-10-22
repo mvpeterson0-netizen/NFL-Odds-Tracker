@@ -58,6 +58,8 @@ SLOTS_PATH = DATA / "slots.csv"
 # If any starter (FILL_SLOTS) still has no pre-game line, pull the game again. Lines captured at ~3 h
 # stay the graded ones; a sweep only adds lines for players who had none.
 SWEEP_WINDOWS = [(timedelta(minutes=75), timedelta(minutes=40)), (timedelta(minutes=25), timedelta(minutes=5))]
+# Sweeps also cover tracked backups who play a real role: average offensive snap share at or above this (%).
+SWEEP_MIN_SNAP = 25.0
 
 CAPTURES_PATH = DATA / "prop_captures.csv"
 PULL_LOG_PATH = DATA / "pull_log.csv"
@@ -114,12 +116,22 @@ def starter_coverage(pull_type):
     return out
 
 
-def missing_starters(pull_type="pregame"):
-    """{game_id: [gsis ids of starters with no line of this pull type]} for games that have starters."""
+def _sweep_player(r):
+    if r.get("slot") in FILL_SLOTS:
+        return True
+    try:
+        return float(r.get("snap_avg") or "") >= SWEEP_MIN_SNAP
+    except ValueError:
+        return False
+
+
+def missing_starters(pull_type="pregame", include_backups=True):
+    """{game_id: [names of starters (and, if include_backups, tracked backups averaging >= SWEEP_MIN_SNAP%
+    of snaps) with no line of this pull type]} for games that have such players."""
     starters = defaultdict(set)
     names = {}
     for r in read_csv(SLOTS_PATH):
-        if r.get("slot") in FILL_SLOTS and r.get("gsis_id"):
+        if r.get("gsis_id") and (r.get("slot") in FILL_SLOTS or (include_backups and _sweep_player(r))):
             starters[(str(int(r["week"])), r["team"])].add(r["gsis_id"])
             names[r["gsis_id"]] = r.get("player", r["gsis_id"])
     have = defaultdict(set)
@@ -159,7 +171,7 @@ def plan_sweeps(games, now=None):
             names = miss.get(g["game_id"], [])
             if names:
                 due.append((g, f"sweep {int(start.total_seconds() // 60)}-{int(end.total_seconds() // 60)} min: "
-                               f"{len(names)} starter(s) had no line: {', '.join(names)}"))
+                               f"{len(names)} player(s) had no line: {', '.join(names)}"))
     return due
 
 
@@ -366,7 +378,8 @@ def run(keys, games, name_index_for_game, log):
 
         # Quota guard
         markets = list(CORE)
-        if pt != "pregame":
+        is_sweep = pt == "pregame" and g["game_id"] in sweep_note and g["game_id"] not in due_ids
+        if pt != "pregame" or is_sweep:
             # Snapshots only use credits the remaining pre-game pulls this month don't need.
             if remaining_n is not None:
                 month = ko.strftime("%Y-%m")
@@ -376,7 +389,7 @@ def run(keys, games, name_index_for_game, log):
                 if spare >= len(CORE) + len(OPTIONAL):
                     markets += OPTIONAL
                 elif spare < len(CORE):
-                    log.append(f"odds: {g['game_id']} {pt} snapshot skipped to protect pre-game pulls "
+                    log.append(f"odds: {g['game_id']} {'sweep' if is_sweep else pt + ' snapshot'} skipped to protect pre-game pulls "
                                f"({remaining_n} credits left)")
                     continue
             else:
