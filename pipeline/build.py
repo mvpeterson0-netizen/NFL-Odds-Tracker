@@ -293,6 +293,12 @@ def build(log):
                 for t, (label, *_r) in SNAPSHOTS.items():
                     sc = snaps_by.get((gid, pid, okey, t))
                     if sc:
+                        # a snapshot type can be pulled more than once (Monday fill-ins): use each book's latest
+                        latest = {}
+                        for c in sc:
+                            if c["captured_utc"] > latest.get(c["book"], ""):
+                                latest[c["book"]] = c["captured_utc"]
+                        sc = [c for c in sc if c["captured_utc"] == latest[c["book"]]]
                         sm, _alts = choose_main(sc)
                         snaps.append({"t": t, "label": label, "line": to_float(sm["line"]),
                                       "op": to_float(sm["over_price"]), "up": to_float(sm["under_price"]),
