@@ -155,3 +155,6 @@ button.badd { font-size: 12px; padding: 3px 10px; }
 .bbtns { margin-top: 8px; }
 .sres { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; justify-content: space-between; margin: 4px 0 6px; }
 .bw { display: inline-flex; align-items: center; gap: 4px; }
+
+/* Defense tab: opponent players and their line, one per line */
+.dtable .facing { white-space: nowrap; line-height: 1.6; }

@@ -658,6 +658,14 @@ function viewDefense() {
     facing[g.home] = { opp: g.away, ha: "vs.", ko: g.ko };
     facing[g.away] = { opp: g.home, ha: "@", ko: g.ko };
   }
+  // Slotted players at the selected position on each defense's opponent this week, with their line for the selected market
+  const facingPlayers = {};
+  for (const s of slotsFor(D.current_week)) {
+    if (!s.slot.startsWith(sel.pos)) continue;
+    const r = rowFor(s.pid, D.current_week);
+    (facingPlayers[s.team] = facingPlayers[s.team] || []).push({ s, m: r ? r.m[sel.m.id] : null });
+  }
+  for (const arr of Object.values(facingPlayers)) arr.sort((a, b) => SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot));
   const rows = Object.entries(tbl).map(([team, v]) => ({ team, rk: v[0], avg: v[1], n: v[2], of: v[3] }));
   rows.sort((a, b) => (S.defAsc ? a.rk - b.rk : b.rk - a.rk) || a.team.localeCompare(b.team));
   const of = rows.length ? rows[0].of : 32, q = Math.round(of / 4);
@@ -666,17 +674,21 @@ function viewDefense() {
     `<button class="gchip ${x.key === S.defMk ? "on" : ""}" data-dm="${x.key}"><b>${x.pos}</b><span class="muted small">${esc(x.m.label)}</span></button>`).join("") + `</div>
     <p class="callout">How each defense ranks in <b>${sel.pos} ${esc(sel.m.label.toLowerCase())} allowed per game</b> this season.
     1 = fewest allowed (toughest), ${of} = most allowed. Counts every game with published stats, so it updates automatically as each week's stats arrive
-    ${stats ? `(nflverse stats last updated ${esc(stats.last_updated)})` : ""}. "This week" is who each defense plays in week ${D.current_week}.</p>`;
+    ${stats ? `(nflverse stats last updated ${esc(stats.last_updated)})` : ""}. "This week" is who each defense plays in week ${D.current_week};
+    "Facing" lists that opponent's ${sel.pos}s and their current ${esc(sel.m.label.toLowerCase())} line (yellow chip = an earlier Mon / Thu / Sun AM snapshot, not the graded pre-game line).</p>`;
   if (!rows.length) return h + `<p class="muted">No games with stats yet.</p>`;
   h += `<div class="panel scroll"><table class="dtable"><thead><tr>
     <th class="num"><button class="sortb" id="d-sort" title="Reverse order">Rank ${S.defAsc ? "▲" : "▼"}</button></th><th>Defense</th>
-    <th class="num">${esc(sel.m.label)} allowed / game</th><th class="num">Games</th><th>This week</th></tr></thead><tbody>`;
+    <th class="num">${esc(sel.m.label)} allowed / game</th><th class="num">Games</th><th>This week</th>
+    <th title="The opponent's slotted ${sel.pos}s this week and their ${esc(sel.m.label.toLowerCase())} line. Pre-game line (~3 h before kickoff) once captured; before that, the latest snapshot with a yellow Mon / Thu / Sun AM chip.">Facing · ${esc(sel.m.label)} line</th></tr></thead><tbody>`;
   for (const r of rows) {
     const cls = r.n < 3 ? "" : r.rk <= q ? "tough" : r.rk > of - q ? "easy" : "";
     const f = facing[r.team];
     h += `<tr><td class="num"><span class="drk ${cls}">${ordinal(r.rk)}</span></td><td><b>${esc(r.team)}</b></td>
       <td class="num">${num(r.avg)}</td><td class="num">${r.n}</td>
-      <td>${f ? `${f.ha} ${esc(f.opp)} <span class="muted small">${fmtTime(f.ko)}</span>` : `<span class="muted small">bye</span>`}</td></tr>`;
+      <td>${f ? `${f.ha} ${esc(f.opp)} <span class="muted small">${fmtTime(f.ko)}</span>` : `<span class="muted small">bye</span>`}</td>
+      <td class="small">${!f ? "" : (facingPlayers[f.opp] || []).map(({ s, m }) =>
+        `<div class="facing">${lineCell(m)} <a class="pname" href="#/player/${s.pid}">${esc(s.name)}</a> <span class="muted">${s.slot}</span></div>`).join("") || `<span class="muted">no slotted ${sel.pos}</span>`}</td></tr>`;
   }
   return h + `</tbody></table></div><p class="muted small">Ties share a rank. Red = top quarter (toughest), green = bottom quarter (most allowed). Same numbers as the Opp D rank column on the Board, which uses only games before each matchup.</p>`;
 }
