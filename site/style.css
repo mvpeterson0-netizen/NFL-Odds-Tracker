@@ -130,3 +130,11 @@ td.slines { white-space: nowrap; }
 .sline { padding: 1px 0; }
 .sline .chip { font-size: 11px; }
 .srch form button.sclear { font-weight: 500; color: var(--muted); }
+/* Log: this week's pulls */
+.wkp details.wkpull { border-bottom: 1px solid var(--line); padding: 6px 0; }
+.wkp summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; list-style: revert; }
+.wkp .wkg { font-weight: 650; min-width: 90px; }
+.wkp .wkmiss { color: var(--warn-ink); } .wkp .wkall { color: var(--over); }
+.wkp table.wkt { margin: 6px 0 4px; }
+.wkp table.wkt td { padding: 3px 8px; }
+.wkp tr.untracked td { color: var(--muted); }

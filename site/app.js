@@ -528,6 +528,47 @@ function viewSlots() {
   return h + `</tbody></table></div>`;
 }
 
+function weekPullsPanel() {
+  const W = D.week_pulls;
+  if (!W || !W.pulls) return "";
+  const PT = { pregame: "Pre-game", mon: "Mon", thu: "Thu", sun: "Sun AM" };
+  const MK = Object.fromEntries(D.markets.map((m) => [m.key, m.label]));
+  const pulls = [...W.pulls].sort((a, b) => b.attempted_utc.localeCompare(a.attempted_utc));
+  let h = `<div class="panel"><h3>Week ${W.week} pulls (${pulls.length}) · tap a pull to see the lines it returned</h3><div class="body wkp">`;
+  if (!pulls.length) return h + `<p class="muted">No pulls yet this week.</p></div></div>`;
+  for (const p of pulls) {
+    const key = `${p.game_id}|${p.pull_type || "pregame"}|${p.attempted_utc}`;
+    const lines = (W.lines || {})[key] || [];
+    const tracked = (W.tracked || {})[p.game_id] || [];
+    const byPlayer = {};
+    for (const [name, gs, mk, book, line, op, up] of lines) (byPlayer[gs || "?" + name] ||= { name, gs, items: [] }).items.push({ mk, book, line, op, up });
+    const got = new Set(lines.map((l) => l[1]).filter(Boolean));
+    const missing = tracked.filter(([pid]) => !got.has(pid));
+    const trackedIds = new Set(tracked.map(([pid]) => pid));
+    const slotOf = Object.fromEntries(tracked.map(([pid, , slot]) => [pid, slot]));
+    const ok = p.status === "ok";
+    h += `<details class="wkpull"><summary><span class="wkg">${esc(gameLabel(p.game_id))}</span>
+      <span class="chip ${p.pull_type && p.pull_type !== "pregame" ? "snapchip" : ""}">${esc(PT[p.pull_type || "pregame"] || p.pull_type)}</span>
+      <span class="${ok ? "" : "na"}">${esc(p.status)}</span>
+      <span class="muted small">${fmtTime(p.attempted_utc)}${p.minutes_before_kickoff ? ` · ${esc(p.minutes_before_kickoff)} min before KO` : ""}</span>
+      <span class="small">${lines.length} lines · ${Object.keys(byPlayer).length} players${tracked.length ? ` · <b class="${missing.length ? "wkmiss" : "wkall"}">${tracked.length - missing.length}/${tracked.length} tracked</b>` : ""}</span>
+      <span class="muted small">credits ${esc(p.credits_last || "0")}</span></summary>`;
+    if (p.note) h += `<p class="muted small">${esc(p.note)}</p>`;
+    if (missing.length) h += `<p class="small"><b>Tracked players with no line in this pull:</b> ${missing.map(([pid, name, slot]) => `<a href="#/player/${pid}">${esc(name)}</a> <span class="muted">${esc(slot)}</span>`).join(", ")}</p>`;
+    if (lines.length) {
+      const players = Object.values(byPlayer).sort((a, b) => (trackedIds.has(b.gs) - trackedIds.has(a.gs)) || a.name.localeCompare(b.name));
+      h += `<table class="wrap wkt"><tbody>`;
+      for (const pl of players) {
+        const tr = trackedIds.has(pl.gs);
+        h += `<tr class="${tr ? "" : "untracked"}"><td>${tr ? `<a href="#/player/${pl.gs}">${esc(pl.name)}</a> <span class="muted small">${esc(slotOf[pl.gs])}</span>` : `${esc(pl.name)} <span class="muted small">not tracked</span>`}</td>
+          <td class="small">${pl.items.sort((a, b) => a.mk.localeCompare(b.mk) || a.book.localeCompare(b.book)).map((it) => `${esc(MK[it.mk] || it.mk)} <b>${num(it.line)}</b> <span class="muted">${odds(it.op)}/${odds(it.up)} ${esc(BOOK_ABBR[it.book] || it.book)}</span>`).join(" · ")}</td></tr>`;
+      }
+      h += `</tbody></table>`;
+    }
+    h += `</details>`;
+  }
+  return h + `</div></div>`;
+}
 function viewLog(live) {
   const src = D.sources || {};
   let h = `<div class="grid2"><div class="panel"><h3>Data sources</h3><div class="body"><table class="wrap"><thead><tr><th>Dataset</th><th>Source last updated</th><th>Fetched</th></tr></thead><tbody>`;
@@ -541,6 +582,7 @@ function viewLog(live) {
       <div>API credits remaining</div><div>${D.odds.credits_remaining || NA("unknown until first pull")}</div>
       <div>Site data built</div><div>${fmtTime(D.generated_utc)}</div>
     </div></div></div>`;
+  h += weekPullsPanel();
   if (live && live.length) {
     h += `<div class="panel scroll"><h3>Recent scheduled runs (live from GitHub)</h3><table><thead><tr><th>Started</th><th>Trigger</th><th>Result</th><th>Link</th></tr></thead><tbody>`;
     for (const r of live.slice(0, 15)) h += `<tr><td>${fmtTime(r.run_started_at || r.created_at)}</td><td>${esc(r.event)}</td><td>${esc(r.conclusion || r.status)}</td><td><a href="${esc(r.html_url)}">log</a></td></tr>`;
