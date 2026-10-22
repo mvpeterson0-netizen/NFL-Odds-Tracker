@@ -47,6 +47,13 @@ CT = ZoneInfo("America/Chicago")
 SNAPSHOTS = {"mon": ("Mon", 0, 8, 0), "thu": ("Thu", 3, 14, 0), "sun": ("Sun AM", 6, 8, 0)}
 SNAP_RETRY = timedelta(hours=1)
 SNAP_MAX_TRIES = 3  # for thu/sun; mon keeps trying hourly until it gets props (or the thu pull starts)
+# Monday fill-in: books post props gradually, so a Monday pull can come back "thin". If fewer than
+# FILL_MIN_COVERAGE of the game's starters (FILL_SLOTS) have a Monday line, pull again every FILL_EVERY
+# until coverage is reached or the Thursday 2 PM snapshot takes over.
+FILL_SLOTS = ("QB1", "RB1", "WR1", "WR2", "TE1")
+FILL_MIN_COVERAGE = 0.75
+FILL_EVERY = timedelta(hours=12)
+SLOTS_PATH = DATA / "slots.csv"
 
 CAPTURES_PATH = DATA / "prop_captures.csv"
 PULL_LOG_PATH = DATA / "pull_log.csv"
@@ -84,6 +91,25 @@ def snapshot_anchor(week_games, t):
     return datetime(d.year, d.month, d.day, hh, mm, tzinfo=CT)
 
 
+def starter_coverage(pull_type):
+    """{game_id: (starters with at least one line of this pull type, starters)} for FILL_SLOTS players."""
+    starters = defaultdict(set)  # (week, team) -> gsis ids
+    for r in read_csv(SLOTS_PATH):
+        if r.get("slot") in FILL_SLOTS and r.get("gsis_id"):
+            starters[(str(int(r["week"])), r["team"])].add(r["gsis_id"])
+    have = defaultdict(set)
+    for c in read_csv(CAPTURES_PATH):
+        if ptype(c) == pull_type and c.get("gsis_id"):
+            have[c["game_id"]].add(c["gsis_id"])
+    out = {}
+    from .nflverse import schedule  # local import keeps module load light
+    for g in schedule():
+        ids = starters.get((g["week"], g["home_team"]), set()) | starters.get((g["week"], g["away_team"]), set())
+        if ids:
+            out[g["game_id"]] = (len(ids & have.get(g["game_id"], set())), len(ids))
+    return out
+
+
 def plan_snapshots(games, now=None):
     """Return [(game, pull_type)] snapshot pulls due now."""
     now = now or utcnow()
@@ -92,6 +118,7 @@ def plan_snapshots(games, now=None):
         if parse_iso(g.get("kickoff_utc", "")) and g.get("week"):
             by_week[g["week"]].append(g)
     logs = {t: _pulls_by_game(t) for t in SNAPSHOTS}
+    cov = None  # loaded only if a Monday pull needs checking
     due = []
     for wk, wg in by_week.items():
         anchors = {t: snapshot_anchor(wg, t) for t in SNAPSHOTS}
@@ -108,6 +135,18 @@ def plan_snapshots(games, now=None):
                     continue  # Sunday pull takes over for Sunday/Monday games
                 rows = logs[t].get(g["game_id"], [])
                 if _has_ok(rows):
+                    if t != "mon":
+                        continue
+                    # Monday fill-in for thin games
+                    if cov is None:
+                        cov = starter_coverage("mon")
+                    have, total = cov.get(g["game_id"], (0, 0))
+                    if total == 0 or have / total >= FILL_MIN_COVERAGE:
+                        continue
+                    last = max((parse_iso(r.get("attempted_utc", "")) for r in rows), default=None)
+                    if last and now - last < FILL_EVERY:
+                        continue
+                    due.append((g, t))
                     continue
                 tries = [r for r in rows if r["status"] in ("empty", "error")]
                 if tries:
