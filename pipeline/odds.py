@@ -54,6 +54,10 @@ FILL_SLOTS = ("QB1", "RB1", "WR1", "WR2", "TE1")
 FILL_MIN_COVERAGE = 0.75
 FILL_EVERY = timedelta(hours=12)
 SLOTS_PATH = DATA / "slots.csv"
+# Pre-kickoff sweeps: after the ~3 h pre-game pull, check again in these windows (time before kickoff).
+# If any starter (FILL_SLOTS) still has no pre-game line, pull the game again. Lines captured at ~3 h
+# stay the graded ones; a sweep only adds lines for players who had none.
+SWEEP_WINDOWS = [(timedelta(minutes=75), timedelta(minutes=40)), (timedelta(minutes=25), timedelta(minutes=5))]
 
 CAPTURES_PATH = DATA / "prop_captures.csv"
 PULL_LOG_PATH = DATA / "pull_log.csv"
@@ -108,6 +112,55 @@ def starter_coverage(pull_type):
         if ids:
             out[g["game_id"]] = (len(ids & have.get(g["game_id"], set())), len(ids))
     return out
+
+
+def missing_starters(pull_type="pregame"):
+    """{game_id: [gsis ids of starters with no line of this pull type]} for games that have starters."""
+    starters = defaultdict(set)
+    names = {}
+    for r in read_csv(SLOTS_PATH):
+        if r.get("slot") in FILL_SLOTS and r.get("gsis_id"):
+            starters[(str(int(r["week"])), r["team"])].add(r["gsis_id"])
+            names[r["gsis_id"]] = r.get("player", r["gsis_id"])
+    have = defaultdict(set)
+    for c in read_csv(CAPTURES_PATH):
+        if ptype(c) == pull_type and c.get("gsis_id"):
+            have[c["game_id"]].add(c["gsis_id"])
+    from .nflverse import schedule
+    out = {}
+    for g in schedule():
+        ids = starters.get((g["week"], g["home_team"]), set()) | starters.get((g["week"], g["away_team"]), set())
+        if ids:
+            out[g["game_id"]] = sorted(names.get(i, i) for i in ids - have.get(g["game_id"], set()))
+    return out
+
+
+def plan_sweeps(games, now=None):
+    """Return [(game, note)] for games that had a pre-game pull but still miss a starter's line, inside a sweep window."""
+    now = now or utcnow()
+    pulls = _pulls_by_game()
+    miss = None
+    due = []
+    for g in games:
+        ko = parse_iso(g.get("kickoff_utc", ""))
+        if ko is None or ko <= now or ko < COLLECTION_START_UTC:
+            continue
+        rows = pulls.get(g["game_id"], [])
+        if not _has_ok(rows):
+            continue  # the normal pre-game pull handles this game
+        for start, end in SWEEP_WINDOWS:
+            if not (ko - start <= now <= ko - end):
+                continue
+            # one attempt per window
+            if any((p := parse_iso(r.get("attempted_utc", ""))) and ko - start <= p <= ko - end for r in rows):
+                continue
+            if miss is None:
+                miss = missing_starters("pregame")
+            names = miss.get(g["game_id"], [])
+            if names:
+                due.append((g, f"sweep {int(start.total_seconds() // 60)}-{int(end.total_seconds() // 60)} min: "
+                               f"{len(names)} starter(s) had no line: {', '.join(names)}"))
+    return due
 
 
 def plan_snapshots(games, now=None):
@@ -254,7 +307,12 @@ def run(keys, games, name_index_for_game, log):
         log.append(f"odds: {g['game_id']} kicked off with no pre-game line (logged as missed)")
         wrote = True
     snaps = plan_snapshots(games, now)
-    if not due and not snaps:
+    try:
+        sweeps = plan_sweeps(games, now)
+    except Exception as ex:  # a sweep problem must never block the main pre-game pull
+        sweeps = []
+        log.append(f"odds: sweep check skipped ({type(ex).__name__}: {str(ex)[:80]})")
+    if not due and not snaps and not sweeps:
         return wrote
 
     # Check every key (the events call is free). Keep the events list from the first key that works.
@@ -286,7 +344,10 @@ def run(keys, games, name_index_for_game, log):
     remaining_n = total_left()
     pulls = _pulls_by_game()
 
+    sweep_note = {g["game_id"]: note for g, note in sweeps}
+    due_ids = {g["game_id"] for g in due}
     jobs = [(g, "pregame") for g in sorted(due, key=lambda x: x["kickoff_utc"])] + \
+           [(g, "pregame") for g, _n in sorted(sweeps, key=lambda x: x[0]["kickoff_utc"]) if g["game_id"] not in due_ids] + \
            sorted(snaps, key=lambda x: x[0]["kickoff_utc"])
     for g, pt in jobs:
         ko = parse_iso(g["kickoff_utc"])
@@ -390,7 +451,9 @@ def run(keys, games, name_index_for_game, log):
                                name_index_for_game(g))
         if not caps:
             append_csv(PULL_LOG_PATH, [{**row, "status": "empty", "outcomes": 0,
-                                        "note": "no player prop outcomes returned"}], PULL_FIELDS)
+                                        "note": ("no player prop outcomes returned" + (
+                                            "; " + sweep_note[g["game_id"]] if pt == "pregame" and g["game_id"] in sweep_note
+                                            and g["game_id"] not in due_ids else ""))}], PULL_FIELDS)
             log.append(f"odds: {g['game_id']} {pt} returned no props (cost {last})")
             wrote = True
             continue
@@ -398,6 +461,8 @@ def run(keys, games, name_index_for_game, log):
         books = sorted({c["book"] for c in caps})
         unmatched = sorted({c["player_book_name"] for c in caps if not c["gsis_id"]})
         note = f"books: {','.join(books)}; {keynote}"
+        if pt == "pregame" and g["game_id"] in sweep_note and g["game_id"] not in due_ids:
+            note = sweep_note[g["game_id"]] + "; " + note
         if unmatched:
             note += f"; unmatched names: {', '.join(unmatched)}"
         append_csv(PULL_LOG_PATH, [{**row, "status": "ok", "outcomes": len(caps), "note": note}], PULL_FIELDS)

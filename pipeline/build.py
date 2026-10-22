@@ -259,6 +259,13 @@ def build(log):
                 else:
                     caps = caps_by.get((gid, pid, okey), [])
                     if caps:
+                        # The graded line is each book's FIRST pre-game capture (the ~3 h pull). Later
+                        # pre-kickoff sweeps only fill in players/markets that had no line yet.
+                        first = {}
+                        for c in caps:
+                            if c["book"] not in first or c["captured_utc"] < first[c["book"]]:
+                                first[c["book"]] = c["captured_utc"]
+                        caps = [c for c in caps if c["captured_utc"] == first[c["book"]]]
                         main, alts = choose_main(caps)
                         m.update({"lstat": "ok", "line": to_float(main["line"]),
                                   "op": to_float(main["over_price"]), "up": to_float(main["under_price"]),
