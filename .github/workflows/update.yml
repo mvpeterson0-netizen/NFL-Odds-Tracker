@@ -73,6 +73,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/update.yml/enable" || true
 
+      - name: Stamp site version (so phones and browsers load new code right away)
+        if: steps.run.outputs.site_changed == 'true' || github.event_name != 'schedule'
+        # The version is a hash of the site's code files only, so it changes when the code changes,
+        # not on every data update. Only the uploaded copy is stamped; nothing is committed.
+        run: |
+          V=$(cat site/*.html site/*.js site/*.css | sha256sum | cut -c1-10)
+          sed -i -E "s/(src|href)=\"([a-z]+\.(js|css))\"/\1=\"\2?v=$V\"/g" site/index.html
+          echo "$V" > site/version.txt
+          grep -c "?v=$V" site/index.html
+
       - name: Upload site
         if: steps.run.outputs.site_changed == 'true' || github.event_name != 'schedule'
         uses: actions/upload-pages-artifact@v3
