@@ -161,6 +161,20 @@ def build(log):
         if w >= info.get("_w", -1):
             info.update({"_w": w, "team": s["team"], "pos": s["slot"][:2]})
 
+    # Extra players, shown in the app only when its "All players" switch is on: QB/RB/WR/TE who had a
+    # DraftKings/FanDuel line captured this season (pre-game or snapshot) but were never in a slot.
+    # Display only: slots.csv and the odds pull triggers (fill-ins, sweeps) are not touched, so this adds no API calls.
+    captured_ids = {k[1] for k in caps_by} | {k[1] for k in snaps_by}
+    n_extra = 0
+    for g in sorted(captured_ids - set(players)):
+        pi = d.player_info.get(g) or {}
+        pos = (pi.get("position") or "").upper()
+        if pos not in ("QB", "RB", "WR", "TE") or not pi.get("team"):
+            continue
+        players[g] = {"id": g, "name": pi.get("name") or g, "slots": {}, "_w": -1,
+                      "team": pi["team"], "pos": pos, "extra": True}
+        n_extra += 1
+
     rows_out = {}
     analysis_out = {}
     leads = []
@@ -457,7 +471,11 @@ def build(log):
         "rows": rows_out,
         "analysis": analysis_out,
         "slots": slots_out,
-        "leads": leads[:40],
+        # Top 40 for slotted players, plus up to 40 for extra players (shown only with "All players" on),
+        # so extras never push a slotted player's lead off the list.
+        "leads": sorted([l for l in leads if not players[l["pid"]].get("extra")][:40]
+                        + [l for l in leads if players[l["pid"]].get("extra")][:40],
+                        key=lambda x: -abs(x["pct5"] or 0)),
         "games": {g["game_id"]: {"wk": int(g["week"]), "home": g["home_team"], "away": g["away_team"],
                                  "ko": g["kickoff_utc"], "final": g.get("result", "") != "",
                                  "type": g.get("game_type", ""), "loc": g.get("location", ""),
@@ -478,6 +496,6 @@ def build(log):
         "runs": runs[-150:],
     }
     write_json(OUT_PATH, out, compact=True)
-    log.append(f"build: {len(players)} players, {len(slots)} slot rows, {len(leads)} leads, "
+    log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
                f"{len(unmatched)} unmatched lines, {d.unmapped_snaps} unmapped snap rows")
     return out

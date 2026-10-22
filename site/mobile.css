@@ -98,3 +98,7 @@ main { padding: 10px 12px 32px; }
 .brow .bl { font-size: 13px; white-space: nowrap; }
 .brow button.brm { justify-self: end; }
 .bgroup { align-items: stretch; }
+
+/* "All players" switch sits on the logo row, left of the status text */
+.allp { order: 1; font-size: 12px; margin-left: auto; }
+.status { max-width: 42%; }

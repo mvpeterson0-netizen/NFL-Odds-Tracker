@@ -87,7 +87,7 @@
   function board() {
     const wk = S.wk, q = S.q.trim().toLowerCase();
     if (S.game && !(D.games[S.game] && D.games[S.game].wk === wk)) S.game = "";
-    let slots = slotsFor(wk);
+    let slots = typeof slotsShown === "function" ? slotsShown(wk) : slotsFor(wk);
     if (S.team) slots = slots.filter((s) => s.team === S.team);
     if (S.pos) slots = slots.filter((s) => s.slot.startsWith(S.pos));
     if (q) slots = slots.filter((s) => s.name.toLowerCase().includes(q));
@@ -97,7 +97,7 @@
       if (!r || (S.game && r.gid !== S.game)) continue;
       items.push({ s, r });
     }
-    items.sort((a, b) => a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot));
+    items.sort((a, b) => a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
     let h = gameBar(wk) + `<div class="filters mfilters">
       <label>Week ${weekSelect("f-wk", wk)}</label>
       <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
@@ -120,7 +120,7 @@
         rows += `<div class="mrow"><span class="mlab">${esc(mk.label)}</span><span>${lineHtml(m)}</span><span>${f.avg == null ? `<span class="na">—</span>` : num(f.avg)}</span><span>${oppHtml(m)}</span><span>${trendHtml(f)}</span></div>`;
       }
       h += `<a class="mcard" href="#/player/${s.pid}">
-        <div class="mcard-h">${headshot(s.pid, 40)}<div><div class="mname">${esc(s.name)}</div><div class="muted small">${esc(s.team)} · <span class="chip ${s.change ? "chg" : ""}">${s.slot}${s.change ? " ↺" : ""}</span></div>${tgtLine(targets(s.pid, pos, wk))}</div><span class="mchev">›</span></div>
+        <div class="mcard-h">${headshot(s.pid, 40)}<div><div class="mname">${esc(s.name)}</div><div class="muted small">${esc(s.team)} · <span class="chip ${s.change ? "chg" : ""} ${s.extra ? "xtra" : ""}">${s.slot}${s.change ? " ↺" : ""}</span></div>${tgtLine(targets(s.pid, pos, wk))}</div><span class="mchev">›</span></div>
         <div class="mrow mhead"><span></span><span>LINE</span><span>AVG</span><span>OPP</span><span>TREND</span></div>${rows}</a>`;
     }
     return h + `</section>`;

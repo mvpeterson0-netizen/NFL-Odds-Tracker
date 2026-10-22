@@ -285,7 +285,7 @@
 
   function run(spec, near = false) {
     const wk = D.current_week, out = [];
-    for (const s of D.slots.filter((x) => x.wk === wk)) {
+    for (const s of slotsShown(wk)) { // includes extra players when the "All players" switch is on
       const pos = s.slot.slice(0, 2);
       if (spec.pos.length && !spec.pos.includes(pos)) continue;
       if (spec.team && s.team !== spec.team) continue;
@@ -346,7 +346,7 @@
     const gapOf = (x) => { for (const g of x.results) for (const r of g) if (r.gap != null) return r.gap; return null; };
     const sorter = (list) => list.sort((a, b) => {
       if (SORT !== "time") { const ga = gapOf(a), gb = gapOf(b); if (ga != null || gb != null) return SORT === "gapUp" ? (gb ?? -1e9) - (ga ?? -1e9) : (ga ?? 1e9) - (gb ?? 1e9); }
-      return (a.cur ? a.cur.ko : "").localeCompare(b.cur ? b.cur.ko : "") || a.s.team.localeCompare(b.s.team) || SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot);
+      return (a.cur ? a.cur.ko : "").localeCompare(b.cur ? b.cur.ko : "") || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot);
     });
     rows = sorter(rows);
     const flat = SPEC.groups.flat();
@@ -447,7 +447,7 @@
       <p><b>Each row</b> = <i>what to measure</i> · <i>stat</i> · <i>comparison</i> · <i>compare to</i>. Rows in the same box are <b>OR</b> (any one is enough); separate boxes are <b>AND</b> (all must pass).</p>
       <p><b>What to measure:</b> <b>Season avg</b> over his starts (pre-game slot QB1/RB1/WR1–3/TE1 and played) · <b>Last N games avg</b> and <b>Each of last N games</b> over games played · <b>Current line</b> (pre-game line if captured, otherwise the latest Mon/Thu/Sun AM snapshot; DraftKings first, then FanDuel) · <b>Line move this week</b> (current line minus the first line captured this week) · <b>Opp D rank</b> (this week's opponent, season rank vs his position in that stat; 1 = fewest allowed).</p>
       <p><b>Compare to:</b> a number, <b>his current line</b>, <b>his season avg</b>, or <b>his last N avg</b>, optionally scaled by a percent (e.g. 90% of his current line). Results show the gap, e.g. "48.0 vs line 60.5 Thu (−21%)"; sort by the biggest gaps.</p>
-      <p><b>Typing</b> is optional: it fills the rows, and anything it can't read is listed so you can set it with the dropdowns. Searches cover this week's slotted players.</p>
+      <p><b>Typing</b> is optional: it fills the rows, and anything it can't read is listed so you can set it with the dropdowns. Searches cover this week's slotted players, plus extra players (no slot, but books posted a line) when <b>All players</b> is on. Extras have no starts, so <b>Season avg</b> conditions never match them; use <b>Last N games</b>.</p>
     </div></div>`;
   }
   window.STIX_SEARCH = { parse, run, evalRow, toRow, view, bind, STATS };

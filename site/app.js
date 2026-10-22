@@ -34,6 +34,24 @@ function impl(o) { if (o == null) return null; return o > 0 ? 100 / (o + 100) : 
 const playerById = {};
 const mkt = {};
 function slotsFor(wk) { return D.slots.filter((s) => s.wk === wk); }
+// "All players" switch (header): also show extra players, i.e. QB/RB/WR/TE who had a DraftKings/FanDuel line
+// but aren't in our 8 slots. Saved per device. Off by default.
+S.all = (() => { try { return localStorage.getItem("stix_all_players") === "1"; } catch { return false; } })();
+const EXTRA_BASIS = "Not in our 8 slots. Shown because DraftKings/FanDuel posted a prop line for him this season (All players is on).";
+function isExtra(pid) { const p = playerById[pid]; return !!(p && p.extra); }
+// Slots for a week, plus extra players with a game that week when the switch is on (slot = their position, e.g. "WR").
+function slotsShown(wk) {
+  const out = slotsFor(wk);
+  if (!S.all) return out;
+  for (const p of D.players) {
+    if (!p.extra) continue;
+    const r = rowFor(p.id, wk);
+    if (r) out.push({ wk, pid: p.id, name: p.name, team: r.team || p.team, slot: p.pos, basis: EXTRA_BASIS, change: "", extra: true });
+  }
+  return out;
+}
+// Sort order: QB1, RB1 ... TE2, then extras by position.
+function slotRank(slot) { const i = SLOT_ORDER.indexOf(slot); return i >= 0 ? i : 100 + ["QB", "RB", "WR", "TE"].indexOf(slot); }
 function rowFor(pid, wk) { return (D.rows[pid] || []).find((r) => r.wk === wk); }
 function marketsFor(pos) { return D.markets.filter((m) => m.pos.includes(pos)); }
 function gameLabel(gid) {
@@ -241,7 +259,7 @@ function viewBoard() {
   const wk = S.wk;
   const q = S.q.trim().toLowerCase();
   if (S.game && !(D.games[S.game] && D.games[S.game].wk === wk)) S.game = "";
-  let slots = slotsFor(wk);
+  let slots = slotsShown(wk);
   if (S.team) slots = slots.filter((s) => s.team === S.team);
   if (S.pos) slots = slots.filter((s) => s.slot.startsWith(S.pos));
   if (q) slots = slots.filter((s) => s.name.toLowerCase().includes(q));
@@ -252,7 +270,7 @@ function viewBoard() {
     if (S.game && r.gid !== S.game) continue;
     items.push({ s, r, ko: r.ko });
   }
-  items.sort((a, b) => a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot));
+  items.sort((a, b) => a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
   let html = gameBar(wk) + `<div class="filters">
     <label>Week ${weekSelect("f-wk", wk)}</label>
     <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
@@ -280,7 +298,7 @@ function viewBoard() {
       html += `<tr class="${grp}">
         ${newGame ? `<td class="gamecell" rowspan="${span[r.gid]}"><div class="gwrap"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></div></td>` : ""}
         <td>${first ? esc(s.team) : ""}</td>
-        <td>${first ? `<span class="chip ${s.change ? "chg" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
+        <td>${first ? `<span class="chip ${s.change ? "chg" : ""} ${s.extra ? "xtra" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
         <td>${first ? `<a class="pname" href="#/player/${s.pid}">${headshot(s.pid, 28)}${esc(s.name)}</a>` : ""}</td>
         <td>${esc(mk.label)}</td>
         <td class="small">${drankCell(m, pos, mk, r.opp)}</td>
@@ -500,13 +518,14 @@ function pickBoxSafe(pid, mid) {
 function viewLeads() {
   let h = `<p class="callout">Upcoming props where the stored pre-game line differs most from the player's last 5 games (prior games only, min 3 games played).
     Sorted by percent gap. These are leads for further research, not predictions or guaranteed value. Lines appear here only after they are captured, about 3 hours before each kickoff.</p>`;
-  if (!D.leads.length) return h + `<p class="muted">No upcoming lines captured yet.</p>`;
+  const leadsShown = D.leads.filter((l) => S.all || !isExtra(l.pid));
+  if (!leadsShown.length) return h + `<p class="muted">No upcoming lines captured yet.</p>`;
   h += `<div class="panel scroll"><table><thead><tr><th>Player</th><th>Team</th><th>Market</th><th>Game</th><th class="num">Line</th><th>Book · captured</th>
     <th class="num">3-gm mean</th><th class="num">5-gm mean</th><th class="num">5-gm median</th><th class="num">Line − 5-gm mean</th><th class="num">% gap</th></tr></thead><tbody>`;
-  for (const l of D.leads) {
+  for (const l of leadsShown) {
     const p = playerById[l.pid]; if (!p) continue;
     const mk = mkt[l.mid];
-    h += `<tr><td><a href="#/player/${l.pid}">${esc(p.name)}</a></td><td>${esc(p.team)}</td><td>${esc(mk.label)}</td><td>${esc(gameLabel(l.gid))}</td>
+    h += `<tr><td><a href="#/player/${l.pid}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra" title="${esc(EXTRA_BASIS)}">extra</span>` : ""}</td><td>${esc(p.team)}</td><td>${esc(mk.label)}</td><td>${esc(gameLabel(l.gid))}</td>
       <td class="num"><b>${num(l.line)}</b></td><td class="small">${esc(l.book)} · ${fmtTime(l.cap)}</td>
       <td class="num">${num(l.mean3)} <span class="muted small">(n=${l.n3})</span></td><td class="num">${num(l.mean5)} <span class="muted small">(n=${l.n5})</span></td>
       <td class="num">${num(l.med5)}</td><td class="num">${l.gap5 > 0 ? "+" : ""}${num(l.gap5)}</td>
@@ -671,12 +690,12 @@ function viewDefense() {
   }
   // Slotted players at the selected position on each defense's opponent this week, with their line for the selected market
   const facingPlayers = {};
-  for (const s of slotsFor(D.current_week)) {
+  for (const s of slotsShown(D.current_week)) {
     if (!s.slot.startsWith(sel.pos)) continue;
     const r = rowFor(s.pid, D.current_week);
     (facingPlayers[s.team] = facingPlayers[s.team] || []).push({ s, m: r ? r.m[sel.m.id] : null });
   }
-  for (const arr of Object.values(facingPlayers)) arr.sort((a, b) => SLOT_ORDER.indexOf(a.s.slot) - SLOT_ORDER.indexOf(b.s.slot));
+  for (const arr of Object.values(facingPlayers)) arr.sort((a, b) => slotRank(a.s.slot) - slotRank(b.s.slot));
   const rows = Object.entries(tbl).map(([team, v]) => ({ team, rk: v[0], avg: v[1], n: v[2], of: v[3] }));
   rows.sort((a, b) => (S.defAsc ? a.rk - b.rk : b.rk - a.rk) || a.team.localeCompare(b.team));
   const of = rows.length ? rows[0].of : 32, q = Math.round(of / 4);
@@ -734,6 +753,12 @@ function render() {
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };
+  const ap = document.getElementById("all-players");
+  if (ap && !ap.dataset.bound) {
+    ap.dataset.bound = "1";
+    ap.checked = S.all;
+    ap.addEventListener("change", () => { S.all = ap.checked; try { localStorage.setItem("stix_all_players", S.all ? "1" : "0"); } catch { /* ignore */ } render(); });
+  }
   on("f-wk", "change", (e) => { S.wk = +e.target.value; S.game = ""; render(); });
   document.querySelectorAll("[data-gid]").forEach((b) => b.addEventListener("click", () => { S.game = b.dataset.gid; render(); }));
   on("f-team", "change", (e) => { S.team = e.target.value; render(); });
