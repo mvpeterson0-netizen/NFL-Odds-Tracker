@@ -126,3 +126,6 @@ button.sx-rm:hover { color: var(--under); background: transparent; }
 .sx a { display: block; padding: 6px 0; border-bottom: 1px solid var(--line); }
 td.sok { color: var(--ink); } td.sno { color: var(--muted); }
 .snear { font-size: 15px; margin: 14px 0 2px; }
+td.slines { white-space: nowrap; }
+.sline { padding: 1px 0; }
+.sline .chip { font-size: 11px; }

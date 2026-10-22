@@ -290,12 +290,26 @@
     if (!spec.groups.length) return h + `<p class="muted">No filters recognized. ${helpLink()}</p>${helpPanel()}</div>`;
     h += `<p class="muted small">${rows.length} player${rows.length === 1 ? "" : "s"} in week ${D.current_week} match every filter. Values shown are what each player was checked on. ${helpLink()}</p>`;
     const flat = spec.groups.flat();
+    // Which prop lines to show: the markets named in the filters (targets/snap/share have no props);
+    // if no filter names a market, show every market tracked for that player's position.
+    const named = [...new Set(flat.map((c) => STATS[c.stat].market).filter(Boolean))];
+    const marketsFor2 = (pos) => (named.length ? named : D.markets.filter((m) => m.pos.includes(pos)).map((m) => m.id));
+    const lineHtmlS = (cur, mid) => {
+      const m = cur && cur.m[mid];
+      const label = mkt[mid] ? mkt[mid].label : mid;
+      if (!m) return `<div class="sline"><span class="muted">${esc(label)}:</span> <span class="na">not tracked</span></div>`;
+      const sn = m.lstat === "pending" && m.snaps && m.snaps.length ? m.snaps[m.snaps.length - 1] : null;
+      if (m.lstat === "ok") return `<div class="sline" title="Graded pre-game line, ${esc(m.book)}, ${esc(fmtTime(m.cap))}"><span class="muted">${esc(label)}:</span> <b>${num(m.line)}</b> <span class="chip">Pre</span> <span class="muted">${odds(m.op)} / ${odds(m.up)} · ${esc(BOOK_ABBR[m.book] || m.book)}</span></div>`;
+      if (sn) return `<div class="sline" title="Latest snapshot (not graded), ${esc(sn.book)}, ${esc(fmtTime(sn.cap))}. The pre-game line replaces it ~3 h before kickoff."><span class="muted">${esc(label)}:</span> <b>${num(sn.line)}</b> <span class="chip snapchip">${esc(sn.label)}</span> <span class="muted">${odds(sn.op)} / ${odds(sn.up)} · ${esc(BOOK_ABBR[sn.book] || sn.book)}</span></div>`;
+      return `<div class="sline"><span class="muted">${esc(label)}:</span> <span class="na" title="${esc(m.lnote || "")}">no line yet</span></div>`;
+    };
     const table = (list) => {
-      let t = `<div class="panel scroll"><table class="stable"><thead><tr><th>Player</th><th>Game</th>${flat.map((c) => `<th title="${esc(describe(c))}">${esc(shortHead(c))}</th>`).join("")}</tr></thead><tbody>`;
+      let t = `<div class="panel scroll"><table class="stable"><thead><tr><th>Player</th><th>Game</th><th title="This week's line for the markets in your search: the graded pre-game line if captured, otherwise the latest Mon / Thu / Sun AM snapshot">Line</th>${flat.map((c) => `<th title="${esc(describe(c))}">${esc(shortHead(c))}</th>`).join("")}</tr></thead><tbody>`;
       for (const { s, cur, results } of list) {
         const cells = results.flat();
         t += `<tr><td><a class="pname" href="#/player/${s.pid}">${headshot(s.pid, 28)}${esc(s.name)}</a> <span class="muted small">${esc(s.team)} · ${s.slot}</span></td>
         <td>${cur ? `${cur.ha === "home" ? "vs." : "@"} ${esc(cur.opp)} <span class="muted small">${fmtTime(cur.ko)}</span>` : ""}</td>
+        <td class="slines">${marketsFor2(s.slot.slice(0, 2)).map((mid) => lineHtmlS(cur, mid)).join("")}</td>
         ${cells.map((x, i) => `<td class="${x.ok ? "sok" : "sno"}" data-label="${esc(shortHead(flat[i]))}">${x.ok ? "✓" : "✗"} ${esc(x.show)}</td>`).join("")}</tr>`;
       }
       return t + `</tbody></table></div>`;
