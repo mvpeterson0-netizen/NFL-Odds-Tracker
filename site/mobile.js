@@ -97,7 +97,8 @@
       if (!r || (S.game && r.gid !== S.game)) continue;
       items.push({ s, r });
     }
-    items.sort((a, b) => a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
+    // Finished games' players go to the bottom (same order as the game chip row).
+    items.sort((a, b) => (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
     let h = gameBar(wk) + `<div class="filters mfilters">
       <label>Week ${weekSelect("f-wk", wk)}</label>
       <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
