@@ -37,3 +37,4 @@
 - 2026-10-23 · PR: Finished games' players move to the bottom of the Board · Same order as the game chip row: upcoming games first, finished games last.
 - 2026-10-23 · PR: Share a player as an image · Small share icon on player pages; makes an image for the market being viewed (upcoming game, line, opp D rank, weather, season/last-3 avg, trend, chart, last 5 games) and opens the phone share sheet (or Save image / Copy link).
 - 2026-10-23 · PR: Share sends just the image and the link · No separate text message; footer moved up so Messages' rounded corners don't clip it.
+- 2026-10-23 · PR: Bet-slip link capture (experiment, step 1) · Pulls ask The Odds API for bookmaker links/ids (includeLinks, includeSids); latest links for upcoming games saved to data/prop_links.csv. Existing line files unchanged; a rejected request is retried without links. Walk-back point: branch restore/pre-betslip-links.
