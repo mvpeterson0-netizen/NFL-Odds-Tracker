@@ -36,3 +36,4 @@
 - 2026-10-23 · PR: Finished games move to the end of the Board game chips · The "All games" row lists upcoming games first; games that are over move to the far right.
 - 2026-10-23 · PR: Finished games' players move to the bottom of the Board · Same order as the game chip row: upcoming games first, finished games last.
 - 2026-10-23 · PR: Share a player as an image · Small share icon on player pages; makes an image for the market being viewed (upcoming game, line, opp D rank, weather, season/last-3 avg, trend, chart, last 5 games) and opens the phone share sheet (or Save image / Copy link).
+- 2026-10-23 · PR: Share sends just the image and the link · No separate text message; footer moved up so Messages' rounded corners don't clip it.

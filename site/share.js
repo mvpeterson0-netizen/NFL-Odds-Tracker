@@ -192,11 +192,11 @@
     if (!recent.length) text(ctx, "No finished games yet", PAD, y + 52, f(26), C.muted);
 
     // footer
-    ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(PAD, H - 78); ctx.lineTo(W - PAD, H - 78); ctx.stroke();
+    ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(PAD, H - 100); ctx.lineTo(W - PAD, H - 100); ctx.stroke();
     const note = (anyNC ? "— = no line collected (tracking began week 7) · " : "") +
       "Lines: DraftKings / FanDuel (The Odds API) · Stats: nflverse";
-    text(ctx, fit(ctx, note, f(18), W - 2 * PAD), PAD, H - 48, f(18), C.muted);
-    text(ctx, `Research tool, not betting advice · shared ${new Date().toLocaleDateString()}`, PAD, H - 20, f(20), C.muted);
+    text(ctx, fit(ctx, note, f(18), W - 2 * PAD), PAD, H - 70, f(18), C.muted);
+    text(ctx, `Research tool, not betting advice · shared ${new Date().toLocaleDateString()}`, PAD, H - 42, f(20), C.muted);
     return cv;
   }
 
@@ -208,8 +208,6 @@
     const d = cardData(pid, mid);
     const cv = draw(d);
     const link = `${location.origin}${location.pathname}#/player/${pid}`;
-    const ln = d.up ? currentLine(d.upM) : null;
-    const msg = `${d.p.name} · ${d.mk.label}` + (d.up ? ` · W${d.up.wk} ${d.up.ha === "home" ? "vs" : "@"} ${d.up.opp}` : "") + (ln ? ` · line ${n1(ln.line)}` : "") + `\n${link}`;
     const ov = document.createElement("div");
     ov.id = "share-ov"; ov.className = "share-ov";
     ov.innerHTML = `<div class="share-box" role="dialog" aria-label="Share player">
@@ -231,10 +229,11 @@
     });
     ov.querySelector("#sh-send").addEventListener("click", async () => {
       if (!FILE) { msgEl.textContent = "Still making the image… try again in a second."; return; }
-      const withFile = { files: [FILE], text: msg };
+      // Image + link only: the link on its own becomes the page preview in Messages (no separate text bubble).
+      const withFile = { files: [FILE], text: link };
       try {
         if (navigator.canShare && navigator.canShare({ files: [FILE] })) await navigator.share(withFile);
-        else if (navigator.share) { await navigator.share({ text: msg, url: link }); msgEl.textContent = "This browser can't share images; shared the link. Use Save image for the picture."; }
+        else if (navigator.share) { await navigator.share({ url: link }); msgEl.textContent = "This browser can't share images; shared the link. Use Save image for the picture."; }
         else msgEl.textContent = "Sharing isn't supported in this browser. Use Save image or Copy link.";
       } catch (e) { if (e && e.name !== "AbortError") msgEl.textContent = "Share didn't go through. Try Save image instead."; }
     });
