@@ -39,3 +39,4 @@
 - 2026-10-23 · PR: Share sends just the image and the link · No separate text message; footer moved up so Messages' rounded corners don't clip it.
 - 2026-10-23 · PR: Bet-slip link capture (experiment, step 1) · Pulls ask The Odds API for bookmaker links/ids (includeLinks, includeSids); latest links for upcoming games saved to data/prop_links.csv. Existing line files unchanged; a rejected request is retried without links. Walk-back point: branch restore/pre-betslip-links.
 - 2026-10-23 · PR: One-time link test pull · Pulls KC @ SEA once with bet-slip links (links only, no lines saved); result in data/link_test.json; never repeats.
+- 2026-10-23 · PR: Bet on DraftKings · Player pages show Over / Under buttons that open DraftKings with the bet on the slip (links from the latest pull; before kickoff only). A tap also saves the pick to My picks at DraftKings' line and odds. Data build adds "links" to data.json (skipped safely if anything fails).

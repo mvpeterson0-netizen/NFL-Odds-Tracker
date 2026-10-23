@@ -14,7 +14,7 @@ from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso
 from .defense import DefenseRanks, as_fields
 from .weather import load as load_weather
 from .nflverse import Data, load_sources
-from .odds import CAPTURES_PATH, PULL_LOG_PATH, SNAPSHOTS, WINDOW_CLOSE, WINDOW_OPEN, ptype
+from .odds import CAPTURES_PATH, LINKS_PATH, PULL_LOG_PATH, SNAPSHOTS, WINDOW_CLOSE, WINDOW_OPEN, ptype
 from .slots import update_slots
 
 MARKETS = [
@@ -95,6 +95,45 @@ def choose_main(caps):
         else:
             alts.append(best)
     return main, alts
+
+
+def bet_links(name_index, games_by_id, now):
+    """Bet-slip links for games that haven't kicked off: {player: {market id: {book: {o, u, point, cap, gid}}}}.
+    One point per player/market/book (the one with both sides and prices closest to even money).
+    Links come from the latest pull of each game (data/prop_links.csv); a missing link means none was returned."""
+    okey_to_mid = {m[1]: m[0] for m in MARKETS}
+    grouped = defaultdict(lambda: defaultdict(dict))  # (pid, mid, book) -> point -> side -> row
+    for r in read_csv(LINKS_PATH):
+        g = games_by_id.get(r.get("game_id"))
+        ko = parse_iso(r.get("kickoff_utc", ""))
+        mid = okey_to_mid.get(r.get("market"))
+        if not g or not ko or ko <= now or not mid or not r.get("outcome_link") or r.get("side") not in ("over", "under"):
+            continue
+        pid = r.get("gsis_id")
+        if not pid:
+            k = norm_name(r.get("player_book_name", ""))
+            pid = name_index.get(g["home_team"], {}).get(k) or name_index.get(g["away_team"], {}).get(k) or ""
+        if not pid:
+            continue
+        grouped[(pid, mid, r["book"])][r.get("point", "")][r["side"]] = r
+    out = defaultdict(lambda: defaultdict(dict))
+    for (pid, mid, book), points in grouped.items():
+        both = {pt: v for pt, v in points.items() if "over" in v and "under" in v}
+        pool = both or points
+
+        def balance(item):
+            v = item[1]
+            nv = novig_over(v.get("over", {}).get("price", ""), v.get("under", {}).get("price", ""))
+            return abs(nv - 0.5) if nv is not None else 1.0
+
+        pt, sides = sorted(pool.items(), key=balance)[0]
+        any_row = sides.get("over") or sides.get("under")
+        entry = {"point": to_float(pt), "cap": any_row["captured_utc"], "gid": any_row["game_id"]}
+        for side, key in (("over", "o"), ("under", "u")):
+            if side in sides:
+                entry[key] = {"url": sides[side]["outcome_link"], "price": to_float(sides[side].get("price"))}
+        out[pid][mid][book] = entry
+    return out
 
 
 def stat_value(row, col):
@@ -459,6 +498,11 @@ def build(log):
                   "name": s["player"], "basis": s["basis"], "change": s.get("change_note", ""),
                   "snapshot": s["depth_snapshot"], "frozen": s.get("frozen") == "1"} for s in slots]
 
+    try:  # bet-slip links are optional: a problem here must never stop the build
+        links_out = bet_links(name_index, games_by_id, now)
+    except Exception as ex:
+        links_out = {}
+        log.append(f"build: bet-slip links skipped ({type(ex).__name__}: {str(ex)[:80]})")
     out = {
         "generated_utc": iso(now),
         "repo": os.environ.get("GITHUB_REPOSITORY", ""),
@@ -494,6 +538,7 @@ def build(log):
                        "tracked": {g: [[pid, v[0], v[1]] for pid, v in t.items()] for g, t in tracked.items()}},
         "unmatched": unmatched[-100:],
         "runs": runs[-150:],
+        "links": links_out,
     }
     write_json(OUT_PATH, out, compact=True)
     log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
