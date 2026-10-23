@@ -139,7 +139,7 @@
     const m = cur ? cur.m[mid] : null;
     const f = cur ? form(pid, mid, p.pos, cur.wk) : { n: 0, avg: null, trend: null };
     let h = `<div class="mplayer">
-      <div class="mp-top"><a href="#/board" class="mback" id="m-back">‹ Board</a><button class="sharebtn" data-share="${esc(pid)}" aria-label="Share"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg> Share</button></div>
+      <div class="mp-top"><a href="#/board" class="mback" id="m-back">‹ Board</a><button class="sharebtn" data-share="${esc(pid)}" title="Share as image" aria-label="Share as image"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button></div>
       <div class="mp-h">${headshot(pid, 64)}<div><h2>${esc(p.name)}</h2><div class="muted">${esc(p.team)} · ${esc(cur && cur.slot ? cur.slot : p.pos)}</div>
         ${cur ? `<div class="small">W${cur.wk} ${cur.ha === "home" ? "vs" : "@"} ${esc(cur.opp)} · ${fmtTime(cur.ko)}</div><div class="small">${wxShort(cur.gid)}</div>` : ""}</div></div>
       <div class="mtabs">${ms.map((x) => `<button data-mid="${x.id}" class="${x.id === mid ? "on" : ""}">${esc(x.label)}</button>`).join("")}</div>
