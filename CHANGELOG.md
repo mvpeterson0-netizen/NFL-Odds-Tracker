@@ -41,3 +41,4 @@
 - 2026-10-23 · PR: One-time link test pull · Pulls KC @ SEA once with bet-slip links (links only, no lines saved); result in data/link_test.json; never repeats.
 - 2026-10-23 · PR: Bet on DraftKings · Player pages show Over / Under buttons that open DraftKings with the bet on the slip (links from the latest pull; before kickoff only). A tap also saves the pick to My picks at DraftKings' line and odds. Data build adds "links" to data.json (skipped safely if anything fails).
 - 2026-10-23 · PR: Targets only for receiving markets · Player page tables show targets only when Receptions or Rec yds is selected.
+- 2026-10-23 · PR: Player updates pop-up · Notes icon next to player names (Board, player page); tap for injury report / practice status, IR or inactive, slot changes and big snap/target-share swings. Red when first seen in the last 48 h (items present at launch stay gray). Build writes data/updates_seen.json.

@@ -9,8 +9,8 @@ import os
 from collections import defaultdict
 from statistics import mean, median
 
-from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso, read_csv, to_float, utcnow,
-                     write_json)
+from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso, read_csv, read_json, to_float,
+                     utcnow, write_json)
 from .defense import DefenseRanks, as_fields
 from .weather import load as load_weather
 from .nflverse import Data, load_sources
@@ -133,6 +133,81 @@ def bet_links(name_index, games_by_id, now):
             if side in sides:
                 entry[key] = {"url": sides[side]["outcome_link"], "price": to_float(sides[side].get("price"))}
         out[pid][mid][book] = entry
+    return out
+
+
+UPDATES_SEEN_PATH = DATA / "updates_seen.json"
+ROLE_SNAP_PTS = 25    # role change: last game's snap share differs from his prior average by this many points
+ROLE_TSHARE_PTS = 12   # ... or target share (WR/TE/RB) by this many points; needs 3+ prior games
+
+
+def player_updates(d, slots, players, rows_out, cur, now, log):
+    """Per-player updates for the current week (and the last game): official injury report and practice status,
+    roster reserve/inactive status, slot / depth chart changes, and role changes seen in snap or target share.
+    Each item gets the time Stix first saw it (data/updates_seen.json). Items present when tracking started have
+    no time, so they never light the "new" icon."""
+    if cur is None:
+        return {}
+    seen = read_json(UPDATES_SEEN_PATH, None)
+    first_run = seen is None
+    seen = seen or {}
+    items = defaultdict(list)
+
+    def add(pid, key, kind, text, src):
+        k = f"{pid}|{key}"
+        if k not in seen:
+            seen[k] = "" if first_run else iso(now)
+        items[pid].append({"k": key, "kind": kind, "text": text, "src": src, "t": seen[k]})
+
+    for pid, p in players.items():
+        rows = rows_out.get(pid) or []
+        cur_row = next((r for r in rows if r["wk"] == cur), None)
+        team = cur_row["team"] if cur_row else p.get("team")
+        inj = d.injuries.get((cur, team, pid))
+        if inj:
+            if inj.get("practice_status"):
+                pi = inj.get("practice_primary_injury") or ""
+                add(pid, f"w{cur}|practice|{inj['practice_status']}|{pi}", "Practice",
+                    f"Week {cur}: {inj['practice_status']}" + (f" ({pi})" if pi else ""), "Official NFL injury report via nflverse")
+            if inj.get("report_status"):
+                ri = inj.get("report_primary_injury") or ""
+                add(pid, f"w{cur}|status|{inj['report_status']}|{ri}", "Injury",
+                    f"Week {cur} game status: {inj['report_status']}" + (f" ({ri})" if ri else ""), "Official NFL injury report via nflverse")
+        rr = d.roster.get((cur, pid))
+        if rr and rr.get("status") in ("RES", "INA"):
+            label = {"RES": "On a reserve list (IR/PUP/etc.)", "INA": "Inactive"}[rr["status"]]
+            add(pid, f"w{cur}|roster|{rr['status']}", "Roster", f"Week {cur}: {label}", "nflverse weekly roster")
+        sl = next((s_ for s_ in slots if s_["gsis_id"] == pid and int(s_["week"]) == cur), None)
+        if sl and sl.get("change_note"):
+            add(pid, f"w{cur}|slot|{sl['slot']}", "Slot", f"Week {cur} slot {sl['slot']}: {sl['change_note']}",
+                "Stix slots (ESPN depth chart via nflverse + snap share + injury report)")
+        played = [r for r in rows if r.get("final") and r.get("played") is True]
+        finals = [r for r in rows if r.get("final")]
+        # role changes only from his team's most recent game (not an older game before an absence)
+        if len(played) >= 4 and finals and played[-1] is finals[-1]:
+            last, prior = played[-1], played[:-1]
+            sn = [r["snap"] for r in prior if r.get("snap") is not None]
+            if last.get("snap") is not None and len(sn) >= 3:
+                avg = sum(sn) / len(sn)
+                if abs(last["snap"] - avg) >= ROLE_SNAP_PTS:
+                    add(pid, f"w{last['wk']}|snap", "Role",
+                        f"Week {last['wk']} snap share {round(last['snap'])}% (prior average {round(avg)}%)",
+                        "nflverse snap counts")
+            ts = [r["tshare"] for r in prior if r.get("tshare") is not None]
+            if p.get("pos") in ("WR", "TE", "RB") and last.get("tshare") is not None and len(ts) >= 3:
+                avg = sum(ts) / len(ts)
+                if abs(last["tshare"] - avg) * 100 >= ROLE_TSHARE_PTS:
+                    add(pid, f"w{last['wk']}|tshare", "Role",
+                        f"Week {last['wk']} target share {round(last['tshare'] * 100)}% (prior average {round(avg * 100)}%)",
+                        "nflverse player stats")
+    # keep the seen-times only for items still current, so the file stays small
+    live = {f"{pid}|{it['k']}" for pid, its in items.items() for it in its}
+    write_json(UPDATES_SEEN_PATH, {k: v for k, v in seen.items() if k in live})
+    out = {}
+    for pid, its in items.items():
+        its.sort(key=lambda x: x["t"] or "", reverse=True)
+        out[pid] = [{k: v for k, v in it.items() if k != "k"} for it in its]
+    log.append(f"build: player updates for {len(out)} players" + (" (first run: existing items not marked new)" if first_run else ""))
     return out
 
 
@@ -498,6 +573,11 @@ def build(log):
                   "name": s["player"], "basis": s["basis"], "change": s.get("change_note", ""),
                   "snapshot": s["depth_snapshot"], "frozen": s.get("frozen") == "1"} for s in slots]
 
+    try:  # player updates are optional: a problem here must never stop the build
+        updates_out = player_updates(d, slots, players, rows_out, cur, now, log)
+    except Exception as ex:
+        updates_out = {}
+        log.append(f"build: player updates skipped ({type(ex).__name__}: {str(ex)[:80]})")
     try:  # bet-slip links are optional: a problem here must never stop the build
         links_out = bet_links(name_index, games_by_id, now)
     except Exception as ex:
@@ -539,6 +619,7 @@ def build(log):
         "unmatched": unmatched[-100:],
         "runs": runs[-150:],
         "links": links_out,
+        "updates": updates_out,
     }
     write_json(OUT_PATH, out, compact=True)
     log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
