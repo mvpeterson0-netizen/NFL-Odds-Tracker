@@ -162,7 +162,7 @@
       h += `</div></div>`;
     }
     // Game log
-    const showT = TGT_POS.includes(p.pos);
+    const showT = TGT_POS.includes(p.pos) && TGT_MARKETS.includes(mid); // targets only for Receptions / Rec yds
     h += `<div class="panel"><h3>Game log</h3><div class="mlog"><div class="mlog-r mhead ${showT ? "t" : ""}"><span>Wk</span><span>Opp</span><span>Line</span><span>Act</span>${showT ? "<span>Tgt</span>" : ""}<span>Snap</span></div>`;
     for (const r of [...rows].reverse()) {
       const mm = r.m[mid] || {};
