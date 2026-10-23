@@ -35,3 +35,4 @@
 - 2026-10-23 · PR: Results on the Leads tab · Over / under / push / void and Over % for every graded pre-game line, by market and by position, with Week / Position / Market filters and a per-game list (tap a game to see each prop). Respects the All players switch.
 - 2026-10-23 · PR: Finished games move to the end of the Board game chips · The "All games" row lists upcoming games first; games that are over move to the far right.
 - 2026-10-23 · PR: Finished games' players move to the bottom of the Board · Same order as the game chip row: upcoming games first, finished games last.
+- 2026-10-23 · PR: Share a player as an image · Small share icon on player pages; makes an image for the market being viewed (upcoming game, line, opp D rank, weather, season/last-3 avg, trend, chart, last 5 games) and opens the phone share sheet (or Save image / Copy link).

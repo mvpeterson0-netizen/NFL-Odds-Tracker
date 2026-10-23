@@ -102,3 +102,6 @@ main { padding: 10px 12px 32px; }
 /* "All players" switch sits on the logo row, left of the status text */
 .allp { order: 1; font-size: 12px; margin-left: auto; }
 .status { max-width: 42%; }
+
+/* Share button sits at the right of the back-link row */
+.mp-top { display: flex; align-items: center; }

@@ -206,3 +206,15 @@ details.rgame { border-bottom: 1px solid var(--line); padding: 8px 0; }
 details.rgame:last-child { border-bottom: 0; }
 details.rgame summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; list-style: revert; }
 details.rgame table { margin-top: 8px; }
+
+/* Share a player page as an image */
+.sharebtn { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; min-height: 0; padding: 0; align-self: center; border-radius: 8px; color: var(--muted); }
+.sharebtn:hover { color: var(--accent); }
+.mp-top .sharebtn { margin-left: auto; }
+.share-ov { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.share-box { background: var(--panel); border-radius: 14px; padding: 14px; max-width: 520px; width: 100%; max-height: 100%; overflow: auto; }
+.share-box img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; display: block; background: #fff; min-height: 120px; }
+.share-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.share-btns > * { flex: 1; min-height: 42px; white-space: nowrap; font-size: 15px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
+.share-btns a { border: 1px solid var(--line); border-radius: 8px; color: var(--ink); }
+.sh-main { border: 2px solid var(--accent); color: var(--accent); font-weight: 600; }

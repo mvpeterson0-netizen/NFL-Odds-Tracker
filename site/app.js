@@ -482,7 +482,7 @@ function viewPlayer(pid) {
   const mid = S.market[pid] && ms.some((m) => m.id === S.market[pid]) ? S.market[pid] : ms[0].id;
   const curSlot = [...D.slots].filter((s) => s.pid === pid).sort((a, b) => b.wk - a.wk)[0];
   let h = `<p class="small"><a href="#/board">← Board</a></p>
-    <div class="ph">${headshot(pid, 72)}<h2>${esc(p.name)}</h2><span class="chip">${esc(p.team)} · ${esc(p.pos)}</span>
+    <div class="ph">${headshot(pid, 72)}<h2>${esc(p.name)}</h2><span class="chip">${esc(p.team)} · ${esc(p.pos)}</span><button class="sharebtn" data-share="${esc(pid)}" title="Share as image" aria-label="Share as image"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button>
     ${curSlot ? `<span class="muted">Week ${curSlot.wk}: <b>${curSlot.slot}</b> — ${esc(curSlot.basis)}</span>` : ""}</div>
     ${curSlot && curSlot.change ? `<p class="callout">Slot change: ${esc(curSlot.change)}</p>` : ""}
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
