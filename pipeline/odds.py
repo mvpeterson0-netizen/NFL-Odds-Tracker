@@ -30,7 +30,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from .common import (DATA, TEAM_NAME_TO_ABBR, append_csv, http_get, iso, norm_name, parse_iso, read_csv,
-                     redact, utcnow, COLLECTION_START_UTC)
+                     redact, utcnow, write_csv, COLLECTION_START_UTC)
 
 API = "https://api.the-odds-api.com/v4"
 SPORT = "americanfootball_nfl"
@@ -63,6 +63,14 @@ SWEEP_MIN_SNAP = 25.0
 
 CAPTURES_PATH = DATA / "prop_captures.csv"
 PULL_LOG_PATH = DATA / "pull_log.csv"
+# Bet-slip links (experiment, 2026-10-23): ask The Odds API for bookmaker links / source ids with each pull
+# (includeLinks / includeSids) and keep the latest ones for upcoming games in their own file. This never changes
+# what goes into prop_captures.csv or pull_log.csv. Set LINKS_ENABLED = False to stop asking for links.
+LINKS_ENABLED = True
+LINKS_PATH = DATA / "prop_links.csv"
+LINK_FIELDS = ["game_id", "event_id", "pull_type", "captured_utc", "kickoff_utc", "book", "market",
+               "player_book_name", "gsis_id", "side", "point", "price", "outcome_link", "outcome_sid",
+               "market_link", "market_sid", "book_link", "book_sid"]
 CAPTURE_FIELDS = ["game_id", "event_id", "pull_type", "captured_utc", "kickoff_utc", "minutes_before_kickoff",
                   "in_window", "book", "market", "player_book_name", "gsis_id", "line", "over_price",
                   "under_price", "book_last_update", "source"]
@@ -300,6 +308,36 @@ def _main_line_rows(event, game_id, pull_type, captured, ko, mins, in_window, na
     return rows
 
 
+def _link_rows(event, game_id, pull_type, captured, ko, name_index):
+    """One row per (book, market, player, side, point) outcome that came back with a link or source id."""
+    rows = []
+    for bk in event.get("bookmakers", []):
+        for m in bk.get("markets", []):
+            for o in m.get("outcomes", []):
+                if not any(x.get(k) for x in (o, m, bk) for k in ("link", "sid")):
+                    continue
+                player = o.get("description", "")
+                rows.append({
+                    "game_id": game_id, "event_id": event.get("id", ""), "pull_type": pull_type,
+                    "captured_utc": iso(captured), "kickoff_utc": iso(ko), "book": bk.get("key", ""),
+                    "market": m.get("key", ""), "player_book_name": player,
+                    "gsis_id": name_index.get(norm_name(player), "") if player else "",
+                    "side": (o.get("name") or "").lower(), "point": o.get("point", ""), "price": o.get("price", ""),
+                    "outcome_link": o.get("link") or "", "outcome_sid": o.get("sid") or "",
+                    "market_link": m.get("link") or "", "market_sid": m.get("sid") or "",
+                    "book_link": bk.get("link") or "", "book_sid": bk.get("sid") or "",
+                })
+    return rows
+
+
+def save_links(game_id, rows, now):
+    """Keep only the latest pull's links for each game, and only for games that haven't kicked off
+    (links are only useful before kickoff). The file is rewritten, never appended to."""
+    keep = [r for r in read_csv(LINKS_PATH)
+            if r["game_id"] != game_id and (parse_iso(r.get("kickoff_utc", "")) or now) > now]
+    write_csv(LINKS_PATH, keep + rows, LINK_FIELDS)
+
+
 def run(keys, games, name_index_for_game, log):
     """Execute due pulls. Returns True if any data/log rows were written."""
     if isinstance(keys, str):
@@ -421,7 +459,15 @@ def run(keys, games, name_index_for_game, log):
             tried.append(ki)
             params = {"apiKey": keys[ki - 1], "bookmakers": ",".join(BOOKS), "markets": ",".join(markets),
                       "oddsFormat": "american", "dateFormat": "iso"}
+            if LINKS_ENABLED:
+                params.update({"includeLinks": "true", "includeSids": "true"})
             body, h, status = http_get(f"{API}/sports/{SPORT}/events/{e['id']}/odds", params)
+            if LINKS_ENABLED and status not in (200, 401, 429):
+                # The link options must never cost us a line: if the request fails with them, ask again without.
+                log.append(f"odds: request with link options failed (HTTP {status}); retrying without links")
+                for k in ("includeLinks", "includeSids"):
+                    params.pop(k, None)
+                body, h, status = http_get(f"{API}/sports/{SPORT}/events/{e['id']}/odds", params)
             _last, rem = _headers_credits(h)
             if rem.isdigit():
                 left[ki] = int(rem)
@@ -471,6 +517,18 @@ def run(keys, games, name_index_for_game, log):
             wrote = True
             continue
         append_csv(CAPTURES_PATH, caps, CAPTURE_FIELDS)
+        if LINKS_ENABLED:
+            try:  # links are an experiment: any problem here is logged and ignored
+                lrows = _link_rows(event, g["game_id"], pt, captured, ko, name_index_for_game(g))
+                save_links(g["game_id"], lrows, captured)
+                by_book = defaultdict(lambda: [0, 0])
+                for r in lrows:
+                    by_book[r["book"]][0] += 1 if r["outcome_link"] else 0
+                    by_book[r["book"]][1] += 1 if r["outcome_sid"] else 0
+                log.append(f"odds: {g['game_id']} links: " + (", ".join(
+                    f"{b} {v[0]} outcome links / {v[1]} outcome ids" for b, v in sorted(by_book.items())) or "none returned"))
+            except Exception as ex:
+                log.append(f"odds: link save skipped ({type(ex).__name__}: {str(ex)[:80]})")
         books = sorted({c["book"] for c in caps})
         unmatched = sorted({c["player_book_name"] for c in caps if not c["gsis_id"]})
         note = f"books: {','.join(books)}; {keynote}"
