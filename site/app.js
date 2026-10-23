@@ -243,7 +243,8 @@ function gamesFor(wk) {
     .sort((a, b) => a[1].ko.localeCompare(b[1].ko) || a[0].localeCompare(b[0]));
 }
 function gameBar(wk) {
-  const gs = gamesFor(wk);
+  // Finished games move to the far right of the chip row (still in kickoff order among themselves).
+  const gs = gamesFor(wk).sort((a, b) => (a[1].final ? 1 : 0) - (b[1].final ? 1 : 0));
   if (!gs.length) return "";
   const chip = (gid, label, sub, extra = "") =>
     `<button class="gchip ${S.game === gid ? "on" : ""}" data-gid="${esc(gid)}" ${extra}>${label}${sub ? `<span class="muted small">${sub}</span>` : ""}</button>`;
