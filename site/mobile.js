@@ -121,7 +121,7 @@
         rows += `<div class="mrow"><span class="mlab">${esc(mk.label)}</span><span>${lineHtml(m)}</span><span>${f.avg == null ? `<span class="na">—</span>` : num(f.avg)}</span><span>${oppHtml(m)}</span><span>${trendHtml(f)}</span></div>`;
       }
       h += `<a class="mcard" href="#/player/${s.pid}">
-        <div class="mcard-h">${headshot(s.pid, 40)}<div><div class="mname">${esc(s.name)}</div><div class="muted small">${esc(s.team)} · <span class="chip ${s.change ? "chg" : ""} ${s.extra ? "xtra" : ""}">${s.slot}${s.change ? " ↺" : ""}</span></div>${tgtLine(targets(s.pid, pos, wk))}</div><span class="mchev">›</span></div>
+        <div class="mcard-h">${headshot(s.pid, 40)}<div><div class="mname">${esc(s.name)} ${window.STIX_NEWS ? window.STIX_NEWS.icon(s.pid) : ""}</div><div class="muted small">${esc(s.team)} · <span class="chip ${s.change ? "chg" : ""} ${s.extra ? "xtra" : ""}">${s.slot}${s.change ? " ↺" : ""}</span></div>${tgtLine(targets(s.pid, pos, wk))}</div><span class="mchev">›</span></div>
         <div class="mrow mhead"><span></span><span>LINE</span><span>AVG</span><span>OPP</span><span>TREND</span></div>${rows}</a>`;
     }
     return h + `</section>`;
@@ -140,7 +140,7 @@
     const f = cur ? form(pid, mid, p.pos, cur.wk) : { n: 0, avg: null, trend: null };
     let h = `<div class="mplayer">
       <div class="mp-top"><a href="#/board" class="mback" id="m-back">‹ Board</a><button class="sharebtn" data-share="${esc(pid)}" title="Share as image" aria-label="Share as image"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button></div>
-      <div class="mp-h">${headshot(pid, 64)}<div><h2>${esc(p.name)}</h2><div class="muted">${esc(p.team)} · ${esc(cur && cur.slot ? cur.slot : p.pos)}</div>
+      <div class="mp-h">${headshot(pid, 64)}<div><h2>${esc(p.name)} ${window.STIX_NEWS ? window.STIX_NEWS.icon(pid) : ""}</h2><div class="muted">${esc(p.team)} · ${esc(cur && cur.slot ? cur.slot : p.pos)}</div>
         ${cur ? `<div class="small">W${cur.wk} ${cur.ha === "home" ? "vs" : "@"} ${esc(cur.opp)} · ${fmtTime(cur.ko)}</div><div class="small">${wxShort(cur.gid)}</div>` : ""}</div></div>
       <div class="mtabs">${ms.map((x) => `<button data-mid="${x.id}" class="${x.id === mid ? "on" : ""}">${esc(x.label)}</button>`).join("")}</div>
       <div class="mtiles">

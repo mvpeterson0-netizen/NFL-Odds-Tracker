@@ -225,3 +225,16 @@ details.rgame table { margin-top: 8px; }
 .betbtn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); font-weight: 600; white-space: nowrap; }
 .betbtn:hover { text-decoration: none; background: var(--hover); }
 .betnote { flex-basis: 100%; }
+
+/* Player updates icon + pop-up (news.js) */
+.newsbtn { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 6px; color: var(--muted); vertical-align: middle; cursor: pointer; }
+.newsbtn.hot { color: #fff; background: var(--under); }
+.newsbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.nw-box { max-width: 460px; }
+.nw-h { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.nw-h b { font-size: 18px; }
+.nw-x { margin-left: auto; min-width: 36px; min-height: 36px; }
+.nw-item { border-top: 1px solid var(--line); padding: 10px 0; }
+.nw-text { margin: 4px 0 2px; }
+.nw-new { color: var(--under); font-weight: 700; font-size: 12px; }
+.nw-open { display: inline-block; margin-top: 6px; }
