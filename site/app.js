@@ -459,14 +459,17 @@ function bookCompact(m) {
   const tip = (m.snaps || []).map((x) => `${x.label}: ${num(x.line)} (${x.book}, ${fmtTime(x.cap)})`).join("; ") + ". Snapshot, not graded.";
   return `<span title="${esc(tip)}">${esc(BOOK_ABBR[sn.book] || sn.book)} · ${esc(sn.label)}</span>`;
 }
-function snapUse(r, pos) {
+// Targets show only for the receiving markets (Receptions, Rec yds).
+const TGT_MARKETS = ["rec", "rec_yds"];
+function snapUse(r, pos, mid) {
   const parts = [];
   const sc = snapCell(r);
+  const tg = TGT_MARKETS.includes(mid) && r.tgt != null;
   if (sc) parts.push(sc);
   if (pos === "RB") {
     if (r.car != null) parts.push(`${num(r.car, 0)} car`);
-    if (r.tgt != null) parts.push(`${num(r.tgt, 0)} tgt`);
-  } else if (pos !== "QB" && r.tgt != null) parts.push(`${num(r.tgt, 0)} tgt`);
+    if (tg) parts.push(`${num(r.tgt, 0)} tgt`);
+  } else if (pos !== "QB" && tg) parts.push(`${num(r.tgt, 0)} tgt`);
   return parts.join(" · ");
 }
 function actualCompact(r, m) {
@@ -504,7 +507,7 @@ function viewPlayer(pid) {
       <td class="num">${lineCompact(m)}</td><td class="num">${oddsCompact(m)}</td>
       <td class="small">${bookCompact(m)}</td>
       <td class="num">${actualCompact(r, m)}</td><td>${resultCell(m)}</td>
-      <td class="num small">${snapUse(r, p.pos)}</td>
+      <td class="num small">${snapUse(r, p.pos, mid)}</td>
       <td>${nt ? `<button class="info" data-note title="Show notes" aria-label="Show notes">ⓘ</button>` : ""}</td></tr>`;
     if (nt) h += `<tr class="noterow" hidden><td></td><td colspan="11" class="note">${nt}</td></tr>`;
   }
