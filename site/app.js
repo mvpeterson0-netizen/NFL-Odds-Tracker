@@ -515,7 +515,89 @@ function pickBoxSafe(pid, mid) {
   try { return window.STIX_PICKS ? window.STIX_PICKS.box(pid, mid) : ""; } catch (e) { console.error("picks box failed", e); return ""; }
 }
 
+// ---------- Results (on the Leads tab): how graded pre-game lines finished, over vs under ----------
+// Uses the app's own grading: the pre-game line (~3 h before kickoff) vs the actual stat. Snapshots are never graded.
+// Extra players (not in our slots) are counted only when the "All players" switch is on.
+const RES_POS = ["QB", "RB", "WR", "TE"];
+function gradedProps() {
+  const out = [];
+  for (const p of D.players) {
+    if (p.extra && !S.all) continue;
+    for (const r of D.rows[p.id] || []) {
+      for (const [mid, m] of Object.entries(r.m)) {
+        if (!m || !["over", "under", "push", "void"].includes(m.res)) continue;
+        out.push({ p, r, mid, m, pos: p.pos, wk: r.wk });
+      }
+    }
+  }
+  return out;
+}
+function resCount(list) {
+  const c = { over: 0, under: 0, push: 0, void: 0 };
+  for (const x of list) c[x.m.res]++;
+  const n = c.over + c.under;
+  return Object.assign(c, { n: list.length, pct: n ? Math.round((100 * c.over) / n) : null });
+}
+function resTable(title, keyLabel, groups) {
+  let h = `<div class="panel scroll"><h3>${title}</h3><table class="rtable"><thead><tr><th>${keyLabel}</th><th class="num">Over</th><th class="num">Under</th>
+    <th class="num">Push</th><th class="num">Void</th><th class="num" title="Overs ÷ (overs + unders); pushes and voids left out">Over %</th></tr></thead><tbody>`;
+  for (const [label, list] of groups) {
+    const c = resCount(list);
+    h += `<tr><td>${label}</td><td class="num">${c.over}</td><td class="num">${c.under}</td><td class="num">${c.push}</td><td class="num">${c.void}</td>
+      <td class="num">${c.pct == null ? `<span class="muted">—</span>` : `<b>${c.pct}%</b>`}</td></tr>`;
+  }
+  return h + `</tbody></table></div>`;
+}
+function viewResults() {
+  const all = gradedProps();
+  const weeks = [...new Set(all.map((x) => x.wk))].sort((a, b) => a - b);
+  if (S.resWk && !weeks.includes(+S.resWk)) S.resWk = "";
+  const f = all.filter((x) => (!S.resWk || x.wk === +S.resWk) && (!S.resMk || x.mid === S.resMk) && (!S.resPos || x.pos === S.resPos));
+  const mkList = D.markets.filter((m) => !S.resPos || m.pos.includes(S.resPos));
+  if (S.resMk && !mkList.some((m) => m.id === S.resMk)) S.resMk = "";
+  const sel = (id, val, opts) => `<select id="${id}">${opts.map(([v, l]) => `<option value="${esc(v)}" ${String(v) === String(val) ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
+  let h = `<h2 class="gsec">Results</h2>
+    <p class="callout">Every graded pre-game line (captured ~3 h before kickoff), over or under the actual stat. Push = actual equals the line; void = had a line but didn't play.
+    Over % leaves out pushes and voids.${S.all ? " Includes extra players (All players is on)." : ""}</p>
+    <div class="filters">
+      <label>Week ${sel("r-wk", S.resWk || "", [["", "All weeks"], ...weeks.map((w) => [w, `Week ${w}`])])}</label>
+      <label>Position ${sel("r-pos", S.resPos || "", [["", "All"], ...RES_POS.map((p) => [p, p])])}</label>
+      <label>Market ${sel("r-mk", S.resMk || "", [["", "All markets"], ...mkList.map((m) => [m.id, m.label])])}</label>
+      ${S.resWk || S.resPos || S.resMk ? `<button id="r-clear" type="button">Clear</button>` : ""}
+    </div>`;
+  if (!all.length) return h + `<p class="muted">No graded lines yet. Results appear once a game with a captured pre-game line has final stats.</p>`;
+  const tot = resCount(f);
+  h += `<div class="rtot"><span><b>${tot.n}</b> props</span> · <span class="res over">${tot.over} over</span> · <span class="res under">${tot.under} under</span>
+    ${tot.push ? ` · <span>${tot.push} push</span>` : ""}${tot.void ? ` · <span>${tot.void} void</span>` : ""} · Over % <b>${tot.pct == null ? "—" : tot.pct + "%"}</b></div>`;
+  if (!f.length) return h + `<p class="muted">No graded lines match these filters.</p>`;
+  h += `<div class="grid2">`;
+  h += resTable("By market", "Market", mkList.filter((m) => !S.resMk || m.id === S.resMk).map((m) => [esc(m.label), f.filter((x) => x.mid === m.id)]));
+  h += resTable("By position", "Position", RES_POS.filter((p) => !S.resPos || p === S.resPos).map((p) => [p, f.filter((x) => x.pos === p)]));
+  h += `</div>`;
+  // Every graded prop, grouped by game (newest first); tap a game to open it.
+  const byGame = {};
+  for (const x of f) (byGame[x.r.gid] ||= []).push(x);
+  const games = Object.keys(byGame).sort((a, b) => (D.games[b] ? D.games[b].ko : "").localeCompare(D.games[a] ? D.games[a].ko : "") || a.localeCompare(b));
+  h += `<div class="panel"><h3>By game (${games.length})</h3><div class="body">`;
+  for (const gid of games) {
+    const list = byGame[gid].sort((a, b) => a.p.team.localeCompare(b.p.team) || slotRank(a.r.slot || a.pos) - slotRank(b.r.slot || b.pos) || a.mid.localeCompare(b.mid));
+    const c = resCount(list), g = D.games[gid];
+    h += `<details class="rgame"><summary><b>${esc(gameLabel(gid))}</b> <span class="muted small">W${g ? g.wk : ""} · ${g ? fmtTime(g.ko) : ""}</span>
+      <span class="small">${c.n} props · <span class="res over">${c.over} over</span> · <span class="res under">${c.under} under</span>${c.push ? ` · ${c.push} push` : ""}${c.void ? ` · ${c.void} void` : ""}</span></summary>
+      <table class="wrap"><thead><tr><th>Player</th><th>Market</th><th class="num">Line</th><th class="num">Actual</th><th>Result</th></tr></thead><tbody>`;
+    for (const x of list) {
+      h += `<tr><td><a href="#/player/${x.p.id}">${esc(x.p.name)}</a> <span class="muted small">${esc(x.p.team)} · ${esc(x.r.slot || x.pos)}</span></td>
+        <td>${esc(mkt[x.mid].label)}</td><td class="num">${num(x.m.line)}</td><td class="num">${x.m.act == null ? "" : num(x.m.act)}</td><td>${resultCell(x.m)}</td></tr>`;
+    }
+    h += `</tbody></table></details>`;
+  }
+  return h + `</div></div>`;
+}
+
 function viewLeads() {
+  return viewResults() + `<h2 class="gsec">Leads</h2>` + viewLeadsTable();
+}
+function viewLeadsTable() {
   let h = `<p class="callout">Upcoming props where the stored pre-game line differs most from the player's last 5 games (prior games only, min 3 games played).
     Sorted by percent gap. These are leads for further research, not predictions or guaranteed value. Lines appear here only after they are captured, about 3 hours before each kickoff.</p>`;
   const leadsShown = D.leads.filter((l) => S.all || !isExtra(l.pid));
@@ -769,6 +851,10 @@ function bind(tab, arg) {
   on("an-toggle", "click", () => { S.showAn = !S.showAn; render(); });
   document.querySelectorAll("[data-dm]").forEach((b) => b.addEventListener("click", () => { S.defMk = b.dataset.dm; render(); }));
   on("d-sort", "click", () => { S.defAsc = !S.defAsc; render(); });
+  on("r-wk", "change", (e) => { S.resWk = e.target.value; render(); });
+  on("r-pos", "change", (e) => { S.resPos = e.target.value; render(); });
+  on("r-mk", "change", (e) => { S.resMk = e.target.value; render(); });
+  on("r-clear", "click", () => { S.resWk = S.resPos = S.resMk = ""; render(); });
   document.querySelectorAll("[data-note]").forEach((b) => b.addEventListener("click", () => {
     const nr = b.closest("tr").nextElementSibling;
     if (nr && nr.classList.contains("noterow")) { nr.hidden = !nr.hidden; b.classList.toggle("on", !nr.hidden); }

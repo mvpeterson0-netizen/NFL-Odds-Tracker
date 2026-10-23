@@ -198,3 +198,11 @@ header .brand { touch-action: manipulation; -webkit-user-select: none; user-sele
 .allp input:checked + .sw::after { left: 16px; }
 .allp input:focus-visible + .sw { outline: 2px solid var(--accent); outline-offset: 2px; }
 .chip.xtra { border: 1px dashed var(--muted); background: transparent; }
+
+/* Results (Leads tab) */
+.rtot { font-size: 15px; margin: 4px 0 10px; }
+.rtable td:first-child { white-space: nowrap; }
+details.rgame { border-bottom: 1px solid var(--line); padding: 8px 0; }
+details.rgame:last-child { border-bottom: 0; }
+details.rgame summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; list-style: revert; }
+details.rgame table { margin-top: 8px; }
