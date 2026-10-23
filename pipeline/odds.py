@@ -30,7 +30,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from .common import (DATA, TEAM_NAME_TO_ABBR, append_csv, http_get, iso, norm_name, parse_iso, read_csv,
-                     redact, utcnow, write_csv, COLLECTION_START_UTC)
+                     redact, utcnow, write_csv, write_json, COLLECTION_START_UTC)
 
 API = "https://api.the-odds-api.com/v4"
 SPORT = "americanfootball_nfl"
@@ -338,6 +338,74 @@ def save_links(game_id, rows, now):
     write_csv(LINKS_PATH, keep + rows, LINK_FIELDS)
 
 
+# One-time link test (Michael, 2026-10-23): pull this one game once, outside the schedule, to see what bet-slip
+# links The Odds API returns. Saves links only (prop_links.csv), never lines, and writes a marker so it runs once.
+# Set LINK_TEST_GAME = "" to disable.
+LINK_TEST_GAME = "2026_07_KC_SEA"
+LINK_TEST_MARKER = DATA / "link_test.json"
+
+
+def link_test(keys, games, name_index_for_game, log):
+    if not LINK_TEST_GAME or LINK_TEST_MARKER.exists():
+        return False
+    g = next((x for x in games if x["game_id"] == LINK_TEST_GAME), None)
+    now = utcnow()
+    result = {"game_id": LINK_TEST_GAME, "attempted_utc": iso(now)}
+    try:
+        if g is None or parse_iso(g["kickoff_utc"]) <= now:
+            result["status"] = "skipped: game not found or already started"
+        else:
+            markets = CORE + OPTIONAL
+            ev, e, key_no, status, body, h = None, None, None, None, b"", {}
+            for i, k in enumerate(keys, 1):
+                try:
+                    ev, hh = fetch_events(k)
+                except RuntimeError:
+                    continue
+                _l, rem = _headers_credits(hh)
+                if rem.isdigit() and int(rem) < len(markets) + RESERVE_CREDITS:
+                    continue
+                e = match_event(g, ev)
+                if e is None:
+                    break
+                params = {"apiKey": k, "bookmakers": ",".join(BOOKS), "markets": ",".join(markets),
+                          "oddsFormat": "american", "dateFormat": "iso", "includeLinks": "true", "includeSids": "true"}
+                body, h, status = http_get(f"{API}/sports/{SPORT}/events/{e['id']}/odds", params)
+                key_no = i
+                break
+            if e is None:
+                result["status"] = "skipped: event not found or no key with enough credits"
+            else:
+                last, remaining = _headers_credits(h)
+                result.update({"http_status": status, "credits_last": last, "credits_remaining_on_key": remaining,
+                               "key": f"#{key_no}", "markets": " ".join(markets)})
+                if status == 200:
+                    event = json.loads(body)
+                    captured = utcnow()
+                    rows = _link_rows(event, g["game_id"], "linktest", captured, parse_iso(g["kickoff_utc"]),
+                                      name_index_for_game(g))
+                    save_links(g["game_id"], rows, captured)
+                    books = defaultdict(lambda: {"outcomes": 0, "outcome_links": 0, "outcome_ids": 0,
+                                                 "market_links": 0, "book_links": 0})
+                    for bk in event.get("bookmakers", []):
+                        for m in bk.get("markets", []):
+                            for o in m.get("outcomes", []):
+                                b = books[bk.get("key", "")]
+                                b["outcomes"] += 1
+                                b["outcome_links"] += 1 if o.get("link") else 0
+                                b["outcome_ids"] += 1 if o.get("sid") else 0
+                                b["market_links"] += 1 if m.get("link") else 0
+                                b["book_links"] += 1 if bk.get("link") else 0
+                    result.update({"status": "ok", "link_rows_saved": len(rows), "by_book": books})
+                else:
+                    result["status"] = f"error: {body[:150].decode('utf-8', 'replace')}"
+    except Exception as ex:
+        result["status"] = f"error: {type(ex).__name__}: {str(ex)[:120]}"
+    write_json(LINK_TEST_MARKER, result)  # written even on failure, so the test never repeats
+    log.append(f"odds: link test {LINK_TEST_GAME}: {result.get('status')} (cost {result.get('credits_last', '0')})")
+    return True
+
+
 def run(keys, games, name_index_for_game, log):
     """Execute due pulls. Returns True if any data/log rows were written."""
     if isinstance(keys, str):
@@ -346,6 +414,11 @@ def run(keys, games, name_index_for_game, log):
     if not keys:
         log.append("odds: ODDS_API_KEY not set; skipped")
         return False
+    test_wrote = False
+    try:  # the one-time link test must never stop the regular pulls
+        test_wrote = link_test(keys, games, name_index_for_game, log)
+    except Exception as ex:
+        log.append(f"odds: link test skipped ({type(ex).__name__})")
     now = utcnow()
     due, missed = plan(games, now)
     wrote = False
@@ -363,7 +436,7 @@ def run(keys, games, name_index_for_game, log):
         sweeps = []
         log.append(f"odds: sweep check skipped ({type(ex).__name__}: {str(ex)[:80]})")
     if not due and not snaps and not sweeps:
-        return wrote
+        return wrote or test_wrote
 
     # Check every key (the events call is free). Keep the events list from the first key that works.
     events, left = None, {}
@@ -542,4 +615,4 @@ def run(keys, games, name_index_for_game, log):
         log.append(f"odds: {g['game_id']} {pt} captured {len(caps)} lines {mins} min before kickoff "
                    f"(cost {last}, remaining {remaining})")
         wrote = True
-    return wrote
+    return wrote or test_wrote
