@@ -149,6 +149,7 @@
         <div><span>OPP</span>${oppHtml(m)}${m && m.dav != null ? `<small>${num(m.dav)}/g allowed</small>` : ""}</div>
         <div><span>TREND</span>${trendHtml(f, true)}</div>
       </div>
+      ${typeof betBox === "function" ? betBox(pid, mid) : ""}
       ${typeof pickBoxSafe === "function" ? pickBoxSafe(pid, mid) : ""}
       ${cur ? tgtLine(targets(pid, p.pos, cur.wk)).replace('class="mtgt', 'class="mtgt mtgt-big') : ""}
       <div class="panel"><h3>${esc(mk.label)} by week</h3><div class="chart">${chartSVG(rows, mid, { W: 400, H: 230, L: 30, R: 26, T: 26, B: 24, fs: 12, edgeAbove: true })}</div>

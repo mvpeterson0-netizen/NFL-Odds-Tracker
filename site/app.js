@@ -487,6 +487,7 @@ function viewPlayer(pid) {
     ${curSlot && curSlot.change ? `<p class="callout">Slot change: ${esc(curSlot.change)}</p>` : ""}
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
+    ${betBox(pid, mid)}
     ${pickBoxSafe(pid, mid)}
     <div class="panel"><div class="chart">${chartSVG(rows, mid, { edgeAbove: true })}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM), until the pre-game line arrives</span></div></div>
@@ -511,6 +512,28 @@ function viewPlayer(pid) {
   if (S.showAn) h += analysisPanel(pid, mid, rows);
   return h;
 }
+
+// "Bet on DraftKings": links that put the Over or Under on the DraftKings bet slip (from the latest pull; built in
+// pipeline/build.py from data/prop_links.csv). Shown only before kickoff and only when a link was captured.
+function betBox(pid, mid) {
+  const e = ((((D.links || {})[pid] || {})[mid]) || {}).draftkings;
+  if (!e || !(e.o || e.u)) return "";
+  const g = D.games[e.gid];
+  if (!g || new Date(g.ko) <= new Date()) return "";
+  const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens DraftKings with this bet on the slip"
+    data-bet="${side === "Over" ? "o" : "u"}" data-pid="${esc(pid)}" data-bmid="${esc(mid)}">${side} ${num(e.point)} <span class="muted">${x.price == null ? "" : odds(x.price)}</span> ↗</a>` : "";
+  return `<div class="betbox"><span class="betlbl">Bet on DraftKings</span>${a("Over", e.o)}${a("Under", e.u)}
+    <span class="muted small betnote">Line as of ${fmtTime(e.cap)}; DraftKings shows its current line and odds before you place it.${window.STIX_PICKS && window.STIX_PICKS.enabled() ? " Tapping also saves it to your picks." : ""}</span></div>`;
+}
+// Tapping a DraftKings button also records the pick in My picks (picks.js), then the link opens DraftKings as usual.
+document.addEventListener("click", (ev) => {
+  const b = ev.target.closest && ev.target.closest("[data-bet]");
+  if (!b || !window.STIX_PICKS) return;
+  try {
+    const e = D.links[b.dataset.pid][b.dataset.bmid].draftkings, x = b.dataset.bet === "o" ? e.o : e.u;
+    window.STIX_PICKS.recordBet(b.dataset.pid, b.dataset.bmid, b.dataset.bet, { line: e.point, odds: x.price, cap: e.cap, gid: e.gid });
+  } catch (err) { console.error("pick from bet link failed", err); }
+});
 
 // My picks box (picks.js). Empty unless this browser has the owner's picks key; never breaks the page.
 function pickBoxSafe(pid, mid) {

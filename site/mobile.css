@@ -105,3 +105,7 @@ main { padding: 10px 12px 32px; }
 
 /* Share button sits at the right of the back-link row */
 .mp-top { display: flex; align-items: center; }
+
+/* Bet on DraftKings: label on top, Over / Under side by side */
+.betlbl { flex-basis: 100%; }
+.betbtn { flex: 1; justify-content: center; }

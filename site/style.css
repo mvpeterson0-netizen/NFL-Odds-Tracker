@@ -218,3 +218,10 @@ details.rgame table { margin-top: 8px; }
 .share-btns > * { flex: 1; min-height: 42px; white-space: nowrap; font-size: 15px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
 .share-btns a { border: 1px solid var(--line); border-radius: 8px; color: var(--ink); }
 .sh-main { border: 2px solid var(--accent); color: var(--accent); font-weight: 600; }
+
+/* Bet on DraftKings (bet-slip links) */
+.betbox { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 10px 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.betlbl { font-weight: 600; font-size: 14px; }
+.betbtn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); font-weight: 600; white-space: nowrap; }
+.betbtn:hover { text-decoration: none; background: var(--hover); }
+.betnote { flex-basis: 100%; }
