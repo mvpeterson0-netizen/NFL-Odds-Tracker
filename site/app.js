@@ -520,9 +520,17 @@ function viewPlayer(pid) {
 
 // "Bet on DraftKings": links that put the Over or Under on the DraftKings bet slip (from the latest pull; built in
 // pipeline/build.py from data/prop_links.csv). Shown only before kickoff and only when a link was captured.
+// DraftKings bet-slip links stop working once DK changes the selection, so a link older than BET_LINK_MAX_MIN
+// minutes is treated as stale and its buttons are hidden (they come back when a newer pull brings fresh links).
+const BET_LINK_MAX_MIN = 60;
+function betLinkFresh(e) {
+  const t = Date.parse(e && e.cap);
+  return Number.isFinite(t) && Date.now() - t <= BET_LINK_MAX_MIN * 60000;
+}
 function betBox(pid, mid) {
   const e = ((((D.links || {})[pid] || {})[mid]) || {}).draftkings;
   if (!e || !(e.o || e.u)) return "";
+  if (!betLinkFresh(e)) return "";
   const g = D.games[e.gid];
   if (!g || new Date(g.ko) <= new Date()) return "";
   const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens DraftKings with this bet on the slip"
@@ -533,7 +541,16 @@ function betBox(pid, mid) {
 // Tapping a DraftKings button also records the pick in My picks (picks.js), then the link opens DraftKings as usual.
 document.addEventListener("click", (ev) => {
   const b = ev.target.closest && ev.target.closest("[data-bet]");
-  if (!b || !window.STIX_PICKS) return;
+  if (!b) return;
+  // A page left open can show a button whose link has since gone stale: don't open DraftKings or save the pick.
+  try {
+    if (!betLinkFresh(D.links[b.dataset.pid][b.dataset.bmid].draftkings)) {
+      ev.preventDefault();
+      const box = b.closest(".betbox"); if (box) box.remove();
+      return;
+    }
+  } catch (err) { /* fall through */ }
+  if (!window.STIX_PICKS) return;
   try {
     const e = D.links[b.dataset.pid][b.dataset.bmid].draftkings, x = b.dataset.bet === "o" ? e.o : e.u;
     window.STIX_PICKS.recordBet(b.dataset.pid, b.dataset.bmid, b.dataset.bet, { line: e.point, odds: x.price, cap: e.cap, gid: e.gid });
