@@ -199,14 +199,16 @@ function headshot(pid, size) {
   if (!p || !p.img) return `<span class="hs none" style="width:${size}px;height:${size}px"></span>`;
   return `<img class="hs" src="${esc(p.img)}" alt="" width="${size}" height="${size}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'hs none',style:'width:${size}px;height:${size}px'}))">`;
 }
+// Target share shown in parentheses after any target count, e.g. "7 tgt (24%)". Blank when nflverse has no share.
+function tshareTxt(v) { return v == null ? "" : ` (${Math.round(v * 100)}%)`; }
 function usageCell(r, pos) {
   if (pos === "QB") return "";
   const parts = [];
   if (pos === "RB") {
     parts.push(r.car != null ? `${num(r.car, 0)} car` : null);
-    parts.push(r.tgt != null ? `${num(r.tgt, 0)} tgt` : null);
+    parts.push(r.tgt != null ? `${num(r.tgt, 0)} tgt${tshareTxt(r.tshare)}` : null);
   } else {
-    if (r.tgt != null) parts.push(`${num(r.tgt, 0)} tgt` + (r.tshare != null ? ` (${Math.round(r.tshare * 100)}%)` : ""));
+    if (r.tgt != null) parts.push(`${num(r.tgt, 0)} tgt${tshareTxt(r.tshare)}`);
   }
   const s = parts.filter(Boolean).join(", ");
   if (s) return s;
@@ -468,8 +470,8 @@ function snapUse(r, pos, mid) {
   if (sc) parts.push(sc);
   if (pos === "RB") {
     if (r.car != null) parts.push(`${num(r.car, 0)} car`);
-    if (tg) parts.push(`${num(r.tgt, 0)} tgt`);
-  } else if (pos !== "QB" && tg) parts.push(`${num(r.tgt, 0)} tgt`);
+    if (tg) parts.push(`${num(r.tgt, 0)} tgt${tshareTxt(r.tshare)}`);
+  } else if (pos !== "QB" && tg) parts.push(`${num(r.tgt, 0)} tgt${tshareTxt(r.tshare)}`);
   return parts.join(" · ");
 }
 function actualCompact(r, m) {

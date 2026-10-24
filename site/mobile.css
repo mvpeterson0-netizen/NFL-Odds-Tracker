@@ -70,7 +70,9 @@ main { padding: 10px 12px 32px; }
 .chart { padding: 6px 4px 2px; }
 .legend { flex-wrap: wrap; gap: 6px 12px; }
 .wxline { max-width: none; }
-.mlog-r.t { grid-template-columns: 0.4fr 2.1fr 1.1fr 0.65fr 0.5fr 0.65fr; }
+.mlog-r.t { grid-template-columns: 0.35fr 1.75fr 1.05fr 0.6fr 1.05fr 0.6fr; }
+.mlog-r.t > span:nth-child(5) { white-space: nowrap; }
+.mlog-r .tsh { color: var(--muted); font-size: 10px; }
 .mtgt { font-size: 12px; color: var(--ink); margin-top: 2px; }
 .mtgt b { font-weight: 650; }
 .mtgt-big { font-size: 13px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; margin: -4px 0 12px; }

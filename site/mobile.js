@@ -41,15 +41,17 @@
     if (!played.length) return { n: 0 };
     const last = played[played.length - 1];
     const starts = played.filter((r) => STARTER_SLOTS.includes(r.slot));
+    const shr = (rs) => { const v = rs.map((r) => r.tshare).filter((x) => x != null); return v.length ? mean(v) : null; }; // average of per-game shares
     return { n: played.length, last: last.tgt, lastWk: last.wk, lastShare: last.tshare,
-             last3: mean(played.slice(-3).map((r) => r.tgt)), avg: starts.length ? mean(starts.map((r) => r.tgt)) : null, nStarts: starts.length };
+             last3: mean(played.slice(-3).map((r) => r.tgt)), last3Share: shr(played.slice(-3)),
+             avg: starts.length ? mean(starts.map((r) => r.tgt)) : null, avgShare: shr(starts), nStarts: starts.length };
   }
   const pctS = (v) => (v == null ? "" : ` (${Math.round(v * 100)}%)`);
   function tgtLine(t) {
     if (!t) return "";
     if (!t.n) return `<div class="mtgt muted">Targets: no games yet</div>`;
-    return `<div class="mtgt" title="Last game: week ${t.lastWk}. Share = his share of the team's targets. Season avg counts starts only.">` +
-      `Targets <b>${num(t.last, 0)}</b> last${pctS(t.lastShare)} · <b>${num(t.last3)}</b> last 3 · <b>${t.avg == null ? "—" : num(t.avg)}</b> avg</div>`;
+    return `<div class="mtgt" title="Last game: week ${t.lastWk}. (%) = his share of the team's targets (averaged per game for last 3 and avg). Season avg counts starts only.">` +
+      `Targets <b>${num(t.last, 0)}</b> last${pctS(t.lastShare)} · <b>${num(t.last3)}</b> last 3${pctS(t.last3Share)} · <b>${t.avg == null ? "—" : num(t.avg)}</b> avg${t.avg == null ? "" : pctS(t.avgShare)}</div>`;
   }
 
   function trendHtml(f, big) {
@@ -169,7 +171,7 @@
       const w = D.games[r.gid] && D.games[r.gid].wx ? wxSummary(D.games[r.gid].wx) : null;
       const em = D.games[r.gid] && D.games[r.gid].wx && D.games[r.gid].wx.roof === "dome" ? "🏟️" : w ? (w.label.match(/\p{Extended_Pictographic}/u) || [""])[0] : "";
       h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} ${oppHtml(mm)} ${em}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
-        <span>${lineHtml(mm)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0)}</span>` : ""}<span>${snapCell(r)}</span></div>`;
+        <span>${lineHtml(mm)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0) + `<span class="tsh">${pctS(r.tshare)}</span>`}</span>` : ""}<span>${snapCell(r)}</span></div>`;
     }
     h += `</div></div>`;
     // Context
