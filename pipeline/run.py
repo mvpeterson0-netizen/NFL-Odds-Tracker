@@ -12,7 +12,7 @@ import os
 import sys
 import traceback
 
-from . import nflverse, odds, weather
+from . import nflverse, odds, supa, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
 BUILD_VERSION = "1"  # bump to force a rebuild after code changes
@@ -34,6 +34,7 @@ def main() -> int:
         if sched_changed:
             log.append("schedule: updated")
         games = nflverse.schedule()
+        supa.sync_games(games, log, announce=sched_changed)  # kickoff times for the accounts database's pick lock
 
         name_index = read_json(DATA / "name_index.json", {}) or {}
 
