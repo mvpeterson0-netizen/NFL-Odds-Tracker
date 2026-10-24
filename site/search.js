@@ -248,6 +248,9 @@
     if (row.cmp === "avgN") { const v = lastN(row.stat, row.cn, ctx); return v ? { v: mean(v) * k, base: mean(v), txt: `${pf(row)}last ${row.cn} avg ${num(mean(v))}` } : null; }
     return null;
   }
+  // target counts are followed by target share in parentheses, e.g. "7 (24%)"
+  const shareFor = (stat, r) => (stat === "tgt" && r && r.tshare != null ? ` (${Math.round(r.tshare * 100)}%)` : "");
+  const shareAvg = (stat, rs) => { if (stat !== "tgt") return ""; const v = rs.map((r) => r.tshare).filter((x) => x != null); return v.length ? ` (${Math.round(mean(v) * 100)}%)` : ""; };
   const pf = (row) => ((row.pct ?? 100) !== 100 ? `${row.pct}% of ` : "");
   const gapTxt = (a, b) => (b ? ` (${a - b >= 0 ? "+" : ""}${Math.round(((a - b) / Math.abs(b)) * 100)}%)` : "");
 
@@ -261,11 +264,12 @@
     if (row.m === "each") {
       const v = lastN(row.stat, row.n, ctx);
       if (!v) return { ok: false, show: `fewer than ${row.n} games` };
-      return { ok: v.every(test), show: `${v.map((x) => num(x, 0)).join(", ")} vs ${R.txt}` };
+      return { ok: v.every(test), show: `${v.map((x, i) => num(x, 0) + shareFor(row.stat, ctx.prior.slice(-row.n)[i])).join(", ")} vs ${R.txt}` };
     }
     let L, lt;
-    if (row.m === "avg") { const a = seasonAvg(row.stat, ctx); if (!a) return { ok: false, show: "no starts" }; L = a.v; lt = `${num(a.v)} avg (${a.n} st)`; }
-    else if (row.m === "avgN") { const v = lastN(row.stat, row.n, ctx); if (!v) return { ok: false, show: `fewer than ${row.n} games` }; L = mean(v); lt = `${num(L)} (${v.map((x) => num(x, 0)).join(", ")})`; }
+    if (row.m === "avg") { const a = seasonAvg(row.stat, ctx); if (!a) return { ok: false, show: "no starts" }; L = a.v; lt = `${num(a.v)}${shareAvg(row.stat, ctx.starts)} avg (${a.n} st)`; }
+    else if (row.m === "avgN") { const v = lastN(row.stat, row.n, ctx); if (!v) return { ok: false, show: `fewer than ${row.n} games` }; L = mean(v); const lr = ctx.prior.slice(-row.n); const games = v.map((x, i) => num(x, 0) + shareFor(row.stat, lr[i])).join(", ");
+      lt = row.stat === "tgt" ? `${num(L)}${shareAvg(row.stat, lr)} · ${games}` : `${num(L)} (${games})`; } // avoid nested ( ) when shares are shown
     else if (row.m === "line") { const l = lineOf(ctx.cur, row.stat); if (!l) return { ok: false, show: "no line yet" }; L = l.v; lt = `${num(l.v)} ${l.lab}`; }
     else if (row.m === "move") {
       const l = lineOf(ctx.cur, row.stat); const first = l && l.m.snaps && l.m.snaps.length ? l.m.snaps[0] : null;
