@@ -14,20 +14,32 @@
     const hot = its.some(fresh);
     return `<span class="newsbtn ${hot ? "hot" : ""}" role="button" tabindex="0" data-upd="${esc(pid)}" title="${hot ? "New player updates" : "Player updates"}" aria-label="${hot ? "New player updates" : "Player updates"}">${ICON}</span>`;
   }
+  // When the source data behind an item was last published (nflverse timestamp.json, e.g. "2026-10-25 02:01:17 EDT").
+  const SRC_KEY = (src) => /injury report/i.test(src) ? "injuries" : /roster/i.test(src) ? "rosters"
+    : /slots/i.test(src) ? "depth" : /snap/i.test(src) ? "snaps" : /player stats/i.test(src) ? "stats" : null;
+  function srcTime(src) {
+    const k = SRC_KEY(src || ""), v = k && D && D.sources && D.sources[k];
+    const s = v && v.last_updated;
+    if (!s) return "";
+    const m = /^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}) (EDT|EST|UTC)$/.exec(s);
+    if (!m) return esc(s);
+    const off = { EDT: "-04:00", EST: "-05:00", UTC: "Z" }[m[3]];
+    return fmtTime(`${m[1]}T${m[2]}${off}`);
+  }
   function close() { const o = document.getElementById("news-ov"); if (o) o.remove(); }
   function open(pid) {
     close();
     const p = playerById[pid]; if (!p) return;
     const its = items(pid);
-    const row = (it) => `<div class="nw-item ${fresh(it) ? "new" : ""}"><div><span class="chip nw-kind">${esc(it.kind)}</span>${fresh(it) ? ' <span class="nw-new">New</span>' : ""}</div>
+    const row = (it) => { const asof = srcTime(it.src); return `<div class="nw-item ${fresh(it) ? "new" : ""}"><div><span class="chip nw-kind">${esc(it.kind)}</span>${fresh(it) ? ' <span class="nw-new">New</span>' : ""}</div>
       <div class="nw-text">${esc(it.text)}</div>
-      <div class="muted small">${it.t ? `First seen ${fmtTime(it.t)}` : "Already listed when update tracking started"} · ${esc(it.src)}</div></div>`;
+      ${asof ? `<div class="small"><b>Info as of ${asof}</b></div>` : ""}
+      <div class="muted small">${esc(it.src)}</div></div>`; };
     const ov = document.createElement("div");
     ov.id = "news-ov"; ov.className = "share-ov";
     ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Updates for ${esc(p.name)}">
       <div class="nw-h"><b>${esc(p.name)}</b> <span class="muted">${esc(p.team)} · ${esc(p.pos)}</span><button class="nw-x" aria-label="Close">✕</button></div>
       ${its.length ? its.map(row).join("") : `<p class="muted">No updates this week.</p>`}
-      <p class="muted small">From the official NFL injury report, weekly rosters, depth charts and snap / target data (via nflverse). These are data updates, not news articles. "New" = first seen in the last 48 hours.</p>
       <a class="nw-open" href="#/player/${esc(pid)}">Open player page ›</a></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x")) close(); });
