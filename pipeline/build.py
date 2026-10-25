@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import os
 from collections import defaultdict
+from datetime import timedelta
 from statistics import mean, median
 
 from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso, read_csv, read_json, to_float,
@@ -137,6 +138,9 @@ def bet_links(name_index, games_by_id, now):
 
 
 UPDATES_SEEN_PATH = DATA / "updates_seen.json"
+ESPN_PATH = DATA / "espn_news.json"
+ESPN_NEWS_DAYS = 7   # headlines older than this are left out
+ESPN_NEWS_MAX = 3    # at most this many headlines per player
 ROLE_SNAP_PTS = 25    # role change: last game's snap share differs from his prior average by this many points
 ROLE_TSHARE_PTS = 12   # ... or target share (WR/TE/RB) by this many points; needs 3+ prior games
 
@@ -151,13 +155,24 @@ def player_updates(d, slots, players, rows_out, cur, now, log):
     seen = read_json(UPDATES_SEEN_PATH, None)
     first_run = seen is None
     seen = seen or {}
+    espn_first = not any("|espn|" in k for k in seen)
     items = defaultdict(list)
 
-    def add(pid, key, kind, text, src):
+    def add(pid, key, kind, text, src, at="", url=""):
         k = f"{pid}|{key}"
         if k not in seen:
-            seen[k] = "" if first_run else iso(now)
-        items[pid].append({"k": key, "kind": kind, "text": text, "src": src, "t": seen[k]})
+            # first run, or first run with ESPN items: existing items are not marked new
+            seen[k] = "" if first_run or (espn_first and key.startswith("espn|")) else iso(now)
+        it = {"k": key, "kind": kind, "text": text, "src": src, "t": seen[k]}
+        if at:
+            it["at"] = at  # when the source itself dated this item (ESPN)
+        if url:
+            it["url"] = url
+        items[pid].append(it)
+
+    espn = read_json(ESPN_PATH, None) or {}
+    espn_status, espn_news = espn.get("status") or {}, espn.get("news") or {}
+    news_cutoff = iso(now - timedelta(days=ESPN_NEWS_DAYS))
 
     for pid, p in players.items():
         rows = rows_out.get(pid) or []
@@ -181,6 +196,19 @@ def player_updates(d, slots, players, rows_out, cur, now, log):
         if sl and sl.get("change_note"):
             add(pid, f"w{cur}|slot|{sl['slot']}", "Slot", f"Week {cur} slot {sl['slot']}: {sl['change_note']}",
                 "Stix slots (ESPN depth chart via nflverse + snap share + injury report)")
+        rr_any = d.roster_row(cur, pid) or {}
+        eid = str(rr_any.get("espn_id") or "").split(".")[0]
+        if eid:
+            st = espn_status.get(eid)
+            if st and (st.get("note") or st.get("status")):
+                text = (f"{st['status']}: " if st.get("status") else "") + (st.get("note") or "")
+                add(pid, f"espn|status|{st.get('date')}|{st.get('status')}", "ESPN", text, "ESPN player note",
+                    at=st.get("date") or "", url=st.get("url") or "")
+            arts = sorted((a for a in espn_news.get(eid) or [] if (a.get("date") or "") >= news_cutoff),
+                          key=lambda a: a.get("date") or "", reverse=True)[:ESPN_NEWS_MAX]
+            for a in arts:
+                add(pid, f"espn|news|{a['url']}", "ESPN news", a["headline"], "ESPN headline",
+                    at=a.get("date") or "", url=a["url"])
         played = [r for r in rows if r.get("final") and r.get("played") is True]
         finals = [r for r in rows if r.get("final")]
         # role changes only from his team's most recent game (not an older game before an absence)
@@ -205,7 +233,9 @@ def player_updates(d, slots, players, rows_out, cur, now, log):
     write_json(UPDATES_SEEN_PATH, {k: v for k, v in seen.items() if k in live})
     out = {}
     for pid, its in items.items():
+        # ESPN items first (newest first, by ESPN's own date), then the rest as before (newest first seen)
         its.sort(key=lambda x: x["t"] or "", reverse=True)
+        its.sort(key=lambda x: x.get("at") or "", reverse=True)
         out[pid] = [{k: v for k, v in it.items() if k != "k"} for it in its]
     log.append(f"build: player updates for {len(out)} players" + (" (first run: existing items not marked new)" if first_run else ""))
     return out

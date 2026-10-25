@@ -12,7 +12,7 @@ import os
 import sys
 import traceback
 
-from . import nflverse, odds, weather
+from . import espn, nflverse, odds, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
 BUILD_VERSION = "1"  # bump to force a rebuild after code changes
@@ -48,11 +48,17 @@ def main() -> int:
 
         weather_changed = weather.refresh(games, log)
 
+        try:  # optional source: a problem here must never stop the run
+            espn_changed = espn.refresh(log)
+        except Exception as ex:
+            espn_changed = False
+            log.append(f"espn: skipped ({type(ex).__name__}: {str(ex)[:80]})")
+
         changed = nflverse.changed_datasets()
         if changed:
             log.append("nflverse updated: " + ", ".join(changed))
         state = read_json(DATA / "build_state.json", {}) or {}
-        need = (sched_changed or odds_changed or weather_changed or changed or not out_path.exists()
+        need = (sched_changed or odds_changed or weather_changed or espn_changed or changed or not out_path.exists()
                 or state.get("version") != BUILD_VERSION or os.environ.get("FORCE_BUILD") == "1")
         if need:
             from .build import build
