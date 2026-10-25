@@ -34,7 +34,7 @@
     const row = (it) => { const asof = srcTime(it.src); return `<div class="nw-item ${fresh(it) ? "new" : ""}"><div><span class="chip nw-kind">${esc(it.kind)}</span>${fresh(it) ? ' <span class="nw-new">New</span>' : ""}</div>
       <div class="nw-text">${esc(it.text)}</div>
       ${asof ? `<div class="small"><b>Info as of ${asof}</b></div>` : ""}
-      <div class="muted small">${it.t ? `First seen ${fmtTime(it.t)}` : "Already listed when update tracking started"} · ${esc(it.src)}</div></div>`; };
+      <div class="muted small">${esc(it.src)}</div></div>`; };
     const ov = document.createElement("div");
     ov.id = "news-ov"; ov.className = "share-ov";
     ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Updates for ${esc(p.name)}">
