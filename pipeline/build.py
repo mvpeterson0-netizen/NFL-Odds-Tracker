@@ -17,6 +17,7 @@ from .weather import load as load_weather
 from .nflverse import Data, load_sources
 from .odds import CAPTURES_PATH, LINKS_PATH, PULL_LOG_PATH, SNAPSHOTS, WINDOW_CLOSE, WINDOW_OPEN, ptype
 from .slots import update_slots
+from . import espn_box
 
 MARKETS = [
     # id, odds key, nflverse stat column, label, positions
@@ -225,9 +226,11 @@ def player_updates(d, slots, players, rows_out, cur, now, log):
             if p.get("pos") in ("WR", "TE", "RB") and last.get("tshare") is not None and len(ts) >= 3:
                 avg = sum(ts) / len(ts)
                 if abs(last["tshare"] - avg) * 100 >= ROLE_TSHARE_PTS:
+                    from_espn = last["gid"] in getattr(d, "espn_games", set())
                     add(pid, f"w{last['wk']}|tshare", "Role",
                         f"Week {last['wk']} target share {round(last['tshare'] * 100)}% (prior average {round(avg * 100)}%)",
-                        "nflverse player stats")
+                        "ESPN box score" if from_espn else "nflverse player stats",
+                        at=(d.stats.get((last["gid"], pid)) or {}).get("_fetched", "") if from_espn else "")
     # keep the seen-times only for items still current, so the file stays small
     live = {f"{pid}|{it['k']}" for pid, its in items.items() for it in its}
     write_json(UPDATES_SEEN_PATH, {k: v for k, v in seen.items() if k in live})
@@ -248,6 +251,11 @@ def stat_value(row, col):
 
 def build(log):
     d = Data()
+    try:  # ESPN box scores fill in finished games nflverse hasn't published; never stops a build
+        d.espn_games = espn_box.merge_into(d, log)
+    except Exception as ex:
+        d.espn_games = set()
+        log.append(f"espn box: not used ({type(ex).__name__}: {str(ex)[:80]})")
     slots = update_slots(d)
     name_index = build_name_index(d)
     dranks = DefenseRanks(d, MARKETS)
@@ -561,6 +569,12 @@ def build(log):
             cur = int(g["week"])
             break
     sources = load_sources()
+    if getattr(d, "espn_games", None):
+        sources = dict(sources)
+        sources["espn_box"] = {"label": "ESPN box scores (finished games until nflverse stats arrive)",
+                               "last_updated": "not published by ESPN",
+                               "fetched_utc": espn_box.updated_utc() or "",
+                               "url": "https://www.espn.com/nfl/scoreboard"}
     wx = load_weather()
 
     def wx_out(gid):
