@@ -1,0 +1,35 @@
+name: probe-espn (throwaway, branch probe/espn only)
+on:
+  push:
+    branches: [probe/espn]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch ESPN endpoints (raw replies saved, no secrets used)
+        run: |
+          mkdir -p probe/out
+          UA="Mozilla/5.0 (compatible; StixProbe/1.0)"
+          fetch() { # name url
+            code=$(curl -sS -m 30 -A "$UA" -o "probe/out/$1.json" -w "%{http_code}" "$2" || echo ERR)
+            echo "$1 $code $(wc -c < probe/out/$1.json 2>/dev/null) $2" >> probe/out/_status.txt
+          }
+          fetch league_news   "https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=50"
+          fetch team_news_kc  "https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?team=12&limit=20"
+          fetch league_inj    "https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries"
+          fetch team_inj_kc   "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/12/injuries?limit=100"
+          fetch team_inj_sf   "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/teams/25/injuries?limit=100"
+          fetch ath_overview_kirk "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/3895856/overview"
+          fetch ath_overview_mahomes "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/3139477/overview"
+          fetch ath_news_kirk "https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete=3895856&limit=10"
+          fetch ath_core_kirk "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/3895856"
+          fetch ath_core_inj_kirk "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/3895856/injuries"
+          fetch fantasy_news_kirk "https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=3895856&limit=10"
+          cat probe/out/_status.txt
+      - name: Save replies on this branch only
+        run: |
+          git config user.name "probe-bot"; git config user.email "probe-bot@users.noreply.github.com"
+          git add probe/out && git commit -m "probe: ESPN replies" && git push origin HEAD:probe/espn
