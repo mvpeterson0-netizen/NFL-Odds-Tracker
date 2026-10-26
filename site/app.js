@@ -807,8 +807,61 @@ function viewLog(live) {
   return h + `</tbody></table></div>`;
 }
 
+// ---------- Upcoming week line status (Guide page) ----------
+// From Monday 8 AM Central through the end of Sunday, the "upcoming week" is the week of the coming Sunday's games
+// (so on Monday it already looks ahead, even while last week's Monday night game is still to be played).
+function ctDate(d) { return d.toLocaleDateString("en-CA", { timeZone: "America/Chicago" }); }
+function upcomingLinesWeek(now = new Date()) {
+  const ct = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+  const dow = ct.getDay();
+  const add = dow === 1 && ct.getHours() < 8 ? -1 : (7 - dow) % 7;
+  const t = new Date(ctDate(now) + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() + add);
+  const sunday = t.toISOString().slice(0, 10);
+  const games = Object.values(D.games);
+  const sun = games.find((g) => ctDate(new Date(g.ko)) === sunday);
+  if (sun) return sun.wk;
+  const next = games.filter((g) => new Date(g.ko) > now).map((g) => g.wk);
+  return next.length ? Math.min(...next) : D.current_week;
+}
+function weekLinesPanel() {
+  const wk = upcomingLinesWeek();
+  const games = Object.entries(D.games).filter(([, g]) => g.wk === wk).sort((a, b) => a[1].ko.localeCompare(b[1].ko) || a[0].localeCompare(b[0]));
+  if (!games.length) return "";
+  const PT = { pregame: "pre-game line", mon: "Mon snapshot", thu: "Thu snapshot", sun: "Sun AM snapshot" };
+  const slots = slotsFor(wk);
+  let showing = 0, body = "";
+  for (const [gid, g] of games) {
+    let tracked = 0, players = 0, lines = 0, lastCap = "", kind = "";
+    for (const s of slots) {
+      const r = rowFor(s.pid, wk);
+      if (!r || r.gid !== gid) continue;
+      tracked++;
+      let any = false;
+      for (const m of Object.values(r.m || {})) {
+        if (m.lstat === "ok") { any = true; lines++; if ((m.cap || "") > lastCap) { lastCap = m.cap; kind = "pregame"; } }
+        else if (m.lstat === "pending" && latestSnap(m)) { any = true; lines++; const sn = latestSnap(m); if (sn.cap > lastCap) { lastCap = sn.cap; kind = sn.t; } }
+      }
+      if (any) players++;
+    }
+    const pulls = D.pull_log.filter((p) => p.game_id === gid);
+    const last = pulls[pulls.length - 1];
+    const empty = pulls.filter((p) => p.status === "empty").length;
+    if (players) showing++;
+    const status = players
+      ? `<span class="wlok">✓ ${players}/${tracked} players · ${lines} lines</span><div class="muted small">${esc(PT[kind] || "")}${lastCap ? ` · ${fmtTime(lastCap)}` : ""}</div>`
+      : last
+        ? `<span class="wlno">No lines yet</span><div class="muted small">${empty} check${empty === 1 ? "" : "s"} came back empty · last ${fmtTime(last.attempted_utc)}</div>`
+        : `<span class="wlno">No lines yet</span><div class="muted small">not checked yet</div>`;
+    body += `<tr><td><b>${esc(gameLabel(gid))}</b><div class="muted small">${fmtTime(g.ko)}</div></td><td class="wrapcell">${status}</td></tr>`;
+  }
+  return `<div class="panel"><h3>Week ${wk} lines · ${showing} of ${games.length} games showing lines</h3><div class="body">
+    <table class="wrap wltable"><tbody>${body}</tbody></table>
+    <p class="muted small">Players = our slotted players in that game (QB1, RB1–2, WR1–3, TE1–2) with at least one line showing; lines = player-and-stat lines the app shows for them now (the pre-game line once captured, otherwise the latest Mon / Thu / Sun AM snapshot). "Came back empty" means the odds service answered but DraftKings/FanDuel had no player props posted for that game yet; empty checks use no credits. From Monday 8 AM Central this shows the coming Sunday's week.</p>
+  </div></div>`;
+}
+
 function viewGuide() {
-  return `<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
+  return `${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
     <section id="g-guide"><h2 class="gsec">Guide</h2>${guideBody()}</section>
     <section id="g-log"><h2 class="gsec">Log &amp; sources</h2>${viewLog(LIVE)}</section>`;
 }
