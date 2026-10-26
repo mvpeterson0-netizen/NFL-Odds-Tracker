@@ -17,6 +17,8 @@
       desc: () => `His average over his last 3 games played vs this week's line. Ranked by <b>size</b> = gap ÷ his usual game-to-game swing (standard deviation of his last ${SD_GAMES} games played, min 3).` },
     { id: "usage", label: "Usage up, line flat", title: "Rising usage, line unchanged",
       desc: () => `Usage = target share for WR/TE, snap share for RB (QBs not included). Rising = average of his last 2 games is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) above his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage rise.` },
+    { id: "usagedn", label: "Usage down, line flat", title: "Falling usage, line unchanged",
+      desc: () => `The inverse of Usage up. Usage = target share for WR/TE, snap share for RB (QBs not included). Falling = average of his last 2 games is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) below his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage drop.` },
     { id: "down", label: "Bad script, line down", title: "Line lowered after a game script that worked against him",
       desc: () => scriptDesc("against him", "under", "lower") },
     { id: "up", label: "Good script, line up", title: "Line raised after a game script that helped him",
@@ -94,18 +96,19 @@
         const l3 = c.acts.slice(-3); if (l3.length < 3) continue;
         const avg = l3.reduce((a, b) => a + b, 0) / 3, gap = avg - c.cur.line;
         out.push({ c, size: c.sd ? Math.abs(gap) / c.sd : null, main: gap, cells: [`<b>${num(c.cur.line)}</b>`, `${num(avg)} <span class="muted small">(${l3.map((v) => num(v, 0)).join(", ")})</span>`, `<b>${signed(gap)}</b>`] });
-      } else if (tab === "usage") {
+      } else if (tab === "usage" || tab === "usagedn") {
         const pos = c.p.pos; if (pos === "QB") continue;
         const us = c.played.map((x) => usageOf(pos, x)).filter((v) => v != null);
         if (us.length < 4) continue;
         const last2 = us.slice(-2), early = us.slice(0, -2);
         const a2 = (last2[0] + last2[1]) / 2, ae = early.reduce((a, b) => a + b, 0) / early.length, rise = a2 - ae;
-        if (rise < (pos === "RB" ? USAGE_RISE.snap : USAGE_RISE.tshare)) continue;
+        const need = pos === "RB" ? USAGE_RISE.snap : USAGE_RISE.tshare;
+        if (tab === "usage" ? rise < need : rise > -need) continue;
         if (pl == null) continue;
         const tol = COUNT_MKTS.includes(c.mid) ? FLAT.count : c.mid === "pass_yds" ? FLAT.pass_yds : FLAT.yds;
         if (Math.abs(c.cur.line - pl) > tol) continue;
         const kind = pos === "RB" ? "snap" : "tgt share";
-        out.push({ c, size: rise, main: rise, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(a2)}%</b> <span class="muted small">(last 2: ${last2.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
+        out.push({ c, size: Math.abs(rise), main: rise, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(a2)}%</b> <span class="muted small">(last 2: ${last2.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
       } else if (tab === "down" || tab === "up") {
         if (pl == null || !c.prev || c.pm.act == null) continue;
         const tr = teamResult(c.prev.gid, c.r.team); if (!tr) continue;
@@ -123,6 +126,7 @@
     move: ["Last game → this week", "Change"],
     l3: ["Line", "Last 3 avg", "Avg − line"],
     usage: ["Line (last game → now)", "Usage"],
+    usagedn: ["Line (last game → now)", "Usage"],
     down: ["Last game", "His stat vs line", "Line change"],
     up: ["Last game", "His stat vs line", "Line change"],
   };
@@ -138,7 +142,7 @@
     h += `<div class="panel rlist">`;
     for (const x of list.slice(0, 40)) {
       const { p, r, mid, cur } = x.c;
-      const size = x.size == null ? "" : t.id === "usage" ? `+${Math.round(x.size)} pts` : `size ${num(x.size, 2)}`;
+      const size = x.size == null ? "" : t.id === "usage" || t.id === "usagedn" ? `${t.id === "usage" ? "+" : "−"}${Math.round(x.size)} pts` : `size ${num(x.size, 2)}`;
       h += `<div class="rlrow"><div class="rlhead"><a class="pname" href="#/player/${p.id}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra">extra</span>` : ""}
           <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${size}</span></div>
         <div class="muted small">${esc(p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)} · line from ${esc(cur.label)}</div>
@@ -147,10 +151,12 @@
     return h + `</div>${list.length > 40 ? `<p class="muted small">Showing the top 40 of ${list.length}.</p>` : ""}`;
   }
 
+  // 3 columns, each a pair with its inverse stacked: line move / last 3; usage up / down; good script / bad script
+  const GRID = ["move", "usage", "up", "l3", "usagedn", "down"];
   function html() {
     const mks = D.markets;
     return `<section id="rl"><h2 class="gsec">Leads</h2>
-      <div class="gamebar" role="tablist">${TABS.map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}">${esc(t.label)}</button>`).join("")}</div>
+      <div class="rlgrid" role="tablist">${GRID.map((id) => { const t = TABS.find((x) => x.id === id); return `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}">${esc(t.label)}</button>`; }).join("")}</div>
       <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label></div>
       <div id="rl-body">${body()}</div></section><h2 class="gsec">Builder</h2>`;
   }

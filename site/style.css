@@ -242,3 +242,4 @@ details.rgame table { margin-top: 8px; }
 .rlist { padding: 0 12px; } .rlrow { padding: 9px 0; border-bottom: 1px solid var(--line); } .rlrow:last-child { border-bottom: 0; }
 .rlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; } .rlstat { font-weight: 600; } .rlsize { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--muted); font-size: .9em; }
 .rlcells { display: flex; flex-wrap: wrap; gap: 2px 16px; margin-top: 3px; }
+.rlgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 6px 0 10px; } .rlgrid .gchip { width: 100%; margin: 0; white-space: normal; text-align: center; align-items: center; justify-content: center; line-height: 1.2; padding: 8px 6px; }
