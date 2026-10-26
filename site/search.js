@@ -390,13 +390,13 @@
     } else if (!SPEC) { SPEC = { pos: [], team: "", game: "", groups: [] }; TEXT = ""; NOTES = []; IGN = []; }
     if (!SPEC) SPEC = { pos: [], team: "", game: "", groups: [] };
     if (SPEC.team === "LA") SPEC.team = "LAR"; // older saved links used nflverse's "LA" for the Rams
-    let h = `<div class="srch"><form id="s-form"><input type="search" id="s-q" placeholder="Optional: type a thesis to fill in the rows, e.g. RBs whose last 3 games average is below their rushing yards line" value="${esc(TEXT)}" autocomplete="off"><button type="submit">Fill rows</button>${SPEC.groups.length || TEXT ? `<button type="button" id="s-clear" class="sclear" title="Clear the search box and every condition">Clear all</button>` : ""}</form>`;
+    let h = `<div class="srch">${window.STIX_RESEARCH ? window.STIX_RESEARCH.html() : ""}<form id="s-form"><input type="search" id="s-q" placeholder="Optional: type a thesis to fill in the rows, e.g. RBs whose last 3 games average is below their rushing yards line" value="${esc(TEXT)}" autocomplete="off"><button type="submit">Fill rows</button>${SPEC.groups.length || TEXT ? `<button type="button" id="s-clear" class="sclear" title="Clear the search box and every condition">Clear all</button>` : ""}</form>`;
     if (NOTES.length) h += `<p class="snote">How I read it: ${NOTES.map(esc).join(" · ")}</p>`;
     if (IGN.length) h += `<p class="snote warn">Not understood (ignored): ${IGN.map((x) => `“${esc(x)}”`).join(" · ")}. Use the rows below instead.</p>`;
     h += builderHtml();
     h += `<div id="s-results">${resultsHtml()}</div>`;
     if (!SPEC.groups.length) h += `<div class="panel"><h3>Try one</h3><div class="body sx">${EXAMPLES.map((e) => `<a href="#/search/${encodeURIComponent(e)}">${esc(e)}</a>`).join("")}</div></div>`;
-    return h + helpPanel() + `</div>`;
+    return h + `</div>`;
   }
   function save() {
     // keep the builder state in the address so Back / refresh / sharing a link restore it
@@ -446,13 +446,5 @@
     "TEs with 4 or more receptions in each of the last 3 games",
     "QBs facing a top 5 defense vs QB passing yards",
   ];
-  function helpPanel() {
-    return `<div class="panel"><h3>How the builder works</h3><div class="body small">
-      <p><b>Each row</b> = <i>what to measure</i> · <i>stat</i> · <i>comparison</i> · <i>compare to</i>. Rows in the same box are <b>OR</b> (any one is enough); separate boxes are <b>AND</b> (all must pass).</p>
-      <p><b>What to measure:</b> <b>Season avg</b> over his starts (pre-game slot QB1/RB1/WR1–3/TE1 and played) · <b>Last N games avg</b> and <b>Each of last N games</b> over games played · <b>Current line</b> (pre-game line if captured, otherwise the latest Mon/Thu/Sun AM snapshot; DraftKings first, then FanDuel) · <b>Line move this week</b> (current line minus the first line captured this week) · <b>Opp D rank</b> (this week's opponent, season rank vs his position in that stat; 1 = fewest allowed).</p>
-      <p><b>Compare to:</b> a number, <b>his current line</b>, <b>his season avg</b>, or <b>his last N avg</b>, optionally scaled by a percent (e.g. 90% of his current line). Results show the gap, e.g. "48.0 vs line 60.5 Thu (−21%)"; sort by the biggest gaps.</p>
-      <p><b>Typing</b> is optional: it fills the rows, and anything it can't read is listed so you can set it with the dropdowns. Searches cover this week's slotted players, plus extra players (no slot, but books posted a line) when <b>All players</b> is on. Extras have no starts, so <b>Season avg</b> conditions never match them; use <b>Last N games</b>.</p>
-    </div></div>`;
-  }
   window.STIX_SEARCH = { parse, run, evalRow, toRow, view, bind, STATS };
 })();
