@@ -46,6 +46,9 @@ CT = ZoneInfo("America/Chicago")
 # pull type -> (label, days after the week's Monday, hour, minute) in Central time
 SNAPSHOTS = {"mon": ("Mon", 0, 8, 0), "thu": ("Thu", 3, 14, 0), "sun": ("Sun AM", 6, 8, 0)}
 SNAP_RETRY = timedelta(hours=1)
+# Runs start every ~30 min and each attempt is logged a few seconds into its run, so the run an hour later
+# is a few seconds short of a full hour. Allow this much slack so the retry lands every hour, not every 90 min.
+RETRY_SLACK = timedelta(minutes=5)
 SNAP_MAX_TRIES = 3  # for thu/sun; mon keeps trying hourly until it gets props (or the thu pull starts)
 # Monday fill-in: books post props gradually, so a Monday pull can come back "thin". If fewer than
 # FILL_MIN_COVERAGE of the game's starters (FILL_SLOTS) have a Monday line, pull again every FILL_EVERY
@@ -224,7 +227,7 @@ def plan_snapshots(games, now=None):
                 tries = [r for r in rows if r["status"] in ("empty", "error")]
                 if tries:
                     last = parse_iso(tries[-1].get("attempted_utc", ""))
-                    if last and now - last < SNAP_RETRY:
+                    if last and now - last < SNAP_RETRY - RETRY_SLACK:
                         continue
                     if t != "mon" and len(tries) >= SNAP_MAX_TRIES:
                         continue
