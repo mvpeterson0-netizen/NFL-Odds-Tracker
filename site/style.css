@@ -239,4 +239,6 @@ details.rgame table { margin-top: 8px; }
 .nw-text { margin: 4px 0 2px; }
 .nw-new { color: var(--under); font-weight: 700; font-size: 12px; }
 .nw-open { display: inline-block; margin-top: 6px; }
-.rltable td { vertical-align: top; } .rltable td .small { white-space: nowrap; }
+.rlist { padding: 0 12px; } .rlrow { padding: 9px 0; border-bottom: 1px solid var(--line); } .rlrow:last-child { border-bottom: 0; }
+.rlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; } .rlstat { font-weight: 600; } .rlsize { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--muted); font-size: .9em; }
+.rlcells { display: flex; flex-wrap: wrap; gap: 2px 16px; margin-top: 3px; }

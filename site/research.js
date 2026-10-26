@@ -134,16 +134,17 @@
     let h = `<p class="callout small"><b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.</p>`;
     if (scoresMissing) return h + `<p class="muted">Final scores aren't in the app's data yet, so this tab can't be filled.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
-    h += `<div class="panel scroll"><table class="rltable"><thead><tr><th>Player</th><th>Stat</th>${HEADS[t.id].map((x) => `<th>${x}</th>`).join("")}<th class="num" title="${t.id === "usage" ? "Usage rise in percentage points" : "Change or gap ÷ his usual game-to-game swing (standard deviation of his last " + SD_GAMES + " games)"}">${t.id === "usage" ? "Rise" : "Size"}</th></tr></thead><tbody>`;
+    const heads = HEADS[t.id];
+    h += `<div class="panel rlist">`;
     for (const x of list.slice(0, 40)) {
       const { p, r, mid, cur } = x.c;
-      h += `<tr><td><a class="pname" href="#/player/${p.id}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra">extra</span>` : ""}
-        <div class="muted small">${esc(r.team)} ${r.ha === "home" || r.ha === "vs" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</div></td>
-        <td>${esc(mkt[mid].label)}<div class="muted small">${esc(cur.label)}</div></td>
-        ${x.cells.map((v) => `<td>${v}</td>`).join("")}
-        <td class="num">${x.size == null ? `<span class="muted">—</span>` : t.id === "usage" ? `+${Math.round(x.size)}` : num(x.size, 2)}</td></tr>`;
+      const size = x.size == null ? "" : t.id === "usage" ? `+${Math.round(x.size)} pts` : `size ${num(x.size, 2)}`;
+      h += `<div class="rlrow"><div class="rlhead"><a class="pname" href="#/player/${p.id}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra">extra</span>` : ""}
+          <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${size}</span></div>
+        <div class="muted small">${esc(p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)} · line from ${esc(cur.label)}</div>
+        <div class="rlcells">${x.cells.map((v, k) => `<span><span class="muted small">${heads[k]}</span> ${v}</span>`).join("")}</div></div>`;
     }
-    return h + `</tbody></table></div>${list.length > 40 ? `<p class="muted small">Showing the top 40 of ${list.length}.</p>` : ""}`;
+    return h + `</div>${list.length > 40 ? `<p class="muted small">Showing the top 40 of ${list.length}.</p>` : ""}`;
   }
 
   function html() {
