@@ -327,6 +327,50 @@ function niceStep(range, target = 5) {
   for (const f of [1, 2, 2.5, 5, 10]) if (raw <= f * mag) return f * mag;
   return 10 * mag;
 }
+// Chooses above / below for each line or snapshot label so it does not overlap the actual-stat number,
+// the actual dot, a marker, or another label. Boxes are estimated from the font size.
+function placeLabels(labels, pts, { xs, ys, W, H, B, fs }) {
+  const cw = fs * 0.62, gap = 4; // approximate width of one character; space between marker and text
+  const hit = (a, b) => Math.max(0, Math.min(a.r, b.r) - Math.max(a.l, b.l)) * Math.max(0, Math.min(a.b, b.b) - Math.max(a.t, b.t));
+  const obstacles = [];
+  pts.forEach((p, i) => {
+    const x = xs(i);
+    if (p.act != null) {
+      const ya = ys(p.act), w = String(num(p.act)).length * cw;
+      obstacles.push({ l: x - w / 2, r: x + w / 2, t: ya - 9 - fs, b: ya - 9 + 3 }); // actual number
+      obstacles.push({ l: x - 5, r: x + 5, t: ya - 5, b: ya + 5 }); // actual dot
+    }
+    for (const v of [p.line, p.proj ? p.proj.line : null]) if (v != null) obstacles.push({ l: x - 14, r: x + 14, t: ys(v) - 2, b: ys(v) + 2 });
+  });
+  // the blue actual line, sampled into small boxes (weighted lower than text: crossing it is less bad)
+  const path = [];
+  const ap = pts.map((p, i) => (p.act == null ? null : [xs(i), ys(p.act)]));
+  for (let i = 1; i < ap.length; i++) {
+    if (!ap[i - 1] || !ap[i]) continue;
+    const [x1, y1] = ap[i - 1], [x2, y2] = ap[i], n = Math.ceil(Math.hypot(x2 - x1, y2 - y1) / 3);
+    for (let k = 0; k <= n; k++) { const x = x1 + ((x2 - x1) * k) / n, y = y1 + ((y2 - y1) * k) / n; path.push({ l: x - 1.5, r: x + 1.5, t: y - 1.5, b: y + 1.5 }); }
+  }
+  const bottomLimit = H - B; // keep clear of the week labels
+  let out = "";
+  for (const lb of labels) {
+    const w = lb.text.replace(/&[a-z]+;/g, "x").length * cw;
+    const cx = Math.min(Math.max(lb.x, w / 2 + 2), W - w / 2 - 2); // keep the text inside the chart
+    // Candidates: just above / just below the marker, then one or two rows further out if both are taken.
+    let best = null;
+    for (let k = 0; k < 3; k++) {
+      for (const dir of [-1, 1]) {
+        const t = dir < 0 ? lb.y - gap - fs - k * (fs + 2) : lb.y + gap + k * (fs + 2);
+        const box = { l: cx - w / 2, r: cx + w / 2, t, b: t + fs };
+        const score = obstacles.reduce((s, o) => s + hit(box, o), 0) + 0.3 * path.reduce((s, o) => s + hit(box, o), 0) +
+          k * 12 + (box.t < 0 || box.b > bottomLimit ? 1e6 : 0);
+        if (!best || score < best.score) best = { score, box, base: t + fs - 2 };
+      }
+    }
+    obstacles.push(best.box);
+    out += `<text x="${cx}" y="${best.base}" text-anchor="middle" font-size="${fs}" font-weight="600" fill="${lb.fill}">${lb.text}</text>`;
+  }
+  return out;
+}
 function chartSVG(rows, mid, o = {}) {
   // act = actual stat; line = graded pre-game line; proj = latest snapshot shown until the pre-game line exists
   const pts = rows.map((r) => {
@@ -338,8 +382,9 @@ function chartSVG(rows, mid, o = {}) {
   const vals = pts.flatMap((p) => [p.act, p.line, p.proj ? p.proj.line : null]).filter((v) => v != null);
   if (!vals.length) return `<p class="muted pad">No data to chart yet.</p>`;
   const { W = 1200, H = 280, L = 48, R = 70, T = 22, B = 30, fs = 12, edgeAbove = false } = o; // phone view passes a smaller canvas
-  // edgeAbove: put line/snapshot labels above the marker for the last week so they are not cut off on narrow charts
-  const lbl = (i, x, y) => (edgeAbove && i === pts.length - 1 ? `x="${x}" y="${y - 9}" text-anchor="middle"` : `x="${x + 18}" y="${y + 4}"`);
+  // Line / snapshot labels sit centered just above or just below their marker. Each one takes the side
+  // that does not cover the week's actual-stat number or dot, another week's label, or a marker; if both
+  // sides collide it takes the one with the least overlap (placeLabels). edgeAbove is no longer used.
   const top = Math.max(...vals);
   const step = niceStep(top || 1);
   const max = Math.ceil((top * 1.08) / step) * step || step, min = 0;
@@ -361,18 +406,21 @@ function chartSVG(rows, mid, o = {}) {
     path += `${pen ? "L" : "M"}${xs(i)},${ys(p.act)} `; pen = true;
   });
   g += `<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;
+  const labels = []; // line / snapshot labels, placed after the markers (see placeLabels)
   pts.forEach((p, i) => {
     const x = xs(i);
     if (p.line != null) {
       const res = p.m.res;
       const col = res === "over" ? "var(--over)" : res === "under" ? "var(--under)" : "var(--ink)";
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${ys(p.line)}" y2="${ys(p.line)}" stroke="${col}" stroke-width="3"><title>W${p.wk} pre-game line ${num(p.line)} (${esc(p.m.book || "")})</title></line>
-        <text ${lbl(i, x, ys(p.line))} font-size="${fs}" font-weight="600" fill="${col}">${num(p.line)}</text>`;
+`;
+      labels.push({ i, x, y: ys(p.line), text: num(p.line), fill: col });
     }
     if (p.proj) {
       const y = ys(p.proj.line);
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${y}" y2="${y}" stroke="var(--warn-ink)" stroke-width="3" stroke-dasharray="4 3"><title>W${p.wk} ${esc(p.proj.label)} snapshot ${num(p.proj.line)} (${esc(p.proj.book)}, ${esc(fmtTime(p.proj.cap))}). Not graded; replaced by the pre-game line.</title></line>
-        <text ${lbl(i, x, y)} font-size="${fs}" font-weight="600" fill="var(--warn-ink)">${num(p.proj.line)} ${esc(p.proj.label)}</text>`;
+`;
+      labels.push({ i, x, y, text: `${num(p.proj.line)} ${esc(p.proj.label)}`, fill: "var(--warn-ink)" });
     }
     if (p.act != null) {
       g += `<circle cx="${x}" cy="${ys(p.act)}" r="4.5" fill="var(--accent)"><title>W${p.wk} actual ${num(p.act)}</title></circle>
@@ -380,6 +428,7 @@ function chartSVG(rows, mid, o = {}) {
     }
     if (p.r.played === false) g += `<text x="${x}" y="${ys(min) - 6}" text-anchor="middle" font-size="${fs - 1}" fill="var(--muted)">DNP</text>`;
   });
+  g += placeLabels(labels, pts, { xs, ys, W, H, B, fs });
   return `<svg viewBox="0 0 ${W} ${H}" role="img">${g}</svg>`;
 }
 
