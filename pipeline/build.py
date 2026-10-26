@@ -35,6 +35,13 @@ NAME_INDEX_PATH = DATA / "name_index.json"
 OUT_PATH = SITE / "data" / "data.json"
 
 
+def _int_or_none(v):
+    try:
+        return int(float(v))
+    except (TypeError, ValueError):
+        return None
+
+
 def implied(price):
     p = to_float(price)
     if p is None or p == 0:
@@ -647,7 +654,10 @@ def build(log):
         "games": {g["game_id"]: {"wk": int(g["week"]), "home": g["home_team"], "away": g["away_team"],
                                  "ko": g["kickoff_utc"], "final": g.get("result", "") != "",
                                  "type": g.get("game_type", ""), "loc": g.get("location", ""),
-                                 "stadium": g.get("stadium", ""), "wx": wx_out(g["game_id"])} for g in games},
+                                 "stadium": g.get("stadium", ""), "wx": wx_out(g["game_id"]),
+                                 # final score (nflverse schedule), only once the game is final; used for game-script research tabs
+                                 "as": _int_or_none(g.get("away_score")) if g.get("result", "") != "" else None,
+                                 "hs": _int_or_none(g.get("home_score")) if g.get("result", "") != "" else None} for g in games},
         "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},
