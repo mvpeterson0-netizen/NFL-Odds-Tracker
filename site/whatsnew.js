@@ -4,9 +4,12 @@
 // so it doesn't show again. Screenshots in site/whatsnew/ come from the real built site.
 // To announce a future release: change WHATS_NEW_ID and ITEMS.
 (function () {
-  const WHATS_NEW_ID = "2026-10-27";
+  const WHATS_NEW_ID = "2026-10-27-fanduel"; // changed so everyone sees it once more, even if they closed the first one
   const KEY = "stix_whatsnew";
   const ITEMS = [
+    { title: "Bet on FanDuel",
+      text: "FanDuel is now the official partner of Stix, after partnership negotiations with DraftKings ended. On any player page, tap <b>Over</b> or <b>Under</b> under <b>Bet on FanDuel</b> to open FanDuel with that bet on your slip. FanDuel shows its current line before you place it.",
+      imgs: [["whatsnew/fanduel.jpg", 640, 257, "Bet on FanDuel box with Over and Under buttons on a player page"]] },
     { title: "Line alerts",
       text: "Get a notification when a game's player lines go up. Turn it on at the top of the <b>Guide</b> tab. On iPhone, open Stix from your Home Screen first.",
       imgs: [["whatsnew/alerts.jpg", 640, 343, "Alerts panel on the Guide tab with a Turn on alerts button"]],
