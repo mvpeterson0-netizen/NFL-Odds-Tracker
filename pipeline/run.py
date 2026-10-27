@@ -12,7 +12,7 @@ import os
 import sys
 import traceback
 
-from . import espn, espn_box, nflverse, odds, script, weather
+from . import espn, espn_box, nflverse, notify, odds, script, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
 BUILD_VERSION = "1"  # bump to force a rebuild after code changes
@@ -78,6 +78,11 @@ def main() -> int:
             build(log)
             built = True
             write_json(DATA / "build_state.json", {"version": BUILD_VERSION, "built_utc": iso(utcnow())})
+
+        try:  # optional: phone alert when a game's lines first cover most players (never fails the run)
+            notify.run(log)
+        except Exception as ex:
+            log.append(f"notify: skipped ({type(ex).__name__}: {str(ex)[:80]})")
     except Exception as e:  # logged, then the run fails so the next schedule retries
         status = "error"
         err = f"{type(e).__name__}: {e}"[:500]
