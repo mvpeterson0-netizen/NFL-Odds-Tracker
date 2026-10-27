@@ -27,7 +27,7 @@ MARKETS = [
     ("rush_att", "player_rush_attempts", "carries", "Rush att", ("RB",)),
     ("rush_yds", "player_rush_yds", "rushing_yards", "Rush yds", ("QB", "RB")),
     ("rec", "player_receptions", "receptions", "Receptions", ("RB", "WR", "TE")),
-    ("rec_yds", "player_reception_yds", "receiving_yards", "Rec yds", ("WR", "TE")),
+    ("rec_yds", "player_reception_yds", "receiving_yards", "Rec yds", ("RB", "WR", "TE")),
 ]
 BOOK_NAMES = {"draftkings": "DraftKings", "fanduel": "FanDuel"}
 BOOK_ORDER = ["draftkings", "fanduel"]
