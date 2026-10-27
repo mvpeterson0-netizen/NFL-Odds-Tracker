@@ -135,8 +135,8 @@
     ST.picks = ST.picks.filter((p) => p.id !== id).concat(pick);
     ST.dirty = true; saveCache(); rerender(); sync();
   }
-  // A tap on "Bet on DraftKings" also saves the pick (only on devices where My picks is set up), at DraftKings' line
-  // and odds from the link. Never removes or flips silently: it always records the side that was tapped.
+  // A tap on a sportsbook bet button ("Bet on FanDuel") also saves the pick (only on devices where My picks is set up), at
+  // the line and odds from the link. Never removes or flips silently: it always records the side that was tapped.
   function recordBet(pid, mid, side, bet) {
     if (!enabled() || !bet || bet.line == null) return;
     const r = nextRow(pid);
@@ -145,7 +145,7 @@
     const t = new Date().toISOString();
     const p = playerById[pid];
     const pick = { id, pid, name: p.name, pos: p.pos, gid: r.gid, wk: r.wk, mid, side, line: bet.line, odds: bet.odds,
-      book: "DraftKings", src: "Bet on DK", cap: bet.cap, ko: r.ko, picked_utc: t, updated_utc: t };
+      book: bet.book || "DraftKings", src: bet.src || "Bet on DK", cap: bet.cap, ko: r.ko, picked_utc: t, updated_utc: t };
     ST.picks = ST.picks.filter((x) => x.id !== id).concat(pick);
     ST.dirty = true; saveCache(); sync();
   }
