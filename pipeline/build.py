@@ -6,6 +6,7 @@ Missing values stay missing and carry a reason; nothing is estimated.
 from __future__ import annotations
 
 import os
+import re
 from collections import defaultdict
 from datetime import timedelta
 from statistics import mean, median
@@ -138,6 +139,10 @@ def bet_links(name_index, games_by_id, now):
         pt, sides = sorted(pool.items(), key=balance)[0]
         any_row = sides.get("over") or sides.get("under")
         entry = {"point": to_float(pt), "cap": any_row["captured_utc"], "gid": any_row["game_id"]}
+        if book == "draftkings":  # DK's game id from its game-page link, for the "Open <tab> on DraftKings" button
+            ev = re.search(r"/event/(?:[^/?#]+/)?(\d+)", any_row.get("book_link") or "")
+            if ev:
+                entry["ev"] = ev.group(1)
         for side, key in (("over", "o"), ("under", "u")):
             if side in sides:
                 entry[key] = {"url": sides[side]["outcome_link"], "price": to_float(sides[side].get("price"))}
