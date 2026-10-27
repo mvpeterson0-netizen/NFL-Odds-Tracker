@@ -24,7 +24,7 @@
 
   const TABS = [
     { id: "move", label: "Line move", title: "Lines that moved most from his last game's line",
-      desc: () => `This week's line (pre-game line if captured, otherwise the latest Mon / Thu / Sun AM snapshot) vs the graded pre-game line from his previous game, same stat. Ranked by <b>size</b> = change ÷ his usual game-to-game swing in that stat (standard deviation of his last ${SD_GAMES} games played, min 3), so a 1.5 → 2.5 receptions move and a 60.5 → 70.5 yards move are compared fairly. No percentages.` },
+      desc: () => `This week's line (pre-game line if captured, otherwise the latest Mon / Thu / Sun AM snapshot) vs the graded pre-game line from his previous game, same stat. Ranked by <b>size</b> = change ÷ √(last game's line). Bigger lines naturally move more, but not in proportion, so this sits between raw change (which favors big yardage lines) and percent change (which favors tiny lines). Examples: rec yds 77.5 → 68.5 = 1.02; rush yds 11.5 → 10.5 = 0.29; receptions 1.5 → 2.5 = 0.82; pass yds 289.5 → 259.5 = 1.76. A size of 1 is a move of about √line (about 9 rec yds on an 80.5 line, 2.3 catches on 5.5, 16 pass yds on 250.5).` },
     { id: "l3", label: "Last 3 vs line", title: "Last 3 games average furthest from this week's line",
       desc: () => `His average over his last 3 games played vs this week's line. Ranked by <b>size</b> = gap ÷ his usual game-to-game swing (standard deviation of his last ${SD_GAMES} games played, min 3).` },
     { id: "usage", label: "Usage up, line flat", title: "Rising usage, line unchanged",
@@ -37,7 +37,7 @@
       desc: () => scriptDesc("in his favor", "over", "higher") },
   ];
   function scriptDesc(way, ou, hl) {
-    return `In his previous game the game script went ${way}, he finished <b>${ou}</b> that game's line, and this week's line is <b>${hl}</b>. Game script = how long his team spent with a big lead or deficit: <b>led big</b> = ahead by ${SCRIPT.margin}+ points for at least ${SCRIPT.minutes} of the game's minutes, <b>trailed big</b> = behind by ${SCRIPT.margin}+ for at least ${SCRIPT.minutes} minutes (from nflverse play-by-play; <a href="#/guide">change the margin and minutes on the Guide tab</a>). Rule of thumb: a team with a big lead runs more and passes less, so leading big helps RBs and works against QBs, WRs and TEs; playing from far behind means more passing, which helps QBs, WRs and TEs and works against RBs. Ranked by size of the line change ÷ his usual game-to-game swing.`;
+    return `In his previous game the game script went ${way}, he finished <b>${ou}</b> that game's line, and this week's line is <b>${hl}</b>. Game script = how long his team spent with a big lead or deficit: <b>led big</b> = ahead by ${SCRIPT.margin}+ points for at least ${SCRIPT.minutes} of the game's minutes, <b>trailed big</b> = behind by ${SCRIPT.margin}+ for at least ${SCRIPT.minutes} minutes (from nflverse play-by-play; <a href="#/guide">change the margin and minutes on the Guide tab</a>). Rule of thumb: a team with a big lead runs more and passes less, so leading big helps RBs and works against QBs, WRs and TEs; playing from far behind means more passing, which helps QBs, WRs and TEs and works against RBs. Ranked by size of the line change ÷ √(last game's line), as on Line move.`;
   }
 
   // ---------- helpers ----------
@@ -149,7 +149,7 @@
       if (tab === "move") {
         if (pl == null) continue;
         const ch = c.cur.line - pl; if (!ch) continue;
-        out.push({ c, size: c.sd ? Math.abs(ch) / c.sd : null, main: ch, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `<b>${signed(ch)}</b>`] });
+        out.push({ c, size: pl > 0 ? Math.abs(ch) / Math.sqrt(pl) : null, main: ch, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `<b>${signed(ch)}</b>`] });
       } else if (tab === "l3") {
         const l3 = c.acts.slice(-3); if (l3.length < 3) continue;
         const avg = l3.reduce((a, b) => a + b, 0) / 3, gap = avg - c.cur.line;
@@ -174,7 +174,7 @@
         const want = tab === "up" ? 1 : -1;
         if (sc !== want) continue;
         if (want === 1 ? !(c.pm.act > pl && ch > 0) : !(c.pm.act < pl && ch < 0)) continue;
-        out.push({ c, size: c.sd ? Math.abs(ch) / c.sd : null, main: ch, cells: [`${esc(scriptTxt(info))} <span class="muted small">(${esc(info.score)})</span>`, `${num(c.pm.act)} vs ${num(pl)}`, `${num(pl)} → <b>${num(c.cur.line)}</b> <b>${signed(ch)}</b>`] });
+        out.push({ c, size: pl > 0 ? Math.abs(ch) / Math.sqrt(pl) : null, main: ch, cells: [`${esc(scriptTxt(info))} <span class="muted small">(${esc(info.score)})</span>`, `${num(c.pm.act)} vs ${num(pl)}`, `${num(pl)} → <b>${num(c.cur.line)}</b> <b>${signed(ch)}</b>`] });
       }
     }
     out.sort((a, b) => (b.size ?? -1) - (a.size ?? -1) || Math.abs(b.main) - Math.abs(a.main));
