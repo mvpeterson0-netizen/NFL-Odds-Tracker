@@ -94,20 +94,19 @@
 
   // Season totals for a team: add up its per-game counts (games with play-by-play data).
   function teamSeason(team) {
-    const tot = { g: 0, np: 0, npp: 0, up: [0, 0], cl: [0, 0], dn: [0, 0], pl: 0, dr: 0, tao: 0, fd: 0, td: 0, to: 0, rz: 0, dsec: 0, dpl: 0, last: 0 };
+    const tot = { g: 0, np: 0, npp: 0, up: [0, 0], cl: [0, 0], dn: [0, 0], last: 0 };
     for (const g of Object.values(D.games)) {
       if (!g.scr || !g.scr.t) continue;
       const side = g.home === team ? "h" : g.away === team ? "a" : null; if (!side) continue;
       const t = g.scr.t[side]; if (!t) continue;
       tot.g++; tot.last = Math.max(tot.last, g.wk);
-      for (const k of ["np", "npp", "pl", "dr", "tao", "fd", "td", "to", "rz", "dsec", "dpl"]) tot[k] += t[k] || 0;
+      for (const k of ["np", "npp"]) tot[k] += t[k] || 0;
       for (const k of ["up", "cl", "dn"]) { tot[k][0] += t[k][0]; tot[k][1] += t[k][1]; }
     }
     return tot;
   }
   const pct = (a, b) => (b ? `${Math.round((100 * a) / b)}%` : "—");
   const pctN = (a, b) => (b ? `${Math.round((100 * a) / b)}% <span class="muted">(${b})</span>` : `<span class="muted">—</span>`);
-  const per = (a, b, d = 1) => (b ? num(a / b, d) : "—");
   function leaguePass() {
     let n = 0, p = 0;
     for (const g of Object.values(D.games)) if (g.scr && g.scr.t) for (const s of ["h", "a"]) { const t = g.scr.t[s]; if (t) { n += t.np; p += t.npp; } }
@@ -115,7 +114,9 @@
   }
 
   // Game-flow chart: the team's score margin over the game (from each scoring change).
-  function flowSvg(flow, home) {
+  // info (scriptInfo) adds dashed lines at ± the big-margin setting and, when the margin went past one, the
+  // minutes beyond it written on the chart (top for leading, bottom for trailing).
+  function flowSvg(flow, home, info) {
     const pts = flow.map(([m, d]) => [m, home ? d : -d]);
     const hi = Math.max(0, ...pts.map((x) => x[1])), lo = Math.min(0, ...pts.map((x) => x[1]));
     const T = [0, 7, 13, 21, 28, 35, 42, 49, 56];
@@ -135,6 +136,13 @@
     g += `<clipPath id="${id}u"><rect x="0" y="0" width="${W}" height="${ys(0)}"/></clipPath><clipPath id="${id}d"><rect x="0" y="${ys(0)}" width="${W}" height="${H}"/></clipPath>`;
     g += `<path d="${area}" fill="var(--over)" opacity=".28" clip-path="url(#${id}u)"/><path d="${area}" fill="var(--under)" opacity=".28" clip-path="url(#${id}d)"/>`;
     g += `<path d="${d} L${xs(end)},${ys(prev)}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;
+    if (info) {
+      const M = SCRIPT.margin;
+      for (const v of [M, -M]) g += `<line x1="${L}" x2="${W - R}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--warn-ink)" stroke-width="1" stroke-dasharray="5 3"/>`;
+      const big = (mins) => mins >= SCRIPT.minutes;
+      if (info.l > 0) g += `<text x="${L + 6}" y="${Tp + 12}" font-size="11.5" font-weight="700" fill="var(--over)">Led ${M}+ for ${Math.round(info.l)} min${big(info.l) ? " · big" : ""}</text>`;
+      if (info.t > 0) g += `<text x="${L + 6}" y="${H - B - 6}" font-size="11.5" font-weight="700" fill="var(--under)">Trailed ${M}+ for ${Math.round(info.t)} min${big(info.t) ? " · big" : ""}</text>`;
+    }
     return `<svg viewBox="0 0 ${W} ${H}" class="flowsvg" role="img" aria-label="Score margin over the game">${g}</svg>`;
   }
 
@@ -143,16 +151,14 @@
     closePop();
     const g = D.games[gid]; if (!g || !g.scr) return;
     const info = scriptInfo(gid, team), home = g.home === team, opp = home ? g.away : g.home;
-    const sc = scriptFor(pos, info), my = (g.scr.t || {})[home ? "h" : "a"], th = (g.scr.t || {})[home ? "a" : "h"];
+    const my = (g.scr.t || {})[home ? "h" : "a"], th = (g.scr.t || {})[home ? "a" : "h"];
     const S1 = teamSeason(team), S2 = teamSeason(opp);
-    const p = pid && playerById[pid], gt = pid && g.scr.gt ? g.scr.gt[pid] : null;
     const row = (...c) => `<tr>${c.map((x, i) => `<td${i ? ' class="num"' : ""}>${x}</td>`).join("")}</tr>`;
     const sec = (title, sub, body) => `<div class="scrsec"><div class="scrh">${title}</div>${sub ? `<div class="muted small">${sub}</div>` : ""}${body}</div>`;
     let h = `<div class="share-box nw-box scrbox" role="dialog" aria-label="Game script">
       <div class="nw-h"><b>Game script</b> <span class="muted">${esc(team)} · W${g.wk}</span><button class="nw-x" aria-label="Close">✕</button></div>
       <p><b>${esc(info ? info.score : gameLabel(gid))}</b></p>`;
-    if (g.scr.flow) h += flowSvg(g.scr.flow, home) + `<div class="muted small">${esc(team)}'s score margin over the game. Green = ahead, red = behind. Axis grows past ±13 only if the game did.</div>`;
-    if (info) h += `<p class="small">${info.big ? `<b>${esc(scriptTxt(info))}</b>: by the app's rule of thumb this <b>${sc > 0 ? "helped" : "worked against"}</b> ${esc(pos)}s.` : `Not a big-margin game by your setting (${SCRIPT.margin}+ for ${SCRIPT.minutes} min): led ${num(info.l)} min, trailed ${num(info.t)} min by ${SCRIPT.margin}+.`}</p>`;
+    if (g.scr.flow) h += flowSvg(g.scr.flow, home, info);
     if (my && th) {
       h += sec("Neutral pass rate", "Pass share of plays with the score within 7, quarters 1–3 (true run/pass tendency)",
         `<table class="wrap scrtab"><thead><tr><th></th><th class="num">This game</th><th class="num">Season</th></tr></thead><tbody>
@@ -160,20 +166,8 @@
       h += sec("Pass rate by score", "Season pass share when up 13+, within 6, down 13+",
         `<table class="wrap scrtab"><thead><tr><th></th><th class="num">Up 13+</th><th class="num">Within 6</th><th class="num">Down 13+</th></tr></thead><tbody>
         ${row(esc(team), pctN(S1.up[1], S1.up[0]), pctN(S1.cl[1], S1.cl[0]), pctN(S1.dn[1], S1.dn[0]))}${row(esc(opp), pctN(S2.up[1], S2.up[0]), pctN(S2.cl[1], S2.cl[0]), pctN(S2.dn[1], S2.dn[0]))}</tbody></table>`);
-      h += sec("Plays &amp; pace", "Offensive plays, seconds per play on drives, time of possession",
-        `<table class="wrap scrtab"><thead><tr><th></th><th class="num">Plays</th><th class="num">Sec/play</th><th class="num">TOP</th></tr></thead><tbody>
-        ${row(`${esc(team)} game`, my.pl, per(my.dsec, my.dpl), `${num(my.dsec / 60, 1)}m`)}${row(`${esc(team)} season`, per(S1.pl, S1.g), per(S1.dsec, S1.dpl), `${per(S1.dsec / 60, S1.g)}m`)}
-        ${row(`${esc(opp)} game`, th.pl, per(th.dsec, th.dpl), `${num(th.dsec / 60, 1)}m`)}${row(`${esc(opp)} season`, per(S2.pl, S2.g), per(S2.dsec, S2.dpl), `${per(S2.dsec / 60, S2.g)}m`)}</tbody></table>`);
-      h += sec("Drive results", "Share of drives: 3-and-out (punt, no first down), touchdown, turnover; first downs per drive; red-zone trips",
-        `<table class="wrap scrtab"><thead><tr><th></th><th class="num">3&amp;out</th><th class="num">1st dn/dr</th><th class="num">TD</th><th class="num">TO</th><th class="num">RZ</th></tr></thead><tbody>
-        ${row(`${esc(team)} game`, pct(my.tao, my.dr), per(my.fd, my.dr, 2), pct(my.td, my.dr), pct(my.to, my.dr), my.rz)}${row(`${esc(team)} season`, pct(S1.tao, S1.dr), per(S1.fd, S1.dr, 2), pct(S1.td, S1.dr), pct(S1.to, S1.dr), per(S1.rz, S1.g))}
-        ${row(`${esc(opp)} game`, pct(th.tao, th.dr), per(th.fd, th.dr, 2), pct(th.td, th.dr), pct(th.to, th.dr), th.rz)}${row(`${esc(opp)} season`, pct(S2.tao, S2.dr), per(S2.fd, S2.dr, 2), pct(S2.td, S2.dr), pct(S2.to, S2.dr), per(S2.rz, S2.g))}</tbody></table>`);
-      h += sec("Win probability", `nflverse's in-game win probability for ${esc(team)}`,
-        `<table class="wrap scrtab"><tbody>${row("Minutes under 20% to win", `<b>${num(my.wpl)} min</b>`)}${row("First went under 20%", my.wpf == null ? "never" : `minute ${Math.round(my.wpf)} (Q${Math.min(4, Math.floor(my.wpf / 15) + 1)})`)}</tbody></table>`);
-      if (p) h += sec("Garbage time", "His plays when the game was decided (win probability under 10% or over 90%)",
-        gt ? `<table class="wrap scrtab"><tbody>${row(`${esc(p.name)}: carries + targets`, `${gt[0]} for ${gt[1]} yds`)}${row("…in garbage time", `<b>${gt[2]} for ${gt[3]} yds</b>`)}</tbody></table>` : `<p class="muted small">No carries or targets for ${esc(p.name)} in this game.</p>`);
     }
-    h += `<p class="muted small">Season = ${S1.g} games with play-by-play through W${S1.last}. Big margin = ${SCRIPT.margin}+ for ${SCRIPT.minutes} min (Guide tab). Source: nflverse play-by-play. Definitions are this app's rules of thumb.</p></div>`;
+    h += `<p class="muted small">Dashed lines = your big-margin setting (${SCRIPT.margin}+; "big" = ${SCRIPT.minutes}+ min, Guide tab). Season = ${S1.g} games with play-by-play through W${S1.last}. Source: nflverse play-by-play.</p></div>`;
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
     ov.innerHTML = h;
