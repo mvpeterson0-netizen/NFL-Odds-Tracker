@@ -232,6 +232,41 @@ function notes(r, m, slotRow) {
 }
 
 // ---------- views ----------
+// Default week on the Board, player pages and the Research builder: from Monday 8 AM Central through Sunday, the
+// coming Sunday's week (upcomingLinesWeek, Guide tab). The Defense tab keeps D.current_week, which turns over only
+// once every game of the week (incl. Monday night) is final. S.wkUser = the viewer picked a week themselves.
+let _dw = null; // cached for a minute: callers may ask many times per render (it checks every game's date)
+function defaultWeek() {
+  if (_dw && _dw.d === D && Date.now() - _dw.t < 60000) return _dw.w;
+  let w = null;
+  try { const u = upcomingLinesWeek(); if (D.weeks.includes(u)) w = u; } catch (e) { console.error(e); }
+  if (w == null) w = D.current_week || D.weeks[D.weeks.length - 1];
+  _dw = { d: D, t: Date.now(), w };
+  return w;
+}
+// Week slider (Board): a horizontal strip showing 2 weeks at a time, starting on this week and next week;
+// swipe (or scroll) on it to reveal earlier / later weeks. Tap a week to pick it.
+function weekSlider(val) {
+  return `<div class="wkslider" role="tablist" aria-label="Week">${D.weeks.map((w) =>
+    `<button type="button" class="wkchip ${w === val ? "on" : ""}" data-wkpick="${w}" ${w === D.current_week ? 'data-wkcur="1"' : ""}>W${w}</button>`).join("")}</div>`;
+}
+function initWeekSliders() {
+  document.querySelectorAll(".wkslider").forEach((el) => {
+    const on = el.querySelector(".wkchip.on"), cur = el.querySelector("[data-wkcur]");
+    const curW = cur ? +cur.dataset.wkpick : null, onW = on ? +on.dataset.wkpick : null;
+    // start on this week + next week; if the picked week is outside that pair, start on the picked week
+    const start = on && curW != null && (onW === curW || onW === curW + 1) ? cur : on || cur;
+    if (start) el.scrollLeft = start.offsetLeft - el.firstElementChild.offsetLeft;
+    if (!el.dataset.wheel) {
+      el.dataset.wheel = "1";
+      el.addEventListener("wheel", (e) => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false });
+    }
+  });
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest && e.target.closest("[data-wkpick]"); if (!b) return;
+  S.wk = +b.dataset.wkpick; S.wkUser = true; S.game = ""; render();
+});
 function weekSelect(id, val) {
   return `<select id="${id}">${D.weeks.map((w) => `<option value="${w}" ${w === val ? "selected" : ""}>Week ${w}${w === D.current_week ? " (current)" : ""}</option>`).join("")}</select>`;
 }
@@ -276,7 +311,7 @@ function viewBoard() {
   // Finished games' players go to the bottom (same order as the game chip row).
   items.sort((a, b) => (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
   let html = gameBar(wk) + `<div class="filters">
-    <label>Week ${weekSelect("f-wk", wk)}</label>
+    <div class="flab">Week ${weekSlider(wk)}</div>
     <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
     <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
     <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label>
@@ -945,6 +980,7 @@ function render() {
   }
   else app.innerHTML = viewBoard();
   bind(tab, arg);
+  try { initWeekSliders(); } catch (e) { console.error(e); }
   // Old Slots / Log links now open the Guide page at that section.
   if (tab === "slots" || tab === "log") setTimeout(() => { const el = document.getElementById(tab === "log" ? "g-log" : "g-slots"); if (el) el.scrollIntoView(); }, 0);
   if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
@@ -959,7 +995,6 @@ function bind(tab, arg) {
     ap.checked = S.all;
     ap.addEventListener("change", () => { S.all = ap.checked; try { localStorage.setItem("stix_all_players", S.all ? "1" : "0"); } catch { /* ignore */ } render(); });
   }
-  on("f-wk", "change", (e) => { S.wk = +e.target.value; S.game = ""; render(); });
   document.querySelectorAll("[data-gid]").forEach((b) => b.addEventListener("click", () => { S.game = b.dataset.gid; render(); }));
   on("f-team", "change", (e) => { S.team = e.target.value; render(); });
   on("f-pos", "change", (e) => { S.pos = e.target.value; render(); });
@@ -1022,8 +1057,8 @@ async function status() {
     return;
   }
   index();
-  S.wk = D.current_week || D.weeks[D.weeks.length - 1];
-  S.slotWk = S.wk;
+  S.wk = defaultWeek();
+  S.slotWk = D.current_week || S.wk;
   window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
   render();
   status();
@@ -1046,6 +1081,7 @@ async function status() {
       const nd = await r.json();
       if (nd.generated_utc === D.generated_utc) return;
       D = nd; index();
+      if (!S.wkUser) S.wk = defaultWeek(); // e.g. the page was open across Monday 8 AM
       const typing = document.activeElement && document.activeElement.id === "f-q";
       const board = document.querySelector(".panel.board"), keep = board ? board.scrollTop : 0;
       if (!typing) { render(); const b2 = document.querySelector(".panel.board"); if (b2) b2.scrollTop = keep; }
