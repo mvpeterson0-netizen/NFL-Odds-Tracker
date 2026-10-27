@@ -201,7 +201,7 @@
     for (const x of list.slice(0, 40)) {
       const { p, r, mid, cur } = x.c;
       const size = x.size == null ? "" : t.id === "usage" || t.id === "usagedn" ? `${t.id === "usage" ? "+" : "−"}${Math.round(x.size)} pts` : `size ${num(x.size, 2)}`;
-      h += `<div class="rlrow"><div class="rlhead"><a class="pname" href="#/player/${p.id}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra">extra</span>` : ""}
+      h += `<div class="rlrow"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra">extra</span>` : ""}
           <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${size}</span></div>
         <div class="muted small">${esc(p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)} · line from ${esc(cur.label)}</div>
         <div class="rlcells">${x.cells.map((v, k) => `<span><span class="muted small">${heads[k]}</span> ${v}</span>`).join("")}</div></div>`;
@@ -226,6 +226,11 @@
     const b = e.target.closest("[data-rtab]"); if (!b) return;
     RL.tab = b.dataset.rtab; redraw();
   });
+  // Opening a player from a lead shows the lead's stat on his player page (same per-player choice the stat tabs set).
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("[data-rmid]"); if (!a) return;
+    try { S.market[a.dataset.rpid] = a.dataset.rmid; } catch (err) { console.error(err); }
+  }, true);
   document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-mk") { RL.mk = e.target.value; redraw(); } });
 
   function safeHtml() { try { return html(); } catch (e) { console.error("research leads failed", e); return ""; } }
