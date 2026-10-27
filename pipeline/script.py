@@ -19,6 +19,10 @@ PATH = DATA / "game_script.json"
 TAG = "pbp"
 FILE = f"play_by_play_{SEASON}.csv.gz"
 MARGINS = (7, 10, 13, 14, 17, 21)  # points; the app lets the user pick which margin counts as "big" (Guide tab)
+VERSION = 2  # bump when compute() output changes so the next run recomputes even if nflverse hasn't republished
+# Definitions (shown in the app next to each number):
+NEUTRAL_MARGIN = 7       # neutral pass rate: plays with the score within 7, quarters 1-3
+STATE_MARGIN = 13        # pass rate by score: up 13+ / within 6 / down 13+
 
 
 def _remote_ts() -> str | None:
@@ -65,8 +69,51 @@ def compute(rows) -> dict:
                     secs[f"l{m}"] += dt
                 if d <= -m:
                     secs[f"t{m}"] += dt
-        out[gid] = {"h": {k: round(v / 60, 1) for k, v in secs.items()}, "min": round(total / 60, 1)}
+        home = plays[0].get("home_team")
+        out[gid] = {"h": {k: round(v / 60, 1) for k, v in secs.items()}, "min": round(total / 60, 1),
+                    "flow": _flow(plays), "t": {"h": _team(plays, home), "a": _team(plays, plays[0].get("away_team"))}}
     return out
+
+
+def _elapsed(p):
+    return round((3600 - _num(p["game_seconds_remaining"])) / 60, 2)
+
+
+def _flow(plays) -> list:
+    """Home team's score margin each time it changes: [[minute elapsed, margin], ...], starting at [0, 0]."""
+    out, last = [[0, 0]], 0
+    for p in plays:
+        d = (_num(p.get("total_home_score")) or 0) - (_num(p.get("total_away_score")) or 0)
+        if d != last:
+            out.append([_elapsed(p), int(d)])
+            last = d
+    out.append([round(max(60.0, _elapsed(plays[-1])), 2), int(last)])
+    return out
+
+
+def _is_play(p) -> bool:
+    return (p.get("pass") == "1" or p.get("rush") == "1") and p.get("qb_kneel") != "1" and p.get("qb_spike") != "1"
+
+
+def _team(plays, team) -> dict:
+    """Per-team pass counts for one game (counts, so the app can add games up into season totals):
+    np/npp = neutral plays / passes (score within NEUTRAL_MARGIN, quarters 1-3); up/cl/dn = [plays, passes] when the
+    offense was up STATE_MARGIN+, within STATE_MARGIN - 7, or down STATE_MARGIN+ before the play."""
+    st = {"np": 0, "npp": 0, "up": [0, 0], "cl": [0, 0], "dn": [0, 0]}
+    for p in plays:
+        if p.get("posteam") != team or not _is_play(p):
+            continue
+        sd = _num(p.get("score_differential")) or 0  # offense's margin before the play
+        ps = 1 if p.get("pass") == "1" else 0
+        q = _num(p.get("qtr"))
+        if q is not None and q <= 3 and abs(sd) <= NEUTRAL_MARGIN:
+            st["np"] += 1
+            st["npp"] += ps
+        k = "up" if sd >= STATE_MARGIN else "dn" if sd <= -STATE_MARGIN else "cl" if abs(sd) <= STATE_MARGIN - 7 else None
+        if k:
+            st[k][0] += 1
+            st[k][1] += ps
+    return st
 
 
 def refresh(log: list) -> bool:
@@ -76,7 +123,7 @@ def refresh(log: list) -> bool:
     if not ts:
         log.append("game script: nflverse play-by-play timestamp unavailable; kept previous")
         return False
-    if old.get("source_updated") == ts and old.get("margins") == list(MARGINS):
+    if old.get("source_updated") == ts and old.get("margins") == list(MARGINS) and old.get("v") == VERSION:
         return False
     body, _, status = http_get(f"{NFLVERSE}/{TAG}/{FILE}", timeout=240)
     if status != 200:
@@ -84,7 +131,7 @@ def refresh(log: list) -> bool:
         return False
     rows = csv.DictReader(io.StringIO(gzip.decompress(body).decode("utf-8")))
     games = compute(rows)
-    write_json(PATH, {"source_updated": ts, "fetched_utc": iso(utcnow()), "margins": list(MARGINS),
+    write_json(PATH, {"source_updated": ts, "fetched_utc": iso(utcnow()), "margins": list(MARGINS), "v": VERSION,
                       "url": f"https://github.com/nflverse/nflverse-data/releases/tag/{TAG}", "games": games})
     log.append(f"game script: {len(games)} games from nflverse play-by-play ({ts})")
     return True

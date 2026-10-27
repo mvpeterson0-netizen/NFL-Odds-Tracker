@@ -597,7 +597,10 @@ def build(log):
         h = x["h"]
         # minutes the home ("h") and away ("a") team led ("l<margin>") or trailed ("t<margin>") by each margin;
         # away is the mirror of home (away leading = home trailing)
-        return {"h": h, "a": {("t" if k[0] == "l" else "l") + k[1:]: v for k, v in h.items()}, "min": x.get("min")}
+        return {"h": h, "a": {("t" if k[0] == "l" else "l") + k[1:]: v for k, v in h.items()}, "min": x.get("min"),
+                # game-flow chart (home margin at each score) and per-team pass counts (neutral / by score);
+                # see pipeline/script.py for definitions
+                "flow": x.get("flow"), "t": x.get("t")}
     wx = load_weather()
 
     def wx_out(gid):
