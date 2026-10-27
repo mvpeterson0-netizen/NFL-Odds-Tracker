@@ -865,7 +865,7 @@ function weekLinesPanel() {
 }
 
 function viewGuide() {
-  return `${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
+  return `${window.alertsPanel ? window.alertsPanel() : ""}${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
     <section id="g-guide"><h2 class="gsec">Guide</h2>${guideBody()}</section>
     <section id="g-log"><h2 class="gsec">Log &amp; sources</h2>${viewLog(LIVE)}</section>`;
 }
