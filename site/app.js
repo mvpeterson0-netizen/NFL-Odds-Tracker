@@ -327,6 +327,11 @@ function niceStep(range, target = 5) {
   for (const f of [1, 2, 2.5, 5, 10]) if (raw <= f * mag) return f * mag;
   return 10 * mag;
 }
+// Actual-stat number goes on the far side of the dot from the pre-game line: below the dot when the actual finished
+// under the line, above it otherwise (over, push, or no line). Falls back to above when there's no room at the bottom.
+function actBelow(p, ys, H, B, fs) {
+  return p.act != null && p.line != null && p.act < p.line && ys(p.act) + 9 + fs <= H - B - 2;
+}
 // Chooses above / below for each line or snapshot label so it does not overlap the actual-stat number,
 // the actual dot, a marker, or another label. Boxes are estimated from the font size.
 function placeLabels(labels, pts, { xs, ys, W, H, B, fs }) {
@@ -337,7 +342,8 @@ function placeLabels(labels, pts, { xs, ys, W, H, B, fs }) {
     const x = xs(i);
     if (p.act != null) {
       const ya = ys(p.act), w = String(num(p.act)).length * cw;
-      obstacles.push({ l: x - w / 2, r: x + w / 2, t: ya - 9 - fs, b: ya - 9 + 3 }); // actual number
+      obstacles.push(actBelow(p, ys, H, B, fs) ? { l: x - w / 2, r: x + w / 2, t: ya + 9, b: ya + 9 + fs + 3 }
+        : { l: x - w / 2, r: x + w / 2, t: ya - 9 - fs, b: ya - 9 + 3 }); // actual number
       obstacles.push({ l: x - 5, r: x + 5, t: ya - 5, b: ya + 5 }); // actual dot
     }
     for (const v of [p.line, p.proj ? p.proj.line : null]) if (v != null) obstacles.push({ l: x - 14, r: x + 14, t: ys(v) - 2, b: ys(v) + 2 });
@@ -358,7 +364,7 @@ function placeLabels(labels, pts, { xs, ys, W, H, B, fs }) {
     // Candidates: just above / just below the marker, then one or two rows further out if both are taken.
     let best = null;
     for (let k = 0; k < 3; k++) {
-      for (const dir of [-1, 1]) {
+      for (const dir of lb.side ? [lb.side] : [-1, 1]) {
         const t = dir < 0 ? lb.y - gap - fs - k * (fs + 2) : lb.y + gap + k * (fs + 2);
         const box = { l: cx - w / 2, r: cx + w / 2, t, b: t + fs };
         const score = obstacles.reduce((s, o) => s + hit(box, o), 0) + 0.3 * path.reduce((s, o) => s + hit(box, o), 0) +
@@ -414,17 +420,19 @@ function chartSVG(rows, mid, o = {}) {
       const col = res === "over" ? "var(--over)" : res === "under" ? "var(--under)" : "var(--ink)";
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${ys(p.line)}" y2="${ys(p.line)}" stroke="${col}" stroke-width="3"><title>W${p.wk} pre-game line ${num(p.line)} (${esc(p.m.book || "")})</title></line>
 `;
-      labels.push({ i, x, y: ys(p.line), text: num(p.line), fill: col });
+      // pre-game line label on the side away from the actual dot: above the bar when the actual finished under, below when over
+      const side = p.act == null || p.act === p.line ? 0 : p.act < p.line ? -1 : 1;
+      labels.push({ i, x, y: ys(p.line), text: num(p.line), fill: col, side });
     }
     if (p.proj) {
       const y = ys(p.proj.line);
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${y}" y2="${y}" stroke="var(--warn-ink)" stroke-width="3" stroke-dasharray="4 3"><title>W${p.wk} ${esc(p.proj.label)} snapshot ${num(p.proj.line)} (${esc(p.proj.book)}, ${esc(fmtTime(p.proj.cap))}). Not graded; replaced by the pre-game line.</title></line>
 `;
-      labels.push({ i, x, y, text: `${num(p.proj.line)} ${esc(p.proj.label)}`, fill: "var(--warn-ink)" });
+      labels.push({ i, x, y, text: num(p.proj.line), fill: "var(--warn-ink)" }); // number only; which pull it came from is in the hover text and the Line movement panel
     }
     if (p.act != null) {
       g += `<circle cx="${x}" cy="${ys(p.act)}" r="4.5" fill="var(--accent)"><title>W${p.wk} actual ${num(p.act)}</title></circle>
-        <text x="${x}" y="${ys(p.act) - 9}" text-anchor="middle" font-size="${fs}" fill="var(--accent)">${num(p.act)}</text>`;
+        <text x="${x}" y="${actBelow(p, ys, H, B, fs) ? ys(p.act) + 9 + fs - 2 : ys(p.act) - 9}" text-anchor="middle" font-size="${fs}" fill="var(--accent)">${num(p.act)}</text>`;
     }
     if (p.r.played === false) g += `<text x="${x}" y="${ys(min) - 6}" text-anchor="middle" font-size="${fs - 1}" fill="var(--muted)">DNP</text>`;
   });
