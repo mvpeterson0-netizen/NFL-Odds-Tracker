@@ -173,13 +173,13 @@
     const mine = live().find((p) => p.id === id);
     const ln = lineNow(r.m[mid]);
     const head = `<div class="pk-h"><div><b>Week ${r.wk} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${esc(mk.label)}</b><div class="muted small">${fmtTime(r.ko)}${ln ? ` · ${esc(ln.book)}` : ""}</div></div>
-      ${ln ? `<div class="pk-line"><b>${lineNum(ln.line)}</b>${ln.src !== "Pre-game" ? ` <span class="chip snapchip">${esc(ln.src)}</span>` : ""}</div>` : ""}</div>`;
+      ${ln ? `<div class="pk-line"><b>${lineNum(ln.line)}</b></div>` : ""}</div>`;
     if (!ln) return `<div class="pickbox">${head}<p class="muted small">No line posted yet for this market. Pick buttons appear once one is captured.</p></div>`;
     const btn = (s) => {
       const on = mine && mine.side === s;
       return `<button class="pk-btn ${on ? "on" : ""}" data-pick="${s}" data-pid="${esc(pid)}" data-pmid="${esc(mid)}">${on ? "✓ " : ""}${sideWord(s)} ${lineNum(on ? mine.line : ln.line)}</button>`;
     };
-    let note = `<span class="muted small">Tap Over or Under to add it to your picks · tap again to remove · locks at kickoff</span>`;
+    let note = "";
     if (mine) {
       note = `<span class="small">Saved: <b>${sideWord(mine.side)} ${lineNum(mine.line)}</b> ${oddsTxt(mine.odds)} (${esc(mine.src)}, ${esc(mine.book)})${mine.line !== ln.line ? ` · line now ${lineNum(ln.line)}; tap the other side, or remove and re-add, to take the new line` : ""}</span>`;
     }
