@@ -582,6 +582,21 @@ def build(log):
                                "last_updated": "not published by ESPN",
                                "fetched_utc": espn_box.updated_utc() or "",
                                "url": "https://www.espn.com/nfl/scoreboard"}
+    gs = read_json(DATA / "game_script.json", {}) or {}
+    gs_games = gs.get("games") or {}
+    if gs_games:
+        sources = dict(sources)
+        sources["script"] = {"label": "nflverse play-by-play (game script: time leading / trailing by 10+ and 13+)",
+                             "last_updated": gs.get("source_updated", "unknown"), "fetched_utc": gs.get("fetched_utc", ""),
+                             "url": gs.get("url", "https://github.com/nflverse/nflverse-data/releases/tag/pbp")}
+
+    def scr_out(gid):
+        x = gs_games.get(gid)
+        if not x:
+            return None
+        h = x["h"]
+        # minutes the home ("h") and away ("a") team led ("l") or trailed ("t") by 10+ / 13+
+        return {"h": h, "a": {"l10": h["t10"], "t10": h["l10"], "l13": h["t13"], "t13": h["l13"]}, "min": x.get("min")}
     wx = load_weather()
 
     def wx_out(gid):
@@ -657,7 +672,8 @@ def build(log):
                                  "stadium": g.get("stadium", ""), "wx": wx_out(g["game_id"]),
                                  # final score (nflverse schedule), only once the game is final; used for game-script research tabs
                                  "as": _int_or_none(g.get("away_score")) if g.get("result", "") != "" else None,
-                                 "hs": _int_or_none(g.get("home_score")) if g.get("result", "") != "" else None} for g in games},
+                                 "hs": _int_or_none(g.get("home_score")) if g.get("result", "") != "" else None,
+                                 "scr": scr_out(g["game_id"])} for g in games},
         "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},
