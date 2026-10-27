@@ -630,8 +630,7 @@ function betBox(pid, mid) {
   if (!g || new Date(g.ko) <= new Date()) return "";
   const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens FanDuel with this bet on the slip"
     data-bet="${side === "Over" ? "o" : "u"}" data-pid="${esc(pid)}" data-bmid="${esc(mid)}">${side} ${num(e.point)} <span class="muted">${x.price == null ? "" : odds(x.price)}</span> ↗</a>` : "";
-  return `<div class="betbox"><span class="betlbl">Bet on FanDuel</span>${a("Over", o)}${a("Under", u)}
-    <span class="muted small betnote">FanDuel line as of ${fmtTime(e.cap)}. FanDuel shows its current line and odds on the slip before you place it.${window.STIX_PICKS && window.STIX_PICKS.enabled() ? " Tapping also saves it to your picks at this line." : ""}</span></div>`;
+  return `<div class="betbox"><span class="betlbl">Bet on FanDuel</span>${a("Over", o)}${a("Under", u)}</div>`;
 }
 // Tapping a FanDuel Over/Under button also records the pick in My picks (picks.js) at the line and odds shown here
 // (Michael's choice), then the link opens FanDuel as usual.
