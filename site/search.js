@@ -288,7 +288,7 @@
   }
 
   function run(spec, near = false) {
-    const wk = D.current_week, out = [];
+    const wk = (typeof defaultWeek === "function" ? defaultWeek() : D.current_week), out = [];
     for (const s of slotsShown(wk)) { // includes extra players when the "All players" switch is on
       const pos = s.slot.slice(0, 2);
       if (spec.pos.length && !spec.pos.includes(pos)) continue;
@@ -330,8 +330,8 @@
     return h + `<button type="button" class="brm" data-rm="${id}" title="Remove this row">×</button></div>`;
   }
   function builderHtml() {
-    const teams = [...new Set(D.slots.filter((x) => x.wk === D.current_week).map((x) => x.team))].sort();
-    const games = gamesFor(D.current_week);
+    const teams = [...new Set(D.slots.filter((x) => x.wk === (typeof defaultWeek === "function" ? defaultWeek() : D.current_week)).map((x) => x.team))].sort();
+    const games = gamesFor((typeof defaultWeek === "function" ? defaultWeek() : D.current_week));
     let h = `<div class="builder"><div class="btop">
       <span class="bpos">${["QB", "RB", "WR", "TE"].map((p) => `<label><input type="checkbox" data-pos="${p}" ${SPEC.pos.includes(p) ? "checked" : ""}> ${p}</label>`).join("")}</span>
       <select id="b-team"><option value="">All teams</option>${teams.map((t) => `<option ${t === SPEC.team ? "selected" : ""}>${t}</option>`).join("")}</select>
@@ -372,7 +372,7 @@
       }
       return t + `</tbody></table></div>`;
     };
-    let h = `<div class="sres"><span class="muted small">${rows.length} player${rows.length === 1 ? "" : "s"} in week ${D.current_week} match every condition.</span>
+    let h = `<div class="sres"><span class="muted small">${rows.length} player${rows.length === 1 ? "" : "s"} in week ${(typeof defaultWeek === "function" ? defaultWeek() : D.current_week)} match every condition.</span>
       <label class="small muted">Sort <select id="b-sort">${opt([["time", "Game time"], ["gapDown", "Biggest gap below"], ["gapUp", "Biggest gap above"]], SORT)}</select></label></div>`;
     if (rows.length) h += table(rows);
     else if (nearRows.length) h += `<h3 class="snear">Closest: ${nearRows.length} player${nearRows.length === 1 ? "" : "s"} who pass every condition but one</h3><p class="muted small">✗ marks the condition each one missed.</p>` + table(sorter(nearRows).slice(0, 40));

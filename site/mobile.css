@@ -111,3 +111,4 @@ main { padding: 10px 12px 32px; }
 /* Bet on DraftKings: label on top, Over / Under side by side */
 .betlbl { flex-basis: 100%; }
 .betbtn { flex: 1; justify-content: center; }
+.mfilters .flab { min-width: 0; } .mfilters .wkslider { width: 100%; } .mfilters .wkchip { font-size: 16px; padding: 8px 0; }

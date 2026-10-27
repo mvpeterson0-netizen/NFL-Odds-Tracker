@@ -102,7 +102,7 @@
     // Finished games' players go to the bottom (same order as the game chip row).
     items.sort((a, b) => (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
     let h = gameBar(wk) + `<div class="filters mfilters">
-      <label>Week ${weekSelect("f-wk", wk)}</label>
+      <div class="flab">Week ${weekSlider(wk)}</div>
       <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
       <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
       <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label></div>
@@ -137,7 +137,9 @@
     const ms = marketsFor(p.pos);
     const mid = S.market[pid] && ms.some((m) => m.id === S.market[pid]) ? S.market[pid] : ms[0].id;
     const mk = mkt[mid];
-    const cur = rows.find((r) => r.wk === S.wk) || rows.filter((r) => !r.final)[0] || rows[rows.length - 1];
+    // His next game that isn't finished (so a finished game's lines and line movement give way to next week's);
+    // a week the viewer picked on the Board takes priority.
+    const cur = (S.wkUser && rows.find((r) => r.wk === S.wk)) || rows.find((r) => !r.final) || rows[rows.length - 1];
     const m = cur ? cur.m[mid] : null;
     const f = cur ? form(pid, mid, p.pos, cur.wk) : { n: 0, avg: null, trend: null };
     let h = `<div class="mplayer">
