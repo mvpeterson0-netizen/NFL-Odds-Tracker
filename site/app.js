@@ -463,7 +463,11 @@ function chartSVG(rows, mid, o = {}) {
       const y = ys(p.proj.line);
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${y}" y2="${y}" stroke="var(--warn-ink)" stroke-width="3" stroke-dasharray="4 3"><title>W${p.wk} ${esc(p.proj.label)} snapshot ${num(p.proj.line)} (${esc(p.proj.book)}, ${esc(fmtTime(p.proj.cap))}). Not graded; replaced by the pre-game line.</title></line>
 `;
-      labels.push({ i, x, y, text: num(p.proj.line), fill: "var(--warn-ink)" }); // number only; which pull it came from is in the hover text and the Line movement panel
+      // snapshot label: below the dashed bar when it is lower than his most recent earlier pre-game line, above when higher;
+      // no earlier line or no change -> whichever side is clear (placeLabels)
+      const prev = pts.slice(0, i).reverse().find((q) => q.line != null);
+      const side = !prev || p.proj.line === prev.line ? 0 : p.proj.line < prev.line ? 1 : -1;
+      labels.push({ i, x, y, text: num(p.proj.line), fill: "var(--warn-ink)", side }); // number only; which pull it came from is in the hover text and the Line movement panel
     }
     if (p.act != null) {
       g += `<circle cx="${x}" cy="${ys(p.act)}" r="4.5" fill="var(--accent)"><title>W${p.wk} actual ${num(p.act)}</title></circle>
