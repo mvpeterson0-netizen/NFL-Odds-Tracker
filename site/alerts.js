@@ -4,7 +4,7 @@
 (function () {
   const SUPABASE_URL = "https://hewbbugkbycdkazlwspq.supabase.co";
   const SUPABASE_KEY = "sb_publishable_a_CTgL6PKT4kcUCc6CyJwg_AihMMe3G"; // public by design
-  const VAPID_PUBLIC = "REPLACE_WITH_MICHAELS_PUBLIC_KEY"; // public half of the alert signing key
+  const VAPID_PUBLIC = "BKuAVWCf9lScyffyEpxymTTDlcDvdw647fsgqaep7U9_hZvgJKeG7yUi4hXDdX1ROD1Qk4sgh3JnqLosnf2DvvI"; // public half of the alert signing key
   const A = { reg: null, sub: null, busy: false, msg: "", ready: false };
 
   const supported = () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
