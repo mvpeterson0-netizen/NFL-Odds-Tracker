@@ -258,3 +258,6 @@ details.rgame table { margin-top: 8px; }
 .scrh { font-weight: 650; }
 .scrtab { width: 100%; font-size: .92em; margin-top: 4px; }
 .scrtab td, .scrtab th { padding: 3px 4px; }
+
+/* Research Leads: "i" on Good / Bad script buttons opens the full rule */
+.rinfo { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-left: 4px; border: 1px solid currentColor; border-radius: 50%; font-size: 11px; font-weight: 700; font-style: italic; font-family: Georgia, serif; line-height: 1; opacity: .75; vertical-align: middle; }
