@@ -31,8 +31,8 @@
   }
   function open() {
     if (document.getElementById("wn-ov")) return;
-    const card = (it) => `<section class="wn-card">
-      <h3>${it.title}</h3><p>${it.text}</p>
+    const card = (it, i) => `<section class="wn-card">
+      <h3><span class="wn-num" aria-hidden="true">${i + 1}</span>${it.title}</h3><p>${it.text}</p>
       ${it.imgs.map(([src, w, h, alt]) => `<img src="${src}" width="${w}" height="${h}" alt="${alt}" loading="lazy">`).join("")}
       ${it.go ? `<a class="wn-go" href="${it.go[0]}">${it.go[1]} ›</a>` : ""}</section>`;
     const ov = document.createElement("div");

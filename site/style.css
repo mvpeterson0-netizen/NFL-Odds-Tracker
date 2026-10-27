@@ -268,8 +268,9 @@ body.wn-lock { overflow: hidden; }
 .wn-h { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 14px 0 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
 .wn-h b { font-size: 19px; }
 .wn-x { margin-left: auto; min-width: 40px; min-height: 40px; font-size: 16px; }
-.wn-card { padding: 14px 0 6px; border-bottom: 1px solid var(--line); }
-.wn-card h3 { margin: 0 0 4px; font-size: 16px; }
+.wn-card { padding: 16px 0 8px; border-bottom: 6px solid var(--bg); }
+.wn-card h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; padding: 9px 12px; font-size: 18px; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--panel)); border-left: 4px solid var(--accent); border-radius: 8px; }
+.wn-num { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--panel); font-size: 14px; font-weight: 700; }
 .wn-card p { margin: 0 0 10px; line-height: 1.4; }
 .wn-card img { display: block; width: 100%; height: auto; margin: 0 0 8px; border: 1px solid var(--line); border-radius: 10px; background: #fff; min-height: 0; }
 .wn-go { display: inline-block; margin: 0 0 8px; font-weight: 600; }
