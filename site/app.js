@@ -614,44 +614,23 @@ function viewPlayer(pid) {
   return h;
 }
 
-// "Bet on DraftKings": links that put the Over or Under on the DraftKings bet slip (from the latest pull; built in
-// pipeline/build.py from data/prop_links.csv). Shown only before kickoff and only when a link was captured.
-// DraftKings bet-slip links stop working once DK changes the selection, so a link older than BET_LINK_MAX_MIN
-// minutes is treated as stale and its buttons are hidden (they come back when a newer pull brings fresh links).
-const BET_LINK_MAX_MIN = 60;
-function betLinkFresh(e) {
-  const t = Date.parse(e && e.cap);
-  return Number.isFinite(t) && Date.now() - t <= BET_LINK_MAX_MIN * 60000;
-}
+// "Open <player> <tab> in DK": opens the game on DraftKings at the stat's tab (Passing / Rushing / Receiving), built from
+// DraftKings' game id ("ev", added by pipeline/build.py from the links saved with each pull). Shown before kickoff for
+// players DraftKings had a line for in the latest pull. Exact bet-slip links (Over / Under onto the slip) are not shown:
+// they fail once DraftKings changes the market and we can't tell beforehand which still work (Michael's 2026-10-27
+// test), so Michael asked to show only this link. Tab names confirmed by that test.
+const DK_TAB = { pass_yds: "passing", pass_att: "passing", pass_cmp: "passing", rush_att: "rushing", rush_yds: "rushing",
+  rec: "receiving", rec_yds: "receiving" };
 function betBox(pid, mid) {
-  const e = ((((D.links || {})[pid] || {})[mid]) || {}).draftkings;
-  if (!e || !(e.o || e.u)) return "";
-  if (!betLinkFresh(e)) return "";
+  const e = ((((D.links || {})[pid] || {})[mid]) || {}).draftkings, t = DK_TAB[mid], p = playerById[pid];
+  if (!e || !t || !p || !/^\d+$/.test(e.ev || "")) return "";
   const g = D.games[e.gid];
   if (!g || new Date(g.ko) <= new Date()) return "";
-  const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens DraftKings with this bet on the slip"
-    data-bet="${side === "Over" ? "o" : "u"}" data-pid="${esc(pid)}" data-bmid="${esc(mid)}">${side} ${num(e.point)} <span class="muted">${x.price == null ? "" : odds(x.price)}</span> ↗</a>` : "";
-  return `<div class="betbox"><span class="betlbl">Bet on DraftKings</span>${a("Over", e.o)}${a("Under", e.u)}
-    <span class="muted small betnote">Line as of ${fmtTime(e.cap)}; DraftKings shows its current line and odds before you place it.${window.STIX_PICKS && window.STIX_PICKS.enabled() ? " Tapping also saves it to your picks." : ""}</span></div>`;
+  const url = `https://sportsbook.draftkings.com/event/${e.ev}?category=odds&subcategory=${t}`;
+  const tab = t[0].toUpperCase() + t.slice(1);
+  return `<div class="betbox"><a class="betbtn betalt" href="${esc(url)}" target="_blank" rel="noopener" title="Opens this game on DraftKings at the ${esc(tab)} tab">Open ${esc(p.name)} ${esc(tab)} in DK ↗</a>
+    <span class="muted small betnote">DraftKings line ${num(e.point)} as of ${fmtTime(e.cap)}. It's in the ${esc(tab)} tab's O/U section.</span></div>`;
 }
-// Tapping a DraftKings button also records the pick in My picks (picks.js), then the link opens DraftKings as usual.
-document.addEventListener("click", (ev) => {
-  const b = ev.target.closest && ev.target.closest("[data-bet]");
-  if (!b) return;
-  // A page left open can show a button whose link has since gone stale: don't open DraftKings or save the pick.
-  try {
-    if (!betLinkFresh(D.links[b.dataset.pid][b.dataset.bmid].draftkings)) {
-      ev.preventDefault();
-      const box = b.closest(".betbox"); if (box) box.remove();
-      return;
-    }
-  } catch (err) { /* fall through */ }
-  if (!window.STIX_PICKS) return;
-  try {
-    const e = D.links[b.dataset.pid][b.dataset.bmid].draftkings, x = b.dataset.bet === "o" ? e.o : e.u;
-    window.STIX_PICKS.recordBet(b.dataset.pid, b.dataset.bmid, b.dataset.bet, { line: e.point, odds: x.price, cap: e.cap, gid: e.gid });
-  } catch (err) { console.error("pick from bet link failed", err); }
-});
 
 // My picks box (picks.js). Empty unless this browser has the owner's picks key; never breaks the page.
 function pickBoxSafe(pid, mid) {
