@@ -261,3 +261,16 @@ details.rgame table { margin-top: 8px; }
 
 /* Research Leads: "i" on Good / Bad script buttons opens the full rule */
 .rinfo { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-left: 4px; border: 1px solid currentColor; border-radius: 50%; font-size: 11px; font-weight: 700; font-style: italic; font-family: Georgia, serif; line-height: 1; opacity: .75; vertical-align: middle; }
+
+/* What's new pop-up (whatsnew.js) */
+body.wn-lock { overflow: hidden; }
+.wn-box { max-width: 460px; max-height: 88vh; overflow-y: auto; padding: 0 16px 16px; -webkit-overflow-scrolling: touch; }
+.wn-h { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 8px; padding: 14px 0 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.wn-h b { font-size: 19px; }
+.wn-x { margin-left: auto; min-width: 40px; min-height: 40px; font-size: 16px; }
+.wn-card { padding: 14px 0 6px; border-bottom: 1px solid var(--line); }
+.wn-card h3 { margin: 0 0 4px; font-size: 16px; }
+.wn-card p { margin: 0 0 10px; line-height: 1.4; }
+.wn-card img { display: block; width: 100%; height: auto; margin: 0 0 8px; border: 1px solid var(--line); border-radius: 10px; background: #fff; min-height: 0; }
+.wn-go { display: inline-block; margin: 0 0 8px; font-weight: 600; }
+.wn-ok { display: block; width: 100%; margin-top: 14px; min-height: 44px; font-weight: 600; }
