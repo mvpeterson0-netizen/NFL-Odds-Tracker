@@ -1,10 +1,22 @@
 "use strict";
 // Stix Research tab: pre-built "Leads" filters shown as tabs above the builder (search.js).
-// Uses only data already in data.json (players' per-game rows, lines, usage; game final scores for the game-script tabs).
+// Uses only data already in data.json (players' per-game rows, lines, usage; game script minutes from play-by-play).
 // Every rule is spelled out in the tab's description so a reader can check it. These are leads, not predictions.
 (function () {
   const RL = { tab: "move", mk: "" };
-  const SCRIPT_MARGIN = 10;       // a game counts as lopsided when the final margin is 10+ points
+  // Game script (nflverse play-by-play, built into games[gid].scr as minutes leading "l<m>" / trailing "t<m>" by each
+  // margin m): a team "led big" when ahead by MARGIN+ points for at least MINUTES of the game, "trailed big" likewise.
+  // Default 13+ for 30 minutes (Michael's choice); each viewer can change both on the Guide tab (saved in this browser).
+  const SCRIPT_DEFAULT = { margin: 13, minutes: 30 };
+  const SCRIPT_MINUTES = [10, 15, 20, 25, 30, 35, 40, 45];
+  const SCRIPT = (() => {
+    try { const v = JSON.parse(localStorage.getItem("stix_script") || "null"); if (v && v.margin && v.minutes) return { margin: +v.margin, minutes: +v.minutes }; } catch { /* default */ }
+    return { ...SCRIPT_DEFAULT };
+  })();
+  function scriptMargins() {
+    for (const g of Object.values(D.games)) if (g.scr && g.scr.h) return Object.keys(g.scr.h).filter((k) => k[0] === "l").map((k) => +k.slice(1)).sort((a, b) => a - b);
+    return [];
+  }
   const USAGE_RISE = { tshare: 5, snap: 10 }; // percentage points (last 2 games vs his earlier games)
   const FLAT = { count: 0.5, yds: 5, pass_yds: 10 }; // "line unchanged" tolerance
   const COUNT_MKTS = ["rec", "rush_att", "pass_att", "pass_cmp"];
@@ -25,7 +37,7 @@
       desc: () => scriptDesc("in his favor", "over", "higher") },
   ];
   function scriptDesc(way, ou, hl) {
-    return `His previous game was lopsided (final margin <b>${SCRIPT_MARGIN}+ points</b>) ${way}, he finished <b>${ou}</b> that game's line, and this week's line is <b>${hl}</b>. Game script rule of thumb: a big lead means more running and fewer passes, so a big <b>win</b> helps RBs and works against QBs, WRs and TEs; a big <b>loss</b> (playing from behind) means more passing, which helps QBs, WRs and TEs and works against RBs. Based on the final score only, not how the game unfolded. Ranked by size of the line change ÷ his usual game-to-game swing.`;
+    return `In his previous game the game script went ${way}, he finished <b>${ou}</b> that game's line, and this week's line is <b>${hl}</b>. Game script = how long his team spent with a big lead or deficit: <b>led big</b> = ahead by ${SCRIPT.margin}+ points for at least ${SCRIPT.minutes} of the game's minutes, <b>trailed big</b> = behind by ${SCRIPT.margin}+ for at least ${SCRIPT.minutes} minutes (from nflverse play-by-play; <a href="#/guide">change the margin and minutes on the Guide tab</a>). Rule of thumb: a team with a big lead runs more and passes less, so leading big helps RBs and works against QBs, WRs and TEs; playing from far behind means more passing, which helps QBs, WRs and TEs and works against RBs. Ranked by size of the line change ÷ his usual game-to-game swing.`;
   }
 
   // ---------- helpers ----------
@@ -42,18 +54,64 @@
     return v > 0 ? Math.sqrt(v) : null;
   }
   const signed = (v, d = 1) => (v > 0 ? "+" : v < 0 ? "−" : "") + num(Math.abs(v), d);
-  function teamResult(gid, team) {
+  // Game script for a team in a game: minutes leading / trailing by 10+ and 13+, and whether it counts as big.
+  function scriptInfo(gid, team) {
     const g = D.games[gid];
-    if (!g || g.as == null || g.hs == null) return null;
-    const home = g.home === team, us = home ? g.hs : g.as, them = home ? g.as : g.hs;
-    return { margin: us - them, txt: `${us > them ? "W" : us < them ? "L" : "T"} ${us}–${them} ${home ? "vs" : "@"} ${home ? g.away : g.home}` };
+    if (!g || !g.scr) return null;
+    const home = g.home === team, x = g.scr[home ? "h" : "a"]; if (!x) return null;
+    const us = home ? g.hs : g.as, them = home ? g.as : g.hs;
+    const score = us == null || them == null ? "" : `${us > them ? "W" : us < them ? "L" : "T"} ${us}–${them} ${home ? "vs" : "@"} ${home ? g.away : g.home}`;
+    const M = SCRIPT.margin, l = x["l" + M], t = x["t" + M];
+    if (l == null || t == null) return null; // margin not in the data
+    const led = l >= SCRIPT.minutes, trailed = t >= SCRIPT.minutes;
+    return { x, l, t, score, led, trailed, big: led !== trailed ? (led ? "led" : "trailed") : null };
   }
-  // script for a position given the team's final margin: +1 helped, -1 hurt, 0 neither
-  function scriptFor(pos, margin) {
-    if (Math.abs(margin) < SCRIPT_MARGIN) return 0;
-    const won = margin > 0;
-    return pos === "RB" ? (won ? 1 : -1) : (won ? -1 : 1);
+  // +1 the script helped this position, -1 it worked against him, 0 neither
+  function scriptFor(pos, info) {
+    if (!info || !info.big) return 0;
+    const led = info.big === "led";
+    return pos === "RB" ? (led ? 1 : -1) : (led ? -1 : 1);
   }
+  const scriptTxt = (info) => `${info.big === "led" ? "Led" : "Trailed"} by ${SCRIPT.margin}+ for ${Math.round(info.big === "led" ? info.l : info.t)} min`;
+
+  // ---------- game script indicator on player game logs (tap for a pop-up) ----------
+  function badge(gid, team, pos) {
+    try {
+      const info = scriptInfo(gid, team); if (!info || !info.big) return "";
+      const sc = scriptFor(pos, info), cls = sc > 0 ? "help" : "hurt", led = info.big === "led";
+      const tip = `${scriptTxt(info)} (${sc > 0 ? "helps" : "works against"} ${pos}s). Tap for details.`;
+      return `<span class="scrb ${cls}" role="button" tabindex="0" data-scr="${esc(gid)}|${esc(team)}|${esc(pos)}" title="${esc(tip)}">${led ? "Led big" : "Trailed big"}</span>`;
+    } catch (e) { console.error("game script badge failed", e); return ""; }
+  }
+  function closePop() { const o = document.getElementById("scr-ov"); if (o) o.remove(); }
+  function openPop(gid, team, pos) {
+    closePop();
+    const info = scriptInfo(gid, team); if (!info) return;
+    const g = D.games[gid], sc = scriptFor(pos, info), x = info.x;
+    const ov = document.createElement("div");
+    ov.id = "scr-ov"; ov.className = "share-ov";
+    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Game script">
+      <div class="nw-h"><b>Game script</b> <span class="muted">${esc(team)} · W${g.wk}</span><button class="nw-x" aria-label="Close">✕</button></div>
+      <p><b>${esc(info.score)}</b></p>
+      <table class="wrap scrt"><thead><tr><th>Margin</th><th class="num">Led</th><th class="num">Trailed</th></tr></thead><tbody>
+        ${scriptMargins().map((m) => `<tr class="${m === SCRIPT.margin ? "on" : ""}"><td>${m}+ points${m === SCRIPT.margin ? " <span class=\"muted small\">(your setting)</span>" : ""}</td><td class="num">${num(x["l" + m])} min</td><td class="num">${num(x["t" + m])} min</td></tr>`).join("")}
+      </tbody></table>
+      <p class="small">${info.big ? `<b>${esc(scriptTxt(info))}</b>: by the app's rule of thumb this <b>${sc > 0 ? "helped" : "worked against"}</b> ${esc(pos)}s (a team with a big lead runs more; a team far behind passes more).` : `Neither team led by ${SCRIPT.margin}+ for ${SCRIPT.minutes} minutes or more.`}</p>
+      <p class="muted small">Big = ${SCRIPT.margin}+ points for at least ${SCRIPT.minutes} of the game's minutes (change it on the Guide tab). Source: nflverse play-by-play (score at each play × game clock).</p></div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x")) closePop(); });
+  }
+  const popHandler = (e) => {
+    const b = e.target.closest && e.target.closest("[data-scr]"); if (!b) return;
+    if (e.type === "keydown" && e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault(); e.stopPropagation();
+    const [gid, team, pos] = b.dataset.scr.split("|");
+    try { openPop(gid, team, pos); } catch (err) { console.error("game script pop-up failed", err); }
+  };
+  document.addEventListener("click", popHandler, true);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePop(); else popHandler(e); }, true);
+  window.addEventListener("hashchange", closePop);
+
   function usageOf(pos, r) {
     if (pos === "RB") return r.snap == null ? null : r.snap;
     if (pos === "WR" || pos === "TE") return r.tshare == null ? null : r.tshare * 100;
@@ -111,12 +169,12 @@
         out.push({ c, size: Math.abs(rise), main: rise, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(a2)}%</b> <span class="muted small">(last 2: ${last2.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
       } else if (tab === "down" || tab === "up") {
         if (pl == null || !c.prev || c.pm.act == null) continue;
-        const tr = teamResult(c.prev.gid, c.r.team); if (!tr) continue;
-        const sc = scriptFor(c.p.pos, tr.margin), ch = c.cur.line - pl;
+        const info = scriptInfo(c.prev.gid, c.r.team); if (!info) continue;
+        const sc = scriptFor(c.p.pos, info), ch = c.cur.line - pl;
         const want = tab === "up" ? 1 : -1;
         if (sc !== want) continue;
         if (want === 1 ? !(c.pm.act > pl && ch > 0) : !(c.pm.act < pl && ch < 0)) continue;
-        out.push({ c, size: c.sd ? Math.abs(ch) / c.sd : null, main: ch, cells: [`${esc(tr.txt)}`, `${num(c.pm.act)} vs ${num(pl)}`, `${num(pl)} → <b>${num(c.cur.line)}</b> <b>${signed(ch)}</b>`] });
+        out.push({ c, size: c.sd ? Math.abs(ch) / c.sd : null, main: ch, cells: [`${esc(scriptTxt(info))} <span class="muted small">(${esc(info.score)})</span>`, `${num(c.pm.act)} vs ${num(pl)}`, `${num(pl)} → <b>${num(c.cur.line)}</b> <b>${signed(ch)}</b>`] });
       }
     }
     out.sort((a, b) => (b.size ?? -1) - (a.size ?? -1) || Math.abs(b.main) - Math.abs(a.main));
@@ -134,9 +192,9 @@
   function body() {
     const t = TABS.find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
-    const scoresMissing = (t.id === "down" || t.id === "up") && !Object.values(D.games).some((g) => g.as != null);
+    const scoresMissing = (t.id === "down" || t.id === "up") && !Object.values(D.games).some((g) => g.scr);
     let h = `<p class="callout small"><b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.</p>`;
-    if (scoresMissing) return h + `<p class="muted">Final scores aren't in the app's data yet, so this tab can't be filled.</p>`;
+    if (scoresMissing) return h + `<p class="muted">Game script data (nflverse play-by-play) isn't in the app's data yet, so this tab can't be filled.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
     const heads = HEADS[t.id];
     h += `<div class="panel rlist">`;
@@ -171,5 +229,31 @@
   document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-mk") { RL.mk = e.target.value; redraw(); } });
 
   function safeHtml() { try { return html(); } catch (e) { console.error("research leads failed", e); return ""; } }
-  window.STIX_RESEARCH = { html: safeHtml, compute, TABS };
+  // ---------- Guide tab setting ----------
+  function settingsHtml() {
+    const ms = scriptMargins();
+    if (!ms.length) return "";
+    const sel = (id, val, opts, suffix) => `<select id="${id}">${opts.map((v) => `<option value="${v}" ${v === val ? "selected" : ""}>${v}${suffix}</option>`).join("")}</select>`;
+    const isDef = SCRIPT.margin === SCRIPT_DEFAULT.margin && SCRIPT.minutes === SCRIPT_DEFAULT.minutes;
+    return `<div class="panel" id="g-script"><h3>Game script setting</h3><div class="body">
+      <p class="callout">A team <b>led big</b> (or <b>trailed big</b>) in a game when it was ahead (or behind) by at least the margin below for at least the minutes below, out of 60. Used by the <b>Led big / Trailed big</b> chips in player game logs and the <b>Good script / Bad script</b> filters on the Research tab. Saved in this browser only.</p>
+      <div class="filters"><label>Margin ${sel("gs-margin", SCRIPT.margin, ms, "+ points")}</label>
+        <label>For at least ${sel("gs-min", SCRIPT.minutes, SCRIPT_MINUTES, " minutes")}</label>
+        ${isDef ? `<span class="muted small">Default (${SCRIPT_DEFAULT.margin}+ for ${SCRIPT_DEFAULT.minutes} min)</span>` : `<button id="gs-reset" type="button">Reset to ${SCRIPT_DEFAULT.margin}+ for ${SCRIPT_DEFAULT.minutes} min</button>`}</div>
+      <p class="muted small">Rule of thumb behind the colors: a team with a big lead runs more and passes less, so leading big is shown as helping RBs (green) and working against QBs, WRs and TEs (red); trailing big is the reverse. Minutes come from nflverse play-by-play (score at each play × game clock).</p>
+    </div></div>`;
+  }
+  function saveScript() {
+    try { localStorage.setItem("stix_script", JSON.stringify(SCRIPT)); } catch { /* setting just won't persist */ }
+    try { render(); } catch (e) { console.error(e); }
+    const el = document.getElementById("g-script"); if (el) el.scrollIntoView({ block: "center" });
+  }
+  document.addEventListener("change", (e) => {
+    if (e.target && e.target.id === "gs-margin") { SCRIPT.margin = +e.target.value; saveScript(); }
+    if (e.target && e.target.id === "gs-min") { SCRIPT.minutes = +e.target.value; saveScript(); }
+  });
+  document.addEventListener("click", (e) => { if (e.target && e.target.id === "gs-reset") { Object.assign(SCRIPT, SCRIPT_DEFAULT); saveScript(); } });
+
+  function safeSettings() { try { return settingsHtml(); } catch (e) { console.error("game script setting failed", e); return ""; } }
+  window.STIX_RESEARCH = { html: safeHtml, compute, TABS, badge, settingsHtml: safeSettings };
 })();
