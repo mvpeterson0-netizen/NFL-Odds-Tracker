@@ -75,29 +75,102 @@
   const scriptTxt = (info) => `${info.big === "led" ? "Led" : "Trailed"} by ${SCRIPT.margin}+ for ${Math.round(info.big === "led" ? info.l : info.t)} min`;
 
   // ---------- game script indicator on player game logs (tap for a pop-up) ----------
-  function badge(gid, team, pos) {
+  function badge(gid, team, pos, pid) {
     try {
       const info = scriptInfo(gid, team); if (!info || !info.big) return "";
       const sc = scriptFor(pos, info), cls = sc > 0 ? "help" : "hurt", led = info.big === "led";
-      const tip = `${scriptTxt(info)} (${sc > 0 ? "helps" : "works against"} ${pos}s). Tap for details.`;
-      return `<span class="scrb ${cls}" role="button" tabindex="0" data-scr="${esc(gid)}|${esc(team)}|${esc(pos)}" title="${esc(tip)}">${led ? "Led big" : "Trailed big"}</span>`;
+      const tip = `${scriptTxt(info)} (${sc > 0 ? "helps" : "works against"} ${pos}s). Tap for the game script.`;
+      return `<span class="scrb ${cls}" role="button" tabindex="0" data-scr="${esc(gid)}|${esc(team)}|${esc(pos)}|${esc(pid || "")}" title="${esc(tip)}">${led ? "Led big" : "Trailed big"}</span>`;
     } catch (e) { console.error("game script badge failed", e); return ""; }
   }
+  // The opponent text in a game log row: tappable (opens the game script) when the game has play-by-play data.
+  function oppLink(gid, team, pos, pid, label) {
+    try {
+      const g = D.games[gid];
+      if (!g || !g.scr || !g.scr.flow) return label;
+      return `<span class="scrlink" role="button" tabindex="0" data-scr="${esc(gid)}|${esc(team)}|${esc(pos)}|${esc(pid || "")}" title="Tap for the game script">${label}</span>`;
+    } catch (e) { return label; }
+  }
+
+  // Season totals for a team: add up its per-game counts (games with play-by-play data).
+  function teamSeason(team) {
+    const tot = { g: 0, np: 0, npp: 0, up: [0, 0], cl: [0, 0], dn: [0, 0], last: 0 };
+    for (const g of Object.values(D.games)) {
+      if (!g.scr || !g.scr.t) continue;
+      const side = g.home === team ? "h" : g.away === team ? "a" : null; if (!side) continue;
+      const t = g.scr.t[side]; if (!t) continue;
+      tot.g++; tot.last = Math.max(tot.last, g.wk);
+      for (const k of ["np", "npp"]) tot[k] += t[k] || 0;
+      for (const k of ["up", "cl", "dn"]) { tot[k][0] += t[k][0]; tot[k][1] += t[k][1]; }
+    }
+    return tot;
+  }
+  const pct = (a, b) => (b ? `${Math.round((100 * a) / b)}%` : "—");
+  const pctN = (a, b) => (b ? `${Math.round((100 * a) / b)}% <span class="muted">(${b})</span>` : `<span class="muted">—</span>`);
+  function leaguePass() {
+    let n = 0, p = 0;
+    for (const g of Object.values(D.games)) if (g.scr && g.scr.t) for (const s of ["h", "a"]) { const t = g.scr.t[s]; if (t) { n += t.np; p += t.npp; } }
+    return pct(p, n);
+  }
+
+  // Game-flow chart: the team's score margin over the game (from each scoring change).
+  // info (scriptInfo) adds dashed lines at ± the big-margin setting and, when the margin went past one, the
+  // minutes beyond it written on the chart (top for leading, bottom for trailing).
+  function flowSvg(flow, home, info) {
+    const pts = flow.map(([m, d]) => [m, home ? d : -d]);
+    const hi = Math.max(0, ...pts.map((x) => x[1])), lo = Math.min(0, ...pts.map((x) => x[1]));
+    const T = [0, 7, 13, 21, 28, 35, 42, 49, 56];
+    const top = T.find((t) => t >= Math.max(13, hi)) || hi, bot = T.find((t) => t >= Math.max(13, -lo)) || -lo;
+    const W = 340, H = 190, L = 30, R = 8, Tp = 10, B = 22, end = Math.max(60, pts[pts.length - 1][0]);
+    const xs = (m) => L + ((W - L - R) * m) / end, ys = (v) => Tp + ((H - Tp - B) * (top - v)) / (top + bot);
+    let g = "";
+    const ticks = [...T.filter((t) => t <= top), ...T.filter((t) => t > 0 && t <= bot).map((t) => -t)].sort((a, b) => a - b);
+    for (const t of ticks) g += `<line x1="${L}" x2="${W - R}" y1="${ys(t)}" y2="${ys(t)}" stroke="var(--line)" stroke-width="${t === 0 ? 1.4 : 1}"/><text x="${L - 4}" y="${ys(t) + 3.5}" font-size="10" text-anchor="end" fill="var(--muted)">${t > 0 ? "+" : ""}${t}</text>`;
+    for (const q of [15, 30, 45]) g += `<line x1="${xs(q)}" x2="${xs(q)}" y1="${Tp}" y2="${H - B}" stroke="var(--line)" stroke-dasharray="2 3"/>`;
+    ["Q1", "Q2", "Q3", "Q4"].forEach((q, i) => { g += `<text x="${xs(7.5 + 15 * i)}" y="${H - 7}" font-size="10" text-anchor="middle" fill="var(--muted)">${q}</text>`; });
+    if (end > 60) g += `<text x="${xs((60 + end) / 2)}" y="${H - 7}" font-size="10" text-anchor="middle" fill="var(--muted)">OT</text>`;
+    let d = "", prev = 0;
+    pts.forEach(([m, v], i) => { d += i === 0 ? `M${xs(m)},${ys(v)}` : ` L${xs(m)},${ys(prev)} L${xs(m)},${ys(v)}`; prev = v; });
+    const area = `${d} L${xs(end)},${ys(prev)} L${xs(end)},${ys(0)} L${xs(0)},${ys(0)} Z`;
+    const id = "f" + Math.random().toString(36).slice(2, 7);
+    g += `<clipPath id="${id}u"><rect x="0" y="0" width="${W}" height="${ys(0)}"/></clipPath><clipPath id="${id}d"><rect x="0" y="${ys(0)}" width="${W}" height="${H}"/></clipPath>`;
+    g += `<path d="${area}" fill="var(--over)" opacity=".28" clip-path="url(#${id}u)"/><path d="${area}" fill="var(--under)" opacity=".28" clip-path="url(#${id}d)"/>`;
+    g += `<path d="${d} L${xs(end)},${ys(prev)}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;
+    if (info) {
+      const M = SCRIPT.margin;
+      for (const v of [M, -M]) g += `<line x1="${L}" x2="${W - R}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--warn-ink)" stroke-width="1" stroke-dasharray="5 3"/>`;
+      const big = (mins) => mins >= SCRIPT.minutes;
+      if (info.l > 0) g += `<text x="${L + 6}" y="${Tp + 12}" font-size="11.5" font-weight="700" fill="var(--over)">Led ${M}+ for ${Math.round(info.l)} min${big(info.l) ? " · big" : ""}</text>`;
+      if (info.t > 0) g += `<text x="${L + 6}" y="${H - B - 6}" font-size="11.5" font-weight="700" fill="var(--under)">Trailed ${M}+ for ${Math.round(info.t)} min${big(info.t) ? " · big" : ""}</text>`;
+    }
+    return `<svg viewBox="0 0 ${W} ${H}" class="flowsvg" role="img" aria-label="Score margin over the game">${g}</svg>`;
+  }
+
   function closePop() { const o = document.getElementById("scr-ov"); if (o) o.remove(); }
-  function openPop(gid, team, pos) {
+  function openPop(gid, team, pos, pid) {
     closePop();
-    const info = scriptInfo(gid, team); if (!info) return;
-    const g = D.games[gid], sc = scriptFor(pos, info), x = info.x;
+    const g = D.games[gid]; if (!g || !g.scr) return;
+    const info = scriptInfo(gid, team), home = g.home === team, opp = home ? g.away : g.home;
+    const my = (g.scr.t || {})[home ? "h" : "a"], th = (g.scr.t || {})[home ? "a" : "h"];
+    const S1 = teamSeason(team), S2 = teamSeason(opp);
+    const row = (...c) => `<tr>${c.map((x, i) => `<td${i ? ' class="num"' : ""}>${x}</td>`).join("")}</tr>`;
+    const sec = (title, sub, body) => `<div class="scrsec"><div class="scrh">${title}</div>${sub ? `<div class="muted small">${sub}</div>` : ""}${body}</div>`;
+    let h = `<div class="share-box nw-box scrbox" role="dialog" aria-label="Game script">
+      <div class="nw-h"><b>Game script</b> <span class="muted">${esc(team)} · W${g.wk}</span><button class="nw-x" aria-label="Close">✕</button></div>
+      <p><b>${esc(info ? info.score : gameLabel(gid))}</b></p>`;
+    if (g.scr.flow) h += flowSvg(g.scr.flow, home, info);
+    if (my && th) {
+      h += sec("Neutral pass rate", "Pass share of plays with the score within 7, quarters 1–3 (true run/pass tendency)",
+        `<table class="wrap scrtab"><thead><tr><th></th><th class="num">This game</th><th class="num">Season</th></tr></thead><tbody>
+        ${row(esc(team), pctN(my.npp, my.np), pctN(S1.npp, S1.np))}${row(esc(opp), pctN(th.npp, th.np), pctN(S2.npp, S2.np))}${row("League", "", leaguePass())}</tbody></table>`);
+      h += sec("Pass rate by score", "Season pass share when up 13+, within 6, down 13+",
+        `<table class="wrap scrtab"><thead><tr><th></th><th class="num">Up 13+</th><th class="num">Within 6</th><th class="num">Down 13+</th></tr></thead><tbody>
+        ${row(esc(team), pctN(S1.up[1], S1.up[0]), pctN(S1.cl[1], S1.cl[0]), pctN(S1.dn[1], S1.dn[0]))}${row(esc(opp), pctN(S2.up[1], S2.up[0]), pctN(S2.cl[1], S2.cl[0]), pctN(S2.dn[1], S2.dn[0]))}</tbody></table>`);
+    }
+    h += `<p class="muted small">Dashed lines = your big-margin setting (${SCRIPT.margin}+; "big" = ${SCRIPT.minutes}+ min, Guide tab). Season = ${S1.g} games with play-by-play through W${S1.last}. Source: nflverse play-by-play.</p></div>`;
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
-    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Game script">
-      <div class="nw-h"><b>Game script</b> <span class="muted">${esc(team)} · W${g.wk}</span><button class="nw-x" aria-label="Close">✕</button></div>
-      <p><b>${esc(info.score)}</b></p>
-      <table class="wrap scrt"><thead><tr><th>Margin</th><th class="num">Led</th><th class="num">Trailed</th></tr></thead><tbody>
-        ${scriptMargins().map((m) => `<tr class="${m === SCRIPT.margin ? "on" : ""}"><td>${m}+ points${m === SCRIPT.margin ? " <span class=\"muted small\">(your setting)</span>" : ""}</td><td class="num">${num(x["l" + m])} min</td><td class="num">${num(x["t" + m])} min</td></tr>`).join("")}
-      </tbody></table>
-      <p class="small">${info.big ? `<b>${esc(scriptTxt(info))}</b>: by the app's rule of thumb this <b>${sc > 0 ? "helped" : "worked against"}</b> ${esc(pos)}s (a team with a big lead runs more; a team far behind passes more).` : `Neither team led by ${SCRIPT.margin}+ for ${SCRIPT.minutes} minutes or more.`}</p>
-      <p class="muted small">Big = ${SCRIPT.margin}+ points for at least ${SCRIPT.minutes} of the game's minutes (change it on the Guide tab). Source: nflverse play-by-play (score at each play × game clock).</p></div>`;
+    ov.innerHTML = h;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x")) closePop(); });
   }
@@ -105,8 +178,8 @@
     const b = e.target.closest && e.target.closest("[data-scr]"); if (!b) return;
     if (e.type === "keydown" && e.key !== "Enter" && e.key !== " ") return;
     e.preventDefault(); e.stopPropagation();
-    const [gid, team, pos] = b.dataset.scr.split("|");
-    try { openPop(gid, team, pos); } catch (err) { console.error("game script pop-up failed", err); }
+    const [gid, team, pos, pid] = b.dataset.scr.split("|");
+    try { openPop(gid, team, pos, pid); } catch (err) { console.error("game script pop-up failed", err); }
   };
   document.addEventListener("click", popHandler, true);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePop(); else popHandler(e); }, true);
@@ -260,5 +333,5 @@
   document.addEventListener("click", (e) => { if (e.target && e.target.id === "gs-reset") { Object.assign(SCRIPT, SCRIPT_DEFAULT); saveScript(); } });
 
   function safeSettings() { try { return settingsHtml(); } catch (e) { console.error("game script setting failed", e); return ""; } }
-  window.STIX_RESEARCH = { html: safeHtml, compute, TABS, badge, settingsHtml: safeSettings };
+  window.STIX_RESEARCH = { html: safeHtml, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
 })();
