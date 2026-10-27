@@ -172,7 +172,7 @@
       const mm = r.m[mid] || {};
       const w = D.games[r.gid] && D.games[r.gid].wx ? wxSummary(D.games[r.gid].wx) : null;
       const em = D.games[r.gid] && D.games[r.gid].wx && D.games[r.gid].wx.roof === "dome" ? "🏟️" : w ? (w.label.match(/\p{Extended_Pictographic}/u) || [""])[0] : "";
-      h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} ${oppHtml(mm)} ${em}${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos) : ""}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
+      h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${window.STIX_RESEARCH ? window.STIX_RESEARCH.oppLink(r.gid, r.team, p.pos, pid, `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`) : `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`} ${oppHtml(mm)} ${em}${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos, pid) : ""}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
         <span>${lineHtml(mm)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0) + `<span class="tsh">${pctS(r.tshare)}</span>`}</span>` : ""}<span>${snapCell(r)}</span></div>`;
     }
     h += `</div></div>`;

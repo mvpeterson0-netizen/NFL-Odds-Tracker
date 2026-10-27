@@ -251,3 +251,10 @@ details.rgame table { margin-top: 8px; }
 .wkslider::-webkit-scrollbar { display: none; }
 .wkchip { flex: 0 0 50%; scroll-snap-align: start; border: 0; background: transparent; color: inherit; padding: 6px 0; font: inherit; font-weight: 600; cursor: pointer; border-radius: 7px; }
 .wkchip.on { background: var(--accent); color: #fff; }
+.scrlink { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+.scrbox { max-height: 88vh; overflow-y: auto; }
+.flowsvg { width: 100%; height: auto; display: block; margin: 4px 0 2px; }
+.scrsec { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 8px; }
+.scrh { font-weight: 650; }
+.scrtab { width: 100%; font-size: .92em; margin-top: 4px; }
+.scrtab td, .scrtab th { padding: 3px 4px; }

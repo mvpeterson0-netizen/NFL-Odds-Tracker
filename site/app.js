@@ -594,7 +594,7 @@ function viewPlayer(pid) {
   for (const r of rows) {
     const m = r.m[mid];
     const nt = notes(r, m, null);
-    h += `<tr><td>${r.wk}</td><td title="${esc(fmtTime(r.ko))}">${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)} ${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos) : ""}</td>
+    h += `<tr><td>${r.wk}</td><td title="${esc(fmtTime(r.ko))}">${window.STIX_RESEARCH ? window.STIX_RESEARCH.oppLink(r.gid, r.team, p.pos, pid, `${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)}`) : `${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)}`} ${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos, pid) : ""}</td>
       <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
       <td class="small">${wxCompact(r.gid)}</td>
       <td>${r.slot ? esc(r.slot) : '<span class="na">N/A</span>'}</td>
