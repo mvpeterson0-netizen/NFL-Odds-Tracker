@@ -2,9 +2,9 @@
 // Player updates: a notes icon next to a player's name (Board, player page). Tap it for a pop-up of that player's
 // updates: official injury report / practice status, roster reserve/inactive status, slot or depth chart changes,
 // and big role changes in snap or target share (built in pipeline/build.py -> data.json "updates").
-// The icon is red when something was first seen by Stix in the last 48 hours, gray otherwise.
+// The icon is red when something was first seen by Stix in the last 24 hours, gray otherwise.
 (function () {
-  const FRESH_MS = 48 * 3600 * 1000;
+  const FRESH_MS = 24 * 3600 * 1000;
   const ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>';
   const items = (pid) => ((D && D.updates) || {})[pid] || [];
   const fresh = (it) => it.t && Date.now() - new Date(it.t).getTime() < FRESH_MS;
