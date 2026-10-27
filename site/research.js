@@ -23,7 +23,7 @@
   const SD_GAMES = 8;             // games used for his usual game-to-game swing
 
   const TABS = [
-    { id: "move", label: "Line move", title: "Lines that moved most from his last game's line",
+    { id: "move", label: "Line move", title: "Largest line moves from previous week",
       desc: () => `This week's line (pre-game line if captured, otherwise the latest Mon / Thu / Sun AM snapshot) vs the graded pre-game line from his previous game, same stat. Ranked by <b>size</b> = change ÷ √(last game's line). Bigger lines naturally move more, but not in proportion, so this sits between raw change (which favors big yardage lines) and percent change (which favors tiny lines). Examples: rec yds 77.5 → 68.5 = 1.02; rush yds 11.5 → 10.5 = 0.29; receptions 1.5 → 2.5 = 0.82; pass yds 289.5 → 259.5 = 1.76. A size of 1 is a move of about √line (about 9 rec yds on an 80.5 line, 2.3 catches on 5.5, 16 pass yds on 250.5).` },
     { id: "l3", label: "Last 3 vs line", title: "Last 3 games average furthest from this week's line",
       desc: () => `His average over his last 3 games played vs this week's line. Ranked by <b>size</b> = gap ÷ his usual game-to-game swing (standard deviation of his last ${SD_GAMES} games played, min 3).` },
@@ -266,7 +266,7 @@
     const t = TABS.find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
     const scoresMissing = (t.id === "down" || t.id === "up") && !Object.values(D.games).some((g) => g.scr);
-    let h = `<p class="callout small"><b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.</p>`;
+    let h = `<p class="callout small"><b>${esc(t.title)}.</b></p>`; // full rules: Good / Bad script behind the "i" on their buttons
     if (scoresMissing) return h + `<p class="muted">Game script data (nflverse play-by-play) isn't in the app's data yet, so this tab can't be filled.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
     const heads = HEADS[t.id];
@@ -284,10 +284,31 @@
 
   // 3 columns, each a pair with its inverse stacked: line move / last 3; usage up / down; good script / bad script
   const GRID = ["move", "usage", "up", "l3", "usagedn", "down"];
+  // Filters whose full description opens from an "i" on the button.
+  const INFO_TABS = ["up", "down"];
+  function openInfo(id) {
+    closePop();
+    const t = TABS.find((x) => x.id === id); if (!t) return;
+    const ov = document.createElement("div");
+    ov.id = "scr-ov"; ov.className = "share-ov";
+    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="${esc(t.label)}">
+      <div class="nw-h"><b>${esc(t.label)}</b><button class="nw-x" aria-label="Close">✕</button></div>
+      <p class="small"><b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.</p></div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
+  }
+  const infoHandler = (e) => {
+    const b = e.target.closest && e.target.closest("[data-rinfo]"); if (!b) return;
+    if (e.type === "keydown" && e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault(); e.stopPropagation();
+    openInfo(b.dataset.rinfo);
+  };
+  document.addEventListener("click", infoHandler, true);
+  document.addEventListener("keydown", infoHandler, true);
   function html() {
     const mks = D.markets;
     return `<section id="rl"><h2 class="gsec">Leads</h2>
-      <div class="rlgrid" role="tablist">${GRID.map((id) => { const t = TABS.find((x) => x.id === id); return `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}">${esc(t.label)}</button>`; }).join("")}</div>
+      <div class="rlgrid" role="tablist">${GRID.map((id) => { const t = TABS.find((x) => x.id === id); return `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}">${esc(t.label)}${INFO_TABS.includes(t.id) ? ` <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" title="About this filter">i</span>` : ""}</button>`; }).join("")}</div>
       <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label></div>
       <div id="rl-body">${body()}</div></section><h2 class="gsec">Builder</h2>`;
   }
