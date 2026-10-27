@@ -23,8 +23,10 @@
     if (!r.ok) throw new Error(`server said ${r.status}`);
   }
 
+  // How many to expect (no fixed number until more weeks of real alerts are in).
+  const HOW_MANY = `<p class="muted small">Usually a few a week. Games whose lines go up in the same check come as one notification, and each game alerts only once.</p>`;
   function inner() {
-    const lead = `<p>Get a notification when a game's player lines first go up (more than half of its tracked players have a line).</p>`;
+    const lead = `<p>Get a notification when a game's player lines first go up (more than half of its tracked players have a line).</p>${HOW_MANY}`;
     if (!supported()) {
       if (isIOS() && !standalone())
         return lead + `<p class="muted">On iPhone, alerts work only in the Stix home-screen app: tap Share → <b>Add to Home Screen</b>, open Stix from your Home Screen, then come back to this page.</p>`;
@@ -32,7 +34,7 @@
     }
     if (!A.ready) return lead + `<p class="muted">Checking…</p>`;
     const note = A.msg ? `<p class="muted small">${A.msg}</p>` : "";
-    if (A.sub) return `<p><b>Alerts are on for this device.</b></p>${note}<button type="button" id="alerts-off" ${A.busy ? "disabled" : ""}>Turn off</button>`;
+    if (A.sub) return `<p><b>Alerts are on for this device.</b></p>${HOW_MANY}${note}<button type="button" id="alerts-off" ${A.busy ? "disabled" : ""}>Turn off</button>`;
     if (Notification.permission === "denied")
       return lead + `<p class="muted">Notifications are blocked for Stix on this device. Turn them on in your device's notification settings, then come back.</p>`;
     return lead + note + `<button type="button" id="alerts-on" class="on" ${A.busy ? "disabled" : ""}>Turn on alerts</button>`;
