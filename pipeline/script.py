@@ -1,7 +1,8 @@
-"""Game script from nflverse play-by-play (CC-BY 4.0): how long each team led or trailed by a big margin.
+"""Game script from nflverse play-by-play (CC-BY 4.0): how long each team led or trailed by a big margin
+(7, 10, 13, 14, 17 and 21+ points).
 
 For every finished game in the play-by-play file we add up the game clock spent with the home team ahead or behind
-by 10+ and by 13+ points (score before each play x time until the next play). Saved to data/game_script.json,
+by each margin in MARGINS (score before each play x time until the next play). Saved to data/game_script.json,
 rewritten whenever nflverse republishes the file (checked via its timestamp.json). Derived data only: it can be
 rebuilt from nflverse at any time. Failures are logged and never stop a run (the previous file is kept).
 """
@@ -17,7 +18,7 @@ from .common import DATA, NFLVERSE, SEASON, http_get, iso, read_json, utcnow, wr
 PATH = DATA / "game_script.json"
 TAG = "pbp"
 FILE = f"play_by_play_{SEASON}.csv.gz"
-MARGINS = (10, 13)
+MARGINS = (7, 10, 13, 14, 17, 21)  # points; the app lets the user pick which margin counts as "big" (Guide tab)
 
 
 def _remote_ts() -> str | None:
@@ -75,7 +76,7 @@ def refresh(log: list) -> bool:
     if not ts:
         log.append("game script: nflverse play-by-play timestamp unavailable; kept previous")
         return False
-    if old.get("source_updated") == ts:
+    if old.get("source_updated") == ts and old.get("margins") == list(MARGINS):
         return False
     body, _, status = http_get(f"{NFLVERSE}/{TAG}/{FILE}", timeout=240)
     if status != 200:

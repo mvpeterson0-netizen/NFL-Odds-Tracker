@@ -586,7 +586,7 @@ def build(log):
     gs_games = gs.get("games") or {}
     if gs_games:
         sources = dict(sources)
-        sources["script"] = {"label": "nflverse play-by-play (game script: time leading / trailing by 10+ and 13+)",
+        sources["script"] = {"label": "nflverse play-by-play (game script: time leading / trailing by a big margin)",
                              "last_updated": gs.get("source_updated", "unknown"), "fetched_utc": gs.get("fetched_utc", ""),
                              "url": gs.get("url", "https://github.com/nflverse/nflverse-data/releases/tag/pbp")}
 
@@ -595,8 +595,9 @@ def build(log):
         if not x:
             return None
         h = x["h"]
-        # minutes the home ("h") and away ("a") team led ("l") or trailed ("t") by 10+ / 13+
-        return {"h": h, "a": {"l10": h["t10"], "t10": h["l10"], "l13": h["t13"], "t13": h["l13"]}, "min": x.get("min")}
+        # minutes the home ("h") and away ("a") team led ("l<margin>") or trailed ("t<margin>") by each margin;
+        # away is the mirror of home (away leading = home trailing)
+        return {"h": h, "a": {("t" if k[0] == "l" else "l") + k[1:]: v for k, v in h.items()}, "min": x.get("min")}
     wx = load_weather()
 
     def wx_out(gid):
