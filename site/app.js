@@ -551,7 +551,7 @@ function viewPlayer(pid) {
   for (const r of rows) {
     const m = r.m[mid];
     const nt = notes(r, m, null);
-    h += `<tr><td>${r.wk}</td><td title="${esc(fmtTime(r.ko))}">${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)}</td>
+    h += `<tr><td>${r.wk}</td><td title="${esc(fmtTime(r.ko))}">${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)} ${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos) : ""}</td>
       <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
       <td class="small">${wxCompact(r.gid)}</td>
       <td>${r.slot ? esc(r.slot) : '<span class="na">N/A</span>'}</td>
@@ -829,7 +829,7 @@ function viewGuide() {
 function guideBody() {
   const R = WX_RULES;
   const row = (label, cls, rule) => `<tr><td><span class="wxb ${cls}">${label}</span></td><td class="wrapcell">${rule}</td></tr>`;
-  return `<div class="panel"><h3>Weather labels</h3><div class="body">
+  return `${window.STIX_RESEARCH ? window.STIX_RESEARCH.settingsHtml() : ""}<div class="panel"><h3>Weather labels</h3><div class="body">
     <p class="callout">Each game's weather gets a one-glance label from the numbers below. Several can apply at once and are joined with "&amp;" (for example <b>🌧️ Rainy &amp; 💨 Windy</b>). If none apply, the label is <b>Nice</b>. Past games use observed weather; upcoming games use the latest forecast. Hover a label on the Board to see which values triggered it.</p>
     <table class="wrap"><thead><tr><th>Label</th><th>Triggered when</th></tr></thead><tbody>
     ${row("🌧️ Rainy", "bad", `Precipitation of <b>${R.rainIn} in or more</b> over the kickoff hour and next 3 hours, <b>or</b> a forecast chance of precipitation of <b>${R.rainProb}% or more</b>.`)}
