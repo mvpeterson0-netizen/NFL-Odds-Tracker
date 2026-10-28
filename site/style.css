@@ -186,6 +186,22 @@ button.badd { font-size: 12px; padding: 3px 10px; }
 .pk-del { min-width: 36px; min-height: 36px; }
 .pk-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
 .pk-form label { display: flex; flex-direction: column; font-size: 13px; gap: 4px; min-width: 240px; flex: 1; }
+/* Accounts (account.js) */
+.ac { max-width: 560px; }
+.ac-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 8px 0; }
+.ac-form label { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 200px; }
+.ac-form input[type=email], .ac-form input[type=number], .ac-form input[inputmode=numeric] { font: inherit; font-size: 16px; padding: 8px 10px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); }
+.ac-form button { min-height: 40px; }
+.ac-form .ac-check { flex-direction: row; align-items: center; gap: 8px; font-size: 15px; min-width: 0; }
+.ac-check input { width: 20px; height: 20px; }
+.ac-ok { color: var(--over); }
+.ac-priv summary { cursor: pointer; color: var(--muted); }
+.ac-link { border: 0; background: none; color: var(--under); padding: 4px 0; }
+.ac-danger { border-color: var(--under); color: var(--under); font-weight: 600; }
+.ac-del { border: 1px solid var(--under); border-radius: 8px; padding: 8px 12px; margin-top: 8px; }
+.ac-legacy summary { padding: 10px 14px; cursor: pointer; }
+.pk-stat span + span { margin-top: 2px; }
 
 /* Logo: quick taps without zooming (3 taps opens My picks) */
 header .brand { touch-action: manipulation; -webkit-user-select: none; user-select: none; }

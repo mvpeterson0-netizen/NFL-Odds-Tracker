@@ -1,24 +1,35 @@
 "use strict";
-// My picks: Over/Under picks on player props, saved to a PRIVATE GitHub repo the owner chooses.
-// Hidden unless this browser has the owner's key (a fine-grained GitHub token limited to that one repo).
-// The key and a local copy of the picks live only in this browser's storage; nothing here touches the app's own data.
-// Picks lock at kickoff (by this device's clock) and are graded against the line saved when the pick was made.
+// My picks: Over/Under picks on player props.
+// Two ways to save them:
+//  • Account (default going forward): signed in with email (account.js). Picks are stored in the Stix database;
+//    the database itself refuses changes after kickoff, so the phone's clock doesn't matter.
+//  • GitHub (the original way, kept until old picks are imported): a private repo + key saved in this browser.
+// Picks are graded against the line saved when the pick was made. Every pick is 1 unit; dollars = units × unit size.
 (function () {
+  // false = the Picks tab stays hidden for visitors who aren't signed in (open it with the 3-tap logo or #/picks).
+  // Flip to true when sign-up is open to everyone.
+  const OPEN_SIGNUP = false;
   const LS_CFG = "stix_picks_cfg", LS_CACHE = "stix_picks_cache", FILE = "picks.json";
-  const ST = { picks: [], dirty: false, syncing: false, synced: null, err: "", sha: null };
+  const ST = { picks: [], dirty: false, syncing: false, synced: null, err: "", sha: null };          // GitHub mode
+  const AC = { picks: [], loaded: false, loading: false, err: "", saving: 0, uid: null, at: 0 };          // account mode
+  const ACC = () => window.STIX_ACCOUNT;
 
   // ---------- browser storage (always wrapped: it can be blocked or empty) ----------
   const lsGet = (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } };
   const lsSet = (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } };
   const cfg = () => { const c = lsGet(LS_CFG); return c && c.token && c.repo ? c : null; };
-  const enabled = () => !!cfg();
   (function loadCache() { const c = lsGet(LS_CACHE); if (c && Array.isArray(c.picks)) { ST.picks = c.picks; ST.dirty = !!c.dirty; ST.synced = c.synced || null; } })();
   const saveCache = () => lsSet(LS_CACHE, { picks: ST.picks, dirty: ST.dirty, synced: ST.synced });
+
+  // Which storage is in use right now: "acct", "gh", or null (picking not available on this device).
+  const mode = () => (ACC() && ACC().signedIn() ? (ACC().ready() ? "acct" : null) : cfg() ? "gh" : null);
+  const enabled = () => mode() !== null;
+  const unit = () => (mode() === "acct" ? ACC().unitSize() : 10);
 
   // ---------- helpers ----------
   const now = () => Date.now();
   const started = (ko) => !ko || new Date(ko).getTime() <= now();
-  const live = () => ST.picks.filter((p) => !p.deleted);
+  const live = () => (mode() === "acct" ? AC.picks : ST.picks.filter((p) => !p.deleted));
   const sideWord = (s) => (s === "o" ? "Over" : "Under");
   const lineNum = (v) => (v == null ? "" : Number.isInteger(v) ? String(v) : v.toFixed(1));
   const oddsTxt = (v) => (v == null ? "" : v > 0 ? `+${v}` : String(v));
@@ -46,8 +57,64 @@
     if (r && r.final) return { st: "locked", why: "waiting for stats" };
     return { st: "locked", why: "in progress" };
   }
+  function rerender() {
+    const t = (location.hash || "").split("/")[1];
+    if ((t === "picks" || t === "player") && typeof render === "function" && D) {
+      const y = window.scrollY; render(); window.scrollTo(0, y);
+    }
+    showTab();
+  }
+  function showTab() {
+    const a = document.getElementById("tab-picks");
+    if (a) a.hidden = !(OPEN_SIGNUP || cfg() || (ACC() && ACC().signedIn()));
+  }
 
-  // ---------- GitHub sync ----------
+  // ---------- account storage ----------
+  // Database row <-> the pick shape the screens use.
+  function fromRow(r) {
+    const g = D && D.games[r.game_id];
+    return { id: r.pick_key, pid: r.player_id, name: r.player_name, pos: r.pos, gid: r.game_id, wk: r.week, mid: r.market, side: r.side,
+      line: r.line == null ? null : Number(r.line), odds: r.odds, book: r.book || "", src: r.line_label || (r.source === "Bet on DK" ? "Bet on DK" : r.source),
+      cap: r.line_captured_at, ko: g ? g.ko : null, picked_utc: r.picked_at, updated_utc: r.updated_at };
+  }
+  function toRow(p, source) {
+    return { pick_key: p.id, game_id: p.gid, week: p.wk, player_id: p.pid, player_name: p.name, pos: p.pos || null, market: p.mid,
+      side: p.side, line: p.line, odds: p.odds == null ? null : Math.round(p.odds), book: p.book || null, source,
+      line_label: p.src || null, line_captured_at: p.cap || null };
+  }
+  async function acLoad() {
+    if (mode() !== "acct" || AC.loading) return;
+    AC.loading = true;
+    const uid = ACC().user().id;
+    const r = await ACC().db("/rest/v1/picks?select=*&order=picked_at.asc");
+    AC.loading = false;
+    if (r.ok && Array.isArray(r.data)) { AC.picks = r.data.map(fromRow); AC.loaded = true; AC.err = ""; AC.uid = uid; AC.at = Date.now(); }
+    else if (r.status !== 401) AC.err = `Couldn't load your picks: ${r.error}`;
+    rerender();
+  }
+  // Save (add or change) one pick. The screen updates right away; if the server refuses, it changes back and says why.
+  async function acSave(pick, source) {
+    const before = AC.picks;
+    AC.picks = AC.picks.filter((p) => p.id !== pick.id).concat(Object.assign({}, pick, { saving: true }));
+    AC.saving++; AC.err = ""; rerender();
+    const r = await ACC().db("/rest/v1/picks?on_conflict=user_id,pick_key", { method: "POST", body: toRow(pick, source), prefer: "resolution=merge-duplicates,return=representation" });
+    AC.saving--;
+    if (r.ok && Array.isArray(r.data) && r.data[0]) AC.picks = AC.picks.filter((p) => p.id !== pick.id).concat(fromRow(r.data[0]));
+    else { AC.picks = before; AC.err = `Pick not saved: ${r.error}`; }
+    rerender();
+  }
+  async function acDelete(id) {
+    const before = AC.picks;
+    AC.picks = AC.picks.filter((p) => p.id !== id);
+    AC.saving++; AC.err = ""; rerender();
+    const r = await ACC().db(`/rest/v1/picks?pick_key=eq.${encodeURIComponent(id)}`, { method: "DELETE", prefer: "return=representation" });
+    AC.saving--;
+    if (!r.ok) { AC.picks = before; AC.err = `Pick not removed: ${r.error}`; }
+    else if (Array.isArray(r.data) && r.data.length === 0) { AC.picks = before; AC.err = "Pick not removed (it may already be locked)."; }
+    rerender();
+  }
+
+  // ---------- GitHub storage (original) ----------
   const b64e = (s) => btoa(unescape(encodeURIComponent(s)));
   const b64d = (s) => decodeURIComponent(escape(atob(s.replace(/\s/g, ""))));
   async function gh(method, body) {
@@ -91,8 +158,8 @@
     ST.sha = (await r.json()).content.sha;
     return true;
   }
-  async function sync() {
-    if (!enabled() || ST.syncing) return;
+  async function ghSync() {
+    if (!cfg() || ST.syncing) return;
     ST.syncing = true; ST.err = ""; rerender();
     try {
       for (let attempt = 0; attempt < 3; attempt++) {
@@ -106,14 +173,8 @@
     } catch (e) { ST.err = e.message || String(e); }
     ST.syncing = false; saveCache(); rerender();
   }
-  function rerender() {
-    const t = (location.hash || "").split("/")[1];
-    if ((t === "picks" || t === "player") && typeof render === "function" && D) {
-      const y = window.scrollY; render(); window.scrollTo(0, y);
-    }
-    showTab();
-  }
-  function showTab() { const a = document.getElementById("tab-picks"); if (a) a.hidden = !enabled(); }
+  // Refresh whichever storage is in use (and keep the GitHub copy current while it exists on this device).
+  function sync() { if (mode() === "acct") acLoad(); if (cfg()) ghSync(); }
 
   // ---------- making a pick ----------
   function setPick(pid, mid, side) {
@@ -123,17 +184,20 @@
     const ln = lineNow(m);
     if (!ln || started(r.ko)) return;
     const id = `${r.wk}|${pid}|${mid}`;
-    const old = ST.picks.find((p) => p.id === id);
     const t = new Date().toISOString();
-    let pick;
-    if (old && !old.deleted && old.side === side) pick = Object.assign({}, old, { deleted: true, updated_utc: t }); // tap again = remove
-    else {
-      const p = playerById[pid];
-      pick = { id, pid, name: p.name, pos: p.pos, gid: r.gid, wk: r.wk, mid, side, line: ln.line, odds: side === "o" ? ln.op : ln.up,
-        book: ln.book, src: ln.src, cap: ln.cap, ko: r.ko, picked_utc: t, updated_utc: t };
+    const p = playerById[pid];
+    const fresh = { id, pid, name: p.name, pos: p.pos, gid: r.gid, wk: r.wk, mid, side, line: ln.line, odds: side === "o" ? ln.op : ln.up,
+      book: ln.book, src: ln.src, cap: ln.cap, ko: r.ko, picked_utc: t, updated_utc: t };
+    if (mode() === "acct") {
+      const old = AC.picks.find((x) => x.id === id);
+      if (old && old.side === side) acDelete(id); // tap again = remove
+      else acSave(fresh, "manual");
+      return;
     }
-    ST.picks = ST.picks.filter((p) => p.id !== id).concat(pick);
-    ST.dirty = true; saveCache(); rerender(); sync();
+    const old = ST.picks.find((x) => x.id === id);
+    const pick = old && !old.deleted && old.side === side ? Object.assign({}, old, { deleted: true, updated_utc: t }) : fresh;
+    ST.picks = ST.picks.filter((x) => x.id !== id).concat(pick);
+    ST.dirty = true; saveCache(); rerender(); ghSync();
   }
   // A tap on a sportsbook bet button ("Bet on FanDuel") also saves the pick (only on devices where My picks is set up), at
   // the line and odds from the link. Never removes or flips silently: it always records the side that was tapped.
@@ -146,14 +210,16 @@
     const p = playerById[pid];
     const pick = { id, pid, name: p.name, pos: p.pos, gid: r.gid, wk: r.wk, mid, side, line: bet.line, odds: bet.odds,
       book: bet.book || "DraftKings", src: bet.src || "Bet on DK", cap: bet.cap, ko: r.ko, picked_utc: t, updated_utc: t };
+    if (mode() === "acct") { acSave(pick, pick.src); return; }
     ST.picks = ST.picks.filter((x) => x.id !== id).concat(pick);
-    ST.dirty = true; saveCache(); sync();
+    ST.dirty = true; saveCache(); ghSync();
   }
   function removePick(id) {
+    if (mode() === "acct") { const old = AC.picks.find((p) => p.id === id); if (old && !started(old.ko)) acDelete(id); return; }
     const old = ST.picks.find((p) => p.id === id);
     if (!old || old.deleted || started(old.ko)) return;
     ST.picks = ST.picks.filter((p) => p.id !== id).concat(Object.assign({}, old, { deleted: true, updated_utc: new Date().toISOString() }));
-    ST.dirty = true; saveCache(); rerender(); sync();
+    ST.dirty = true; saveCache(); rerender(); ghSync();
   }
 
   // ---------- player page box ----------
@@ -177,15 +243,20 @@
     if (!ln) return `<div class="pickbox">${head}<p class="muted small">No line posted yet for this market. Pick buttons appear once one is captured.</p></div>`;
     const btn = (s) => {
       const on = mine && mine.side === s;
-      return `<button class="pk-btn ${on ? "on" : ""}" data-pick="${s}" data-pid="${esc(pid)}" data-pmid="${esc(mid)}">${on ? "✓ " : ""}${sideWord(s)} ${lineNum(on ? mine.line : ln.line)}</button>`;
+      return `<button class="pk-btn ${on ? "on" : ""}" data-pick="${s}" data-pid="${esc(pid)}" data-pmid="${esc(mid)}" ${mine && mine.saving ? "disabled" : ""}>${on ? "✓ " : ""}${sideWord(s)} ${lineNum(on ? mine.line : ln.line)}</button>`;
     };
     let note = "";
     if (mine) {
       note = `<span class="small">Saved: <b>${sideWord(mine.side)} ${lineNum(mine.line)}</b> ${oddsTxt(mine.odds)} (${esc(mine.src)}, ${esc(mine.book)})${mine.line !== ln.line ? ` · line now ${lineNum(ln.line)}; tap the other side, or remove and re-add, to take the new line` : ""}</span>`;
     }
-    return `<div class="pickbox">${head}<div class="pk-btns">${btn("o")}${btn("u")}</div>${note} ${syncBadge()}</div>`;
+    return `<div class="pickbox">${head}<div class="pk-btns">${btn("o")}${btn("u")}</div>${note} ${saveBadge()}</div>`;
   }
-  function syncBadge() {
+  function saveBadge() {
+    if (mode() === "acct") {
+      if (AC.saving) return `<span class="muted small">· saving…</span>`;
+      if (AC.err) return `<span class="small pk-err">· ${esc(AC.err)}</span>`;
+      return "";
+    }
     if (ST.syncing) return `<span class="muted small">· saving…</span>`;
     if (ST.err) return `<span class="small pk-err">· not saved to GitHub yet (${esc(ST.err)}) <a href="#/picks">details</a></span>`;
     if (ST.dirty) return `<span class="muted small">· waiting to save</span>`;
@@ -204,26 +275,28 @@
         <button type="submit">Save and connect</button> <span id="pk-msg" class="small pk-err"></span>
       </form></div></div>`;
   }
-  // Profit / loss on a flat $10 stake per pick that locked, at the odds saved with the pick.
-  // Win pays at those American odds, loss = −$10, push / void = $0. Missing odds → not counted (labeled, never guessed).
-  const STAKE = 10;
+  // Result of one pick in units (each pick = 1 unit) at the odds saved with it.
+  // Win pays at those American odds, loss = −1 u, push / void = 0. Missing odds → not counted (labeled, never guessed).
   function profit(p, g) {
     if (g.st === "push" || g.st === "void") return 0;
     if (g.st !== "hit" && g.st !== "miss") return null;
-    if (g.st === "miss") return -STAKE;
+    if (g.st === "miss") return -1;
     const o = Number(p.odds);
     if (!p.odds || !isFinite(o) || o === 0) return null;
-    return o > 0 ? (STAKE * o) / 100 : (STAKE * 100) / -o;
+    return o > 0 ? o / 100 : 100 / -o;
   }
-  const money = (v) => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}$${Math.abs(v).toFixed(2)}`);
-  function row(p, g) {
+  const units = (v) => (v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(2)} u`);
+  const money = (v) => (v == null ? "" : `${v > 0 ? "+" : v < 0 ? "−" : ""}$${Math.abs(v * unit()).toFixed(2)}`);
+  const both = (v) => (v == null ? "—" : `${units(v)} (${money(v)})`);
+  function row(p, g, readOnly) {
     const mk = mkt[p.mid];
     const gm = D.games[p.gid];
     const vs = gm ? `${gm.away} @ ${gm.home}` : p.gid;
     const chip = { hit: `<span class="pk-res hit">Hit</span>`, miss: `<span class="pk-res miss">Miss</span>`, push: `<span class="pk-res">Push</span>`, void: `<span class="pk-res">Void</span>` }[g.st] || "";
-    const right = g.st === "open" ? `<button class="pk-del" data-del="${esc(p.id)}" aria-label="Remove pick" title="Remove">✕</button>` : chip || `<span class="muted small">${esc(g.why || "")}</span>`;
+    const right = g.st === "open" && !readOnly ? `<button class="pk-del" data-del="${esc(p.id)}" aria-label="Remove pick" title="Remove" ${p.saving ? "disabled" : ""}>✕</button>` : chip || `<span class="muted small">${esc(g.why || (g.st === "open" ? "open" : ""))}</span>`;
+    const pl = profit(p, g);
     return `<div class="pk-row"><div><a class="pname" href="#/player/${esc(p.pid)}">${esc(p.name)}</a> · ${esc(mk ? mk.label : p.mid)} <span class="muted small">W${p.wk} ${esc(vs)} · ${fmtTime(p.ko)}</span>
-      <div class="small"><b>${sideWord(p.side)} ${lineNum(p.line)}</b> ${oddsTxt(p.odds)} <span class="muted">(${esc(p.src)}, ${esc(p.book)})</span>${g.act != null ? ` · actual <b>${lineNum(g.act)}</b>` : ""}${g.st === "void" ? ` <span class="muted">· ${esc(g.why)}</span>` : ""}${["hit", "miss", "push", "void"].includes(g.st) ? ` · <span class="${profit(p, g) > 0 ? "pk-up" : profit(p, g) < 0 ? "pk-down" : "muted"}">${profit(p, g) == null ? "P/L n/a (no odds saved)" : money(profit(p, g))}</span>` : ""}</div></div>${right}</div>`;
+      <div class="small"><b>${sideWord(p.side)} ${lineNum(p.line)}</b> ${oddsTxt(p.odds)} <span class="muted">(${esc(p.src)}, ${esc(p.book)})</span>${g.act != null ? ` · actual <b>${lineNum(g.act)}</b>` : ""}${g.st === "void" ? ` <span class="muted">· ${esc(g.why)}</span>` : ""}${["hit", "miss", "push", "void"].includes(g.st) ? ` · <span class="${pl > 0 ? "pk-up" : pl < 0 ? "pk-down" : "muted"}">${pl == null ? "P/L n/a (no odds saved)" : both(pl)}</span>` : ""}${p.saving ? ` <span class="muted">· saving…</span>` : ""}</div></div>${right}</div>`;
   }
   function rec(list) {
     const c = { hit: 0, miss: 0, push: 0 };
@@ -233,36 +306,62 @@
     for (const x of list) { const v = profit(x.p, x.g); if (v == null) { if (x.g.st === "hit") noOdds++; } else pl += v; }
     return { txt: `${c.hit}–${c.miss}–${c.push}`, pct: n ? `${Math.round((c.hit / n) * 100)}%` : "—", n: c.hit + c.miss + c.push, pl, noOdds, bets: list.length };
   }
-  function view() {
-    if (!enabled()) return setupView();
-    const all = live().map((p) => ({ p, g: grade(p) })).sort((a, b) => (a.p.ko || "").localeCompare(b.p.ko || "") || a.p.name.localeCompare(b.p.name));
+  function picksView(list, statusTxt, lockNote) {
+    const all = list.map((p) => ({ p, g: grade(p) })).sort((a, b) => (a.p.ko || "").localeCompare(b.p.ko || "") || a.p.name.localeCompare(b.p.name));
     const open = all.filter((x) => x.g.st === "open");
     const locked = all.filter((x) => x.g.st === "locked");
     const graded = all.filter((x) => ["hit", "miss", "push", "void"].includes(x.g.st)).reverse();
     const R = rec(graded), O = rec(graded.filter((x) => x.p.side === "o")), U = rec(graded.filter((x) => x.p.side === "u"));
     const byMk = D.markets.map((m) => ({ m, r: rec(graded.filter((x) => x.p.mid === m.id)) })).filter((x) => x.r.n);
-    const st = ST.syncing ? "Saving…" : ST.err ? `<span class="pk-err">Not synced: ${esc(ST.err)}</span> <button id="pk-retry">Retry</button>` :
-      ST.dirty ? "Waiting to save" : ST.synced ? `Synced with GitHub ${ago(ST.synced)}` : "Not synced yet";
     let h = `<div class="pk-stats"><div class="pk-stat"><span>Record (W–L–P)</span><b>${R.txt}</b></div><div class="pk-stat"><span>Hit rate</span><b>${R.pct}</b></div>
-      <div class="pk-stat"><span>Profit / loss</span><b class="${R.bets && R.pl > 0 ? "pk-up" : R.bets && R.pl < 0 ? "pk-down" : ""}">${R.bets ? money(R.pl) : "—"}</b></div></div>
-      <p class="small muted">Overs ${O.txt} (${money(O.pl)}) · Unders ${U.txt} (${money(U.pl)})${byMk.length ? " · " + byMk.map((x) => `${esc(x.m.label)} ${x.r.txt} (${money(x.r.pl)})`).join(" · ") : ""}
-      · P/L assumes $${STAKE} on every pick that locked, at the odds saved with it; pushes and voids are $0; picks still in progress aren't counted until graded${R.noOdds ? ` · ${R.noOdds} winning pick${R.noOdds === 1 ? "" : "s"} had no saved odds and ${R.noOdds === 1 ? "isn't" : "aren't"} counted` : ""}
-      · Hit rate leaves out pushes and voids · ${st}</p>`;
-    const sec = (title, list, empty) => `<div class="panel"><h3>${title} (${list.length})</h3><div class="body">${list.length ? list.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">${empty}</p>`}</div></div>`;
+      <div class="pk-stat"><span>Profit / loss</span><b class="${R.bets && R.pl > 0 ? "pk-up" : R.bets && R.pl < 0 ? "pk-down" : ""}">${R.bets ? units(R.pl) : "—"}</b>${R.bets ? `<span>${money(R.pl)} at $${unit().toFixed(2)}/unit</span>` : ""}</div></div>
+      <p class="small muted">Overs ${O.txt} (${units(O.pl)}) · Unders ${U.txt} (${units(U.pl)})${byMk.length ? " · " + byMk.map((x) => `${esc(x.m.label)} ${x.r.txt} (${units(x.r.pl)})`).join(" · ") : ""}
+      · Every pick is 1 unit at the odds saved with it; pushes and voids are 0; picks still in progress aren't counted until graded${R.noOdds ? ` · ${R.noOdds} winning pick${R.noOdds === 1 ? "" : "s"} had no saved odds and ${R.noOdds === 1 ? "isn't" : "aren't"} counted` : ""}
+      · Hit rate leaves out pushes and voids · ${statusTxt}</p>`;
+    const sec = (title, l, empty) => `<div class="panel"><h3>${title} (${l.length})</h3><div class="body">${l.length ? l.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">${empty}</p>`}</div></div>`;
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
     h += sec("Locked · game started", locked, "Picks move here at kickoff. They can't be changed or removed after that.");
     h += sec("Graded", graded, "Graded picks appear here once the game's stats are published.");
     h += `<p class="muted small">Picks are graded against the line saved when you made the pick (a Mon / Thu / Sun AM snapshot or the pre-game line), not the app's graded line.
-      Over hits when the actual stat is above that line; equal = push; a player who doesn't play = void. Locking uses this device's clock and the scheduled kickoff.</p>
-      <p class="small"><button id="pk-off">Turn off My picks on this device</button> <span class="muted">Removes the key and local copy from this browser. Your picks stay in your GitHub repo.</span></p>`;
+      Over hits when the actual stat is above that line; equal = push; a player who doesn't play = void. ${lockNote}</p>`;
     return h;
+  }
+  function ghView() {
+    const st = ST.syncing ? "Saving…" : ST.err ? `<span class="pk-err">Not synced: ${esc(ST.err)}</span> <button id="pk-retry">Retry</button>` :
+      ST.dirty ? "Waiting to save" : ST.synced ? `Synced with GitHub ${ago(ST.synced)}` : "Not synced yet";
+    return picksView(ST.picks.filter((p) => !p.deleted), st, "Locking uses this device's clock and the scheduled kickoff.") +
+      `<p class="small"><button id="pk-off">Turn off My picks on this device</button> <span class="muted">Removes the key and local copy from this browser. Your picks stay in your GitHub repo.</span></p>`;
+  }
+  // Earlier picks still saved in GitHub on this device, shown read-only while signed in (until they're imported).
+  function ghLegacy() {
+    const old = ST.picks.filter((p) => !p.deleted);
+    if (!cfg() || !old.length) return "";
+    const rows = old.map((p) => ({ p, g: grade(p) })).sort((a, b) => (b.p.ko || "").localeCompare(a.p.ko || "")).map((x) => row(x.p, x.g, true)).join("");
+    return `<details class="panel ac-legacy"><summary><b>Earlier picks saved to GitHub (${old.length})</b> <span class="muted small">· not in your account yet; importing them is the next update</span></summary><div class="body">${rows}</div></details>`;
+  }
+  function view() {
+    const acc = ACC();
+    if (acc && acc.signedIn()) {
+      const g = acc.gate();
+      if (g) return g;
+      if (!AC.loaded) { if (!AC.loading) setTimeout(acLoad, 0); return `<p class="muted pad">Loading your picks…</p>${acc.accountBox()}`; }
+      const st = AC.saving ? "Saving…" : AC.err ? `<span class="pk-err">${esc(AC.err)}</span> <button id="pk-retry">Retry</button>` : "Saved to your account";
+      return picksView(AC.picks, st, "Locks are enforced by the Stix server at the scheduled kickoff, so a device's clock can't change them.") + ghLegacy() + acc.accountBox();
+    }
+    if (cfg()) return (acc ? `<div class="panel ac"><div class="body"><p class="small"><b>New:</b> sign in with your email to keep your picks in a Stix account, on every device. <a href="#/picks" id="pk-goacct">Sign in</a></p></div></div>` : "") + ghView();
+    return acc ? acc.gate() || "" : setupView();
   }
 
   function bind(tab) {
     showTab();
+    // Opening the Picks tab refreshes from the account (at most every 15 s), so picks made on another device show up.
+    if (tab === "picks" && mode() === "acct" && AC.loaded && !AC.saving && Date.now() - AC.at > 15000) acLoad();
+    if (ACC()) ACC().bind();
     document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => setPick(b.dataset.pid, b.dataset.pmid, b.dataset.pick)));
     document.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => removePick(b.dataset.del)));
     const rt = document.getElementById("pk-retry"); if (rt) rt.addEventListener("click", sync);
+    const ga = document.getElementById("pk-goacct");
+    if (ga) ga.addEventListener("click", (e) => { e.preventDefault(); signInWanted = true; rerender(); });
     const off = document.getElementById("pk-off");
     if (off) off.addEventListener("click", () => { if (confirm("Turn off My picks on this device? Your picks stay saved in your GitHub repo.")) { lsSet(LS_CFG, null); lsSet(LS_CACHE, null); ST.picks = []; ST.dirty = false; ST.synced = null; ST.err = ""; rerender(); } });
     const f = document.getElementById("pk-setup");
@@ -277,12 +376,26 @@
       lsSet(LS_CFG, { repo, token });
       try { await pull(); } catch (err) { lsSet(LS_CFG, null); msg.textContent = `Couldn't connect: ${err.message}`; return; }
       msg.textContent = "";
-      await sync();
+      await ghSync();
       rerender();
     });
   }
+  // A device with the GitHub key sees its GitHub picks first; "Sign in" switches the tab to the sign-in screen.
+  let signInWanted = false;
+  const viewOuter = () => (signInWanted && cfg() && ACC() && !ACC().signedIn() ? ACC().gate() + `<p class="small"><a href="#/picks" id="pk-back">Back to my GitHub picks</a></p>` : view());
+  const bindOuter = (tab) => {
+    bind(tab);
+    const bk = document.getElementById("pk-back");
+    if (bk) bk.addEventListener("click", (e) => { e.preventDefault(); signInWanted = false; rerender(); });
+  };
 
-  window.STIX_PICKS = { enabled, box, view, bind, sync, recordBet };
+  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet };
+  // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
+  if (ACC()) ACC().onChange(() => {
+    if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }
+    else { signInWanted = false; if (ACC().ready() && (!AC.loaded || AC.uid !== ACC().user().id)) { AC.loaded = false; acLoad(); } }
+    rerender();
+  });
   // Hidden way in: tap the Stix logo 3 times within ~1.5 s to open My picks (setup on a device without the key).
   // Needed for the home-screen app, which has its own storage and no address bar.
   (function logoTaps() {
@@ -295,7 +408,7 @@
       if (taps.length >= 3) { taps = []; location.hash = "#/picks"; }
     });
   })();
-  // Keep devices in step: sync when the app comes back into view and every 5 minutes while open.
+  // Keep devices in step: refresh when the app comes back into view and every 5 minutes while open.
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && D) sync(); });
   setInterval(() => { if (document.visibilityState === "visible" && D) sync(); }, 5 * 60000);
   const first = setInterval(() => { if (D) { clearInterval(first); showTab(); sync(); } }, 300);
