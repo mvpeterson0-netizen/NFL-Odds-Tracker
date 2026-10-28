@@ -25,6 +25,10 @@
   const mode = () => (ACC() && ACC().signedIn() ? (ACC().ready() ? "acct" : null) : cfg() ? "gh" : null);
   const enabled = () => mode() !== null;
   const unit = () => (mode() === "acct" ? ACC().unitSize() : 10);
+  // Visitors who can't save picks yet (not signed in, or signed in but the 21+ step isn't done) still see Over/Under.
+  // A tap remembers that pick and asks them to sign in; once signed in + 21+, it's saved automatically (Michael, 2026-10-27).
+  const offer = () => OPEN_SIGNUP && !enabled() && !!ACC();
+  const LS_WANT = "stix_pending_pick", WANT_MAX_MS = 30 * 60000;
 
   // ---------- helpers ----------
   const now = () => Date.now();
@@ -91,6 +95,47 @@
     if (r.ok && Array.isArray(r.data)) { AC.picks = r.data.map(fromRow); AC.loaded = true; AC.err = ""; AC.uid = uid; AC.at = Date.now(); }
     else if (r.status !== 401) AC.err = `Couldn't load your picks: ${r.error}`;
     rerender();
+    applyWanted();
+  }
+
+  // ---------- pick tapped before signing in ----------
+  function wantedPick() {
+    const w = lsGet(LS_WANT);
+    return w && w.pid && w.mid && (w.side === "o" || w.side === "u") && Date.now() - (w.at || 0) < WANT_MAX_MS ? w : null;
+  }
+  const clearWanted = () => lsSet(LS_WANT, null);
+  function wantedLabel() {
+    const w = wantedPick();
+    if (!w) return "";
+    const p = playerById[w.pid], mk = mkt[w.mid];
+    return `${p ? p.name : ""} ${sideWord(w.side)} ${lineNum(w.line)} ${mk ? mk.label : ""}`.replace(/\s+/g, " ").trim();
+  }
+  function askSignIn(pid, mid, side) {
+    const r = nextRow(pid);
+    const ln = r ? lineNow(r.m[mid]) : null;
+    if (!r || !ln || started(r.ko)) return;
+    lsSet(LS_WANT, { pid, mid, side, gid: r.gid, line: ln.line, back: location.hash || "#/board", at: Date.now() });
+    if (ACC().signedIn()) { location.hash = "#/picks"; return; } // signed in: the 21+ step comes next on the Picks tab
+    if (window.STIX_WHATSNEW && window.STIX_WHATSNEW.open) window.STIX_WHATSNEW.open({ pick: wantedLabel() });
+    else location.hash = "#/picks";
+  }
+  // Once the account is ready and its picks are loaded: save the remembered pick (never removes or flips an existing
+  // same-side pick), then go back to the page the pick was tapped on.
+  function applyWanted() {
+    if (mode() !== "acct" || !AC.loaded || !D) return; // after a redirect sign-in the data file may not be loaded yet
+    const w = wantedPick();
+    if (!lsGet(LS_WANT)) return;
+    clearWanted();
+    if (!w) return;
+    const r = nextRow(w.pid);
+    const ln = r && r.gid === w.gid ? lineNow(r.m[w.mid]) : null;
+    if (!ln || started(r.ko)) { AC.err = "Your pick wasn't saved: the game has started or the line is no longer posted."; rerender(); }
+    else {
+      const id = `${r.wk}|${w.pid}|${w.mid}`;
+      const old = AC.picks.find((x) => x.id === id);
+      if (!old || old.side !== w.side) setPick(w.pid, w.mid, w.side);
+    }
+    if ((location.hash || "").startsWith("#/picks") && w.back && !w.back.startsWith("#/picks")) location.hash = w.back;
   }
   // Save (add or change) one pick. The screen updates right away; if the server refuses, it changes back and says why.
   async function acSave(pick, source) {
@@ -224,7 +269,17 @@
 
   // ---------- player page box ----------
   function box(pid, mid) {
-    if (!enabled()) return "";
+    if (!enabled() && !offer()) return "";
+    if (offer()) {
+      const r = nextRow(pid);
+      if (!r) return "";
+      const ln = lineNow(r.m[mid]);
+      const mk = mkt[mid];
+      if (!ln) return "";
+      const b = (s) => `<button class="pk-btn" data-pick="${s}" data-pid="${esc(pid)}" data-pmid="${esc(mid)}">${sideWord(s)} ${lineNum(ln.line)}</button>`;
+      return `<div class="pickbox"><div class="pk-h"><div><b>Week ${r.wk} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${esc(mk.label)}</b><div class="muted small">${fmtTime(r.ko)} · ${esc(ln.book)}</div></div>
+        <div class="pk-line"><b>${lineNum(ln.line)}</b></div></div><div class="pk-btns">${b("o")}${b("u")}</div><span class="muted small">Tap to save a pick to My picks (free account).</span></div>`;
+    }
     const r = nextRow(pid);
     const mk = mkt[mid];
     if (!r) {
@@ -357,7 +412,7 @@
     // Opening the Picks tab refreshes from the account (at most every 15 s), so picks made on another device show up.
     if (tab === "picks" && mode() === "acct" && AC.loaded && !AC.saving && Date.now() - AC.at > 15000) acLoad();
     if (ACC()) ACC().bind();
-    document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => setPick(b.dataset.pid, b.dataset.pmid, b.dataset.pick)));
+    document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => (enabled() ? setPick : offer() ? askSignIn : () => {})(b.dataset.pid, b.dataset.pmid, b.dataset.pick)));
     document.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => removePick(b.dataset.del)));
     const rt = document.getElementById("pk-retry"); if (rt) rt.addEventListener("click", sync);
     const ga = document.getElementById("pk-goacct");
@@ -389,12 +444,13 @@
     if (bk) bk.addEventListener("click", (e) => { e.preventDefault(); signInWanted = false; rerender(); });
   };
 
-  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet };
+  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, wantedLabel, clearWanted };
   // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
   if (ACC()) ACC().onChange(() => {
     if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }
     else { signInWanted = false; if (ACC().ready() && (!AC.loaded || AC.uid !== ACC().user().id)) { AC.loaded = false; acLoad(); } }
     rerender();
+    applyWanted();
   });
   // Hidden way in: tap the Stix logo 3 times within ~1.5 s to open the admin page (site traffic + users;
   // data only for admin accounts). Was My picks until the Picks tab opened to everyone (Michael, 2026-10-27).
@@ -412,5 +468,5 @@
   // Keep devices in step: refresh when the app comes back into view and every 5 minutes while open.
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && D) sync(); });
   setInterval(() => { if (document.visibilityState === "visible" && D) sync(); }, 5 * 60000);
-  const first = setInterval(() => { if (D) { clearInterval(first); showTab(); sync(); } }, 300);
+  const first = setInterval(() => { if (D) { clearInterval(first); showTab(); sync(); applyWanted(); } }, 300);
 })();
