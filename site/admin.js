@@ -4,7 +4,9 @@
 // database returns nothing unless the signed-in account is in the admins table.
 (function () {
   const ACC = () => window.STIX_ACCOUNT;
-  const AD = { days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, sel: null, activity: null, actErr: "" };
+  const inclKey = "stix_admin_include_me";
+  const getIncl = () => { try { return localStorage.getItem(inclKey) === "1"; } catch { return false; } };
+  const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, sel: null, activity: null, actErr: "" };
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtN = (n) => Number(n || 0).toLocaleString("en-US");
   const dur = (s) => { s = Math.round(Number(s) || 0); if (s < 60) return `${s}s`; const m = Math.floor(s / 60); if (m < 60) return `${m}m ${s % 60}s`; return `${Math.floor(m / 60)}h ${m % 60}m`; };
@@ -25,10 +27,10 @@
     if (!ACC() || !ACC().signedIn() || AD.loading) return;
     AD.loading = true; AD.err = ""; AD.denied = false; rerender();
     const [t, u] = await Promise.all([
-      ACC().db("/rest/v1/rpc/admin_traffic", { method: "POST", body: { p_days: AD.days } }),
+      ACC().db("/rest/v1/rpc/admin_traffic", { method: "POST", body: { p_days: AD.days, p_include_admins: AD.incl } }),
       ACC().db("/rest/v1/rpc/admin_users", { method: "POST", body: {} }),
     ]);
-    AD.loading = false; AD.loadedFor = `${ACC().user().id}|${AD.days}`;
+    AD.loading = false; AD.loadedFor = `${ACC().user().id}|${AD.days}|${AD.incl}`;
     if (!t.ok || !u.ok) {
       const e = (!t.ok ? t : u);
       if (/not allowed|permission|42501|404/i.test(`${e.error} ${e.status}`)) AD.denied = true; else AD.err = e.error || "Couldn't load.";
@@ -80,7 +82,9 @@
         <p class="muted small">Latest 200 events.</p></div></div>`;
     }
     return `<div class="ad">
-      <div class="ad-head"><h2>Stix admin</h2><div class="ad-chips">${chips}<button id="ad-refresh">Refresh</button></div></div>
+      <div class="ad-head"><h2>Stix admin</h2><div class="ad-chips">${chips}<button id="ad-refresh">Refresh</button>
+        <label class="ad-incl"><input type="checkbox" id="ad-incl" ${AD.incl ? "checked" : ""}> Include my activity</label></div></div>
+      <p class="muted small ad-note">${AD.incl ? "Traffic includes admin accounts (you)." : "Traffic leaves out admin accounts (you), including what a device did before you signed in on it."}</p>
       <div class="ad-cards">
         ${card("Visitors", fmtN(t.devices), "browsers / devices")}
         ${card("Signed-in users active", fmtN(t.active_users), `${fmtN(t.signed_in_devices)} of ${fmtN(t.devices)} devices signed in`)}
@@ -110,7 +114,7 @@
     if (!ACC().signedIn()) {
       return `<div class="panel ac"><h3>Stix admin</h3><div class="body"><p class="small">Sign in with your admin account.</p>${ACC().googleBlock("ad")}</div></div>`;
     }
-    const key = `${ACC().user().id}|${AD.days}`;
+    const key = `${ACC().user().id}|${AD.days}|${AD.incl}`;
     if (AD.loadedFor !== key && !AD.loading) setTimeout(load, 0);
     if (AD.loading || AD.loadedFor !== key) return `<p class="muted pad">Loading admin data…</p>`;
     if (AD.denied) return `<div class="panel ac"><h3>Stix admin</h3><div class="body"><p class="small">This page is only for Stix admins. You're signed in as <b>${esc(ACC().user().email)}</b>.</p></div></div>`;
@@ -120,6 +124,8 @@
   function bind() {
     if (document.getElementById("ad-gis")) ACC().bindGoogle("ad");
     document.querySelectorAll("[data-addays]").forEach((b) => b.addEventListener("click", () => { AD.days = Number(b.dataset.addays); AD.sel = null; load(); }));
+    const inc = document.getElementById("ad-incl");
+    if (inc) inc.addEventListener("change", () => { AD.incl = inc.checked; try { localStorage.setItem(inclKey, AD.incl ? "1" : "0"); } catch { /* ignore */ } AD.sel = null; load(); });
     const r = document.getElementById("ad-refresh"); if (r) r.addEventListener("click", () => { AD.loadedFor = null; load(); });
     document.querySelectorAll("[data-aduser]").forEach((tr) => {
       const go = () => loadActivity(tr.dataset.aduser);
