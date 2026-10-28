@@ -983,6 +983,10 @@ function render() {
     try { app.innerHTML = window.STIX_PICKS ? window.STIX_PICKS.view() : `<p class="pad">Picks didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">My picks hit an error. Try refreshing.</p>`; }
   }
+  else if (tab === "admin") {
+    try { app.innerHTML = window.STIX_ADMIN ? window.STIX_ADMIN.view() : `<p class="pad">Admin page didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">Admin page hit an error. Try refreshing.</p>`; }
+  }
   else if (tab === "search") {
     // Search lives in search.js; if it is missing or throws, show a message instead of breaking the app.
     try { app.innerHTML = window.STIX_SEARCH ? window.STIX_SEARCH.view(arg) : `<p class="pad">Search didn't load. Try refreshing.</p>`; }
@@ -996,6 +1000,7 @@ function render() {
   if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
   if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
   if (window.STIX_PICKS) { try { window.STIX_PICKS.bind(tab, arg); } catch (e) { console.error(e); } }
+  if (tab === "admin" && window.STIX_ADMIN) { try { window.STIX_ADMIN.bind(); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };
