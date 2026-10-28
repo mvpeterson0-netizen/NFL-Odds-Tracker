@@ -396,7 +396,8 @@
     else { signInWanted = false; if (ACC().ready() && (!AC.loaded || AC.uid !== ACC().user().id)) { AC.loaded = false; acLoad(); } }
     rerender();
   });
-  // Hidden way in: tap the Stix logo 3 times within ~1.5 s to open My picks (setup on a device without the key).
+  // Hidden way in: tap the Stix logo 3 times within ~1.5 s to open the admin page (site traffic + users;
+  // data only for admin accounts). Was My picks until the Picks tab opened to everyone (Michael, 2026-10-27).
   // Needed for the home-screen app, which has its own storage and no address bar.
   (function logoTaps() {
     const brand = document.querySelector("header .brand");
@@ -405,7 +406,7 @@
     brand.addEventListener("click", () => {
       const t = Date.now();
       taps = taps.filter((x) => t - x < 1500).concat(t);
-      if (taps.length >= 3) { taps = []; location.hash = "#/picks"; }
+      if (taps.length >= 3) { taps = []; location.hash = "#/admin"; }
     });
   })();
   // Keep devices in step: refresh when the app comes back into view and every 5 minutes while open.
