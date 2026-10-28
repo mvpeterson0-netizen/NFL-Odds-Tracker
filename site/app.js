@@ -75,6 +75,9 @@ function lineCell(m) {
   }
 }
 function latestSnap(m) { return m && m.snaps && m.snaps.length ? m.snaps[m.snaps.length - 1] : null; }
+// A player "has a line" for the week when any of his stats shows one now: the pre-game line, or (before it) the latest
+// Mon / Thu / Sun AM snapshot. Same rule as the Guide's "Week N lines" panel. Used to put those players first on the Board.
+function hasLineNow(r) { return Object.values((r && r.m) || {}).some((m) => m && (m.lstat === "ok" || (m.lstat === "pending" && latestSnap(m)))); }
 function snapTip(m) {
   const lines = (m.snaps || []).map((x) => `${x.label} (${fmtTime(x.cap)}, ${x.book}): ${num(x.line)}  ${odds(x.op).replace(/<[^>]+>/g, "")}/${odds(x.up).replace(/<[^>]+>/g, "")}`);
   return "Line-movement snapshots (not graded):\n" + lines.join("\n") +
@@ -267,6 +270,16 @@ document.addEventListener("click", (e) => {
   const b = e.target.closest && e.target.closest("[data-wkpick]"); if (!b) return;
   S.wk = +b.dataset.wkpick; S.wkUser = true; S.game = ""; render();
 });
+// Guide "Week N lines" panel: tapping a game opens the Board filtered to just that game (other Board filters cleared).
+function openGameOnBoard(el) {
+  S.wk = +el.dataset.wlwk; S.game = el.dataset.wlgame; S.team = ""; S.pos = ""; S.q = "";
+  if ((location.hash || "#/board").startsWith("#/board")) render(); else location.hash = "#/board";
+}
+document.addEventListener("click", (e) => { const el = e.target.closest && e.target.closest("[data-wlgame]"); if (el) openGameOnBoard(el); });
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const el = e.target.closest && e.target.closest("[data-wlgame]"); if (el) { e.preventDefault(); openGameOnBoard(el); }
+});
 function weekSelect(id, val) {
   return `<select id="${id}">${D.weeks.map((w) => `<option value="${w}" ${w === val ? "selected" : ""}>Week ${w}${w === D.current_week ? " (current)" : ""}</option>`).join("")}</select>`;
 }
@@ -308,8 +321,9 @@ function viewBoard() {
     if (S.game && r.gid !== S.game) continue;
     items.push({ s, r, ko: r.ko });
   }
-  // Finished games' players go to the bottom (same order as the game chip row).
-  items.sort((a, b) => (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
+  // Players with a line showing come first; then, within each group, finished games' players go to the bottom
+  // (same order as the game chip row), then kickoff, game, team, slot.
+  items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
   let html = gameBar(wk) + `<div class="filters">
     <div class="flab">Week ${weekSlider(wk)}</div>
     <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
@@ -322,10 +336,11 @@ function viewBoard() {
     <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
-  // Rows per game, so the Game cell can span every row of that game.
-  const span = {};
-  for (const { s, r } of items) span[r.gid] = (span[r.gid] || 0) + marketsFor(s.slot.slice(0, 2)).length;
-  let lastGid = null;
+  // Rows per run of the same game, so the Game cell can span every row of that run. (A game can appear twice
+  // when some of its players have lines and some don't yet.)
+  const span = [];
+  { let g = null; for (const { s, r } of items) { if (r.gid !== g) { span.push(0); g = r.gid; } span[span.length - 1] += marketsFor(s.slot.slice(0, 2)).length; } }
+  let lastGid = null, run = -1;
   for (const { s, r } of items) {
     const pos = s.slot.slice(0, 2);
     const ms = marketsFor(pos);
@@ -335,7 +350,7 @@ function viewBoard() {
       const newGame = first && r.gid !== lastGid;
       const grp = newGame ? "grp" : first ? "plr" : "";
       html += `<tr class="${grp}">
-        ${newGame ? `<td class="gamecell" rowspan="${span[r.gid]}"><div class="gwrap"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></div></td>` : ""}
+        ${newGame ? `<td class="gamecell" rowspan="${span[++run]}"><div class="gwrap"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></div></td>` : ""}
         <td>${first ? esc(s.team) : ""}</td>
         <td>${first ? `<span class="chip ${s.change ? "chg" : ""} ${s.extra ? "xtra" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
         <td>${first ? `<a class="pname" href="#/player/${s.pid}">${headshot(s.pid, 28)}${esc(s.name)}</a> ${window.STIX_NEWS ? window.STIX_NEWS.icon(s.pid) : ""}` : ""}</td>
@@ -851,7 +866,7 @@ function weekLinesPanel() {
       : last
         ? `<span class="wlno">No lines yet</span><div class="muted small">${empty} check${empty === 1 ? "" : "s"} came back empty · last ${fmtTime(last.attempted_utc)}</div>`
         : `<span class="wlno">No lines yet</span><div class="muted small">not checked yet</div>`;
-    body += `<tr><td><b>${esc(gameLabel(gid))}</b><div class="muted small">${fmtTime(g.ko)}</div></td><td class="wrapcell">${status}</td></tr>`;
+    body += `<tr class="wlgame" data-wlgame="${esc(gid)}" data-wlwk="${wk}" role="link" tabindex="0" title="Show this game on the Board"><td><b>${esc(gameLabel(gid))}</b><div class="muted small">${fmtTime(g.ko)}</div></td><td class="wrapcell">${status}</td><td class="wlgo" aria-hidden="true">›</td></tr>`;
   }
   return `<div class="panel"><h3>Week ${wk} lines · ${showing} of ${games.length} games showing lines</h3><div class="body">
     <table class="wrap wltable"><tbody>${body}</tbody></table>

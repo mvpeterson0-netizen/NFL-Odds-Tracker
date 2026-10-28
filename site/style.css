@@ -138,7 +138,7 @@ td.slines { white-space: nowrap; }
 .wkp table.wkt { margin: 6px 0 4px; }
 .wkp table.wkt td { padding: 3px 8px; }
 .wkp tr.untracked td { color: var(--muted); }
-.wltable td { padding: 5px 8px; vertical-align: top; } .wltable .wlok { color: var(--over); font-weight: 600; } .wltable .wlno { color: var(--warn-ink); font-weight: 600; }
+.wltable td { padding: 5px 8px; vertical-align: top; } .wltable .wlgame { cursor: pointer; } .wltable .wlgame:hover td, .wltable .wlgame:focus-visible td { background: var(--hover, rgba(127,127,127,.12)); } .wltable .wlgo { color: var(--muted, #888); font-size: 1.2em; vertical-align: middle; text-align: right; width: 1em; } .wltable .wlok { color: var(--over); font-weight: 600; } .wltable .wlno { color: var(--warn-ink); font-weight: 600; }
 /* Search builder */
 .builder { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 6px 0 12px; }
 .btop { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-bottom: 8px; }
