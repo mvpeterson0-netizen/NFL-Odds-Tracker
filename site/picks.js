@@ -8,7 +8,7 @@
 (function () {
   // false = the Picks tab stays hidden for visitors who aren't signed in (open it with the 3-tap logo or #/picks).
   // Flip to true when sign-up is open to everyone.
-  const OPEN_SIGNUP = false;
+  const OPEN_SIGNUP = true; // Picks tab for everyone (Michael, 2026-10-27); visitors see the sign-in screen until signed in
   const LS_CFG = "stix_picks_cfg", LS_CACHE = "stix_picks_cache", FILE = "picks.json";
   const ST = { picks: [], dirty: false, syncing: false, synced: null, err: "", sha: null };          // GitHub mode
   const AC = { picks: [], loaded: false, loading: false, err: "", saving: 0, uid: null, at: 0 };          // account mode
