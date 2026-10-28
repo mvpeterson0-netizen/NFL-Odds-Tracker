@@ -75,6 +75,9 @@ function lineCell(m) {
   }
 }
 function latestSnap(m) { return m && m.snaps && m.snaps.length ? m.snaps[m.snaps.length - 1] : null; }
+// A player "has a line" for the week when any of his stats shows one now: the pre-game line, or (before it) the latest
+// Mon / Thu / Sun AM snapshot. Same rule as the Guide's "Week N lines" panel. Used to put those players first on the Board.
+function hasLineNow(r) { return Object.values((r && r.m) || {}).some((m) => m && (m.lstat === "ok" || (m.lstat === "pending" && latestSnap(m)))); }
 function snapTip(m) {
   const lines = (m.snaps || []).map((x) => `${x.label} (${fmtTime(x.cap)}, ${x.book}): ${num(x.line)}  ${odds(x.op).replace(/<[^>]+>/g, "")}/${odds(x.up).replace(/<[^>]+>/g, "")}`);
   return "Line-movement snapshots (not graded):\n" + lines.join("\n") +
@@ -232,6 +235,51 @@ function notes(r, m, slotRow) {
 }
 
 // ---------- views ----------
+// Default week on the Board, player pages and the Research builder: from Monday 8 AM Central through Sunday, the
+// coming Sunday's week (upcomingLinesWeek, Guide tab). The Defense tab keeps D.current_week, which turns over only
+// once every game of the week (incl. Monday night) is final. S.wkUser = the viewer picked a week themselves.
+let _dw = null; // cached for a minute: callers may ask many times per render (it checks every game's date)
+function defaultWeek() {
+  if (_dw && _dw.d === D && Date.now() - _dw.t < 60000) return _dw.w;
+  let w = null;
+  try { const u = upcomingLinesWeek(); if (D.weeks.includes(u)) w = u; } catch (e) { console.error(e); }
+  if (w == null) w = D.current_week || D.weeks[D.weeks.length - 1];
+  _dw = { d: D, t: Date.now(), w };
+  return w;
+}
+// Week slider (Board): a horizontal strip showing 2 weeks at a time, starting on this week and next week;
+// swipe (or scroll) on it to reveal earlier / later weeks. Tap a week to pick it.
+function weekSlider(val) {
+  return `<div class="wkslider" role="tablist" aria-label="Week">${D.weeks.map((w) =>
+    `<button type="button" class="wkchip ${w === val ? "on" : ""}" data-wkpick="${w}" ${w === D.current_week ? 'data-wkcur="1"' : ""}>W${w}</button>`).join("")}</div>`;
+}
+function initWeekSliders() {
+  document.querySelectorAll(".wkslider").forEach((el) => {
+    const on = el.querySelector(".wkchip.on"), cur = el.querySelector("[data-wkcur]");
+    const curW = cur ? +cur.dataset.wkpick : null, onW = on ? +on.dataset.wkpick : null;
+    // start on this week + next week; if the picked week is outside that pair, start on the picked week
+    const start = on && curW != null && (onW === curW || onW === curW + 1) ? cur : on || cur;
+    if (start) el.scrollLeft = start.offsetLeft - el.firstElementChild.offsetLeft;
+    if (!el.dataset.wheel) {
+      el.dataset.wheel = "1";
+      el.addEventListener("wheel", (e) => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false });
+    }
+  });
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest && e.target.closest("[data-wkpick]"); if (!b) return;
+  S.wk = +b.dataset.wkpick; S.wkUser = true; S.game = ""; render();
+});
+// Guide "Week N lines" panel: tapping a game opens the Board filtered to just that game (other Board filters cleared).
+function openGameOnBoard(el) {
+  S.wk = +el.dataset.wlwk; S.game = el.dataset.wlgame; S.team = ""; S.pos = ""; S.q = "";
+  if ((location.hash || "#/board").startsWith("#/board")) render(); else location.hash = "#/board";
+}
+document.addEventListener("click", (e) => { const el = e.target.closest && e.target.closest("[data-wlgame]"); if (el) openGameOnBoard(el); });
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const el = e.target.closest && e.target.closest("[data-wlgame]"); if (el) { e.preventDefault(); openGameOnBoard(el); }
+});
 function weekSelect(id, val) {
   return `<select id="${id}">${D.weeks.map((w) => `<option value="${w}" ${w === val ? "selected" : ""}>Week ${w}${w === D.current_week ? " (current)" : ""}</option>`).join("")}</select>`;
 }
@@ -273,10 +321,11 @@ function viewBoard() {
     if (S.game && r.gid !== S.game) continue;
     items.push({ s, r, ko: r.ko });
   }
-  // Finished games' players go to the bottom (same order as the game chip row).
-  items.sort((a, b) => (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
+  // Players with a line showing come first; then, within each group, finished games' players go to the bottom
+  // (same order as the game chip row), then kickoff, game, team, slot.
+  items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
   let html = gameBar(wk) + `<div class="filters">
-    <label>Week ${weekSelect("f-wk", wk)}</label>
+    <div class="flab">Week ${weekSlider(wk)}</div>
     <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
     <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
     <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label>
@@ -287,10 +336,11 @@ function viewBoard() {
     <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
-  // Rows per game, so the Game cell can span every row of that game.
-  const span = {};
-  for (const { s, r } of items) span[r.gid] = (span[r.gid] || 0) + marketsFor(s.slot.slice(0, 2)).length;
-  let lastGid = null;
+  // Rows per run of the same game, so the Game cell can span every row of that run. (A game can appear twice
+  // when some of its players have lines and some don't yet.)
+  const span = [];
+  { let g = null; for (const { s, r } of items) { if (r.gid !== g) { span.push(0); g = r.gid; } span[span.length - 1] += marketsFor(s.slot.slice(0, 2)).length; } }
+  let lastGid = null, run = -1;
   for (const { s, r } of items) {
     const pos = s.slot.slice(0, 2);
     const ms = marketsFor(pos);
@@ -300,7 +350,7 @@ function viewBoard() {
       const newGame = first && r.gid !== lastGid;
       const grp = newGame ? "grp" : first ? "plr" : "";
       html += `<tr class="${grp}">
-        ${newGame ? `<td class="gamecell" rowspan="${span[r.gid]}"><div class="gwrap"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></div></td>` : ""}
+        ${newGame ? `<td class="gamecell" rowspan="${span[++run]}"><div class="gwrap"><b>${esc(gameLabel(r.gid))}</b><div class="muted small">${fmtTime(r.ko)}</div><div class="small wxline">${wxCell(r.gid)}</div></div></td>` : ""}
         <td>${first ? esc(s.team) : ""}</td>
         <td>${first ? `<span class="chip ${s.change ? "chg" : ""} ${s.extra ? "xtra" : ""}" title="${esc(s.change ? "Changed: " + s.change : s.basis)}">${s.slot}${s.change ? " ↺" : ""}</span>` : ""}</td>
         <td>${first ? `<a class="pname" href="#/player/${s.pid}">${headshot(s.pid, 28)}${esc(s.name)}</a> ${window.STIX_NEWS ? window.STIX_NEWS.icon(s.pid) : ""}` : ""}</td>
@@ -327,6 +377,56 @@ function niceStep(range, target = 5) {
   for (const f of [1, 2, 2.5, 5, 10]) if (raw <= f * mag) return f * mag;
   return 10 * mag;
 }
+// Actual-stat number goes on the far side of the dot from the pre-game line: below the dot when the actual finished
+// under the line, above it otherwise (over, push, or no line). Falls back to above when there's no room at the bottom.
+function actBelow(p, ys, H, B, fs) {
+  return p.act != null && p.line != null && p.act < p.line && ys(p.act) + 9 + fs <= H - B - 2;
+}
+// Chooses above / below for each line or snapshot label so it does not overlap the actual-stat number,
+// the actual dot, a marker, or another label. Boxes are estimated from the font size.
+function placeLabels(labels, pts, { xs, ys, W, H, B, fs }) {
+  const cw = fs * 0.62, gap = 4; // approximate width of one character; space between marker and text
+  const hit = (a, b) => Math.max(0, Math.min(a.r, b.r) - Math.max(a.l, b.l)) * Math.max(0, Math.min(a.b, b.b) - Math.max(a.t, b.t));
+  const obstacles = [];
+  pts.forEach((p, i) => {
+    const x = xs(i);
+    if (p.act != null) {
+      const ya = ys(p.act), w = String(num(p.act)).length * cw;
+      obstacles.push(actBelow(p, ys, H, B, fs) ? { l: x - w / 2, r: x + w / 2, t: ya + 9, b: ya + 9 + fs + 3 }
+        : { l: x - w / 2, r: x + w / 2, t: ya - 9 - fs, b: ya - 9 + 3 }); // actual number
+      obstacles.push({ l: x - 5, r: x + 5, t: ya - 5, b: ya + 5 }); // actual dot
+    }
+    for (const v of [p.line, p.proj ? p.proj.line : null]) if (v != null) obstacles.push({ l: x - 14, r: x + 14, t: ys(v) - 2, b: ys(v) + 2 });
+  });
+  // the blue actual line, sampled into small boxes (weighted lower than text: crossing it is less bad)
+  const path = [];
+  const ap = pts.map((p, i) => (p.act == null ? null : [xs(i), ys(p.act)]));
+  for (let i = 1; i < ap.length; i++) {
+    if (!ap[i - 1] || !ap[i]) continue;
+    const [x1, y1] = ap[i - 1], [x2, y2] = ap[i], n = Math.ceil(Math.hypot(x2 - x1, y2 - y1) / 3);
+    for (let k = 0; k <= n; k++) { const x = x1 + ((x2 - x1) * k) / n, y = y1 + ((y2 - y1) * k) / n; path.push({ l: x - 1.5, r: x + 1.5, t: y - 1.5, b: y + 1.5 }); }
+  }
+  const bottomLimit = H - B; // keep clear of the week labels
+  let out = "";
+  for (const lb of labels) {
+    const w = lb.text.replace(/&[a-z]+;/g, "x").length * cw;
+    const cx = Math.min(Math.max(lb.x, w / 2 + 2), W - w / 2 - 2); // keep the text inside the chart
+    // Candidates: just above / just below the marker, then one or two rows further out if both are taken.
+    let best = null;
+    for (let k = 0; k < 3; k++) {
+      for (const dir of lb.side ? [lb.side] : [-1, 1]) {
+        const t = dir < 0 ? lb.y - gap - fs - k * (fs + 2) : lb.y + gap + k * (fs + 2);
+        const box = { l: cx - w / 2, r: cx + w / 2, t, b: t + fs };
+        const score = obstacles.reduce((s, o) => s + hit(box, o), 0) + 0.3 * path.reduce((s, o) => s + hit(box, o), 0) +
+          k * 12 + (box.t < 0 || box.b > bottomLimit ? 1e6 : 0);
+        if (!best || score < best.score) best = { score, box, base: t + fs - 2 };
+      }
+    }
+    obstacles.push(best.box);
+    out += `<text x="${cx}" y="${best.base}" text-anchor="middle" font-size="${fs}" font-weight="600" fill="${lb.fill}">${lb.text}</text>`;
+  }
+  return out;
+}
 function chartSVG(rows, mid, o = {}) {
   // act = actual stat; line = graded pre-game line; proj = latest snapshot shown until the pre-game line exists
   const pts = rows.map((r) => {
@@ -338,8 +438,9 @@ function chartSVG(rows, mid, o = {}) {
   const vals = pts.flatMap((p) => [p.act, p.line, p.proj ? p.proj.line : null]).filter((v) => v != null);
   if (!vals.length) return `<p class="muted pad">No data to chart yet.</p>`;
   const { W = 1200, H = 280, L = 48, R = 70, T = 22, B = 30, fs = 12, edgeAbove = false } = o; // phone view passes a smaller canvas
-  // edgeAbove: put line/snapshot labels above the marker for the last week so they are not cut off on narrow charts
-  const lbl = (i, x, y) => (edgeAbove && i === pts.length - 1 ? `x="${x}" y="${y - 9}" text-anchor="middle"` : `x="${x + 18}" y="${y + 4}"`);
+  // Line / snapshot labels sit centered just above or just below their marker. Each one takes the side
+  // that does not cover the week's actual-stat number or dot, another week's label, or a marker; if both
+  // sides collide it takes the one with the least overlap (placeLabels). edgeAbove is no longer used.
   const top = Math.max(...vals);
   const step = niceStep(top || 1);
   const max = Math.ceil((top * 1.08) / step) * step || step, min = 0;
@@ -361,25 +462,35 @@ function chartSVG(rows, mid, o = {}) {
     path += `${pen ? "L" : "M"}${xs(i)},${ys(p.act)} `; pen = true;
   });
   g += `<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;
+  const labels = []; // line / snapshot labels, placed after the markers (see placeLabels)
   pts.forEach((p, i) => {
     const x = xs(i);
     if (p.line != null) {
       const res = p.m.res;
       const col = res === "over" ? "var(--over)" : res === "under" ? "var(--under)" : "var(--ink)";
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${ys(p.line)}" y2="${ys(p.line)}" stroke="${col}" stroke-width="3"><title>W${p.wk} pre-game line ${num(p.line)} (${esc(p.m.book || "")})</title></line>
-        <text ${lbl(i, x, ys(p.line))} font-size="${fs}" font-weight="600" fill="${col}">${num(p.line)}</text>`;
+`;
+      // pre-game line label on the side away from the actual dot: above the bar when the actual finished under, below when over
+      const side = p.act == null || p.act === p.line ? 0 : p.act < p.line ? -1 : 1;
+      labels.push({ i, x, y: ys(p.line), text: num(p.line), fill: col, side });
     }
     if (p.proj) {
       const y = ys(p.proj.line);
       g += `<line x1="${x - 14}" x2="${x + 14}" y1="${y}" y2="${y}" stroke="var(--warn-ink)" stroke-width="3" stroke-dasharray="4 3"><title>W${p.wk} ${esc(p.proj.label)} snapshot ${num(p.proj.line)} (${esc(p.proj.book)}, ${esc(fmtTime(p.proj.cap))}). Not graded; replaced by the pre-game line.</title></line>
-        <text ${lbl(i, x, y)} font-size="${fs}" font-weight="600" fill="var(--warn-ink)">${num(p.proj.line)} ${esc(p.proj.label)}</text>`;
+`;
+      // snapshot label: below the dashed bar when it is lower than his most recent earlier pre-game line, above when higher;
+      // no earlier line or no change -> whichever side is clear (placeLabels)
+      const prev = pts.slice(0, i).reverse().find((q) => q.line != null);
+      const side = !prev || p.proj.line === prev.line ? 0 : p.proj.line < prev.line ? 1 : -1;
+      labels.push({ i, x, y, text: num(p.proj.line), fill: "var(--warn-ink)", side }); // number only; which pull it came from is in the hover text and the Line movement panel
     }
     if (p.act != null) {
       g += `<circle cx="${x}" cy="${ys(p.act)}" r="4.5" fill="var(--accent)"><title>W${p.wk} actual ${num(p.act)}</title></circle>
-        <text x="${x}" y="${ys(p.act) - 9}" text-anchor="middle" font-size="${fs}" fill="var(--accent)">${num(p.act)}</text>`;
+        <text x="${x}" y="${actBelow(p, ys, H, B, fs) ? ys(p.act) + 9 + fs - 2 : ys(p.act) - 9}" text-anchor="middle" font-size="${fs}" fill="var(--accent)">${num(p.act)}</text>`;
     }
     if (p.r.played === false) g += `<text x="${x}" y="${ys(min) - 6}" text-anchor="middle" font-size="${fs - 1}" fill="var(--muted)">DNP</text>`;
   });
+  g += placeLabels(labels, pts, { xs, ys, W, H, B, fs });
   return `<svg viewBox="0 0 ${W} ${H}" role="img">${g}</svg>`;
 }
 
@@ -502,7 +613,7 @@ function viewPlayer(pid) {
   for (const r of rows) {
     const m = r.m[mid];
     const nt = notes(r, m, null);
-    h += `<tr><td>${r.wk}</td><td title="${esc(fmtTime(r.ko))}">${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)}</td>
+    h += `<tr><td>${r.wk}</td><td title="${esc(fmtTime(r.ko))}">${window.STIX_RESEARCH ? window.STIX_RESEARCH.oppLink(r.gid, r.team, p.pos, pid, `${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)}`) : `${r.ha === "home" ? "vs." : "@"} ${esc(r.opp)}`} ${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos, pid) : ""}</td>
       <td class="small">${drankCell(m, p.pos, mkt[mid], r.opp)}</td>
       <td class="small">${wxCompact(r.gid)}</td>
       <td>${r.slot ? esc(r.slot) : '<span class="na">N/A</span>'}</td>
@@ -518,25 +629,33 @@ function viewPlayer(pid) {
   return h;
 }
 
-// "Bet on DraftKings": links that put the Over or Under on the DraftKings bet slip (from the latest pull; built in
-// pipeline/build.py from data/prop_links.csv). Shown only before kickoff and only when a link was captured.
+// "Bet on FanDuel": Over / Under buttons that open FanDuel with that bet on the slip (addToBetslip?marketId=…&selectionId=…,
+// from the latest pull; built in pipeline/build.py from data/prop_links.csv). Shown before kickoff when FanDuel had a line
+// for the player in that pull; no age cutoff. FanDuel's link names the market and the player's Over/Under, not a number:
+// in Michael's 2026-10-27 test a link captured at 218.5 still worked after FanDuel moved to 221.5 and showed the current
+// line (one test, not a guarantee). DraftKings slip links fail once DK changes the market, and DK's app ignores tab links,
+// so Michael chose FanDuel only.
+const FD_SLIP = /^https:\/\/sportsbook\.fanduel\.com\/addToBetslip\?/;
 function betBox(pid, mid) {
-  const e = ((((D.links || {})[pid] || {})[mid]) || {}).draftkings;
-  if (!e || !(e.o || e.u)) return "";
+  const e = ((((D.links || {})[pid] || {})[mid]) || {}).fanduel;
+  if (!e) return "";
+  const o = e.o && FD_SLIP.test(e.o.url || "") ? e.o : null, u = e.u && FD_SLIP.test(e.u.url || "") ? e.u : null;
+  if (!o && !u) return "";
   const g = D.games[e.gid];
   if (!g || new Date(g.ko) <= new Date()) return "";
-  const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens DraftKings with this bet on the slip"
+  const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens FanDuel with this bet on the slip"
     data-bet="${side === "Over" ? "o" : "u"}" data-pid="${esc(pid)}" data-bmid="${esc(mid)}">${side} ${num(e.point)} <span class="muted">${x.price == null ? "" : odds(x.price)}</span> ↗</a>` : "";
-  return `<div class="betbox"><span class="betlbl">Bet on DraftKings</span>${a("Over", e.o)}${a("Under", e.u)}
-    <span class="muted small betnote">Line as of ${fmtTime(e.cap)}; DraftKings shows its current line and odds before you place it.${window.STIX_PICKS && window.STIX_PICKS.enabled() ? " Tapping also saves it to your picks." : ""}</span></div>`;
+  return `<div class="betbox"><span class="betlbl">Bet on FanDuel</span>${a("Over", o)}${a("Under", u)}</div>`;
 }
-// Tapping a DraftKings button also records the pick in My picks (picks.js), then the link opens DraftKings as usual.
+// Tapping a FanDuel Over/Under button also records the pick in My picks (picks.js) at the line and odds shown here
+// (Michael's choice), then the link opens FanDuel as usual.
 document.addEventListener("click", (ev) => {
   const b = ev.target.closest && ev.target.closest("[data-bet]");
   if (!b || !window.STIX_PICKS) return;
   try {
-    const e = D.links[b.dataset.pid][b.dataset.bmid].draftkings, x = b.dataset.bet === "o" ? e.o : e.u;
-    window.STIX_PICKS.recordBet(b.dataset.pid, b.dataset.bmid, b.dataset.bet, { line: e.point, odds: x.price, cap: e.cap, gid: e.gid });
+    const e = D.links[b.dataset.pid][b.dataset.bmid].fanduel, x = b.dataset.bet === "o" ? e.o : e.u;
+    window.STIX_PICKS.recordBet(b.dataset.pid, b.dataset.bmid, b.dataset.bet,
+      { line: e.point, odds: x.price, cap: e.cap, gid: e.gid, book: "FanDuel", src: "Bet on FD" });
   } catch (err) { console.error("pick from bet link failed", err); }
 });
 
@@ -545,7 +664,7 @@ function pickBoxSafe(pid, mid) {
   try { return window.STIX_PICKS ? window.STIX_PICKS.box(pid, mid) : ""; } catch (e) { console.error("picks box failed", e); return ""; }
 }
 
-// ---------- Results (on the Leads tab): how graded pre-game lines finished, over vs under ----------
+// ---------- Results tab: how graded pre-game lines finished, over vs under (pushes and voids left out) ----------
 // Uses the app's own grading: the pre-game line (~3 h before kickoff) vs the actual stat. Snapshots are never graded.
 // Extra players (not in our slots) are counted only when the "All players" switch is on.
 const RES_POS = ["QB", "RB", "WR", "TE"];
@@ -555,7 +674,7 @@ function gradedProps() {
     if (p.extra && !S.all) continue;
     for (const r of D.rows[p.id] || []) {
       for (const [mid, m] of Object.entries(r.m)) {
-        if (!m || !["over", "under", "push", "void"].includes(m.res)) continue;
+        if (!m || !["over", "under"].includes(m.res)) continue;
         out.push({ p, r, mid, m, pos: p.pos, wk: r.wk });
       }
     }
@@ -563,17 +682,17 @@ function gradedProps() {
   return out;
 }
 function resCount(list) {
-  const c = { over: 0, under: 0, push: 0, void: 0 };
+  const c = { over: 0, under: 0 };
   for (const x of list) c[x.m.res]++;
   const n = c.over + c.under;
   return Object.assign(c, { n: list.length, pct: n ? Math.round((100 * c.over) / n) : null });
 }
 function resTable(title, keyLabel, groups) {
   let h = `<div class="panel scroll"><h3>${title}</h3><table class="rtable"><thead><tr><th>${keyLabel}</th><th class="num">Over</th><th class="num">Under</th>
-    <th class="num">Push</th><th class="num">Void</th><th class="num" title="Overs ÷ (overs + unders); pushes and voids left out">Over %</th></tr></thead><tbody>`;
+    <th class="num" title="Overs ÷ (overs + unders)">Over %</th></tr></thead><tbody>`;
   for (const [label, list] of groups) {
     const c = resCount(list);
-    h += `<tr><td>${label}</td><td class="num">${c.over}</td><td class="num">${c.under}</td><td class="num">${c.push}</td><td class="num">${c.void}</td>
+    h += `<tr><td>${label}</td><td class="num">${c.over}</td><td class="num">${c.under}</td>
       <td class="num">${c.pct == null ? `<span class="muted">—</span>` : `<b>${c.pct}%</b>`}</td></tr>`;
   }
   return h + `</tbody></table></div>`;
@@ -587,8 +706,7 @@ function viewResults() {
   if (S.resMk && !mkList.some((m) => m.id === S.resMk)) S.resMk = "";
   const sel = (id, val, opts) => `<select id="${id}">${opts.map(([v, l]) => `<option value="${esc(v)}" ${String(v) === String(val) ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
   let h = `<h2 class="gsec">Results</h2>
-    <p class="callout">Every graded pre-game line (captured ~3 h before kickoff), over or under the actual stat. Push = actual equals the line; void = had a line but didn't play.
-    Over % leaves out pushes and voids.${S.all ? " Includes extra players (All players is on)." : ""}</p>
+    <p class="callout">Every graded pre-game line (captured ~3 h before kickoff) that finished over or under the actual stat. Pushes and voids are left out.${S.all ? " Includes extra players (All players is on)." : ""}</p>
     <div class="filters">
       <label>Week ${sel("r-wk", S.resWk || "", [["", "All weeks"], ...weeks.map((w) => [w, `Week ${w}`])])}</label>
       <label>Position ${sel("r-pos", S.resPos || "", [["", "All"], ...RES_POS.map((p) => [p, p])])}</label>
@@ -598,53 +716,15 @@ function viewResults() {
   if (!all.length) return h + `<p class="muted">No graded lines yet. Results appear once a game with a captured pre-game line has final stats.</p>`;
   const tot = resCount(f);
   h += `<div class="rtot"><span><b>${tot.n}</b> props</span> · <span class="res over">${tot.over} over</span> · <span class="res under">${tot.under} under</span>
-    ${tot.push ? ` · <span>${tot.push} push</span>` : ""}${tot.void ? ` · <span>${tot.void} void</span>` : ""} · Over % <b>${tot.pct == null ? "—" : tot.pct + "%"}</b></div>`;
+ · Over % <b>${tot.pct == null ? "—" : tot.pct + "%"}</b></div>`;
   if (!f.length) return h + `<p class="muted">No graded lines match these filters.</p>`;
   h += `<div class="grid2">`;
   h += resTable("By market", "Market", mkList.filter((m) => !S.resMk || m.id === S.resMk).map((m) => [esc(m.label), f.filter((x) => x.mid === m.id)]));
   h += resTable("By position", "Position", RES_POS.filter((p) => !S.resPos || p === S.resPos).map((p) => [p, f.filter((x) => x.pos === p)]));
-  h += `</div>`;
-  // Every graded prop, grouped by game (newest first); tap a game to open it.
-  const byGame = {};
-  for (const x of f) (byGame[x.r.gid] ||= []).push(x);
-  const games = Object.keys(byGame).sort((a, b) => (D.games[b] ? D.games[b].ko : "").localeCompare(D.games[a] ? D.games[a].ko : "") || a.localeCompare(b));
-  h += `<div class="panel"><h3>By game (${games.length})</h3><div class="body">`;
-  for (const gid of games) {
-    const list = byGame[gid].sort((a, b) => a.p.team.localeCompare(b.p.team) || slotRank(a.r.slot || a.pos) - slotRank(b.r.slot || b.pos) || a.mid.localeCompare(b.mid));
-    const c = resCount(list), g = D.games[gid];
-    h += `<details class="rgame"><summary><b>${esc(gameLabel(gid))}</b> <span class="muted small">W${g ? g.wk : ""} · ${g ? fmtTime(g.ko) : ""}</span>
-      <span class="small">${c.n} props · <span class="res over">${c.over} over</span> · <span class="res under">${c.under} under</span>${c.push ? ` · ${c.push} push` : ""}${c.void ? ` · ${c.void} void` : ""}</span></summary>
-      <table class="wrap"><thead><tr><th>Player</th><th>Market</th><th class="num">Line</th><th class="num">Actual</th><th>Result</th></tr></thead><tbody>`;
-    for (const x of list) {
-      h += `<tr><td><a href="#/player/${x.p.id}">${esc(x.p.name)}</a> <span class="muted small">${esc(x.p.team)} · ${esc(x.r.slot || x.pos)}</span></td>
-        <td>${esc(mkt[x.mid].label)}</td><td class="num">${num(x.m.line)}</td><td class="num">${x.m.act == null ? "" : num(x.m.act)}</td><td>${resultCell(x.m)}</td></tr>`;
-    }
-    h += `</tbody></table></details>`;
-  }
-  return h + `</div></div>`;
+  return h + `</div>`;
 }
 
-function viewLeads() {
-  return viewResults() + `<h2 class="gsec">Leads</h2>` + viewLeadsTable();
-}
-function viewLeadsTable() {
-  let h = `<p class="callout">Upcoming props where the stored pre-game line differs most from the player's last 5 games (prior games only, min 3 games played).
-    Sorted by percent gap. These are leads for further research, not predictions or guaranteed value. Lines appear here only after they are captured, about 3 hours before each kickoff.</p>`;
-  const leadsShown = D.leads.filter((l) => S.all || !isExtra(l.pid));
-  if (!leadsShown.length) return h + `<p class="muted">No upcoming lines captured yet.</p>`;
-  h += `<div class="panel scroll"><table><thead><tr><th>Player</th><th>Team</th><th>Market</th><th>Game</th><th class="num">Line</th><th>Book · captured</th>
-    <th class="num">3-gm mean</th><th class="num">5-gm mean</th><th class="num">5-gm median</th><th class="num">Line − 5-gm mean</th><th class="num">% gap</th></tr></thead><tbody>`;
-  for (const l of leadsShown) {
-    const p = playerById[l.pid]; if (!p) continue;
-    const mk = mkt[l.mid];
-    h += `<tr><td><a href="#/player/${l.pid}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra" title="${esc(EXTRA_BASIS)}">extra</span>` : ""}</td><td>${esc(p.team)}</td><td>${esc(mk.label)}</td><td>${esc(gameLabel(l.gid))}</td>
-      <td class="num"><b>${num(l.line)}</b></td><td class="small">${esc(l.book)} · ${fmtTime(l.cap)}</td>
-      <td class="num">${num(l.mean3)} <span class="muted small">(n=${l.n3})</span></td><td class="num">${num(l.mean5)} <span class="muted small">(n=${l.n5})</span></td>
-      <td class="num">${num(l.med5)}</td><td class="num">${l.gap5 > 0 ? "+" : ""}${num(l.gap5)}</td>
-      <td class="num">${l.pct5 == null ? "" : `${l.pct5 > 0 ? "+" : ""}${l.pct5}%`}</td></tr>`;
-  }
-  return h + `</tbody></table></div>`;
-}
+function viewLeads() { return viewResults(); }
 
 function viewSlots() {
   const wk = S.slotWk;
@@ -741,15 +821,68 @@ function viewLog(live) {
   return h + `</tbody></table></div>`;
 }
 
+// ---------- Upcoming week line status (Guide page) ----------
+// From Monday 8 AM Central through the end of Sunday, the "upcoming week" is the week of the coming Sunday's games
+// (so on Monday it already looks ahead, even while last week's Monday night game is still to be played).
+function ctDate(d) { return d.toLocaleDateString("en-CA", { timeZone: "America/Chicago" }); }
+function upcomingLinesWeek(now = new Date()) {
+  const ct = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+  const dow = ct.getDay();
+  const add = dow === 1 && ct.getHours() < 8 ? -1 : (7 - dow) % 7;
+  const t = new Date(ctDate(now) + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() + add);
+  const sunday = t.toISOString().slice(0, 10);
+  const games = Object.values(D.games);
+  const sun = games.find((g) => ctDate(new Date(g.ko)) === sunday);
+  if (sun) return sun.wk;
+  const next = games.filter((g) => new Date(g.ko) > now).map((g) => g.wk);
+  return next.length ? Math.min(...next) : D.current_week;
+}
+function weekLinesPanel() {
+  const wk = upcomingLinesWeek();
+  const games = Object.entries(D.games).filter(([, g]) => g.wk === wk).sort((a, b) => a[1].ko.localeCompare(b[1].ko) || a[0].localeCompare(b[0]));
+  if (!games.length) return "";
+  const PT = { pregame: "pre-game line", mon: "Mon snapshot", thu: "Thu snapshot", sun: "Sun AM snapshot" };
+  const slots = slotsFor(wk);
+  let showing = 0, body = "";
+  for (const [gid, g] of games) {
+    let tracked = 0, players = 0, lines = 0, lastCap = "", kind = "";
+    for (const s of slots) {
+      const r = rowFor(s.pid, wk);
+      if (!r || r.gid !== gid) continue;
+      tracked++;
+      let any = false;
+      for (const m of Object.values(r.m || {})) {
+        if (m.lstat === "ok") { any = true; lines++; if ((m.cap || "") > lastCap) { lastCap = m.cap; kind = "pregame"; } }
+        else if (m.lstat === "pending" && latestSnap(m)) { any = true; lines++; const sn = latestSnap(m); if (sn.cap > lastCap) { lastCap = sn.cap; kind = sn.t; } }
+      }
+      if (any) players++;
+    }
+    const pulls = D.pull_log.filter((p) => p.game_id === gid);
+    const last = pulls[pulls.length - 1];
+    const empty = pulls.filter((p) => p.status === "empty").length;
+    if (players) showing++;
+    const status = players
+      ? `<span class="wlok">✓ ${players}/${tracked} players · ${lines} lines</span><div class="muted small">${esc(PT[kind] || "")}${lastCap ? ` · ${fmtTime(lastCap)}` : ""}</div>`
+      : last
+        ? `<span class="wlno">No lines yet</span><div class="muted small">${empty} check${empty === 1 ? "" : "s"} came back empty · last ${fmtTime(last.attempted_utc)}</div>`
+        : `<span class="wlno">No lines yet</span><div class="muted small">not checked yet</div>`;
+    body += `<tr class="wlgame" data-wlgame="${esc(gid)}" data-wlwk="${wk}" role="link" tabindex="0" title="Show this game on the Board"><td><b>${esc(gameLabel(gid))}</b><div class="muted small">${fmtTime(g.ko)}</div></td><td class="wrapcell">${status}</td><td class="wlgo" aria-hidden="true">›</td></tr>`;
+  }
+  return `<div class="panel"><h3>Week ${wk} lines · ${showing} of ${games.length} games showing lines</h3><div class="body">
+    <table class="wrap wltable"><tbody>${body}</tbody></table>
+    <p class="muted small">Players = our slotted players in that game (QB1, RB1–2, WR1–3, TE1–2) with at least one line showing; lines = player-and-stat lines the app shows for them now (the pre-game line once captured, otherwise the latest Mon / Thu / Sun AM snapshot). "Came back empty" means the odds service answered but DraftKings/FanDuel had no player props posted for that game yet; empty checks use no credits. From Monday 8 AM Central this shows the coming Sunday's week.</p>
+  </div></div>`;
+}
+
 function viewGuide() {
-  return `<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
+  return `${window.alertsPanel ? window.alertsPanel() : ""}${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
     <section id="g-guide"><h2 class="gsec">Guide</h2>${guideBody()}</section>
     <section id="g-log"><h2 class="gsec">Log &amp; sources</h2>${viewLog(LIVE)}</section>`;
 }
 function guideBody() {
   const R = WX_RULES;
   const row = (label, cls, rule) => `<tr><td><span class="wxb ${cls}">${label}</span></td><td class="wrapcell">${rule}</td></tr>`;
-  return `<div class="panel"><h3>Weather labels</h3><div class="body">
+  return `${window.STIX_RESEARCH ? window.STIX_RESEARCH.settingsHtml() : ""}<div class="panel"><h3>Weather labels</h3><div class="body">
     <p class="callout">Each game's weather gets a one-glance label from the numbers below. Several can apply at once and are joined with "&amp;" (for example <b>🌧️ Rainy &amp; 💨 Windy</b>). If none apply, the label is <b>Nice</b>. Past games use observed weather; upcoming games use the latest forecast. Hover a label on the Board to see which values triggered it.</p>
     <table class="wrap"><thead><tr><th>Label</th><th>Triggered when</th></tr></thead><tbody>
     ${row("🌧️ Rainy", "bad", `Precipitation of <b>${R.rainIn} in or more</b> over the kickoff hour and next 3 hours, <b>or</b> a forecast chance of precipitation of <b>${R.rainProb}% or more</b>.`)}
@@ -857,6 +990,7 @@ function render() {
   }
   else app.innerHTML = viewBoard();
   bind(tab, arg);
+  try { initWeekSliders(); } catch (e) { console.error(e); }
   // Old Slots / Log links now open the Guide page at that section.
   if (tab === "slots" || tab === "log") setTimeout(() => { const el = document.getElementById(tab === "log" ? "g-log" : "g-slots"); if (el) el.scrollIntoView(); }, 0);
   if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
@@ -871,7 +1005,6 @@ function bind(tab, arg) {
     ap.checked = S.all;
     ap.addEventListener("change", () => { S.all = ap.checked; try { localStorage.setItem("stix_all_players", S.all ? "1" : "0"); } catch { /* ignore */ } render(); });
   }
-  on("f-wk", "change", (e) => { S.wk = +e.target.value; S.game = ""; render(); });
   document.querySelectorAll("[data-gid]").forEach((b) => b.addEventListener("click", () => { S.game = b.dataset.gid; render(); }));
   on("f-team", "change", (e) => { S.team = e.target.value; render(); });
   on("f-pos", "change", (e) => { S.pos = e.target.value; render(); });
@@ -934,8 +1067,8 @@ async function status() {
     return;
   }
   index();
-  S.wk = D.current_week || D.weeks[D.weeks.length - 1];
-  S.slotWk = S.wk;
+  S.wk = defaultWeek();
+  S.slotWk = D.current_week || S.wk;
   window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
   render();
   status();
@@ -958,6 +1091,7 @@ async function status() {
       const nd = await r.json();
       if (nd.generated_utc === D.generated_utc) return;
       D = nd; index();
+      if (!S.wkUser) S.wk = defaultWeek(); // e.g. the page was open across Monday 8 AM
       const typing = document.activeElement && document.activeElement.id === "f-q";
       const board = document.querySelector(".panel.board"), keep = board ? board.scrollTop : 0;
       if (!typing) { render(); const b2 = document.querySelector(".panel.board"); if (b2) b2.scrollTop = keep; }

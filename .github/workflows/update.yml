@@ -38,6 +38,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install alert sender (web push)
+        # The only package outside the standard library (Michael approved 2026-10-27). If it fails to
+        # install, alerts by web push are skipped and everything else runs as usual.
+        continue-on-error: true
+        run: pip install -q pywebpush==2.5.0
+
       - name: Run pipeline
         id: run
         env:
@@ -47,6 +53,8 @@ jobs:
           ODDS_API_KEY_4: ${{ secrets.ODDS_API_KEY_4 }}
           ODDS_API_KEY_5: ${{ secrets.ODDS_API_KEY_5 }}
           ODDS_API_KEY_6: ${{ secrets.ODDS_API_KEY_6 }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           FORCE_BUILD: ${{ (inputs.force_build || github.event_name == 'push') && '1' || '0' }}
         run: python -m pipeline.run

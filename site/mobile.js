@@ -60,14 +60,15 @@
     const tip = `Last ${TREND_RULES.lastN} starts avg ${num(f.lastAvg)} vs season ${num(f.avg)}` + (f.pctCh != null ? ` (${f.pctCh > 0 ? "+" : ""}${Math.round(f.pctCh)}%)` : "");
     return `<span class="mtrend ${t[2]}" title="${esc(tip)}">${t[0]}${big ? " " + t[1] : ""}</span>${f.usage ? `<span class="musage ${f.usage === "mixed" ? "mixed" : ""}">${esc(f.usage)}</span>` : ""}`;
   }
-  function lineHtml(m) {
+  // noDay: leave out the Mon / Thu / Sun AM chip (player page shows the day only under Line movement).
+  function lineHtml(m, noDay) {
     if (!m) return `<span class="na">—</span>`;
     if (m.lstat === "ok") {
       const res = m.res && m.res !== "pending" ? ` <span class="res ${m.res}">${m.res}</span>` : "";
       return `<b>${num(m.line)}</b>${res}`;
     }
     const sn = m.lstat === "pending" ? latestSnap(m) : null;
-    if (sn) return `<b>${num(sn.line)}</b> <span class="chip snapchip">${esc(sn.label)}</span>`;
+    if (sn) return noDay ? `<b>${num(sn.line)}</b>` : `<b>${num(sn.line)}</b> <span class="chip snapchip">${esc(sn.label)}</span>`;
     const t = { not_collected: "n/c", pending: "pending", no_pregame: "none", not_offered: "n/o", not_requested: "n/r" }[m.lstat] || "—";
     return `<span class="na" title="${esc(m.lnote || m.lstat || "")}">${t}</span>`;
   }
@@ -99,10 +100,11 @@
       if (!r || (S.game && r.gid !== S.game)) continue;
       items.push({ s, r });
     }
-    // Finished games' players go to the bottom (same order as the game chip row).
-    items.sort((a, b) => (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
+    // Players with a line showing come first (hasLineNow, app.js); then, within each group, finished games' players
+    // go to the bottom (same order as the game chip row), then kickoff, game, team, slot.
+    items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
     let h = gameBar(wk) + `<div class="filters mfilters">
-      <label>Week ${weekSelect("f-wk", wk)}</label>
+      <div class="flab">Week ${weekSlider(wk)}</div>
       <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
       <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
       <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label></div>
@@ -137,7 +139,9 @@
     const ms = marketsFor(p.pos);
     const mid = S.market[pid] && ms.some((m) => m.id === S.market[pid]) ? S.market[pid] : ms[0].id;
     const mk = mkt[mid];
-    const cur = rows.find((r) => r.wk === S.wk) || rows.filter((r) => !r.final)[0] || rows[rows.length - 1];
+    // His next game that isn't finished (so a finished game's lines and line movement give way to next week's);
+    // a week the viewer picked on the Board takes priority.
+    const cur = (S.wkUser && rows.find((r) => r.wk === S.wk)) || rows.find((r) => !r.final) || rows[rows.length - 1];
     const m = cur ? cur.m[mid] : null;
     const f = cur ? form(pid, mid, p.pos, cur.wk) : { n: 0, avg: null, trend: null };
     let h = `<div class="mplayer">
@@ -146,14 +150,13 @@
         ${cur ? `<div class="small">W${cur.wk} ${cur.ha === "home" ? "vs" : "@"} ${esc(cur.opp)} · ${fmtTime(cur.ko)}</div><div class="small">${wxShort(cur.gid)}</div>` : ""}</div></div>
       <div class="mtabs">${ms.map((x) => `<button data-mid="${x.id}" class="${x.id === mid ? "on" : ""}">${esc(x.label)}</button>`).join("")}</div>
       <div class="mtiles">
-        <div><span>LINE</span>${lineHtml(m)}</div>
+        <div><span>LINE</span>${lineHtml(m, true)}</div>
         <div><span>AVG</span>${f.avg == null ? `<span class="na">—</span>` : `<b>${num(f.avg)}</b><small>${f.n} start${f.n === 1 ? "" : "s"}</small>`}</div>
         <div><span>OPP</span>${oppHtml(m)}${m && m.dav != null ? `<small>${num(m.dav)}/g allowed</small>` : ""}</div>
         <div><span>TREND</span>${trendHtml(f, true)}</div>
       </div>
       ${typeof betBox === "function" ? betBox(pid, mid) : ""}
       ${typeof pickBoxSafe === "function" ? pickBoxSafe(pid, mid) : ""}
-      ${cur ? tgtLine(targets(pid, p.pos, cur.wk)).replace('class="mtgt', 'class="mtgt mtgt-big') : ""}
       <div class="panel"><h3>${esc(mk.label)} by week</h3><div class="chart">${chartSVG(rows, mid, { W: 400, H: 230, L: 30, R: 26, T: 26, B: 24, fs: 12, edgeAbove: true })}</div>
         <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Snapshot</span></div></div>`;
     // Line movement for this week's game
@@ -170,18 +173,13 @@
       const mm = r.m[mid] || {};
       const w = D.games[r.gid] && D.games[r.gid].wx ? wxSummary(D.games[r.gid].wx) : null;
       const em = D.games[r.gid] && D.games[r.gid].wx && D.games[r.gid].wx.roof === "dome" ? "🏟️" : w ? (w.label.match(/\p{Extended_Pictographic}/u) || [""])[0] : "";
-      h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} ${oppHtml(mm)} ${em}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
-        <span>${lineHtml(mm)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0) + `<span class="tsh">${pctS(r.tshare)}</span>`}</span>` : ""}<span>${snapCell(r)}</span></div>`;
+      h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${window.STIX_RESEARCH ? window.STIX_RESEARCH.oppLink(r.gid, r.team, p.pos, pid, `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`) : `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`} ${oppHtml(mm)} ${em}${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos, pid) : ""}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
+        <span>${lineHtml(mm, true)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0) + `<span class="tsh">${pctS(r.tshare)}</span>`}</span>` : ""}<span>${snapCell(r)}</span></div>`;
     }
     h += `</div></div>`;
-    // Context
-    const notesTxt = cur ? notes(cur, m, null) : "";
+    // Context: weather only
     h += `<div class="panel"><h3>Matchup &amp; context</h3><div class="body mlist">
-      ${m && m.drk != null ? `<div>${drankCell(m, p.pos, mk, cur.opp)}</div><div class="muted small">${esc(cur.opp)} allowed ${num(m.dav)} ${p.pos} ${esc(mk.label.toLowerCase())} per game in ${m.dn} games (rank ${m.drk} of ${m.dof}; 1 = fewest).</div>` : ""}
       ${cur ? `<div>Weather: ${wxCell(cur.gid)}</div>` : ""}
-      ${(() => { const lp = rows.filter((r) => cur && r.wk < cur.wk && r.final && r.played === true).pop(); const u = lp ? usageCell(lp, p.pos) : ""; return u ? `<div>Last game usage (W${lp.wk}): ${u}</div>` : ""; })()}
-      ${notesTxt ? `<div class="muted small">${notesTxt}</div>` : ""}
-      <div class="muted small"><a href="#/guide">How AVG, OPP, trend and weather labels work</a></div>
     </div></div></div>`;
     return h;
   }

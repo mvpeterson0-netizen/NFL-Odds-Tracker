@@ -6,7 +6,9 @@ Missing values stay missing and carry a reason; nothing is estimated.
 from __future__ import annotations
 
 import os
+import re
 from collections import defaultdict
+from datetime import timedelta
 from statistics import mean, median
 
 from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso, read_csv, read_json, to_float,
@@ -16,6 +18,7 @@ from .weather import load as load_weather
 from .nflverse import Data, load_sources
 from .odds import CAPTURES_PATH, LINKS_PATH, PULL_LOG_PATH, SNAPSHOTS, WINDOW_CLOSE, WINDOW_OPEN, ptype
 from .slots import update_slots
+from . import espn_box
 
 MARKETS = [
     # id, odds key, nflverse stat column, label, positions
@@ -25,12 +28,19 @@ MARKETS = [
     ("rush_att", "player_rush_attempts", "carries", "Rush att", ("RB",)),
     ("rush_yds", "player_rush_yds", "rushing_yards", "Rush yds", ("QB", "RB")),
     ("rec", "player_receptions", "receptions", "Receptions", ("RB", "WR", "TE")),
-    ("rec_yds", "player_reception_yds", "receiving_yards", "Rec yds", ("WR", "TE")),
+    ("rec_yds", "player_reception_yds", "receiving_yards", "Rec yds", ("RB", "WR", "TE")),
 ]
 BOOK_NAMES = {"draftkings": "DraftKings", "fanduel": "FanDuel"}
 BOOK_ORDER = ["draftkings", "fanduel"]
 NAME_INDEX_PATH = DATA / "name_index.json"
 OUT_PATH = SITE / "data" / "data.json"
+
+
+def _int_or_none(v):
+    try:
+        return int(float(v))
+    except (TypeError, ValueError):
+        return None
 
 
 def implied(price):
@@ -129,6 +139,10 @@ def bet_links(name_index, games_by_id, now):
         pt, sides = sorted(pool.items(), key=balance)[0]
         any_row = sides.get("over") or sides.get("under")
         entry = {"point": to_float(pt), "cap": any_row["captured_utc"], "gid": any_row["game_id"]}
+        if book == "draftkings":  # DK's game id from its game-page link, for the "Open <tab> on DraftKings" button
+            ev = re.search(r"/event/(?:[^/?#]+/)?(\d+)", any_row.get("book_link") or "")
+            if ev:
+                entry["ev"] = ev.group(1)
         for side, key in (("over", "o"), ("under", "u")):
             if side in sides:
                 entry[key] = {"url": sides[side]["outcome_link"], "price": to_float(sides[side].get("price"))}
@@ -137,6 +151,9 @@ def bet_links(name_index, games_by_id, now):
 
 
 UPDATES_SEEN_PATH = DATA / "updates_seen.json"
+ESPN_PATH = DATA / "espn_news.json"
+ESPN_NEWS_DAYS = 7   # headlines older than this are left out
+ESPN_NEWS_MAX = 3    # at most this many headlines per player
 ROLE_SNAP_PTS = 25    # role change: last game's snap share differs from his prior average by this many points
 ROLE_TSHARE_PTS = 12   # ... or target share (WR/TE/RB) by this many points; needs 3+ prior games
 
@@ -151,13 +168,24 @@ def player_updates(d, slots, players, rows_out, cur, now, log):
     seen = read_json(UPDATES_SEEN_PATH, None)
     first_run = seen is None
     seen = seen or {}
+    espn_first = not any("|espn|" in k for k in seen)
     items = defaultdict(list)
 
-    def add(pid, key, kind, text, src):
+    def add(pid, key, kind, text, src, at="", url=""):
         k = f"{pid}|{key}"
         if k not in seen:
-            seen[k] = "" if first_run else iso(now)
-        items[pid].append({"k": key, "kind": kind, "text": text, "src": src, "t": seen[k]})
+            # first run, or first run with ESPN items: existing items are not marked new
+            seen[k] = "" if first_run or (espn_first and key.startswith("espn|")) else iso(now)
+        it = {"k": key, "kind": kind, "text": text, "src": src, "t": seen[k]}
+        if at:
+            it["at"] = at  # when the source itself dated this item (ESPN)
+        if url:
+            it["url"] = url
+        items[pid].append(it)
+
+    espn = read_json(ESPN_PATH, None) or {}
+    espn_status, espn_news = espn.get("status") or {}, espn.get("news") or {}
+    news_cutoff = iso(now - timedelta(days=ESPN_NEWS_DAYS))
 
     for pid, p in players.items():
         rows = rows_out.get(pid) or []
@@ -181,6 +209,19 @@ def player_updates(d, slots, players, rows_out, cur, now, log):
         if sl and sl.get("change_note"):
             add(pid, f"w{cur}|slot|{sl['slot']}", "Slot", f"Week {cur} slot {sl['slot']}: {sl['change_note']}",
                 "Stix slots (ESPN depth chart via nflverse + snap share + injury report)")
+        rr_any = d.roster_row(cur, pid) or {}
+        eid = str(rr_any.get("espn_id") or "").split(".")[0]
+        if eid:
+            st = espn_status.get(eid)
+            if st and (st.get("note") or st.get("status")):
+                text = (f"{st['status']}: " if st.get("status") else "") + (st.get("note") or "")
+                add(pid, f"espn|status|{st.get('date')}|{st.get('status')}", "ESPN", text, "ESPN player note",
+                    at=st.get("date") or "", url=st.get("url") or "")
+            arts = sorted((a for a in espn_news.get(eid) or [] if (a.get("date") or "") >= news_cutoff),
+                          key=lambda a: a.get("date") or "", reverse=True)[:ESPN_NEWS_MAX]
+            for a in arts:
+                add(pid, f"espn|news|{a['url']}", "ESPN news", a["headline"], "ESPN headline",
+                    at=a.get("date") or "", url=a["url"])
         played = [r for r in rows if r.get("final") and r.get("played") is True]
         finals = [r for r in rows if r.get("final")]
         # role changes only from his team's most recent game (not an older game before an absence)
@@ -197,15 +238,19 @@ def player_updates(d, slots, players, rows_out, cur, now, log):
             if p.get("pos") in ("WR", "TE", "RB") and last.get("tshare") is not None and len(ts) >= 3:
                 avg = sum(ts) / len(ts)
                 if abs(last["tshare"] - avg) * 100 >= ROLE_TSHARE_PTS:
+                    from_espn = last["gid"] in getattr(d, "espn_games", set())
                     add(pid, f"w{last['wk']}|tshare", "Role",
                         f"Week {last['wk']} target share {round(last['tshare'] * 100)}% (prior average {round(avg * 100)}%)",
-                        "nflverse player stats")
+                        "ESPN box score" if from_espn else "nflverse player stats",
+                        at=(d.stats.get((last["gid"], pid)) or {}).get("_fetched", "") if from_espn else "")
     # keep the seen-times only for items still current, so the file stays small
     live = {f"{pid}|{it['k']}" for pid, its in items.items() for it in its}
     write_json(UPDATES_SEEN_PATH, {k: v for k, v in seen.items() if k in live})
     out = {}
     for pid, its in items.items():
+        # ESPN items first (newest first, by ESPN's own date), then the rest as before (newest first seen)
         its.sort(key=lambda x: x["t"] or "", reverse=True)
+        its.sort(key=lambda x: x.get("at") or "", reverse=True)
         out[pid] = [{k: v for k, v in it.items() if k != "k"} for it in its]
     log.append(f"build: player updates for {len(out)} players" + (" (first run: existing items not marked new)" if first_run else ""))
     return out
@@ -218,6 +263,11 @@ def stat_value(row, col):
 
 def build(log):
     d = Data()
+    try:  # ESPN box scores fill in finished games nflverse hasn't published; never stops a build
+        d.espn_games = espn_box.merge_into(d, log)
+    except Exception as ex:
+        d.espn_games = set()
+        log.append(f"espn box: not used ({type(ex).__name__}: {str(ex)[:80]})")
     slots = update_slots(d)
     name_index = build_name_index(d)
     dranks = DefenseRanks(d, MARKETS)
@@ -531,6 +581,31 @@ def build(log):
             cur = int(g["week"])
             break
     sources = load_sources()
+    if getattr(d, "espn_games", None):
+        sources = dict(sources)
+        sources["espn_box"] = {"label": "ESPN box scores (finished games until nflverse stats arrive)",
+                               "last_updated": "not published by ESPN",
+                               "fetched_utc": espn_box.updated_utc() or "",
+                               "url": "https://www.espn.com/nfl/scoreboard"}
+    gs = read_json(DATA / "game_script.json", {}) or {}
+    gs_games = gs.get("games") or {}
+    if gs_games:
+        sources = dict(sources)
+        sources["script"] = {"label": "nflverse play-by-play (game script: time leading / trailing by a big margin)",
+                             "last_updated": gs.get("source_updated", "unknown"), "fetched_utc": gs.get("fetched_utc", ""),
+                             "url": gs.get("url", "https://github.com/nflverse/nflverse-data/releases/tag/pbp")}
+
+    def scr_out(gid):
+        x = gs_games.get(gid)
+        if not x:
+            return None
+        h = x["h"]
+        # minutes the home ("h") and away ("a") team led ("l<margin>") or trailed ("t<margin>") by each margin;
+        # away is the mirror of home (away leading = home trailing)
+        return {"h": h, "a": {("t" if k[0] == "l" else "l") + k[1:]: v for k, v in h.items()}, "min": x.get("min"),
+                # game-flow chart (home margin at each score) and per-team pass counts (neutral / by score);
+                # see pipeline/script.py for definitions
+                "flow": x.get("flow"), "t": x.get("t")}
     wx = load_weather()
 
     def wx_out(gid):
@@ -603,7 +678,11 @@ def build(log):
         "games": {g["game_id"]: {"wk": int(g["week"]), "home": g["home_team"], "away": g["away_team"],
                                  "ko": g["kickoff_utc"], "final": g.get("result", "") != "",
                                  "type": g.get("game_type", ""), "loc": g.get("location", ""),
-                                 "stadium": g.get("stadium", ""), "wx": wx_out(g["game_id"])} for g in games},
+                                 "stadium": g.get("stadium", ""), "wx": wx_out(g["game_id"]),
+                                 # final score (nflverse schedule), only once the game is final; used for game-script research tabs
+                                 "as": _int_or_none(g.get("away_score")) if g.get("result", "") != "" else None,
+                                 "hs": _int_or_none(g.get("home_score")) if g.get("result", "") != "" else None,
+                                 "scr": scr_out(g["game_id"])} for g in games},
         "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},
