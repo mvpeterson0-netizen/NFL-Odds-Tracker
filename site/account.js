@@ -42,17 +42,19 @@
   }
 
   // A sign-in link from the email lands here with the session in the address (#access_token=...).
+  // "Continue with Google" comes back the same way (Supabase sends the session in the address after Google).
   (function landing() {
-    const h = location.hash || "";
-    if (!/access_token=|error_description=/.test(h)) return;
-    const q = new URLSearchParams(h.slice(1));
+    const h = location.hash || "", qs = location.search || "";
+    const inHash = /access_token=|error_description=/.test(h), inQuery = /error_description=/.test(qs);
+    if (!inHash && !inQuery) return;
+    const q = new URLSearchParams(inHash ? h.slice(1) : qs.slice(1));
     if (q.get("access_token")) {
       saveSession({ access_token: q.get("access_token"), refresh_token: q.get("refresh_token"), expires_at: q.get("expires_at") });
       lsSet(LS_PENDING, null); A.pending = null;
     } else {
-      A.err = q.get("error_description") ? `Sign-in link didn't work: ${q.get("error_description").replace(/\+/g, " ")}. Request a new one.` : "";
+      A.err = q.get("error_description") ? `Sign-in didn't work: ${q.get("error_description").replace(/\+/g, " ")}. Please try again.` : "";
     }
-    try { history.replaceState(null, "", location.pathname + location.search + "#/picks"); } catch { location.hash = "#/picks"; }
+    try { history.replaceState(null, "", location.pathname + (inQuery ? "" : location.search) + "#/picks"); } catch { location.hash = "#/picks"; }
   })();
 
   // ---------- requests ----------
@@ -112,6 +114,12 @@
     else A.err = /expired|invalid/i.test(r.error) ? "That code is wrong or expired. Check the newest email, or send a new one." : `Couldn't sign in: ${r.error}`;
     changed();
   }
+  // Sign in with Google: Supabase sends the person to Google and back to this page with the session in the address
+  // (handled by landing() above). No email is sent. Google only lets in test users until the Google app is published.
+  function googleSignIn() {
+    const back = encodeURIComponent(location.origin + location.pathname);
+    location.href = `${BASE}/auth/v1/authorize?provider=google&redirect_to=${back}`;
+  }
   function restart() { A.pending = null; lsSet(LS_PENDING, null); A.err = ""; changed(); }
   async function signOut() {
     if (signedIn()) await raw("/auth/v1/logout", { method: "POST" });
@@ -158,7 +166,7 @@
   function privacy() {
     return `<details class="ac-priv"><summary class="small">What we store (privacy)</summary><p class="small muted">
       Your email (to sign you in), your unit size, when you confirmed you're 21+, and the picks you make, with the line, odds and time.
-      No password, name, phone number or payment details. We don't sell or share your data. Delete your account any time from this page;
+      No password, phone number or payment details. If you use Google, Google shares your email and name with our sign-in service (Supabase); Stix uses only your email. We don't sell or share your data. Delete your account any time from this page;
       that removes your email and every pick. Separately, Stix counts visits anonymously with
       <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> (which screens are opened; no cookies, not linked to your account).</p></details>`;
   }
@@ -175,6 +183,8 @@
         </div></div>`;
     }
     return `<div class="panel ac"><h3>Sign in to save your picks</h3><div class="body">
+      <p><button id="ac-google" class="ac-google" type="button" ${A.busy ? "disabled" : ""}>Continue with Google</button></p>
+      <p class="small muted ac-or">or use your email</p>
       <p class="small">Just your email. No password: we email you a sign-in link.</p>
       <form id="ac-email" class="ac-form" novalidate><label class="small">Email <input id="ac-email-in" type="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com"></label>
         <button type="submit" ${A.busy ? "disabled" : ""}>${A.busy ? "Sending…" : "Email me a sign-in link"}</button></form>
@@ -220,6 +230,7 @@
   function bind() {
     const $ = (id) => document.getElementById(id);
     const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
+    on("ac-google", "click", googleSignIn);
     on("ac-email", "submit", (e) => { e.preventDefault(); sendCode($("ac-email-in").value); });
     on("ac-code", "submit", (e) => { e.preventDefault(); verify($("ac-code-in").value); });
     on("ac-resend", "click", () => sendCode(A.pending && A.pending.email));
