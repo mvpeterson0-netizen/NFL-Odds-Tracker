@@ -199,8 +199,8 @@
     ST.picks = ST.picks.filter((x) => x.id !== id).concat(pick);
     ST.dirty = true; saveCache(); rerender(); ghSync();
   }
-  // A tap on "Bet on DraftKings" also saves the pick (when picking is set up on this device), at DraftKings' line
-  // and odds from the link. Never removes or flips silently: it always records the side that was tapped.
+  // A tap on a sportsbook bet button ("Bet on FanDuel") also saves the pick (only on devices where My picks is set up), at
+  // the line and odds from the link. Never removes or flips silently: it always records the side that was tapped.
   function recordBet(pid, mid, side, bet) {
     if (!enabled() || !bet || bet.line == null) return;
     const r = nextRow(pid);
@@ -209,8 +209,8 @@
     const t = new Date().toISOString();
     const p = playerById[pid];
     const pick = { id, pid, name: p.name, pos: p.pos, gid: r.gid, wk: r.wk, mid, side, line: bet.line, odds: bet.odds,
-      book: "DraftKings", src: "Bet on DK", cap: bet.cap, ko: r.ko, picked_utc: t, updated_utc: t };
-    if (mode() === "acct") { acSave(pick, "Bet on DK"); return; }
+      book: bet.book || "DraftKings", src: bet.src || "Bet on DK", cap: bet.cap, ko: r.ko, picked_utc: t, updated_utc: t };
+    if (mode() === "acct") { acSave(pick, pick.src); return; }
     ST.picks = ST.picks.filter((x) => x.id !== id).concat(pick);
     ST.dirty = true; saveCache(); ghSync();
   }
@@ -239,13 +239,13 @@
     const mine = live().find((p) => p.id === id);
     const ln = lineNow(r.m[mid]);
     const head = `<div class="pk-h"><div><b>Week ${r.wk} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${esc(mk.label)}</b><div class="muted small">${fmtTime(r.ko)}${ln ? ` · ${esc(ln.book)}` : ""}</div></div>
-      ${ln ? `<div class="pk-line"><b>${lineNum(ln.line)}</b>${ln.src !== "Pre-game" ? ` <span class="chip snapchip">${esc(ln.src)}</span>` : ""}</div>` : ""}</div>`;
+      ${ln ? `<div class="pk-line"><b>${lineNum(ln.line)}</b></div>` : ""}</div>`;
     if (!ln) return `<div class="pickbox">${head}<p class="muted small">No line posted yet for this market. Pick buttons appear once one is captured.</p></div>`;
     const btn = (s) => {
       const on = mine && mine.side === s;
       return `<button class="pk-btn ${on ? "on" : ""}" data-pick="${s}" data-pid="${esc(pid)}" data-pmid="${esc(mid)}" ${mine && mine.saving ? "disabled" : ""}>${on ? "✓ " : ""}${sideWord(s)} ${lineNum(on ? mine.line : ln.line)}</button>`;
     };
-    let note = `<span class="muted small">Tap Over or Under to add it to your picks · tap again to remove · locks at kickoff</span>`;
+    let note = "";
     if (mine) {
       note = `<span class="small">Saved: <b>${sideWord(mine.side)} ${lineNum(mine.line)}</b> ${oddsTxt(mine.odds)} (${esc(mine.src)}, ${esc(mine.book)})${mine.line !== ln.line ? ` · line now ${lineNum(ln.line)}; tap the other side, or remove and re-add, to take the new line` : ""}</span>`;
     }
