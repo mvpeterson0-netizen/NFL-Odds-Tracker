@@ -196,6 +196,8 @@ button.badd { font-size: 12px; padding: 3px 10px; }
 .ac-form .ac-check { flex-direction: row; align-items: center; gap: 8px; font-size: 15px; min-width: 0; }
 .ac-check input { width: 20px; height: 20px; }
 .ac-ok { color: var(--over); }
+.ac-google { min-height: 44px; width: 100%; max-width: 360px; font-weight: 600; }
+.ac-or { margin: 4px 0 0; }
 .ac-priv summary { cursor: pointer; color: var(--muted); }
 .ac-link { border: 0; background: none; color: var(--under); padding: 4px 0; }
 .ac-danger { border-color: var(--under); color: var(--under); font-weight: 600; }
