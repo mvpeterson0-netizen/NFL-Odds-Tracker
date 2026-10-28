@@ -6,6 +6,8 @@
   const PROD_URL = "https://hewbbugkbycdkazlwspq.supabase.co";
   const KEY = "sb_publishable_a_CTgL6PKT4kcUCc6CyJwg_AihMMe3G";
   const LS_SESSION = "stix_session", LS_PENDING = "stix_signin_email";
+  // Google sign-in key for sharpstix.com (Google Cloud project stix-513001). A Client ID is public by design; the secret is only in Supabase.
+  const GOOGLE_CLIENT_ID = "37075527814-nfibome9bgopush7u6uhcbuh00nt2prt.apps.googleusercontent.com";
   const HELP = { name: "1-800-MY-RESET", tel: "+18006973738", url: "https://www.ncpgambling.org/1-800-my-reset-national-problem-gambling-helpline-faq/" };
 
   const lsGet = (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } };
@@ -114,8 +116,56 @@
     else A.err = /expired|invalid/i.test(r.error) ? "That code is wrong or expired. Check the newest email, or send a new one." : `Couldn't sign in: ${r.error}`;
     changed();
   }
-  // Sign in with Google: Supabase sends the person to Google and back to this page with the session in the address
-  // (handled by landing() above). No email is sent. Google only lets in test users until the Google app is published.
+  // Sign in with Google, main way: Google's own button runs on sharpstix.com, so Google's screen names sharpstix.com
+  // (not the Supabase address). Google hands the page a signed ID token; Supabase checks it (audience = our Client ID,
+  // nonce = the hash we gave Google) and signs the person in. No redirect, no email.
+  const G = { load: null, raw: "", hash: "", failed: false };
+  function loadGoogle() {
+    if (G.load) return G.load;
+    G.load = new Promise((resolve, reject) => {
+      if (window.google && window.google.accounts && window.google.accounts.id) return resolve();
+      const s = document.createElement("script");
+      s.src = "https://accounts.google.com/gsi/client"; s.async = true;
+      const t = setTimeout(() => reject(new Error("timeout")), 8000);
+      s.onload = () => { clearTimeout(t); window.google && window.google.accounts && window.google.accounts.id ? resolve() : reject(new Error("no gis")); };
+      s.onerror = () => { clearTimeout(t); reject(new Error("load")); };
+      document.head.appendChild(s);
+    }).catch((e) => { G.failed = true; throw e; });
+    return G.load;
+  }
+  async function newNonce() {
+    const b = new Uint8Array(32); crypto.getRandomValues(b);
+    G.raw = Array.from(b, (x) => x.toString(16).padStart(2, "0")).join("");
+    const d = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(G.raw)));
+    G.hash = Array.from(d, (x) => x.toString(16).padStart(2, "0")).join("");
+  }
+  async function onGoogleCredential(resp) {
+    if (!resp || !resp.credential) return;
+    A.busy = true; A.err = ""; changed();
+    const r = await raw("/auth/v1/token?grant_type=id_token", { method: "POST", body: { provider: "google", id_token: resp.credential, nonce: G.raw }, auth: false });
+    A.busy = false; G.raw = ""; G.hash = "";
+    if (r.ok) { saveSession(r.data); A.pending = null; lsSet(LS_PENDING, null); await loadProfile(); }
+    else A.err = `Google sign-in didn't work: ${r.error}. Please try again.`;
+    changed();
+  }
+  // Puts Google's button into #ac-gis. If Google's script can't load (blocked, offline), the backup button shows instead.
+  async function mountGoogle() {
+    const el = document.getElementById("ac-gis"), alt = document.getElementById("ac-google-wrap"), hint = document.getElementById("ac-google-alt-wrap");
+    if (!el) return;
+    const fallback = () => { el.hidden = true; if (alt) alt.hidden = false; if (hint) hint.hidden = true; };
+    if (G.failed) return fallback();
+    try {
+      await loadGoogle();
+      if (!G.hash) await newNonce();
+      window.google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: onGoogleCredential, nonce: G.hash, ux_mode: "popup", itp_support: true });
+      if (!document.body.contains(el)) return;
+      el.innerHTML = "";
+      window.google.accounts.id.renderButton(el, { type: "standard", theme: "outline", size: "large", text: "continue_with", shape: "rectangular", logo_alignment: "center", width: Math.min(360, Math.max(200, el.clientWidth || 320)) });
+      if (hint) hint.hidden = false;
+    } catch { fallback(); }
+  }
+  // Backup way: Supabase sends the person to Google and back to this page with the session in the address
+  // (handled by landing() above). Google's screen names the Supabase address here. Used if Google's button can't load.
   function googleSignIn() {
     const back = encodeURIComponent(location.origin + location.pathname);
     location.href = `${BASE}/auth/v1/authorize?provider=google&redirect_to=${back}`;
@@ -183,7 +233,9 @@
         </div></div>`;
     }
     return `<div class="panel ac"><h3>Sign in to save your picks</h3><div class="body">
-      <p><button id="ac-google" class="ac-google" type="button" ${A.busy ? "disabled" : ""}>Continue with Google</button></p>
+      <div id="ac-gis" class="ac-gis" aria-label="Continue with Google"></div>
+      <p id="ac-google-wrap" hidden><button id="ac-google" class="ac-google" type="button" ${A.busy ? "disabled" : ""}>Continue with Google</button></p>
+      <p id="ac-google-alt-wrap" class="small muted" hidden>Google button not working? <button id="ac-google-alt" class="ac-link" type="button">Try the other way</button></p>
       <p class="small muted ac-or">or use your email</p>
       <p class="small">Just your email. No password: we email you a sign-in link.</p>
       <form id="ac-email" class="ac-form" novalidate><label class="small">Email <input id="ac-email-in" type="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com"></label>
@@ -231,6 +283,8 @@
     const $ = (id) => document.getElementById(id);
     const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
     on("ac-google", "click", googleSignIn);
+    on("ac-google-alt", "click", googleSignIn);
+    mountGoogle();
     on("ac-email", "submit", (e) => { e.preventDefault(); sendCode($("ac-email-in").value); });
     on("ac-code", "submit", (e) => { e.preventDefault(); verify($("ac-code-in").value); });
     on("ac-resend", "click", () => sendCode(A.pending && A.pending.email));
