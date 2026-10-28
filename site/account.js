@@ -232,8 +232,9 @@
     return `<details class="ac-priv"><summary class="small">What we store (privacy)</summary><p class="small muted">
       Your email (to sign you in), your unit size, when you confirmed you're 21+, and the picks you make, with the line, odds and time.
       No password, phone number or payment details. If you use Google, Google shares your email, name and profile picture with our sign-in service (Supabase); Stix uses only your email. We don't sell or share your data. Delete your account any time from this page;
-      that removes your email and every pick. Separately, Stix counts visits anonymously with
-      <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> (which screens are opened; no cookies, not linked to your account). <a href="privacy.html">Full privacy policy</a></p></details>`;
+      that removes your email, every pick and your usage history. Stix also records which screens you open, for how long, and which
+      buttons you tap (never what you type), linked to your account once you sign in and kept 6 months. Separately,
+      <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> counts visits anonymously (no cookies). <a href="privacy.html">Full privacy policy</a></p></details>`;
   }
   function signInView() {
     if (A.pending) {
@@ -312,7 +313,16 @@
   }
   function onChange(f) { A.listeners.push(f); }
 
-  window.STIX_ACCOUNT = { signedIn, ready, user, unitSize, gate, accountBox, bind, onChange, db, loadProfile, googleBlock, bindGoogle, helpLine,
+  // Fire-and-forget POST used by usage tracking (track.js). keepalive lets it finish while the page is closing.
+  // Sends the sign-in token only while it's still valid, so an expired token never loses the events.
+  function beacon(path, body, keepalive) {
+    const headers = { apikey: KEY, "Content-Type": "application/json" };
+    if (signedIn() && (A.session.expires_at || 0) * 1000 > Date.now() + 60000) headers.Authorization = `Bearer ${A.session.access_token}`;
+    try { return fetch(BASE + path, { method: "POST", headers, body: JSON.stringify(body), keepalive: !!keepalive, cache: "no-store" }).catch(() => null); }
+    catch { return Promise.resolve(null); }
+  }
+
+  window.STIX_ACCOUNT = { signedIn, ready, user, unitSize, gate, accountBox, bind, onChange, db, loadProfile, googleBlock, bindGoogle, helpLine, beacon,
     error: () => A.err, clearNotes: () => { A.msg = ""; A.err = ""; } };
   if (signedIn()) loadProfile();
 })();
