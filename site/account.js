@@ -8,6 +8,9 @@
   const LS_SESSION = "stix_session", LS_PENDING = "stix_signin_email";
   // Google sign-in key for sharpstix.com (Google Cloud project stix-513001). A Client ID is public by design; the secret is only in Supabase.
   const GOOGLE_CLIENT_ID = "37075527814-nfibome9bgopush7u6uhcbuh00nt2prt.apps.googleusercontent.com";
+  // Email sign-in stays in the code but is hidden: Supabase's built-in email only reaches the project team until an
+  // email-sending service is set up (Michael, 2026-10-27: Google only for now). Set to true to show it again.
+  const EMAIL_SIGNIN = false;
   const HELP = { name: "1-800-MY-RESET", tel: "+18006973738", url: "https://www.ncpgambling.org/1-800-my-reset-national-problem-gambling-helpline-faq/" };
 
   const lsGet = (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } };
@@ -148,9 +151,21 @@
     else A.err = `Google sign-in didn't work: ${r.error}. Please try again.`;
     changed();
   }
-  // Puts Google's button into #ac-gis. If Google's script can't load (blocked, offline), the backup button shows instead.
-  async function mountGoogle() {
-    const el = document.getElementById("ac-gis"), alt = document.getElementById("ac-google-wrap"), hint = document.getElementById("ac-google-alt-wrap");
+  // Puts Google's button into #<p>-gis (p = "ac" on the Picks tab, "su" in the first-open pop-up). If Google's script
+  // can't load (blocked, offline), the backup button shows instead.
+  function googleBlock(p) {
+    return `<div id="${p}-gis" class="ac-gis" aria-label="Continue with Google"></div>
+      <p id="${p}-google-wrap" hidden><button id="${p}-google" class="ac-google" type="button" ${A.busy ? "disabled" : ""}>Continue with Google</button></p>
+      <p id="${p}-google-alt-wrap" class="small muted" hidden>Google button not working? <button id="${p}-google-alt" class="ac-link" type="button">Try the other way</button></p>`;
+  }
+  function bindGoogle(p) {
+    const b = document.getElementById(`${p}-google`), alt = document.getElementById(`${p}-google-alt`);
+    if (b) b.addEventListener("click", googleSignIn);
+    if (alt) alt.addEventListener("click", googleSignIn);
+    mountGoogle(p);
+  }
+  async function mountGoogle(p = "ac") {
+    const el = document.getElementById(`${p}-gis`), alt = document.getElementById(`${p}-google-wrap`), hint = document.getElementById(`${p}-google-alt-wrap`);
     if (!el) return;
     const fallback = () => { el.hidden = true; if (alt) alt.hidden = false; if (hint) hint.hidden = true; };
     if (G.failed) return fallback();
@@ -233,13 +248,12 @@
         </div></div>`;
     }
     return `<div class="panel ac"><h3>Sign in to save your picks</h3><div class="body">
-      <div id="ac-gis" class="ac-gis" aria-label="Continue with Google"></div>
-      <p id="ac-google-wrap" hidden><button id="ac-google" class="ac-google" type="button" ${A.busy ? "disabled" : ""}>Continue with Google</button></p>
-      <p id="ac-google-alt-wrap" class="small muted" hidden>Google button not working? <button id="ac-google-alt" class="ac-link" type="button">Try the other way</button></p>
-      <p class="small muted ac-or">or use your email</p>
+      <p class="small">Free. Your picks are saved to your account, locked at kickoff, and only you can see them.</p>
+      ${googleBlock("ac")}
+      ${EMAIL_SIGNIN ? `<p class="small muted ac-or">or use your email</p>
       <p class="small">Just your email. No password: we email you a sign-in link.</p>
       <form id="ac-email" class="ac-form" novalidate><label class="small">Email <input id="ac-email-in" type="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com"></label>
-        <button type="submit" ${A.busy ? "disabled" : ""}>${A.busy ? "Sending…" : "Email me a sign-in link"}</button></form>
+        <button type="submit" ${A.busy ? "disabled" : ""}>${A.busy ? "Sending…" : "Email me a sign-in link"}</button></form>` : ""}
       ${note()}
       <p class="small muted">Stix is for adults 21 and over. ${helpLine()}</p>
       ${privacy()}</div></div>`;
@@ -282,9 +296,7 @@
   function bind() {
     const $ = (id) => document.getElementById(id);
     const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
-    on("ac-google", "click", googleSignIn);
-    on("ac-google-alt", "click", googleSignIn);
-    mountGoogle();
+    if (document.getElementById("ac-gis")) bindGoogle("ac");
     on("ac-email", "submit", (e) => { e.preventDefault(); sendCode($("ac-email-in").value); });
     on("ac-code", "submit", (e) => { e.preventDefault(); verify($("ac-code-in").value); });
     on("ac-resend", "click", () => sendCode(A.pending && A.pending.email));
@@ -300,6 +312,7 @@
   }
   function onChange(f) { A.listeners.push(f); }
 
-  window.STIX_ACCOUNT = { signedIn, ready, user, unitSize, gate, accountBox, bind, onChange, db, loadProfile, clearNotes: () => { A.msg = ""; A.err = ""; } };
+  window.STIX_ACCOUNT = { signedIn, ready, user, unitSize, gate, accountBox, bind, onChange, db, loadProfile, googleBlock, bindGoogle, helpLine,
+    error: () => A.err, clearNotes: () => { A.msg = ""; A.err = ""; } };
   if (signedIn()) loadProfile();
 })();

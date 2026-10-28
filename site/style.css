@@ -295,3 +295,10 @@ body.wn-lock { overflow: hidden; }
 .wn-card img { display: block; width: 100%; height: auto; margin: 0 0 8px; border: 1px solid var(--line); border-radius: 10px; background: #fff; min-height: 0; }
 .wn-go { display: inline-block; margin: 0 0 8px; font-weight: 600; }
 .wn-ok { display: block; width: 100%; margin-top: 14px; min-height: 44px; font-weight: 600; }
+/* First-open sign-in pop-up (whatsnew.js) */
+.su-box { max-width: 420px; }
+.su-list { margin: 4px 0 14px; padding-left: 20px; font-size: 15px; line-height: 1.5; }
+.su-list li { margin: 4px 0; }
+.su-box .ac-gis { margin: 0 auto 6px; }
+.su-later { display: block; width: 100%; max-width: 360px; margin: 8px auto 0; min-height: 40px; }
+.su-fine { margin: 12px 0 0; text-align: center; }

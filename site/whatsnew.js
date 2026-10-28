@@ -1,64 +1,66 @@
 "use strict";
-// "What's new" pop-up: shown once per release on the next app open, for everyone (signed in or not).
-// Closing it (✕, Got it, a "Go to" button, tapping outside, or Escape) saves WHATS_NEW_ID in this browser
-// so it doesn't show again. Screenshots in site/whatsnew/ come from the real built site.
-// To announce a future release: change WHATS_NEW_ID and ITEMS.
+// First-open pop-up: invites people who aren't signed in to create a free Stix account (Google sign-in).
+// Replaced the "What's new" pop-up (Michael, 2026-10-27). Shown once per browser; closing it (✕, Not now, tapping
+// outside, or Escape) or signing in saves PROMPT_ID in this browser so it doesn't show again. Never shown to someone
+// already signed in, or over a sign-in link. To show it to everyone again, change PROMPT_ID.
+// (The old What's new screenshots stay in site/whatsnew/ but aren't used.)
 (function () {
-  const WHATS_NEW_ID = "2026-10-27-fanduel"; // changed so everyone sees it once more, even if they closed the first one
-  const KEY = "stix_whatsnew";
-  const ITEMS = [
-    { title: "Bet on FanDuel",
-      text: "FanDuel is now the official partner of Stix, after partnership negotiations with DraftKings ended. On any player page, tap <b>Over</b> or <b>Under</b> under <b>Bet on FanDuel</b> to open FanDuel with that bet on your slip. FanDuel shows its current line before you place it.",
-      imgs: [["whatsnew/fanduel.jpg", 640, 257, "Bet on FanDuel box with Over and Under buttons on a player page"]] },
-    { title: "Line alerts",
-      text: "Get a notification when a game's player lines go up. Turn it on at the top of the <b>Guide</b> tab. On iPhone, open Stix from your Home Screen first.",
-      imgs: [["whatsnew/alerts.jpg", 640, 343, "Alerts panel on the Guide tab with a Turn on alerts button"]],
-      go: ["#/guide", "Go to Guide"] },
-    { title: "Game flow & game script",
-      text: "On any player page, tap an opponent in the game log (or a <b>Led big</b> / <b>Trailed big</b> tag) to see how that game played out: the score margin all game, how long a team led or trailed big, and pass rates.",
-      imgs: [["whatsnew/log.jpg", 640, 151, "Player game log rows with a Led big tag"],
-             ["whatsnew/script.jpg", 640, 773, "Game script pop-up with a game-flow chart and neutral pass rates"]] },
-    { title: "Research Leads",
-      text: "The <b>Research</b> tab now opens with 6 ready-made filters: line moves, last 3 vs line, usage up or down with a flat line, and good or bad game scripts.",
-      imgs: [["whatsnew/leads.jpg", 640, 638, "Research tab Leads with six filter buttons and a Line move result"]],
-      go: ["#/search", "Open Research"] },
-  ];
+  const PROMPT_ID = "2026-10-28-signin";
+  const KEY = "stix_signin_prompt";
+  const ACC = () => window.STIX_ACCOUNT;
 
-  function seen() { try { return localStorage.getItem(KEY) === WHATS_NEW_ID; } catch (e) { return !!window.__stixWnSeen; } }
-  function markSeen() { window.__stixWnSeen = true; try { localStorage.setItem(KEY, WHATS_NEW_ID); } catch (e) { /* storage blocked: show once per page load */ } }
+  function seen() { try { return localStorage.getItem(KEY) === PROMPT_ID; } catch (e) { return !!window.__stixSuSeen; } }
+  function markSeen() { window.__stixSuSeen = true; try { localStorage.setItem(KEY, PROMPT_ID); } catch (e) { /* storage blocked: show once per page load */ } }
 
   function close() {
-    const ov = document.getElementById("wn-ov");
+    const ov = document.getElementById("su-ov");
     if (!ov) return;
     ov.remove(); document.body.classList.remove("wn-lock"); markSeen();
   }
   function open() {
-    if (document.getElementById("wn-ov")) return;
-    const card = (it, i) => `<section class="wn-card">
-      <h3><span class="wn-num" aria-hidden="true">${i + 1}</span>${it.title}</h3><p>${it.text}</p>
-      ${it.imgs.map(([src, w, h, alt]) => `<img src="${src}" width="${w}" height="${h}" alt="${alt}" loading="lazy">`).join("")}
-      ${it.go ? `<a class="wn-go" href="${it.go[0]}">${it.go[1]} ›</a>` : ""}</section>`;
+    if (document.getElementById("su-ov") || !ACC()) return;
     const ov = document.createElement("div");
-    ov.id = "wn-ov"; ov.className = "share-ov";
-    ov.innerHTML = `<div class="share-box wn-box" role="dialog" aria-modal="true" aria-labelledby="wn-title">
-      <div class="wn-h"><b id="wn-title">What's new in Stix</b><button type="button" class="nw-x wn-x" aria-label="Close">✕</button></div>
-      ${ITEMS.map(card).join("")}
-      <button type="button" class="wn-ok on">Got it</button></div>`;
+    ov.id = "su-ov"; ov.className = "share-ov";
+    ov.innerHTML = `<div class="share-box wn-box su-box" role="dialog" aria-modal="true" aria-labelledby="su-title">
+      <div class="wn-h"><b id="su-title">Save your picks with a free Stix account</b><button type="button" class="nw-x wn-x" aria-label="Close">✕</button></div>
+      <ul class="su-list">
+        <li>Tap <b>Over</b> or <b>Under</b> on any player page to save a pick.</li>
+        <li>Picks lock at kickoff and are graded automatically.</li>
+        <li>Track your record and profit in units, on every device.</li>
+        <li>Only you can see your picks.</li>
+      </ul>
+      ${ACC().googleBlock("su")}
+      <p id="su-err" class="small pk-err" role="alert" hidden></p>
+      <button type="button" class="su-later">Not now</button>
+      <p class="small muted su-fine">Stix is for adults 21 and over. ${ACC().helpLine()} · <a href="privacy.html">Privacy</a></p>
+    </div>`;
     document.body.appendChild(ov); document.body.classList.add("wn-lock");
     ov.addEventListener("click", (e) => {
-      if (e.target === ov || e.target.closest(".wn-x") || e.target.closest(".wn-ok") || e.target.closest(".wn-go")) close();
+      if (e.target === ov || e.target.closest(".wn-x") || e.target.closest(".su-later")) close();
     });
-    const x = ov.querySelector(".wn-x"); if (x) x.focus({ preventScroll: true });
+    ACC().bindGoogle("su");
   }
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
 
+  // Signed in from the pop-up: close it and go to Picks, where the 21+ step comes next. A failed attempt shows its reason.
+  function watch() {
+    if (!ACC()) return;
+    ACC().onChange(() => {
+      if (!document.getElementById("su-ov")) return;
+      if (ACC().signedIn()) { close(); location.hash = "#/picks"; return; }
+      const err = ACC().error(), box = document.getElementById("su-err");
+      if (box) { box.textContent = err || ""; box.hidden = !err; }
+    });
+  }
+
   function maybeShow() {
     try {
-      if (seen()) return;
-      if (/access_token|sign-in/i.test(location.hash)) return; // don't cover a sign-in link
+      if (seen() || !ACC() || ACC().signedIn()) return;
+      if (/access_token|sign-in|error_description/i.test(location.hash + location.search)) return; // don't cover a sign-in link
       open();
-    } catch (e) { console.error("what's new pop-up failed", e); }
+    } catch (e) { console.error("sign-in pop-up failed", e); }
   }
+  watch();
   if (document.readyState === "complete") setTimeout(maybeShow, 600);
   else window.addEventListener("load", () => setTimeout(maybeShow, 600));
   window.STIX_WHATSNEW = { open, close };
