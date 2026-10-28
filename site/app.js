@@ -983,6 +983,10 @@ function render() {
     try { app.innerHTML = window.STIX_PICKS ? window.STIX_PICKS.view() : `<p class="pad">Picks didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">My picks hit an error. Try refreshing.</p>`; }
   }
+  else if (tab === "welcome") {
+    try { app.innerHTML = window.STIX_WELCOME ? window.STIX_WELCOME.view() : viewBoard(); }
+    catch (e) { console.error(e); app.innerHTML = viewBoard(); }
+  }
   else if (tab === "admin") {
     try { app.innerHTML = window.STIX_ADMIN ? window.STIX_ADMIN.view() : `<p class="pad">Admin page didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">Admin page hit an error. Try refreshing.</p>`; }

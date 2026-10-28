@@ -57,6 +57,9 @@
     try {
       if (seen() || !ACC() || ACC().signedIn()) return;
       if (/access_token|sign-in|error_description/i.test(location.hash + location.search)) return; // don't cover a sign-in link
+      if ((location.hash || "").startsWith("#/welcome")) { // don't cover the Welcome page; offer it once they move on
+        window.addEventListener("hashchange", () => setTimeout(maybeShow, 600), { once: true }); return;
+      }
       open();
     } catch (e) { console.error("sign-in pop-up failed", e); }
   }
