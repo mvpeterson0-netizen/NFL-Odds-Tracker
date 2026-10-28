@@ -216,9 +216,9 @@
   function privacy() {
     return `<details class="ac-priv"><summary class="small">What we store (privacy)</summary><p class="small muted">
       Your email (to sign you in), your unit size, when you confirmed you're 21+, and the picks you make, with the line, odds and time.
-      No password, phone number or payment details. If you use Google, Google shares your email and name with our sign-in service (Supabase); Stix uses only your email. We don't sell or share your data. Delete your account any time from this page;
+      No password, phone number or payment details. If you use Google, Google shares your email, name and profile picture with our sign-in service (Supabase); Stix uses only your email. We don't sell or share your data. Delete your account any time from this page;
       that removes your email and every pick. Separately, Stix counts visits anonymously with
-      <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> (which screens are opened; no cookies, not linked to your account).</p></details>`;
+      <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> (which screens are opened; no cookies, not linked to your account). <a href="privacy.html">Full privacy policy</a></p></details>`;
   }
   function signInView() {
     if (A.pending) {
