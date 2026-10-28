@@ -159,7 +159,8 @@
     return `<details class="ac-priv"><summary class="small">What we store (privacy)</summary><p class="small muted">
       Your email (to sign you in), your unit size, when you confirmed you're 21+, and the picks you make, with the line, odds and time.
       No password, name, phone number or payment details. We don't sell or share your data. Delete your account any time from this page;
-      that removes your email and every pick.</p></details>`;
+      that removes your email and every pick. Separately, Stix counts visits anonymously with
+      <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> (which screens are opened; no cookies, not linked to your account).</p></details>`;
   }
   function signInView() {
     if (A.pending) {
