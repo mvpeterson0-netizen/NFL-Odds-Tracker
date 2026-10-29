@@ -374,6 +374,7 @@
       · Every pick is 1 unit at the odds saved with it; pushes and voids are 0; picks still in progress aren't counted until graded${R.noOdds ? ` · ${R.noOdds} winning pick${R.noOdds === 1 ? "" : "s"} had no saved odds and ${R.noOdds === 1 ? "isn't" : "aren't"} counted` : ""}
       · Hit rate leaves out pushes and voids · ${statusTxt}</p>`;
     const sec = (title, l, empty) => `<div class="panel"><h3>${title} (${l.length})</h3><div class="body">${l.length ? l.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">${empty}</p>`}</div></div>`;
+    if (mode() === "acct" && window.STIX_REVIEW) { try { h += window.STIX_REVIEW.entry(); } catch (e) { console.error("review entry failed", e); } }
     const nShare = open.length + locked.length;
     if (nShare && window.STIX_SHARE && window.STIX_SHARE.openPicks) h += `<p class="pk-sharerow"><button id="pk-share" class="sh-main" type="button">Share this week's picks (${nShare})</button></p>`;
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
@@ -454,7 +455,18 @@
     if (bk) bk.addEventListener("click", (e) => { e.preventDefault(); signInWanted = false; rerender(); });
   };
 
-  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, wantedLabel, clearWanted };
+  // Review queue (review.js): save a pick without the "tap again = remove" toggle, and look up an existing pick.
+  function savePick(pid, mid, side) {
+    if (mode() !== "acct") return false;
+    const r = nextRow(pid); if (!r) return false;
+    const old = AC.picks.find((x) => x.id === `${r.wk}|${pid}|${mid}`);
+    if (old && old.side === side) return true; // already saved on that side
+    setPick(pid, mid, side);
+    return true;
+  }
+  const pickFor = (key) => (mode() === "acct" ? AC.picks.find((p) => p.id === key) || null : null);
+  const acctReady = () => mode() === "acct" && AC.loaded;
+  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
   // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
   if (ACC()) ACC().onChange(() => {
     if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }
