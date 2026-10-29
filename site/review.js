@@ -88,24 +88,51 @@
     const { p, r, mk, ln } = c, m = r.m[mk.id];
     const s = stats(c);
     const all = (D.rows[p.id] || []).filter((x) => x.final || x === r).sort((a, b) => a.wk - b.wk);
+    RV.chart = { rows: all.slice(-8), mid: mk.id };
     const g = D.games[r.gid];
     const tile = (lab, val, sub) => `<div class="rv-tile"><span>${lab}</span><b>${val}</b>${sub ? `<small>${sub}</small>` : ""}</div>`;
     const log = window.STIX_MOBILE && window.STIX_MOBILE.gameLog ? window.STIX_MOBILE.gameLog(p.id, mk.id, all.filter((x) => x.final), LOG_ROWS) : "";
     return `<div class="rv-card" id="rv-card" tabindex="0" aria-label="${esc(p.name)} ${esc(mk.label)} ${n1(ln.line)}">
-      ${c.moved != null ? `<p class="rv-moved small">Line moved since you reviewed it: ${n1(c.moved)} → <b>${n1(ln.line)}</b></p>` : ""}
+      <div>${c.moved != null ? `<p class="rv-moved small">Line moved since you reviewed it: ${n1(c.moved)} → <b>${n1(ln.line)}</b></p>` : ""}
       <div class="rv-h"><a class="pname rv-name" href="#/player/${esc(p.id)}" data-rpid="${esc(p.id)}" data-rmid="${esc(mk.id)}">${esc(p.name)}</a>
         <span class="rv-mk">${esc(mk.label)} <b>${n1(ln.line)}</b></span></div>
       <div class="rv-sub muted small"><span>${esc(r.team)} ${esc(r.slot || p.pos)} · ${g ? `${esc(g.away)} @ ${esc(g.home)}` : ""} · ${fmtTime(r.ko)}</span>
-        <span>O ${oddsT(ln.op)} / U ${oddsT(ln.up)} · ${esc(ln.src)} ${esc(BOOK(ln.book))}</span></div>
+        <span>O ${oddsT(ln.op)} / U ${oddsT(ln.up)} · ${esc(ln.src)} ${esc(BOOK(ln.book))}</span></div></div>
       <div class="rv-tiles">${tile("Season", s.fm.avg == null ? "—" : n1(Math.round(s.fm.avg * 10) / 10), s.fm.n ? `${s.fm.n} starts` : "no starts")}
         ${tile("Last 3", s.l3 == null ? "—" : n1(Math.round(s.l3 * 10) / 10), s.n3 ? s.l3v.map((v) => n1(v)).join(", ") : "no games")}
         ${tile("Over line", s.graded ? `${s.overs}/${s.graded}` : "—", s.graded ? "graded" : "none yet")}
         <div class="rv-tile"><span>Opp D</span><b class="rv-drk">${m && m.drk != null ? ordinal(m.drk) : "—"}</b><small>${m && m.dav != null ? `${n1(m.dav)}/g` : "no data"}</small></div></div>
-      <div class="chart rv-chart">${chartSVG(all.slice(-8), mk.id, { W: 400, H: 150, L: 30, R: 26, T: 22, B: 22, fs: 12, edgeAbove: true })}</div>
+      <div class="chart rv-chart" id="rv-chart">${chartSVG(all.slice(-8), mk.id, chartOpts(150))}</div>
       ${log}
-      <div class="rv-btns"><button class="rv-b rv-o" data-rv="o">▲ Over</button><button class="rv-b rv-s" data-rv="skip">Skip</button><button class="rv-b rv-u" data-rv="u">▼ Under</button></div>
-      <p class="muted small rv-hint">Swipe ↑ Over · ↓ Under · ← → skip · Over / Under saves to My picks at ${n1(ln.line)}</p></div>`;
+      <div><div class="rv-btns"><button class="rv-b rv-o" data-rv="o">▲ Over</button><button class="rv-b rv-s" data-rv="skip">Skip</button><button class="rv-b rv-u" data-rv="u">▼ Under</button></div>
+      <p class="muted small rv-hint">Swipe ↑ Over · ↓ Under · ←→ Skip · saves at ${n1(ln.line)}</p></div></div>${footLine()}`;
   }
+  // The site footer (sources, "research tool only", privacy) shrinks to one line that expands, on this page only,
+  // so the card can use the space (Michael, 2026-10-28). Same text and links as the footer in index.html.
+  function footLine() {
+    const f = document.querySelector("footer.foot");
+    return f ? `<details class="rv-foot muted small"><summary>Research tool only, not predictions · sources &amp; privacy</summary><div>${f.innerHTML}</div></details>` : "";
+  }
+  const chartOpts = (H) => ({ W: 400, H: Math.round(H), L: 30, R: 26, T: 22, B: 22, fs: 12, edgeAbove: true });
+  // Use the screen height that's free to make the card roomier (never smaller than its compact size): about half
+  // goes to a taller chart, the rest to more padding in the game log, tiles and buttons. Capped so desktop stays sane.
+  function fitCard() {
+    const el = document.getElementById("rv-card"); if (!el) return;
+    el.style.removeProperty("--rvx");
+    const ch = document.getElementById("rv-chart");
+    if (ch && RV.chart) ch.innerHTML = chartSVG(RV.chart.rows, RV.chart.mid, chartOpts(150));
+    const ft = document.querySelector(".rv-foot");
+    const free = window.innerHeight - el.getBoundingClientRect().top - (ft ? ft.offsetHeight + 10 : 0) - 6;
+    const extra = Math.min(free - el.offsetHeight, 240);
+    if (extra < 12) return;
+    const svg = ch && ch.querySelector("svg");
+    if (svg && RV.chart) {
+      const perPx = 400 / (svg.getBoundingClientRect().width || 400);
+      ch.innerHTML = chartSVG(RV.chart.rows, RV.chart.mid, chartOpts(150 + extra * 0.5 * perPx));
+    }
+    el.style.setProperty("--rvx", `${Math.floor(extra * 0.5)}px`);
+  }
+  window.addEventListener("resize", () => { if ((location.hash || "").split("/")[1] === "review") fitCard(); });
   const BOOK = (b) => ({ DraftKings: "DK", FanDuel: "FD" }[b] || b || "");
   function view() {
     const acc = ACC();
@@ -115,7 +142,7 @@
     const list = cards();
     let h = `<div class="rv-top"><a href="#/picks">← Picks</a><b>Review queue</b><span class="muted small">${list.length} left this week</span></div>`;
     if (RV.err) h += `<p class="small pk-err pad">${esc(RV.err)}</p>`;
-    if (!list.length) return h + `<div class="panel"><div class="body"><p><b>All caught up.</b></p><p class="muted small">Every slotted player × stat with a line this week has been reviewed or picked. New cards appear as lines post (most arrive Monday night to Wednesday), and a reviewed card comes back if its line moves more than ±0.5 (receptions, carries, attempts, completions), ±5 (rushing / receiving yards) or ±10 (passing yards).</p></div></div>`;
+    if (!list.length) return h + `<div class="panel"><div class="body"><p><b>All caught up.</b></p><p class="muted small">Every slotted player × stat with a line this week has been reviewed or picked. New cards appear as lines post (most arrive Monday night to Wednesday), and a reviewed card comes back if its line moves more than ±0.5 (receptions, carries, attempts, completions), ±5 (rushing / receiving yards) or ±10 (passing yards).</p></div></div>` + footLine();
     return h + cardHtml(list[0]);
   }
   function entry() {
@@ -134,6 +161,7 @@
     if (tab !== "review") return;
     if (RV.loaded && !RV.busy && Date.now() - RV.at > 15000) load(); // pick up reviews made on another device
     const el = document.getElementById("rv-card"); if (!el) return;
+    fitCard();
     document.querySelectorAll("[data-rv]").forEach((b) => b.addEventListener("click", () => { const c = current(); if (c) decide(c, b.dataset.rv); }));
     // swipe
     let x0 = null, y0 = null, dx = 0, dy = 0, id = null;

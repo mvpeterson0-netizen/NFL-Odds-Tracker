@@ -968,6 +968,7 @@ let LIVE = null;
 function render() {
   const hash = location.hash || "#/board";
   const [, tab, arg] = hash.split("/");
+  document.body.classList.toggle("rv-on", tab === "review"); // review queue: site footer shrinks to one line (review.js)
   document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "slots" || tab === "log" ? "guide" : tab === "review" ? "picks" : tab)));
   // Phone layout (mobile.js) may take over the Board and player pages on narrow screens.
   // If it is missing or throws, the normal desktop view renders instead.
