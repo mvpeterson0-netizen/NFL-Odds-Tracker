@@ -60,6 +60,11 @@
       why: "Same trailing-team passing volume.", rec: "59–42 · 58.4% · +10.6 u · +10.5% ROI",
       desc: () => `WRs and TEs with a receiving yards line whose team is a <b>${BIG_SPREAD}+ point underdog</b>. Ordered by spread, then kickoff.` },
   ];
+  // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
+  // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
+  const FREE_RULES = 3;
+  const signedIn = () => { try { return !!(window.STIX_ACCOUNT && window.STIX_ACCOUNT.signedIn()); } catch (e) { return false; } };
+  const visibleTabs = () => (signedIn() ? TABS : TABS.slice(0, FREE_RULES));
   const SPREAD_NOTE = "Spread = nflverse schedule spread_line (source book and time not stated by nflverse); it can move during the week, and the rule is scored on the value nflverse shows after the game.";
 
   // ---------- helpers ----------
@@ -294,7 +299,7 @@
   const recLine = (t) => `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
 
   function body() {
-    const t = TABS.find((x) => x.id === RL.tab) || TABS[0];
+    const t = visibleTabs().find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
     let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${recLine(t)}</span></p>`;
     if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
@@ -336,7 +341,7 @@
   function html() {
     const mks = D.markets;
     return `<section id="rl"><h2 class="gsec">Leads</h2>
-      <div class="rlgrid rl8" role="tablist">${TABS.map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}</div>
+      <div class="rlgrid rl8" role="tablist">${visibleTabs().map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}${signedIn() ? "" : `<button type="button" class="gchip rl-lock" data-rlsignin>🔒 Sign in to see all ${TABS.length}</button>`}</div>
       <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label></div>
       <div id="rl-body">${body()}</div></section><h2 class="gsec">Builder</h2>`;
   }
@@ -348,6 +353,17 @@
     const b = e.target.closest("[data-rtab]"); if (!b) return;
     RL.tab = b.dataset.rtab; redraw();
   });
+  // "Sign in to see all 8": the Google sign-in pop-up (whatsnew.js); signing in there keeps the visitor on Research.
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[data-rlsignin]"); if (!b) return;
+    e.preventDefault();
+    try { window.STIX_WHATSNEW.open({ leads: TABS.length }); } catch (err) { console.error("leads sign-in failed", err); location.hash = "#/picks"; }
+  });
+  // Signing in or out redraws the Leads (rules 4–8 appear or disappear).
+  (function watchAccount() {
+    if (window.STIX_ACCOUNT && window.STIX_ACCOUNT.onChange) window.STIX_ACCOUNT.onChange(() => { try { redraw(); } catch (e) { console.error(e); } });
+    else setTimeout(watchAccount, 500);
+  })();
   // Opening a player from a lead shows the lead's stat on his player page (same per-player choice the stat tabs set).
   document.addEventListener("click", (e) => {
     const a = e.target.closest && e.target.closest("[data-rmid]"); if (!a) return;
