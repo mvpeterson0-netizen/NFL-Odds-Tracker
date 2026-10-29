@@ -82,7 +82,8 @@
     return { fm, l3: l3.length ? mean(l3) : null, l3v: l3, n3: l3.length, graded: graded.length, overs };
   }
   // Compact so the whole card fits on one phone screen (Michael, 2026-10-28): line + odds on one row,
-  // 4 small tiles, a short chart, the last 5 games of the game log (same rows as the phone player page).
+  // 4 small tiles, a short chart, the game log: this card's upcoming game (opp D rank) on top, then the last 5 games
+  // (same rows as the phone player page, which also lists the upcoming game; Michael, 2026-10-29).
   const LOG_ROWS = 5;
   function cardHtml(c) {
     const { p, r, mk, ln } = c, m = r.m[mk.id];
@@ -91,7 +92,7 @@
     RV.chart = { rows: all.slice(-8), mid: mk.id };
     const g = D.games[r.gid];
     const tile = (lab, val, sub) => `<div class="rv-tile"><span>${lab}</span><b>${val}</b>${sub ? `<small>${sub}</small>` : ""}</div>`;
-    const log = window.STIX_MOBILE && window.STIX_MOBILE.gameLog ? window.STIX_MOBILE.gameLog(p.id, mk.id, all.filter((x) => x.final), LOG_ROWS) : "";
+    const log = window.STIX_MOBILE && window.STIX_MOBILE.gameLog ? window.STIX_MOBILE.gameLog(p.id, mk.id, all, LOG_ROWS + 1) : "";
     return `<div class="rv-card" id="rv-card" tabindex="0" aria-label="${esc(p.name)} ${esc(mk.label)} ${n1(ln.line)}">
       <div>${c.moved != null ? `<p class="rv-moved small">Line moved since you reviewed it: ${n1(c.moved)} → <b>${n1(ln.line)}</b></p>` : ""}
       <div class="rv-h"><a class="pname rv-name" href="#/player/${esc(p.id)}" data-rpid="${esc(p.id)}" data-rmid="${esc(mk.id)}">${esc(p.name)}</a>
