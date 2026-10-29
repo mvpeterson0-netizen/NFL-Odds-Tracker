@@ -726,7 +726,9 @@ def build(log):
                                  # final score (nflverse schedule), only once the game is final; used for game-script research tabs
                                  "as": _int_or_none(g.get("away_score")) if g.get("result", "") != "" else None,
                                  "hs": _int_or_none(g.get("home_score")) if g.get("result", "") != "" else None,
-                                 "scr": scr_out(g["game_id"])} for g in games},
+                                 "scr": scr_out(g["game_id"]),
+                                 # nflverse spread_line: points the HOME team is favored by (negative = home underdog); None if not posted
+                                 "spread": to_float(g.get("spread_line"))} for g in games},
         "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},

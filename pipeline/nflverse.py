@@ -33,7 +33,8 @@ LABELS = {
 SOURCES_PATH = DATA / "sources.json"
 SCHEDULE_PATH = DATA / "schedule.csv"
 SCHEDULE_FIELDS = ["game_id", "season", "game_type", "week", "gameday", "gametime", "kickoff_utc",
-                   "away_team", "home_team", "away_score", "home_score", "result", "location", "stadium"]
+                   "away_team", "home_team", "away_score", "home_score", "result", "location", "stadium",
+                   "spread_line"]  # spread_line = points the home team is favored by (nflverse)
 
 
 def remote_timestamp(name: str) -> str | None:
@@ -84,7 +85,10 @@ def refresh_schedule(force: bool = False) -> bool:
     """Refresh the slim season schedule. Returns True if anything changed."""
     src = load_sources()
     ts = remote_timestamp("schedule")
-    if not force and SCHEDULE_PATH.exists() and ts and src.get("schedule", {}).get("last_updated") == ts:
+    # A schedule file saved before a column was added (e.g. spread_line) is refreshed once even if nflverse hasn't changed.
+    has_all = SCHEDULE_PATH.exists() and all(f in (SCHEDULE_PATH.read_text(encoding="utf-8").split("\n", 1)[0].strip().split(","))
+                                             for f in SCHEDULE_FIELDS)
+    if not force and has_all and ts and src.get("schedule", {}).get("last_updated") == ts:
         return False
     rows = download("schedule")
     out = []
