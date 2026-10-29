@@ -5,7 +5,7 @@
 // Not shown over a sign-in link, the Welcome page (waits until the visitor leaves it), the admin page, or an open sign-in
 // pop-up. The screenshot in site/whatsnew/ comes from the real built site.
 // Numbers: frozen theses baseline (claude/frozen-theses.md), weeks 1–7, in-sample. To announce a future release: change
-// RELEASE_ID and ITEMS.
+// ITEMS — any content change shows the pop-up once more to everyone (see fingerprint below).
 (function () {
   const RELEASE_ID = "2026-10-29-season-signals";
   const KEY = "stix_release";
@@ -21,8 +21,26 @@
       go: ["#/search", "See all 8 on the Research tab"] },
   ];
 
-  function seen() { try { return localStorage.getItem(KEY) === RELEASE_ID; } catch (e) { return !!window.__stixRelSeen; } }
-  function markSeen() { window.__stixRelSeen = true; try { localStorage.setItem(KEY, RELEASE_ID); } catch (e) { /* storage blocked: once per page load */ } }
+  // 2026-10-29 (Michael): the pop-up shows again automatically whenever its content changes. The saved value is a
+  // fingerprint of RELEASE_ID + ITEMS (text, stats, image paths, buttons), so editing any of them re-shows it once.
+  // Not covered: replacing an image file under the same name — rename it or change RELEASE_ID to force a re-show.
+  // Fixing a typo also re-shows it to everyone.
+  function fingerprint(s) { // FNV-1a 32-bit
+    let h = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h.toString(36);
+  }
+  const VERSION = "c-" + fingerprint(RELEASE_ID + "\n" + JSON.stringify(ITEMS));
+  // Browsers that closed the 2026-10-29 pop-up before fingerprints existed saved RELEASE_ID itself. Count that as seen
+  // only while the content is still exactly what they saw (fingerprint LEGACY_VERSION).
+  const LEGACY_VERSION = "c-9q2e2j";
+  function seen() {
+    try {
+      const v = localStorage.getItem(KEY);
+      return v === VERSION || (v === "2026-10-29-season-signals" && VERSION === LEGACY_VERSION);
+    } catch (e) { return !!window.__stixRelSeen; }
+  }
+  function markSeen() { window.__stixRelSeen = true; try { localStorage.setItem(KEY, VERSION); } catch (e) { /* storage blocked: once per page load */ } }
 
   function close() {
     const ov = document.getElementById("wn-ov");
