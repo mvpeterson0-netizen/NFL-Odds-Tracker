@@ -50,7 +50,7 @@
       text: "Tap an opponent in a game log to see how that game went: who led, by how much and for how long, and how pass-heavy each team was. A blowout can explain a big or small stat line.",
       img: () => shot("script.jpg", "Game script pop-up for Seattle's Week 7 win over Kansas City", "", "wl-pop") },
     { id: "research", title: "Research & Leads", link: "#/search", go: "Open Research",
-      text: "Leads point out lines worth a closer look: big line moves, usage up while the line stayed flat, good or bad game scripts, and the last 3 games against the line.",
+      text: "Leads apply 8 rules picked from weeks 1–7 (for example TE1 receiving yards Under, or a 7+ point underdog's QB passing yards Over) to this week's lines. They're candidates, not proven, and are tracked from week 8 on.",
       img: () => shot("research.jpg", "Research tab: lead filters and the largest line moves from the previous week") },
     { id: "results", title: "Results", link: "#/leads", go: "Open Results",
       text: "How every graded pre-game line finished this season, over or under, by market, position and week.",

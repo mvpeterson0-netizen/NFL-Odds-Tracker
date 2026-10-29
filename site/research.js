@@ -1,9 +1,9 @@
 "use strict";
 // Stix Research tab: pre-built "Leads" filters shown as tabs above the builder (search.js).
 // Uses only data already in data.json (players' per-game rows, lines, usage; game script minutes from play-by-play).
-// Every rule is spelled out in the tab's description so a reader can check it. These are leads, not predictions.
+// Leads = the 8 frozen theses (claude/frozen-theses.md), each spelled out behind its "i". Candidates, not predictions.
 (function () {
-  const RL = { tab: "move", mk: "" };
+  const RL = { tab: "t1", mk: "" };
   // Game script (nflverse play-by-play, built into games[gid].scr as minutes leading "l<m>" / trailing "t<m>" by each
   // margin m): a team "led big" when ahead by MARGIN+ points for at least MINUTES of the game, "trailed big" likewise.
   // Default 13+ for 30 minutes (Michael's choice); each viewer can change both on the Guide tab (saved in this browser).
@@ -17,36 +17,50 @@
     for (const g of Object.values(D.games)) if (g.scr && g.scr.h) return Object.keys(g.scr.h).filter((k) => k[0] === "l").map((k) => +k.slice(1)).sort((a, b) => a - b);
     return [];
   }
-  const USAGE_RISE = { tshare: 5, snap: 10 }; // percentage points (his recent games vs his earlier games)
-  // How many recent games count as "recent" for Usage up / down (slider on those tabs; saved in this browser).
-  // Default 2 = the rule before the slider existed, so nothing changes unless it's moved.
-  const USAGE_GAMES_DEFAULT = 2, USAGE_GAMES_MIN = 1, USAGE_GAMES_MAX = 4;
-  const UG = (() => {
-    try { const v = +localStorage.getItem("stix_usage_games"); if (v >= USAGE_GAMES_MIN && v <= USAGE_GAMES_MAX) return { n: v }; } catch { /* default */ }
-    return { n: USAGE_GAMES_DEFAULT };
-  })();
-  const gamesTxt = (n) => (n === 1 ? "his last game" : `his last ${n} games`);
-  const FLAT = { count: 0.5, yds: 5, pass_yds: 10 }; // "line unchanged" tolerance
+  // Frozen theses (claude/frozen-theses.md; rules 1–5 frozen 2026-10-28 ~10:00 PM CT, 6–8 ~10:10 PM CT, Michael's Yes).
+  // The lists below apply each rule to this week's upcoming games. Never change a rule's wording or thresholds here:
+  // a changed rule is a new thesis with its own record.
+  const USAGE_DROP = { tshare: 5, snap: 10 }; // percentage points (his last 2 games vs his earlier games) — rule 5
+  const USAGE_N = 2;                            // rule 5 is frozen with the 2-game window
+  const FLAT = { count: 0.5, yds: 5, pass_yds: 10 }; // "line flat" tolerance — rule 5
   const COUNT_MKTS = ["rec", "rush_att", "pass_att", "pass_cmp"];
-  const SD_GAMES = 8;             // games used for his usual game-to-game swing
-
+  const BIG_SPREAD = 7;
+  const UNIVERSE = "Slotted players only (not All players extras). The rule is scored on the graded pre-game line (~3 h before kickoff); until that line is captured this list uses the latest line showing, so players can join or leave as lines move.";
   const TABS = [
-    { id: "move", label: "Line move", title: "Largest line moves from previous week",
-      desc: () => `This week's line (pre-game line if captured, otherwise the latest Mon / Thu / Sun AM snapshot) vs the graded pre-game line from his previous game, same stat. Ranked by <b>size</b> = change ÷ √(last game's line). Bigger lines naturally move more, but not in proportion, so this sits between raw change (which favors big yardage lines) and percent change (which favors tiny lines). Examples: rec yds 77.5 → 68.5 = 1.02; rush yds 11.5 → 10.5 = 0.29; receptions 1.5 → 2.5 = 0.82; pass yds 289.5 → 259.5 = 1.76. A size of 1 is a move of about √line (about 9 rec yds on an 80.5 line, 2.3 catches on 5.5, 16 pass yds on 250.5).` },
-    { id: "l3", label: "Last 3 vs line", title: "Last 3 games average furthest from this week's line",
-      desc: () => `His average over his last 3 games played vs this week's line. Ranked by <b>size</b> = gap ÷ his usual game-to-game swing (standard deviation of his last ${SD_GAMES} games played, min 3).` },
-    { id: "usage", label: "Usage up, line flat", title: "Rising usage, line unchanged",
-      desc: () => `Usage = target share for WR/TE, snap share for RB (QBs not included). Rising = average of ${gamesTxt(UG.n)} is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) above his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage rise.` },
-    { id: "usagedn", label: "Usage down, line flat", title: "Falling usage, line unchanged",
-      desc: () => `The inverse of Usage up. Usage = target share for WR/TE, snap share for RB (QBs not included). Falling = average of ${gamesTxt(UG.n)} is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) below his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage drop.` },
-    { id: "down", label: "Bad script, line down", title: "Line lowered after a game script that worked against him",
-      desc: () => scriptDesc("against him", "under", "lower") },
-    { id: "up", label: "Good script, line up", title: "Line raised after a game script that helped him",
-      desc: () => scriptDesc("in his favor", "over", "higher") },
+    { id: "t1", n: 1, side: "under", label: "WR2 went over → Under",
+      title: "WR2 who went over his line last week (same stat) → Under",
+      why: "Books may overreact to a secondary receiver's good game.", rec: "99–54 · 64.7% · +34.1 u · +22.3% ROI",
+      desc: () => `His slot this week is <b>WR2</b> and, in his previous game, he finished <b>over</b> that game's graded pre-game line for the same stat. "Previous game" = his team's most recent earlier final game (even if he didn't play). Ordered by how far over he went (actual − line, ÷ √line).` },
+    { id: "t2", n: 2, side: "under", label: "Away, line raised → Under",
+      title: "Away game and his line is higher than last week (same stat) → Under",
+      why: "Fading a raised line, with road-game drag.", rec: "333–239 · 58.2% · +50.9 u · +8.9% ROI",
+      desc: () => `His team is <b>away</b> and this week's line is <b>higher</b> than the graded pre-game line from his previous game for the same stat (any amount). Ordered by size of the raise ÷ √(last game's line), as on the old Line move tab.` },
+    { id: "t3", n: 3, side: "under", label: "TE1 rec yds → Under",
+      title: "TE1 receiving yards → Under",
+      why: "Tight-end yardage is lumpy: a few big games lift the average, so the typical game lands below a line set near it.", rec: "122–85 · 58.9% · +24.0 u · +11.6% ROI",
+      desc: () => `Every player slotted <b>TE1</b> this week with a receiving yards line. Ordered by kickoff.` },
+    { id: "t4", n: 4, side: "under", label: "QB1 rush yds → Under",
+      title: "QB1 rushing yards → Under",
+      why: "Same lumpiness: occasional scrambles inflate the average.", rec: "125–86 · 59.2% · +23.5 u · +11.2% ROI",
+      desc: () => `Every player slotted <b>QB1</b> this week with a rushing yards line. Ordered by kickoff.` },
+    { id: "t5", n: 5, side: "under", label: "Usage down, line flat → Under",
+      title: "Usage down, line flat → Under",
+      why: "The line hasn't caught up with a shrinking role.", rec: "68–46 · 59.6% · +11.2 u · +9.8% ROI",
+      desc: () => `Usage = target share for WR/TE, snap share for RB (QBs not included). Down = average of his last ${USAGE_N} games played is at least <b>${USAGE_DROP.tshare} points</b> of target share (WR/TE) or <b>${USAGE_DROP.snap} points</b> of snap share (RB) below his average in his earlier games this season (min 2 earlier games). Line flat = within ±${FLAT.count} for receptions / carries / attempts / completions, ±${FLAT.yds} for rushing and receiving yards, ±${FLAT.pass_yds} for passing yards, compared with his previous game's graded line. The ${USAGE_N}-game window is fixed because the rule was frozen with it. Ordered by the usage drop.` },
+    { id: "t6", n: 6, side: "under", label: "Favored by 7+: RB rush → Under", spread: true,
+      title: "His team favored by 7+ → RB rushing yards Under",
+      why: "The expected-blowout run game may already be priced in, possibly over-priced.", rec: "29–14 · 67.4% · +11.8 u · +27.5% ROI",
+      desc: () => `RBs with a rushing yards line whose team is favored by <b>${BIG_SPREAD} or more</b> points. Ordered by spread, then kickoff.` },
+    { id: "t7", n: 7, side: "over", label: "7+ underdog: QB pass → Over", spread: true,
+      title: "His team a 7+ underdog → QB passing yards Over",
+      why: "Trailing teams may throw more than the line assumes.", rec: "18–6 · 75.0% · +10.1 u · +42.1% ROI",
+      desc: () => `Players with a passing yards line whose team is a <b>${BIG_SPREAD}+ point underdog</b>. Ordered by spread, then kickoff.` },
+    { id: "t8", n: 8, side: "over", label: "7+ underdog: WR/TE rec → Over", spread: true,
+      title: "His team a 7+ underdog → WR/TE receiving yards Over",
+      why: "Same trailing-team passing volume.", rec: "59–42 · 58.4% · +10.6 u · +10.5% ROI",
+      desc: () => `WRs and TEs with a receiving yards line whose team is a <b>${BIG_SPREAD}+ point underdog</b>. Ordered by spread, then kickoff.` },
   ];
-  function scriptDesc(way, ou, hl) {
-    return `In his previous game the game script went ${way}, he finished <b>${ou}</b> that game's line, and this week's line is <b>${hl}</b>. Game script = how long his team spent with a big lead or deficit: <b>led big</b> = ahead by ${SCRIPT.margin}+ points for at least ${SCRIPT.minutes} of the game's minutes, <b>trailed big</b> = behind by ${SCRIPT.margin}+ for at least ${SCRIPT.minutes} minutes (from nflverse play-by-play; <a href="#/guide">change the margin and minutes on the Guide tab</a>). Rule of thumb: a team with a big lead runs more and passes less, so leading big helps RBs and works against QBs, WRs and TEs; playing from far behind means more passing, which helps QBs, WRs and TEs and works against RBs. Ranked by size of the line change ÷ √(last game's line), as on Line move.`;
-  }
+  const SPREAD_NOTE = "Spread = nflverse schedule spread_line (source book and time not stated by nflverse); it can move during the week, and the rule is scored on the value nflverse shows after the game.";
 
   // ---------- helpers ----------
   function curLine(m) {
@@ -199,11 +213,11 @@
     return null;
   }
 
-  // Every upcoming (not started) player × market with a line showing, plus his history.
+  // Every upcoming (not started) player × market with a line showing, plus his history. Slotted players only (the rules' universe).
   function candidates() {
     const now = Date.now(), out = [];
     for (const p of D.players) {
-      if (p.extra && !S.all) continue;
+      if (p.extra) continue;
       const rows = D.rows[p.id] || [];
       for (const r of rows) {
         if (r.final || !r.ko || new Date(r.ko).getTime() <= now) continue;
@@ -213,102 +227,101 @@
         for (const [mid, m] of Object.entries(r.m || {})) {
           if (RL.mk && mid !== RL.mk) continue;
           const cur = curLine(m); if (!cur) continue;
-          const acts = played.map((x) => x.m && x.m[mid] ? x.m[mid].act : null).filter((v) => v != null);
           const pm = prev && prev.m ? prev.m[mid] : null;
-          out.push({ p, r, mid, m, cur, past, played, prev, pm, acts, sd: sd(acts.slice(-SD_GAMES)) });
+          out.push({ p, r, mid, m, cur, past, played, prev, pm });
         }
       }
     }
     return out;
   }
   const prevLine = (c) => (c.pm && c.pm.lstat === "ok" && c.pm.line != null ? c.pm.line : null);
+  // Points his team is favored by (negative = underdog), from nflverse spread_line (home team favored by). null if not posted.
+  function favBy(r) {
+    const g = D.games[r.gid];
+    if (!g || g.spread == null) return null;
+    return g.spread * (r.ha === "home" ? 1 : -1);
+  }
+  const spreadTxt = (f) => (f > 0 ? `favored by ${num(f)}` : f < 0 ? `${num(-f)}-pt underdog` : "pick'em");
+  const koMs = (c) => new Date(c.r.ko).getTime();
 
   function compute(tab) {
     const out = [];
     for (const c of candidates()) {
-      const pl = prevLine(c);
-      if (tab === "move") {
-        if (pl == null) continue;
-        const ch = c.cur.line - pl; if (!ch) continue;
-        out.push({ c, size: pl > 0 ? Math.abs(ch) / Math.sqrt(pl) : null, main: ch, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `<b>${signed(ch)}</b>`] });
-      } else if (tab === "l3") {
-        const l3 = c.acts.slice(-3); if (l3.length < 3) continue;
-        const avg = l3.reduce((a, b) => a + b, 0) / 3, gap = avg - c.cur.line;
-        out.push({ c, size: c.sd ? Math.abs(gap) / c.sd : null, main: gap, cells: [`<b>${num(c.cur.line)}</b>`, `${num(avg)} <span class="muted small">(${l3.map((v) => num(v, 0)).join(", ")})</span>`, `<b>${signed(gap)}</b>`] });
-      } else if (tab === "usage" || tab === "usagedn") {
-        const pos = c.p.pos; if (pos === "QB") continue;
+      const pl = prevLine(c), pos = c.p.pos, line = c.cur.line;
+      if (tab === "t1") {
+        if (c.r.slot !== "WR2" || !c.pm || c.pm.res !== "over" || pl == null) continue;
+        const by = c.pm.act - pl;
+        out.push({ c, rank: pl > 0 ? by / Math.sqrt(pl) : 0, cells: [`<b>${num(line)}</b>`, `${num(c.pm.act)} vs ${num(pl)} <span class="muted small">(over by ${num(by)})</span>`] });
+      } else if (tab === "t2") {
+        if (c.r.ha !== "away" || pl == null || !(line > pl)) continue;
+        const ch = line - pl;
+        out.push({ c, rank: pl > 0 ? ch / Math.sqrt(pl) : 0, cells: [`${num(pl)} → <b>${num(line)}</b> <b>${signed(ch)}</b>`, `@ ${esc(c.r.opp)}`] });
+      } else if (tab === "t3" || tab === "t4") {
+        if (tab === "t3" ? !(c.r.slot === "TE1" && c.mid === "rec_yds") : !(c.r.slot === "QB1" && c.mid === "rush_yds")) continue;
+        const l3 = c.played.map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).slice(-3);
+        out.push({ c, rank: -koMs(c), cells: [`<b>${num(line)}</b>`, l3.length ? l3.map((v) => num(v, 0)).join(", ") : `<span class="muted">—</span>`] });
+      } else if (tab === "t5") {
+        if (pos === "QB" || pl == null) continue;
         const us = c.played.map((x) => usageOf(pos, x)).filter((v) => v != null);
-        const N = UG.n;
-        if (us.length < N + 2) continue; // N recent games + at least 2 earlier
-        const last2 = us.slice(-N), early = us.slice(0, -N);
-        const a2 = last2.reduce((a, b) => a + b, 0) / N, ae = early.reduce((a, b) => a + b, 0) / early.length, rise = a2 - ae;
-        const need = pos === "RB" ? USAGE_RISE.snap : USAGE_RISE.tshare;
-        if (tab === "usage" ? rise < need : rise > -need) continue;
-        if (pl == null) continue;
+        if (us.length < USAGE_N + 2) continue; // 2 recent games + at least 2 earlier
+        const rec = us.slice(-USAGE_N), early = us.slice(0, -USAGE_N);
+        const ar = rec.reduce((a, b) => a + b, 0) / USAGE_N, ae = early.reduce((a, b) => a + b, 0) / early.length, drop = ar - ae;
+        if (drop > -(pos === "RB" ? USAGE_DROP.snap : USAGE_DROP.tshare)) continue;
         const tol = COUNT_MKTS.includes(c.mid) ? FLAT.count : c.mid === "pass_yds" ? FLAT.pass_yds : FLAT.yds;
-        if (Math.abs(c.cur.line - pl) > tol) continue;
+        if (Math.abs(line - pl) > tol) continue;
         const kind = pos === "RB" ? "snap" : "tgt share";
-        out.push({ c, size: Math.abs(rise), main: rise, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(a2)}%</b> <span class="muted small">(last ${N}: ${last2.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
-      } else if (tab === "down" || tab === "up") {
-        if (pl == null || !c.prev || c.pm.act == null) continue;
-        const info = scriptInfo(c.prev.gid, c.r.team); if (!info) continue;
-        const sc = scriptFor(c.p.pos, info), ch = c.cur.line - pl;
-        const want = tab === "up" ? 1 : -1;
-        if (sc !== want) continue;
-        if (want === 1 ? !(c.pm.act > pl && ch > 0) : !(c.pm.act < pl && ch < 0)) continue;
-        out.push({ c, size: pl > 0 ? Math.abs(ch) / Math.sqrt(pl) : null, main: ch, cells: [`${esc(scriptTxt(info))} <span class="muted small">(${esc(info.score)})</span>`, `${num(c.pm.act)} vs ${num(pl)}`, `${num(pl)} → <b>${num(c.cur.line)}</b> <b>${signed(ch)}</b>`] });
+        out.push({ c, rank: -drop, badge: `−${Math.round(-drop)} pts`, cells: [`${num(pl)} → <b>${num(line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(ar)}%</b> <span class="muted small">(last ${USAGE_N}: ${rec.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
+      } else if (tab === "t6" || tab === "t7" || tab === "t8") {
+        const f = favBy(c.r); if (f == null) continue;
+        const ok = tab === "t6" ? f >= BIG_SPREAD && pos === "RB" && c.mid === "rush_yds"
+          : tab === "t7" ? f <= -BIG_SPREAD && c.mid === "pass_yds"
+          : f <= -BIG_SPREAD && (pos === "WR" || pos === "TE") && c.mid === "rec_yds";
+        if (!ok) continue;
+        out.push({ c, rank: Math.abs(f) * 1e13 - koMs(c), cells: [`<b>${num(line)}</b>`, esc(spreadTxt(f))] });
       }
     }
-    out.sort((a, b) => (b.size ?? -1) - (a.size ?? -1) || Math.abs(b.main) - Math.abs(a.main));
+    out.sort((a, b) => b.rank - a.rank || a.c.p.name.localeCompare(b.c.p.name));
     return out;
   }
   const HEADS = {
-    move: ["Last game → this week", "Change"],
-    l3: ["Line", "Last 3 avg", "Avg − line"],
-    usage: ["Line (last game → now)", "Usage"],
-    usagedn: ["Line (last game → now)", "Usage"],
-    down: ["Last game", "His stat vs line", "Line change"],
-    up: ["Last game", "His stat vs line", "Line change"],
+    t1: ["Line", "Last game: his stat vs line"],
+    t2: ["Line (last game → now)", "Game"],
+    t3: ["Line", "Last 3"], t4: ["Line", "Last 3"],
+    t5: ["Line (last game → now)", "Usage"],
+    t6: ["Line", "Team"], t7: ["Line", "Team"], t8: ["Line", "Team"],
   };
+  const sideChip = (t) => `<span class="chip rl-side ${t.side}">Bet ${t.side === "over" ? "Over" : "Under"}</span>`;
+  const recLine = (t) => `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
 
   function body() {
     const t = TABS.find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
-    const scoresMissing = (t.id === "down" || t.id === "up") && !Object.values(D.games).some((g) => g.scr);
-    let h = `<p class="callout small"><b>${esc(t.title)}.</b></p>`; // full rules: Good / Bad script behind the "i" on their buttons
-    if (scoresMissing) return h + `<p class="muted">Game script data (nflverse play-by-play) isn't in the app's data yet, so this tab can't be filled.</p>`;
+    let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${recLine(t)}</span></p>`;
+    if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
     const heads = HEADS[t.id];
     h += `<div class="panel rlist">`;
     for (const x of list.slice(0, 40)) {
       const { p, r, mid, cur } = x.c;
-      const size = x.size == null ? "" : t.id === "usage" || t.id === "usagedn" ? `${t.id === "usage" ? "+" : "−"}${Math.round(x.size)} pts` : `size ${num(x.size, 2)}`;
-      h += `<div class="rlrow"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>${p.extra ? ` <span class="chip xtra">extra</span>` : ""}
-          <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${size}</span></div>
-        <div class="muted small">${esc(p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)} · line from ${esc(cur.label)}</div>
+      h += `<div class="rlrow"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+          <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${x.badge || ""}</span></div>
+        <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)} · line from ${esc(cur.label)}</div>
         <div class="rlcells">${x.cells.map((v, k) => `<span><span class="muted small">${heads[k]}</span> ${v}</span>`).join("")}</div></div>`;
     }
     return h + `</div>${list.length > 40 ? `<p class="muted small">Showing the top 40 of ${list.length}.</p>` : ""}`;
   }
 
-  // 3 columns, each a pair with its inverse stacked: line move / last 3; usage up / down; good script / bad script
-  const GRID = ["move", "usage", "up", "l3", "usagedn", "down"];
-  // Filters whose full description opens from an "i" on the button.
-  const INFO_TABS = ["usage", "usagedn", "up", "down"];
-  // Usage up / down "i" pop-up also holds the recent-games slider (Michael, 2026-10-28).
-  const ugSlider = () => `<div class="filters rl-ugbox"><label class="rl-ug">Recent games vs his earlier games${UG.n === USAGE_GAMES_DEFAULT ? " (default)" : ""}<span class="rl-ugrow"><input id="rl-ug" type="range" min="${USAGE_GAMES_MIN}" max="${USAGE_GAMES_MAX}" step="1" value="${UG.n}" aria-label="Recent games used for usage"> <b id="rl-ugv">${UG.n}</b></span></label></div>`;
-  let infoId = null;
   function openInfo(id) {
     closePop();
     const t = TABS.find((x) => x.id === id); if (!t) return;
-    infoId = id;
-    // Usage pop-ups: show that filter's list behind it, so moving the slider changes what's on screen.
-    if ((id === "usage" || id === "usagedn") && RL.tab !== id) { RL.tab = id; redraw(); }
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
-    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="${esc(t.label)}">
-      <div class="nw-h"><b>${esc(t.label)}</b><button class="nw-x" aria-label="Close">✕</button></div>
-      ${id === "usage" || id === "usagedn" ? ugSlider() : ""}<p class="small" id="rl-infodesc"><b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.</p></div>`;
+    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Rule ${t.n}">
+      <div class="nw-h"><b>Rule ${t.n} · Bet ${t.side === "over" ? "Over" : "Under"}</b><button class="nw-x" aria-label="Close">✕</button></div>
+      <p class="small"><b>${esc(t.title)}.</b> ${t.desc()}</p>
+      <p class="small"><b>Why it might work</b> (an interpretation, not proven): ${esc(t.why)}</p>
+      <p class="small">${recLine(t)} Picked from many conditions tested on weeks 1–7, so the real rate is likely lower; break-even at −110 is about 52.4%.</p>
+      <p class="muted small">${UNIVERSE}${t.spread ? " " + SPREAD_NOTE : ""}</p></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
@@ -323,7 +336,7 @@
   function html() {
     const mks = D.markets;
     return `<section id="rl"><h2 class="gsec">Leads</h2>
-      <div class="rlgrid" role="tablist">${GRID.map((id) => { const t = TABS.find((x) => x.id === id); return `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}">${esc(t.label)}${INFO_TABS.includes(t.id) ? ` <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" title="About this filter">i</span>` : ""}</button>`; }).join("")}</div>
+      <div class="rlgrid rl8" role="tablist">${TABS.map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}</div>
       <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label></div>
       <div id="rl-body">${body()}</div></section><h2 class="gsec">Builder</h2>`;
   }
@@ -341,21 +354,6 @@
     try { S.market[a.dataset.rpid] = a.dataset.rmid; } catch (err) { console.error(err); }
   }, true);
   document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-mk") { RL.mk = e.target.value; redraw(); } });
-  // Usage slider: number updates while dragging; the list redraws when it's let go.
-  document.addEventListener("input", (e) => { if (e.target && e.target.id === "rl-ug") { const v = document.getElementById("rl-ugv"); if (v) v.textContent = e.target.value; } });
-  document.addEventListener("change", (e) => {
-    if (!e.target || e.target.id !== "rl-ug") return;
-    UG.n = Math.min(USAGE_GAMES_MAX, Math.max(USAGE_GAMES_MIN, +e.target.value || USAGE_GAMES_DEFAULT));
-    try { localStorage.setItem("stix_usage_games", String(UG.n)); } catch { /* setting just won't persist */ }
-    redraw();
-    // refresh the open pop-up so its rule text and "(default)" match the new setting
-    const box = document.querySelector("#scr-ov .rl-ugbox"), d = document.getElementById("rl-infodesc");
-    const t = TABS.find((x) => x.id === infoId);
-    if (box) box.outerHTML = ugSlider();
-    if (d && t) d.innerHTML = `<b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.`;
-    const s = document.getElementById("rl-ug"); if (s) s.focus();
-  });
-
   function safeHtml() { try { return html(); } catch (e) { console.error("research leads failed", e); return ""; } }
   // ---------- Guide tab setting ----------
   function settingsHtml() {
@@ -364,7 +362,7 @@
     const sel = (id, val, opts, suffix) => `<select id="${id}">${opts.map((v) => `<option value="${v}" ${v === val ? "selected" : ""}>${v}${suffix}</option>`).join("")}</select>`;
     const isDef = SCRIPT.margin === SCRIPT_DEFAULT.margin && SCRIPT.minutes === SCRIPT_DEFAULT.minutes;
     return `<div class="panel" id="g-script"><h3>Game script setting</h3><div class="body">
-      <p class="callout">A team <b>led big</b> (or <b>trailed big</b>) in a game when it was ahead (or behind) by at least the margin below for at least the minutes below, out of 60. Used by the <b>Led big / Trailed big</b> chips in player game logs and the <b>Good script / Bad script</b> filters on the Research tab. Saved in this browser only.</p>
+      <p class="callout">A team <b>led big</b> (or <b>trailed big</b>) in a game when it was ahead (or behind) by at least the margin below for at least the minutes below, out of 60. Used by the <b>Led big / Trailed big</b> chips in player game logs. Saved in this browser only.</p>
       <div class="filters"><label>Margin ${sel("gs-margin", SCRIPT.margin, ms, "+ points")}</label>
         <label>For at least ${sel("gs-min", SCRIPT.minutes, SCRIPT_MINUTES, " minutes")}</label>
         ${isDef ? `<span class="muted small">Default (${SCRIPT_DEFAULT.margin}+ for ${SCRIPT_DEFAULT.minutes} min)</span>` : `<button id="gs-reset" type="button">Reset to ${SCRIPT_DEFAULT.margin}+ for ${SCRIPT_DEFAULT.minutes} min</button>`}</div>
