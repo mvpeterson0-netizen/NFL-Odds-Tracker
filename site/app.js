@@ -968,7 +968,7 @@ let LIVE = null;
 function render() {
   const hash = location.hash || "#/board";
   const [, tab, arg] = hash.split("/");
-  document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "slots" || tab === "log" ? "guide" : tab)));
+  document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "slots" || tab === "log" ? "guide" : tab === "review" ? "picks" : tab)));
   // Phone layout (mobile.js) may take over the Board and player pages on narrow screens.
   // If it is missing or throws, the normal desktop view renders instead.
   let mobileHtml = null;
@@ -982,6 +982,10 @@ function render() {
   else if (tab === "picks") {
     try { app.innerHTML = window.STIX_PICKS ? window.STIX_PICKS.view() : `<p class="pad">Picks didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">My picks hit an error. Try refreshing.</p>`; }
+  }
+  else if (tab === "review") {
+    try { app.innerHTML = window.STIX_REVIEW ? window.STIX_REVIEW.view() : `<p class="pad">Review queue didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">Review queue hit an error. Try refreshing.</p>`; }
   }
   else if (tab === "welcome") {
     try { app.innerHTML = window.STIX_WELCOME ? window.STIX_WELCOME.view() : viewBoard(); }
@@ -1004,6 +1008,7 @@ function render() {
   if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
   if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
   if (window.STIX_PICKS) { try { window.STIX_PICKS.bind(tab, arg); } catch (e) { console.error(e); } }
+  if (tab === "review" && window.STIX_REVIEW) { try { window.STIX_REVIEW.bind(tab); } catch (e) { console.error(e); } }
   if (tab === "admin" && window.STIX_ADMIN) { try { window.STIX_ADMIN.bind(); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
