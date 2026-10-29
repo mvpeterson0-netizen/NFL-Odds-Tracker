@@ -1,0 +1,90 @@
+{
+ "game": "2026_01_NE_SEA",
+ "date": "2026-09-09T21:20:00Z",
+ "events_call": {
+  "http": 200,
+  "credits": {
+   "last": "1",
+   "used": "1",
+   "remaining": "19999"
+  },
+  "snapshot": "2026-09-09T21:15:36Z",
+  "events": [
+   {
+    "id": "8c94552d022acec4a0458d70c19d3da9",
+    "home": "Seattle Seahawks",
+    "away": "New England Patriots",
+    "commence": "2026-09-10T00:20:00Z"
+   }
+  ]
+ },
+ "odds_call": {
+  "http": 200,
+  "credits": {
+   "last": "70",
+   "used": "71",
+   "remaining": "19929"
+  },
+  "snapshot": "2026-09-09T21:15:36Z",
+  "previous": "2026-09-09T21:10:36Z",
+  "next": "2026-09-09T21:20:36Z",
+  "by_book_market": {
+   "draftkings player_pass_attempts": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-09-09T21:15:16Z"
+   },
+   "draftkings player_pass_completions": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-09-09T21:15:16Z"
+   },
+   "draftkings player_pass_yds": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-09-09T21:15:16Z"
+   },
+   "draftkings player_reception_yds": {
+    "outcomes": 26,
+    "players": 13,
+    "last_update": "2026-09-09T21:15:16Z"
+   },
+   "draftkings player_receptions": {
+    "outcomes": 26,
+    "players": 13,
+    "last_update": "2026-09-09T21:15:16Z"
+   },
+   "draftkings player_rush_attempts": {
+    "outcomes": 8,
+    "players": 4,
+    "last_update": "2026-09-09T21:15:16Z"
+   },
+   "draftkings player_rush_yds": {
+    "outcomes": 14,
+    "players": 7,
+    "last_update": "2026-09-09T21:15:16Z"
+   },
+   "fanduel player_pass_yds": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-09-09T21:15:18Z"
+   },
+   "fanduel player_reception_yds": {
+    "outcomes": 26,
+    "players": 13,
+    "last_update": "2026-09-09T21:15:18Z"
+   },
+   "fanduel player_receptions": {
+    "outcomes": 26,
+    "players": 13,
+    "last_update": "2026-09-09T21:15:18Z"
+   },
+   "fanduel player_rush_yds": {
+    "outcomes": 14,
+    "players": 7,
+    "last_update": "2026-09-09T21:15:18Z"
+   }
+  }
+ },
+ "status": "ok"
+}
