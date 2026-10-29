@@ -432,7 +432,8 @@ def build(log):
                     m["act"] = stat_value(st, col) if st else 0.0
                     if m["act"] is None:
                         m["act"] = 0.0
-                if ko < COLLECTION_START_UTC:
+                if ko < COLLECTION_START_UTC and not pulls:
+                    # Played before collection began and no historical line was downloaded (pipeline/history.py)
                     m["lstat"] = "not_collected"
                 else:
                     caps = caps_by.get((gid, pid, okey), [])
