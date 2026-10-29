@@ -83,6 +83,47 @@ def build_name_index(d):
     return out
 
 
+def week_name_matcher(d):
+    """Match a book's player name using the rosters of the game's own week. The main name index uses each player's
+    latest team, so lines from earlier weeks miss players who have since changed teams (e.g. traded). Also accepts a
+    first-name variant (Josh / Joshua) when the last name is the same and only one player in the game fits."""
+    idx = defaultdict(dict)
+    amb = defaultdict(set)
+    for (w, g), r in d.roster.items():
+        team = r.get("team", "")
+        keys = {norm_name(r.get("full_name", ""))}
+        if r.get("football_name") and r.get("last_name"):
+            keys.add(norm_name(f"{r['football_name']} {r['last_name']}"))
+        for k in keys:
+            if not k:
+                continue
+            if k in idx[(w, team)] and idx[(w, team)][k] != g:
+                amb[(w, team)].add(k)
+            idx[(w, team)][k] = g
+    for key, ks in amb.items():
+        for k in ks:
+            idx[key].pop(k, None)
+
+    def match(name, week, teams):
+        k = norm_name(name)
+        hits = {idx[(week, t)][k] for t in teams if k in idx.get((week, t), {})}
+        if len(hits) == 1:
+            return hits.pop()
+        parts = k.split()
+        if len(hits) == 0 and len(parts) >= 2:
+            first, last = parts[0], " ".join(parts[1:])
+            for t in teams:
+                for kk, g in idx.get((week, t), {}).items():
+                    p2 = kk.split()
+                    if (len(p2) >= 2 and " ".join(p2[1:]) == last and min(len(first), len(p2[0])) >= 3
+                            and (p2[0].startswith(first) or first.startswith(p2[0]))):
+                        hits.add(g)
+            if len(hits) == 1:
+                return hits.pop()
+        return ""
+    return match
+
+
 def choose_main(caps):
     """Pick the displayed line: preferred book first, then the line closest to even money."""
     by_book = defaultdict(list)
@@ -292,13 +333,15 @@ def build(log):
     caps_by = defaultdict(list)
     snaps_by = defaultdict(list)  # (game, player, market, pull_type) -> captures (line-movement snapshots)
     unmatched = []
+    wk_match = week_name_matcher(d)
     for c in read_csv(CAPTURES_PATH):
         if not c.get("gsis_id"):
             g = games_by_id.get(c["game_id"])
             if g:
                 k = norm_name(c["player_book_name"])
                 c["gsis_id"] = (name_index.get(g["home_team"], {}).get(k)
-                                or name_index.get(g["away_team"], {}).get(k) or "")
+                                or name_index.get(g["away_team"], {}).get(k)
+                                or wk_match(c["player_book_name"], int(g["week"]), (g["home_team"], g["away_team"])))
         if not c["gsis_id"]:
             unmatched.append({"game_id": c["game_id"], "book": c["book"], "market": c["market"],
                               "name": c["player_book_name"]})
