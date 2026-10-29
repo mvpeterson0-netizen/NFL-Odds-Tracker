@@ -369,29 +369,46 @@ body.wn-lock { overflow: hidden; }
   .wl-pic { max-width: 360px; width: 100%; margin: 0 auto; }
 }
 
-/* Review queue (#/review) */
+/* Review queue (#/review) — compact so a card fits one phone screen */
 .rv-entry { margin: 4px 0 10px; }
 .rv-go { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 8px; border: 2px solid var(--accent); color: var(--accent); font-weight: 600; text-decoration: none; background: var(--panel); }
-.rv-top { display: flex; align-items: baseline; gap: 12px; margin: 4px 0 10px; }
-.rv-top b { font-size: 18px; }
+.rv-top { display: flex; align-items: baseline; gap: 12px; margin: 0 0 6px; }
+.rv-top b { font-size: 16px; }
 .rv-top .muted { margin-left: auto; }
-.rv-card { max-width: 560px; margin: 0 auto 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 14px; touch-action: none; user-select: none; transition: box-shadow .15s; }
+.rv-card { max-width: 560px; margin: 0 auto 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; touch-action: none; user-select: none; transition: box-shadow .15s; }
 .rv-card.go-o { box-shadow: 0 0 0 3px var(--over); }
 .rv-card.go-u { box-shadow: 0 0 0 3px var(--under); }
 .rv-card.go-s { box-shadow: 0 0 0 3px var(--muted); }
-.rv-h { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
-.rv-name { font-size: 20px; font-weight: 700; }
-.rv-line { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
-.rv-line b { font-size: 30px; line-height: 1.1; }
-.rv-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 12px 0 6px; }
-.rv-tile { border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; }
-.rv-tile > span { display: block; font-size: 12px; color: var(--muted); }
-.rv-tile > b { font-size: 20px; }
-.rv-drk { font-size: 16px !important; }
-.rv-use { margin: 6px 0; }
-.rv-moved { background: var(--warn-bg, #fff4d6); color: var(--warn-ink); border-radius: 8px; padding: 6px 10px; margin: 0 0 8px; }
+.rv-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.rv-name { font-size: 18px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.rv-mk { white-space: nowrap; font-size: 13px; color: var(--muted); }
+.rv-mk b { font-size: 22px; color: var(--ink); margin-left: 2px; }
+.rv-sub { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 10px; font-size: 11.5px; margin-top: 1px; }
+.rv-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 8px 0 2px; }
+.rv-tile { border: 1px solid var(--line); border-radius: 8px; padding: 3px 7px; min-width: 0; }
+.rv-tile > span { display: block; font-size: 10.5px; color: var(--muted); }
+.rv-tile > b { display: block; font-size: 16px; line-height: 1.2; }
+.rv-tile > small { display: block; font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rv-chart { padding: 2px 0 0; }
+.rv-chart svg { max-height: 170px; }
+.rv-card .panel { margin: 4px 0 0; border: 0; box-shadow: none; background: transparent; }
+.rv-card .panel h3 { display: none; }
+.rv-card .mlog { font-size: 12.5px; }
+.rv-card .mlog-r { display: grid; grid-template-columns: 0.4fr 2.2fr 1.1fr 0.7fr 0.7fr; gap: 6px; padding: 4px 2px; border-top: 1px solid var(--line); align-items: center; font-variant-numeric: tabular-nums; }
+.rv-card .mlog-r.t { grid-template-columns: 0.35fr 1.75fr 1.05fr 0.6fr 1.05fr 0.6fr; }
+.rv-card .mlog-r > span:nth-child(n+3) { text-align: right; }
+.rv-card .mlog-r.mhead { border-top: 0; font-size: 10px; letter-spacing: .06em; color: var(--muted); font-weight: 600; padding-top: 0; }
+.rv-card .mlog-r .chip { font-size: 10px; padding: 0 5px; }
+.rv-card .mlog-r .tsh { color: var(--muted); font-size: 10px; }
+/* one line per game so the card stays short: long opponent cells are cut with "…" (full log on the player page) */
+.rv-card .mlog-r > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.rv-card .mlog-r, .rv-card .mlog-r.t { grid-template-columns: 0.32fr 1.9fr 1.25fr 0.6fr 0.65fr; gap: 5px; font-size: 12px; }
+.rv-card .mlog-r.t { grid-template-columns: 0.32fr 1.6fr 1.25fr 0.55fr 0.95fr 0.55fr; }
+.rv-card .mlog-r .res { font-size: 9.5px; }
+.rv-card .mlog-r > span:first-child { overflow: visible; text-overflow: clip; }
+.rv-moved { background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 4px 8px; margin: 0 0 6px; }
 .rv-btns { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; margin-top: 8px; }
-.rv-b { min-height: 46px; border-radius: 10px; font-size: 16px; font-weight: 600; padding: 0 12px; }
+.rv-b { min-height: 42px; border-radius: 10px; font-size: 16px; font-weight: 600; padding: 0 14px; }
 .rv-o { border: 2px solid var(--over); color: var(--over); }
 .rv-u { border: 2px solid var(--under); color: var(--under); }
-.rv-hint { text-align: center; margin: 8px 0 0; }
+.rv-hint { text-align: center; margin: 5px 0 0; font-size: 11px; }

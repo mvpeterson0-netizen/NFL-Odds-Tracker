@@ -131,6 +131,21 @@
     return h + `</section>`;
   }
 
+  // Game log panel (phone player page; also the review queue card, review.js). max = newest rows to show.
+  function gameLog(pid, mid, rows, max = Infinity) {
+    const p = playerById[pid];
+    const showT = TGT_POS.includes(p.pos) && TGT_MARKETS.includes(mid); // targets only for Receptions / Rec yds
+    let h = `<div class="panel"><h3>Game log</h3><div class="mlog"><div class="mlog-r mhead ${showT ? "t" : ""}"><span>Wk</span><span>Opp</span><span>Line</span><span>Act</span>${showT ? "<span>Tgt</span>" : ""}<span>Snap</span></div>`;
+    for (const r of [...rows].reverse().slice(0, max)) {
+      const mm = r.m[mid] || {};
+      const w = D.games[r.gid] && D.games[r.gid].wx ? wxSummary(D.games[r.gid].wx) : null;
+      const em = D.games[r.gid] && D.games[r.gid].wx && D.games[r.gid].wx.roof === "dome" ? "🏟️" : w ? (w.label.match(/\p{Extended_Pictographic}/u) || [""])[0] : "";
+      h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${window.STIX_RESEARCH ? window.STIX_RESEARCH.oppLink(r.gid, r.team, p.pos, pid, `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`) : `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`} ${oppHtml(mm)} ${em}${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos, pid) : ""}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
+        <span>${lineHtml(mm, true)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0) + `<span class="tsh">${pctS(r.tshare)}</span>`}</span>` : ""}<span>${snapCell(r)}</span></div>`;
+    }
+    return h + `</div></div>`;
+  }
+
   // ---------- Player page ----------
   function player(pid) {
     const p = playerById[pid];
@@ -167,16 +182,7 @@
       h += `</div></div>`;
     }
     // Game log
-    const showT = TGT_POS.includes(p.pos) && TGT_MARKETS.includes(mid); // targets only for Receptions / Rec yds
-    h += `<div class="panel"><h3>Game log</h3><div class="mlog"><div class="mlog-r mhead ${showT ? "t" : ""}"><span>Wk</span><span>Opp</span><span>Line</span><span>Act</span>${showT ? "<span>Tgt</span>" : ""}<span>Snap</span></div>`;
-    for (const r of [...rows].reverse()) {
-      const mm = r.m[mid] || {};
-      const w = D.games[r.gid] && D.games[r.gid].wx ? wxSummary(D.games[r.gid].wx) : null;
-      const em = D.games[r.gid] && D.games[r.gid].wx && D.games[r.gid].wx.roof === "dome" ? "🏟️" : w ? (w.label.match(/\p{Extended_Pictographic}/u) || [""])[0] : "";
-      h += `<div class="mlog-r ${showT ? "t" : ""}"><span>${r.wk}</span><span>${window.STIX_RESEARCH ? window.STIX_RESEARCH.oppLink(r.gid, r.team, p.pos, pid, `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`) : `${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}`} ${oppHtml(mm)} ${em}${window.STIX_RESEARCH ? window.STIX_RESEARCH.badge(r.gid, r.team, p.pos, pid) : ""}${STARTER_SLOTS.includes(r.slot) ? "" : ` <span class="muted small">${esc(r.slot || "not slotted")}</span>`}</span>
-        <span>${lineHtml(mm, true)}</span><span>${actualCell(r, mm)}</span>${showT ? `<span>${r.tgt == null ? "" : num(r.tgt, 0) + `<span class="tsh">${pctS(r.tshare)}</span>`}</span>` : ""}<span>${snapCell(r)}</span></div>`;
-    }
-    h += `</div></div>`;
+    h += gameLog(pid, mid, rows);
     // Context: weather only
     h += `<div class="panel"><h3>Matchup &amp; context</h3><div class="body mlist">
       ${cur ? `<div>Weather: ${wxCell(cur.gid)}</div>` : ""}
@@ -187,6 +193,7 @@
   window.STIX_MOBILE = {
     active: () => MQ.matches,
     form, // season avg / trend rules, reused by the share image (share.js)
+    gameLog, // game log panel, reused by the review queue (review.js)
     render(tab, arg) {
       if (tab === "player") return player(arg);
       if (!tab || tab === "board" || tab === "") return board();

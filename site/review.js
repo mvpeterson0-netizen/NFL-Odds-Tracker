@@ -79,33 +79,34 @@
     const l3 = played.slice(-3).map((x) => x.m[mid].act);
     const graded = past.filter((x) => x.m[mid] && (x.m[mid].res === "over" || x.m[mid].res === "under"));
     const overs = graded.filter((x) => x.m[mid].res === "over").length;
-    let use = "";
-    const pl = past.filter((x) => x.played === true).slice(-3);
-    if (["WR", "TE", "RB"].includes(p.pos) && pl.some((x) => x.tgt != null))
-      use = `Targets last 3: ${pl.map((x) => (x.tgt == null ? "—" : `${x.tgt}${x.tshare == null ? "" : ` (${Math.round(x.tshare * 100)}%)`}`)).join(", ")}`;
-    if (p.pos === "RB" && pl.some((x) => x.snap != null)) use += `${use ? " · " : ""}Snaps last 3: ${pl.map((x) => (x.snap == null ? "—" : `${Math.round(x.snap)}%`)).join(", ")}`;
-    return { fm, l3: l3.length ? mean(l3) : null, l3v: l3, n3: l3.length, graded: graded.length, overs, use };
+    return { fm, l3: l3.length ? mean(l3) : null, l3v: l3, n3: l3.length, graded: graded.length, overs };
   }
-  function cardHtml(c, left) {
+  // Compact so the whole card fits on one phone screen (Michael, 2026-10-28): line + odds on one row,
+  // 4 small tiles, a short chart, the last 5 games of the game log (same rows as the phone player page).
+  const LOG_ROWS = 5;
+  function cardHtml(c) {
     const { p, r, mk, ln } = c, m = r.m[mk.id];
     const s = stats(c);
-    const rows = (D.rows[p.id] || []).filter((x) => x.final || x === r).sort((a, b) => a.wk - b.wk).slice(-8);
+    const all = (D.rows[p.id] || []).filter((x) => x.final || x === r).sort((a, b) => a.wk - b.wk);
     const g = D.games[r.gid];
-    const tile = (lab, val, sub) => `<div class="rv-tile"><span>${lab}</span><b>${val}</b>${sub ? `<span>${sub}</span>` : ""}</div>`;
+    const tile = (lab, val, sub) => `<div class="rv-tile"><span>${lab}</span><b>${val}</b>${sub ? `<small>${sub}</small>` : ""}</div>`;
+    const log = window.STIX_MOBILE && window.STIX_MOBILE.gameLog ? window.STIX_MOBILE.gameLog(p.id, mk.id, all.filter((x) => x.final), LOG_ROWS) : "";
     return `<div class="rv-card" id="rv-card" tabindex="0" aria-label="${esc(p.name)} ${esc(mk.label)} ${n1(ln.line)}">
       ${c.moved != null ? `<p class="rv-moved small">Line moved since you reviewed it: ${n1(c.moved)} → <b>${n1(ln.line)}</b></p>` : ""}
-      <div class="rv-h"><div><a class="pname rv-name" href="#/player/${esc(p.id)}" data-rpid="${esc(p.id)}" data-rmid="${esc(mk.id)}">${esc(p.name)}</a>
-        <div class="muted small">${esc(r.team)} · ${esc(r.slot || p.pos)} · ${g ? `${esc(g.away)} @ ${esc(g.home)}` : ""} · ${fmtTime(r.ko)}</div></div>
-        <div class="rv-line"><span class="muted small">${esc(mk.label)}</span><b>${n1(ln.line)}</b><span class="muted small">O ${oddsT(ln.op)} / U ${oddsT(ln.up)}</span><span class="muted small">${esc(ln.src)} · ${esc(ln.book)}</span></div></div>
-      <div class="rv-tiles">${tile("Season avg", s.fm.avg == null ? "—" : n1(Math.round(s.fm.avg * 10) / 10), s.fm.n ? `${s.fm.n} start${s.fm.n === 1 ? "" : "s"}` : "no starts")}
-        ${tile("Last 3 avg", s.l3 == null ? "—" : n1(Math.round(s.l3 * 10) / 10), s.n3 ? s.l3v.map((v) => n1(v)).join(", ") : "no games")}
-        ${tile("Over his line", s.graded ? `${s.overs} of ${s.graded}` : "—", s.graded ? "graded games" : "no graded lines yet")}
-        <div class="rv-tile"><span>Opp D rank</span><b class="rv-drk">${drankCell(m, p.pos, mk, r.opp)}</b></div></div>
-      ${s.use ? `<p class="small rv-use">${s.use}</p>` : ""}
-      <div class="chart">${chartSVG(rows, mk.id, { W: 400, H: 200, L: 30, R: 26, T: 26, B: 24, fs: 12, edgeAbove: true })}</div>
-      <div class="rv-btns"><button class="rv-b rv-o" data-rv="o">▲ Over ${n1(ln.line)}</button><button class="rv-b rv-s" data-rv="skip">Skip</button><button class="rv-b rv-u" data-rv="u">▼ Under ${n1(ln.line)}</button></div>
-      <p class="muted small rv-hint">Swipe up = Over · down = Under · left or right = skip. Over / Under saves to My picks at this line. ${left} left this week.</p></div>`;
+      <div class="rv-h"><a class="pname rv-name" href="#/player/${esc(p.id)}" data-rpid="${esc(p.id)}" data-rmid="${esc(mk.id)}">${esc(p.name)}</a>
+        <span class="rv-mk">${esc(mk.label)} <b>${n1(ln.line)}</b></span></div>
+      <div class="rv-sub muted small"><span>${esc(r.team)} ${esc(r.slot || p.pos)} · ${g ? `${esc(g.away)} @ ${esc(g.home)}` : ""} · ${fmtTime(r.ko)}</span>
+        <span>O ${oddsT(ln.op)} / U ${oddsT(ln.up)} · ${esc(ln.src)} ${esc(BOOK(ln.book))}</span></div>
+      <div class="rv-tiles">${tile("Season", s.fm.avg == null ? "—" : n1(Math.round(s.fm.avg * 10) / 10), s.fm.n ? `${s.fm.n} starts` : "no starts")}
+        ${tile("Last 3", s.l3 == null ? "—" : n1(Math.round(s.l3 * 10) / 10), s.n3 ? s.l3v.map((v) => n1(v)).join(", ") : "no games")}
+        ${tile("Over line", s.graded ? `${s.overs}/${s.graded}` : "—", s.graded ? "graded" : "none yet")}
+        <div class="rv-tile"><span>Opp D</span><b class="rv-drk">${m && m.drk != null ? ordinal(m.drk) : "—"}</b><small>${m && m.dav != null ? `${n1(m.dav)}/g` : "no data"}</small></div></div>
+      <div class="chart rv-chart">${chartSVG(all.slice(-8), mk.id, { W: 400, H: 150, L: 30, R: 26, T: 22, B: 22, fs: 12, edgeAbove: true })}</div>
+      ${log}
+      <div class="rv-btns"><button class="rv-b rv-o" data-rv="o">▲ Over</button><button class="rv-b rv-s" data-rv="skip">Skip</button><button class="rv-b rv-u" data-rv="u">▼ Under</button></div>
+      <p class="muted small rv-hint">Swipe ↑ Over · ↓ Under · ← → skip · Over / Under saves to My picks at ${n1(ln.line)}</p></div>`;
   }
+  const BOOK = (b) => ({ DraftKings: "DK", FanDuel: "FD" }[b] || b || "");
   function view() {
     const acc = ACC();
     if (!acc || !acc.signedIn() || !acc.ready()) return `<p class="pad">Sign in on the <a href="#/picks">Picks tab</a> to use the review queue.</p>`;
@@ -115,7 +116,7 @@
     let h = `<div class="rv-top"><a href="#/picks">← Picks</a><b>Review queue</b><span class="muted small">${list.length} left this week</span></div>`;
     if (RV.err) h += `<p class="small pk-err pad">${esc(RV.err)}</p>`;
     if (!list.length) return h + `<div class="panel"><div class="body"><p><b>All caught up.</b></p><p class="muted small">Every slotted player × stat with a line this week has been reviewed or picked. New cards appear as lines post (most arrive Monday night to Wednesday), and a reviewed card comes back if its line moves more than ±0.5 (receptions, carries, attempts, completions), ±5 (rushing / receiving yards) or ±10 (passing yards).</p></div></div>`;
-    return h + cardHtml(list[0], list.length);
+    return h + cardHtml(list[0]);
   }
   function entry() {
     if (!ready() || !RV.loaded) { if (ready() && !RV.loading) setTimeout(load, 0); return `<p class="rv-entry"><a class="rv-go" href="#/review">Review this week's lines</a></p>`; }
