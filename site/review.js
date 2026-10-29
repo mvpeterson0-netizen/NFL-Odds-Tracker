@@ -134,10 +134,19 @@
   }
   window.addEventListener("resize", () => { if ((location.hash || "").split("/")[1] === "review") fitCard(); });
   const BOOK = (b) => ({ DraftKings: "DK", FanDuel: "FD" }[b] || b || "");
+  let retryT = null, retries = 0;
+  function retry() {
+    if (retryT || retries > 60) return; // up to ~30 s
+    retries++;
+    retryT = setTimeout(() => { retryT = null; redraw(); }, 500);
+  }
   function view() {
     const acc = ACC();
-    if (!acc || !acc.signedIn() || !acc.ready()) return `<p class="pad">Sign in on the <a href="#/picks">Picks tab</a> to use the review queue.</p>`;
-    if (!ready()) { setTimeout(() => PK().sync(), 0); return `<p class="muted pad">Loading your picks…</p>`; }
+    if (!acc || !acc.signedIn()) return `<p class="pad">Sign in on the <a href="#/picks">Picks tab</a> to use the review queue.</p>`;
+    // Opened directly (reload, home-screen app): the account and picks load in the background, and their own
+    // redraws only cover the Picks / player pages, so check again shortly until they're in.
+    if (!acc.ready()) { retry(); return (acc.error && acc.error()) || retries > 6 ? `<p class="pad">Finish signing in on the <a href="#/picks">Picks tab</a> to use the review queue.</p>` : `<p class="muted pad">Loading your account…</p>`; }
+    if (!ready()) { setTimeout(() => PK().sync(), 0); retry(); return `<p class="muted pad">Loading your picks…</p>`; }
     if (!RV.loaded || RV.uid !== acc.user().id) { if (!RV.loading) setTimeout(load, 0); return `<p class="muted pad">Loading your review queue…</p>`; }
     const list = cards();
     let h = `<div class="rv-top"><a href="#/picks">← Picks</a><b>Review queue</b><span class="muted small">${list.length} left this week</span></div>`;
@@ -188,7 +197,7 @@
     const dec = { ArrowUp: "o", ArrowDown: "u", ArrowLeft: "skip", ArrowRight: "skip" }[e.key]; if (!dec) return;
     e.preventDefault(); const c = current(); if (c) decide(c, dec);
   });
-  if (ACC()) ACC().onChange(() => { if (!ACC().signedIn()) { RV.rows = {}; RV.loaded = false; RV.uid = null; } });
+  if (ACC()) ACC().onChange(() => { if (!ACC().signedIn()) { RV.rows = {}; RV.loaded = false; RV.uid = null; } retries = 0; redraw(); });
 
   window.STIX_REVIEW = { view, bind, entry, load };
 })();
