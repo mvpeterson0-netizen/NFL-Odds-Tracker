@@ -17,7 +17,15 @@
     for (const g of Object.values(D.games)) if (g.scr && g.scr.h) return Object.keys(g.scr.h).filter((k) => k[0] === "l").map((k) => +k.slice(1)).sort((a, b) => a - b);
     return [];
   }
-  const USAGE_RISE = { tshare: 5, snap: 10 }; // percentage points (last 2 games vs his earlier games)
+  const USAGE_RISE = { tshare: 5, snap: 10 }; // percentage points (his recent games vs his earlier games)
+  // How many recent games count as "recent" for Usage up / down (slider on those tabs; saved in this browser).
+  // Default 2 = the rule before the slider existed, so nothing changes unless it's moved.
+  const USAGE_GAMES_DEFAULT = 2, USAGE_GAMES_MIN = 1, USAGE_GAMES_MAX = 4;
+  const UG = (() => {
+    try { const v = +localStorage.getItem("stix_usage_games"); if (v >= USAGE_GAMES_MIN && v <= USAGE_GAMES_MAX) return { n: v }; } catch { /* default */ }
+    return { n: USAGE_GAMES_DEFAULT };
+  })();
+  const gamesTxt = (n) => (n === 1 ? "his last game" : `his last ${n} games`);
   const FLAT = { count: 0.5, yds: 5, pass_yds: 10 }; // "line unchanged" tolerance
   const COUNT_MKTS = ["rec", "rush_att", "pass_att", "pass_cmp"];
   const SD_GAMES = 8;             // games used for his usual game-to-game swing
@@ -28,9 +36,9 @@
     { id: "l3", label: "Last 3 vs line", title: "Last 3 games average furthest from this week's line",
       desc: () => `His average over his last 3 games played vs this week's line. Ranked by <b>size</b> = gap ÷ his usual game-to-game swing (standard deviation of his last ${SD_GAMES} games played, min 3).` },
     { id: "usage", label: "Usage up, line flat", title: "Rising usage, line unchanged",
-      desc: () => `Usage = target share for WR/TE, snap share for RB (QBs not included). Rising = average of his last 2 games is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) above his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage rise.` },
+      desc: () => `Usage = target share for WR/TE, snap share for RB (QBs not included). Rising = average of ${gamesTxt(UG.n)} is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) above his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage rise.` },
     { id: "usagedn", label: "Usage down, line flat", title: "Falling usage, line unchanged",
-      desc: () => `The inverse of Usage up. Usage = target share for WR/TE, snap share for RB (QBs not included). Falling = average of his last 2 games is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) below his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage drop.` },
+      desc: () => `The inverse of Usage up. Usage = target share for WR/TE, snap share for RB (QBs not included). Falling = average of ${gamesTxt(UG.n)} is at least <b>${USAGE_RISE.tshare} points</b> of target share (WR/TE) or <b>${USAGE_RISE.snap} points</b> of snap share (RB) below his average in his earlier games this season (min 2 earlier games). Line unchanged = within ±${FLAT.count} for receptions / carries, ±${FLAT.yds} for rushing and receiving yards, compared with his previous game's line. Ranked by the usage drop.` },
     { id: "down", label: "Bad script, line down", title: "Line lowered after a game script that worked against him",
       desc: () => scriptDesc("against him", "under", "lower") },
     { id: "up", label: "Good script, line up", title: "Line raised after a game script that helped him",
@@ -230,16 +238,17 @@
       } else if (tab === "usage" || tab === "usagedn") {
         const pos = c.p.pos; if (pos === "QB") continue;
         const us = c.played.map((x) => usageOf(pos, x)).filter((v) => v != null);
-        if (us.length < 4) continue;
-        const last2 = us.slice(-2), early = us.slice(0, -2);
-        const a2 = (last2[0] + last2[1]) / 2, ae = early.reduce((a, b) => a + b, 0) / early.length, rise = a2 - ae;
+        const N = UG.n;
+        if (us.length < N + 2) continue; // N recent games + at least 2 earlier
+        const last2 = us.slice(-N), early = us.slice(0, -N);
+        const a2 = last2.reduce((a, b) => a + b, 0) / N, ae = early.reduce((a, b) => a + b, 0) / early.length, rise = a2 - ae;
         const need = pos === "RB" ? USAGE_RISE.snap : USAGE_RISE.tshare;
         if (tab === "usage" ? rise < need : rise > -need) continue;
         if (pl == null) continue;
         const tol = COUNT_MKTS.includes(c.mid) ? FLAT.count : c.mid === "pass_yds" ? FLAT.pass_yds : FLAT.yds;
         if (Math.abs(c.cur.line - pl) > tol) continue;
         const kind = pos === "RB" ? "snap" : "tgt share";
-        out.push({ c, size: Math.abs(rise), main: rise, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(a2)}%</b> <span class="muted small">(last 2: ${last2.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
+        out.push({ c, size: Math.abs(rise), main: rise, cells: [`${num(pl)} → <b>${num(c.cur.line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(a2)}%</b> <span class="muted small">(last ${N}: ${last2.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
       } else if (tab === "down" || tab === "up") {
         if (pl == null || !c.prev || c.pm.act == null) continue;
         const info = scriptInfo(c.prev.gid, c.r.team); if (!info) continue;
@@ -285,15 +294,21 @@
   // 3 columns, each a pair with its inverse stacked: line move / last 3; usage up / down; good script / bad script
   const GRID = ["move", "usage", "up", "l3", "usagedn", "down"];
   // Filters whose full description opens from an "i" on the button.
-  const INFO_TABS = ["up", "down"];
+  const INFO_TABS = ["usage", "usagedn", "up", "down"];
+  // Usage up / down "i" pop-up also holds the recent-games slider (Michael, 2026-10-28).
+  const ugSlider = () => `<div class="filters rl-ugbox"><label class="rl-ug">Recent games vs his earlier games${UG.n === USAGE_GAMES_DEFAULT ? " (default)" : ""}<span class="rl-ugrow"><input id="rl-ug" type="range" min="${USAGE_GAMES_MIN}" max="${USAGE_GAMES_MAX}" step="1" value="${UG.n}" aria-label="Recent games used for usage"> <b id="rl-ugv">${UG.n}</b></span></label></div>`;
+  let infoId = null;
   function openInfo(id) {
     closePop();
     const t = TABS.find((x) => x.id === id); if (!t) return;
+    infoId = id;
+    // Usage pop-ups: show that filter's list behind it, so moving the slider changes what's on screen.
+    if ((id === "usage" || id === "usagedn") && RL.tab !== id) { RL.tab = id; redraw(); }
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
     ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="${esc(t.label)}">
       <div class="nw-h"><b>${esc(t.label)}</b><button class="nw-x" aria-label="Close">✕</button></div>
-      <p class="small"><b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.</p></div>`;
+      ${id === "usage" || id === "usagedn" ? ugSlider() : ""}<p class="small" id="rl-infodesc"><b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.</p></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
@@ -326,6 +341,20 @@
     try { S.market[a.dataset.rpid] = a.dataset.rmid; } catch (err) { console.error(err); }
   }, true);
   document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-mk") { RL.mk = e.target.value; redraw(); } });
+  // Usage slider: number updates while dragging; the list redraws when it's let go.
+  document.addEventListener("input", (e) => { if (e.target && e.target.id === "rl-ug") { const v = document.getElementById("rl-ugv"); if (v) v.textContent = e.target.value; } });
+  document.addEventListener("change", (e) => {
+    if (!e.target || e.target.id !== "rl-ug") return;
+    UG.n = Math.min(USAGE_GAMES_MAX, Math.max(USAGE_GAMES_MIN, +e.target.value || USAGE_GAMES_DEFAULT));
+    try { localStorage.setItem("stix_usage_games", String(UG.n)); } catch { /* setting just won't persist */ }
+    redraw();
+    // refresh the open pop-up so its rule text and "(default)" match the new setting
+    const box = document.querySelector("#scr-ov .rl-ugbox"), d = document.getElementById("rl-infodesc");
+    const t = TABS.find((x) => x.id === infoId);
+    if (box) box.outerHTML = ugSlider();
+    if (d && t) d.innerHTML = `<b>${esc(t.title)}.</b> ${t.desc()} Leads for research, not predictions.`;
+    const s = document.getElementById("rl-ug"); if (s) s.focus();
+  });
 
   function safeHtml() { try { return html(); } catch (e) { console.error("research leads failed", e); return ""; } }
   // ---------- Guide tab setting ----------
