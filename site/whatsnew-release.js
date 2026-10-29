@@ -16,7 +16,7 @@
       text: "We tested more than 1,900 conditions on weeks 1–7 and kept 8. One of them:",
       stat: { rule: "WR2 who went over his line last week → bet the Under (same stat)",
               rec: "99–54 · 64.7% hit · +34.1 units · <b>+22.3% ROI</b>" },
-      after: "Honest caveat: that record comes from the same weeks used to pick the rule, and with that many conditions tested some are expected to look good by chance. All 8 are now frozen and scored only on week 8 on, so treat them as candidates, not proven.",
+      after: "Not financial advice, additional data may prove or disprove thesis",
       imgs: [["whatsnew/signals.jpg", 640, 720, "Research tab Leads showing rule 1, WR2 went over, with its weeks 1–7 record"]],
       go: ["#/search", "See all 8 on the Research tab"] },
   ];
