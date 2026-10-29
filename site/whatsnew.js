@@ -84,7 +84,7 @@
     try {
       if (!wanted()) { clearInterval(timer); return; }
       if (document.visibilityState !== "visible") return;
-      if (addSecs(TICK) > AFTER_SECS && okToShowNow() && !document.getElementById("su-ov")) open();
+      if (addSecs(TICK) > AFTER_SECS && okToShowNow() && !document.getElementById("su-ov") && !document.getElementById("wn-ov")) open(); // not over What's new
     } catch (e) { console.error("sign-in pop-up failed", e); }
   }
   watch();
