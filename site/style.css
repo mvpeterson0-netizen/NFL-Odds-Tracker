@@ -180,6 +180,12 @@ button.badd { font-size: 12px; padding: 3px 10px; }
 .pk-stat b { font-size: 22px; }
 .pk-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
 .pk-row:first-child { border-top: 0; }
+.pk-sharerow { margin: 4px 0 10px; }
+.pk-sharerow .sh-main { min-height: 40px; padding: 0 14px; border-radius: 8px; background: var(--panel); }
+.rl-ugbox { margin: 4px 0 8px; }
+.rl-ugrow { display: flex; align-items: center; gap: 8px; min-height: 34px; }
+.rl-ugrow input[type=range] { width: 140px; margin: 0; }
+.rl-ugrow b { color: var(--ink); font-size: 16px; min-width: 1ch; }
 .pk-res { font-size: 12px; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--line); white-space: nowrap; }
 .pk-res.hit { color: var(--over); border-color: var(--over); font-weight: 600; }
 .pk-res.miss { color: var(--under); border-color: var(--under); font-weight: 600; }

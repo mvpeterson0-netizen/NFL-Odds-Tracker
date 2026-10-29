@@ -204,21 +204,26 @@
   let FILE = null, URLX = null;
   function close() { const o = document.getElementById("share-ov"); if (o) o.remove(); if (URLX) { URL.revokeObjectURL(URLX); URLX = null; } FILE = null; }
   function open(pid, mid) {
-    close();
     const d = cardData(pid, mid);
-    const cv = draw(d);
-    const link = `${location.origin}${location.pathname}#/player/${pid}`;
+    present(draw(d), { label: "Share player", alt: `Share image for ${d.p.name}, ${d.mk.label}`,
+      save: `stix-${d.p.name.replace(/\W+/g, "-").toLowerCase()}-${mid}.png`, file: `stix-${pid}-${mid}.png`,
+      link: `${location.origin}${location.pathname}#/player/${pid}` });
+  }
+  // Preview overlay with Share… / Save image / Copy link / Close for a drawn canvas (player card or picks card).
+  function present(cv, o) {
+    close();
+    const link = o.link;
     const ov = document.createElement("div");
     ov.id = "share-ov"; ov.className = "share-ov";
-    ov.innerHTML = `<div class="share-box" role="dialog" aria-label="Share player">
-      <img alt="Share image for ${esc(d.p.name)}, ${esc(d.mk.label)}">
-      <div class="share-btns"><button id="sh-send" class="sh-main">Share…</button><a id="sh-save" download="stix-${esc(d.p.name.replace(/\W+/g, "-").toLowerCase())}-${esc(mid)}.png">Save image</a>
+    ov.innerHTML = `<div class="share-box" role="dialog" aria-label="${esc(o.label)}">
+      <img alt="${esc(o.alt)}">
+      <div class="share-btns"><button id="sh-send" class="sh-main">Share…</button><a id="sh-save" download="${esc(o.save)}">Save image</a>
       <button id="sh-copy">Copy link</button><button id="sh-close">Close</button></div><p id="sh-msg" class="small muted"></p></div>`;
     document.body.appendChild(ov);
     const img = ov.querySelector("img"), msgEl = ov.querySelector("#sh-msg");
     cv.toBlob((blob) => {
       if (!blob) { msgEl.textContent = "Couldn't make the image on this device."; return; }
-      FILE = new File([blob], `stix-${pid}-${mid}.png`, { type: "image/png" });
+      FILE = new File([blob], o.file, { type: "image/png" });
       URLX = URL.createObjectURL(blob);
       img.src = URLX; ov.querySelector("#sh-save").href = URLX;
     }, "image/png");
@@ -250,5 +255,54 @@
     const mid = S.market[pid] && ms.some((m) => m.id === S.market[pid]) ? S.market[pid] : ms[0].id;
     try { open(pid, mid); } catch (err) { console.error("share failed", err); }
   });
-  window.STIX_SHARE = { open, draw, cardData };
+  // ---------- this week's picks card (Picks tab) ----------
+  // picks: open + locked picks in the picks.js shape ({ name, pid, pos, gid, wk, mid, side, line, odds, book, src, ko, locked }).
+  // Shows only what was saved with each pick; no results (these games haven't been graded).
+  function drawPicks(picks) {
+    const MAX = 30, shown = picks.slice(0, MAX), RH = 112, TOP = 250;
+    const h = TOP + shown.length * RH + (picks.length > MAX ? 50 : 0) + 130;
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = h;
+    const ctx = cv.getContext("2d");
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, h);
+    ctx.textBaseline = "alphabetic";
+    const wks = [...new Set(picks.map((p) => p.wk))].sort((a, b) => a - b);
+    const wkTxt = wks.length === 1 ? `Week ${wks[0]}` : `Weeks ${wks[0]}–${wks[wks.length - 1]}`;
+    text(ctx, "STIX", PAD, 70, f(30, 800), C.accent);
+    text(ctx, "NFL props · 2026", PAD + 92, 70, f(26), C.muted);
+    text(ctx, `My picks · ${wkTxt}`, PAD, 150, f(62, 800), C.ink);
+    const nl = picks.filter((p) => p.locked).length;
+    text(ctx, `${picks.length} pick${picks.length === 1 ? "" : "s"}${nl ? ` · ${nl} locked (game started)` : ""}`, PAD, 198, f(32, 500), C.muted);
+    let y = TOP;
+    ctx.strokeStyle = C.line; ctx.lineWidth = 2;
+    shown.forEach((p) => {
+      ctx.beginPath(); ctx.moveTo(PAD, y); ctx.lineTo(W - PAD, y); ctx.stroke();
+      const pl = playerById[p.pid], mk = mkt[p.mid], g = D.games[p.gid];
+      const right = W - PAD;
+      // right side: side + line, then odds · book
+      const sideCol = p.side === "o" ? C.over : C.under;
+      const big = `${p.side === "o" ? "Over" : "Under"} ${n1(p.line)}`;
+      ctx.font = f(42, 800); const bw = ctx.measureText(big).width;
+      text(ctx, big, right, y + 52, f(42, 800), sideCol, "right");
+      const sub = [oddsT(p.odds), p.src, p.book].filter(Boolean).join(" · ");
+      text(ctx, sub, right, y + 90, f(24), C.muted, "right");
+      const leftW = right - Math.max(bw, 260) - PAD - 30;
+      text(ctx, fit(ctx, `${p.name}${p.locked ? "  🔒" : ""}`, f(36, 700), leftW), PAD, y + 50, f(36, 700), C.ink);
+      const gm = g ? `${g.away} @ ${g.home}` : "";
+      const meta = [pl ? `${pl.team} ${p.pos || pl.pos}` : p.pos, mk ? mk.label : p.mid, gm, p.ko ? koText(p.ko) : ""].filter(Boolean).join(" · ");
+      text(ctx, fit(ctx, meta, f(24), leftW), PAD, y + 90, f(24), C.muted);
+      y += RH;
+    });
+    ctx.beginPath(); ctx.moveTo(PAD, y); ctx.lineTo(W - PAD, y); ctx.stroke();
+    if (picks.length > MAX) { text(ctx, `+ ${picks.length - MAX} more picks not shown`, PAD, y + 38, f(26), C.muted); y += 50; }
+    text(ctx, fit(ctx, "Line and odds saved when each pick was made · Lines: DraftKings / FanDuel (The Odds API)", f(20), W - 2 * PAD), PAD, h - 70, f(20), C.muted);
+    text(ctx, `Research tool, not betting advice · shared ${new Date().toLocaleDateString()}`, PAD, h - 42, f(20), C.muted);
+    return cv;
+  }
+  function openPicks(picks) {
+    if (!picks || !picks.length) return;
+    const wk = Math.max(...picks.map((p) => p.wk));
+    present(drawPicks(picks), { label: "Share this week's picks", alt: `My picks, week ${wk}: ${picks.length} picks`,
+      save: `stix-picks-week-${wk}.png`, file: `stix-picks-week-${wk}.png`, link: `${location.origin}${location.pathname}` });
+  }
+  window.STIX_SHARE = { open, draw, cardData, openPicks, drawPicks };
 })();

@@ -374,6 +374,8 @@
       · Every pick is 1 unit at the odds saved with it; pushes and voids are 0; picks still in progress aren't counted until graded${R.noOdds ? ` · ${R.noOdds} winning pick${R.noOdds === 1 ? "" : "s"} had no saved odds and ${R.noOdds === 1 ? "isn't" : "aren't"} counted` : ""}
       · Hit rate leaves out pushes and voids · ${statusTxt}</p>`;
     const sec = (title, l, empty) => `<div class="panel"><h3>${title} (${l.length})</h3><div class="body">${l.length ? l.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">${empty}</p>`}</div></div>`;
+    const nShare = open.length + locked.length;
+    if (nShare && window.STIX_SHARE && window.STIX_SHARE.openPicks) h += `<p class="pk-sharerow"><button id="pk-share" class="sh-main" type="button">Share this week's picks (${nShare})</button></p>`;
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
     h += sec("Locked · game started", locked, "Picks move here at kickoff. They can't be changed or removed after that.");
     h += sec("Graded", graded, "Graded picks appear here once the game's stats are published.");
@@ -415,6 +417,14 @@
     document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => (enabled() ? setPick : offer() ? askSignIn : () => {})(b.dataset.pid, b.dataset.pmid, b.dataset.pick)));
     document.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => removePick(b.dataset.del)));
     const rt = document.getElementById("pk-retry"); if (rt) rt.addEventListener("click", sync);
+    const sh = document.getElementById("pk-share");
+    if (sh) sh.addEventListener("click", () => {
+      // Open + locked picks (not yet graded), in kickoff order, as an image to share.
+      const list = live().map((p) => ({ p, g: grade(p) })).filter((x) => x.g.st === "open" || x.g.st === "locked")
+        .sort((a, b) => (a.p.ko || "").localeCompare(b.p.ko || "") || a.p.name.localeCompare(b.p.name))
+        .map((x) => Object.assign({}, x.p, { locked: x.g.st === "locked" }));
+      try { window.STIX_SHARE.openPicks(list); } catch (err) { console.error("picks share failed", err); }
+    });
     const ga = document.getElementById("pk-goacct");
     if (ga) ga.addEventListener("click", (e) => { e.preventDefault(); signInWanted = true; rerender(); });
     const off = document.getElementById("pk-off");
