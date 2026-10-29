@@ -79,8 +79,8 @@ Captured lines are stored as CSV in the repo rather than a SQLite file so every 
 
 ## Setup
 
-1. Repo secret `ODDS_API_KEY` (Settings → Secrets and variables → Actions).
+1. Repo secret `ODDS_API_KEY_20K` (Settings → Secrets and variables → Actions).
 2. Settings → Pages → Source: **GitHub Actions**.
 3. Actions tab → `update` → **Run workflow** once.
 
-Run locally: `python -m pipeline.run` (set `ODDS_API_KEY` to pull props; `FORCE_BUILD=1` to rebuild).
+Run locally: `python -m pipeline.run` (set `ODDS_API_KEY_20K` to pull props; `FORCE_BUILD=1` to rebuild).

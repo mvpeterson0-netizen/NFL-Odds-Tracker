@@ -43,8 +43,8 @@ def main() -> int:
             merged.update(name_index.get(g["home_team"], {}))
             return merged
 
-        keys = [os.environ.get("ODDS_API_KEY", "").strip()] + \
-               [os.environ.get(f"ODDS_API_KEY_{n}", "").strip() for n in range(2, 7)]
+        # Only the paid 20k-credit key is used (Michael, 2026-10-28); the older free keys are retired.
+        keys = [os.environ.get("ODDS_API_KEY_20K", "").strip()]
         odds_changed = odds.run(keys, games, idx_for, log)
 
         weather_changed = weather.refresh(games, log)

@@ -415,7 +415,7 @@ def run(keys, games, name_index_for_game, log):
         keys = [keys]
     keys = [k for k in (keys or []) if k]
     if not keys:
-        log.append("odds: ODDS_API_KEY not set; skipped")
+        log.append("odds: ODDS_API_KEY_20K not set; skipped")
         return False
     test_wrote = False
     try:  # the one-time link test must never stop the regular pulls
