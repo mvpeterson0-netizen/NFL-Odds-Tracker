@@ -1,0 +1,3372 @@
+{
+ "downloaded_utc": "2026-10-30T15:52:09Z",
+ "game_id": "2025_01_PIT_NYJ",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-09-07T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Pittsburgh Steelers",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-09-07T13:55:21Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:54:34Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 202.5,
+         "price": -112
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 202.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 171.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 171.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:54:34Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 54.5,
+         "price": -114
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 54.5,
+         "price": -110
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 50.5,
+         "price": -114
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 27.5,
+         "price": -114
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 26.5,
+         "price": -113
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 26.5,
+         "price": -111
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -109
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -109
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -116
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -111
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 16.5,
+         "price": -109
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -107
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:54:34Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -137
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 107
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 2.5,
+         "price": -156
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 2.5,
+         "price": 122
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 121
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -138
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -136
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -128
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 1.5,
+         "price": -158
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 1.5,
+         "price": 123
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": 149
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -191
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:54:34Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 52.5,
+         "price": -114
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 52.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 44.5,
+         "price": -109
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 28.5,
+         "price": -109
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 22.5,
+         "price": -112
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 22.5,
+         "price": -112
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 0.5,
+         "price": 111
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 0.5,
+         "price": -140
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-09-07T13:54:58Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 203.5,
+         "price": -113
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 203.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 173.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 173.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 22.5,
+         "price": -113
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 22.5,
+         "price": -113
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 19.5,
+         "price": -113
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 19.5,
+         "price": -113
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 51.5,
+         "price": -113
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 51.5,
+         "price": -113
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 54.5,
+         "price": -113
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 54.5,
+         "price": -113
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -113
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -113
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -113
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 1.5,
+         "price": -166
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 124
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 118
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 136
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -174
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": 136
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -174
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -138
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 108
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 21.5,
+         "price": -113
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 21.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 54.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 54.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 44.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 44.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 44.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 44.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-09-07T13:55:22Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 203.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 203.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 174.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 174.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 51.5,
+         "price": -120
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 51.5,
+         "price": -110
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -105
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -180
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 52.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 52.5,
+         "price": -105
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 0.5,
+         "price": 110
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 0.5,
+         "price": -140
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-09-07T13:55:23Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 175.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 175.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 200.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 200.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -105
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -125
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 15.5,
+         "price": -130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 15.5,
+         "price": 100
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 25.5,
+         "price": -130
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 25.5,
+         "price": 100
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 25.5,
+         "price": -125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 25.5,
+         "price": -105
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 20.5,
+         "price": -130
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 25.5,
+         "price": -105
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 25.5,
+         "price": -125
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 50.5,
+         "price": -130
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 50.5,
+         "price": 100
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 2.5,
+         "price": 280
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 2.5,
+         "price": -400
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 55.5,
+         "price": -105
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 55.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-09-07T13:55:22Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 166.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 166.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 200.5,
+         "price": -114
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 200.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 26.5,
+         "price": -114
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 26.5,
+         "price": -117
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 26.5,
+         "price": -113
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 26.5,
+         "price": -118
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -113
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -118
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 53.5,
+         "price": -113
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 53.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -141
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 2.5,
+         "price": -157
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 2.5,
+         "price": 118
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -104
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -129
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -143
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -136
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 116
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -195
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 114
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 54.5,
+         "price": -114
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 45.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 45.5,
+         "price": -118
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 23.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 42.5,
+         "price": -117
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 42.5,
+         "price": -114
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 28.5,
+         "price": -114
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 28.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-09-07T13:55:21Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 200.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 166.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -118
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 26.5,
+         "price": -113
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -134
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -103
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 2.5,
+         "price": -157
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -139
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-09-07T13:55:21Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 175.5,
+         "price": -118
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 175.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 16.5,
+         "price": -130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 16.5,
+         "price": -105
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -118
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 20.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 0.5,
+         "price": 125
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 0.5,
+         "price": -165
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 43.5,
+         "price": -118
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 53.5,
+         "price": -118
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 27.5,
+         "price": -118
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 44.5,
+         "price": -118
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 44.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-09-07T13:53:32Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 175.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 175.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Roman Wilson",
+         "name": "Over",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Roman Wilson",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Roman Wilson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 160
+        },
+        {
+         "description": "Roman Wilson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -210
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": 185
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": -250
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -145
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 110
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 0.5,
+         "price": 125
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 0.5,
+         "price": -165
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-09-07T13:54:17Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 202.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 202.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 173.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 173.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 22.5,
+         "price": -105
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 22.5,
+         "price": -125
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-09-07T13:54:29Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-07T13:54:45Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 202.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 202.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 173.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 173.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-07T13:54:45Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -125
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 20.5,
+         "price": -130
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 10.5,
+         "price": -130
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-07T13:54:45Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -195
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-07T13:54:45Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 45.5,
+         "price": -125
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 44.5,
+         "price": -125
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 28.5,
+         "price": -125
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Over",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Kaleb Johnson",
+         "name": "Under",
+         "point": 22.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    }
+   ],
+   "commence_time": "2025-09-07T17:00:00Z",
+   "home_team": "New York Jets",
+   "id": "5ed483bb614b18955f8b43f177746371",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-09-07T14:00:38Z",
+  "previous_timestamp": "2025-09-07T13:50:38Z",
+  "timestamp": "2025-09-07T13:55:38Z"
+ }
+}
