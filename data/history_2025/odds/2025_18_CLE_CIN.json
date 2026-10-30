@@ -1,0 +1,2639 @@
+{
+ "downloaded_utc": "2026-10-30T22:30:37Z",
+ "game_id": "2025_18_CLE_CIN",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2026-01-04T15:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Cleveland Browns",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2026-01-04T14:55:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:38Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 245.5,
+         "price": -111
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 245.5,
+         "price": -113
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 198.5,
+         "price": -113
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 198.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:38Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 79.5,
+         "price": -114
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 79.5,
+         "price": -110
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 56.5,
+         "price": -114
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 45.5,
+         "price": -114
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 26.5,
+         "price": -109
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 22.5,
+         "price": -116
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 22.5,
+         "price": -108
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 19.5,
+         "price": -111
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 19.5,
+         "price": -113
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 15.5,
+         "price": -116
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 15.5,
+         "price": -108
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:38Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -132
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 6.5,
+         "price": 104
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -164
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 126
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -161
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 2.5,
+         "price": -164
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": 103
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 1.5,
+         "price": -131
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:38Z",
+       "outcomes": [
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -114
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 30.5,
+         "price": -111
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 25.5,
+         "price": -109
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 14.5,
+         "price": -106
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 14.5,
+         "price": -119
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 4.5,
+         "price": -107
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2026-01-04T14:54:37Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:32Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 234.5,
+         "price": -120
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 234.5,
+         "price": -110
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 193.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 193.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:32Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 78.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 78.5,
+         "price": -115
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 52.5,
+         "price": -110
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:32Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -130
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 6.5,
+         "price": 100
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": -180
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:32Z",
+       "outcomes": [
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "theScore Bet"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2026-01-04T14:55:26Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:42Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 235.5,
+         "price": -112
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 235.5,
+         "price": -112
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 192.5,
+         "price": -112
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 192.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:42Z",
+       "outcomes": [
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 77.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 77.5,
+         "price": -112
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:42Z",
+       "outcomes": [
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 4.5,
+         "price": 114
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -144
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -106
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 1.5,
+         "price": -122
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 116
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 2.5,
+         "price": -148
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -128
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 6.5,
+         "price": 102
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -106
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:42Z",
+       "outcomes": [
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 30.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2026-01-04T14:55:14Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:46Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 243.5,
+         "price": -114
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 198.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:46Z",
+       "outcomes": [
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 46.5,
+         "price": -121
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 55.5,
+         "price": -121
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 81.5,
+         "price": -120
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 20.5,
+         "price": -121
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 23.5,
+         "price": -121
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:46Z",
+       "outcomes": [
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -108
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 4.5,
+         "price": 104
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -124
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -134
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:46Z",
+       "outcomes": [
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 31.5,
+         "price": -117
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 4.5,
+         "price": -127
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 14.5,
+         "price": -121
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 63.5,
+         "price": -121
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -117
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 22.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2026-01-04T14:55:01Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:31Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 243.5,
+         "price": -115
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 243.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 198.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 198.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:31Z",
+       "outcomes": [
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 23.5,
+         "price": -114
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 23.5,
+         "price": -117
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 23.5,
+         "price": -113
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 46.5,
+         "price": -117
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 46.5,
+         "price": -114
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 55.5,
+         "price": -117
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 55.5,
+         "price": -114
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 20.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:31Z",
+       "outcomes": [
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 4.5,
+         "price": 107
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -129
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:31Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 4.5,
+         "price": -124
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 63.5,
+         "price": -114
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 14.5,
+         "price": -114
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -113
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -118
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 22.5,
+         "price": -109
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Under",
+         "point": 22.5,
+         "price": -121
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 31.5,
+         "price": -113
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 31.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2026-01-04T14:54:59Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 194.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 194.5,
+         "price": -115
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 244.5,
+         "price": -115
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 244.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 79.5,
+         "price": -118
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 79.5,
+         "price": -110
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 21.5,
+         "price": 100
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 21.5,
+         "price": -135
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 22.5,
+         "price": -118
+        },
+        {
+         "description": "Sal Cannella",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Sal Cannella",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 49.5,
+         "price": -118
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Tanner Hudson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Tanner Hudson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -118
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 25.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -145
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Sal Cannella",
+         "name": "Over",
+         "point": 1.5,
+         "price": -200
+        },
+        {
+         "description": "Sal Cannella",
+         "name": "Under",
+         "point": 1.5,
+         "price": 145
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Tanner Hudson",
+         "name": "Over",
+         "point": 0.5,
+         "price": -210
+        },
+        {
+         "description": "Tanner Hudson",
+         "name": "Under",
+         "point": 0.5,
+         "price": 155
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -118
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 14.5,
+         "price": -118
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 21.5,
+         "price": -118
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2026-01-04T14:55:26Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 194.5,
+         "price": -114
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 194.5,
+         "price": -117
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 239.5,
+         "price": -114
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 239.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 22.5,
+         "price": -114
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 19.5,
+         "price": -114
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 53.5,
+         "price": -107
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 53.5,
+         "price": -127
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 24.5,
+         "price": -117
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 24.5,
+         "price": -113
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 79.5,
+         "price": -114
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 79.5,
+         "price": -117
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 15.5,
+         "price": -114
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -102
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 4.5,
+         "price": 122
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -180
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -152
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -137
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 6.5,
+         "price": 103
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 1.5,
+         "price": -127
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 122
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 40.5,
+         "price": -113
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 40.5,
+         "price": -117
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -107
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -127
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 13.5,
+         "price": -118
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 4.5,
+         "price": -121
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 24.5,
+         "price": -122
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 31.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2026-01-04T14:55:15Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:50Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 240.5,
+         "price": -120
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 240.5,
+         "price": -120
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 195.5,
+         "price": -120
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 195.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:50Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 80.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 80.5,
+         "price": -120
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 19.5,
+         "price": -125
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Sal Cannella",
+         "name": "Over",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Sal Cannella",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Tanner Hudson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Tanner Hudson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:50Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -170
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:50Z",
+       "outcomes": [
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Under",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 13.5,
+         "price": -130
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 13.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2026-01-04T14:54:40Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 194.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 194.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 79.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 79.5,
+         "price": -115
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Over",
+         "point": 6.5,
+         "price": -140
+        },
+        {
+         "description": "Ja'Marr Chase",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Tee Higgins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Cedric Tillman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Andrei Iosivas",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Mike Gesicki",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Chase Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Chase Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Dylan Sampson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Samaje Perine",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Raheim Sanders",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Joe Burrow",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Shedeur Sanders",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2026-01-04T18:00:00Z",
+   "home_team": "Cincinnati Bengals",
+   "id": "dad5ec44b4df2b91138872aeb4454e1e",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2026-01-04T15:00:39Z",
+  "previous_timestamp": "2026-01-04T14:50:37Z",
+  "timestamp": "2026-01-04T14:55:37Z"
+ }
+}

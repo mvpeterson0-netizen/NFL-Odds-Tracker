@@ -1,0 +1,2712 @@
+{
+ "downloaded_utc": "2026-10-30T22:30:41Z",
+ "game_id": "2025_18_TEN_JAX",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2026-01-04T15:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Tennessee Titans",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2026-01-04T14:55:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:13Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 250.5,
+         "price": -113
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 250.5,
+         "price": -112
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 190.5,
+         "price": -113
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 190.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:13Z",
+       "outcomes": [
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -114
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 42.5,
+         "price": -114
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 34.5,
+         "price": -109
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 18.5,
+         "price": -109
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 15.5,
+         "price": -116
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 15.5,
+         "price": -108
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:13Z",
+       "outcomes": [
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -158
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 4.5,
+         "price": 124
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -142
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 4.5,
+         "price": 111
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -126
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 3.5,
+         "price": -101
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -146
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 3.5,
+         "price": 126
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 3.5,
+         "price": -162
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 137
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 3.5,
+         "price": -176
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -138
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -147
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:13Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 20.5,
+         "price": -111
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 20.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2026-01-04T14:54:37Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:22Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 249.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 249.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 192.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 192.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:22Z",
+       "outcomes": [
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 47.5,
+         "price": -120
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:22Z",
+       "outcomes": [
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 3.5,
+         "price": -180
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 140
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -190
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:22Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "theScore Bet"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2026-01-04T14:55:26Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:51Z",
+       "outcomes": [
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 191.5,
+         "price": -112
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 191.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 252.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 252.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:51Z",
+       "outcomes": [
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -112
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 58.5,
+         "price": -112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:51Z",
+       "outcomes": [
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -116
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -136
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 104
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -132
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 132
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -168
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -136
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 4.5,
+         "price": 108
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 140
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 126
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 3.5,
+         "price": 138
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 3.5,
+         "price": -176
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -142
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 3.5,
+         "price": 112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:51Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2026-01-04T14:55:14Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:02Z",
+       "outcomes": [
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 191.5,
+         "price": -114
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 246.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:02Z",
+       "outcomes": [
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 48.5,
+         "price": -121
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -122
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 43.5,
+         "price": -118
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 40.5,
+         "price": -117
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 33.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:02Z",
+       "outcomes": [
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -103
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 123
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 118
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -141
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -162
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -136
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -141
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:02Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 61.5,
+         "price": -117
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -122
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2026-01-04T14:55:01Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:56:00Z",
+       "outcomes": [
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 191.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 191.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 246.5,
+         "price": -117
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 246.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:56:00Z",
+       "outcomes": [
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 29.5,
+         "price": -117
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 29.5,
+         "price": -114
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -118
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 58.5,
+         "price": -113
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 43.5,
+         "price": -114
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 43.5,
+         "price": -117
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 40.5,
+         "price": -113
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 40.5,
+         "price": -118
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 48.5,
+         "price": -117
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 48.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:56:00Z",
+       "outcomes": [
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -136
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 123
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 125
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -136
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:56:00Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 61.5,
+         "price": -113
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 61.5,
+         "price": -118
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -118
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2026-01-04T14:54:59Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:14Z",
+       "outcomes": [
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 203.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 203.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 254.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 254.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:14Z",
+       "outcomes": [
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 40.5,
+         "price": -118
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 38.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 38.5,
+         "price": -118
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 13.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 44.5,
+         "price": -118
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "James Proche II",
+         "name": "Over",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "James Proche II",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 0.5,
+         "price": -118
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 0.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:14Z",
+       "outcomes": [
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "James Proche II",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "James Proche II",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 0.5,
+         "price": -145
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 0.5,
+         "price": 110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:14Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 64.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 64.5,
+         "price": -118
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 68.5,
+         "price": -118
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 8.5,
+         "price": -105
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2026-01-04T14:55:26Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 193.5,
+         "price": -127
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 193.5,
+         "price": -107
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 250.5,
+         "price": -127
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 250.5,
+         "price": -107
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 47.5,
+         "price": -120
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 39.5,
+         "price": -105
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 32.5,
+         "price": -127
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 32.5,
+         "price": -107
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 34.5,
+         "price": -114
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 42.5,
+         "price": -108
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 18.5,
+         "price": -114
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 14.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 14.5,
+         "price": -113
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -128
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -141
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -157
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 4.5,
+         "price": 118
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 3.5,
+         "price": 134
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 3.5,
+         "price": -179
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -143
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 3.5,
+         "price": 108
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -128
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 3.5,
+         "price": -185
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -164
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 62.5,
+         "price": -114
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 62.5,
+         "price": -117
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -111
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -121
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2026-01-04T14:55:15Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:58Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 248.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 248.5,
+         "price": -120
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 192.5,
+         "price": -125
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 192.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:58Z",
+       "outcomes": [
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -125
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 58.5,
+         "price": -120
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 47.5,
+         "price": -125
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "James Proche II",
+         "name": "Over",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "James Proche II",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 14.5,
+         "price": -125
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 8.5,
+         "price": -125
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 0.5,
+         "price": -120
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 0.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:58Z",
+       "outcomes": [
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:58Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 19.5,
+         "price": -125
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 13.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2026-01-04T14:54:47Z",
+     "markets": [
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:32Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2026-01-04T14:54:40Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 191.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 191.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 248.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 248.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "Jakobi Meyers",
+         "name": "Under",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Chimere Dike",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Over",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Tyjae Spears",
+         "name": "Under",
+         "point": 2.5,
+         "price": 135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2026-01-04T18:00:00Z",
+   "home_team": "Jacksonville Jaguars",
+   "id": "623e9172767ca231241e2313bbee095e",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2026-01-04T15:00:39Z",
+  "previous_timestamp": "2026-01-04T14:50:37Z",
+  "timestamp": "2026-01-04T14:55:37Z"
+ }
+}

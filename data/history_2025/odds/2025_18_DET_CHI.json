@@ -1,0 +1,2718 @@
+{
+ "downloaded_utc": "2026-10-30T22:30:43Z",
+ "game_id": "2025_18_DET_CHI",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2026-01-04T18:25:00Z",
+ "response": {
+  "data": {
+   "away_team": "Detroit Lions",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2026-01-04T18:20:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:38Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 254.5,
+         "price": -112
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 254.5,
+         "price": -112
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 242.5,
+         "price": -112
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 242.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:38Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 67.5,
+         "price": -111
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 67.5,
+         "price": -113
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 61.5,
+         "price": -113
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 61.5,
+         "price": -111
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 55.5,
+         "price": -113
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 55.5,
+         "price": -111
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 43.5,
+         "price": -114
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 35.5,
+         "price": -109
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 25.5,
+         "price": -113
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 25.5,
+         "price": -111
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -109
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 15.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:38Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 5.5,
+         "price": -129
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 5.5,
+         "price": 101
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 4.5,
+         "price": -127
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -133
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -166
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -127
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 3.5,
+         "price": -101
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -164
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 2.5,
+         "price": 124
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 2.5,
+         "price": -159
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 1.5,
+         "price": -153
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -144
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 113
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:38Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 62.5,
+         "price": -114
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 57.5,
+         "price": -114
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 57.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 46.5,
+         "price": -113
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 46.5,
+         "price": -111
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 38.5,
+         "price": -108
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 38.5,
+         "price": -116
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -109
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2026-01-04T18:20:28Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:45Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 238.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:45Z",
+       "outcomes": [
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 65.5,
+         "price": -120
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 65.5,
+         "price": -110
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:45Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 4.5,
+         "price": 130
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 4.5,
+         "price": -170
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:45Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 57.5,
+         "price": -120
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 57.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 37.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 37.5,
+         "price": -110
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "theScore Bet"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2026-01-04T18:20:12Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:40Z",
+       "outcomes": [
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 235.5,
+         "price": -112
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 235.5,
+         "price": -112
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 254.5,
+         "price": -112
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 254.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:40Z",
+       "outcomes": [
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 55.5,
+         "price": -112
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 55.5,
+         "price": -112
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 34.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:19:55Z",
+       "outcomes": [
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 2.5,
+         "price": -166
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -134
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -152
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -146
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": 114
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 1.5,
+         "price": -158
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 1.5,
+         "price": 124
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 4.5,
+         "price": 112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -142
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 106
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 4.5,
+         "price": 130
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 4.5,
+         "price": -166
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 5.5,
+         "price": -132
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 5.5,
+         "price": 104
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:40Z",
+       "outcomes": [
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 61.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2026-01-04T18:20:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:47Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 248.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 240.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:47Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 69.5,
+         "price": -117
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 36.5,
+         "price": -120
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 54.5,
+         "price": -122
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:47Z",
+       "outcomes": [
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 104
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 5.5,
+         "price": -148
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -134
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:47Z",
+       "outcomes": [
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 59.5,
+         "price": -122
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 58.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 36.5,
+         "price": -117
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 20.5,
+         "price": -117
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 49.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2026-01-04T18:20:25Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:48Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 248.5,
+         "price": -117
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 248.5,
+         "price": -114
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 240.5,
+         "price": -117
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 240.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:48Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 69.5,
+         "price": -113
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 69.5,
+         "price": -118
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 54.5,
+         "price": -118
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 54.5,
+         "price": -113
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:48Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 5.5,
+         "price": -141
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -129
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 107
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:48Z",
+       "outcomes": [
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 36.5,
+         "price": -113
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 36.5,
+         "price": -118
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 59.5,
+         "price": -118
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 59.5,
+         "price": -113
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 20.5,
+         "price": -113
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 20.5,
+         "price": -118
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 49.5,
+         "price": -114
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 49.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2026-01-04T18:20:24Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:58Z",
+       "outcomes": [
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 239.5,
+         "price": -121
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 239.5,
+         "price": -111
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 253.5,
+         "price": -114
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 253.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:58Z",
+       "outcomes": [
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 26.5,
+         "price": -118
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 56.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 28.5,
+         "price": -117
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 14.5,
+         "price": -113
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 62.5,
+         "price": -114
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 35.5,
+         "price": -121
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 35.5,
+         "price": -111
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 44.5,
+         "price": -114
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:58Z",
+       "outcomes": [
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -157
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 117
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -148
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": -102
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 4.5,
+         "price": -137
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -141
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 1.5,
+         "price": 112
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": 121
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 2.5,
+         "price": 113
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:58Z",
+       "outcomes": [
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 46.5,
+         "price": -114
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 37.5,
+         "price": -118
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 58.5,
+         "price": -114
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 62.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2026-01-04T18:20:26Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:27Z",
+       "outcomes": [
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 233.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 233.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 246.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 246.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:27Z",
+       "outcomes": [
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 57.5,
+         "price": -118
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 39.5,
+         "price": 100
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 27.5,
+         "price": -118
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Olamide Zaccheaus",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Olamide Zaccheaus",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:27Z",
+       "outcomes": [
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Olamide Zaccheaus",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Olamide Zaccheaus",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:27Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 41.5,
+         "price": -150
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 41.5,
+         "price": 110
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 59.5,
+         "price": -118
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 37.5,
+         "price": -118
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 37.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2026-01-04T18:20:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:35Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 254.5,
+         "price": -120
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 254.5,
+         "price": -120
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 240.5,
+         "price": -125
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 240.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:35Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 61.5,
+         "price": -125
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 55.5,
+         "price": -125
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Olamide Zaccheaus",
+         "name": "Over",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Olamide Zaccheaus",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 25.5,
+         "price": -125
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:35Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 5.5,
+         "price": -155
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:35Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 58.5,
+         "price": -120
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 58.5,
+         "price": -120
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 45.5,
+         "price": -125
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 36.5,
+         "price": -125
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2026-01-04T18:20:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:28Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 255.5,
+         "price": -110
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 255.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:28Z",
+       "outcomes": [
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:20:28Z",
+       "outcomes": [
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 3.5,
+         "price": 155
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 3.5,
+         "price": -220
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:20:28Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2026-01-04T18:19:39Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:19:48Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 254.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 254.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 238.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:19:48Z",
+       "outcomes": [
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 66.5,
+         "price": -115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 66.5,
+         "price": -115
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 43.5,
+         "price": -115
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 43.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T18:19:48Z",
+       "outcomes": [
+        {
+         "description": "Luther Burden III",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Luther Burden III",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "DJ Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Colston Loveland",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Isaac TeSlaa",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "Cole Kmet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T18:19:48Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Caleb Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Over",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "D'Andre Swift",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Kyle Monangai",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2026-01-04T21:25:00Z",
+   "home_team": "Chicago Bears",
+   "id": "1a5451b8f0d74f90937c52bec447dc40",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2026-01-04T18:25:37Z",
+  "previous_timestamp": "2026-01-04T18:15:37Z",
+  "timestamp": "2026-01-04T18:20:37Z"
+ }
+}

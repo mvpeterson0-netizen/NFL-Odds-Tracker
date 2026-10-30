@@ -1,0 +1,160 @@
+{
+ "downloaded_utc": "2026-10-30T22:30:46Z",
+ "game_id": "2025_18_NYJ_BUF",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2026-01-04T18:25:00Z",
+ "response": {
+  "data": {
+   "away_team": "New York Jets",
+   "bookmakers": [
+    {
+     "key": "betmgm",
+     "last_update": "2026-01-04T18:20:26Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:40Z",
+       "outcomes": [
+        {
+         "description": "Brady Cook",
+         "name": "Over",
+         "point": 157.5,
+         "price": -118
+        },
+        {
+         "description": "Brady Cook",
+         "name": "Under",
+         "point": 157.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:40Z",
+       "outcomes": [
+        {
+         "description": "Adonai Mitchell",
+         "name": "Over",
+         "point": 37.5,
+         "price": -118
+        },
+        {
+         "description": "Adonai Mitchell",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Isaiah Williams",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Isaiah Williams",
+         "name": "Under",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "John Metchie III",
+         "name": "Over",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "John Metchie III",
+         "name": "Under",
+         "point": 22.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2026-01-04T18:20:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T18:20:52Z",
+       "outcomes": [
+        {
+         "description": "Brady Cook",
+         "name": "Over",
+         "point": 159.5,
+         "price": -120
+        },
+        {
+         "description": "Brady Cook",
+         "name": "Under",
+         "point": 159.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T18:20:52Z",
+       "outcomes": [
+        {
+         "description": "Adonai Mitchell",
+         "name": "Over",
+         "point": 38.5,
+         "price": -120
+        },
+        {
+         "description": "Adonai Mitchell",
+         "name": "Under",
+         "point": 38.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Williams",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Williams",
+         "name": "Under",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "John Metchie III",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "John Metchie III",
+         "name": "Under",
+         "point": 23.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    }
+   ],
+   "commence_time": "2026-01-04T21:25:00Z",
+   "home_team": "Buffalo Bills",
+   "id": "bd5134e8440a2b12cc8ac98ab4f18093",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2026-01-04T18:25:37Z",
+  "previous_timestamp": "2026-01-04T18:15:37Z",
+  "timestamp": "2026-01-04T18:20:37Z"
+ }
+}

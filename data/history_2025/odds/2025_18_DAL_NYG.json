@@ -1,0 +1,466 @@
+{
+ "downloaded_utc": "2026-10-30T22:30:38Z",
+ "game_id": "2025_18_DAL_NYG",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2026-01-04T15:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Dallas Cowboys",
+   "bookmakers": [
+    {
+     "key": "betmgm",
+     "last_update": "2026-01-04T14:54:59Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2026-01-04T14:55:29Z",
+       "outcomes": [
+        {
+         "description": "Jaxson Dart",
+         "name": "Over",
+         "point": 213.5,
+         "price": -115
+        },
+        {
+         "description": "Jaxson Dart",
+         "name": "Under",
+         "point": 213.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:29Z",
+       "outcomes": [
+        {
+         "description": "Devin Singletary",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Over",
+         "point": 14.5,
+         "price": -118
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 69.5,
+         "price": -118
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Darius Slayton",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Darius Slayton",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Daniel Bellinger",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Bellinger",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:29Z",
+       "outcomes": [
+        {
+         "description": "Devin Singletary",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Under",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Daniel Bellinger",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Daniel Bellinger",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Darius Slayton",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Darius Slayton",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:29Z",
+       "outcomes": [
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 56.5,
+         "price": -118
+        },
+        {
+         "description": "Jaxson Dart",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Jaxson Dart",
+         "name": "Under",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Over",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Under",
+         "point": 60.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2026-01-04T14:55:15Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2026-01-04T14:55:21Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 68.5,
+         "price": -125
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Over",
+         "point": 14.5,
+         "price": -125
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 7.5,
+         "price": -125
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2026-01-04T14:55:21Z",
+       "outcomes": [
+        {
+         "description": "Devin Singletary",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Under",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2026-01-04T14:55:21Z",
+       "outcomes": [
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Tyrone Tracy Jr.",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Jaxson Dart",
+         "name": "Over",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Jaxson Dart",
+         "name": "Under",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Devin Singletary",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    }
+   ],
+   "commence_time": "2026-01-04T18:00:00Z",
+   "home_team": "New York Giants",
+   "id": "d48a44e7b45f563282fd042c2104da9b",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2026-01-04T15:00:39Z",
+  "previous_timestamp": "2026-01-04T14:50:37Z",
+  "timestamp": "2026-01-04T14:55:37Z"
+ }
+}
