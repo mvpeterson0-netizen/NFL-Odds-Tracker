@@ -1,0 +1,2999 @@
+{
+ "downloaded_utc": "2026-10-30T15:55:59Z",
+ "game_id": "2025_02_DEN_IND",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-09-14T17:05:00Z",
+ "response": {
+  "data": {
+   "away_team": "Denver Broncos",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 233.5,
+         "price": -112
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 233.5,
+         "price": -112
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 202.5,
+         "price": -111
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 202.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 61.5,
+         "price": -114
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 46.5,
+         "price": -109
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 44.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 32.5,
+         "price": -113
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 29.5,
+         "price": -114
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 21.5,
+         "price": -114
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -114
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -109
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 5.5,
+         "price": 107
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 5.5,
+         "price": -136
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -107
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": 111
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -142
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 3.5,
+         "price": -103
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 3.5,
+         "price": -124
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 2.5,
+         "price": -168
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 2.5,
+         "price": 131
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -146
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 114
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 111
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -142
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 116
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -141
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 75.5,
+         "price": -113
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 75.5,
+         "price": -111
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 48.5,
+         "price": -109
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 31.5,
+         "price": -109
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 28.5,
+         "price": -111
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 18.5,
+         "price": -116
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 18.5,
+         "price": -108
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 199.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 199.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 227.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 11.5,
+         "price": -135
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 11.5,
+         "price": 105
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 4.5,
+         "price": -195
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 4.5,
+         "price": 145
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 46.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 46.5,
+         "price": -110
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 76.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 76.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-09-14T16:59:09Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:59:25Z",
+       "outcomes": [
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 197.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 197.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 228.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 228.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:01:03Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 36.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 36.5,
+         "price": -110
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:01:03Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T16:59:25Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 76.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 76.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-09-14T16:57:10Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 229.5,
+         "price": -102
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 229.5,
+         "price": -135
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 201.5,
+         "price": -113
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 201.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 46.5,
+         "price": -116
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 44.5,
+         "price": -127
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 44.5,
+         "price": -107
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -128
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 21.5,
+         "price": -119
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 21.5,
+         "price": -111
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 29.5,
+         "price": -105
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 29.5,
+         "price": -130
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 32.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 37.5,
+         "price": -118
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 62.5,
+         "price": -116
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -127
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 3.5,
+         "price": -138
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -152
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -102
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 2.5,
+         "price": -164
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -119
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -137
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -138
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 48.5,
+         "price": 102
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 48.5,
+         "price": -137
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -122
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 29.5,
+         "price": -111
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 31.5,
+         "price": -102
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 31.5,
+         "price": -130
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 76.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 76.5,
+         "price": -122
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:57Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 229.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 229.5,
+         "price": -120
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 200.5,
+         "price": -120
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 200.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:57Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 36.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 36.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:57Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 5.5,
+         "price": -155
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:57Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 75.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 75.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 199.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 199.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 227.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 11.5,
+         "price": -140
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 11.5,
+         "price": 105
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 42.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 64.5,
+         "price": -118
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 18.5,
+         "price": -135
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 18.5,
+         "price": 100
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 76.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 76.5,
+         "price": -115
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 46.5,
+         "price": -118
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 46.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 30.5,
+         "price": -130
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-09-14T16:59:07Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:03Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 228.5,
+         "price": -112
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 228.5,
+         "price": -112
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 202.5,
+         "price": -112
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 202.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:03Z",
+       "outcomes": [
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 46.5,
+         "price": -108
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 46.5,
+         "price": -118
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 36.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 36.5,
+         "price": -112
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:03Z",
+       "outcomes": [
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -152
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Over",
+         "point": 3.5,
+         "price": 108
+        },
+        {
+         "description": "Evan Engram",
+         "name": "Under",
+         "point": 3.5,
+         "price": -136
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 2.5,
+         "price": -152
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -126
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -102
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -136
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": 108
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": 106
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -128
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 116
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -148
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -106
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:03Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 76.5,
+         "price": -112
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 76.5,
+         "price": -112
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 223.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 200.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 31.5,
+         "price": -117
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 11.5,
+         "price": -107
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 43.5,
+         "price": -117
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 46.5,
+         "price": -113
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 64.5,
+         "price": -114
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 35.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -134
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -132
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -121
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -132
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 5.5,
+         "price": 106
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 47.5,
+         "price": -117
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 74.5,
+         "price": -114
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-09-14T16:59:08Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:50Z",
+       "outcomes": [
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 200.5,
+         "price": -115
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 200.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 223.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 223.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:50Z",
+       "outcomes": [
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 35.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 35.5,
+         "price": -113
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 64.5,
+         "price": -114
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 43.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 43.5,
+         "price": -113
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 11.5,
+         "price": -109
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 11.5,
+         "price": -122
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 31.5,
+         "price": -117
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 31.5,
+         "price": -114
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 14.5,
+         "price": -113
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 14.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 46.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 46.5,
+         "price": -117
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 31.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:50Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 5.5,
+         "price": -139
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 1.5,
+         "price": -136
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 1.5,
+         "price": 102
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": -134
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 3.5,
+         "price": 133
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 3.5,
+         "price": -180
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -122
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -109
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Over",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Tyler Warren",
+         "name": "Under",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 3.5,
+         "price": -134
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 118
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -157
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:50Z",
+       "outcomes": [
+        {
+         "description": "RJ Harvey",
+         "name": "Over",
+         "point": 30.5,
+         "price": -121
+        },
+        {
+         "description": "RJ Harvey",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Over",
+         "point": 29.5,
+         "price": -114
+        },
+        {
+         "description": "Daniel Jones",
+         "name": "Under",
+         "point": 29.5,
+         "price": -117
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 74.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 74.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": -113
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Over",
+         "point": 47.5,
+         "price": -118
+        },
+        {
+         "description": "J.K. Dobbins",
+         "name": "Under",
+         "point": 47.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    }
+   ],
+   "commence_time": "2025-09-14T20:06:00Z",
+   "home_team": "Indianapolis Colts",
+   "id": "e217b38ef8bc6e98d3512cb42b90782e",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-09-14T17:05:38Z",
+  "previous_timestamp": "2025-09-14T16:55:38Z",
+  "timestamp": "2025-09-14T17:00:38Z"
+ }
+}

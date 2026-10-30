@@ -1,0 +1,3299 @@
+{
+ "downloaded_utc": "2026-10-30T15:55:55Z",
+ "game_id": "2025_02_SEA_PIT",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-09-14T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Seattle Seahawks",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-09-14T13:54:45Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 229.5,
+         "price": -113
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 229.5,
+         "price": -111
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 199.5,
+         "price": -111
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 199.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 67.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 67.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 38.5,
+         "price": -114
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 38.5,
+         "price": -110
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 31.5,
+         "price": -113
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -114
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -111
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -111
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -113
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 19.5,
+         "price": -109
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 14.5,
+         "price": -111
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 14.5,
+         "price": -113
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 12.5,
+         "price": -117
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 12.5,
+         "price": -107
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 11.5,
+         "price": -111
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 11.5,
+         "price": -113
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 10.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 6.5,
+         "price": 119
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 6.5,
+         "price": -152
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -139
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 109
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -124
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -103
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -147
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -148
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 116
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -147
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -164
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 131
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 1.5,
+         "price": -179
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 1.5,
+         "price": 139
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -131
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 103
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 49.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 49.5,
+         "price": -111
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 47.5,
+         "price": -111
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 47.5,
+         "price": -113
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 42.5,
+         "price": -109
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 28.5,
+         "price": -114
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -118
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -107
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 201.5,
+         "price": -115
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 201.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 235.5,
+         "price": 120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 235.5,
+         "price": -160
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 65.5,
+         "price": -125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 65.5,
+         "price": -105
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 20.5,
+         "price": -105
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 68.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 5.5,
+         "price": -155
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": 140
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 43.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 43.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -105
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 45.5,
+         "price": -140
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 45.5,
+         "price": 105
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-09-14T13:54:47Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:54:59Z",
+       "outcomes": [
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 197.5,
+         "price": -115
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 197.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 227.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:54:59Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:54:59Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 6.5,
+         "price": 125
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 6.5,
+         "price": -160
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:54:59Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-09-14T13:55:05Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 197.5,
+         "price": -114
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 197.5,
+         "price": -116
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 227.5,
+         "price": -105
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 227.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -130
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -116
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 70.5,
+         "price": -116
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 70.5,
+         "price": -114
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 14.5,
+         "price": 105
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 14.5,
+         "price": -138
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 19.5,
+         "price": -105
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 19.5,
+         "price": -128
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 38.5,
+         "price": -118
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 38.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 67.5,
+         "price": -116
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 11.5,
+         "price": -114
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 32.5,
+         "price": -116
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 32.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 1.5,
+         "price": 122
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -172
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 5.5,
+         "price": -185
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 5.5,
+         "price": 127
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -122
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -149
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -159
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -152
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 28.5,
+         "price": -111
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 28.5,
+         "price": -119
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 49.5,
+         "price": -108
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 47.5,
+         "price": -113
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 47.5,
+         "price": -120
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -118
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -112
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 43.5,
+         "price": -102
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 43.5,
+         "price": -135
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 227.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 227.5,
+         "price": -120
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 198.5,
+         "price": -120
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 198.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 38.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 38.5,
+         "price": -120
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 31.5,
+         "price": -125
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 14.5,
+         "price": -125
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 11.5,
+         "price": -125
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 6.5,
+         "price": -160
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 47.5,
+         "price": -125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-09-14T13:54:45Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:15Z",
+       "outcomes": [
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 201.5,
+         "price": -115
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 201.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 235.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 235.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:15Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 65.5,
+         "price": -130
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 65.5,
+         "price": 100
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 39.5,
+         "price": -105
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 13.5,
+         "price": -135
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 13.5,
+         "price": 100
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 33.5,
+         "price": 110
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 33.5,
+         "price": -145
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 68.5,
+         "price": -118
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 20.5,
+         "price": -105
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 10.5,
+         "price": -118
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 11.5,
+         "price": -125
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 11.5,
+         "price": -105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Under",
+         "point": 14.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:15Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 5.5,
+         "price": -165
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 5.5,
+         "price": 125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 1.5,
+         "price": -200
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 1.5,
+         "price": 150
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": 140
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": -190
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Tory Horton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:15Z",
+       "outcomes": [
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -105
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 45.5,
+         "price": -118
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 43.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 43.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:12Z",
+       "outcomes": [
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 196.5,
+         "price": -112
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 196.5,
+         "price": -112
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 226.5,
+         "price": -112
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 226.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:12Z",
+       "outcomes": [
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -112
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 9.5,
+         "price": -112
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 37.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:12Z",
+       "outcomes": [
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 134
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -172
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": 150
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": -192
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 114
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -144
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -156
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 122
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -104
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -122
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -136
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 108
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -116
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -128
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 5.5,
+         "price": -134
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 5.5,
+         "price": 106
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 126
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 126
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:12Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -112
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 46.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 46.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 226.5,
+         "price": -114
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 194.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 66.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -117
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 32.5,
+         "price": -114
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 25.5,
+         "price": -117
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 70.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -139
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -134
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -121
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": 150
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -134
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 133
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 5.5,
+         "price": -152
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 45.5,
+         "price": -114
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 42.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-09-14T13:53:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 226.5,
+         "price": -114
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 226.5,
+         "price": -115
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 194.5,
+         "price": -114
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 194.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 9.5,
+         "price": -121
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 12.5,
+         "price": -113
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 12.5,
+         "price": -118
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 38.5,
+         "price": -117
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 38.5,
+         "price": -114
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 66.5,
+         "price": -117
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 66.5,
+         "price": -114
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 25.5,
+         "price": -118
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 25.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 13.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 13.5,
+         "price": -118
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 70.5,
+         "price": -113
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 70.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -122
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -109
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -162
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 3.5,
+         "price": 104
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 3.5,
+         "price": -137
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "AJ Barner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -177
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 1.5,
+         "price": -136
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 1.5,
+         "price": 102
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Over",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Cooper Kupp",
+         "name": "Under",
+         "point": 3.5,
+         "price": -148
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 5.5,
+         "price": -155
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 5.5,
+         "price": 116
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": 150
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": -141
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": 106
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": -134
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": 102
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Walker III",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Over",
+         "point": 9.5,
+         "price": -121
+        },
+        {
+         "description": "Sam Darnold",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 49.5,
+         "price": -117
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 49.5,
+         "price": -114
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 28.5,
+         "price": -117
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 28.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    }
+   ],
+   "commence_time": "2025-09-14T17:01:00Z",
+   "home_team": "Pittsburgh Steelers",
+   "id": "82f9fd7001598d5cf9c1bdd57c66cae4",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-09-14T14:00:38Z",
+  "previous_timestamp": "2025-09-14T13:50:38Z",
+  "timestamp": "2025-09-14T13:55:38Z"
+ }
+}

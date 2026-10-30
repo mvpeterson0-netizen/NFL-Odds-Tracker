@@ -1,0 +1,2885 @@
+{
+ "downloaded_utc": "2026-10-30T15:55:52Z",
+ "game_id": "2025_02_LA_TEN",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-09-14T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Los Angeles Rams",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-09-14T13:54:45Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:54:40Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 235.5,
+         "price": -113
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 235.5,
+         "price": -111
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 200.5,
+         "price": -113
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Under",
+         "point": 200.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:54:40Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 82.5,
+         "price": -111
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 82.5,
+         "price": -113
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 56.5,
+         "price": -113
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 56.5,
+         "price": -111
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 32.5,
+         "price": -114
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 29.5,
+         "price": -111
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -108
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -116
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -108
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -116
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -108
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -116
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -111
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:54:40Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -134
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 113
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -123
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -104
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 108
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -138
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -162
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 126
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 121
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -174
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 136
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -169
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 132
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -161
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 126
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:54:40Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -114
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Under",
+         "point": 11.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 202.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 202.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 54.5,
+         "price": -130
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 54.5,
+         "price": 100
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 80.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 80.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Over",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Over",
+         "point": 1.5,
+         "price": 180
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Under",
+         "point": 1.5,
+         "price": -240
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 8.5,
+         "price": -135
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 8.5,
+         "price": 105
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-09-14T13:54:47Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 236.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 236.5,
+         "price": -115
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 198.5,
+         "price": -115
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Under",
+         "point": 198.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 7.5,
+         "price": 120
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 7.5,
+         "price": -150
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 130
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 5.5,
+         "price": -170
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 66.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 66.5,
+         "price": -115
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-09-14T13:55:05Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:04Z",
+       "outcomes": [
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 198.5,
+         "price": -114
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 198.5,
+         "price": -116
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 236.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 236.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:04Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 61.5,
+         "price": -130
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 61.5,
+         "price": -105
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -116
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 18.5,
+         "price": -119
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 18.5,
+         "price": -111
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -116
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -116
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -114
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 56.5,
+         "price": -114
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 56.5,
+         "price": -116
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 83.5,
+         "price": -116
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 83.5,
+         "price": -114
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 29.5,
+         "price": -116
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 33.5,
+         "price": 100
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 33.5,
+         "price": -135
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:04Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -169
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -164
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -121
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -170
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 6.5,
+         "price": 113
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 107
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 5.5,
+         "price": -137
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:04Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -112
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 11.5,
+         "price": -114
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 75.5,
+         "price": -121
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 75.5,
+         "price": -111
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:30Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 237.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 237.5,
+         "price": -120
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 200.5,
+         "price": -120
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 200.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:30Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 83.5,
+         "price": -120
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 83.5,
+         "price": -125
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:30Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -155
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 5.5,
+         "price": -165
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:30Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -125
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 66.5,
+         "price": -120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 66.5,
+         "price": -125
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 11.5,
+         "price": -130
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-09-14T13:54:45Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 202.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 202.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 59.5,
+         "price": -118
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 80.5,
+         "price": -118
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 80.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 54.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 54.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Over",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -140
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Over",
+         "point": 1.5,
+         "price": 180
+        },
+        {
+         "description": "Gunnar Helm",
+         "name": "Under",
+         "point": 1.5,
+         "price": -250
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 67.5,
+         "price": -118
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:09Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 235.5,
+         "price": -112
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 235.5,
+         "price": -112
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 196.5,
+         "price": -112
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 196.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:09Z",
+       "outcomes": [
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -112
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -112
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 85.5,
+         "price": -112
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 85.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 55.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 55.5,
+         "price": -112
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 33.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:09Z",
+       "outcomes": [
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -154
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -158
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 124
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -134
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -138
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 108
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -158
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 124
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 126
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 5.5,
+         "price": -160
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -164
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 6.5,
+         "price": 128
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -166
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -142
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:09Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Over",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Cam Ward",
+         "name": "Under",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 75.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 75.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:08Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 234.5,
+         "price": -113
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 199.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:08Z",
+       "outcomes": [
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 57.5,
+         "price": -114
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -117
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 85.5,
+         "price": -115
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 35.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:08Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -139
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 123
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -186
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -113
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 116
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:08Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 66.5,
+         "price": -117
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 10.5,
+         "price": -109
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 76.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-09-14T13:53:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 234.5,
+         "price": -114
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 234.5,
+         "price": -117
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 199.5,
+         "price": -114
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Under",
+         "point": 199.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 85.5,
+         "price": -117
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 85.5,
+         "price": -114
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -121
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 55.5,
+         "price": -117
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 55.5,
+         "price": -114
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 35.5,
+         "price": -114
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 123
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 5.5,
+         "price": -162
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Chigoziem Okonkwo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -152
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Over",
+         "point": 4.5,
+         "price": -109
+        },
+        {
+         "description": "Calvin Ridley",
+         "name": "Under",
+         "point": 4.5,
+         "price": -122
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -114
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 1.5,
+         "price": 128
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -186
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 138
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 6.5,
+         "price": -141
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 6.5,
+         "price": 106
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Over",
+         "point": 2.5,
+         "price": -157
+        },
+        {
+         "description": "Elic Ayomanor",
+         "name": "Under",
+         "point": 2.5,
+         "price": 117
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Tony Pollard",
+         "name": "Over",
+         "point": 66.5,
+         "price": -118
+        },
+        {
+         "description": "Tony Pollard",
+         "name": "Under",
+         "point": 66.5,
+         "price": -113
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Over",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Cameron Ward",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 76.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 76.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    }
+   ],
+   "commence_time": "2025-09-14T17:01:00Z",
+   "home_team": "Tennessee Titans",
+   "id": "0e6f68b30237afc04d1517a193213a65",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-09-14T14:00:38Z",
+  "previous_timestamp": "2025-09-14T13:50:38Z",
+  "timestamp": "2025-09-14T13:55:38Z"
+ }
+}

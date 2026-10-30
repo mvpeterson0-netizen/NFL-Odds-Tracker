@@ -1,0 +1,2862 @@
+{
+ "downloaded_utc": "2026-10-30T15:55:48Z",
+ "game_id": "2025_02_BUF_NYJ",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-09-14T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Buffalo Bills",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-09-14T13:54:45Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 226.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 226.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 60.5,
+         "price": -111
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 60.5,
+         "price": -113
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 46.5,
+         "price": -109
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 43.5,
+         "price": -114
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 30.5,
+         "price": -111
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 14.5,
+         "price": -109
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -106
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 103
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -132
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 122
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -156
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -109
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -116
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -157
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 129
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -166
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 61.5,
+         "price": -114
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 59.5,
+         "price": -109
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 17.5,
+         "price": -114
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 226.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 226.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -105
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -125
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:16Z",
+       "outcomes": [
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 57.5,
+         "price": -145
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 57.5,
+         "price": 110
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Ty Johnson",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Ty Johnson",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-09-14T13:54:45Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 226.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 226.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 33.5,
+         "price": -118
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 42.5,
+         "price": -118
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Johnson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Allen Lazard",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:10Z",
+       "outcomes": [
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 57.5,
+         "price": -130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 57.5,
+         "price": -105
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 33.5,
+         "price": -118
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 60.5,
+         "price": -118
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Ty Johnson",
+         "name": "Over",
+         "point": 13.5,
+         "price": -118
+        },
+        {
+         "description": "Ty Johnson",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-09-14T13:54:47Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:54:08Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 233.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 233.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:54:08Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -110
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:54:08Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:54:08Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-09-14T13:55:05Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 231.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 231.5,
+         "price": -121
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 21.5,
+         "price": -118
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 44.5,
+         "price": -116
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 47.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 47.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 31.5,
+         "price": -116
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 31.5,
+         "price": -114
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -106
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -108
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -127
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -159
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -143
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -111
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -119
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:05Z",
+       "outcomes": [
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 61.5,
+         "price": -121
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 17.5,
+         "price": -119
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 17.5,
+         "price": -111
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 35.5,
+         "price": -113
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 58.5,
+         "price": -118
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 58.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 231.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 231.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 47.5,
+         "price": -125
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 14.5,
+         "price": -125
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 11.5,
+         "price": -125
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 57.5,
+         "price": -125
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 35.5,
+         "price": -125
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 231.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 231.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 59.5,
+         "price": -112
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 59.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 116
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -148
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Over",
+         "point": 1.5,
+         "price": 112
+        },
+        {
+         "description": "Dawson Knox",
+         "name": "Under",
+         "point": 1.5,
+         "price": -142
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -128
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 106
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -134
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 33.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-09-14T13:54:50Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 230.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 230.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 60.5,
+         "price": -105
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 60.5,
+         "price": -125
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 50.5,
+         "price": -120
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 20.5,
+         "price": -105
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 10.5,
+         "price": -130
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 10.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 3.5,
+         "price": 185
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 3.5,
+         "price": -250
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Mason Taylor",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 55.5,
+         "price": -125
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 55.5,
+         "price": -105
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 35.5,
+         "price": -105
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 35.5,
+         "price": -125
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 15.5,
+         "price": -130
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 15.5,
+         "price": 100
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-09-14T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 227.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -113
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -113
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 34.5,
+         "price": -117
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 62.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 19.5,
+         "price": -113
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 44.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -103
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 18.5,
+         "price": -109
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 59.5,
+         "price": -117
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 62.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-09-14T13:53:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T13:53:57Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 227.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T13:53:57Z",
+       "outcomes": [
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 44.5,
+         "price": -114
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 44.5,
+         "price": -117
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 62.5,
+         "price": -114
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 62.5,
+         "price": -117
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -114
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -117
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 34.5,
+         "price": -118
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 34.5,
+         "price": -113
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -114
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -117
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 19.5,
+         "price": -114
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 19.5,
+         "price": -117
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 32.5,
+         "price": -113
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 32.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T13:53:57Z",
+       "outcomes": [
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 2.5,
+         "price": -104
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 2.5,
+         "price": -129
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -159
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -139
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -103
+        },
+        {
+         "description": "Garrett Wilson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -132
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Over",
+         "point": 2.5,
+         "price": -132
+        },
+        {
+         "description": "Joshua Palmer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -103
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T13:53:57Z",
+       "outcomes": [
+        {
+         "description": "Braelon Allen",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Braelon Allen",
+         "name": "Under",
+         "point": 18.5,
+         "price": -121
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 59.5,
+         "price": -118
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 59.5,
+         "price": -113
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Breece Hall",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 37.5,
+         "price": -117
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 37.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    }
+   ],
+   "commence_time": "2025-09-14T17:01:00Z",
+   "home_team": "New York Jets",
+   "id": "cd0fd9335b5182d3bfed35ab8d5ab6fb",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-09-14T14:00:38Z",
+  "previous_timestamp": "2025-09-14T13:50:38Z",
+  "timestamp": "2025-09-14T13:55:38Z"
+ }
+}

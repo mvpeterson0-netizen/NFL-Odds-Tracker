@@ -1,0 +1,2963 @@
+{
+ "downloaded_utc": "2026-10-30T15:55:58Z",
+ "game_id": "2025_02_CAR_ARI",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-09-14T17:05:00Z",
+ "response": {
+  "data": {
+   "away_team": "Carolina Panthers",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 220.5,
+         "price": -113
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 220.5,
+         "price": -111
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 210.5,
+         "price": -113
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 210.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 63.5,
+         "price": -111
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 63.5,
+         "price": -113
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 59.5,
+         "price": -114
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 58.5,
+         "price": -113
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 58.5,
+         "price": -111
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -114
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 25.5,
+         "price": -109
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 25.5,
+         "price": -116
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 17.5,
+         "price": -114
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -108
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -116
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 102
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -130
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 119
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -153
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -103
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -124
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 121
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -154
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -138
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -127
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -108
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 114
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -146
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T16:59:56Z",
+       "outcomes": [
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 71.5,
+         "price": -110
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 71.5,
+         "price": -114
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 36.5,
+         "price": -111
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 36.5,
+         "price": -113
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 29.5,
+         "price": -109
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 17.5,
+         "price": -108
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 17.5,
+         "price": -116
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 216.5,
+         "price": -115
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 216.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 201.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 201.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -125
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -185
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:58Z",
+       "outcomes": [
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -130
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 34.5,
+         "price": 100
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-09-14T16:59:09Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:58:56Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 218.5,
+         "price": -115
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 218.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 204.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:24Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:24Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -135
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:24Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-09-14T16:57:10Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 204.5,
+         "price": -114
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 204.5,
+         "price": -116
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 219.5,
+         "price": -115
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 219.5,
+         "price": -116
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 60.5,
+         "price": -116
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 60.5,
+         "price": -114
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 24.5,
+         "price": -119
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 56.5,
+         "price": -116
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 14.5,
+         "price": -111
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 14.5,
+         "price": -119
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -108
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 24.5,
+         "price": -127
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 21.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 15.5,
+         "price": -114
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 15.5,
+         "price": -116
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -133
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 118
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 118
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 100
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -138
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -164
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -128
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -154
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -121
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T16:58:34Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 63.5,
+         "price": -116
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 63.5,
+         "price": -114
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 28.5,
+         "price": -118
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 70.5,
+         "price": -108
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 36.5,
+         "price": -111
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 36.5,
+         "price": -121
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:54Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 217.5,
+         "price": -120
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 217.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 204.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 204.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:54Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 56.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:54Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:54Z",
+       "outcomes": [
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 36.5,
+         "price": -120
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 36.5,
+         "price": -125
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 216.5,
+         "price": -115
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 216.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 201.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 201.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 58.5,
+         "price": -118
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 53.5,
+         "price": -118
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 12.5,
+         "price": -118
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -125
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -185
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:43Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -118
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-09-14T16:59:07Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:41Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 203.5,
+         "price": -112
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 203.5,
+         "price": -112
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 217.5,
+         "price": -112
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 217.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:41Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 55.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 55.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 20.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 20.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:41Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 130
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -166
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -106
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -122
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -142
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -108
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -136
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -128
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 126
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 122
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -156
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:41Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 69.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-09-14T17:00:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 217.5,
+         "price": -114
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 202.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 24.5,
+         "price": -114
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 20.5,
+         "price": -113
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 57.5,
+         "price": -114
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 61.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 25.5,
+         "price": -117
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 15.5,
+         "price": -108
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -141
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 117
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 104
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -109
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T16:59:36Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 63.5,
+         "price": -117
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -117
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-09-14T16:59:08Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-09-14T17:00:51Z",
+       "outcomes": [
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 217.5,
+         "price": -115
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 217.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 202.5,
+         "price": -114
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 202.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-09-14T17:00:51Z",
+       "outcomes": [
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 20.5,
+         "price": -117
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 57.5,
+         "price": -114
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 15.5,
+         "price": -121
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 25.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 25.5,
+         "price": -113
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 63.5,
+         "price": -117
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 63.5,
+         "price": -114
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 61.5,
+         "price": -114
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-09-14T17:00:51Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -141
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": 107
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": 112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": -132
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -103
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 2.5,
+         "price": -121
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -152
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-09-14T17:00:51Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 14.5,
+         "price": -114
+        },
+        {
+         "description": "James Conner",
+         "name": "Over",
+         "point": 67.5,
+         "price": -117
+        },
+        {
+         "description": "James Conner",
+         "name": "Under",
+         "point": 67.5,
+         "price": -114
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Over",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "Kyler Murray",
+         "name": "Under",
+         "point": 28.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 63.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 63.5,
+         "price": -113
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -118
+        },
+        {
+         "description": "Trey Benson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    }
+   ],
+   "commence_time": "2025-09-14T20:05:00Z",
+   "home_team": "Arizona Cardinals",
+   "id": "7e2ad5ef04493526707e0868f7b70c47",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-09-14T17:05:38Z",
+  "previous_timestamp": "2025-09-14T16:55:38Z",
+  "timestamp": "2025-09-14T17:00:38Z"
+ }
+}
