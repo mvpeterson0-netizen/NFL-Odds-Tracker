@@ -311,6 +311,38 @@
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">Bet ${t.side === "over" ? "Over" : "Under"}</span>`;
   const recLine = (t) => `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
 
+  // "Add all to FanDuel slip" (Michael 2026-10-29): one link that puts the rule's bet side for every listed player
+  // (the rows shown, top 40) on the FanDuel bet slip. FanDuel takes several bets in one addToBetslip link as
+  // marketId[i]=…&selectionId[i]=… (Michael's iPhone test 2026-10-29: 3 bets all landed; repeated or comma-separated
+  // parameters did not work). Each bet uses FanDuel's own current line. Players without a FanDuel link in the latest
+  // pull, or whose game has started, are left out and named. Tapping also saves the picks to My picks (one save).
+  const FD_SLIP = /^https:\/\/sportsbook\.fanduel\.com\/addToBetslip\?/;
+  function fdSlip(t, rows) {
+    const now = Date.now(), side = t.side === "over" ? "o" : "u", legs = [], missing = [];
+    for (const x of rows) {
+      const { p, r, mid } = x.c;
+      const e = ((((D.links || {})[p.id] || {})[mid]) || {}).fanduel, o = e && e[side], g = e && D.games[e.gid];
+      let m = null, sel = null;
+      if (o && FD_SLIP.test(o.url || "") && g && e.gid === r.gid && new Date(g.ko).getTime() > now) {
+        try { const u = new URL(o.url); m = u.searchParams.get("marketId"); sel = u.searchParams.get("selectionId"); } catch (err) { m = sel = null; }
+      }
+      if (m && sel && /^[\d.]+$/.test(m) && /^\d+$/.test(sel)) legs.push({ pid: p.id, mid, side, m, sel, bet: { line: e.point, odds: o.price, cap: e.cap, gid: e.gid, book: "FanDuel", src: "Bet on FD" } });
+      else missing.push(`${p.name} (${mkt[mid].label})`);
+    }
+    const url = "https://sportsbook.fanduel.com/addToBetslip?" + legs.map((l, i) => `marketId[${i}]=${l.m}&selectionId[${i}]=${l.sel}`).join("&");
+    return { legs, missing, url };
+  }
+  function fdSlipBox(t, rows) {
+    const f = fdSlip(t, rows); RL.fdLegs = f.legs;
+    if (!f.legs.length) return "";
+    const word = t.side === "over" ? "Over" : "Under";
+    return `<div class="betbox rl-fd"><a class="betbtn" href="${esc(f.url)}" target="_blank" rel="noopener" data-fdall="${esc(t.id)}" title="Opens FanDuel with all ${f.legs.length} bets on the slip">Add all ${f.legs.length} ${word}s to FanDuel slip ↗</a>${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}</div>`;
+  }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[data-fdall]"); if (!b || !window.STIX_PICKS) return;
+    try { window.STIX_PICKS.recordBets(RL.fdLegs || []); } catch (err) { console.error("picks from FanDuel slip failed", err); }
+  });
+
   function body() {
     const t = visibleTabs().find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
@@ -319,6 +351,7 @@
     if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
     const heads = HEADS[t.id];
+    h += fdSlipBox(t, list.slice(0, 40));
     h += `<div class="panel rlist">`;
     for (const x of list.slice(0, 40)) {
       const { p, r, mid, cur } = x.c;

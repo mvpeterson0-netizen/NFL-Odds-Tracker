@@ -246,18 +246,47 @@
   }
   // A tap on a sportsbook bet button ("Bet on FanDuel") also saves the pick (only on devices where My picks is set up), at
   // the line and odds from the link. Never removes or flips silently: it always records the side that was tapped.
-  function recordBet(pid, mid, side, bet) {
-    if (!enabled() || !bet || bet.line == null) return;
+  function betPick(pid, mid, side, bet) {
+    if (!bet || bet.line == null) return null;
     const r = nextRow(pid);
-    if (!r || started(r.ko) || (bet.gid && bet.gid !== r.gid)) return;
+    if (!r || started(r.ko) || (bet.gid && bet.gid !== r.gid)) return null;
     const id = `${r.wk}|${pid}|${mid}`;
     const t = new Date().toISOString();
     const p = playerById[pid];
-    const pick = { id, pid, name: p.name, pos: p.pos, gid: r.gid, wk: r.wk, mid, side, line: bet.line, odds: bet.odds,
+    return { id, pid, name: p.name, pos: p.pos, gid: r.gid, wk: r.wk, mid, side, line: bet.line, odds: bet.odds,
       book: bet.book || "DraftKings", src: bet.src || "Bet on DK", cap: bet.cap, ko: r.ko, picked_utc: t, updated_utc: t };
+  }
+  function recordBet(pid, mid, side, bet) {
+    if (!enabled()) return;
+    const pick = betPick(pid, mid, side, bet);
+    if (!pick) return;
     if (mode() === "acct") { acSave(pick, pick.src); return; }
-    ST.picks = ST.picks.filter((x) => x.id !== id).concat(pick);
+    ST.picks = ST.picks.filter((x) => x.id !== pick.id).concat(pick);
     ST.dirty = true; saveCache(); ghSync();
+  }
+  // Research "Add all to FanDuel slip": record every pick from one tap in a single save (one request for an account,
+  // one GitHub sync), so they all go through before the phone switches to FanDuel. Same rules as recordBet per pick.
+  function recordBets(list) {
+    if (!enabled()) return 0;
+    const picks = list.map((x) => betPick(x.pid, x.mid, x.side, x.bet)).filter(Boolean);
+    if (!picks.length) return 0;
+    const ids = new Set(picks.map((p) => p.id));
+    if (mode() === "acct") { acSaveMany(picks, ids); return picks.length; }
+    ST.picks = ST.picks.filter((x) => !ids.has(x.id)).concat(picks);
+    ST.dirty = true; saveCache(); ghSync();
+    return picks.length;
+  }
+  async function acSaveMany(picks, ids) {
+    const before = AC.picks;
+    AC.picks = AC.picks.filter((p) => !ids.has(p.id)).concat(picks.map((p) => Object.assign({}, p, { saving: true })));
+    AC.saving++; AC.err = ""; rerender();
+    const r = await ACC().db("/rest/v1/picks?on_conflict=user_id,pick_key", { method: "POST", body: picks.map((p) => toRow(p, p.src)), prefer: "resolution=merge-duplicates,return=representation" });
+    AC.saving--;
+    if (r.ok && Array.isArray(r.data)) {
+      const got = r.data.map(fromRow), gotIds = new Set(got.map((p) => p.id));
+      AC.picks = AC.picks.filter((p) => !gotIds.has(p.id)).concat(got);
+    } else { AC.picks = before; AC.err = `Picks not saved: ${r.error}`; }
+    rerender();
   }
   function removePick(id) {
     if (mode() === "acct") { const old = AC.picks.find((p) => p.id === id); if (old && !started(old.ko)) acDelete(id); return; }
@@ -466,7 +495,7 @@
   }
   const pickFor = (key) => (mode() === "acct" ? AC.picks.find((p) => p.id === key) || null : null);
   const acctReady = () => mode() === "acct" && AC.loaded;
-  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
+  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
   // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
   if (ACC()) ACC().onChange(() => {
     if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }
