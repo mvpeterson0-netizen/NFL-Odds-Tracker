@@ -1,0 +1,2747 @@
+{
+ "downloaded_utc": "2026-10-30T19:30:50Z",
+ "game_id": "2025_11_SF_ARI",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-11-16T18:05:00Z",
+ "response": {
+  "data": {
+   "away_team": "San Francisco 49ers",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-11-16T17:59:48Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T18:00:12Z",
+       "outcomes": [
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 253.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 253.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 228.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 228.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T18:00:12Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 77.5,
+         "price": -114
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 77.5,
+         "price": -110
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 50.5,
+         "price": -111
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 50.5,
+         "price": -113
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 50.5,
+         "price": -114
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 49.5,
+         "price": -111
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 49.5,
+         "price": -113
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 46.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 46.5,
+         "price": -110
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 38.5,
+         "price": -112
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 38.5,
+         "price": -112
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 30.5,
+         "price": -109
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T18:00:12Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -147
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": -103
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -124
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": -116
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 4.5,
+         "price": 127
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 4.5,
+         "price": -162
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -162
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 127
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 132
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -169
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T18:00:12Z",
+       "outcomes": [
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 72.5,
+         "price": -111
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 72.5,
+         "price": -113
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 39.5,
+         "price": -108
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 39.5,
+         "price": -116
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 22.5,
+         "price": -117
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 22.5,
+         "price": -107
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -117
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 17.5,
+         "price": -107
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 7.5,
+         "price": -106
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-11-16T18:00:15Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T18:00:52Z",
+       "outcomes": [
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 229.5,
+         "price": -105
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 229.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T18:00:52Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 76.5,
+         "price": -120
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 76.5,
+         "price": -110
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 46.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 46.5,
+         "price": -110
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 52.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T18:00:52Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -145
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T18:00:52Z",
+       "outcomes": [
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-11-16T17:49:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T18:00:26Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 229.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 229.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 253.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 253.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T18:00:26Z",
+       "outcomes": [
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 0.5,
+         "price": 110
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 0.5,
+         "price": -150
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 79.5,
+         "price": -110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 79.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 44.5,
+         "price": -145
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 44.5,
+         "price": 110
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 48.5,
+         "price": -110
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 48.5,
+         "price": -118
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 47.5,
+         "price": -118
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T18:00:26Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": -105
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -185
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 0.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 0.5,
+         "price": -118
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 4.5,
+         "price": 145
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 4.5,
+         "price": -200
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Over",
+         "point": 1.5,
+         "price": 165
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Under",
+         "point": 1.5,
+         "price": -225
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Under",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T18:00:26Z",
+       "outcomes": [
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 70.5,
+         "price": -118
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 41.5,
+         "price": -118
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 22.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-11-16T17:59:50Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T17:59:55Z",
+       "outcomes": [
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 254.5,
+         "price": -114
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 254.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 229.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 229.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T17:59:55Z",
+       "outcomes": [
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 46.5,
+         "price": -114
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 77.5,
+         "price": -121
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 77.5,
+         "price": -111
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 53.5,
+         "price": -114
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 53.5,
+         "price": -117
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 29.5,
+         "price": -114
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 48.5,
+         "price": -127
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 48.5,
+         "price": -107
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 50.5,
+         "price": -120
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 50.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T17:59:55Z",
+       "outcomes": [
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -134
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -154
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 116
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 3.5,
+         "price": -190
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -117
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": -105
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -128
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 105
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -139
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T17:59:55Z",
+       "outcomes": [
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 70.5,
+         "price": -117
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 70.5,
+         "price": -114
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 21.5,
+         "price": -108
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 8.5,
+         "price": -112
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 40.5,
+         "price": -111
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 40.5,
+         "price": -121
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-11-16T18:00:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T18:00:49Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 227.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 227.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 254.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 254.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T18:00:49Z",
+       "outcomes": [
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 38.5,
+         "price": -112
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 38.5,
+         "price": -112
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 76.5,
+         "price": -112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 76.5,
+         "price": -112
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 46.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 46.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T18:00:49Z",
+       "outcomes": [
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -146
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -142
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -128
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -128
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -152
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 3.5,
+         "price": -148
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 3.5,
+         "price": 116
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T18:00:49Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 21.5,
+         "price": -118
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 21.5,
+         "price": -108
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 8.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 8.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-11-16T18:00:01Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T18:00:18Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 231.5,
+         "price": -113
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 257.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T18:00:18Z",
+       "outcomes": [
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 29.5,
+         "price": -117
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 77.5,
+         "price": -113
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 51.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T18:00:18Z",
+       "outcomes": [
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -139
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 105
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 3.5,
+         "price": -152
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": 102
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 118
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T18:00:18Z",
+       "outcomes": [
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 73.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-11-16T18:00:04Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T18:00:15Z",
+       "outcomes": [
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 257.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 257.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 231.5,
+         "price": -114
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 231.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T18:00:15Z",
+       "outcomes": [
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 51.5,
+         "price": -117
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 77.5,
+         "price": -114
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 77.5,
+         "price": -117
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 51.5,
+         "price": -117
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 39.5,
+         "price": -117
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 39.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 46.5,
+         "price": -117
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 46.5,
+         "price": -114
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 53.5,
+         "price": -113
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 53.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T18:00:15Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 104
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -137
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 117
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -157
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": 102
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -134
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -141
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -152
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T18:00:15Z",
+       "outcomes": [
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 73.5,
+         "price": -113
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 73.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-11-16T18:00:29Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T18:00:16Z",
+       "outcomes": [
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 254.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 254.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 229.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 229.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T18:00:16Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 77.5,
+         "price": -120
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 77.5,
+         "price": -120
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 53.5,
+         "price": -125
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 46.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 46.5,
+         "price": -120
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Under",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T18:00:16Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 100
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -145
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T18:00:16Z",
+       "outcomes": [
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 38.5,
+         "price": -125
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 22.5,
+         "price": -125
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 8.5,
+         "price": -125
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-11-16T17:59:39Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T17:58:33Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 229.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 229.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 253.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 253.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T17:58:33Z",
+       "outcomes": [
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 0.5,
+         "price": 110
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 0.5,
+         "price": -145
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 44.5,
+         "price": -130
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 44.5,
+         "price": 100
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 79.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 79.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 26.5,
+         "price": -135
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 26.5,
+         "price": 100
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T17:58:33Z",
+       "outcomes": [
+        {
+         "description": "Xavier Weaver",
+         "name": "Over",
+         "point": 1.5,
+         "price": 165
+        },
+        {
+         "description": "Xavier Weaver",
+         "name": "Under",
+         "point": 1.5,
+         "price": -225
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Kendrick Bourne",
+         "name": "Under",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Over",
+         "point": 4.5,
+         "price": 140
+        },
+        {
+         "description": "Jauan Jennings",
+         "name": "Under",
+         "point": 4.5,
+         "price": -185
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "George Kittle",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "George Kittle",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Ricky Pearsall",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -145
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 0.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 0.5,
+         "price": -120
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T17:58:33Z",
+       "outcomes": [
+        {
+         "description": "Emari Demercado",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Emari Demercado",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Christian McCaffrey",
+         "name": "Under",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Purdy",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Robinson Jr.",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 41.5,
+         "price": -140
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 41.5,
+         "price": 105
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-11-16T21:05:00Z",
+   "home_team": "Arizona Cardinals",
+   "id": "91630b9c62640117918fa30d2a62d2db",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-11-16T18:05:38Z",
+  "previous_timestamp": "2025-11-16T17:55:37Z",
+  "timestamp": "2025-11-16T18:00:38Z"
+ }
+}
