@@ -465,7 +465,7 @@
           if (!x.hits.includes(tab)) continue;
           const odds = t.side === "under" ? m.up : m.op;
           const o = m.res === "push" ? "push" : m.res === t.side ? "hit" : "miss";
-          out.push({ p, r, mid, m, side: t.side, out: o, u: o === "hit" ? payout(odds) : o === "miss" ? -1 : 0, odds, ...x });
+          out.push({ p, r, mid, m, rule: t, side: t.side, out: o, u: o === "hit" ? payout(odds) : o === "miss" ? -1 : 0, odds, ...x });
         }
       }
     }
@@ -483,7 +483,7 @@
   const recTxt = (s) => `${s.W}–${s.L}${s.P ? `–${s.P}` : ""}`;
   function why(x) {
     const t = x.r, line = num(x.m.line);
-    switch (LA.tab) {
+    switch (x.rule.id) {
       case "t1": return `Last game ${num(x.pm.act)} vs ${num(x.pl)} line (over)`;
       case "t2": return `Line ${num(x.pl)} → ${line} · @ ${esc(t.opp)}`;
       case "t5": return `Line ${num(x.pl)} → ${line}`;
@@ -495,29 +495,36 @@
     const { p, r, mid, m } = x;
     const cls = x.out === "hit" ? "la-hit" : x.out === "miss" ? "la-miss" : "la-push";
     const w = why(x);
-    return `<div class="rlrow ${cls}"><div class="rlhead"><span class="la-mark" aria-hidden="true">${x.out === "hit" ? "✓" : x.out === "miss" ? "✗" : "–"}</span><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+    return `<div class="rlrow ${cls}"><div class="rlhead"><span class="la-mark" aria-hidden="true">${x.out === "hit" ? "✓" : x.out === "miss" ? "✗" : "–"}</span>${LA.tab === "all" ? `<span class="rl-n" title="${esc(x.rule.title)}">${x.rule.n}</span>` : ""}<a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${x.out === "push" ? "push" : unitsTxt(x.u)}</span></div>
       <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}</div>
       <div class="rlcells"><span><span class="muted small">${x.side === "over" ? "Over" : "Under"}</span> <b>${num(m.line)}</b> <span class="muted small">${odds(x.odds)}</span></span><span><span class="muted small">Actual</span> <b>${num(m.act)}</b></span>${w ? `<span class="muted small">${w}</span>` : ""}</div></div>`;
   }
   function analysisBody() {
-    const t = TABS.find((x) => x.id === LA.tab);
-    const all = analyze(LA.tab, LA.wk);
+    // "All leads" (Michael 2026-10-30): every visible rule together; each rule's bet counts on its own, so a player-stat
+    // that fits two rules counts twice (as the rules' separate records add up).
+    const isAll = LA.tab === "all", rules = isAll ? visibleTabs() : [TABS.find((x) => x.id === LA.tab)];
+    const t = rules[0];
+    const all = rules.flatMap((r) => analyze(r.id, LA.wk));
     const games = laGames(LA.wk), nFinal = games.filter(([, g]) => g.final).length;
     const list = LA.gid ? all.filter((x) => x.r.gid === LA.gid) : all;
     const s = tally(list);
     const scope = LA.gid ? esc(gameLabel(LA.gid)) : `Week ${LA.wk}${nFinal < games.length ? ` (${nFinal} of ${games.length} games final)` : ""}`;
-    let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${LA.wk <= 7 ? "Weeks 1–7 are the weeks this rule was picked from (in-sample), so these results flatter it." : "Week 8 on: weeks the rule had never seen when it was frozen (out-of-sample)."}</span></p>`;
-    if (t.spread && !Object.values(D.games).some((g) => g.wk === LA.wk && g.spread != null)) return h + `<p class="muted">No point spreads in the app's data for week ${LA.wk}, so this rule can't be scored.</p>`;
+    let h = `<p class="callout small">${isAll ? `<b>All ${rules.length} leads together.</b> Each rule's bet counts separately, so a player-stat that fits two rules counts twice.` : `<b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}`}<br><span class="muted">${LA.wk <= 7 ? `Weeks 1–7 are the weeks ${isAll ? "these rules were" : "this rule was"} picked from (in-sample), so these results flatter ${isAll ? "them" : "it"}.` : "Week 8 on: weeks the rules had never seen when it was frozen (out-of-sample)."}</span></p>`;
+    if (!isAll && t.spread && !Object.values(D.games).some((g) => g.wk === LA.wk && g.spread != null)) return h + `<p class="muted">No point spreads in the app's data for week ${LA.wk}, so this rule can't be scored.</p>`;
     h += `<div class="la-sum"><div><span class="muted small">${scope}</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : ""}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : (s.roi > 0 ? "+" : s.roi < 0 ? "−" : "") + Math.abs(s.roi).toFixed(1) + "%"}</b></div></div>`;
+    if (isAll && list.length) {
+      // per-rule breakdown; tap a rule to see only it
+      h += `<div class="panel la-games">${rules.map((r) => { const g = list.filter((x) => x.rule === r); if (!g.length) return ""; const st = tally(g); return `<button type="button" class="la-game" data-larule="${r.id}"><span><span class="rl-n">${r.n}</span> ${esc(r.label)}</span><span class="muted small">${recTxt(st)} · ${st.n ? unitsTxt(st.U) : "push"}</span><span class="muted">›</span></button>`; }).join("")}</div>`;
+    }
     if (!LA.gid && all.length) {
       // per-game breakdown; tap a game to see only it
       const by = new Map();
       for (const x of all) { if (!by.has(x.r.gid)) by.set(x.r.gid, []); by.get(x.r.gid).push(x); }
       h += `<div class="panel la-games">${games.filter(([g]) => by.has(g)).map(([g]) => { const st = tally(by.get(g)); return `<button type="button" class="la-game" data-lagid="${esc(g)}"><span>${esc(gameLabel(g))}</span><span class="muted small">${recTxt(st)} · ${st.n ? unitsTxt(st.U) : "push"}</span><span class="muted">›</span></button>`; }).join("")}</div>`;
     }
-    if (!list.length) return h + `<p class="muted">${LA.gid && !(D.games[LA.gid] || {}).final ? "This game isn't final yet." : `No graded bets for rule ${t.n} ${LA.gid ? "in this game" : `in week ${LA.wk}`}.`}</p>`;
-    const sortK = (a, b) => (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid);
+    if (!list.length) return h + `<p class="muted">${LA.gid && !(D.games[LA.gid] || {}).final ? "This game isn't final yet." : `No graded bets for ${isAll ? "any lead" : `rule ${t.n}`} ${LA.gid ? "in this game" : `in week ${LA.wk}`}.`}</p>`;
+    const sortK = (a, b) => (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid) || a.rule.n - b.rule.n;
     const grp = (k, title) => { const g = list.filter((x) => x.out === k).sort(sortK); return g.length ? `<h3 class="la-h ${k}">${title} (${g.length})</h3><div class="panel rlist">${g.map(laRow).join("")}</div>` : ""; };
     return h + grp("hit", "Hits") + grp("miss", "Misses") + grp("push", "Pushes") +
       `<p class="muted small">Graded on the pre-game line (~3 h before kickoff) at its saved odds, 1 unit per bet; voids and lines without both saved odds are left out. Same scoring as the rule's frozen record.</p>`;
@@ -526,14 +533,14 @@
     const weeks = laWeeks();
     if (!weeks.length) return `<section id="la"></section>`;
     const tabs = visibleTabs();
-    if (!tabs.some((t) => t.id === LA.tab)) LA.tab = tabs[0].id;
+    if (LA.tab !== "all" && !tabs.some((t) => t.id === LA.tab)) LA.tab = tabs[0].id;
     if (LA.wk == null || !weeks.includes(LA.wk)) LA.wk = weeks[0];
     const games = laGames(LA.wk);
     if (LA.gid && !games.some(([g]) => g === LA.gid)) LA.gid = "";
     let body;
     try { body = analysisBody(); } catch (e) { console.error("leads analysis failed", e); body = `<p class="muted">Leads Analysis hit an error. Try refreshing.</p>`; }
     return `<section id="la"><h2 class="gsec">Leads Analysis</h2>
-      <div class="filters"><label>Lead <select id="la-tab">${tabs.map((t) => `<option value="${t.id}" ${t.id === LA.tab ? "selected" : ""}>${t.n}. ${esc(t.label)}</option>`).join("")}</select></label>
+      <div class="filters"><label>Lead <select id="la-tab"><option value="all" ${LA.tab === "all" ? "selected" : ""}>All leads</option>${tabs.map((t) => `<option value="${t.id}" ${t.id === LA.tab ? "selected" : ""}>${t.n}. ${esc(t.label)}</option>`).join("")}</select></label>
         <label>Week <select id="la-wk">${weeks.map((w) => `<option value="${w}" ${w === LA.wk ? "selected" : ""}>Week ${w}</option>`).join("")}</select></label>
         <label>Game <select id="la-gid"><option value="">All games</option>${games.map(([g, x]) => `<option value="${esc(g)}" ${g === LA.gid ? "selected" : ""}>${esc(gameLabel(g))}${x.final ? "" : " (not final)"}</option>`).join("")}</select></label></div>
       ${signedIn() ? "" : `<p class="muted small">Rules 4–8 appear here after you sign in, same as the Leads above.</p>`}
@@ -545,6 +552,10 @@
     if (id === "la-tab") { LA.tab = e.target.value; laRedraw(); }
     if (id === "la-wk") { LA.wk = +e.target.value; LA.gid = ""; laRedraw(); }
     if (id === "la-gid") { LA.gid = e.target.value; laRedraw(); }
+  });
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[data-larule]"); if (!b) return;
+    LA.tab = b.dataset.larule; laRedraw();
   });
   document.addEventListener("click", (e) => {
     const b = e.target.closest && e.target.closest("[data-lagid]"); if (!b) return;
