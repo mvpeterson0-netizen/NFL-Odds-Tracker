@@ -1,0 +1,3804 @@
+{
+ "downloaded_utc": "2026-10-30T18:00:58Z",
+ "game_id": "2025_08_BUF_CAR",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-10-26T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Buffalo Bills",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-10-26T13:55:23Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 233.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 233.5,
+         "price": -112
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 211.5,
+         "price": -112
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 211.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 56.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 56.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 41.5,
+         "price": -109
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 39.5,
+         "price": -114
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -113
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -111
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 24.5,
+         "price": -111
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 24.5,
+         "price": -113
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -114
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 15.5,
+         "price": -107
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 15.5,
+         "price": -117
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -114
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -116
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -108
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 10.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -116
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -104
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -123
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -127
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 119
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -153
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 124
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -158
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 133
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -147
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -116
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -112
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 41.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 32.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 32.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-10-26T13:55:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 210.5,
+         "price": -115
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 210.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 50.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 71.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 71.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-10-26T13:53:49Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 230.5,
+         "price": -121
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 230.5,
+         "price": -112
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 210.5,
+         "price": -114
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 210.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 40.5,
+         "price": -114
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 40.5,
+         "price": -117
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -118
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -113
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -114
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 12.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 12.5,
+         "price": -118
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 56.5,
+         "price": -125
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 41.5,
+         "price": -105
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 41.5,
+         "price": -128
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -117
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -114
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -113
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -118
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 11.5,
+         "price": -109
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 11.5,
+         "price": -122
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -113
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -121
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -128
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 113
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -157
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -102
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 122
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -127
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -107
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -148
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -117
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -164
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 72.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 51.5,
+         "price": -117
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 41.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 41.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 31.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-10-26T13:55:25Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 209.5,
+         "price": -112
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 209.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 229.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 229.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 41.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 41.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 39.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": 106
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 104
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -132
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 138
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -176
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -154
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -128
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -116
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -122
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -106
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -102
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -124
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -158
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 124
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -112
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 71.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 71.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 41.5,
+         "price": -112
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 41.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 50.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 50.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 30.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-10-26T13:54:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 228.5,
+         "price": -114
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 211.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 40.5,
+         "price": -114
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 56.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 33.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 39.5,
+         "price": -117
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -114
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -109
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -114
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 138
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -121
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -157
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 31.5,
+         "price": -114
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 52.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 40.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-10-26T13:53:56Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 228.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 228.5,
+         "price": -115
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 211.5,
+         "price": -114
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 211.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 56.5,
+         "price": -113
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 56.5,
+         "price": -118
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 39.5,
+         "price": -118
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 39.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 14.5,
+         "price": -121
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 33.5,
+         "price": -114
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 33.5,
+         "price": -117
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -114
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -121
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -152
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 114
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 138
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -182
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -159
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 118
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -117
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -114
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -122
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -109
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 104
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 102
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -137
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -162
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -118
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 73.5,
+         "price": -117
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 73.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 52.5,
+         "price": -118
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 52.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 40.5,
+         "price": -114
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 40.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-10-26T13:54:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 231.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 231.5,
+         "price": -120
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 210.5,
+         "price": -120
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 210.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 57.5,
+         "price": -120
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 57.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 48.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 25.5,
+         "price": -125
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 11.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:31Z",
+       "outcomes": [
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 73.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 73.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 51.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 51.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 32.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-10-26T13:55:11Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:24Z",
+       "outcomes": [
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 210.5,
+         "price": -110
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 210.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 230.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 230.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:24Z",
+       "outcomes": [
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 45.5,
+         "price": -125
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 45.5,
+         "price": -105
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 55.5,
+         "price": -135
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 55.5,
+         "price": 100
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 15.5,
+         "price": 110
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 15.5,
+         "price": -150
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 10.5,
+         "price": -135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 10.5,
+         "price": 100
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 25.5,
+         "price": 100
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 25.5,
+         "price": -135
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 10.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:24Z",
+       "outcomes": [
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 140
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -195
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": 180
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": -265
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 2.5,
+         "price": 180
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 2.5,
+         "price": -265
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:24Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 50.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 70.5,
+         "price": -105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 40.5,
+         "price": -105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 40.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-10-26T13:55:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:56Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 230.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 230.5,
+         "price": -115
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 211.5,
+         "price": -115
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 211.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:56Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 54.5,
+         "price": -130
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 54.5,
+         "price": 100
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 45.5,
+         "price": -118
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 12.5,
+         "price": -105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 13.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 20.5,
+         "price": -118
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 41.5,
+         "price": -118
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Over",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:56Z",
+       "outcomes": [
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -118
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 1.5,
+         "price": -175
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:56Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 40.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 71.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-10-26T13:54:46Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 211.5,
+         "price": -115
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 211.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 230.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 230.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 20.5,
+         "price": -135
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 46.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 41.5,
+         "price": -130
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 41.5,
+         "price": 100
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Keon Coleman",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Keon Coleman",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Khalil Shakir",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 2.5,
+         "price": 150
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Dalton Kincaid",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": 140
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Tyrell Shavers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 1.5,
+         "price": -180
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Josh Allen",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Allen",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Andy Dalton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Over",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "James Cook",
+         "name": "Under",
+         "point": 71.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-10-26T17:00:00Z",
+   "home_team": "Carolina Panthers",
+   "id": "53d4369464c66630f03a5d128cd39b08",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-10-26T14:00:39Z",
+  "previous_timestamp": "2025-10-26T13:50:38Z",
+  "timestamp": "2025-10-26T13:55:38Z"
+ }
+}

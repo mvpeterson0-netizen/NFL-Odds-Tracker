@@ -1,0 +1,3318 @@
+{
+ "downloaded_utc": "2026-10-30T18:00:45Z",
+ "game_id": "2025_07_PHI_MIN",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-10-19T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Philadelphia Eagles",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-10-19T13:55:33Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:55:51Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 226.5,
+         "price": -111
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 226.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 205.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 205.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:55:52Z",
+       "outcomes": [
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 85.5,
+         "price": -114
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 85.5,
+         "price": -111
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -111
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -113
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 49.5,
+         "price": -114
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 46.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 46.5,
+         "price": -112
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 44.5,
+         "price": -114
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -113
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -111
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 17.5,
+         "price": -114
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 16.5,
+         "price": -109
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 10.5,
+         "price": -109
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 9.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 9.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:55:52Z",
+       "outcomes": [
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 119
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -152
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -126
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -101
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -133
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 107
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -137
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -136
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -112
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -114
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -161
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 126
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 1.5,
+         "price": -144
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 1.5,
+         "price": 113
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -122
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 181
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -235
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 74.5,
+         "price": -112
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 74.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 68.5,
+         "price": -113
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 68.5,
+         "price": -111
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 36.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 36.5,
+         "price": -111
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 15.5,
+         "price": -111
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 9.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-10-19T13:55:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 225.5,
+         "price": -110
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 225.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 84.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 84.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 50.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 10.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 115
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -145
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 170
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -240
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:55:43Z",
+       "outcomes": [
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 74.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 74.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-10-19T13:54:11Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:55:53Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 203.5,
+         "price": -108
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 203.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:55:53Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 60.5,
+         "price": -114
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 60.5,
+         "price": -117
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -107
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -128
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 50.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 47.5,
+         "price": -122
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 10.5,
+         "price": -121
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 83.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 83.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:55:53Z",
+       "outcomes": [
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 111
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 113
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -175
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 170
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -240
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -129
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": -106
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -154
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -143
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 1.5,
+         "price": -137
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 1.5,
+         "price": -102
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -129
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -106
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:55:53Z",
+       "outcomes": [
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 9.5,
+         "price": -118
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 9.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 35.5,
+         "price": -114
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 35.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 68.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 68.5,
+         "price": -118
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 74.5,
+         "price": -107
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 74.5,
+         "price": -128
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-10-19T13:55:22Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:55:49Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 226.5,
+         "price": -112
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 226.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 205.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 205.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:55:49Z",
+       "outcomes": [
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 50.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 50.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 83.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 83.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 47.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:55:11Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -126
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -102
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -152
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 5.5,
+         "price": 120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 108
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -136
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 3.5,
+         "price": 136
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 3.5,
+         "price": -174
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -138
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 108
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 1.5,
+         "price": -134
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 1.5,
+         "price": 106
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 166
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -215
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -118
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -108
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -122
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": -104
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 108
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -136
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:55:49Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 74.5,
+         "price": -112
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 74.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 67.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 67.5,
+         "price": -112
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-10-19T13:55:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:54:28Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 227.5,
+         "price": -114
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 199.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:54:28Z",
+       "outcomes": [
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 40.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 84.5,
+         "price": -113
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -114
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 32.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -121
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 46.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:54:28Z",
+       "outcomes": [
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -121
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -129
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 117
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -159
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 112
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:54:28Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 9.5,
+         "price": -114
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 75.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-10-19T13:54:47Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 227.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 199.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 199.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -114
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 46.5,
+         "price": -113
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 46.5,
+         "price": -117
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 40.5,
+         "price": -113
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 40.5,
+         "price": -117
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 47.5,
+         "price": -117
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 47.5,
+         "price": -114
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 84.5,
+         "price": -114
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 84.5,
+         "price": -117
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -122
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 16.5,
+         "price": -109
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -122
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -109
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -148
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": -103
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -162
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 5.5,
+         "price": 120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:55:23Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 36.5,
+         "price": -117
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 36.5,
+         "price": -114
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 75.5,
+         "price": -113
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 75.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 68.5,
+         "price": -113
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 68.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-10-19T13:55:22Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:55:12Z",
+       "outcomes": [
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 227.5,
+         "price": -120
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 227.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 203.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 203.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:55:12Z",
+       "outcomes": [
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 85.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 85.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 47.5,
+         "price": -125
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 47.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:55:12Z",
+       "outcomes": [
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -155
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 0.5,
+         "price": -225
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 0.5,
+         "price": 155
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:55:12Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 75.5,
+         "price": -125
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 75.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-10-19T13:54:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 205.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 205.5,
+         "price": -120
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 225.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 225.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 50.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 15.5,
+         "price": -150
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 15.5,
+         "price": 110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 40.5,
+         "price": -125
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 40.5,
+         "price": -105
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 85.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 85.5,
+         "price": -115
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 10.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 115
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -155
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 2.5,
+         "price": -205
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 165
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -235
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:56:07Z",
+       "outcomes": [
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 65.5,
+         "price": -135
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 65.5,
+         "price": 100
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 75.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 75.5,
+         "price": -120
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-10-19T13:54:12Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:54:42Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 210.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 210.5,
+         "price": -160
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 233.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 233.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:54:42Z",
+       "outcomes": [
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 60.5,
+         "price": -118
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 10.5,
+         "price": -118
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 8.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 41.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 45.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 5.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:54:42Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -118
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 185
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -250
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 2.5,
+         "price": 155
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 2.5,
+         "price": -210
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 1.5,
+         "price": 160
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 1.5,
+         "price": -220
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:54:42Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 35.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 67.5,
+         "price": -118
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-10-19T13:54:24Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-19T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 210.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 210.5,
+         "price": -155
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 233.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 233.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-19T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 45.5,
+         "price": -135
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 45.5,
+         "price": 105
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 5.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-19T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "Justin Jefferson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -145
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "T.J. Hockenson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Jordan Addison",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 185
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -260
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 2.5,
+         "price": -190
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Jalen Nailor",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 1.5,
+         "price": 160
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 1.5,
+         "price": -220
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-19T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Mason",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Carson Wentz",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Dillon",
+         "name": "Over",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Dillon",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Zavier Scott",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-10-19T17:00:00Z",
+   "home_team": "Minnesota Vikings",
+   "id": "6a8d2daf7f75100d02656bc0217737e8",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-10-19T14:00:38Z",
+  "previous_timestamp": "2025-10-19T13:50:38Z",
+  "timestamp": "2025-10-19T13:55:38Z"
+ }
+}
