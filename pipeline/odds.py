@@ -43,6 +43,15 @@ from .common import (DATA, TEAM_NAME_TO_ABBR, append_csv, http_get, iso, norm_na
 API = "https://api.the-odds-api.com/v4"
 SPORT = "americanfootball_nfl"
 BOOKS = ["draftkings", "fanduel"]  # stored in this order of preference
+# Other books (Michael 2026-10-29): asked for in the same request at no extra credit cost (The Odds API counts every
+# group of 10 bookmakers as 1 region; probe 2026-10-29: 10 books cost 7 credits, same as DK+FD). Their lines are kept
+# in data/other_books/week_NN.csv only; prop_captures.csv, grading and the pull rules stay DraftKings/FanDuel only.
+EXTRA_BOOKS = ["betmgm", "williamhill_us", "fanatics", "betrivers", "espnbet", "hardrockbet", "ballybet", "fliff"]
+assert len(BOOKS) + len(EXTRA_BOOKS) <= 10  # more than 10 books would count as a second region (double cost)
+OTHER_DIR = DATA / "other_books"
+# One-time catch-up: games that already had lines get one line check after this time, so other books show up
+# without waiting for the next scheduled check.
+BOOKS_ADDED_UTC = datetime(2026, 10, 30, 4, 15, tzinfo=ZoneInfo("UTC"))
 CORE = ["player_pass_yds", "player_rush_attempts", "player_rush_yds", "player_receptions", "player_reception_yds"]
 OPTIONAL = ["player_pass_attempts", "player_pass_completions"]
 WINDOW_OPEN = timedelta(hours=3, minutes=30)
@@ -83,6 +92,10 @@ TRACK_DIR = DATA / "line_checks"
 
 def track_path(g):
     return TRACK_DIR / f"week_{int(g['week']):02d}.csv"
+
+
+def other_path(g):
+    return OTHER_DIR / f"week_{int(g['week']):02d}.csv"
 PULL_LOG_PATH = DATA / "pull_log.csv"
 # Bet-slip links (experiment, 2026-10-23): ask The Odds API for bookmaker links / source ids with each pull
 # (includeLinks / includeSids) and keep the latest ones for upcoming games in their own file. This never changes
@@ -289,6 +302,8 @@ def plan_tracking(games, now=None, skip=()):
         if not _has_ok(rows):
             continue  # no lines yet: the Monday / Thursday / Sunday rules keep looking
         target = track_target(ko, now)
+        if BOOKS_ADDED_UTC <= now and (target is None or target < BOOKS_ADDED_UTC):
+            target = BOOKS_ADDED_UTC  # one-time other-books catch-up
         if target is None:
             continue
         last = max((p for r in rows if r["status"] in ("ok", "empty") and (p := parse_iso(r.get("attempted_utc", "")))),
@@ -599,7 +614,7 @@ def run(keys, games, name_index_for_game, log):
             if ki is None:
                 break
             tried.append(ki)
-            params = {"apiKey": keys[ki - 1], "bookmakers": ",".join(BOOKS), "markets": ",".join(markets),
+            params = {"apiKey": keys[ki - 1], "bookmakers": ",".join(BOOKS + EXTRA_BOOKS), "markets": ",".join(markets),
                       "oddsFormat": "american", "dateFormat": "iso"}
             if LINKS_ENABLED:
                 params.update({"includeLinks": "true", "includeSids": "true"})
@@ -648,11 +663,23 @@ def run(keys, games, name_index_for_game, log):
             wrote = True
             continue
         event = json.loads(body)
-        caps = _main_line_rows(event, g["game_id"], pt, captured, ko, mins, in_window,
-                               name_index_for_game(g))
+        all_caps = _main_line_rows(event, g["game_id"], pt, captured, ko, mins, in_window,
+                                   name_index_for_game(g))
+        caps = [c for c in all_caps if c["book"] in BOOKS]  # DraftKings/FanDuel: unchanged destination and rules
+        others = [c for c in all_caps if c["book"] not in BOOKS]
+        other_note = ""
+        if others:
+            try:  # other books are extra: a problem here must never cost the DK/FD lines
+                append_csv(other_path(g), others, CAPTURE_FIELDS)
+                cnt = defaultdict(int)
+                for c in others:
+                    cnt[c["book"]] += 1
+                other_note = "; other books: " + ", ".join(f"{b} {n}" for b, n in sorted(cnt.items()))
+            except Exception as ex:
+                log.append(f"odds: other books save skipped ({type(ex).__name__}: {str(ex)[:80]})")
         if not caps:
             append_csv(PULL_LOG_PATH, [{**row, "status": "empty", "outcomes": 0,
-                                        "note": ("no player prop outcomes returned" + (
+                                        "note": ("no DraftKings/FanDuel player prop outcomes returned" + other_note + (
                                             "; " + sweep_note[g["game_id"]] if pt == "pregame" and g["game_id"] in sweep_note
                                             and g["game_id"] not in due_ids else ""))}], PULL_FIELDS)
             log.append(f"odds: {g['game_id']} {pt} returned no props (cost {last})")
@@ -661,7 +688,8 @@ def run(keys, games, name_index_for_game, log):
         append_csv(track_path(g) if pt == "track" else CAPTURES_PATH, caps, CAPTURE_FIELDS)
         if LINKS_ENABLED:
             try:  # links are an experiment: any problem here is logged and ignored
-                lrows = _link_rows(event, g["game_id"], pt, captured, ko, name_index_for_game(g))
+                lrows = [r for r in _link_rows(event, g["game_id"], pt, captured, ko, name_index_for_game(g))
+                         if r["book"] in BOOKS]  # bet-slip links stay DraftKings/FanDuel
                 save_links(g["game_id"], lrows, captured)
                 by_book = defaultdict(lambda: [0, 0])
                 for r in lrows:
@@ -673,7 +701,7 @@ def run(keys, games, name_index_for_game, log):
                 log.append(f"odds: link save skipped ({type(ex).__name__}: {str(ex)[:80]})")
         books = sorted({c["book"] for c in caps})
         unmatched = sorted({c["player_book_name"] for c in caps if not c["gsis_id"]})
-        note = f"books: {','.join(books)}; {keynote}"
+        note = f"books: {','.join(books)}{other_note}; {keynote}"
         if pt == "pregame" and g["game_id"] in sweep_note and g["game_id"] not in due_ids:
             note = sweep_note[g["game_id"]] + "; " + note
         if unmatched:
