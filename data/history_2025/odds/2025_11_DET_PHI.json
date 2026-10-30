@@ -1,0 +1,3648 @@
+{
+ "downloaded_utc": "2026-10-30T20:00:39Z",
+ "game_id": "2025_11_DET_PHI",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-11-16T22:20:00Z",
+ "response": {
+  "data": {
+   "away_team": "Detroit Lions",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-11-16T22:15:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:32Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 242.5,
+         "price": -111
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 242.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 206.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 206.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:32Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 77.5,
+         "price": -111
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 77.5,
+         "price": -113
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -111
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -113
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 58.5,
+         "price": -114
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 55.5,
+         "price": -111
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 55.5,
+         "price": -113
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 37.5,
+         "price": -109
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 22.5,
+         "price": -108
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 22.5,
+         "price": -116
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 16.5,
+         "price": -116
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 16.5,
+         "price": -108
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 15.5,
+         "price": -109
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 15.5,
+         "price": -114
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 10.5,
+         "price": -114
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 7.5,
+         "price": -111
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 7.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:32Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 114
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -146
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -106
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": 104
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -154
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -143
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -141
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -131
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 103
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -173
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 1.5,
+         "price": -187
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 1.5,
+         "price": 145
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -131
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": 102
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:32Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 69.5,
+         "price": -114
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -111
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 61.5,
+         "price": -113
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 38.5,
+         "price": -114
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 38.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 29.5,
+         "price": -111
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 8.5,
+         "price": -114
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 0.5,
+         "price": 122
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 0.5,
+         "price": -154
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-11-16T22:15:11Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:01Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 207.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 207.5,
+         "price": -120
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 242.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 242.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:01Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 77.5,
+         "price": -120
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 77.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 57.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 57.5,
+         "price": -110
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 37.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 37.5,
+         "price": -110
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:01Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -145
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 2.5,
+         "price": 150
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:01Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 0.5,
+         "price": 115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 0.5,
+         "price": -145
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-11-16T22:14:38Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:17Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 242.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 242.5,
+         "price": -114
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 208.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 208.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:17Z",
+       "outcomes": [
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -125
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -108
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 57.5,
+         "price": -125
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 57.5,
+         "price": -108
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 77.5,
+         "price": -121
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 77.5,
+         "price": -112
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 54.5,
+         "price": -125
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 54.5,
+         "price": -108
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -117
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -113
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 22.5,
+         "price": -112
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 37.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 17.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:17Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -111
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -122
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -137
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -136
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": 101
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 105
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -139
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -162
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -132
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": -102
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 109
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:17Z",
+       "outcomes": [
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 39.5,
+         "price": -118
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 39.5,
+         "price": -113
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 70.5,
+         "price": -117
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 70.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-11-16T22:15:36Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:40Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 241.5,
+         "price": -112
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 241.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 205.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 205.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:40Z",
+       "outcomes": [
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 77.5,
+         "price": -112
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 77.5,
+         "price": -112
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:40Z",
+       "outcomes": [
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 104
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -132
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 136
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -174
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -122
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -104
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -134
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 106
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -134
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 2.5,
+         "price": 152
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 2.5,
+         "price": -196
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -128
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -134
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": 106
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 124
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -158
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:40Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 8.5,
+         "price": -112
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 8.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 0.5,
+         "price": 118
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 0.5,
+         "price": -150
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 40.5,
+         "price": -112
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 40.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-11-16T22:14:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:09Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 236.5,
+         "price": -117
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 236.5,
+         "price": -114
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 205.5,
+         "price": -114
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 205.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:09Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 22.5,
+         "price": -117
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 22.5,
+         "price": -114
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 78.5,
+         "price": -114
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 78.5,
+         "price": -117
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 10.5,
+         "price": -113
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 10.5,
+         "price": -118
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -117
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -114
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 16.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:09Z",
+       "outcomes": [
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 123
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 102
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -136
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": 107
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -141
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -137
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 104
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 106
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -141
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -167
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -137
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": 104
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -127
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -124
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -107
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:09Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 71.5,
+         "price": -117
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 71.5,
+         "price": -114
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -118
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 61.5,
+         "price": -113
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 40.5,
+         "price": -112
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 40.5,
+         "price": -118
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 8.5,
+         "price": -118
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 8.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-11-16T22:15:23Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:55Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 236.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 205.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:55Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 38.5,
+         "price": -114
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 58.5,
+         "price": -114
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 61.5,
+         "price": -114
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 56.5,
+         "price": -114
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 78.5,
+         "price": -113
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:55Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": 108
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -124
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -137
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 107
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 104
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -137
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:55Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 61.5,
+         "price": -117
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 29.5,
+         "price": -114
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 8.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-11-16T22:14:56Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:13Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 242.5,
+         "price": -120
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 242.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 207.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 207.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:13Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 78.5,
+         "price": -120
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 78.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 65.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 65.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 37.5,
+         "price": -125
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 11.5,
+         "price": -125
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 6.5,
+         "price": -125
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:13Z",
+       "outcomes": [
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 100
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -145
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -170
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 1.5,
+         "price": -195
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:13Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 39.5,
+         "price": -125
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 8.5,
+         "price": -125
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-11-16T22:14:43Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:05Z",
+       "outcomes": [
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 240.5,
+         "price": -120
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 240.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 205.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 205.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:05Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 15.5,
+         "price": -135
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 15.5,
+         "price": 100
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 20.5,
+         "price": -135
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 35.5,
+         "price": -125
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 35.5,
+         "price": -105
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 75.5,
+         "price": -125
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 75.5,
+         "price": -105
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 50.5,
+         "price": -135
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 50.5,
+         "price": 100
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 15.5,
+         "price": -135
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 15.5,
+         "price": 100
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 10.5,
+         "price": 135
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 10.5,
+         "price": -185
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 65.5,
+         "price": -105
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 65.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:05Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 3.5,
+         "price": 185
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 3.5,
+         "price": -275
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 105
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -140
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -135
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 2.5,
+         "price": -205
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:05Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 60.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 40.5,
+         "price": -105
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 40.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 30.5,
+         "price": 100
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 30.5,
+         "price": -135
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 10.5,
+         "price": 105
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 10.5,
+         "price": -140
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-11-16T22:14:56Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:14:37Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 213.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 213.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 246.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 246.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:14:37Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 9.5,
+         "price": -118
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 22.5,
+         "price": -118
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 58.5,
+         "price": -118
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 59.5,
+         "price": -118
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -118
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 82.5,
+         "price": -115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 82.5,
+         "price": -115
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 0.5,
+         "price": -105
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 0.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:14:37Z",
+       "outcomes": [
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -155
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 0.5,
+         "price": -165
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 0.5,
+         "price": 130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:14:37Z",
+       "outcomes": [
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 37.5,
+         "price": -118
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 37.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 70.5,
+         "price": -118
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 60.5,
+         "price": -118
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Will Shipley",
+         "name": "Over",
+         "point": 5.5,
+         "price": -125
+        },
+        {
+         "description": "Will Shipley",
+         "name": "Under",
+         "point": 5.5,
+         "price": -105
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 10.5,
+         "price": 100
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 10.5,
+         "price": -130
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-11-16T22:15:25Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-16T22:15:33Z",
+       "outcomes": [
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 213.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 213.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 246.5,
+         "price": -115
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 246.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-16T22:15:33Z",
+       "outcomes": [
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 59.5,
+         "price": -155
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 59.5,
+         "price": 120
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 82.5,
+         "price": 105
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 82.5,
+         "price": -140
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 0.5,
+         "price": -105
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 0.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-16T22:15:33Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Kalif Raymond",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Over",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Dallas Goedert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Brock Wright",
+         "name": "Under",
+         "point": 2.5,
+         "price": -195
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Over",
+         "point": 0.5,
+         "price": -170
+        },
+        {
+         "description": "Jahan Dotson",
+         "name": "Under",
+         "point": 0.5,
+         "price": 130
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Over",
+         "point": 7.5,
+         "price": 115
+        },
+        {
+         "description": "Amon-Ra St. Brown",
+         "name": "Under",
+         "point": 7.5,
+         "price": -150
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Jameson Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-16T22:15:33Z",
+       "outcomes": [
+        {
+         "description": "Will Shipley",
+         "name": "Over",
+         "point": 5.5,
+         "price": -125
+        },
+        {
+         "description": "Will Shipley",
+         "name": "Under",
+         "point": 5.5,
+         "price": -105
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Over",
+         "point": 0.5,
+         "price": 100
+        },
+        {
+         "description": "Jared Goff",
+         "name": "Under",
+         "point": 0.5,
+         "price": -130
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Over",
+         "point": 37.5,
+         "price": -120
+        },
+        {
+         "description": "David Montgomery",
+         "name": "Under",
+         "point": 37.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Hurts",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Jahmyr Gibbs",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Tank Bigsby",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-11-17T01:20:00Z",
+   "home_team": "Philadelphia Eagles",
+   "id": "6d209e0e637f3b116ec958e0634f2a02",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-11-16T22:20:37Z",
+  "previous_timestamp": "2025-11-16T22:10:37Z",
+  "timestamp": "2025-11-16T22:15:37Z"
+ }
+}
