@@ -1,0 +1,4620 @@
+{
+ "downloaded_utc": "2026-10-30T17:00:53Z",
+ "game_id": "2025_05_KC_JAX",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-10-06T21:15:00Z",
+ "response": {
+  "data": {
+   "away_team": "Kansas City Chiefs",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-10-06T21:09:51Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:19Z",
+       "outcomes": [
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 254.5,
+         "price": -113
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 254.5,
+         "price": -111
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 219.5,
+         "price": -111
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 219.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:19Z",
+       "outcomes": [
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 63.5,
+         "price": -111
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 63.5,
+         "price": -113
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 56.5,
+         "price": -114
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 42.5,
+         "price": -111
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 42.5,
+         "price": -113
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 36.5,
+         "price": -114
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 36.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 35.5,
+         "price": -109
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 31.5,
+         "price": -114
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 28.5,
+         "price": -111
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 27.5,
+         "price": -114
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 16.5,
+         "price": -109
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 14.5,
+         "price": -111
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 14.5,
+         "price": -113
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 12.5,
+         "price": -107
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 12.5,
+         "price": -117
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 8.5,
+         "price": -104
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 6.5,
+         "price": -113
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 6.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:19Z",
+       "outcomes": [
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -152
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 119
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -104
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -122
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 4.5,
+         "price": 121
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 4.5,
+         "price": -154
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -153
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -144
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": 113
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -167
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 121
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": -191
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 1.5,
+         "price": 148
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 114
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -136
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": 107
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -112
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -114
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 122
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -156
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 124
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -158
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:19Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 66.5,
+         "price": -111
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 66.5,
+         "price": -113
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 26.5,
+         "price": -109
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 22.5,
+         "price": -109
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 19.5,
+         "price": -113
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 19.5,
+         "price": -111
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 12.5,
+         "price": -107
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 12.5,
+         "price": -117
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -121
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": -104
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-10-06T21:09:52Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:00Z",
+       "outcomes": [
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 254.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 254.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 220.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 220.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:00Z",
+       "outcomes": [
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:00Z",
+       "outcomes": [
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -160
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:08:53Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-10-06T21:08:44Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:47Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 219.5,
+         "price": -111
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 219.5,
+         "price": -122
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 251.5,
+         "price": -121
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 251.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:47Z",
+       "outcomes": [
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 35.5,
+         "price": -121
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 6.5,
+         "price": -117
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 6.5,
+         "price": -114
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 11.5,
+         "price": -117
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 11.5,
+         "price": -114
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 7.5,
+         "price": -128
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 7.5,
+         "price": -105
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 28.5,
+         "price": -118
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 28.5,
+         "price": -113
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 56.5,
+         "price": -113
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 32.5,
+         "price": -122
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 38.5,
+         "price": -113
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 38.5,
+         "price": -118
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 60.5,
+         "price": -128
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 60.5,
+         "price": -107
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 13.5,
+         "price": -121
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:47Z",
+       "outcomes": [
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": 113
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": -179
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -113
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -113
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -121
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 3.5,
+         "price": -200
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 3.5,
+         "price": 150
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 108
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -162
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:47Z",
+       "outcomes": [
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 20.5,
+         "price": -118
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 20.5,
+         "price": -113
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 27.5,
+         "price": -121
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -111
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": -121
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 21.5,
+         "price": -128
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 21.5,
+         "price": -105
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 11.5,
+         "price": -150
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 11.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 64.5,
+         "price": -125
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 64.5,
+         "price": -108
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 28.5,
+         "price": -107
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 28.5,
+         "price": -128
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-10-06T21:10:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:40Z",
+       "outcomes": [
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 250.5,
+         "price": -112
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 250.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 219.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 219.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:40Z",
+       "outcomes": [
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 7.5,
+         "price": -108
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 36.5,
+         "price": -112
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 36.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 59.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 59.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 31.5,
+         "price": -112
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 56.5,
+         "price": -112
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 56.5,
+         "price": -112
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 6.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:40Z",
+       "outcomes": [
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -112
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -112
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -142
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -126
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -102
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -164
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -142
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 112
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -164
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 2.5,
+         "price": 154
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": -176
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 1.5,
+         "price": 138
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -142
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": 112
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": 116
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -154
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 4.5,
+         "price": 130
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 4.5,
+         "price": -166
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:40Z",
+       "outcomes": [
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 20.5,
+         "price": -112
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 20.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 64.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 64.5,
+         "price": -112
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 5.5,
+         "price": 102
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 12.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-10-06T21:10:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:51Z",
+       "outcomes": [
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 253.5,
+         "price": -120
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 253.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 220.5,
+         "price": -125
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 220.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:51Z",
+       "outcomes": [
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 61.5,
+         "price": -125
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 57.5,
+         "price": -125
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 38.5,
+         "price": -125
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 13.5,
+         "price": -125
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 7.5,
+         "price": -130
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 6.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:51Z",
+       "outcomes": [
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -175
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:51Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 64.5,
+         "price": -125
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 26.5,
+         "price": -125
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 22.5,
+         "price": -125
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-10-06T21:10:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:54Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 212.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 247.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:54Z",
+       "outcomes": [
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 42.5,
+         "price": -117
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 59.5,
+         "price": -117
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 37.5,
+         "price": -117
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 11.5,
+         "price": -113
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 14.5,
+         "price": -113
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 12.5,
+         "price": -113
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 26.5,
+         "price": -113
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 29.5,
+         "price": -117
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:54Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -157
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -136
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -162
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -143
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 123
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -122
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -141
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:54Z",
+       "outcomes": [
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 22.5,
+         "price": -118
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 62.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-10-06T21:10:27Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:18Z",
+       "outcomes": [
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 247.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 247.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 212.5,
+         "price": -117
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 212.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:18Z",
+       "outcomes": [
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 14.5,
+         "price": -113
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 37.5,
+         "price": -118
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 37.5,
+         "price": -113
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 55.5,
+         "price": -117
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 55.5,
+         "price": -114
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 35.5,
+         "price": -113
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 35.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 11.5,
+         "price": -114
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 11.5,
+         "price": -117
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 42.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 42.5,
+         "price": -113
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 59.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 59.5,
+         "price": -113
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 26.5,
+         "price": -114
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 26.5,
+         "price": -117
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 14.5,
+         "price": -114
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 12.5,
+         "price": -114
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 12.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:18Z",
+       "outcomes": [
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 3.5,
+         "price": -177
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 128
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": 112
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -157
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": 117
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 123
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -137
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 104
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -124
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -108
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -143
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -159
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": -182
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:18Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 62.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 62.5,
+         "price": -113
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 22.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-10-06T21:09:51Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:17Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 221.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 221.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 256.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 256.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:17Z",
+       "outcomes": [
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 56.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 27.5,
+         "price": -118
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 26.5,
+         "price": -118
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 40.5,
+         "price": -135
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 40.5,
+         "price": 100
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Over",
+         "point": 11.5,
+         "price": 100
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Under",
+         "point": 11.5,
+         "price": -135
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Under",
+         "point": 2.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:17Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 0.5,
+         "price": -185
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 0.5,
+         "price": 135
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Over",
+         "point": 0.5,
+         "price": -135
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Under",
+         "point": 0.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:17Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 60.5,
+         "price": -140
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 60.5,
+         "price": 105
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 28.5,
+         "price": -118
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 11.5,
+         "price": -145
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 11.5,
+         "price": 105
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Over",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 0.5,
+         "price": 210
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 0.5,
+         "price": -295
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-10-06T21:10:34Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:09:41Z",
+       "outcomes": [
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 221.5,
+         "price": 105
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 221.5,
+         "price": -135
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 256.5,
+         "price": 105
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 256.5,
+         "price": -140
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:09:41Z",
+       "outcomes": [
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 11.5,
+         "price": -125
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 11.5,
+         "price": -105
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 30.5,
+         "price": -135
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 30.5,
+         "price": 105
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:09:41Z",
+       "outcomes": [
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 160
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -210
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 0.5,
+         "price": -180
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 0.5,
+         "price": 135
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Over",
+         "point": 0.5,
+         "price": -135
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Under",
+         "point": 0.5,
+         "price": 100
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:09:41Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 60.5,
+         "price": -140
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 60.5,
+         "price": 105
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 11.5,
+         "price": -130
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 11.5,
+         "price": 100
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Over",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 0.5,
+         "price": 210
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 0.5,
+         "price": -300
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-10-06T21:10:09Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-06T21:10:30Z",
+       "outcomes": [
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 250.5,
+         "price": -115
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 250.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 215.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 215.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-06T21:10:30Z",
+       "outcomes": [
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 10.5,
+         "price": 145
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 10.5,
+         "price": -190
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 10.5,
+         "price": 115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 10.5,
+         "price": -150
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 15.5,
+         "price": 100
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 15.5,
+         "price": -130
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 10.5,
+         "price": 260
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 10.5,
+         "price": -375
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Over",
+         "point": 10.5,
+         "price": 220
+        },
+        {
+         "description": "Hunter Long",
+         "name": "Under",
+         "point": 10.5,
+         "price": -315
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-06T21:10:30Z",
+       "outcomes": [
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 2.5,
+         "price": 165
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 2.5,
+         "price": -225
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Travis Hunter",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Tyquan Thornton",
+         "name": "Under",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Over",
+         "point": 4.5,
+         "price": 130
+        },
+        {
+         "description": "Travis Kelce",
+         "name": "Under",
+         "point": 4.5,
+         "price": -170
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Over",
+         "point": 4.5,
+         "price": 135
+        },
+        {
+         "description": "Marquise Brown",
+         "name": "Under",
+         "point": 4.5,
+         "price": -175
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Brenton Strange",
+         "name": "Under",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Over",
+         "point": 2.5,
+         "price": 210
+        },
+        {
+         "description": "Noah Gray",
+         "name": "Under",
+         "point": 2.5,
+         "price": -285
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Over",
+         "point": 3.5,
+         "price": 175
+        },
+        {
+         "description": "Dyami Brown",
+         "name": "Under",
+         "point": 3.5,
+         "price": -240
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Over",
+         "point": 3.5,
+         "price": 150
+        },
+        {
+         "description": "JuJu Smith-Schuster",
+         "name": "Under",
+         "point": 3.5,
+         "price": -200
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Xavier Worthy",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Parker Washington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -165
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-06T21:10:30Z",
+       "outcomes": [
+        {
+         "description": "Kareem Hunt",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Kareem Hunt",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Over",
+         "point": 20.5,
+         "price": -130
+        },
+        {
+         "description": "Patrick Mahomes",
+         "name": "Under",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Over",
+         "point": 65.5,
+         "price": 100
+        },
+        {
+         "description": "Travis Etienne Jr.",
+         "name": "Under",
+         "point": 65.5,
+         "price": -130
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Over",
+         "point": 10.5,
+         "price": -150
+        },
+        {
+         "description": "Trevor Lawrence",
+         "name": "Under",
+         "point": 10.5,
+         "price": 115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Bhayshul Tuten",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Over",
+         "point": 25.5,
+         "price": -140
+        },
+        {
+         "description": "Isiah Pacheco",
+         "name": "Under",
+         "point": 25.5,
+         "price": 105
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Brashard Smith",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    }
+   ],
+   "commence_time": "2025-10-07T00:16:00Z",
+   "home_team": "Jacksonville Jaguars",
+   "id": "1910db6879dddf37e4f86f0bcf1c9547",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-10-06T21:15:38Z",
+  "previous_timestamp": "2025-10-06T21:05:38Z",
+  "timestamp": "2025-10-06T21:10:38Z"
+ }
+}

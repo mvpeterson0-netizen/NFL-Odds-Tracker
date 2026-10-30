@@ -1,0 +1,3149 @@
+{
+ "downloaded_utc": "2026-10-30T17:00:50Z",
+ "game_id": "2025_05_WAS_LAC",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-10-05T17:25:00Z",
+ "response": {
+  "data": {
+   "away_team": "Washington Commanders",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-10-05T17:20:03Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:19:59Z",
+       "outcomes": [
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 262.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 262.5,
+         "price": -113
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 207.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 207.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:19:59Z",
+       "outcomes": [
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 57.5,
+         "price": -111
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 57.5,
+         "price": -113
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 55.5,
+         "price": -114
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 54.5,
+         "price": -110
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -114
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -109
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -114
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -109
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 19.5,
+         "price": -114
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Over",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Under",
+         "point": 18.5,
+         "price": -111
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 18.5,
+         "price": -108
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 18.5,
+         "price": -117
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 7.5,
+         "price": -113
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 7.5,
+         "price": -111
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:19:59Z",
+       "outcomes": [
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 107
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -137
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 5.5,
+         "price": 116
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 5.5,
+         "price": -148
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 5.5,
+         "price": 121
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 5.5,
+         "price": -155
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -141
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 112
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -143
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 126
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 3.5,
+         "price": -161
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 2.5,
+         "price": 134
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 2.5,
+         "price": -172
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -173
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 1.5,
+         "price": -172
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 1.5,
+         "price": 134
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 114
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -145
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:19:59Z",
+       "outcomes": [
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 43.5,
+         "price": -113
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 43.5,
+         "price": -111
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 30.5,
+         "price": -111
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 27.5,
+         "price": -114
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 15.5,
+         "price": -111
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 8.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-10-05T17:19:55Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:20:55Z",
+       "outcomes": [
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 54.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 56.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:20:55Z",
+       "outcomes": [
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:19:47Z",
+       "outcomes": [
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-10-05T17:20:25Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:20:26Z",
+       "outcomes": [
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 259.5,
+         "price": -108
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 259.5,
+         "price": -125
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 207.5,
+         "price": -118
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 207.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:20:26Z",
+       "outcomes": [
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 20.5,
+         "price": -117
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 64.5,
+         "price": -117
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 7.5,
+         "price": -109
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 7.5,
+         "price": -122
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -114
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -117
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 20.5,
+         "price": -117
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 57.5,
+         "price": -121
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 57.5,
+         "price": -111
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 54.5,
+         "price": -113
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 54.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:20:26Z",
+       "outcomes": [
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 118
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 5.5,
+         "price": -157
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 4.5,
+         "price": -152
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -139
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 113
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 113
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 2.5,
+         "price": -173
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 3.5,
+         "price": -176
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:20:26Z",
+       "outcomes": [
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 15.5,
+         "price": -114
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 9.5,
+         "price": -121
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 43.5,
+         "price": -113
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 30.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-10-05T17:20:14Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:20:21Z",
+       "outcomes": [
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 207.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 207.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 262.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 262.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:20:21Z",
+       "outcomes": [
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 39.5,
+         "price": -112
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 58.5,
+         "price": -112
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 58.5,
+         "price": -112
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 17.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:20:21Z",
+       "outcomes": [
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -154
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 1.5,
+         "price": -176
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 1.5,
+         "price": 138
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -156
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 4.5,
+         "price": 122
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 102
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -130
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 5.5,
+         "price": 116
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 5.5,
+         "price": -148
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 134
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 3.5,
+         "price": -172
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 5.5,
+         "price": 130
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 5.5,
+         "price": -166
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 112
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -142
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 2.5,
+         "price": -166
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:20:21Z",
+       "outcomes": [
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 7.5,
+         "price": -134
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 7.5,
+         "price": 106
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -106
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-10-05T17:19:54Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:20:25Z",
+       "outcomes": [
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 261.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 261.5,
+         "price": -120
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 208.5,
+         "price": -120
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 208.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:20:25Z",
+       "outcomes": [
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 65.5,
+         "price": -120
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 65.5,
+         "price": -120
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 58.5,
+         "price": -125
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 58.5,
+         "price": -120
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 7.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:20:25Z",
+       "outcomes": [
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 5.5,
+         "price": -160
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -160
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:20:25Z",
+       "outcomes": [
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 43.5,
+         "price": -125
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 8.5,
+         "price": -125
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-10-05T17:20:04Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:20:50Z",
+       "outcomes": [
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 262.5,
+         "price": -113
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 208.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:20:50Z",
+       "outcomes": [
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 57.5,
+         "price": -114
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 53.5,
+         "price": -114
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:20:50Z",
+       "outcomes": [
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -124
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 4.5,
+         "price": -159
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 1.5,
+         "price": -186
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 102
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 5.5,
+         "price": 123
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:20:50Z",
+       "outcomes": [
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 28.5,
+         "price": -109
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 43.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 31.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-10-05T17:20:13Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:20:55Z",
+       "outcomes": [
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 262.5,
+         "price": -114
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 262.5,
+         "price": -117
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 208.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 208.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:20:55Z",
+       "outcomes": [
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 53.5,
+         "price": -117
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 53.5,
+         "price": -114
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -113
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -118
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 65.5,
+         "price": -117
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 65.5,
+         "price": -113
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -114
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -117
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 19.5,
+         "price": -121
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 57.5,
+         "price": -114
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:20:55Z",
+       "outcomes": [
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 112
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -148
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 132
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 102
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -134
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 5.5,
+         "price": 120
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 5.5,
+         "price": -162
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 4.5,
+         "price": -106
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 4.5,
+         "price": -162
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 4.5,
+         "price": 120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:20:55Z",
+       "outcomes": [
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 68.5,
+         "price": -113
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 68.5,
+         "price": -118
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 43.5,
+         "price": -117
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 43.5,
+         "price": -114
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 28.5,
+         "price": -121
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-10-05T17:20:03Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:19:29Z",
+       "outcomes": [
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 208.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 208.5,
+         "price": -118
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 257.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 257.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:19:29Z",
+       "outcomes": [
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 37.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 37.5,
+         "price": -110
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 54.5,
+         "price": -110
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 54.5,
+         "price": -118
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Jeremy McNichols",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Jeremy McNichols",
+         "name": "Under",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:19:29Z",
+       "outcomes": [
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 3.5,
+         "price": -185
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 5.5,
+         "price": 125
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 5.5,
+         "price": -165
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -135
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 3.5,
+         "price": -190
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 3.5,
+         "price": 145
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:19:29Z",
+       "outcomes": [
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 66.5,
+         "price": -110
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 66.5,
+         "price": -118
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 9.5,
+         "price": -118
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-10-05T17:20:12Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-05T17:20:11Z",
+       "outcomes": [
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 270.5,
+         "price": 100
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 270.5,
+         "price": -135
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 205.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 205.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-05T17:20:11Z",
+       "outcomes": [
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -105
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -125
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 10.5,
+         "price": 130
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 10.5,
+         "price": -170
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 60.5,
+         "price": -105
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 60.5,
+         "price": -125
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 65.5,
+         "price": -110
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 65.5,
+         "price": -120
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Over",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Jaylin Lane",
+         "name": "Under",
+         "point": 20.5,
+         "price": -130
+        },
+        {
+         "description": "Jeremy McNichols",
+         "name": "Over",
+         "point": 10.5,
+         "price": 125
+        },
+        {
+         "description": "Jeremy McNichols",
+         "name": "Under",
+         "point": 10.5,
+         "price": -165
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-05T17:20:11Z",
+       "outcomes": [
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Over",
+         "point": 5.5,
+         "price": 135
+        },
+        {
+         "description": "Quentin Johnston",
+         "name": "Under",
+         "point": 5.5,
+         "price": -175
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 3.5,
+         "price": 150
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 3.5,
+         "price": -200
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Over",
+         "point": 5.5,
+         "price": 120
+        },
+        {
+         "description": "Keenan Allen",
+         "name": "Under",
+         "point": 5.5,
+         "price": -160
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Oronde Gadsden II",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Over",
+         "point": 2.5,
+         "price": 160
+        },
+        {
+         "description": "Luke McCaffrey",
+         "name": "Under",
+         "point": 2.5,
+         "price": -210
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Chris Moore",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Zach Ertz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Over",
+         "point": 5.5,
+         "price": 145
+        },
+        {
+         "description": "Ladd McConkey",
+         "name": "Under",
+         "point": 5.5,
+         "price": -190
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 5.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-05T17:20:11Z",
+       "outcomes": [
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Jacory Croskey-Merritt",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Herbert",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Over",
+         "point": 45.5,
+         "price": 100
+        },
+        {
+         "description": "Jayden Daniels",
+         "name": "Under",
+         "point": 45.5,
+         "price": -130
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Over",
+         "point": 70.5,
+         "price": -105
+        },
+        {
+         "description": "Omarion Hampton",
+         "name": "Under",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Over",
+         "point": 30.5,
+         "price": 100
+        },
+        {
+         "description": "Chris Rodriguez Jr.",
+         "name": "Under",
+         "point": 30.5,
+         "price": -130
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Deebo Samuel Sr.",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    }
+   ],
+   "commence_time": "2025-10-05T20:26:00Z",
+   "home_team": "Los Angeles Chargers",
+   "id": "79c4e9f40e2647dc2a7b377cf61c48cd",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-10-05T17:25:38Z",
+  "previous_timestamp": "2025-10-05T17:15:38Z",
+  "timestamp": "2025-10-05T17:20:37Z"
+ }
+}
