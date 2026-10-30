@@ -626,6 +626,7 @@ function viewPlayer(pid) {
   }
   h += `</tbody></table></div>`;
   if (S.showAn) h += analysisPanel(pid, mid, rows);
+  if (window.STIX_BOOKS) h += window.STIX_BOOKS.box(pid, mid); // other books: very bottom of the page (Michael)
   return h;
 }
 
@@ -980,6 +981,10 @@ function render() {
   else if (tab === "leads") app.innerHTML = viewLeads();
   else if (tab === "guide" || tab === "slots" || tab === "log") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
+  else if (tab === "arb") {
+    try { app.innerHTML = window.STIX_BOOKS ? window.STIX_BOOKS.view() : `<p class="pad">Arbitrage didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">Arbitrage hit an error. Try refreshing.</p>`; }
+  }
   else if (tab === "picks") {
     try { app.innerHTML = window.STIX_PICKS ? window.STIX_PICKS.view() : `<p class="pad">Picks didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">My picks hit an error. Try refreshing.</p>`; }
@@ -1011,6 +1016,7 @@ function render() {
   if (window.STIX_PICKS) { try { window.STIX_PICKS.bind(tab, arg); } catch (e) { console.error(e); } }
   if (tab === "review" && window.STIX_REVIEW) { try { window.STIX_REVIEW.bind(tab); } catch (e) { console.error(e); } }
   if (tab === "admin" && window.STIX_ADMIN) { try { window.STIX_ADMIN.bind(); } catch (e) { console.error(e); } }
+  if (tab === "arb" && window.STIX_BOOKS) { try { window.STIX_BOOKS.bind(); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };

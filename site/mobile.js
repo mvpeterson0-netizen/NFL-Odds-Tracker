@@ -186,7 +186,7 @@
     // Context: weather only
     h += `<div class="panel"><h3>Matchup &amp; context</h3><div class="body mlist">
       ${cur ? `<div>Weather: ${wxCell(cur.gid)}</div>` : ""}
-    </div></div></div>`;
+    </div></div>${window.STIX_BOOKS ? window.STIX_BOOKS.box(pid, mid) : ""}</div>`; // other books: very bottom (Michael)
     return h;
   }
 

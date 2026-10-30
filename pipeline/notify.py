@@ -84,11 +84,11 @@ def message(crossed: list[dict]) -> tuple[str, str]:
 
 
 # ---------- ntfy ----------
-def send(topic: str, title: str, body: str) -> None:
+def send(topic: str, title: str, body: str, click: str = SITE_URL) -> None:
     server = os.environ.get("NTFY_SERVER", "https://ntfy.sh").rstrip("/")
     req = urllib.request.Request(
         f"{server}/{topic}", data=body.encode("utf-8"), method="POST",
-        headers={"Title": title, "Tags": "football", "Click": SITE_URL},  # ASCII-only header values
+        headers={"Title": title, "Tags": "football", "Click": click},  # ASCII-only header values
     )
     with urllib.request.urlopen(req, timeout=20) as resp:
         if resp.status >= 300:
@@ -108,7 +108,7 @@ def _supa(method: str, path: str, key: str, body: bytes | None = None, extra: di
         return json.loads(raw) if raw else None
 
 
-def push_all(title: str, body: str, log: list[str]) -> bool | None:
+def push_all(title: str, body: str, log: list[str], url: str = SITE_URL) -> bool | None:
     """Send to every subscription. Returns None if web push isn't set up, else True when it counts as done."""
     vapid = os.environ.get("VAPID_PRIVATE_KEY", "").strip()
     key = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
@@ -127,7 +127,7 @@ def push_all(title: str, body: str, log: list[str]) -> bool | None:
     except Exception as ex:
         log.append(f"push: couldn't read subscriptions ({type(ex).__name__}: {str(ex)[:80]})")
         return False
-    payload = json.dumps({"title": title, "body": body, "url": SITE_URL})
+    payload = json.dumps({"title": title, "body": body, "url": url})
     signer = Vapid.from_string(private_key=vapid)
     exp = int(time.time()) + 12 * 3600
     signed: dict[str, dict] = {}  # one signed VAPID token per push service per run (Apple asks not to re-sign often)
@@ -207,4 +207,103 @@ def run(log: list[str]) -> bool:
     keep = {k: v for k, v in alerted.items() if (d.get("games", {}).get(k) or {}).get("ko", "9999") > cutoff}
     write_json(STATE, {"alerted": keep})
     log.append(f"notify: alert for {len(crossed)} game(s): " + ", ".join(c["gid"] for c in crossed))
+    return True
+
+
+# ---------- arbitrage alerts (Michael 2026-10-29) ----------
+# After each build: from data.json "books" (each upcoming game's latest multi-book pull), the best Over at one book +
+# Under at another for each player/stat (Over line <= Under line), same math as the Arbitrage tab (site/books.js).
+# An opportunity whose profit on $100 total, split so either side pays the same, is at least $0.01 is alerted once
+# (key: game, player, stat, both books and lines). State: data/arb_alert_state.json (pruned after kickoff).
+ARB_STATE = DATA / "arb_alert_state.json"
+ARB_URL = "https://www.sharpstix.com/#/arb"
+ARB_EXCLUDE_BOOKS: tuple[str, ...] = ()  # books never used for arbitrage alerts
+ARB_WEB_PUSH = True  # also send to everyone who turned on Stix alerts (web push); ntfy always when NTFY_TOPIC is set
+ARB_MAX_LINES = 8
+BOOK_LABEL = {"draftkings": "DraftKings", "fanduel": "FanDuel", "betmgm": "BetMGM", "williamhill_us": "Caesars",
+              "fanatics": "Fanatics", "betrivers": "BetRivers", "espnbet": "theScore Bet", "hardrockbet": "Hard Rock",
+              "ballybet": "Bally Bet", "fliff": "Fliff"}
+
+
+def _dec(o):
+    return 1 + o / 100 if o > 0 else 1 + 100 / abs(o)
+
+
+def arbs(d: dict, now) -> list[dict]:
+    out = []
+    for gid, g in (d.get("books") or {}).items():
+        ko = parse_iso(((d.get("games") or {}).get(gid) or {}).get("ko", ""))
+        if not ko or ko <= now:
+            continue
+        for pid, ms in (g.get("p") or {}).items():
+            for mid, rows in ms.items():
+                rs = [r for r in rows if r[0] not in ARB_EXCLUDE_BOOKS]
+                best = None
+                for o in rs:
+                    for u in rs:
+                        if o[0] == u[0] or o[2] is None or u[3] is None or o[1] > u[1]:
+                            continue
+                        S = 1 / _dec(o[2]) + 1 / _dec(u[3])
+                        ret = 1 / S - 1
+                        if best is None or ret > best["ret"]:
+                            best = {"gid": gid, "pid": pid, "mid": mid, "o": o, "u": u, "ret": ret, "ko": ko}
+                if best and round(best["ret"] * 10000) / 100 > 0:
+                    out.append(best)
+    return sorted(out, key=lambda x: -x["ret"])
+
+
+def arb_message(new: list[dict], d: dict) -> tuple[str, str]:
+    names = {p["id"]: p["name"] for p in d.get("players", [])}
+    labels = {m["id"]: m["label"] for m in d.get("markets", [])}
+    title = f"Stix: {len(new)} arbitrage{'s' if len(new) != 1 else ''} found"
+    lines = []
+    for x in new[:ARB_MAX_LINES]:
+        o, u = x["o"], x["u"]
+        sg = lambda v: f"+{v:g}" if v > 0 else f"{v:g}"
+        lines.append(f"{names.get(x['pid'], x['pid'])} {labels.get(x['mid'], x['mid'])}: O {o[1]:g} {BOOK_LABEL.get(o[0], o[0])} "
+                     f"{sg(o[2])} / U {u[1]:g} {BOOK_LABEL.get(u[0], u[0])} {sg(u[3])} = +${x['ret'] * 100:.2f} per $100")
+    if len(new) > ARB_MAX_LINES:
+        lines.append(f"and {len(new) - ARB_MAX_LINES} more in Stix")
+    return title, "\n".join(lines)
+
+
+def arb_run(log: list[str]) -> bool:
+    """Returns True when the state file changed."""
+    topic = os.environ.get("NTFY_TOPIC", "").strip()
+    push_ready = ARB_WEB_PUSH and bool(os.environ.get("VAPID_PRIVATE_KEY", "").strip() and os.environ.get("SUPABASE_SERVICE_KEY", "").strip())
+    if not topic and not push_ready:
+        return False
+    d = read_json(SITE / "data" / "data.json", None)
+    if not d:
+        return False
+    now = utcnow()
+    state = read_json(ARB_STATE, {}) or {}
+    seen = state.get("alerted", {})
+    found = arbs(d, now)
+    key = lambda x: f"{x['gid']}|{x['pid']}|{x['mid']}|{x['o'][0]}|{x['o'][1]}|{x['u'][0]}|{x['u'][1]}"
+    new = [x for x in found if key(x) not in seen]
+    if not new:
+        return False
+    title, body = arb_message(new, d)
+    ok = False
+    if topic:
+        try:
+            send(topic, title, body, click=ARB_URL)
+            ok = True
+            log.append("arb: ntfy sent")
+        except Exception as ex:
+            log.append(f"arb: ntfy failed ({type(ex).__name__}: {str(ex)[:80]})")
+    if push_ready:
+        try:
+            ok = bool(push_all(title, body, log, url=ARB_URL)) or ok
+        except Exception as ex:
+            log.append(f"arb: push skipped ({type(ex).__name__}: {str(ex)[:80]})")
+    if not ok:
+        return False  # nothing recorded, so the next run retries
+    stamp = iso(now)
+    for x in new:
+        seen[key(x)] = {"utc": stamp, "ko": iso(x["ko"]), "ret": round(x["ret"], 4)}
+    keep = {k: v for k, v in seen.items() if v.get("ko", "9999") > iso(now)}
+    write_json(ARB_STATE, {"alerted": keep})
+    log.append(f"arb: alert for {len(new)} arbitrage(s)")
     return True
