@@ -94,10 +94,7 @@ def main() -> int:
             notify.arb_run(log)
         except Exception as ex:
             log.append(f"arb: skipped ({type(ex).__name__}: {str(ex)[:80]})")
-        try:
-            history_2025.run(os.environ.get("ODDS_API_KEY_20K", "").strip(), log)
-        except Exception as ex:
-            log.append(f"history 2025: paused ({type(ex).__name__}); retry next run")
+        # 2025 research download stopped at Michael's request; preserve the saved archive.
     except Exception as e:  # logged, then the run fails so the next schedule retries
         status = "error"
         err = f"{type(e).__name__}: {e}"[:500]
