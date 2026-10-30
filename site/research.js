@@ -3,7 +3,7 @@
 // Uses only data already in data.json (players' per-game rows, lines, usage; game script minutes from play-by-play).
 // Leads = the 8 frozen theses (claude/frozen-theses.md), each spelled out behind its "i". Candidates, not predictions.
 (function () {
-  const RL = { tab: "t1", mk: "" };
+  const RL = { tab: "t1", mk: "", gid: "" };
   // Game script (nflverse play-by-play, built into games[gid].scr as minutes leading "l<m>" / trailing "t<m>" by each
   // margin m): a team "led big" when ahead by MARGIN+ points for at least MINUTES of the game, "trailed big" likewise.
   // Default 13+ for 30 minutes (Michael's choice); each viewer can change both on the Guide tab (saved in this browser).
@@ -226,6 +226,7 @@
       const rows = D.rows[p.id] || [];
       for (const r of rows) {
         if (r.final || !r.ko || new Date(r.ko).getTime() <= now) continue;
+        if (RL.gid && r.gid !== RL.gid) continue;
         const past = rows.filter((x) => x.wk < r.wk && x.final).sort((a, b) => a.wk - b.wk);
         const played = past.filter((x) => x.played === true);
         const prev = past[past.length - 1] || null;
@@ -238,6 +239,18 @@
       }
     }
     return out;
+  }
+  // Game filter options: upcoming (not started) games where at least one slotted player has a line showing.
+  function gameOptions() {
+    const now = Date.now(), seen = new Map();
+    for (const p of D.players) {
+      if (p.extra) continue;
+      for (const r of D.rows[p.id] || []) {
+        if (r.final || !r.ko || new Date(r.ko).getTime() <= now || seen.has(r.gid)) continue;
+        if (Object.values(r.m || {}).some((m) => curLine(m))) seen.set(r.gid, r.ko);
+      }
+    }
+    return [...seen.entries()].sort((a, b) => new Date(a[1]) - new Date(b[1]) || a[0].localeCompare(b[0]));
   }
   const prevLine = (c) => (c.pm && c.pm.lstat === "ok" && c.pm.line != null ? c.pm.line : null);
   // Points his team is favored by (negative = underdog), from nflverse spread_line (home team favored by). null if not posted.
@@ -303,6 +316,7 @@
     const list = compute(t.id);
     let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${recLine(t)}</span></p>`;
     if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
+    if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
     const heads = HEADS[t.id];
     h += `<div class="panel rlist">`;
@@ -339,10 +353,12 @@
   document.addEventListener("click", infoHandler, true);
   document.addEventListener("keydown", infoHandler, true);
   function html() {
-    const mks = D.markets;
+    const mks = D.markets, gopts = gameOptions();
+    if (RL.gid && !gopts.some(([g]) => g === RL.gid)) RL.gid = ""; // that game started or has no lines: back to all games
     return `<section id="rl"><h2 class="gsec">Leads</h2>
       <div class="rlgrid rl8" role="tablist">${visibleTabs().map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}${signedIn() ? "" : `<button type="button" class="gchip rl-lock" data-rlsignin>🔒 Sign in to see all ${TABS.length}</button>`}</div>
-      <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label></div>
+      <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label>
+        <label>Game <select id="rl-gid"><option value="">All games</option>${gopts.map(([g, ko]) => `<option value="${esc(g)}" ${g === RL.gid ? "selected" : ""}>${esc(gameLabel(g))} · ${fmtTime(ko)}</option>`).join("")}</select></label></div>
       <div id="rl-body">${body()}</div></section><h2 class="gsec">Builder</h2>`;
   }
   function redraw() {
@@ -370,6 +386,7 @@
     try { S.market[a.dataset.rpid] = a.dataset.rmid; } catch (err) { console.error(err); }
   }, true);
   document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-mk") { RL.mk = e.target.value; redraw(); } });
+  document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-gid") { RL.gid = e.target.value; redraw(); } });
   function safeHtml() { try { return html(); } catch (e) { console.error("research leads failed", e); return ""; } }
   // ---------- Guide tab setting ----------
   function settingsHtml() {
