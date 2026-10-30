@@ -2,7 +2,7 @@
 
 Historical access requires the paid key. Free keys are used first by the LIVE
 collector instead. Every billable request gets a fresh, free quota check; a
-request is only made when its maximum cost leaves at least 500 paid credits.
+request is only made when its maximum cost does not exceed the available paid credits.
 A persisted stop and a pre-reset deadline prevent spending next month's quota.
 """
 from datetime import timedelta

@@ -2,7 +2,7 @@
 import os
 from datetime import datetime, timezone
 
-PAID_RESERVE = 500
+PAID_RESERVE = 0
 # Before Nov 1 in either UTC or Central: never spend a newly reset allowance.
 BACKFILL_DEADLINE = datetime(2026, 11, 1, tzinfo=timezone.utc)
 

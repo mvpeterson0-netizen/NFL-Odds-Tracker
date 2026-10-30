@@ -23,13 +23,13 @@ uses only the paid key. Secret values never belong in code, output or reports.
 
 The backfill verifies the paid balance through a free events request immediately
 before **every** billable call, including historical event discovery. It budgets
-the maximum request cost against a 500-credit reserve, saves actual API costs,
+the maximum request cost against a zero-credit reserve, saves actual API costs,
 and pauses on missing quota information. Live NFL pulls also respect the paid
-500-credit floor until the deadline and recheck before using the paid key.
+zero-credit floor until the deadline and recheck before using the paid key.
 
 The NBA app is a separate concurrent consumer: it can spend the reserve and
 can race a balance check. This code controls NFL requests, not NBA requests;
-500 credits is a spending floor for this code, not a claim about two days of NBA
+The zero-credit limit is a spending floor for this code, not a claim about two days of NBA
 usage. API balances and secret availability must be verified in Actions.
 
 ## One-time lifecycle
@@ -49,3 +49,5 @@ The nflverse 2025 depth-chart asset exists with `dt`, `team`, `gsis_id`,
 `pos_abb` and `pos_rank` fields needed by the existing slot code. Lead grading
 and slot reconstruction are a separate step after the archive is downloaded;
 this change does not claim to have evaluated the eight leads.
+
+Budget revised October 30 after NBA free-first routing was enabled: use the remaining paid balance, with no 500-credit reserve. NBA may fall back to paid only when free keys cannot fund a request. Both apps can exhaust their credits before reset.

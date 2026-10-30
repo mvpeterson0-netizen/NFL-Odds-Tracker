@@ -16,6 +16,19 @@ EVENT = {'id': 'e1', 'home_team': 'Philadelphia Eagles', 'away_team': 'Dallas Co
 
 
 class CreditTests(unittest.TestCase):
+    def setUp(self):
+        # Verify reserve arithmetic with a nonzero floor, even when deployment uses zero.
+        self.reserve = patch.object(hist, "PAID_RESERVE", 500)
+        self.reserve.start()
+        self.addCleanup(self.reserve.stop)
+
+    def test_zero_reserve_can_use_last_credits(self):
+        self.assertEqual(policy.PAID_RESERVE, 0)
+        with patch.object(hist, "PAID_RESERVE", 0), patch.object(hist, "utcnow", return_value=NOW), patch.object(hist, "fetch_events", return_value=([], {"x-requests-remaining": "50"})):
+            hist.quota("paid", {}, 50)
+            with self.assertRaises(hist.Stop):
+                hist.quota("paid", {}, 51)
+
     def test_paid_duplicate_is_last_and_core_uses_free_first(self):
         with patch.dict(os.environ, {'ODDS_API_KEY': 'paid', 'ODDS_API_KEY_2': 'free',
                                     'ODDS_API_KEY_20K': 'paid'}, clear=True):
