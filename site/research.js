@@ -1,5 +1,5 @@
 "use strict";
-// Stix Research tab: pre-built "Leads" filters shown as tabs above the builder (search.js).
+// Stix Research tab: pre-built "Leads" filters, then Leads Analysis (how a rule did in a past week / game).
 // Uses only data already in data.json (players' per-game rows, lines, usage; game script minutes from play-by-play).
 // Leads = the 8 frozen theses (claude/frozen-theses.md), each spelled out behind its "i". Candidates, not predictions.
 (function () {
@@ -392,11 +392,12 @@
       <div class="rlgrid rl8" role="tablist">${visibleTabs().map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}${signedIn() ? "" : `<button type="button" class="gchip rl-lock" data-rlsignin>🔒 Sign in to see all ${TABS.length}</button>`}</div>
       <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label>
         <label>Game <select id="rl-gid"><option value="">All games</option>${gopts.map(([g, ko]) => `<option value="${esc(g)}" ${g === RL.gid ? "selected" : ""}>${esc(gameLabel(g))} · ${fmtTime(ko)}</option>`).join("")}</select></label></div>
-      <div id="rl-body">${body()}</div></section><h2 class="gsec">Builder</h2>`;
+      <div id="rl-body">${body()}</div></section>`;
   }
   function redraw() {
     const el = document.getElementById("rl"); if (!el) return;
-    el.outerHTML = html().replace(/<h2 class="gsec">Builder<\/h2>$/, "");
+    el.outerHTML = html();
+    const an = document.getElementById("la"); if (an) an.outerHTML = analysisHtml(); // rules 4–8 follow sign-in here too
   }
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-rtab]"); if (!b) return;
@@ -421,6 +422,136 @@
   document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-mk") { RL.mk = e.target.value; redraw(); } });
   document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-gid") { RL.gid = e.target.value; redraw(); } });
   function safeHtml() { try { return html(); } catch (e) { console.error("research leads failed", e); return ""; } }
+
+  // ---------- Leads Analysis (Michael 2026-10-30): how one rule did in one week, optionally one game ----------
+  // Scores exactly like claude/frozen-theses.md's frozen.py: slotted players, final games, graded pre-game line with
+  // both saved odds, result over/under/push (voids skipped), 1 unit at that line's saved odds for the rule's side.
+  // "Last week" = his most recent earlier final game; spread = data.json games[gid].spread (nflverse spread_line).
+  const LA = { tab: "t1", wk: null, gid: "" };
+  const payout = (o) => (o > 0 ? o / 100 : 100 / Math.abs(o));
+  function ruleHits(r, mid, m, p, past, played, prev) {
+    const pm = prev && prev.m ? prev.m[mid] : null;
+    const pl = pm && pm.lstat === "ok" && pm.line != null ? pm.line : null;
+    const f = favBy(r), hits = [];
+    if (r.slot === "WR2" && pm && pm.res === "over") hits.push("t1");
+    if (r.ha === "away" && pl != null && m.line > pl) hits.push("t2");
+    if (r.slot === "TE1" && mid === "rec_yds") hits.push("t3");
+    if (r.slot === "QB1" && mid === "rush_yds") hits.push("t4");
+    if (p.pos !== "QB" && pl != null) {
+      const us = played.map((x) => usageOf(p.pos, x)).filter((u) => u != null);
+      if (us.length >= USAGE_N + 2) {
+        const early = us.slice(0, -USAGE_N), drop = us.slice(-USAGE_N).reduce((a, b) => a + b, 0) / USAGE_N - early.reduce((a, b) => a + b, 0) / early.length;
+        const tol = COUNT_MKTS.includes(mid) ? FLAT.count : mid === "pass_yds" ? FLAT.pass_yds : FLAT.yds;
+        if (drop <= -(p.pos === "RB" ? USAGE_DROP.snap : USAGE_DROP.tshare) && Math.abs(m.line - pl) <= tol) hits.push("t5");
+      }
+    }
+    if (f != null && f >= BIG_SPREAD && p.pos === "RB" && mid === "rush_yds") hits.push("t6");
+    if (f != null && f <= -BIG_SPREAD && mid === "pass_yds") hits.push("t7");
+    if (f != null && f <= -BIG_SPREAD && (p.pos === "WR" || p.pos === "TE") && mid === "rec_yds") hits.push("t8");
+    return { hits, pm, pl, f };
+  }
+  // Every graded bet one rule made in one week: [{p, r, mid, m, side, out: "hit"|"miss"|"push", u, pm, pl, f}]
+  function analyze(tab, wk) {
+    const t = TABS.find((x) => x.id === tab), out = [];
+    for (const p of D.players) {
+      if (p.extra) continue;
+      const rows = (D.rows[p.id] || []).slice().sort((a, b) => a.wk - b.wk);
+      for (const r of rows) {
+        if (r.wk !== wk || !r.final) continue;
+        const past = rows.filter((x) => x.wk < r.wk && x.final), played = past.filter((x) => x.played === true), prev = past[past.length - 1] || null;
+        for (const [mid, m] of Object.entries(r.m || {})) {
+          if (m.lstat !== "ok" || m.op == null || m.up == null || !["over", "under", "push"].includes(m.res)) continue;
+          const x = ruleHits(r, mid, m, p, past, played, prev);
+          if (!x.hits.includes(tab)) continue;
+          const odds = t.side === "under" ? m.up : m.op;
+          const o = m.res === "push" ? "push" : m.res === t.side ? "hit" : "miss";
+          out.push({ p, r, mid, m, side: t.side, out: o, u: o === "hit" ? payout(odds) : o === "miss" ? -1 : 0, odds, ...x });
+        }
+      }
+    }
+    return out;
+  }
+  // Weeks with at least one final game (newest first), and the week's games.
+  function laWeeks() { return [...new Set(Object.values(D.games).filter((g) => g.final).map((g) => g.wk))].sort((a, b) => b - a); }
+  function laGames(wk) { return Object.entries(D.games).filter(([, g]) => g.wk === wk).sort((a, b) => (a[1].ko || "").localeCompare(b[1].ko || "") || a[0].localeCompare(b[0])); }
+  const unitsTxt = (u) => `${u >= 0 ? "+" : "−"}${Math.abs(u).toFixed(2)} u`;
+  function tally(list) {
+    const W = list.filter((x) => x.out === "hit").length, L = list.filter((x) => x.out === "miss").length, P = list.filter((x) => x.out === "push").length;
+    const U = list.reduce((a, x) => a + x.u, 0), n = W + L;
+    return { W, L, P, U, n, hit: n ? (100 * W) / n : null, roi: n ? (100 * U) / n : null };
+  }
+  const recTxt = (s) => `${s.W}–${s.L}${s.P ? `–${s.P}` : ""}`;
+  function why(x) {
+    const t = x.r, line = num(x.m.line);
+    switch (LA.tab) {
+      case "t1": return `Last game ${num(x.pm.act)} vs ${num(x.pl)} line (over)`;
+      case "t2": return `Line ${num(x.pl)} → ${line} · @ ${esc(t.opp)}`;
+      case "t5": return `Line ${num(x.pl)} → ${line}`;
+      case "t6": case "t7": case "t8": return esc(spreadTxt(x.f));
+      default: return "";
+    }
+  }
+  function laRow(x) {
+    const { p, r, mid, m } = x;
+    const cls = x.out === "hit" ? "la-hit" : x.out === "miss" ? "la-miss" : "la-push";
+    const w = why(x);
+    return `<div class="rlrow ${cls}"><div class="rlhead"><span class="la-mark" aria-hidden="true">${x.out === "hit" ? "✓" : x.out === "miss" ? "✗" : "–"}</span><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+        <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${x.out === "push" ? "push" : unitsTxt(x.u)}</span></div>
+      <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)}</div>
+      <div class="rlcells"><span><span class="muted small">${x.side === "over" ? "Over" : "Under"}</span> <b>${num(m.line)}</b> <span class="muted small">${odds(x.odds)}</span></span><span><span class="muted small">Actual</span> <b>${num(m.act)}</b></span>${w ? `<span class="muted small">${w}</span>` : ""}</div></div>`;
+  }
+  function analysisBody() {
+    const t = TABS.find((x) => x.id === LA.tab);
+    const all = analyze(LA.tab, LA.wk);
+    const games = laGames(LA.wk), nFinal = games.filter(([, g]) => g.final).length;
+    const list = LA.gid ? all.filter((x) => x.r.gid === LA.gid) : all;
+    const s = tally(list);
+    const scope = LA.gid ? esc(gameLabel(LA.gid)) : `Week ${LA.wk}${nFinal < games.length ? ` (${nFinal} of ${games.length} games final)` : ""}`;
+    let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${LA.wk <= 7 ? "Weeks 1–7 are the weeks this rule was picked from (in-sample), so these results flatter it." : "Week 8 on: weeks the rule had never seen when it was frozen (out-of-sample)."}</span></p>`;
+    if (t.spread && !Object.values(D.games).some((g) => g.wk === LA.wk && g.spread != null)) return h + `<p class="muted">No point spreads in the app's data for week ${LA.wk}, so this rule can't be scored.</p>`;
+    h += `<div class="la-sum"><div><span class="muted small">${scope}</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : ""}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : (s.roi > 0 ? "+" : s.roi < 0 ? "−" : "") + Math.abs(s.roi).toFixed(1) + "%"}</b></div></div>`;
+    if (!LA.gid && all.length) {
+      // per-game breakdown; tap a game to see only it
+      const by = new Map();
+      for (const x of all) { if (!by.has(x.r.gid)) by.set(x.r.gid, []); by.get(x.r.gid).push(x); }
+      h += `<div class="panel la-games">${games.filter(([g]) => by.has(g)).map(([g]) => { const st = tally(by.get(g)); return `<button type="button" class="la-game" data-lagid="${esc(g)}"><span>${esc(gameLabel(g))}</span><span class="muted small">${recTxt(st)} · ${st.n ? unitsTxt(st.U) : "push"}</span><span class="muted">›</span></button>`; }).join("")}</div>`;
+    }
+    if (!list.length) return h + `<p class="muted">${LA.gid && !(D.games[LA.gid] || {}).final ? "This game isn't final yet." : `No graded bets for rule ${t.n} ${LA.gid ? "in this game" : `in week ${LA.wk}`}.`}</p>`;
+    const sortK = (a, b) => (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid);
+    const grp = (k, title) => { const g = list.filter((x) => x.out === k).sort(sortK); return g.length ? `<h3 class="la-h ${k}">${title} (${g.length})</h3><div class="panel rlist">${g.map(laRow).join("")}</div>` : ""; };
+    return h + grp("hit", "Hits") + grp("miss", "Misses") + grp("push", "Pushes") +
+      `<p class="muted small">Graded on the pre-game line (~3 h before kickoff) at its saved odds, 1 unit per bet; voids and lines without both saved odds are left out. Same scoring as the rule's frozen record.</p>`;
+  }
+  function analysisHtml() {
+    const weeks = laWeeks();
+    if (!weeks.length) return `<section id="la"></section>`;
+    const tabs = visibleTabs();
+    if (!tabs.some((t) => t.id === LA.tab)) LA.tab = tabs[0].id;
+    if (LA.wk == null || !weeks.includes(LA.wk)) LA.wk = weeks[0];
+    const games = laGames(LA.wk);
+    if (LA.gid && !games.some(([g]) => g === LA.gid)) LA.gid = "";
+    let body;
+    try { body = analysisBody(); } catch (e) { console.error("leads analysis failed", e); body = `<p class="muted">Leads Analysis hit an error. Try refreshing.</p>`; }
+    return `<section id="la"><h2 class="gsec">Leads Analysis</h2>
+      <div class="filters"><label>Lead <select id="la-tab">${tabs.map((t) => `<option value="${t.id}" ${t.id === LA.tab ? "selected" : ""}>${t.n}. ${esc(t.label)}</option>`).join("")}</select></label>
+        <label>Week <select id="la-wk">${weeks.map((w) => `<option value="${w}" ${w === LA.wk ? "selected" : ""}>Week ${w}</option>`).join("")}</select></label>
+        <label>Game <select id="la-gid"><option value="">All games</option>${games.map(([g, x]) => `<option value="${esc(g)}" ${g === LA.gid ? "selected" : ""}>${esc(gameLabel(g))}${x.final ? "" : " (not final)"}</option>`).join("")}</select></label></div>
+      ${signedIn() ? "" : `<p class="muted small">Rules 4–8 appear here after you sign in, same as the Leads above.</p>`}
+      <div id="la-body">${body}</div></section>`;
+  }
+  function laRedraw() { const el = document.getElementById("la"); if (el) el.outerHTML = analysisHtml(); }
+  document.addEventListener("change", (e) => {
+    const id = e.target && e.target.id;
+    if (id === "la-tab") { LA.tab = e.target.value; laRedraw(); }
+    if (id === "la-wk") { LA.wk = +e.target.value; LA.gid = ""; laRedraw(); }
+    if (id === "la-gid") { LA.gid = e.target.value; laRedraw(); }
+  });
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[data-lagid]"); if (!b) return;
+    LA.gid = b.dataset.lagid; laRedraw();
+    const el = document.getElementById("la"); if (el) el.scrollIntoView({ block: "start" });
+  });
+  function safeAnalysis() { try { return analysisHtml(); } catch (e) { console.error("leads analysis failed", e); return ""; } }
   // ---------- Guide tab setting ----------
   function settingsHtml() {
     const ms = scriptMargins();
@@ -447,5 +578,5 @@
   document.addEventListener("click", (e) => { if (e.target && e.target.id === "gs-reset") { Object.assign(SCRIPT, SCRIPT_DEFAULT); saveScript(); } });
 
   function safeSettings() { try { return settingsHtml(); } catch (e) { console.error("game script setting failed", e); return ""; } }
-  window.STIX_RESEARCH = { html: safeHtml, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
+  window.STIX_RESEARCH = { html: safeHtml, analysis: safeAnalysis, analyze, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
 })();

@@ -379,24 +379,10 @@
     return h;
   }
   function view(arg) {
-    // state comes from the URL: #/search/b:<encoded spec> (builder) or #/search/<text> (typed shortcut)
-    let incoming = arg ? decodeURIComponent(arg) : "";
-    if (incoming.startsWith("b:")) {
-      try { const o = JSON.parse(decodeURIComponent(escape(atob(incoming.slice(2))))); SPEC = o.spec; TEXT = o.text || ""; NOTES = o.notes || []; IGN = o.ign || []; } catch { SPEC = null; }
-    } else if (incoming) {
-      const p = parse(incoming);
-      SPEC = { pos: p.pos, team: "", game: "", groups: p.groups.map((g) => g.map(toRow)) };
-      TEXT = incoming; NOTES = p.notes; IGN = p.ignored;
-    } else if (!SPEC) { SPEC = { pos: [], team: "", game: "", groups: [] }; TEXT = ""; NOTES = []; IGN = []; }
-    if (!SPEC) SPEC = { pos: [], team: "", game: "", groups: [] };
-    if (SPEC.team === "LA") SPEC.team = "LAR"; // older saved links used nflverse's "LA" for the Rams
-    let h = `<div class="srch">${window.STIX_RESEARCH ? window.STIX_RESEARCH.html() : ""}<form id="s-form"><input type="search" id="s-q" placeholder="Optional: type a thesis to fill in the rows, e.g. RBs whose last 3 games average is below their rushing yards line" value="${esc(TEXT)}" autocomplete="off"><button type="submit">Fill rows</button>${SPEC.groups.length || TEXT ? `<button type="button" id="s-clear" class="sclear" title="Clear the search box and every condition">Clear all</button>` : ""}</form>`;
-    if (NOTES.length) h += `<p class="snote">How I read it: ${NOTES.map(esc).join(" · ")}</p>`;
-    if (IGN.length) h += `<p class="snote warn">Not understood (ignored): ${IGN.map((x) => `“${esc(x)}”`).join(" · ")}. Use the rows below instead.</p>`;
-    h += builderHtml();
-    h += `<div id="s-results">${resultsHtml()}</div>`;
-    if (!SPEC.groups.length) h += `<div class="panel"><h3>Try one</h3><div class="body sx">${EXAMPLES.map((e) => `<a href="#/search/${encodeURIComponent(e)}">${esc(e)}</a>`).join("")}</div></div>`;
-    return h + `</div>`;
+    // Research tab (Michael 2026-10-30): Leads, then Leads Analysis. The Builder, typed search and its results were
+    // removed from the page; old #/search/... links just open this page.
+    const R = window.STIX_RESEARCH;
+    return `<div class="srch">${R ? R.html() + R.analysis() : `<p class="pad">Research didn't load. Try refreshing.</p>`}</div>`;
   }
   function save() {
     // keep the builder state in the address so Back / refresh / sharing a link restore it
@@ -412,6 +398,7 @@
   }
   function bindResults() { const s = document.getElementById("b-sort"); if (s) s.addEventListener("change", (e) => { SORT = e.target.value; refresh(false); }); }
   function bind() {
+    if (!document.querySelector(".builder")) return; // the builder is no longer on the page (2026-10-30)
     const f = document.getElementById("s-form");
     if (f) f.addEventListener("submit", (e) => { e.preventDefault(); const q = document.getElementById("s-q").value.trim(); location.hash = q ? `#/search/${encodeURIComponent(q)}` : "#/search"; });
     const clr = document.getElementById("s-clear");
