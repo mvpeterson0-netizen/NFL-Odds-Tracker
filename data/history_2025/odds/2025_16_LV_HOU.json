@@ -1,0 +1,2837 @@
+{
+ "downloaded_utc": "2026-10-30T21:31:00Z",
+ "game_id": "2025_16_LV_HOU",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-12-21T18:25:00Z",
+ "response": {
+  "data": {
+   "away_team": "Las Vegas Raiders",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-12-21T18:20:09Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:20:32Z",
+       "outcomes": [
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 225.5,
+         "price": -111
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 225.5,
+         "price": -113
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 185.5,
+         "price": -112
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 185.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:20:32Z",
+       "outcomes": [
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 55.5,
+         "price": -111
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 55.5,
+         "price": -113
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 41.5,
+         "price": -111
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 41.5,
+         "price": -113
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 35.5,
+         "price": -112
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 30.5,
+         "price": -109
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 22.5,
+         "price": -109
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 19.5,
+         "price": -109
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -109
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 11.5,
+         "price": -107
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 11.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:20:32Z",
+       "outcomes": [
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -141
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 4.5,
+         "price": 103
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": -107
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -119
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -159
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 3.5,
+         "price": 124
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -102
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 2.5,
+         "price": -157
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 129
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 1.5,
+         "price": -123
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 1.5,
+         "price": -104
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:20:32Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 44.5,
+         "price": -109
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 44.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 11.5,
+         "price": -108
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 11.5,
+         "price": -116
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 8.5,
+         "price": -122
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 8.5,
+         "price": -103
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-12-21T18:20:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:20:44Z",
+       "outcomes": [
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 224.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 224.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Smith II",
+         "name": "Over",
+         "point": 180.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Smith II",
+         "name": "Under",
+         "point": 180.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:20:44Z",
+       "outcomes": [
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 66.5,
+         "price": -120
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 66.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 52.5,
+         "price": -110
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:20:44Z",
+       "outcomes": [
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 2.5,
+         "price": 160
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -220
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:20:44Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Smith II",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Smith II",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "theScore Bet"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-12-21T18:18:01Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:19:20Z",
+       "outcomes": [
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 181.5,
+         "price": -108
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 181.5,
+         "price": -125
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 224.5,
+         "price": -111
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 224.5,
+         "price": -121
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:19:20Z",
+       "outcomes": [
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 18.5,
+         "price": -117
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -118
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 21.5,
+         "price": -113
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 67.5,
+         "price": -125
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 67.5,
+         "price": -108
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 52.5,
+         "price": -114
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 35.5,
+         "price": -114
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -117
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -113
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 11.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:19:20Z",
+       "outcomes": [
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -106
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -132
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -102
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 2.5,
+         "price": 191
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -265
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -139
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 123
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": -164
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 2.5,
+         "price": -162
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": -102
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 3.5,
+         "price": 109
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 122
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 2.5,
+         "price": -164
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:19:20Z",
+       "outcomes": [
+        {
+         "description": "Nick Chubb",
+         "name": "Over",
+         "point": 45.5,
+         "price": -114
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 45.5,
+         "price": -114
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 45.5,
+         "price": -117
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 8.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-12-21T18:20:24Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:20:33Z",
+       "outcomes": [
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 179.5,
+         "price": -112
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 179.5,
+         "price": -112
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 224.5,
+         "price": -112
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 224.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:20:33Z",
+       "outcomes": [
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -112
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -112
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 52.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:20:33Z",
+       "outcomes": [
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -128
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -142
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 2.5,
+         "price": -154
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 126
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -128
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 114
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -144
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 2.5,
+         "price": 172
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 2.5,
+         "price": -220
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 2.5,
+         "price": -166
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -128
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 4.5,
+         "price": 102
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:20:33Z",
+       "outcomes": [
+        {
+         "description": "Nick Chubb",
+         "name": "Over",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Under",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 8.5,
+         "price": -112
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 8.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-12-21T18:19:58Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:20:51Z",
+       "outcomes": [
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 221.5,
+         "price": -114
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 178.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:20:51Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 50.5,
+         "price": -118
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 27.5,
+         "price": -122
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 42.5,
+         "price": -122
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 17.5,
+         "price": -117
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -122
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 35.5,
+         "price": -118
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 68.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:20:51Z",
+       "outcomes": [
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -121
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": -113
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -157
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 123
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:20:51Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 44.5,
+         "price": -122
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 12.5,
+         "price": -113
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 7.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-12-21T18:20:08Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:20:59Z",
+       "outcomes": [
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 178.5,
+         "price": -117
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 178.5,
+         "price": -114
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 221.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 221.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:20:59Z",
+       "outcomes": [
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 27.5,
+         "price": -118
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 10.5,
+         "price": -121
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 42.5,
+         "price": -118
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 42.5,
+         "price": -113
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 50.5,
+         "price": -114
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 50.5,
+         "price": -117
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 35.5,
+         "price": -114
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 35.5,
+         "price": -117
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 68.5,
+         "price": -114
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 68.5,
+         "price": -117
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 17.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:20:59Z",
+       "outcomes": [
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 118
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": -109
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -159
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 1.5,
+         "price": -141
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:20:59Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 44.5,
+         "price": -118
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 44.5,
+         "price": -113
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 12.5,
+         "price": -109
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 12.5,
+         "price": -121
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 7.5,
+         "price": -109
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 7.5,
+         "price": -122
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-12-21T18:20:24Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:20:05Z",
+       "outcomes": [
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 228.5,
+         "price": -120
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 228.5,
+         "price": -120
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 181.5,
+         "price": -120
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 181.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:20:05Z",
+       "outcomes": [
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 69.5,
+         "price": -125
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -125
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 34.5,
+         "price": -125
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 28.5,
+         "price": -125
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 19.5,
+         "price": -125
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Over",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Christian Kirk",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Kirk",
+         "name": "Under",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Cade Stover",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Cade Stover",
+         "name": "Under",
+         "point": 6.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:20:05Z",
+       "outcomes": [
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -150
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:20:05Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 45.5,
+         "price": -125
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 8.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-12-21T18:20:21Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:20:12Z",
+       "outcomes": [
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 219.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 219.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 188.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 188.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:20:12Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -118
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Kirk",
+         "name": "Over",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Kirk",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Over",
+         "point": 12.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -118
+        },
+        {
+         "description": "Cade Stover",
+         "name": "Over",
+         "point": 6.5,
+         "price": 115
+        },
+        {
+         "description": "Cade Stover",
+         "name": "Under",
+         "point": 6.5,
+         "price": -155
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 28.5,
+         "price": -118
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Over",
+         "point": 0.5,
+         "price": -110
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Under",
+         "point": 0.5,
+         "price": -118
+        },
+        {
+         "description": "Jawhar Jordan",
+         "name": "Over",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Jawhar Jordan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:20:12Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -135
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Christian Kirk",
+         "name": "Over",
+         "point": 1.5,
+         "price": 160
+        },
+        {
+         "description": "Christian Kirk",
+         "name": "Under",
+         "point": 1.5,
+         "price": -220
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Cade Stover",
+         "name": "Over",
+         "point": 0.5,
+         "price": -165
+        },
+        {
+         "description": "Cade Stover",
+         "name": "Under",
+         "point": 0.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 1.5,
+         "price": -118
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Over",
+         "point": 0.5,
+         "price": -140
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Under",
+         "point": 0.5,
+         "price": 105
+        },
+        {
+         "description": "Jawhar Jordan",
+         "name": "Over",
+         "point": 1.5,
+         "price": 160
+        },
+        {
+         "description": "Jawhar Jordan",
+         "name": "Under",
+         "point": 1.5,
+         "price": -220
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:20:12Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 46.5,
+         "price": -110
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 46.5,
+         "price": -120
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 5.5,
+         "price": -105
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 5.5,
+         "price": -125
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Jawhar Jordan",
+         "name": "Over",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Jawhar Jordan",
+         "name": "Under",
+         "point": 43.5,
+         "price": -118
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Nick Chubb",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-12-21T18:19:45Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-12-21T18:19:09Z",
+       "outcomes": [
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 226.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 226.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 181.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 181.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-12-21T18:19:09Z",
+       "outcomes": [
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-12-21T18:19:09Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Jayden Higgins",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Nico Collins",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Dalton Schultz",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Brock Bowers",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Tre Tucker",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Jack Bech",
+         "name": "Under",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Michael Mayer",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Xavier Hutchinson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-12-21T18:19:09Z",
+       "outcomes": [
+        {
+         "description": "Ashton Jeanty",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Ashton Jeanty",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "C.J. Stroud",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-12-21T21:25:00Z",
+   "home_team": "Houston Texans",
+   "id": "47a54fb60f7b79179bc80e18a7c5de81",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-12-21T18:25:37Z",
+  "previous_timestamp": "2025-12-21T18:15:37Z",
+  "timestamp": "2025-12-21T18:20:37Z"
+ }
+}
