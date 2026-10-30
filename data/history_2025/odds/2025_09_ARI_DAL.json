@@ -1,0 +1,3708 @@
+{
+ "downloaded_utc": "2026-10-30T19:00:53Z",
+ "game_id": "2025_09_ARI_DAL",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-11-03T22:15:00Z",
+ "response": {
+  "data": {
+   "away_team": "Arizona Cardinals",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-11-03T22:09:50Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:56Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 268.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 268.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 239.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 239.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:56Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 81.5,
+         "price": -113
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 81.5,
+         "price": -111
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 69.5,
+         "price": -113
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 69.5,
+         "price": -111
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 64.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 64.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 59.5,
+         "price": -114
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -111
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -113
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -111
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 21.5,
+         "price": -109
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 17.5,
+         "price": -108
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 17.5,
+         "price": -116
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -109
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -114
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 6.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:56Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": -143
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": 112
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -134
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 108
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -138
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 122
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -156
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -146
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 114
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -133
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 104
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -154
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 1.5,
+         "price": 116
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -138
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 108
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:56Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 67.5,
+         "price": -114
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 16.5,
+         "price": -111
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 7.5,
+         "price": -119
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 7.5,
+         "price": -105
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-11-03T22:10:18Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:54Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 274.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 274.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 238.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:54Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 66.5,
+         "price": -110
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 66.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:54Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": -140
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -135
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:54Z",
+       "outcomes": [
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-11-03T22:09:09Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:15Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 240.5,
+         "price": -111
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 240.5,
+         "price": -122
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 270.5,
+         "price": -117
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 270.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:15Z",
+       "outcomes": [
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 11.5,
+         "price": -121
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 12.5,
+         "price": -118
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 12.5,
+         "price": -113
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 58.5,
+         "price": -114
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 58.5,
+         "price": -117
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 82.5,
+         "price": -114
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 82.5,
+         "price": -117
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 65.5,
+         "price": -122
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 65.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 70.5,
+         "price": -114
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 70.5,
+         "price": -117
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 6.5,
+         "price": -109
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 6.5,
+         "price": -122
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 20.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:15Z",
+       "outcomes": [
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -136
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -136
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -127
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": -106
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -162
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -125
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": -108
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -148
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": 110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:15Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 65.5,
+         "price": -118
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 65.5,
+         "price": -114
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 7.5,
+         "price": -122
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 7.5,
+         "price": -109
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 23.5,
+         "price": -113
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 51.5,
+         "price": -118
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 51.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-11-03T22:09:50Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:24Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 238.5,
+         "price": -112
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 238.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 267.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 267.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:24Z",
+       "outcomes": [
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 58.5,
+         "price": -112
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 58.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 5.5,
+         "price": -106
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -112
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 80.5,
+         "price": -112
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 80.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:24Z",
+       "outcomes": [
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 116
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -156
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 122
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -116
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 1.5,
+         "price": 168
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 1.5,
+         "price": -215
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -156
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 3.5,
+         "price": 122
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": -136
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": 108
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -172
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 134
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -142
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:24Z",
+       "outcomes": [
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 50.5,
+         "price": -112
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 50.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 7.5,
+         "price": -108
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-11-03T22:09:49Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:11:12Z",
+       "outcomes": [
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 243.5,
+         "price": -114
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 243.5,
+         "price": -117
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 273.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 273.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:11:12Z",
+       "outcomes": [
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -121
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -118
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -113
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 64.5,
+         "price": -114
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 68.5,
+         "price": -113
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 68.5,
+         "price": -118
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 58.5,
+         "price": -114
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -108
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 10.5,
+         "price": -124
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 20.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:11:12Z",
+       "outcomes": [
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -162
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": -113
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 116
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -141
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 107
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 114
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -152
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 120
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -159
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 112
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 116
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -122
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": -109
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:11:12Z",
+       "outcomes": [
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 52.5,
+         "price": -114
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 8.5,
+         "price": -121
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 14.5,
+         "price": -118
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 14.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-11-03T22:10:05Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:14Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 273.5,
+         "price": -114
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 243.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:14Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -108
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 68.5,
+         "price": -112
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -117
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 26.5,
+         "price": -118
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 58.5,
+         "price": -114
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 81.5,
+         "price": -114
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 20.5,
+         "price": -113
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -107
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:14Z",
+       "outcomes": [
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -152
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -141
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -152
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -117
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -121
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -159
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -152
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:14Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 8.5,
+         "price": -109
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 67.5,
+         "price": -114
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 52.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-11-03T22:09:51Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:09Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 270.5,
+         "price": -125
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 270.5,
+         "price": -120
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 236.5,
+         "price": -125
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 236.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:09Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 81.5,
+         "price": -125
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 81.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 65.5,
+         "price": -125
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 65.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 59.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -125
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 8.5,
+         "price": -125
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:09Z",
+       "outcomes": [
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -155
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -135
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -150
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 1.5,
+         "price": 110
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -145
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:09Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Over",
+         "point": 51.5,
+         "price": -125
+        },
+        {
+         "description": "Bam Knight",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 23.5,
+         "price": -125
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 14.5,
+         "price": -125
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 9.5,
+         "price": -130
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 7.5,
+         "price": -125
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 7.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-11-03T22:10:29Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:50Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 270.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 270.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 247.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 247.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:50Z",
+       "outcomes": [
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 57.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 69.5,
+         "price": -140
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 69.5,
+         "price": 105
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 15.5,
+         "price": -118
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 6.5,
+         "price": -135
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 6.5,
+         "price": 100
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -118
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 83.5,
+         "price": -110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 83.5,
+         "price": -118
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 63.5,
+         "price": -118
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 11.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:50Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -145
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -150
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": -185
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": 135
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 2.5,
+         "price": 150
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -200
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 3.5,
+         "price": 145
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Over",
+         "point": 0.5,
+         "price": -175
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Under",
+         "point": 0.5,
+         "price": 130
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 1.5,
+         "price": 165
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 1.5,
+         "price": -225
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 1.5,
+         "price": 175
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 1.5,
+         "price": -235
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:50Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 6.5,
+         "price": -135
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 6.5,
+         "price": 100
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 52.5,
+         "price": -118
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 10.5,
+         "price": 115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 10.5,
+         "price": -150
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-11-03T22:10:00Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:28Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 270.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 270.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 247.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 247.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:28Z",
+       "outcomes": [
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 57.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 57.5,
+         "price": -105
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 17.5,
+         "price": -160
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 17.5,
+         "price": 120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 39.5,
+         "price": 100
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 63.5,
+         "price": -140
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 63.5,
+         "price": 105
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:28Z",
+       "outcomes": [
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Over",
+         "point": 0.5,
+         "price": -175
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Under",
+         "point": 0.5,
+         "price": 130
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -125
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": -105
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 2.5,
+         "price": 140
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 6.5,
+         "price": -135
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Over",
+         "point": 1.5,
+         "price": 165
+        },
+        {
+         "description": "Greg Dortch",
+         "name": "Under",
+         "point": 1.5,
+         "price": -225
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 1.5,
+         "price": 175
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 1.5,
+         "price": -240
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:28Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 26.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-11-03T22:10:07Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-11-03T22:10:11Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 265.5,
+         "price": -120
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 265.5,
+         "price": -110
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 250.5,
+         "price": 115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 250.5,
+         "price": -150
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-11-03T22:10:11Z",
+       "outcomes": [
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 60.5,
+         "price": -140
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 60.5,
+         "price": 105
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -155
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": 115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 80.5,
+         "price": -120
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 80.5,
+         "price": -110
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 25.5,
+         "price": -140
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 25.5,
+         "price": 105
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Over",
+         "point": 10.5,
+         "price": 105
+        },
+        {
+         "description": "Elijah Higgins",
+         "name": "Under",
+         "point": 10.5,
+         "price": -140
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 10.5,
+         "price": -140
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 10.5,
+         "price": 105
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Over",
+         "point": 10.5,
+         "price": 155
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Under",
+         "point": 10.5,
+         "price": -220
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 15.5,
+         "price": -140
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 15.5,
+         "price": 105
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 60.5,
+         "price": -105
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 60.5,
+         "price": -125
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 10.5,
+         "price": 100
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 10.5,
+         "price": -135
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 10.5,
+         "price": 120
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 10.5,
+         "price": -165
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-11-03T22:10:11Z",
+       "outcomes": [
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Over",
+         "point": 4.5,
+         "price": 135
+        },
+        {
+         "description": "Marvin Harrison Jr.",
+         "name": "Under",
+         "point": 4.5,
+         "price": -185
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 6.5,
+         "price": -125
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 6.5,
+         "price": -105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": -155
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Over",
+         "point": 7.5,
+         "price": 120
+        },
+        {
+         "description": "Trey McBride",
+         "name": "Under",
+         "point": 7.5,
+         "price": -165
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Over",
+         "point": 3.5,
+         "price": 165
+        },
+        {
+         "description": "Michael Wilson",
+         "name": "Under",
+         "point": 3.5,
+         "price": -235
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Over",
+         "point": 2.5,
+         "price": 220
+        },
+        {
+         "description": "Zay Jones",
+         "name": "Under",
+         "point": 2.5,
+         "price": -340
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-11-03T22:10:11Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 5.5,
+         "price": -165
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 5.5,
+         "price": 120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 65.5,
+         "price": -105
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 65.5,
+         "price": -125
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Zonovan Knight",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Over",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Jacoby Brissett",
+         "name": "Under",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 10.5,
+         "price": 115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 10.5,
+         "price": -155
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Over",
+         "point": 25.5,
+         "price": 100
+        },
+        {
+         "description": "Michael Carter",
+         "name": "Under",
+         "point": 25.5,
+         "price": -135
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    }
+   ],
+   "commence_time": "2025-11-04T01:15:00Z",
+   "home_team": "Dallas Cowboys",
+   "id": "f3dfb574e0a542375a480534525ee6cf",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-11-03T22:15:38Z",
+  "previous_timestamp": "2025-11-03T22:05:37Z",
+  "timestamp": "2025-11-03T22:10:38Z"
+ }
+}
