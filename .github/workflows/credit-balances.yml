@@ -1,0 +1,52 @@
+name: API credit balances (zero-credit check)
+on:
+  push:
+    branches: [probe/api-credit-balances]
+    paths: [.github/workflows/credit-balances.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  balances:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check balances without downloading odds
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          ODDS_API_KEY_2: ${{ secrets.ODDS_API_KEY_2 }}
+          ODDS_API_KEY_3: ${{ secrets.ODDS_API_KEY_3 }}
+          ODDS_API_KEY_4: ${{ secrets.ODDS_API_KEY_4 }}
+          ODDS_API_KEY_5: ${{ secrets.ODDS_API_KEY_5 }}
+          ODDS_API_KEY_6: ${{ secrets.ODDS_API_KEY_6 }}
+          ODDS_API_KEY_20K: ${{ secrets.ODDS_API_KEY_20K }}
+        shell: python
+        run: |
+          import os, urllib.request, urllib.parse, urllib.error
+          names = ["ODDS_API_KEY","ODDS_API_KEY_2","ODDS_API_KEY_3","ODDS_API_KEY_4","ODDS_API_KEY_5","ODDS_API_KEY_6","ODDS_API_KEY_20K"]
+          rows = []
+          seen = {}
+          for name in names:
+              key = os.environ.get(name, '').strip()
+              if not key:
+                  rows.append((name, 'not configured', '', ''))
+                  continue
+              if key in seen:
+                  rows.append((name, 'duplicate of ' + seen[key], '', ''))
+                  continue
+              seen[key] = name
+              url = 'https://api.the-odds-api.com/v4/sports/americanfootball_nfl/events?' + urllib.parse.urlencode({'apiKey': key})
+              try:
+                  with urllib.request.urlopen(url, timeout=25) as response:
+                      headers, status = response.headers, response.status
+              except urllib.error.HTTPError as error:
+                  headers, status = error.headers, error.code
+              except Exception:
+                  rows.append((name, 'connection failed', '', ''))
+                  continue
+              rows.append((name, str(status), headers.get('x-requests-remaining', '?'), headers.get('x-requests-used', '?')))
+          report = '| Key secret | HTTP/status | Remaining | Used |\n|---|---|---:|---:|\n'
+          report += '\n'.join('| ' + ' | '.join(row) + ' |' for row in rows)
+          print(report)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as output:
+              output.write(report + '\n')
