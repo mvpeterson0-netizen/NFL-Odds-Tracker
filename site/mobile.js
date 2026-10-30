@@ -171,7 +171,6 @@
         <div><span>TREND</span>${trendHtml(f, true)}</div>
       </div>
       ${typeof betBox === "function" ? betBox(pid, mid) : ""}
-      ${window.STIX_BOOKS ? window.STIX_BOOKS.box(pid, mid) : ""}
       ${typeof pickBoxSafe === "function" ? pickBoxSafe(pid, mid) : ""}
       <div class="panel"><h3>${esc(mk.label)} by week</h3><div class="chart">${chartSVG(rows, mid, { W: 400, H: 230, L: 30, R: 26, T: 26, B: 24, fs: 12, edgeAbove: true })}</div>
         <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Snapshot</span></div></div>`;
@@ -187,7 +186,7 @@
     // Context: weather only
     h += `<div class="panel"><h3>Matchup &amp; context</h3><div class="body mlist">
       ${cur ? `<div>Weather: ${wxCell(cur.gid)}</div>` : ""}
-    </div></div></div>`;
+    </div></div>${window.STIX_BOOKS ? window.STIX_BOOKS.box(pid, mid) : ""}</div>`; // other books: very bottom (Michael)
     return h;
   }
 

@@ -604,7 +604,6 @@ function viewPlayer(pid) {
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
     ${betBox(pid, mid)}
-    ${window.STIX_BOOKS ? window.STIX_BOOKS.box(pid, mid) : ""}
     ${pickBoxSafe(pid, mid)}
     <div class="panel"><div class="chart">${chartSVG(rows, mid, { edgeAbove: true })}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM), until the pre-game line arrives</span></div></div>
@@ -627,6 +626,7 @@ function viewPlayer(pid) {
   }
   h += `</tbody></table></div>`;
   if (S.showAn) h += analysisPanel(pid, mid, rows);
+  if (window.STIX_BOOKS) h += window.STIX_BOOKS.box(pid, mid); // other books: very bottom of the page (Michael)
   return h;
 }
 

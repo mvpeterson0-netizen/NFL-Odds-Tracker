@@ -90,6 +90,10 @@ def main() -> int:
             notify.run(log)
         except Exception as ex:
             log.append(f"notify: skipped ({type(ex).__name__}: {str(ex)[:80]})")
+        try:  # optional: phone alert when an arbitrage shows up across books (never fails the run)
+            notify.arb_run(log)
+        except Exception as ex:
+            log.append(f"arb: skipped ({type(ex).__name__}: {str(ex)[:80]})")
     except Exception as e:  # logged, then the run fails so the next schedule retries
         status = "error"
         err = f"{type(e).__name__}: {e}"[:500]
