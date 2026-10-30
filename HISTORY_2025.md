@@ -51,3 +51,5 @@ and slot reconstruction are a separate step after the archive is downloaded;
 this change does not claim to have evaluated the eight leads.
 
 Budget revised October 30 after NBA free-first routing was enabled: use the remaining paid balance, with no 500-credit reserve. NBA may fall back to paid only when free keys cannot fund a request. Both apps can exhaust their credits before reset.
+
+Priority revised with execution approval: archive passing yards, rushing yards, receptions and receiving yards across all 272 games FIRST (10,880 maximum prop credits). Then archive carries in separate carries/ files with whatever balance remains. No passing attempts or completions. Carries coverage can be partial; lead 5 and lead 2 must report that limitation.

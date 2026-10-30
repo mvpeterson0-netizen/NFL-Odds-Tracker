@@ -65,12 +65,15 @@ class CreditTests(unittest.TestCase):
             root = Path(tmp) / 'archive'
             responses = [(json.dumps({'data': [EVENT]}).encode(), {'x-requests-remaining': '550', 'x-requests-last': '1'}, 200),
                          (b'{"timestamp":"2025-09-04T21:20:00Z","data":{"bookmakers":[]}}', {'x-requests-remaining': '500', 'x-requests-last': '50'}, 200)]
-            with patch.object(hist, 'ROOT', root), patch.object(hist, 'STATE', root / 'state.json'), patch.object(hist, 'utcnow', return_value=NOW), patch.object(hist, 'schedule', return_value=[GAME]), patch.object(hist, 'fetch_events', side_effect=[([], {'x-requests-remaining': '551'}), ([], {'x-requests-remaining': '550'})]), patch.object(hist, 'http_get', side_effect=responses) as call, patch.dict(os.environ, {'GITHUB_EVENT_NAME': 'schedule'}):
+            with patch.object(hist, 'ROOT', root), patch.object(hist, 'STATE', root / 'state.json'), patch.object(hist, 'utcnow', return_value=NOW), patch.object(hist, 'schedule', return_value=[GAME]), patch.object(hist, 'MAX_GAMES_PER_RUN', 1), patch.object(hist, 'fetch_events', side_effect=[([], {'x-requests-remaining': '551'}), ([], {'x-requests-remaining': '550'})]), patch.object(hist, 'http_get', side_effect=responses) as call, patch.dict(os.environ, {'GITHUB_EVENT_NAME': 'schedule'}):
                 hist.run('paid', [])
                 self.assertEqual(call.call_count, 2)
                 archive = root / 'odds' / (GAME['game_id'] + '.json')
                 self.assertTrue(archive.exists())
-                self.assertEqual(json.loads(archive.read_text())['markets'], odds.CORE)
+                self.assertEqual(json.loads(archive.read_text())['markets'], hist.PRIMARY)
+                carry = root / 'carries' / (GAME['game_id'] + '.json')
+                carry.parent.mkdir(parents=True, exist_ok=True)
+                carry.write_text('{}')
                 hist.run('paid', [])
                 self.assertEqual(call.call_count, 2)
             # A floor stop is persisted; future monthly resets cannot restart it.

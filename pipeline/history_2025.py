@@ -19,6 +19,9 @@ STATE = ROOT / 'state.json'
 HIST = f'{API}/historical/sports/{SPORT}'
 MAX_GAMES_PER_RUN = 16
 MAX_ERRORS = 3
+# Complete the season for four markets before spending any credits on carries.
+PRIMARY = [m for m in CORE if m != "player_rush_attempts"]
+SECONDARY = ["player_rush_attempts"]
 
 
 class Pause(Exception):
@@ -94,18 +97,21 @@ def run(key, log):
     if utcnow() >= BACKFILL_DEADLINE:
         return
     state.setdefault('markets', list(CORE))
+    state['priority'] = [PRIMARY, SECONDARY]
     state.setdefault('games', {})
     state['reserve'] = PAID_RESERVE
     state['deadline_utc'] = iso(BACKFILL_DEADLINE)
     count = 0
     try:
         games = schedule()
-        for g in games:
+        jobs = [(g, PRIMARY, 'odds') for g in games] + [(g, SECONDARY, 'carries') for g in games]
+        for g, markets, folder in jobs:
             gid = g['game_id']
-            if (ROOT / 'odds' / f'{gid}.json').exists():
-                state['games'][gid] = {'status': 'saved'}
+            task = gid if folder == 'odds' else gid + ':carries'
+            if (ROOT / folder / f'{gid}.json').exists():
+                state['games'][task] = {'status': 'saved'}
                 continue
-            if state['games'].get(gid, {}).get('status') in ('empty', 'not_found', 'error_limit'):
+            if state['games'].get(task, {}).get('status') in ('empty', 'not_found', 'error_limit'):
                 continue
             if count >= MAX_GAMES_PER_RUN:
                 break
@@ -124,37 +130,37 @@ def run(key, log):
                     write_json(cache, events)
                 event = match_event(g, events.get('data', []))
                 if event is None:
-                    state['games'][gid] = {'status': 'not_found', 'date': date}
+                    state['games'][task] = {'status': 'not_found', 'date': date}
                     continue
                 snapshot = request(key, state, f"{HIST}/events/{event['id']}/odds", {
                     'date': date, 'dateFormat': 'iso', 'oddsFormat': 'american',
-                    'bookmakers': ','.join(BOOKS + EXTRA_BOOKS), 'markets': ','.join(CORE),
-                }, 10 * len(CORE))
+                    'bookmakers': ','.join(BOOKS + EXTRA_BOOKS), 'markets': ','.join(markets),
+                }, 10 * len(markets))
                 # Preserve complete raw payload incl. all books, players, odds and timestamps.
-                write_json(ROOT / 'odds' / f'{gid}.json', {
+                write_json(ROOT / folder / f'{gid}.json', {
                     'game_id': gid, 'requested_snapshot': date, 'downloaded_utc': iso(utcnow()),
-                    'markets': list(CORE), 'response': snapshot,
+                    'markets': list(markets), 'response': snapshot,
                 })
-                state['games'][gid] = {'status': 'saved', 'snapshot': snapshot.get('timestamp')}
+                state['games'][task] = {'status': 'saved', 'snapshot': snapshot.get('timestamp')}
             except Pause as ex:
-                prior = state['games'].get(gid, {})
+                prior = state['games'].get(task, {})
                 errors = prior.get('errors', 0) + 1
-                state['games'][gid] = {'status': 'error_limit' if errors >= MAX_ERRORS else 'error',
+                state['games'][task] = {'status': 'error_limit' if errors >= MAX_ERRORS else 'error',
                                        'errors': errors, 'note': str(ex)}
                 raise
             finally:
                 write_json(STATE, state)
         finished = sum(x.get('status') in ('saved', 'not_found', 'empty', 'error_limit') for x in state['games'].values())
-        state['complete'] = finished == len(games)
-        state['saved_games'] = sum(x.get('status') == 'saved' for x in state['games'].values())
-        state['unprocessed_games'] = len(games) - finished
-        log.append(f"history 2025: {state['saved_games']} saved; {state['unprocessed_games']} unprocessed; paid balance {state.get('paid_remaining', '?')}")
+        state['complete'] = finished == len(jobs)
+        state['saved_games'] = sum(x.get('status') == 'saved' and ':carries' not in task for task, x in state['games'].items())
+        state['unprocessed_requests'] = len(jobs) - finished
+        log.append(f"history 2025: {state['saved_games']} saved; {state['unprocessed_requests']} unprocessed market requests; paid balance {state.get('paid_remaining', '?')}")
     except Stop as ex:
         state['stopped'] = str(ex)
         log.append(f'history 2025: stopped — {ex}')
     except Pause as ex:
         log.append(f'history 2025: paused — {ex}')
     finally:
-        state['saved_games'] = sum(x.get('status') == 'saved' for x in state['games'].values())
+        state['saved_games'] = sum(x.get('status') == 'saved' and ':carries' not in task for task, x in state['games'].items())
         state['updated_utc'] = iso(utcnow())
         write_json(STATE, state)
