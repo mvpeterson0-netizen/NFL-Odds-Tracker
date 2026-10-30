@@ -604,6 +604,7 @@ function viewPlayer(pid) {
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
     ${betBox(pid, mid)}
+    ${window.STIX_BOOKS ? window.STIX_BOOKS.box(pid, mid) : ""}
     ${pickBoxSafe(pid, mid)}
     <div class="panel"><div class="chart">${chartSVG(rows, mid, { edgeAbove: true })}</div>
     <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM), until the pre-game line arrives</span></div></div>
@@ -980,6 +981,10 @@ function render() {
   else if (tab === "leads") app.innerHTML = viewLeads();
   else if (tab === "guide" || tab === "slots" || tab === "log") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
+  else if (tab === "arb") {
+    try { app.innerHTML = window.STIX_BOOKS ? window.STIX_BOOKS.view() : `<p class="pad">Arbitrage didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">Arbitrage hit an error. Try refreshing.</p>`; }
+  }
   else if (tab === "picks") {
     try { app.innerHTML = window.STIX_PICKS ? window.STIX_PICKS.view() : `<p class="pad">Picks didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">My picks hit an error. Try refreshing.</p>`; }
@@ -1011,6 +1016,7 @@ function render() {
   if (window.STIX_PICKS) { try { window.STIX_PICKS.bind(tab, arg); } catch (e) { console.error(e); } }
   if (tab === "review" && window.STIX_REVIEW) { try { window.STIX_REVIEW.bind(tab); } catch (e) { console.error(e); } }
   if (tab === "admin" && window.STIX_ADMIN) { try { window.STIX_ADMIN.bind(); } catch (e) { console.error(e); } }
+  if (tab === "arb" && window.STIX_BOOKS) { try { window.STIX_BOOKS.bind(); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };

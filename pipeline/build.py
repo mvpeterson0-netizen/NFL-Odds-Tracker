@@ -191,6 +191,52 @@ def bet_links(name_index, games_by_id, now):
     return out
 
 
+def book_lines(name_index, games_by_id, now):
+    """All books' lines for games that haven't kicked off, from each game's latest pull that included other books
+    (data/other_books, 2026-10-29) — DraftKings/FanDuel rows from that same pull come from prop_captures.csv or
+    data/line_checks (same captured_utc). One point per player/market/book: the one with both sides and prices closest
+    to even money. {gid: {"cap": iso, "p": {pid: {mid: [[book, line, over price, under price], ...]}}}}. Display only:
+    never graded."""
+    from .odds import OTHER_DIR, TRACK_DIR
+    okey_to_mid = {m[1]: m[0] for m in MARKETS}
+    upcoming = {gid for gid, g in games_by_id.items() if (parse_iso(g.get("kickoff_utc", "")) or now) > now}
+    other = [r for f in sorted(OTHER_DIR.glob("*.csv")) for r in read_csv(f) if r.get("game_id") in upcoming]
+    latest = {}
+    for r in other:
+        if r["captured_utc"] > latest.get(r["game_id"], ""):
+            latest[r["game_id"]] = r["captured_utc"]
+    if not latest:
+        return {}
+    rows = [r for r in other if latest.get(r["game_id"]) == r["captured_utc"]]
+    for f in [CAPTURES_PATH] + sorted(TRACK_DIR.glob("*.csv")):
+        rows += [r for r in read_csv(f) if r.get("game_id") in latest and latest[r["game_id"]] == r.get("captured_utc")]
+    pts = defaultdict(list)  # (gid, pid, mid, book) -> [(line, op, up)]
+    for r in rows:
+        g = games_by_id[r["game_id"]]
+        mid = okey_to_mid.get(r.get("market"))
+        pid = r.get("gsis_id")
+        if not pid:
+            k = norm_name(r.get("player_book_name", ""))
+            pid = name_index.get(g["home_team"], {}).get(k) or name_index.get(g["away_team"], {}).get(k) or ""
+        line, op, up = to_float(r.get("line")), to_float(r.get("over_price")), to_float(r.get("under_price"))
+        if not pid or not mid or line is None:
+            continue
+        pts[(r["game_id"], pid, mid, r["book"])].append((line, op, up))
+    out = {}
+    for (gid, pid, mid, book), lst in pts.items():
+        both = [x for x in lst if x[1] is not None and x[2] is not None]
+        pool = both or lst
+
+        def balance(x):
+            nv = novig_over(x[1], x[2]) if x[1] is not None and x[2] is not None else None
+            return abs(nv - 0.5) if nv is not None else 1.0
+
+        line, op, up = sorted(pool, key=balance)[0]
+        gout = out.setdefault(gid, {"cap": latest[gid], "p": {}})
+        gout["p"].setdefault(pid, {}).setdefault(mid, []).append([book, line, op, up])
+    return out
+
+
 UPDATES_SEEN_PATH = DATA / "updates_seen.json"
 ESPN_PATH = DATA / "espn_news.json"
 ESPN_NEWS_DAYS = 7   # headlines older than this are left out
@@ -704,6 +750,11 @@ def build(log):
     except Exception as ex:
         links_out = {}
         log.append(f"build: bet-slip links skipped ({type(ex).__name__}: {str(ex)[:80]})")
+    try:  # other books are optional: a problem here must never stop the build
+        books_out = book_lines(name_index, games_by_id, now)
+    except Exception as ex:
+        books_out = {}
+        log.append(f"build: other books skipped ({type(ex).__name__}: {str(ex)[:80]})")
     out = {
         "generated_utc": iso(now),
         "repo": os.environ.get("GITHUB_REPOSITORY", ""),
@@ -746,6 +797,7 @@ def build(log):
         "unmatched": unmatched[-100:],
         "runs": runs[-150:],
         "links": links_out,
+        "books": books_out,
         "updates": updates_out,
     }
     write_json(OUT_PATH, out, compact=True)

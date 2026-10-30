@@ -420,3 +420,10 @@ body.rv-on footer.foot { display: none; }
 .rv-foot > div { padding: 4px 2px 0; line-height: 1.5; }
 .rl-fd { margin: 8px 0 10px; } .rl-fd .betbtn { white-space: normal; }
 @media (max-width: 700px) { .rl-fd .betbtn { flex: 1 1 100%; justify-content: center; } }
+.bkbox { margin: 10px 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.bk-h { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.bk-sum { margin: 4px 0; } .bk-t { width: 100%; margin-top: 4px; } .bk-t th, .bk-t td { text-align: left; padding: 2px 6px; }
+.bk-best { font-weight: 700; }
+.arb-books { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.arb-legs { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 4px 0; }
+.arb-ev { margin-left: auto; font-weight: 700; } .arb-ev.pos { color: var(--over); } .arb-ev.neg { color: var(--muted); }
