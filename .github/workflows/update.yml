@@ -2,9 +2,9 @@ name: update
 
 on:
   schedule:
-    # Every 15 minutes at off-peak minutes (GitHub delays runs at the top of the hour).
-    # The 60-minute pull window (2.5-3.5 h before kickoff) gets ~4 chances.
-    - cron: "8,23,38,53 * * * *"
+    # Every 5 minutes at off-peak minutes to accelerate the research backfill.
+    # The 60-minute pull window (2.5-3.5 h before kickoff) gets ~12 chances.
+    - cron: "3-58/5 * * * *"
   workflow_dispatch:
     inputs:
       force_build:
