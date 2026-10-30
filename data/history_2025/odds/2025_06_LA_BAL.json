@@ -1,0 +1,3654 @@
+{
+ "downloaded_utc": "2026-10-30T17:30:44Z",
+ "game_id": "2025_06_LA_BAL",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-10-12T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Los Angeles Rams",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-10-12T13:54:55Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 252.5,
+         "price": -113
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 252.5,
+         "price": -111
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 186.5,
+         "price": -112
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 186.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 93.5,
+         "price": -114
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 93.5,
+         "price": -110
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 62.5,
+         "price": -111
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 62.5,
+         "price": -113
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 26.5,
+         "price": -114
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -114
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -109
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 12.5,
+         "price": -117
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 12.5,
+         "price": -107
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 12.5,
+         "price": -111
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 12.5,
+         "price": -113
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 113
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 8.5,
+         "price": -144
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 104
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -116
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -143
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -127
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 109
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -139
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 126
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -162
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 1.5,
+         "price": -167
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 1.5,
+         "price": 131
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 116
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -148
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 1.5,
+         "price": 168
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 1.5,
+         "price": -217
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 73.5,
+         "price": -113
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 73.5,
+         "price": -111
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 71.5,
+         "price": -112
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 71.5,
+         "price": -112
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 26.5,
+         "price": -109
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 7.5,
+         "price": -111
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 7.5,
+         "price": -113
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 0.5,
+         "price": 121
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 0.5,
+         "price": -152
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-10-12T13:55:16Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 251.5,
+         "price": -110
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 251.5,
+         "price": -120
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 190.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 190.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 94.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 94.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 8.5,
+         "price": -145
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -145
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 1.5,
+         "price": 135
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -170
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 1.5,
+         "price": 160
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 1.5,
+         "price": -220
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 0.5,
+         "price": -160
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 0.5,
+         "price": 125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:35Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 0.5,
+         "price": 120
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 0.5,
+         "price": -150
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-10-12T13:55:06Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 188.5,
+         "price": -105
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 188.5,
+         "price": -128
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 252.5,
+         "price": -107
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 252.5,
+         "price": -127
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 26.5,
+         "price": -121
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 12.5,
+         "price": -107
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 17.5,
+         "price": -105
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 17.5,
+         "price": -130
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 93.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 93.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 45.5,
+         "price": -113
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 63.5,
+         "price": -121
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 17.5,
+         "price": -130
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 17.5,
+         "price": -105
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 1.5,
+         "price": -150
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 1.5,
+         "price": 113
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -107
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 110
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 8.5,
+         "price": -152
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -124
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -109
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 122
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -180
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -137
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -154
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -122
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 1.5,
+         "price": 150
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 1.5,
+         "price": -209
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -139
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:42Z",
+       "outcomes": [
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 72.5,
+         "price": -121
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 70.5,
+         "price": -122
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 7.5,
+         "price": -113
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-10-12T13:55:15Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 186.5,
+         "price": -112
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 186.5,
+         "price": -112
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 252.5,
+         "price": -112
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 252.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 26.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 63.5,
+         "price": -112
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 45.5,
+         "price": -112
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 93.5,
+         "price": -112
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 93.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -126
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -102
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -126
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -102
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 112
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 8.5,
+         "price": -142
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -126
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -102
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 172
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -220
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -142
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 114
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -146
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -108
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 154
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -200
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 106
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:54Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 7.5,
+         "price": -112
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 7.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 71.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 71.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-10-12T13:54:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:05Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 251.5,
+         "price": -114
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 251.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 185.5,
+         "price": -114
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 185.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:05Z",
+       "outcomes": [
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 25.5,
+         "price": -117
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 25.5,
+         "price": -114
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -117
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -114
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 43.5,
+         "price": -118
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 43.5,
+         "price": -113
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 12.5,
+         "price": -114
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 12.5,
+         "price": -117
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 65.5,
+         "price": -113
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 65.5,
+         "price": -118
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 16.5,
+         "price": -121
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 95.5,
+         "price": -114
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 95.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:05Z",
+       "outcomes": [
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -177
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -137
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -195
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -107
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -121
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -109
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 114
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -152
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -148
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 100
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 8.5,
+         "price": -134
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:05Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 72.5,
+         "price": -118
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 72.5,
+         "price": -113
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 8.5,
+         "price": -107
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 8.5,
+         "price": -125
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 25.5,
+         "price": -121
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 72.5,
+         "price": -113
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 72.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-10-12T13:55:25Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:50Z",
+       "outcomes": [
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 185.5,
+         "price": -113
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 251.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:50Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 95.5,
+         "price": -113
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 65.5,
+         "price": -112
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 12.5,
+         "price": -113
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 16.5,
+         "price": -109
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 25.5,
+         "price": -114
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 17.5,
+         "price": -114
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 43.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:50Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 102
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -136
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -132
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -121
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 116
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -124
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 133
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:50Z",
+       "outcomes": [
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 72.5,
+         "price": -117
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 8.5,
+         "price": -105
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-10-12T13:55:15Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 185.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 185.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 245.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 245.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 60.5,
+         "price": -125
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 60.5,
+         "price": -105
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 10.5,
+         "price": -150
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 10.5,
+         "price": 110
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 25.5,
+         "price": -125
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 25.5,
+         "price": -105
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 15.5,
+         "price": -140
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 15.5,
+         "price": 105
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -140
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 10.5,
+         "price": 105
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 15.5,
+         "price": -140
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 15.5,
+         "price": 105
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 90.5,
+         "price": -125
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 90.5,
+         "price": -105
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 10.5,
+         "price": -140
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 10.5,
+         "price": 105
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 5.5,
+         "price": 145
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 5.5,
+         "price": -205
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 8.5,
+         "price": -155
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 145
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -205
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 160
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -230
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 70.5,
+         "price": -105
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-10-12T13:54:55Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 253.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 253.5,
+         "price": -120
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 188.5,
+         "price": -120
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 188.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 94.5,
+         "price": -120
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 94.5,
+         "price": -120
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 64.5,
+         "price": -120
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 64.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 25.5,
+         "price": -125
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 8.5,
+         "price": 100
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 8.5,
+         "price": -145
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -140
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -160
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 1.5,
+         "price": -185
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 0.5,
+         "price": -225
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 0.5,
+         "price": 155
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 73.5,
+         "price": -120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 73.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 7.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-10-12T13:55:34Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 188.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 188.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Under",
+         "point": 14.5,
+         "price": -118
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 1.5,
+         "price": -118
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 94.5,
+         "price": -135
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 94.5,
+         "price": 100
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 5.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 5.5,
+         "price": -115
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -118
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 45.5,
+         "price": -118
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 45.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 7.5,
+         "price": -150
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 7.5,
+         "price": 115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 0.5,
+         "price": -155
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 0.5,
+         "price": 115
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -140
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 120
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -160
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": 175
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": -235
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 67.5,
+         "price": -118
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 0.5,
+         "price": 120
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 0.5,
+         "price": -160
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -110
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -118
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 27.5,
+         "price": 100
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 27.5,
+         "price": -130
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 0.5,
+         "price": -105
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 0.5,
+         "price": -130
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 1.5,
+         "price": -135
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-10-12T13:54:37Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 255.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 188.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 188.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 94.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 94.5,
+         "price": -115
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 10.5,
+         "price": -160
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 10.5,
+         "price": 125
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 45.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 7.5,
+         "price": -150
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 7.5,
+         "price": 115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Over",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Davante Adams",
+         "name": "Under",
+         "point": 4.5,
+         "price": 110
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 0.5,
+         "price": -150
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 0.5,
+         "price": 115
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Over",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Jordan Whittington",
+         "name": "Under",
+         "point": 1.5,
+         "price": 105
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 1.5,
+         "price": 140
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 1.5,
+         "price": -190
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "DeAndre Hopkins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Tyler Higbee",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 3.5,
+         "price": -165
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Over",
+         "point": 1.5,
+         "price": 175
+        },
+        {
+         "description": "Tutu Atwell",
+         "name": "Under",
+         "point": 1.5,
+         "price": -240
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:27Z",
+       "outcomes": [
+        {
+         "description": "Matthew Stafford",
+         "name": "Over",
+         "point": 0.5,
+         "price": 110
+        },
+        {
+         "description": "Matthew Stafford",
+         "name": "Under",
+         "point": 0.5,
+         "price": -145
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -110
+        },
+        {
+         "description": "Kyren Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -115
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Over",
+         "point": 6.5,
+         "price": -160
+        },
+        {
+         "description": "Justice Hill",
+         "name": "Under",
+         "point": 6.5,
+         "price": 120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Over",
+         "point": 0.5,
+         "price": -105
+        },
+        {
+         "description": "Puka Nacua",
+         "name": "Under",
+         "point": 0.5,
+         "price": -130
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-10-12T17:01:00Z",
+   "home_team": "Baltimore Ravens",
+   "id": "b235bc78609644cb28492cc1d6ad69fd",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-10-12T14:00:38Z",
+  "previous_timestamp": "2025-10-12T13:50:39Z",
+  "timestamp": "2025-10-12T13:55:39Z"
+ }
+}

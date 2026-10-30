@@ -1,0 +1,3185 @@
+{
+ "downloaded_utc": "2026-10-30T17:30:42Z",
+ "game_id": "2025_06_DAL_CAR",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-10-12T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Dallas Cowboys",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-10-12T13:54:55Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:54:33Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 247.5,
+         "price": -111
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 247.5,
+         "price": -113
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 206.5,
+         "price": -112
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 206.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:54:33Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 73.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 73.5,
+         "price": -114
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 70.5,
+         "price": -113
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 70.5,
+         "price": -111
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 51.5,
+         "price": -111
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 51.5,
+         "price": -113
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 33.5,
+         "price": -111
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 33.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 31.5,
+         "price": -114
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 27.5,
+         "price": -111
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 22.5,
+         "price": -109
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 18.5,
+         "price": -108
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 18.5,
+         "price": -117
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 17.5,
+         "price": -111
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:54:33Z",
+       "outcomes": [
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 104
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -132
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": -103
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -124
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -136
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 107
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 133
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -171
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -163
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": 127
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -149
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 116
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": 107
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -126
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": -101
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 2.5,
+         "price": -106
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 126
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -162
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:54:33Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 76.5,
+         "price": -111
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 76.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 73.5,
+         "price": -114
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 73.5,
+         "price": -110
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 16.5,
+         "price": -111
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 11.5,
+         "price": -107
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 11.5,
+         "price": -117
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 6.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-10-12T13:55:16Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 246.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 246.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 204.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 204.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 73.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 73.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 33.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -145
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -135
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -180
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": 135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:33Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 75.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 75.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 6.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-10-12T13:55:06Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:49Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 244.5,
+         "price": -110
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 244.5,
+         "price": -122
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 206.5,
+         "price": -108
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 206.5,
+         "price": -127
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:49Z",
+       "outcomes": [
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 19.5,
+         "price": -121
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 16.5,
+         "price": -128
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 16.5,
+         "price": -107
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 25.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 25.5,
+         "price": -113
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 33.5,
+         "price": -114
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 33.5,
+         "price": -117
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 71.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:49Z",
+       "outcomes": [
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -141
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 105
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 2.5,
+         "price": -104
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 111
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -160
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": 111
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -148
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 140
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -195
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -176
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -137
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -157
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": 115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:49Z",
+       "outcomes": [
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 17.5,
+         "price": -121
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 17.5,
+         "price": -111
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -121
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -111
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 73.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 73.5,
+         "price": -117
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 75.5,
+         "price": -125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 75.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-10-12T13:55:15Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 206.5,
+         "price": -112
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 206.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 245.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 245.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 48.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 48.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 134
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -172
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -164
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 128
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 116
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -148
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -134
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -156
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": 122
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 102
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -176
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": 138
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -164
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": -108
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 6.5,
+         "price": -112
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 72.5,
+         "price": -112
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-10-12T13:54:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 209.5,
+         "price": -114
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 209.5,
+         "price": -117
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 241.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 241.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 71.5,
+         "price": -117
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 71.5,
+         "price": -114
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 48.5,
+         "price": -113
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 48.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 24.5,
+         "price": -112
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 14.5,
+         "price": -114
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 69.5,
+         "price": -114
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 69.5,
+         "price": -117
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 31.5,
+         "price": -118
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 31.5,
+         "price": -113
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 16.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -136
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": 102
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -167
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 116
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -157
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -162
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -162
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -121
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 107
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -143
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:46Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 73.5,
+         "price": -114
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 73.5,
+         "price": -117
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 5.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 5.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 11.5,
+         "price": -114
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 11.5,
+         "price": -117
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -114
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-10-12T13:55:25Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 209.5,
+         "price": -113
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 241.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 47.5,
+         "price": -112
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 32.5,
+         "price": -112
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 71.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 17.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 69.5,
+         "price": -114
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 21.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 118
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -159
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -121
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -134
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 128
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -136
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -159
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 11.5,
+         "price": -113
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 5.5,
+         "price": -114
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 73.5,
+         "price": -113
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 16.5,
+         "price": -114
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-10-12T13:54:55Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 246.5,
+         "price": -120
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 246.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 206.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 206.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 72.5,
+         "price": -120
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 72.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 51.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 51.5,
+         "price": -120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 25.5,
+         "price": -125
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 14.5,
+         "price": -125
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -150
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 100
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 2.5,
+         "price": -180
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 125
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -185
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:47Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 76.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 76.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 74.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 74.5,
+         "price": -120
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 6.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-10-12T13:55:15Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 240.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 240.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 205.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 205.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 50.5,
+         "price": -105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 50.5,
+         "price": -125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 70.5,
+         "price": -105
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 70.5,
+         "price": -105
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Brycen Tremayne",
+         "name": "Over",
+         "point": 10.5,
+         "price": 140
+        },
+        {
+         "description": "Brycen Tremayne",
+         "name": "Under",
+         "point": 10.5,
+         "price": -195
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Over",
+         "point": 10.5,
+         "price": 240
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Under",
+         "point": 10.5,
+         "price": -375
+        },
+        {
+         "description": "James Mitchell",
+         "name": "Over",
+         "point": 10.5,
+         "price": 185
+        },
+        {
+         "description": "James Mitchell",
+         "name": "Under",
+         "point": 10.5,
+         "price": -275
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 105
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -140
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 6.5,
+         "price": 120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 6.5,
+         "price": -165
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 5.5,
+         "price": 150
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 5.5,
+         "price": -210
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 3.5,
+         "price": 145
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 3.5,
+         "price": -205
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 135
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -185
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 2.5,
+         "price": 120
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 2.5,
+         "price": -165
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:55:48Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 75.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 75.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 70.5,
+         "price": -135
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 70.5,
+         "price": 100
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Over",
+         "point": 15.5,
+         "price": 105
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Under",
+         "point": 15.5,
+         "price": -140
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-10-12T13:54:37Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-12T13:54:55Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 209.5,
+         "price": 100
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 209.5,
+         "price": -130
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 248.5,
+         "price": -115
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 248.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-12T13:54:55Z",
+       "outcomes": [
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Luke Schoonmaker",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Brycen Tremayne",
+         "name": "Over",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Brycen Tremayne",
+         "name": "Under",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "James Mitchell",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "James Mitchell",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 50.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-12T13:54:55Z",
+       "outcomes": [
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Tetairoa McMillan",
+         "name": "Under",
+         "point": 5.5,
+         "price": -145
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 2.5,
+         "price": -170
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 5.5,
+         "price": -150
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 5.5,
+         "price": 115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 4.5,
+         "price": -155
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Ryan Flournoy",
+         "name": "Under",
+         "point": 3.5,
+         "price": -175
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 3.5,
+         "price": 130
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Over",
+         "point": 0.5,
+         "price": -185
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Under",
+         "point": 0.5,
+         "price": 140
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Over",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Hunter Renfrow",
+         "name": "Under",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Brycen Tremayne",
+         "name": "Over",
+         "point": 0.5,
+         "price": -180
+        },
+        {
+         "description": "Brycen Tremayne",
+         "name": "Under",
+         "point": 0.5,
+         "price": 135
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Over",
+         "point": 1.5,
+         "price": 150
+        },
+        {
+         "description": "Jimmy Horn Jr.",
+         "name": "Under",
+         "point": 1.5,
+         "price": -200
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Tommy Tremble",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "James Mitchell",
+         "name": "Over",
+         "point": 0.5,
+         "price": -150
+        },
+        {
+         "description": "James Mitchell",
+         "name": "Under",
+         "point": 0.5,
+         "price": 115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-12T13:54:55Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 9.5,
+         "price": -105
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Over",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Dak Prescott",
+         "name": "Under",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 76.5,
+         "price": 110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 76.5,
+         "price": -145
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Over",
+         "point": 14.5,
+         "price": -150
+        },
+        {
+         "description": "Jaydon Blue",
+         "name": "Under",
+         "point": 14.5,
+         "price": 115
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Trevor Etienne",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 78.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 78.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-10-12T17:01:00Z",
+   "home_team": "Carolina Panthers",
+   "id": "dd3a14fa1529e79bd338a7bfd71d5b3a",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-10-12T14:00:38Z",
+  "previous_timestamp": "2025-10-12T13:50:39Z",
+  "timestamp": "2025-10-12T13:55:39Z"
+ }
+}
