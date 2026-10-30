@@ -191,6 +191,9 @@ def bet_links(name_index, games_by_id, now):
     return out
 
 
+HIDDEN_BOOKS = {"fliff"}  # captured, but kept out of the app and arbitrage alerts (Michael 2026-10-30)
+
+
 def book_lines(name_index, games_by_id, now):
     """All books' lines for games that haven't kicked off, from each game's latest pull that included other books
     (data/other_books, 2026-10-29) — DraftKings/FanDuel rows from that same pull come from prop_captures.csv or
@@ -212,6 +215,8 @@ def book_lines(name_index, games_by_id, now):
         rows += [r for r in read_csv(f) if r.get("game_id") in latest and latest[r["game_id"]] == r.get("captured_utc")]
     pts = defaultdict(list)  # (gid, pid, mid, book) -> [(line, op, up)]
     for r in rows:
+        if r.get("book") in HIDDEN_BOOKS:
+            continue
         g = games_by_id[r["game_id"]]
         mid = okey_to_mid.get(r.get("market"))
         pid = r.get("gsis_id")
