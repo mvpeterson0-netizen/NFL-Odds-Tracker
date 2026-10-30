@@ -1,0 +1,1543 @@
+{
+ "events_call": {
+  "credits_last": "0",
+  "remaining": "13132"
+ },
+ "event": {
+  "id": "c93c421e5fa46031a43162d111d981d0",
+  "commence_time": "2026-11-01T18:00:00Z"
+ },
+ "odds_call": {
+  "credits_last": "7",
+  "remaining": "13125",
+  "books_requested": [
+   "draftkings",
+   "fanduel",
+   "betmgm",
+   "williamhill_us",
+   "fanatics",
+   "betrivers",
+   "espnbet",
+   "hardrockbet",
+   "ballybet",
+   "fliff"
+  ],
+  "markets_requested": [
+   "player_pass_yds",
+   "player_rush_attempts",
+   "player_rush_yds",
+   "player_receptions",
+   "player_reception_yds",
+   "player_pass_attempts",
+   "player_pass_completions"
+  ]
+ },
+ "by_book": {
+  "draftkings": {
+   "player_pass_attempts": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_completions": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_receptions": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_rush_attempts": {
+    "outcomes": 8,
+    "players": 4
+   },
+   "player_rush_yds": {
+    "outcomes": 12,
+    "players": 6
+   }
+  },
+  "fanduel": {
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_receptions": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_rush_yds": {
+    "outcomes": 12,
+    "players": 6
+   }
+  },
+  "ballybet": {
+   "player_pass_attempts": {
+    "outcomes": 2,
+    "players": 2
+   },
+   "player_pass_completions": {
+    "outcomes": 2,
+    "players": 2
+   },
+   "player_pass_yds": {
+    "outcomes": 2,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 11,
+    "players": 11
+   },
+   "player_receptions": {
+    "outcomes": 11,
+    "players": 11
+   },
+   "player_rush_attempts": {
+    "outcomes": 4,
+    "players": 4
+   },
+   "player_rush_yds": {
+    "outcomes": 5,
+    "players": 5
+   }
+  },
+  "betrivers": {
+   "player_pass_completions": {
+    "outcomes": 2,
+    "players": 2
+   },
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 22,
+    "players": 11
+   },
+   "player_receptions": {
+    "outcomes": 11,
+    "players": 11
+   },
+   "player_rush_yds": {
+    "outcomes": 10,
+    "players": 5
+   }
+  },
+  "fliff": {
+   "player_pass_attempts": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_completions": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 30,
+    "players": 15
+   },
+   "player_receptions": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_rush_attempts": {
+    "outcomes": 8,
+    "players": 4
+   },
+   "player_rush_yds": {
+    "outcomes": 10,
+    "players": 5
+   }
+  },
+  "betmgm": {
+   "player_pass_attempts": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_completions": {
+    "outcomes": 2,
+    "players": 1
+   },
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 28,
+    "players": 14
+   },
+   "player_receptions": {
+    "outcomes": 26,
+    "players": 13
+   },
+   "player_rush_attempts": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_rush_yds": {
+    "outcomes": 12,
+    "players": 6
+   }
+  },
+  "hardrockbet": {
+   "player_pass_attempts": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_completions": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_receptions": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_rush_attempts": {
+    "outcomes": 8,
+    "players": 4
+   },
+   "player_rush_yds": {
+    "outcomes": 12,
+    "players": 6
+   }
+  },
+  "espnbet": {
+   "player_pass_attempts": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_completions": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2
+   },
+   "player_reception_yds": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_receptions": {
+    "outcomes": 32,
+    "players": 16
+   },
+   "player_rush_attempts": {
+    "outcomes": 8,
+    "players": 4
+   },
+   "player_rush_yds": {
+    "outcomes": 12,
+    "players": 6
+   }
+  },
+  "fanatics": {
+   "player_pass_attempts": {
+    "outcomes": 2,
+    "players": 1
+   },
+   "player_pass_completions": {
+    "outcomes": 2,
+    "players": 1
+   },
+   "player_pass_yds": {
+    "outcomes": 2,
+    "players": 1
+   },
+   "player_reception_yds": {
+    "outcomes": 2,
+    "players": 1
+   },
+   "player_receptions": {
+    "outcomes": 2,
+    "players": 1
+   },
+   "player_rush_attempts": {
+    "outcomes": 2,
+    "players": 1
+   },
+   "player_rush_yds": {
+    "outcomes": 2,
+    "players": 1
+   }
+  }
+ },
+ "books_with_no_props": [
+  "williamhill_us"
+ ],
+ "unique_markets_returned": [
+  "player_pass_attempts",
+  "player_pass_completions",
+  "player_pass_yds",
+  "player_reception_yds",
+  "player_receptions",
+  "player_rush_attempts",
+  "player_rush_yds"
+ ],
+ "sample_compare": [
+  {
+   "market": "player_pass_attempts",
+   "player": "Josh Allen",
+   "over_by_book": {
+    "draftkings": [
+     [
+      30.5,
+      -117
+     ]
+    ],
+    "ballybet": [
+     [
+      30.5,
+      -124
+     ]
+    ],
+    "fliff": [
+     [
+      30.5,
+      -125
+     ]
+    ],
+    "betmgm": [
+     [
+      30.5,
+      -120
+     ]
+    ],
+    "hardrockbet": [
+     [
+      30.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      30.5,
+      -120
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_pass_attempts",
+   "player": "Lamar Jackson",
+   "over_by_book": {
+    "draftkings": [
+     [
+      30.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      30.5,
+      -114
+     ]
+    ],
+    "fliff": [
+     [
+      30.5,
+      -125
+     ]
+    ],
+    "betmgm": [
+     [
+      29.5,
+      -125
+     ]
+    ],
+    "hardrockbet": [
+     [
+      30.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      30.5,
+      -115
+     ]
+    ],
+    "fanatics": [
+     [
+      30.5,
+      -110
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_pass_completions",
+   "player": "Josh Allen",
+   "over_by_book": {
+    "draftkings": [
+     [
+      20.5,
+      -117
+     ]
+    ],
+    "ballybet": [
+     [
+      20.5,
+      -113
+     ]
+    ],
+    "betrivers": [
+     [
+      20.5,
+      -109
+     ]
+    ],
+    "fliff": [
+     [
+      20.5,
+      -125
+     ]
+    ],
+    "hardrockbet": [
+     [
+      20.5,
+      -120
+     ]
+    ],
+    "espnbet": [
+     [
+      20.5,
+      -120
+     ]
+    ],
+    "fanatics": [
+     [
+      20.5,
+      -120
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_pass_completions",
+   "player": "Lamar Jackson",
+   "over_by_book": {
+    "draftkings": [
+     [
+      20.5,
+      -109
+     ]
+    ],
+    "ballybet": [
+     [
+      19.5,
+      -121
+     ]
+    ],
+    "betrivers": [
+     [
+      19.5,
+      -117
+     ]
+    ],
+    "fliff": [
+     [
+      20.5,
+      -110
+     ]
+    ],
+    "betmgm": [
+     [
+      20.5,
+      100
+     ]
+    ],
+    "hardrockbet": [
+     [
+      20.5,
+      -105
+     ]
+    ],
+    "espnbet": [
+     [
+      20.5,
+      -105
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_pass_yds",
+   "player": "Josh Allen",
+   "over_by_book": {
+    "draftkings": [
+     [
+      252.5,
+      -113
+     ]
+    ],
+    "fanduel": [
+     [
+      247.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      252.5,
+      -115
+     ]
+    ],
+    "betrivers": [
+     [
+      252.5,
+      -117
+     ]
+    ],
+    "fliff": [
+     [
+      249.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      250.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      249.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      249.5,
+      -125
+     ]
+    ],
+    "fanatics": [
+     [
+      245.5,
+      -120
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_pass_yds",
+   "player": "Lamar Jackson",
+   "over_by_book": {
+    "draftkings": [
+     [
+      237.5,
+      -112
+     ]
+    ],
+    "fanduel": [
+     [
+      237.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      234.5,
+      -114
+     ]
+    ],
+    "betrivers": [
+     [
+      234.5,
+      -115
+     ]
+    ],
+    "fliff": [
+     [
+      236.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      241.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      237.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      235.5,
+      -120
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "DJ Moore",
+   "over_by_book": {
+    "draftkings": [
+     [
+      58.5,
+      -110
+     ]
+    ],
+    "fanduel": [
+     [
+      55.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      54.5,
+      -120
+     ]
+    ],
+    "betrivers": [
+     [
+      54.5,
+      -115
+     ]
+    ],
+    "fliff": [
+     [
+      55.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      55.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      56.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      59.5,
+      -105
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Dalton Kincaid",
+   "over_by_book": {
+    "draftkings": [
+     [
+      46.5,
+      -109
+     ]
+    ],
+    "fanduel": [
+     [
+      46.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      47.5,
+      -120
+     ]
+    ],
+    "betrivers": [
+     [
+      47.5,
+      -115
+     ]
+    ],
+    "fliff": [
+     [
+      45.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      46.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      46.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      46.5,
+      -105
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Dawson Knox",
+   "over_by_book": {
+    "draftkings": [
+     [
+      7.5,
+      -119
+     ]
+    ],
+    "fanduel": [
+     [
+      7.5,
+      -114
+     ]
+    ],
+    "fliff": [
+     [
+      7.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      8.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      7.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      7.5,
+      -120
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Derrick Henry",
+   "over_by_book": {
+    "draftkings": [
+     [
+      7.5,
+      -116
+     ]
+    ],
+    "fanduel": [
+     [
+      6.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      7.5,
+      -113
+     ]
+    ],
+    "betrivers": [
+     [
+      7.5,
+      -109
+     ]
+    ],
+    "fliff": [
+     [
+      6.5,
+      -125
+     ]
+    ],
+    "betmgm": [
+     [
+      6.5,
+      -120
+     ]
+    ],
+    "hardrockbet": [
+     [
+      7.5,
+      -110
+     ]
+    ],
+    "espnbet": [
+     [
+      7.5,
+      -115
+     ]
+    ],
+    "fanatics": [
+     [
+      10.5,
+      140
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Devontez Walker",
+   "over_by_book": {
+    "draftkings": [
+     [
+      0.5,
+      -103
+     ]
+    ],
+    "fanduel": [
+     [
+      4.5,
+      102
+     ]
+    ],
+    "hardrockbet": [
+     [
+      1.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      4.5,
+      100
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Ja'Kobi Lane",
+   "over_by_book": {
+    "draftkings": [
+     [
+      32.5,
+      -109
+     ]
+    ],
+    "fanduel": [
+     [
+      30.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      33.5,
+      -118
+     ]
+    ],
+    "betrivers": [
+     [
+      33.5,
+      -114
+     ]
+    ],
+    "fliff": [
+     [
+      31.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      28.5,
+      -140
+     ]
+    ],
+    "hardrockbet": [
+     [
+      31.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      29.5,
+      -130
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "James Cook",
+   "over_by_book": {
+    "draftkings": [
+     [
+      10.5,
+      -111
+     ]
+    ],
+    "fanduel": [
+     [
+      9.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      9.5,
+      -125
+     ]
+    ],
+    "betrivers": [
+     [
+      9.5,
+      -121
+     ]
+    ],
+    "fliff": [
+     [
+      9.5,
+      -125
+     ]
+    ],
+    "betmgm": [
+     [
+      10.5,
+      -111
+     ]
+    ],
+    "hardrockbet": [
+     [
+      9.5,
+      -120
+     ]
+    ],
+    "espnbet": [
+     [
+      9.5,
+      -130
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Josh Cuevas",
+   "over_by_book": {
+    "draftkings": [
+     [
+      10.5,
+      -109
+     ]
+    ],
+    "fanduel": [
+     [
+      10.5,
+      -114
+     ]
+    ],
+    "fliff": [
+     [
+      10.5,
+      -115
+     ]
+    ],
+    "betmgm": [
+     [
+      8.5,
+      -120
+     ]
+    ],
+    "hardrockbet": [
+     [
+      9.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      10.5,
+      -105
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Joshua Palmer",
+   "over_by_book": {
+    "draftkings": [
+     [
+      11.5,
+      -112
+     ]
+    ],
+    "fanduel": [
+     [
+      10.5,
+      -114
+     ]
+    ],
+    "fliff": [
+     [
+      11.5,
+      -115
+     ]
+    ],
+    "betmgm": [
+     [
+      12.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      10.5,
+      -120
+     ]
+    ],
+    "espnbet": [
+     [
+      9.5,
+      -130
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Justice Hill",
+   "over_by_book": {
+    "draftkings": [
+     [
+      12.5,
+      -106
+     ]
+    ],
+    "fanduel": [
+     [
+      10.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      11.5,
+      -117
+     ]
+    ],
+    "betrivers": [
+     [
+      11.5,
+      -113
+     ]
+    ],
+    "fliff": [
+     [
+      10.5,
+      -125
+     ]
+    ],
+    "hardrockbet": [
+     [
+      11.5,
+      -110
+     ]
+    ],
+    "espnbet": [
+     [
+      10.5,
+      -135
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Keon Coleman",
+   "over_by_book": {
+    "draftkings": [
+     [
+      32.5,
+      -110
+     ]
+    ],
+    "fanduel": [
+     [
+      29.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      29.5,
+      -120
+     ]
+    ],
+    "betrivers": [
+     [
+      29.5,
+      -115
+     ]
+    ],
+    "fliff": [
+     [
+      30.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      29.5,
+      -111
+     ]
+    ],
+    "hardrockbet": [
+     [
+      30.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      29.5,
+      -130
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Khalil Shakir",
+   "over_by_book": {
+    "draftkings": [
+     [
+      39.5,
+      -114
+     ]
+    ],
+    "fanduel": [
+     [
+      38.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      39.5,
+      -115
+     ]
+    ],
+    "betrivers": [
+     [
+      39.5,
+      -112
+     ]
+    ],
+    "fliff": [
+     [
+      38.5,
+      -125
+     ]
+    ],
+    "betmgm": [
+     [
+      39.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      38.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      39.5,
+      -110
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Mark Andrews",
+   "over_by_book": {
+    "draftkings": [
+     [
+      30.5,
+      -113
+     ]
+    ],
+    "fanduel": [
+     [
+      29.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      31.5,
+      -115
+     ]
+    ],
+    "betrivers": [
+     [
+      31.5,
+      -112
+     ]
+    ],
+    "fliff": [
+     [
+      30.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      31.5,
+      -120
+     ]
+    ],
+    "hardrockbet": [
+     [
+      30.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      29.5,
+      -125
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Rashod Bateman",
+   "over_by_book": {
+    "draftkings": [
+     [
+      24.5,
+      -115
+     ]
+    ],
+    "fanduel": [
+     [
+      24.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      24.5,
+      -117
+     ]
+    ],
+    "betrivers": [
+     [
+      24.5,
+      -113
+     ]
+    ],
+    "fliff": [
+     [
+      25.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      26.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      25.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      24.5,
+      -130
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Ty Johnson",
+   "over_by_book": {
+    "draftkings": [
+     [
+      15.5,
+      -109
+     ]
+    ],
+    "fanduel": [
+     [
+      15.5,
+      -114
+     ]
+    ],
+    "fliff": [
+     [
+      15.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      15.5,
+      -111
+     ]
+    ],
+    "hardrockbet": [
+     [
+      15.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      15.5,
+      -105
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Zay Flowers",
+   "over_by_book": {
+    "draftkings": [
+     [
+      82.5,
+      -112
+     ]
+    ],
+    "fanduel": [
+     [
+      81.5,
+      -114
+     ]
+    ],
+    "ballybet": [
+     [
+      82.5,
+      -118
+     ]
+    ],
+    "betrivers": [
+     [
+      82.5,
+      -114
+     ]
+    ],
+    "fliff": [
+     [
+      83.5,
+      -120
+     ]
+    ],
+    "betmgm": [
+     [
+      81.5,
+      -115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      83.5,
+      -115
+     ]
+    ],
+    "espnbet": [
+     [
+      84.5,
+      -115
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_receptions",
+   "player": "DJ Moore",
+   "over_by_book": {
+    "draftkings": [
+     [
+      4.5,
+      113
+     ]
+    ],
+    "fanduel": [
+     [
+      4.5,
+      110
+     ]
+    ],
+    "ballybet": [
+     [
+      4.5,
+      114
+     ]
+    ],
+    "betrivers": [
+     [
+      4.5,
+      117
+     ]
+    ],
+    "fliff": [
+     [
+      4.5,
+      105
+     ]
+    ],
+    "betmgm": [
+     [
+      4.5,
+      115
+     ]
+    ],
+    "hardrockbet": [
+     [
+      4.5,
+      105
+     ]
+    ],
+    "espnbet": [
+     [
+      4.5,
+      105
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_receptions",
+   "player": "Dalton Kincaid",
+   "over_by_book": {
+    "draftkings": [
+     [
+      3.5,
+      -138
+     ]
+    ],
+    "fanduel": [
+     [
+      3.5,
+      -130
+     ]
+    ],
+    "ballybet": [
+     [
+      3.5,
+      -152
+     ]
+    ],
+    "betrivers": [
+     [
+      3.5,
+      -148
+     ]
+    ],
+    "fliff": [
+     [
+      3.5,
+      -140
+     ]
+    ],
+    "betmgm": [
+     [
+      3.5,
+      -145
+     ]
+    ],
+    "hardrockbet": [
+     [
+      3.5,
+      -130
+     ]
+    ],
+    "espnbet": [
+     [
+      3.5,
+      -135
+     ]
+    ]
+   }
+  },
+  {
+   "market": "player_receptions",
+   "player": "Dawson Knox",
+   "over_by_book": {
+    "draftkings": [
+     [
+      1.5,
+      151
+     ]
+    ],
+    "fanduel": [
+     [
+      1.5,
+      152
+     ]
+    ],
+    "fliff": [
+     [
+      1.5,
+      145
+     ]
+    ],
+    "betmgm": [
+     [
+      1.5,
+      165
+     ]
+    ],
+    "hardrockbet": [
+     [
+      1.5,
+      150
+     ]
+    ],
+    "espnbet": [
+     [
+      1.5,
+      150
+     ]
+    ]
+   }
+  }
+ ]
+}
