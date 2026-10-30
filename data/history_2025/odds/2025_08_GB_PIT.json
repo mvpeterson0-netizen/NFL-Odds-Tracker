@@ -1,0 +1,4032 @@
+{
+ "downloaded_utc": "2026-10-30T18:30:42Z",
+ "game_id": "2025_08_GB_PIT",
+ "markets": [
+  "player_pass_yds",
+  "player_rush_yds",
+  "player_receptions",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-10-26T21:20:00Z",
+ "response": {
+  "data": {
+   "away_team": "Green Bay Packers",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-10-26T21:15:34Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:14:26Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 239.5,
+         "price": -113
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 239.5,
+         "price": -111
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 220.5,
+         "price": -111
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 220.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:14:26Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 54.5,
+         "price": -111
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 54.5,
+         "price": -113
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 50.5,
+         "price": -114
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 41.5,
+         "price": -111
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 41.5,
+         "price": -113
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -114
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 21.5,
+         "price": -116
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 21.5,
+         "price": -108
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 20.5,
+         "price": -109
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 18.5,
+         "price": -116
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 18.5,
+         "price": -109
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 18.5,
+         "price": -116
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 18.5,
+         "price": -108
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 15.5,
+         "price": -111
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 15.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:14:26Z",
+       "outcomes": [
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -116
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -109
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -117
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -160
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -119
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -107
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": 111
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -142
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 124
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -158
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -132
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": 103
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -116
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -101
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -126
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 109
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -101
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -127
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:14:26Z",
+       "outcomes": [
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 67.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 67.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 53.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 53.5,
+         "price": -111
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": -108
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -116
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 17.5,
+         "price": -111
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 11.5,
+         "price": -113
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 11.5,
+         "price": -111
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 4.5,
+         "price": -104
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -106
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -118
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-10-26T21:14:57Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 242.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 242.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -145
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -150
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": 100
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 0.5,
+         "price": 100
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 0.5,
+         "price": -130
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-10-26T21:14:23Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:15:29Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 241.5,
+         "price": -121
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 241.5,
+         "price": -112
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 222.5,
+         "price": -117
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 222.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:15:29Z",
+       "outcomes": [
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 19.5,
+         "price": -102
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 19.5,
+         "price": -130
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -107
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -127
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 18.5,
+         "price": -121
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 21.5,
+         "price": -122
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 54.5,
+         "price": -125
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 54.5,
+         "price": -108
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 54.5,
+         "price": -117
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 54.5,
+         "price": -114
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 51.5,
+         "price": -121
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 51.5,
+         "price": -111
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 14.5,
+         "price": -114
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 14.5,
+         "price": -117
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 19.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:15:29Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -170
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -121
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -164
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 112
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -121
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -113
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": -102
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -137
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -108
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -122
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -145
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": -107
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:15:29Z",
+       "outcomes": [
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 11.5,
+         "price": -117
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 11.5,
+         "price": -114
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -113
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -118
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 4.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 55.5,
+         "price": 100
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 55.5,
+         "price": -137
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 67.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 67.5,
+         "price": -108
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-10-26T21:15:34Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:16:01Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 240.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 240.5,
+         "price": -112
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 219.5,
+         "price": -112
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 219.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:16:01Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -112
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 40.5,
+         "price": -112
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 40.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 30.5,
+         "price": -112
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 51.5,
+         "price": -112
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 51.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:15:26Z",
+       "outcomes": [
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -108
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -138
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 132
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -168
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": 112
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -142
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -102
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -124
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -138
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 2.5,
+         "price": -182
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 2.5,
+         "price": 142
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -108
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:16:01Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -102
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -124
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 11.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 4.5,
+         "price": -108
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 54.5,
+         "price": -112
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -112
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -112
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-10-26T21:15:35Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:16:01Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 238.5,
+         "price": -114
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 223.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:16:01Z",
+       "outcomes": [
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 41.5,
+         "price": -112
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 22.5,
+         "price": -112
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 56.5,
+         "price": -114
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 20.5,
+         "price": -117
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 18.5,
+         "price": -112
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 28.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 17.5,
+         "price": -109
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 53.5,
+         "price": -114
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:16:01Z",
+       "outcomes": [
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": 108
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -117
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 123
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -104
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -129
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -121
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -127
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:16:01Z",
+       "outcomes": [
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 66.5,
+         "price": -112
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 10.5,
+         "price": -113
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 17.5,
+         "price": -114
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-10-26T21:15:34Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:15:05Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 223.5,
+         "price": -117
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 223.5,
+         "price": -114
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 238.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 238.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:15:05Z",
+       "outcomes": [
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 18.5,
+         "price": -117
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 52.5,
+         "price": -113
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 52.5,
+         "price": -118
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 41.5,
+         "price": -113
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 41.5,
+         "price": -118
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 17.5,
+         "price": -112
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 22.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 22.5,
+         "price": -118
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 14.5,
+         "price": -112
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 18.5,
+         "price": -118
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -112
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 20.5,
+         "price": -118
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 20.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:15:05Z",
+       "outcomes": [
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 106
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -141
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 108
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -143
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -127
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": 107
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -141
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -162
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -130
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -103
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 118
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -159
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -113
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -107
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -122
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": -109
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -127
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:15:05Z",
+       "outcomes": [
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 66.5,
+         "price": -113
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 66.5,
+         "price": -118
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 53.5,
+         "price": -117
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 53.5,
+         "price": -114
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 10.5,
+         "price": -114
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 10.5,
+         "price": -117
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 19.5,
+         "price": -121
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-10-26T21:14:58Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 241.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 241.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 223.5,
+         "price": -125
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 223.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 54.5,
+         "price": -125
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 51.5,
+         "price": -125
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 19.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -170
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 110
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:15:44Z",
+       "outcomes": [
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 68.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 55.5,
+         "price": -125
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -125
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 11.5,
+         "price": -130
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 11.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-10-26T21:15:34Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:11:50Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 242.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 242.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 225.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 225.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:11:50Z",
+       "outcomes": [
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 26.5,
+         "price": -118
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 20.5,
+         "price": -135
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Over",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Under",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:11:50Z",
+       "outcomes": [
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -135
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -118
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -118
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 105
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -105
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -118
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 2.5,
+         "price": -175
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 2.5,
+         "price": 130
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Over",
+         "point": 0.5,
+         "price": -200
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Under",
+         "point": 0.5,
+         "price": 145
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Over",
+         "point": 0.5,
+         "price": -135
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Under",
+         "point": 0.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:11:50Z",
+       "outcomes": [
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 68.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 68.5,
+         "price": -115
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2025-10-26T21:15:24Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:15:54Z",
+       "outcomes": [
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 220.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 220.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 240.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 240.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:15:54Z",
+       "outcomes": [
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 20.5,
+         "price": -105
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 20.5,
+         "price": -135
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 20.5,
+         "price": -105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 20.5,
+         "price": -105
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 25.5,
+         "price": -135
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 25.5,
+         "price": 100
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Over",
+         "point": 10.5,
+         "price": 155
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Under",
+         "point": 10.5,
+         "price": -220
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Over",
+         "point": 10.5,
+         "price": 190
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Under",
+         "point": 10.5,
+         "price": -280
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:15:54Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 135
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -185
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": 105
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -140
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -170
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -155
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:15:54Z",
+       "outcomes": [
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 65.5,
+         "price": -135
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 65.5,
+         "price": 100
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 55.5,
+         "price": 100
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 55.5,
+         "price": -135
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 20.5,
+         "price": 100
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 20.5,
+         "price": -135
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 5.5,
+         "price": 110
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 5.5,
+         "price": -150
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-10-26T21:15:12Z",
+     "markets": [
+      {
+       "key": "player_pass_yds",
+       "last_update": "2025-10-26T21:12:41Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 242.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 242.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 225.5,
+         "price": -115
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 225.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-10-26T21:12:41Z",
+       "outcomes": [
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Over",
+         "point": 5.5,
+         "price": -110
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Under",
+         "point": 5.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_receptions",
+       "last_update": "2025-10-26T21:12:41Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 4.5,
+         "price": 125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 4.5,
+         "price": -165
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 2.5,
+         "price": -150
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 2.5,
+         "price": 115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Over",
+         "point": 4.5,
+         "price": -105
+        },
+        {
+         "description": "Romeo Doubs",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 2.5,
+         "price": 100
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Tucker Kraft",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Over",
+         "point": 1.5,
+         "price": 100
+        },
+        {
+         "description": "Christian Watson",
+         "name": "Under",
+         "point": 1.5,
+         "price": -135
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 3.5,
+         "price": 120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 3.5,
+         "price": -155
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Calvin Austin III",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Darnell Washington",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 2.5,
+         "price": -240
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 2.5,
+         "price": 175
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Over",
+         "point": 0.5,
+         "price": -195
+        },
+        {
+         "description": "Luke Musgrave",
+         "name": "Under",
+         "point": 0.5,
+         "price": 145
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Over",
+         "point": 0.5,
+         "price": -130
+        },
+        {
+         "description": "Malik Heath",
+         "name": "Under",
+         "point": 0.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-10-26T21:12:41Z",
+       "outcomes": [
+        {
+         "description": "Jordan Love",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Love",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Over",
+         "point": 1.5,
+         "price": -120
+        },
+        {
+         "description": "Aaron Rodgers",
+         "name": "Under",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 56.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Over",
+         "point": 68.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Jacobs",
+         "name": "Under",
+         "point": 68.5,
+         "price": -115
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Matthew Golden",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Emanuel Wilson",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-10-27T00:20:00Z",
+   "home_team": "Pittsburgh Steelers",
+   "id": "fb900eef07307ebf5c1930341ecd852a",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-10-26T21:20:38Z",
+  "previous_timestamp": "2025-10-26T21:10:38Z",
+  "timestamp": "2025-10-26T21:15:38Z"
+ }
+}
