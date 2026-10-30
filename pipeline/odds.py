@@ -21,6 +21,14 @@ Snapshot pulls (line movement; displayed, never graded), per NFL week, Central t
   sun  - Sunday 8:00 AM (same retry rule)
 Each applies to that week's games that have not kicked off. Snapshot pulls only
 spend credits that are not needed for the remaining pre-game pulls this month.
+Since 2026-10-29 (Michael) the Monday pull retries every 15 minutes instead of hourly (empty answers cost 0).
+
+Line checks (pull type "track", Michael 2026-10-29): once a game has lines from any pull, it is pulled again
+  - 3 times a day (8:00 AM, 2:00 PM, 8:00 PM Central) until 4 hours before kickoff,
+  - then at 4:00 and 2:30 before kickoff (every 90 min), and 1:00, 0:30 and 0:15 before kickoff.
+A check is skipped when the game was already pulled (any type) since that time, so the Mon/Thu/Sun snapshots,
+the graded ~3 h pre-game pull and the sweeps count toward it. Line checks are never graded; their lines go to
+data/line_checks/week_NN.csv (one file per NFL week), not prop_captures.csv. Same credit guard as snapshots.
 """
 from __future__ import annotations
 
@@ -49,7 +57,8 @@ SNAP_RETRY = timedelta(hours=1)
 # Runs start every ~30 min and each attempt is logged a few seconds into its run, so the run an hour later
 # is a few seconds short of a full hour. Allow this much slack so the retry lands every hour, not every 90 min.
 RETRY_SLACK = timedelta(minutes=5)
-SNAP_MAX_TRIES = 3  # for thu/sun; mon keeps trying hourly until it gets props (or the thu pull starts)
+SNAP_MAX_TRIES = 3  # for thu/sun; mon keeps trying until it gets props (or the thu pull starts)
+MON_RETRY = timedelta(minutes=15)  # Monday "waiting for lines" retry (Michael 2026-10-29); one run per ~15 min
 # Monday fill-in: books post props gradually, so a Monday pull can come back "thin". If fewer than
 # FILL_MIN_COVERAGE of the game's starters (FILL_SLOTS) have a Monday line, pull again every FILL_EVERY
 # until coverage is reached or the Thursday 2 PM snapshot takes over.
@@ -65,6 +74,15 @@ SWEEP_WINDOWS = [(timedelta(minutes=75), timedelta(minutes=40)), (timedelta(minu
 SWEEP_MIN_SNAP = 25.0
 
 CAPTURES_PATH = DATA / "prop_captures.csv"
+# Line checks (see module docstring): Central-time daily slots, the cut-over to kickoff-relative checks, and those checks.
+TRACK_DAILY_CT = [(8, 0), (14, 0), (20, 0)]
+TRACK_DAILY_UNTIL = timedelta(hours=4)
+TRACK_OFFSETS = [timedelta(minutes=m) for m in (240, 150, 60, 30, 15)]  # before kickoff, largest first
+TRACK_DIR = DATA / "line_checks"
+
+
+def track_path(g):
+    return TRACK_DIR / f"week_{int(g['week']):02d}.csv"
 PULL_LOG_PATH = DATA / "pull_log.csv"
 # Bet-slip links (experiment, 2026-10-23): ask The Odds API for bookmaker links / source ids with each pull
 # (includeLinks / includeSids) and keep the latest ones for upcoming games in their own file. This never changes
@@ -227,7 +245,7 @@ def plan_snapshots(games, now=None):
                 tries = [r for r in rows if r["status"] in ("empty", "error")]
                 if tries:
                     last = parse_iso(tries[-1].get("attempted_utc", ""))
-                    if last and now - last < SNAP_RETRY - RETRY_SLACK:
+                    if last and now - last < (MON_RETRY if t == "mon" else SNAP_RETRY) - RETRY_SLACK:
                         continue
                     if t != "mon" and len(tries) >= SNAP_MAX_TRIES:
                         continue
@@ -237,6 +255,47 @@ def plan_snapshots(games, now=None):
 
 def _has_ok(rows):
     return any(r["status"] == "ok" for r in rows)
+
+
+def track_target(ko, now):
+    """The scheduled line-check time that most recently passed for a game kicking off at ko (None before kickoff
+    phases start)."""
+    if ko - now > TRACK_DAILY_UNTIL:
+        local = now.astimezone(CT)
+        for back in (0, 1):
+            d = (local - timedelta(days=back)).date()
+            for hh, mm in reversed(TRACK_DAILY_CT):
+                t = datetime(d.year, d.month, d.day, hh, mm, tzinfo=CT)
+                if t <= now:
+                    return t
+        return None
+    passed = [ko - off for off in TRACK_OFFSETS if ko - off <= now]
+    return max(passed) if passed else None
+
+
+def plan_tracking(games, now=None, skip=()):
+    """Return [game] line checks due now: games that already have lines (any ok pull) whose latest scheduled check
+    time has passed with no pull of any type (ok or empty) since then. Games in skip are pulled this run anyway."""
+    now = now or utcnow()
+    by_game = defaultdict(list)
+    for r in read_csv(PULL_LOG_PATH):
+        by_game[r["game_id"]].append(r)
+    due = []
+    for g in games:
+        ko = parse_iso(g.get("kickoff_utc", ""))
+        if ko is None or ko <= now or ko < COLLECTION_START_UTC or g["game_id"] in skip or not g.get("week"):
+            continue
+        rows = by_game.get(g["game_id"], [])
+        if not _has_ok(rows):
+            continue  # no lines yet: the Monday / Thursday / Sunday rules keep looking
+        target = track_target(ko, now)
+        if target is None:
+            continue
+        last = max((p for r in rows if r["status"] in ("ok", "empty") and (p := parse_iso(r.get("attempted_utc", "")))),
+                   default=None)
+        if last is None or last < target:
+            due.append(g)
+    return due
 
 
 def plan(games, now=None):
@@ -438,7 +497,13 @@ def run(keys, games, name_index_for_game, log):
     except Exception as ex:  # a sweep problem must never block the main pre-game pull
         sweeps = []
         log.append(f"odds: sweep check skipped ({type(ex).__name__}: {str(ex)[:80]})")
-    if not due and not snaps and not sweeps:
+    try:
+        busy = {g["game_id"] for g in due} | {g["game_id"] for g, _t in snaps} | {g["game_id"] for g, _n in sweeps}
+        tracks = plan_tracking(games, now, skip=busy)
+    except Exception as ex:  # a line-check problem must never block the other pulls
+        tracks = []
+        log.append(f"odds: line check planning skipped ({type(ex).__name__}: {str(ex)[:80]})")
+    if not due and not snaps and not sweeps and not tracks:
         return wrote or test_wrote
 
     # Check every key (the events call is free). Keep the events list from the first key that works.
@@ -474,7 +539,8 @@ def run(keys, games, name_index_for_game, log):
     due_ids = {g["game_id"] for g in due}
     jobs = [(g, "pregame") for g in sorted(due, key=lambda x: x["kickoff_utc"])] + \
            [(g, "pregame") for g, _n in sorted(sweeps, key=lambda x: x[0]["kickoff_utc"]) if g["game_id"] not in due_ids] + \
-           sorted(snaps, key=lambda x: x[0]["kickoff_utc"])
+           sorted(snaps, key=lambda x: x[0]["kickoff_utc"]) + \
+           [(g, "track") for g in sorted(tracks, key=lambda x: x["kickoff_utc"])]
     for g, pt in jobs:
         ko = parse_iso(g["kickoff_utc"])
         now = utcnow()
@@ -503,7 +569,7 @@ def run(keys, games, name_index_for_game, log):
                 if spare >= len(CORE) + len(OPTIONAL):
                     markets += OPTIONAL
                 elif spare < len(CORE):
-                    log.append(f"odds: {g['game_id']} {'sweep' if is_sweep else pt + ' snapshot'} skipped to protect pre-game pulls "
+                    log.append(f"odds: {g['game_id']} {'sweep' if is_sweep else 'line check' if pt == 'track' else pt + ' snapshot'} skipped to protect pre-game pulls "
                                f"({remaining_n} credits left)")
                     continue
             else:
@@ -592,7 +658,7 @@ def run(keys, games, name_index_for_game, log):
             log.append(f"odds: {g['game_id']} {pt} returned no props (cost {last})")
             wrote = True
             continue
-        append_csv(CAPTURES_PATH, caps, CAPTURE_FIELDS)
+        append_csv(track_path(g) if pt == "track" else CAPTURES_PATH, caps, CAPTURE_FIELDS)
         if LINKS_ENABLED:
             try:  # links are an experiment: any problem here is logged and ignored
                 lrows = _link_rows(event, g["game_id"], pt, captured, ko, name_index_for_game(g))

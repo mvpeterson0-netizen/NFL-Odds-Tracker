@@ -665,7 +665,9 @@ def build(log):
     # This week's pulls with the lines each one returned (Log tab). Lines are grouped by the exact
     # capture time, which equals the pull's logged time.
     wk_games = {g["game_id"] for g in games if cur is not None and int(g["week"]) == cur}
-    wk_pulls = [p for p in pull_rows if p["game_id"] in wk_games]
+    # Line checks (pull type "track", 2026-10-29) are left out of the app's pull lists for now so data.json doesn't
+    # grow; their lines are kept in data/line_checks/ and not shown yet.
+    wk_pulls = [p for p in pull_rows if p["game_id"] in wk_games and ptype(p) != "track"]
     tracked = defaultdict(dict)  # game -> {gsis: [name, slot]}
     for s_ in slots:
         if cur is not None and int(s_["week"]) == cur:
@@ -738,7 +740,7 @@ def build(log):
                  "games_captured": len({p["game_id"] for p in last_ok}),
                  "last_capture_utc": max((p["attempted_utc"] for p in last_ok), default=""),
                  "credits_remaining": credits},
-        "pull_log": pull_rows[-300:],
+        "pull_log": [p for p in pull_rows if ptype(p) != "track"][-300:],
         "week_pulls": {"week": cur, "pulls": wk_pulls, "lines": pull_lines,
                        "tracked": {g: [[pid, v[0], v[1]] for pid, v in t.items()] for g, t in tracked.items()}},
         "unmatched": unmatched[-100:],
