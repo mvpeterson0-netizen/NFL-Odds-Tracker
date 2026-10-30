@@ -12,7 +12,7 @@ import os
 import sys
 import traceback
 
-from . import espn, espn_box, history, nflverse, notify, odds, script, supa, weather
+from . import espn, espn_box, history, history_2025, nflverse, notify, odds, script, supa, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
 BUILD_VERSION = "1"  # bump to force a rebuild after code changes
@@ -43,12 +43,12 @@ def main() -> int:
             merged.update(name_index.get(g["home_team"], {}))
             return merged
 
-        # Only the paid 20k-credit key is used (Michael, 2026-10-28); the older free keys are retired.
-        keys = [os.environ.get("ODDS_API_KEY_20K", "").strip()]
+        from .credit_policy import live_keys
+        keys = live_keys()  # Free keys first; paid key last (Michael, 2026-10-30).
         odds_changed = odds.run(keys, games, idx_for, log)
 
         try:  # one-time back-fill of weeks 1-6 pre-game lines (historical endpoint); never fails the run
-            history_changed = history.run(keys[0], games, idx_for, log)
+            history_changed = history.run(os.environ.get("ODDS_API_KEY_20K", "").strip(), games, idx_for, log)
         except Exception as ex:
             history_changed = False
             log.append(f"history: skipped ({type(ex).__name__}: {str(ex)[:80]})")
@@ -94,6 +94,10 @@ def main() -> int:
             notify.arb_run(log)
         except Exception as ex:
             log.append(f"arb: skipped ({type(ex).__name__}: {str(ex)[:80]})")
+        try:
+            history_2025.run(os.environ.get("ODDS_API_KEY_20K", "").strip(), log)
+        except Exception as ex:
+            log.append(f"history 2025: paused ({type(ex).__name__}); retry next run")
     except Exception as e:  # logged, then the run fails so the next schedule retries
         status = "error"
         err = f"{type(e).__name__}: {e}"[:500]

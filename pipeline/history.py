@@ -26,7 +26,7 @@ from datetime import timedelta
 from .common import COLLECTION_START_UTC, DATA, append_csv, http_get, iso, parse_iso, read_csv, read_json, \
     utcnow, write_json
 from .odds import (API, BOOKS, CAPTURE_FIELDS, CAPTURES_PATH, CORE, OPTIONAL, PULL_FIELDS, PULL_LOG_PATH, SPORT,
-                   WINDOW_CLOSE, WINDOW_OPEN, _main_line_rows, match_event, ptype)
+                   WINDOW_CLOSE, WINDOW_OPEN, _main_line_rows, match_event, ptype, fetch_events)
 
 HIST = f"{API}/historical/sports/{SPORT}"
 SNAP_BEFORE = timedelta(hours=3)
@@ -67,6 +67,11 @@ def run(key, games, name_index_for_game, log):
     todo = candidates(games, state)
     if not todo:
         return False
+    # Verify balance before even the first billable request (also protects the NBA reserve).
+    _, headers = fetch_events(key)
+    balance = headers.get("x-requests-remaining", "")
+    if not balance.isdigit() or int(balance) < CREDIT_FLOOR + 71:
+        return False
     batch = todo[:MAX_GAMES_PER_RUN]
     markets = CORE + OPTIONAL
     events_by_ko = {}
@@ -104,6 +109,8 @@ def run(key, games, name_index_for_game, log):
             st.update({"status": "not_found", "note": f"not in historical events at {date}"})
             stats["not_found"] += 1
             continue
+        if remaining is None or remaining - 10 * len(markets) < CREDIT_FLOOR:
+            break
         body, h, status = http_get(f"{HIST}/events/{e['id']}/odds", {
             "apiKey": key, "date": date, "bookmakers": ",".join(BOOKS), "markets": ",".join(markets),
             "oddsFormat": "american", "dateFormat": "iso"})

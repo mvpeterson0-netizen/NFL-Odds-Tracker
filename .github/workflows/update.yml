@@ -47,6 +47,12 @@ jobs:
       - name: Run pipeline
         id: run
         env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          ODDS_API_KEY_2: ${{ secrets.ODDS_API_KEY_2 }}
+          ODDS_API_KEY_3: ${{ secrets.ODDS_API_KEY_3 }}
+          ODDS_API_KEY_4: ${{ secrets.ODDS_API_KEY_4 }}
+          ODDS_API_KEY_5: ${{ secrets.ODDS_API_KEY_5 }}
+          ODDS_API_KEY_6: ${{ secrets.ODDS_API_KEY_6 }}
           ODDS_API_KEY_20K: ${{ secrets.ODDS_API_KEY_20K }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}

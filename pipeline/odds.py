@@ -37,6 +37,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
+from .credit_policy import floor_for, pick_live
 from .common import (DATA, TEAM_NAME_TO_ABBR, append_csv, http_get, iso, norm_name, parse_iso, read_csv,
                      redact, utcnow, write_csv, write_json, COLLECTION_START_UTC)
 
@@ -440,7 +441,7 @@ def link_test(keys, games, name_index_for_game, log):
                 except RuntimeError:
                     continue
                 _l, rem = _headers_credits(hh)
-                if rem.isdigit() and int(rem) < len(markets) + RESERVE_CREDITS:
+                if not rem.isdigit() or int(rem) < len(markets) + max(RESERVE_CREDITS, floor_for(k)):
                     continue
                 e = match_event(g, ev)
                 if e is None:
@@ -489,7 +490,7 @@ def run(keys, games, name_index_for_game, log):
         keys = [keys]
     keys = [k for k in (keys or []) if k]
     if not keys:
-        log.append("odds: ODDS_API_KEY_20K not set; skipped")
+        log.append("odds: no API keys configured; skipped")
         return False
     test_wrote = False
     try:  # the one-time link test must never stop the regular pulls
@@ -538,14 +539,8 @@ def run(keys, games, name_index_for_game, log):
     log.append("odds: credits left " + ", ".join(f"key #{i}={v if v is not None else '?'}" for i, v in left.items()))
 
     def total_left():
-        known = [v for v in left.values() if v is not None]
+        known = [max(0, v - floor_for(keys[i - 1])) for i, v in left.items() if v is not None]
         return sum(known) if known else None
-
-    def pick(cost, skip=()):
-        for i, v in left.items():
-            if i not in skip and (v is None or v >= cost):
-                return i
-        return None
 
     remaining_n = total_left()
     pulls = _pulls_by_game()
@@ -606,14 +601,22 @@ def run(keys, games, name_index_for_game, log):
 
         tried = []
         while True:
-            ki = pick(len(markets), skip=tried)
-            if ki is None and len(markets) > len(CORE):
-                ki = pick(len(CORE), skip=tried)
-                if ki is not None:
-                    markets = list(CORE)  # this key can only afford the core markets
+            ki, count = pick_live(left, keys, len(markets), len(CORE), skip=tried)
+            if ki is not None and count == len(CORE):
+                markets = list(CORE)
             if ki is None:
                 break
             tried.append(ki)
+            if floor_for(keys[ki - 1]):
+                # NBA shares the paid key: refresh immediately before a paid NFL request.
+                try:
+                    _, fresh = fetch_events(keys[ki - 1])
+                    rem = fresh.get("x-requests-remaining", "")
+                    left[ki] = int(rem) if rem.isdigit() else None
+                except RuntimeError:
+                    left[ki] = None
+                if left[ki] is None or left[ki] - len(markets) < floor_for(keys[ki - 1]):
+                    continue
             params = {"apiKey": keys[ki - 1], "bookmakers": ",".join(BOOKS + EXTRA_BOOKS), "markets": ",".join(markets),
                       "oddsFormat": "american", "dateFormat": "iso"}
             if LINKS_ENABLED:
