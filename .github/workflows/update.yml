@@ -44,6 +44,10 @@ jobs:
         continue-on-error: true
         run: pip install -q pywebpush==2.5.0
 
+      - name: Sync latest main before generating data
+        if: github.ref == 'refs/heads/main'
+        run: git pull --ff-only origin main
+
       - name: Run pipeline
         id: run
         env:
