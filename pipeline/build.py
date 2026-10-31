@@ -805,6 +805,13 @@ def build(log):
         "books": books_out,
         "updates": updates_out,
     }
+    from .frozen_leads import update as update_frozen
+    # Save pregame evidence before publishing. No decision is reconstructed after kickoff.
+    out["frozen_research"] = update_frozen(d, players, rows_out, now)
+    # Full feature snapshots stay in the audit ledger, not the site's payload.
+    out["frozen_research"] = {**out["frozen_research"], "records": {
+        k: {a: b for a, b in v.items() if a != "feature_snapshot"}
+        for k, v in out["frozen_research"]["records"].items()}}
     write_json(OUT_PATH, out, compact=True)
     log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
                f"{len(unmatched)} unmatched lines, {d.unmapped_snaps} unmapped snap rows")
