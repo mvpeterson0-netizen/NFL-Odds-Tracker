@@ -19,7 +19,7 @@ PATH = DATA / "game_script.json"
 TAG = "pbp"
 FILE = f"play_by_play_{SEASON}.csv.gz"
 MARGINS = (7, 10, 13, 14, 17, 21)  # points; the app lets the user pick which margin counts as "big" (Guide tab)
-VERSION = 2  # bump when compute() output changes so the next run recomputes even if nflverse hasn't republished
+VERSION = 3  # adds exact designed-run denominator used by frozen research models
 # Definitions (shown in the app next to each number):
 NEUTRAL_MARGIN = 7       # neutral pass rate: plays with the score within 7, quarters 1-3
 STATE_MARGIN = 13        # pass rate by score: up 13+ / within 6 / down 13+
@@ -99,8 +99,12 @@ def _team(plays, team) -> dict:
     """Per-team pass counts for one game (counts, so the app can add games up into season totals):
     np/npp = neutral plays / passes (score within NEUTRAL_MARGIN, quarters 1-3); up/cl/dn = [plays, passes] when the
     offense was up STATE_MARGIN+, within STATE_MARGIN - 7, or down STATE_MARGIN+ before the play."""
-    st = {"np": 0, "npp": 0, "up": [0, 0], "cl": [0, 0], "dn": [0, 0]}
+    st = {"np": 0, "npp": 0, "up": [0, 0], "cl": [0, 0], "dn": [0, 0], "designed_runs": 0}
     for p in plays:
+        if (p.get("posteam") == team and p.get("play_type") != "no_play"
+                and _num(p.get("qb_kneel")) != 1 and _num(p.get("rush_attempt")) == 1
+                and _num(p.get("qb_scramble")) != 1):
+            st["designed_runs"] += 1
         if p.get("posteam") != team or not _is_play(p):
             continue
         sd = _num(p.get("score_differential")) or 0  # offense's margin before the play

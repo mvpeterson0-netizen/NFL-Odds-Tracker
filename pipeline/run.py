@@ -15,7 +15,7 @@ import traceback
 from . import espn, espn_box, history, history_2025, nflverse, notify, odds, script, supa, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
-BUILD_VERSION = "1"  # bump to force a rebuild after code changes
+BUILD_VERSION = "2"  # frozen forward research leads 9–12
 RUN_FIELDS = ["run_utc", "finished_utc", "trigger", "status", "built", "summary", "error"]
 
 

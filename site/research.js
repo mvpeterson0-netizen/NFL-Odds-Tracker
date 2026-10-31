@@ -1,7 +1,7 @@
 "use strict";
 // Stix Research tab: pre-built "Leads" filters, then Leads Analysis (how a rule did in a past week / game).
 // Uses only data already in data.json (players' per-game rows, lines, usage; game script minutes from play-by-play).
-// Leads = the 8 frozen theses (claude/frozen-theses.md), each spelled out behind its "i". Candidates, not predictions.
+// Original leads 1–8 plus append-only forward candidates 9–12. Candidates, not proven edges.
 (function () {
   const RL = { tab: "t1", mk: "", gid: "" };
   // Game script (nflverse play-by-play, built into games[gid].scr as minutes leading "l<m>" / trailing "t<m>" by each
@@ -59,6 +59,22 @@
       title: "His team a 7+ underdog → WR/TE receiving yards Over",
       why: "Same trailing-team passing volume.", rec: "59–42 · 58.4% · +10.6 u · +10.5% ROI",
       desc: () => `WRs and TEs with a receiving yards line whose team is a <b>${BIG_SPREAD}+ point underdog</b>. Ordered by spread, then kickoff.` },
+    { id: "t9", n: 9, frozen: true, side: "under", label: "WR: 3 yardage Overs → Under",
+      title: "WR receiving yards: three consecutive Overs → Under",
+      why: "Test whether a run of Overs is overvalued in the next quoted line.",
+      desc: () => `Any quoted WR, including All players extras. Each of his last <b>three offensive appearances</b> this season must have a known receiving-yards pregame line and an Over result. A push or missing line breaks the streak. Zero-production appearances count; inactive games do not. Bet Under at the saved pregame quote.` },
+    { id: "t10", n: 10, frozen: true, side: "under", label: "WR: rising catches → Under",
+      title: "WR receptions: three rising games → Under",
+      why: "Test whether steadily rising catch totals overstate the next game's opportunity.",
+      desc: () => `Any quoted WR. Receptions in his last <b>three offensive appearances</b> this season must be strictly increasing (for example 2 → 4 → 6: three observations, two increases). Ties fail. Zero-production appearances count; inactive games do not. Bet Under at the saved pregame quote.` },
+    { id: "t11", n: 11, frozen: true, side: "model", label: "Frozen basic model",
+      title: "Frozen basic logistic model",
+      why: "Combine line, market probability, recent production, usage and streak inputs.",
+      desc: () => `Frozen model version <b>2026-10-30-v1</b>, trained on 2025 weeks 1–10 with C=0.01. QB passing yards, QB/RB rushing yards, RB/WR/TE receptions and receiving yards. Any quoted player. Select the higher estimated-return side only if its estimated return is <b>at least 10%</b>. Fixed preprocessing and coefficients; no retraining. This threshold is a trigger, not a promised return.` },
+    { id: "t12", n: 12, frozen: true, side: "model", label: "Frozen interaction model",
+      title: "Frozen logistic model with interactions",
+      why: "Test whether production, usage and line adjustments work differently in combination.",
+      desc: () => `Frozen version <b>2026-10-30-v1</b>, C=0.01, with the same four-market universe and <b>10% estimated-return threshold</b> as lead 11. Adds fixed interactions and position/market slopes. No added injury-return assumptions, context package, retraining or threshold tuning.` },
   ];
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
   // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
@@ -263,6 +279,7 @@
   const koMs = (c) => new Date(c.r.ko).getTime();
 
   function compute(tab) {
+    if (TABS.find((t) => t.id === tab)?.frozen) return frozenCandidates(tab);
     const out = [];
     for (const c of candidates()) {
       const pl = prevLine(c), pos = c.p.pos, line = c.cur.line;
@@ -302,14 +319,39 @@
     return out;
   }
   const HEADS = {
+    t9: ["Saved line / side", "Recorded"], t10: ["Saved line / side", "Recorded"],
+    t11: ["Saved line / side", "Model estimate"], t12: ["Saved line / side", "Model estimate"],
     t1: ["Line", "Last game: his stat vs line"],
     t2: ["Line (last game → now)", "Game"],
     t3: ["Line", "Last 3"], t4: ["Line", "Last 3"],
     t5: ["Line (last game → now)", "Usage"],
     t6: ["Line", "Team"], t7: ["Line", "Team"], t8: ["Line", "Team"],
   };
-  const sideChip = (t) => `<span class="chip rl-side ${t.side}">Bet ${t.side === "over" ? "Over" : "Under"}</span>`;
-  const recLine = (t) => `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
+  const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
+  const recLine = (t) => t.frozen ? `Frozen Oct 30, 2026 · forward paper record only. Early-week matches are provisional. Decisions lock at the pregame capture (~3 h before kickoff), at saved odds, 1 unit per bet. No historical results are added.` : `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
+
+  function frozenEntries(tab) {
+    const out = [];
+    for (const [v, locked] of [...Object.values(D.frozen_research?.records || {}).map((v) => [v, true]), ...Object.values(D.frozen_research?.watchlist || {}).filter((v) => !D.frozen_research?.records?.[[v.gid,v.pid,v.mid].join("|")]).map((v) => [v, false])]) {
+      const decision = v.decisions?.[tab];
+      if (!decision || decision.qualifies === false) continue;
+      const p = D.players.find((x) => x.id === v.pid);
+      const r = (D.rows[v.pid] || []).find((x) => x.gid === v.gid);
+      if (p && r) out.push({ v, decision, p, r, locked, mid: v.mid });
+    }
+    return out;
+  }
+  function frozenCandidates(tab) {
+    return frozenEntries(tab).filter((x) => !x.r.final && new Date(x.r.ko).getTime() > Date.now()
+      && (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk)).map((x) => {
+        const { v, decision, p, r, mid } = x, cur = { line: v.quote.line, label: x.locked ? "locked pregame quote" : "provisional weekly snapshot", cap: v.quote.cap };
+        const price = decision.side === "over" ? v.quote.op : v.quote.up;
+        return { c: { p, r, mid, cur }, rank: decision.edge || -new Date(r.ko).getTime(),
+          badge: `${x.locked ? "Locked" : "Watchlist"} · ${decision.side === "over" ? "Over" : "Under"}`,
+          cells: [`<b>${decision.side === "over" ? "Over" : "Under"} ${num(cur.line)}</b> ${odds(price)} · ${esc(v.quote.book)}`,
+            decision.edge != null ? `${num(100 * decision.probability)}% win · ${signed(100 * decision.edge)}% estimated ROI` : fmtTime(v.observed_at)] };
+      }).sort((a, b) => b.rank - a.rank);
+  }
 
   // "Add all to FanDuel slip" (Michael 2026-10-29): one link that puts the rule's bet side for every listed player
   // (the rows shown, top 40) on the FanDuel bet slip. FanDuel takes several bets in one addToBetslip link as
@@ -333,6 +375,7 @@
     return { legs, missing, url };
   }
   function fdSlipBox(t, rows) {
+    if (t.frozen) return ""; // Paper tracking; model sides/prices must never be replaced by current FD quotes.
     const f = fdSlip(t, rows); RL.fdLegs = f.legs;
     if (!f.legs.length) return "";
     const word = t.side === "over" ? "Over" : "Under";
@@ -347,6 +390,7 @@
     const t = visibleTabs().find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
     let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${recLine(t)}</span></p>`;
+    if (t.frozen && !list.length) return h + `<p class="muted">No upcoming matches yet. Weekly snapshots populate a provisional watchlist; matches can change until the pregame capture locks the decision. Only locked decisions are scored.</p>`;
     if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
     if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
@@ -369,11 +413,11 @@
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
     ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Rule ${t.n}">
-      <div class="nw-h"><b>Rule ${t.n} · Bet ${t.side === "over" ? "Over" : "Under"}</b><button class="nw-x" aria-label="Close">✕</button></div>
+      <div class="nw-h"><b>Rule ${t.n} · ${t.side === "model" ? "Model selects Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</b><button class="nw-x" aria-label="Close">✕</button></div>
       <p class="small"><b>${esc(t.title)}.</b> ${t.desc()}</p>
       <p class="small"><b>Why it might work</b> (an interpretation, not proven): ${esc(t.why)}</p>
-      <p class="small">${recLine(t)} Picked from many conditions tested on weeks 1–7, so the real rate is likely lower; break-even at −110 is about 52.4%.</p>
-      <p class="muted small">${UNIVERSE}${t.spread ? " " + SPREAD_NOTE : ""}</p></div>`;
+      <p class="small">${recLine(t)} ${t.frozen ? "Exploratory candidates selected after historical research; future performance is uncertain." : "Picked from many conditions tested on weeks 1–7, so the real rate is likely lower; break-even at −110 is about 52.4%."}</p>
+      <p class="muted small">${t.frozen ? "DK primary, FD fallback. No offseason history. Eligibility, features, selected side and quote are recorded before kickoff; the decision is not recalculated after results." : UNIVERSE}${t.spread ? " " + SPREAD_NOTE : ""}</p></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
@@ -453,6 +497,19 @@
   // Every graded bet one rule made in one week: [{p, r, mid, m, side, out: "hit"|"miss"|"push", u, pm, pl, f}]
   function analyze(tab, wk) {
     const t = TABS.find((x) => x.id === tab), out = [];
+    if (t?.frozen) {
+      for (const x of frozenEntries(tab)) {
+        const { v, decision, p, r, mid } = x;
+        const act = r.m?.[mid]?.act;
+        if (!x.locked || r.wk !== wk || !r.final || r.played !== true || act == null) continue;
+        const side = decision.side, odds = v.quote[side === "over" ? "op" : "up"];
+        const result = act === v.quote.line ? "push" : act > v.quote.line ? "over" : "under";
+        const o = result === "push" ? "push" : result === side ? "hit" : "miss";
+        out.push({ p, r, mid, m: { ...v.quote, act }, rule: t, side, out: o,
+          u: o === "hit" ? payout(odds) : o === "miss" ? -1 : 0, odds });
+      }
+      return out;
+    }
     for (const p of D.players) {
       if (p.extra) continue;
       const rows = (D.rows[p.id] || []).slice().sort((a, b) => a.wk - b.wk);
@@ -510,7 +567,7 @@
     const list = LA.gid ? all.filter((x) => x.r.gid === LA.gid) : all;
     const s = tally(list);
     const scope = LA.gid ? esc(gameLabel(LA.gid)) : `Week ${LA.wk}${nFinal < games.length ? ` (${nFinal} of ${games.length} games final)` : ""}`;
-    let h = `<p class="callout small">${isAll ? `<b>All ${rules.length} leads together.</b> Each rule's bet counts separately, so a player-stat that fits two rules counts twice.` : `<b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}`}<br><span class="muted">${LA.wk <= 7 ? `Weeks 1–7 are the weeks ${isAll ? "these rules were" : "this rule was"} picked from (in-sample), so these results flatter ${isAll ? "them" : "it"}.` : "Week 8 on: weeks the rules had never seen when it was frozen (out-of-sample)."}</span></p>`;
+    let h = `<p class="callout small">${isAll ? `<b>All ${rules.length} leads together.</b> Each rule's bet counts separately, so a player-stat that fits two rules counts twice.` : `<b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}`}<br><span class="muted">${t.frozen && !isAll ? recLine(t) : (LA.wk <= 7 ? `Weeks 1–7 are discovery data for original leads 1–8.` : "Original leads 1–8: week 8 onward. Leads 9–12: only decisions recorded after the Oct 30 freeze; earlier results are excluded.")}</span></p>`;
     if (!isAll && t.spread && !Object.values(D.games).some((g) => g.wk === LA.wk && g.spread != null)) return h + `<p class="muted">No point spreads in the app's data for week ${LA.wk}, so this rule can't be scored.</p>`;
     h += `<div class="la-sum"><div><span class="muted small">${scope}</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : ""}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : (s.roi > 0 ? "+" : s.roi < 0 ? "−" : "") + Math.abs(s.roi).toFixed(1) + "%"}</b></div></div>`;
     if (isAll && list.length) {
