@@ -358,6 +358,7 @@
   // marketId[i]=…&selectionId[i]=… (Michael's iPhone test 2026-10-29: 3 bets all landed; repeated or comma-separated
   // parameters did not work). Each bet uses FanDuel's own current line. Players without a FanDuel link in the latest
   // pull, or whose game has started, are left out and named. Tapping also saves the picks to My picks (one save) only when the switch above the list is on (off by default).
+  const FD_SLIP_MAX = 25; // most bets in one FanDuel slip link (Michael, 2026-11-01)
   const FD_SLIP = /^https:\/\/sportsbook\.fanduel\.com\/addToBetslip\?/;
   // Whether a tap on "Add all to FanDuel slip" also saves those picks to My picks. Off unless switched on (Michael,
   // 2026-11-01: he mostly taps it to try the slip, not to log picks). Per browser: localStorage `stix_fd_save` = "1" (save) / "0".
@@ -375,8 +376,14 @@
       if (m && sel && /^[\d.]+$/.test(m) && /^\d+$/.test(sel)) legs.push({ pid: p.id, mid, side, m, sel, bet: { line: e.point, odds: o.price, cap: e.cap, gid: e.gid, book: "FanDuel", src: "Bet on FD" } });
       else missing.push(`${p.name} (${mkt[mid].label})`);
     }
-    const url = "https://sportsbook.fanduel.com/addToBetslip?" + legs.map((l, i) => `marketId[${i}]=${l.m}&selectionId[${i}]=${l.sel}`).join("&");
-    return { legs, missing, url };
+    // More than FD_SLIP_MAX bets are split into several links of at most FD_SLIP_MAX bets each, in list order.
+    const chunks = [];
+    for (let i = 0; i < legs.length; i += FD_SLIP_MAX) {
+      const part = legs.slice(i, i + FD_SLIP_MAX);
+      chunks.push({ legs: part, from: i + 1, to: i + part.length,
+        url: "https://sportsbook.fanduel.com/addToBetslip?" + part.map((l, j) => `marketId[${j}]=${l.m}&selectionId[${j}]=${l.sel}`).join("&") });
+    }
+    return { legs, missing, chunks };
   }
   // Shown only where saving picks is possible (signed in with 21+ done, or the old GitHub key on this device).
   function saveSwitch() {
@@ -385,14 +392,16 @@
   }
   function fdSlipBox(t, rows) {
     if (t.frozen) return ""; // Paper tracking; model sides/prices must never be replaced by current FD quotes.
-    const f = fdSlip(t, rows); RL.fdLegs = f.legs;
+    const f = fdSlip(t, rows); RL.fdChunks = f.chunks;
     if (!f.legs.length) return "";
-    const word = t.side === "over" ? "Over" : "Under";
-    return `<div class="betbox rl-fd"><a class="betbtn" href="${esc(f.url)}" target="_blank" rel="noopener" data-fdall="${esc(t.id)}" title="Opens FanDuel with all ${f.legs.length} bets on the slip">Add all ${f.legs.length} ${word}s to FanDuel slip ↗</a>${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}${saveSwitch()}</div>`;
+    const word = t.side === "over" ? "Over" : "Under", many = f.chunks.length > 1;
+    const btns = f.chunks.map((c, k) => `<a class="betbtn${many ? " rl-slip" : ""}" href="${esc(c.url)}" target="_blank" rel="noopener" data-fdall="${esc(t.id)}" data-fdchunk="${k}" title="Opens FanDuel with ${c.legs.length} bets on the slip">${many ? `Slip ${k + 1} · ${c.from === c.to ? `bet ${c.from}` : `bets ${c.from}–${c.to}`} ↗` : `Add all ${f.legs.length} ${word}s to FanDuel slip ↗`}</a>`).join("");
+    return `<div class="betbox rl-fd">${many ? `<span class="muted small rl-fdnote">FanDuel takes up to ${FD_SLIP_MAX} bets per link, so these ${f.legs.length} ${word}s are split into ${f.chunks.length} slips. Open each one.</span><div class="rl-slips">${btns}</div>` : btns}${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}${saveSwitch()}</div>`;
   }
   document.addEventListener("click", (e) => {
-    const b = e.target.closest && e.target.closest("[data-fdall]"); if (!b || !window.STIX_PICKS || !fdSave()) return; // switch off: open FanDuel only
-    try { window.STIX_PICKS.recordBets(RL.fdLegs || []); } catch (err) { console.error("picks from FanDuel slip failed", err); }
+    // Switch off: FanDuel opens and nothing is saved. Switch on: save only the slip (chunk) that was tapped.
+    const b = e.target.closest && e.target.closest("[data-fdall]"); if (!b || !window.STIX_PICKS || !fdSave()) return;
+    try { window.STIX_PICKS.recordBets(((RL.fdChunks || [])[+b.dataset.fdchunk || 0] || {}).legs || []); } catch (err) { console.error("picks from FanDuel slip failed", err); }
   });
   document.addEventListener("change", (e) => {
     const c = e.target && e.target.matches && e.target.matches("[data-fdsave]") ? e.target : null; if (!c) return;
