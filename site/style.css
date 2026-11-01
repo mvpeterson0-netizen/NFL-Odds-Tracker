@@ -428,6 +428,7 @@ body.rv-on footer.foot { display: none; }
 .rv-foot summary { cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 4px 2px; }
 .rv-foot > div { padding: 4px 2px 0; line-height: 1.5; }
 .rl-fd { margin: 8px 0 10px; } .rl-fd .betbtn { white-space: normal; }
+.rl-fdnote { flex: 1 1 100%; }
 .rl-fdsave { flex: 1 1 100%; display: flex; align-items: center; gap: 8px; } .rl-fdsave input { width: 18px; height: 18px; flex: none; }
 @media (max-width: 700px) { .rl-fd .betbtn { flex: 1 1 100%; justify-content: center; } }
 .bkbox { margin: 10px 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
