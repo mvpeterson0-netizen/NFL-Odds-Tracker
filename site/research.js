@@ -395,8 +395,8 @@
     const f = fdSlip(t, rows); RL.fdChunks = f.chunks;
     if (!f.legs.length) return "";
     const word = t.side === "over" ? "Over" : "Under", many = f.chunks.length > 1;
-    const btns = f.chunks.map((c, k) => `<a class="betbtn" href="${esc(c.url)}" target="_blank" rel="noopener" data-fdall="${esc(t.id)}" data-fdchunk="${k}" title="Opens FanDuel with ${c.legs.length} bets on the slip">${many ? `Slip ${k + 1} of ${f.chunks.length}: ${c.from === c.to ? `bet ${c.from}` : `bets ${c.from}–${c.to}`} ↗` : `Add all ${f.legs.length} ${word}s to FanDuel slip ↗`}</a>`).join("");
-    return `<div class="betbox rl-fd">${many ? `<span class="muted small rl-fdnote">FanDuel takes up to ${FD_SLIP_MAX} bets per link, so these ${f.legs.length} ${word}s are split into ${f.chunks.length} slips. Open each one.</span>` : ""}${btns}${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}${saveSwitch()}</div>`;
+    const btns = f.chunks.map((c, k) => `<a class="betbtn${many ? " rl-slip" : ""}" href="${esc(c.url)}" target="_blank" rel="noopener" data-fdall="${esc(t.id)}" data-fdchunk="${k}" title="Opens FanDuel with ${c.legs.length} bets on the slip">${many ? `Slip ${k + 1} · ${c.from === c.to ? `bet ${c.from}` : `bets ${c.from}–${c.to}`} ↗` : `Add all ${f.legs.length} ${word}s to FanDuel slip ↗`}</a>`).join("");
+    return `<div class="betbox rl-fd">${many ? `<span class="muted small rl-fdnote">FanDuel takes up to ${FD_SLIP_MAX} bets per link, so these ${f.legs.length} ${word}s are split into ${f.chunks.length} slips. Open each one.</span><div class="rl-slips">${btns}</div>` : btns}${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}${saveSwitch()}</div>`;
   }
   document.addEventListener("click", (e) => {
     // Switch off: FanDuel opens and nothing is saved. Switch on: save only the slip (chunk) that was tapped.
