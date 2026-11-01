@@ -9370,6 +9370,100 @@
    },
    "wk": 8
   },
+  "2026_08_LV_NYJ|00-0040729|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.1326149917415358,
+     "probability": 0.6740664120890922,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.08745724890277429,
+     "probability": 0.6471911562295863,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0,
+    "line": 1.5,
+    "line_delta_ratio": null,
+    "market_p": 0.4386821774265162,
+    "mean3_ratio": 1.1111111111111112,
+    "mean5_ratio": 1.1111111111111112,
+    "nprior": 3,
+    "rise3": 0.0,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 0.0
+   },
+   "gid": "2026_08_LV_NYJ",
+   "ko": "2026-11-01T18:00:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-01T17:00:32Z",
+   "pid": "00-0040729",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-01T17:00:24Z",
+    "line": 1.5,
+    "op": 115.0,
+    "up": -147.0
+   },
+   "wk": 8
+  },
+  "2026_08_LV_NYJ|00-0040729|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.056096212981835425,
+     "probability": 0.5459048057442337,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.00575793668378255,
+     "probability": 0.5139318878011365,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 9.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5115178421846206,
+    "mean3_ratio": 1.6842105263157894,
+    "mean5_ratio": 1.6842105263157894,
+    "nprior": 3,
+    "rise3": 0.0,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 0.0
+   },
+   "gid": "2026_08_LV_NYJ",
+   "ko": "2026-11-01T18:00:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-01T17:00:32Z",
+   "pid": "00-0040729",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-01T17:00:24Z",
+    "line": 9.5,
+    "op": -118.0,
+    "up": -107.0
+   },
+   "wk": 8
+  },
   "2026_08_LV_NYJ|00-0040736|rec": {
    "decisions": {
     "t11": {
