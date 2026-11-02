@@ -1,5 +1,5 @@
 {
- "started_utc": "2026-11-02T01:36:33.644896Z",
+ "started_utc": "2026-11-02T01:40:31.912302Z",
  "notes": [],
  "espn_scoreboard_http": [
   200
@@ -74,8 +74,8 @@
    "patronLevel": 0,
    "tierName": "Free",
    "monthlyLimit": 1000,
-   "remainingCalls": 992,
-   "usedCalls": 8,
+   "remainingCalls": 984,
+   "usedCalls": 16,
    "resetAt": "2026-12-01T00:00:00.000Z",
    "sharedPool": true,
    "products": [
@@ -91,5 +91,15 @@
    }
   }
  },
- "finished_utc": "2026-11-02T01:36:48.008212Z"
+ "crosscheck": {
+  "games": 30,
+  "compared": 829,
+  "match": 827,
+  "diff": 2,
+  "espn_only": 231,
+  "cfbd_only": 0,
+  "team_unmatched": 0,
+  "espn_games_listed": 30
+ },
+ "finished_utc": "2026-11-02T01:41:02.555286Z"
 }
