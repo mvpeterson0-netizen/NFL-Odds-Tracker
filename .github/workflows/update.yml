@@ -11,6 +11,10 @@ on:
         description: "Rebuild site data even if nothing changed"
         type: boolean
         default: false
+      cfb_backfill_weeks:
+        description: "College football: back-fill the 1-hour-before-kickoff lines for these ESPN weeks, e.g. 9 (spends Odds API credits; leave empty normally)"
+        type: string
+        default: ""
   push:
     branches: [main]
     paths: ["site/**", "pipeline/**", ".github/workflows/**"]
@@ -61,6 +65,7 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          CFB_BACKFILL_WEEKS: ${{ inputs.cfb_backfill_weeks }}
           FORCE_BUILD: ${{ (inputs.force_build || github.event_name == 'push') && '1' || '0' }}
         run: python -m pipeline.run
 

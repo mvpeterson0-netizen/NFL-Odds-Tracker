@@ -11,7 +11,8 @@
 --   cfb_lines       — every captured line (append-only): book, market, player, line, prices. Readable by signed-in 21+ users.
 --   cfb_pulls       — log of pulls that returned data or failed (credits used, minutes before kickoff).
 --   cfb_pull_state  — per game: how many empty checks so far, when lines first posted, when the pre-game pull happened.
---   cfb_players     — ESPN roster: athlete id, name, team, position.
+--   cfb_players     — ESPN roster: athlete id, name, team, position (ESPN lists at most 100 players per team).
+--   cfb_roster_state — when each team's roster was last downloaded.
 --   cfb_results     — final passing / rushing / receiving yards per player per game (ESPN box score).
 --   cfb_picks       — each user's CFB picks (separate from NFL picks). A user can only see and change their own.
 --   Lock            — the database refuses adding, changing or deleting a CFB pick once its game has kicked off.
@@ -85,7 +86,13 @@ create table if not exists public.cfb_pull_state (
   last_check_utc   timestamptz,
   first_ok_utc     timestamptz,
   pregame_ok_utc   timestamptz,
+  results_fetched_utc timestamptz,                   -- last time the final box score was downloaded
   updated_at       timestamptz not null default now()
+);
+
+create table if not exists public.cfb_roster_state (
+  team_id     text primary key,                      -- ESPN team id
+  updated_at  timestamptz not null default now()     -- when that team's roster was last downloaded
 );
 
 -- ---------- cfb_players / cfb_results ----------
@@ -114,7 +121,7 @@ create table if not exists public.cfb_results (
 do $$
 declare t text;
 begin
-  foreach t in array array['cfb_games','cfb_lines','cfb_pulls','cfb_pull_state','cfb_players','cfb_results'] loop
+  foreach t in array array['cfb_games','cfb_lines','cfb_pulls','cfb_pull_state','cfb_roster_state','cfb_players','cfb_results'] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists "cfb read for 21+" on public.%I', t);
     execute format('create policy "cfb read for 21+" on public.%I for select to authenticated using (public.cfb_ok())', t);
