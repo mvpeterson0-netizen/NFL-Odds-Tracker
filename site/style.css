@@ -461,3 +461,21 @@ body.cfb-on #tabs { display: none; }
 .c-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0 10px; }
 .c-bar input[type=search] { min-width: 180px; flex: 1; max-width: 280px; }
 header .brand { white-space: nowrap; }
+
+/* CFB side: compact tables that fit a phone, summary strip, expandable result groups */
+.ctable { width: 100%; font-size: 13px; }
+.ctable th, .ctable td { padding: 5px 6px; white-space: normal; }
+.ctable th:first-child, .ctable td:first-child { padding-left: 10px; }
+.ctable .num { white-space: nowrap; }
+.ctable tr.ghead td { background: var(--chip); border-top: 2px solid var(--line); font-size: 12px; }
+.ctable.inner { font-size: 12px; margin: 2px 0 6px; }
+.ctable.inner th { color: var(--muted); font-weight: 500; }
+tr.grow { cursor: pointer; }
+tr.grow .caret { color: var(--muted); display: inline-block; width: 12px; }
+tr.gdetail > td { padding: 0 0 0 14px; background: var(--hover); }
+tr.gdetail:hover td { background: var(--hover); }
+.over { color: var(--over); } .under { color: var(--under); }
+.c-sum { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+.c-sum > div { flex: 1 1 70px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; display: flex; flex-direction: column; }
+.c-sum b { font-size: 18px; } .c-sum span { font-size: 11px; color: var(--muted); }
+.c-bar select { max-width: 100%; }

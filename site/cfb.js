@@ -1,7 +1,7 @@
 "use strict";
-// Stix college football (Power 4 games only): Board and Results.
+// Stix college football (CFB side; Power 4 games only): Board, Results and player cards.
 // The data lives in the Stix database (not in this public repo) and is readable only by signed-in users who confirmed 21+;
-// the database enforces that, this file just asks. Reads the tables made by supabase/011_cfb.sql.
+// the database enforces that, this file just asks. Reads the tables made by supabase/011_cfb.sql and 012_cfb_team_names.sql.
 (function () {
   const ACC = () => window.STIX_ACCOUNT;
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -12,7 +12,8 @@
   ];
   const BOOK = { draftkings: "DraftKings", fanduel: "FanDuel", betmgm: "BetMGM", williamhill_us: "Caesars", fanatics: "Fanatics", betrivers: "BetRivers", espnbet: "ESPN BET", hardrockbet: "Hard Rock", ballybet: "Bally Bet", fliff: "Fliff" };
   const BOOK_RANK = ["draftkings", "fanduel"];
-  const C = { games: null, wk: null, weekData: {}, loading: false, err: "", mk: "player_pass_yds", q: "", game: "", note: "" };
+  const C = { games: null, wk: null, weekData: {}, loading: false, err: "", mk: "player_pass_yds", q: "", game: "", note: "",
+    rWk: "", rMk: "", rPos: "", rBy: "team", open: {}, pMk: "" };
 
   const norm = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.'’]/g, "")
     .replace(/[^a-z ]+/g, " ").replace(/\b(jr|sr|ii|iii|iv|v)\b/g, " ").replace(/\s+/g, " ").trim();
@@ -20,6 +21,14 @@
   const num = (v) => (v == null ? "" : Number.isInteger(Number(v)) ? String(Number(v)) : Number(v).toFixed(1));
   const fmtKo = (iso) => new Date(iso).toLocaleString(undefined, { weekday: "short", month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" });
   const rerender = () => { if ((location.hash || "").startsWith("#/cfb") && typeof render === "function") render(); };
+  const pct = (a, n) => (n ? `${Math.round((100 * a) / n)}%` : "–");
+  const sgn = (v) => (v > 0 ? "+" : "") + (Math.round(v * 10) / 10);
+
+  // ---------- team names: abbreviation (CIN) for tight spots, school name without the mascot (Baylor) elsewhere ----------
+  const abbr = (g, side) => g[side + "_abbr"] || g[side + "_short"] || g[side + "_team"];
+  const school = (g, side) => g[side + "_short"] || g[side + "_team"];
+  const sideOf = (g, teamName) => (teamName === g.home_team ? "home" : teamName === g.away_team ? "away" : null);
+  const matchup = (g, fn = abbr) => `${fn(g, "away")} @ ${fn(g, "home")}`;
 
   async function getAll(path) {
     let out = [], off = 0;
@@ -33,10 +42,9 @@
     }
   }
   const inList = (a) => "(" + a.map((x) => encodeURIComponent(x)).join(",") + ")";
+  const weeksList = () => [...new Set(C.games.map((g) => g.week).filter((w) => w != null))].sort((a, b) => a - b);
 
-  async function loadGames() {
-    C.games = await getAll("/rest/v1/cfb_games?select=*&order=kickoff.asc,game_id.asc");
-  }
+  async function loadGames() { C.games = await getAll("/rest/v1/cfb_games?select=*&order=kickoff.asc,game_id.asc"); }
   async function loadWeek(wk) {
     if (C.weekData[wk]) return C.weekData[wk];
     const ids = C.games.filter((g) => g.week === wk).map((g) => g.game_id);
@@ -53,6 +61,9 @@
     C.weekData[wk] = d;
     return d;
   }
+  async function loadAllWeeks() { for (const w of weeksList()) await loadWeek(w); }
+  const allLoaded = () => !!C.games && weeksList().every((w) => C.weekData[w]);
+
   // One row per game + market + player: the graded (~1 h before kickoff) line if captured, else the latest line showing.
   function rowsFor(wk) {
     const d = C.weekData[wk]; if (!d) return [];
@@ -65,7 +76,7 @@
       (groups.get(k) || groups.set(k, []).get(k)).push(l);
     }
     const rows = [];
-    for (const [k, ls] of groups) {
+    for (const ls of groups.values()) {
       const g = games.get(ls[0].game_id); if (!g) continue;
       const kind = ls.some((l) => l.pull_type === "pregame") ? "pregame" : "first";
       const byBook = new Map();
@@ -86,11 +97,16 @@
           outcome = act > line ? "over" : act < line ? "under" : "push";
         } else outcome = "nomatch";
       }
-      rows.push({ g, mk, name: main.player_name, team: res ? res.team_name : "", pos: res ? res.pos : "", main, others: books.slice(1), kind, act, outcome });
+      const side = res ? sideOf(g, res.team_name) : null;
+      rows.push({ g, wk, mk, name: main.player_name, key: norm(main.player_name), team: res ? res.team_name : "", side, pos: res ? res.pos : "",
+        main, books, kind, act, outcome });
     }
-    rows.sort((a, b) => a.g.kickoff.localeCompare(b.g.kickoff) || a.g.game_id.localeCompare(b.g.game_id) || a.team.localeCompare(b.team) || a.name.localeCompare(b.name));
+    rows.sort((a, b) => a.g.kickoff.localeCompare(b.g.kickoff) || a.g.game_id.localeCompare(b.g.game_id) || (a.side || "").localeCompare(b.side || "") || a.name.localeCompare(b.name));
     return rows;
   }
+  const teamAbbr = (r) => (r.side ? abbr(r.g, r.side) : "");
+  const teamSchool = (r) => (r.side ? school(r.g, r.side) : "");
+  const graded = (r) => r.g.status === "final" && r.outcome !== "nomatch" && r.outcome !== "";
 
   async function start() {
     if (C.loading) return;
@@ -98,7 +114,7 @@
     try {
       if (!C.games) await loadGames();
       if (C.wk == null && C.games.length) {
-        const weeks = [...new Set(C.games.map((g) => g.week).filter((w) => w != null))].sort((a, b) => a - b);
+        const weeks = weeksList();
         const up = weeks.find((w) => C.games.some((g) => g.week === w && g.status !== "final"));
         let pick = up != null ? up : weeks[weeks.length - 1];
         await loadWeek(pick);
@@ -109,54 +125,142 @@
         }
         C.wk = pick;
       } else if (C.wk != null) await loadWeek(C.wk);
+      if (/^#\/cfb\/(results|player-)/.test(location.hash || "")) await loadAllWeeks();
     } catch (e) { C.err = `Couldn't load college football data: ${e.message}`; }
     C.loading = false;
     rerender();
   }
 
-  // ---------- views ----------
-  function weekBar() {
-    const weeks = [...new Set(C.games.map((g) => g.week).filter((w) => w != null))].sort((a, b) => a - b);
-    return `<label class="small">Week <select id="c-wk">${weeks.map((w) => `<option value="${w}" ${w === C.wk ? "selected" : ""}>${w}</option>`).join("")}</select></label>`;
-  }
-  function filters(tab) {
-    const gs = C.games.filter((g) => g.week === C.wk);
-    const chips = tab === "board" ? `<div class="gamebar" role="group" aria-label="Choose a game"><button class="gchip ${C.game ? "" : "on"}" data-cg=""><b>All games</b><span class="muted small">${gs.length}</span></button>` +
-      gs.map((g) => `<button class="gchip ${C.game === g.game_id ? "on" : ""}" data-cg="${esc(g.game_id)}"><b>${esc(g.away_team)} @ ${esc(g.home_team)}</b><span class="muted small">${g.status === "final" ? `Final ${g.away_score}–${g.home_score}` : esc(fmtKo(g.kickoff))}</span></button>`).join("") + `</div>` : "";
-    return `<div class="c-bar">${weekBar()} <span class="mtabs">${MK.map((m) => `<button class="gchip ${C.mk === m.id ? "on" : ""}" data-cm="${m.id}"><b>${m.short}</b></button>`).join("")}</span>
-      <input id="c-q" type="search" placeholder="Search player or team" value="${esc(C.q)}" autocomplete="off"></div>${chips}`;
-  }
-  function visible(tab) {
+  // ---------- shared bits ----------
+  const resCell = (r) => (r.outcome === "nomatch" ? `<span class="muted small" title="No player with this name in the box score (did not play, or the name is written differently)">no match</span>`
+    : r.outcome ? `<span class="res ${r.outcome}">${r.outcome}</span>` : "");
+  const pLink = (r) => `<a class="pname" href="#/cfb/player-${esc(r.key.replace(/ /g, "_"))}"><b>${esc(r.name)}</b></a>`;
+  const mkTabs = (cur, attr, withAll) => `<span class="mtabs">${withAll ? `<button class="gchip ${cur === "" ? "on" : ""}" ${attr}=""><b>All</b></button>` : ""}${MK.map((m) => `<button class="gchip ${cur === m.id ? "on" : ""}" ${attr}="${m.id}"><b>${m.short}</b></button>`).join("")}</span>`;
+  const foot = `<p class="muted small">Power 4 games (ACC, Big Ten, Big 12, SEC, Notre Dame). Lines: The Odds API, graded on the line captured about 1 hour before kickoff (DraftKings first, then FanDuel; every book is on the player's card). Results: ESPN box scores; a player in the box score with no entry for a stat counts as 0. Research tool only.</p>`;
+  const searchBox = `<input id="c-q" type="search" placeholder="Search player or team" value="${esc(C.q)}" autocomplete="off">`;
+
+  // ---------- Board ----------
+  function boardRows() {
     const q = norm(C.q);
-    return rowsFor(C.wk).filter((r) => r.mk.id === C.mk && (!C.game || r.g.game_id === C.game) && (tab !== "results" || (r.g.status === "final" && r.outcome !== "nomatch" && r.outcome !== "")) &&
-      (!q || norm(r.name).includes(q) || norm(r.team).includes(q)));
+    return rowsFor(C.wk).filter((r) => r.mk.id === C.mk && (!C.game || r.g.game_id === C.game) &&
+      (!q || r.key.includes(q) || norm(teamSchool(r)).includes(q) || norm(teamAbbr(r)).includes(q)));
   }
-  const resCell = (r) => (r.outcome === "nomatch" ? `<span class="muted small" title="No player with this name in the box score (did not play, or the name is written differently)">no box score match</span>`
-    : r.outcome ? `<span class="res ${r.outcome}">${r.outcome}</span>` : `<span class="muted small">${r.g.status === "in" ? "live" : "pending"}</span>`);
-  function table(rows, tab) {
-    if (!rows.length) return `<p class="muted pad">${tab === "results" ? "No graded lines for this filter yet." : "No lines for this filter yet. Lines are collected starting midweek and again about 1 hour before kickoff."}</p>`;
-    let h = `<div class="panel scroll"><table class="dtable"><thead><tr><th>Game</th><th>Player</th><th>Pos</th><th class="num">Line</th><th class="num">Over / Under</th><th>Book</th><th>Other books</th><th class="num">Actual</th><th>Result</th></tr></thead><tbody>`;
+  function board() {
+    const gs = C.games.filter((g) => g.week === C.wk);
+    const rows = boardRows();
+    const anyFinal = rows.some((r) => r.g.status === "final");
+    let h = `<div class="c-bar"><label class="small">Week <select id="c-wk">${weeksList().map((w) => `<option value="${w}" ${w === C.wk ? "selected" : ""}>${w}</option>`).join("")}</select></label>${mkTabs(C.mk, "data-cm")}${searchBox}</div>
+      <div class="gamebar" role="group" aria-label="Choose a game"><button class="gchip ${C.game ? "" : "on"}" data-cg=""><b>All</b><span class="muted small">${gs.length}</span></button>` +
+      gs.map((g) => `<button class="gchip ${C.game === g.game_id ? "on" : ""}" data-cg="${esc(g.game_id)}"><b>${esc(matchup(g))}</b><span class="muted small">${g.status === "final" ? `Final ${g.away_score}–${g.home_score}` : esc(fmtKo(g.kickoff))}</span></button>`).join("") + `</div>`;
+    if (!rows.length) return h + `<p class="muted pad">No lines for this filter yet. Lines are collected starting midweek and again about 1 hour before kickoff.</p>` + foot;
+    h += `<div class="panel"><table class="ctable"><thead><tr><th>Player</th><th>Team</th><th class="num">Line</th>${anyFinal ? `<th class="num">Act</th><th>Result</th>` : ""}</tr></thead><tbody>`;
     let last = "";
     for (const r of rows) {
-      const first = r.g.game_id !== last; last = r.g.game_id;
-      h += `<tr class="${first ? "grp" : ""}"><td class="small">${first ? `<b>${esc(r.g.away_team)} @ ${esc(r.g.home_team)}</b><div class="muted">${r.g.status === "final" ? `Final ${r.g.away_score}–${r.g.home_score}` : esc(fmtKo(r.g.kickoff))}</div>` : ""}</td>
-        <td><b>${esc(r.name)}</b>${r.team ? `<div class="muted small">${esc(r.team)}</div>` : ""}</td><td>${esc(r.pos) || '<span class="muted">–</span>'}</td>
-        <td class="num"><b>${num(r.main.line)}</b>${r.kind === "first" ? ` <span class="chip snapchip" title="First-posted line. The graded line is captured about 1 hour before kickoff.">first</span>` : ""}</td>
-        <td class="num">${odds(r.main.over_price)} / ${odds(r.main.under_price)}</td><td class="small">${esc(BOOK[r.main.book] || r.main.book)}</td>
-        <td class="small">${r.others.map((o) => `${esc(BOOK[o.book] || o.book)} ${num(o.line)}`).join(" · ")}</td>
-        <td class="num">${r.act == null ? '<span class="muted">–</span>' : `<b>${num(r.act)}</b>`}</td><td>${resCell(r)}</td></tr>`;
+      if (r.g.game_id !== last) {
+        last = r.g.game_id;
+        h += `<tr class="ghead"><td colspan="${anyFinal ? 5 : 3}"><b>${esc(matchup(r.g))}</b> <span class="muted">· ${r.g.status === "final" ? `Final ${r.g.away_score}–${r.g.home_score}` : esc(fmtKo(r.g.kickoff))}</span></td></tr>`;
+      }
+      h += `<tr><td>${pLink(r)}${r.pos ? ` <span class="muted small">${esc(r.pos)}</span>` : ""}</td><td>${esc(teamAbbr(r)) || '<span class="muted">–</span>'}</td>
+        <td class="num"><b>${num(r.main.line)}</b>${r.kind === "first" ? ` <span class="chip snapchip" title="First-posted line. The graded line is captured about 1 hour before kickoff.">1st</span>` : ""}</td>
+        ${anyFinal ? `<td class="num">${r.act == null ? '<span class="muted">–</span>' : `<b>${num(r.act)}</b>`}</td><td>${resCell(r)}</td>` : ""}</tr>`;
     }
-    return h + `</tbody></table></div>`;
+    return h + `</tbody></table></div><p class="muted small">Tap a player for his card: every game, every book's line and odds.</p>` + foot;
   }
-  function summary(rows) {
-    const n = rows.length, o = rows.filter((r) => r.outcome === "over").length, u = rows.filter((r) => r.outcome === "under").length, p = n - o - u;
-    if (!n) return "";
-    return `<p class="callout">${n} graded line${n === 1 ? "" : "s"} · Over ${o} (${Math.round((100 * o) / n)}%) · Under ${u} (${Math.round((100 * u) / n)}%)${p ? ` · Push ${p}` : ""}. Graded on the line captured about 1 hour before kickoff.</p>`;
+
+  // ---------- Results: summary first, expand for the specifics ----------
+  function tally(rs) {
+    const o = rs.filter((r) => r.outcome === "over").length, u = rs.filter((r) => r.outcome === "under").length;
+    return { n: rs.length, o, u, p: rs.length - o - u, diff: rs.length ? rs.reduce((s, r) => s + (r.act - Number(r.main.line)), 0) / rs.length : null };
   }
+  function resultRows() {
+    const q = norm(C.q);
+    const out = [];
+    for (const w of weeksList()) {
+      if (C.rWk !== "" && w !== +C.rWk) continue;
+      for (const r of rowsFor(w)) {
+        if (!graded(r) || (C.rMk && r.mk.id !== C.rMk) || (C.rPos && r.pos !== C.rPos)) continue;
+        if (q && !(r.key.includes(q) || norm(teamSchool(r)).includes(q) || norm(teamAbbr(r)).includes(q))) continue;
+        out.push(r);
+      }
+    }
+    return out;
+  }
+  function results() {
+    const rows = resultRows(), t = tally(rows);
+    const pos = [...new Set(weeksList().flatMap((w) => rowsFor(w)).filter(graded).map((r) => r.pos).filter(Boolean))].sort();
+    let h = `<div class="c-bar"><label class="small">Week <select id="c-rwk"><option value="">All</option>${weeksList().map((w) => `<option value="${w}" ${String(w) === String(C.rWk) ? "selected" : ""}>${w}</option>`).join("")}</select></label>
+      ${mkTabs(C.rMk, "data-rm", true)}
+      <label class="small">Pos <select id="c-rpos"><option value="">All</option>${pos.map((p) => `<option ${p === C.rPos ? "selected" : ""}>${esc(p)}</option>`).join("")}</select></label>${searchBox}</div>`;
+    if (!rows.length) return h + `<p class="muted pad">No graded lines for these filters yet.</p>` + foot;
+    h += `<div class="c-sum"><div><b>${t.n}</b><span>graded</span></div><div class="over"><b>${t.o}</b><span>Over · ${pct(t.o, t.n)}</span></div><div class="under"><b>${t.u}</b><span>Under · ${pct(t.u, t.n)}</span></div>${t.p ? `<div><b>${t.p}</b><span>Push</span></div>` : ""}${C.rMk ? `<div><b>${sgn(t.diff)}</b><span>avg actual vs line</span></div>` : ""}</div>`;
+    const by = C.rMk === "" || C.rBy !== "market" ? C.rBy : "team";
+    const opts = [["team", "Team"], ["player", "Player"], ["week", "Week"]].concat(C.rMk === "" ? [["market", "Stat"]] : []);
+    h += `<div class="c-bar"><span class="small muted">Group by</span><span class="mtabs">${opts.map(([k, l]) => `<button class="gchip ${by === k ? "on" : ""}" data-rb="${k}"><b>${l}</b></button>`).join("")}</span></div>`;
+    const keyOf = { team: (r) => teamSchool(r) || "(unknown team)", player: (r) => r.name, week: (r) => `Week ${r.wk}`, market: (r) => r.mk.label }[by];
+    const groups = new Map();
+    for (const r of rows) (groups.get(keyOf(r)) || groups.set(keyOf(r), []).get(keyOf(r))).push(r);
+    const list = [...groups].map(([k, rs]) => ({ k, rs, t: tally(rs) })).sort((a, b) => b.t.n - a.t.n || a.k.localeCompare(b.k));
+    const showDiff = !!C.rMk;
+    h += `<div class="panel"><table class="ctable"><thead><tr><th>${opts.find((x) => x[0] === by)[1]}</th><th class="num">N</th><th class="num">Over</th><th class="num">Under</th>${showDiff ? `<th class="num" title="Average of actual minus line">Avg ±</th>` : ""}</tr></thead><tbody>`;
+    for (const x of list) {
+      const id = `${by}|${x.k}`, open = !!C.open[id];
+      h += `<tr class="grow ${open ? "open" : ""}" data-open="${esc(id)}" tabindex="0"><td><span class="caret">${open ? "▾" : "▸"}</span> <b>${esc(x.k)}</b></td><td class="num">${x.t.n}</td>
+        <td class="num over">${x.t.o} <span class="muted small">${pct(x.t.o, x.t.n)}</span></td><td class="num under">${x.t.u} <span class="muted small">${pct(x.t.u, x.t.n)}</span></td>${showDiff ? `<td class="num">${sgn(x.t.diff)}</td>` : ""}</tr>`;
+      if (open) {
+        h += `<tr class="gdetail"><td colspan="${showDiff ? 5 : 4}"><table class="ctable inner"><thead><tr><th>Player</th><th>Game</th><th class="num">Line</th><th class="num">Act</th><th>Result</th></tr></thead><tbody>` +
+          x.rs.map((r) => `<tr><td>${pLink(r)} <span class="muted small">${esc(teamAbbr(r))}${by === "market" || !C.rMk ? ` · ${esc(r.mk.short)}` : ""}</span></td><td class="small">${esc(matchup(r.g))}<span class="muted"> wk ${r.wk}</span></td>
+            <td class="num">${num(r.main.line)}</td><td class="num"><b>${num(r.act)}</b></td><td>${resCell(r)}</td></tr>`).join("") + `</tbody></table></td></tr>`;
+      }
+    }
+    return h + `</tbody></table></div><p class="muted small">Tap a row to open its lines. Pushes count in N but in neither Over nor Under.</p>` + foot;
+  }
+
+  // ---------- Player card ----------
+  function playerCard(key) {
+    const back = `<p class="small"><a href="#/cfb/board">← Board</a> · <a href="#/cfb/results">Results</a></p>`;
+    const all = weeksList().flatMap((w) => rowsFor(w)).filter((r) => r.key === key);
+    if (!all.length) return back + `<p class="muted pad">No lines found for this player.</p>`;
+    const mks = MK.filter((m) => all.some((r) => r.mk.id === m.id));
+    const mid = mks.some((m) => m.id === C.pMk) ? C.pMk : mks[0].id;
+    const rs = all.filter((r) => r.mk.id === mid).sort((a, b) => a.g.kickoff.localeCompare(b.g.kickoff));
+    const latest = all.slice().sort((a, b) => b.g.kickoff.localeCompare(a.g.kickoff))[0];
+    const gr = rs.filter(graded), t = tally(gr);
+    const mkObj = MK.find((m) => m.id === mid);
+    const avgAct = gr.length ? gr.reduce((s, r) => s + r.act, 0) / gr.length : null, avgLine = rs.reduce((s, r) => s + Number(r.main.line), 0) / rs.length;
+    let h = back + `<div class="ph"><h2>${esc(latest.name)}</h2><span class="chip">${esc(teamSchool(latest) || "–")}${latest.pos ? ` · ${esc(latest.pos)}` : ""}</span></div>
+      <div class="mtabs">${mks.map((m) => `<button data-pm="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}</div>
+      <div class="c-sum"><div><b>${rs.length}</b><span>games with a line</span></div><div><b>${num(avgLine)}</b><span>avg line</span></div>${gr.length ? `<div><b>${num(avgAct)}</b><span>avg actual</span></div><div class="over"><b>${t.o}</b><span>Over</span></div><div class="under"><b>${t.u}</b><span>Under</span></div>` : ""}</div>`;
+    h += `<div class="panel"><div class="chart">${chart(rs)}</div><div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Line (green = over hit, red = under)</span></div></div>`;
+    h += `<div class="panel"><table class="ctable"><thead><tr><th>Wk</th><th>Opp</th><th class="num">Line</th><th class="num">Over / Under</th><th class="num">Act</th><th>Result</th></tr></thead><tbody>` +
+      rs.map((r) => `<tr><td>${r.wk}</td><td>${r.side ? (r.side === "home" ? "vs " : "@ ") + esc(abbr(r.g, r.side === "home" ? "away" : "home")) : esc(matchup(r.g))}</td>
+        <td class="num"><b>${num(r.main.line)}</b>${r.kind === "first" ? ` <span class="chip snapchip" title="First-posted line; graded line not captured yet">1st</span>` : ""}</td><td class="num small">${odds(r.main.over_price)} / ${odds(r.main.under_price)}</td>
+        <td class="num">${r.act == null ? '<span class="muted">–</span>' : `<b>${num(r.act)}</b>`}</td><td>${resCell(r)}</td></tr>`).join("") + `</tbody></table></div>`;
+    // Every book's line for each game (the "other books" box, like the NFL side)
+    h += `<div class="panel"><h3>${esc(mkObj.label)}: lines by book</h3><div class="body">` + rs.slice().reverse().map((r, i) =>
+      `<details ${i === 0 ? "open" : ""}><summary class="small"><b>Week ${r.wk}</b> ${esc(matchup(r.g))} <span class="muted">· ${r.kind === "first" ? "first-posted lines" : "~1 h before kickoff"}</span></summary>
+      <table class="ctable inner"><thead><tr><th>Book</th><th class="num">Line</th><th class="num">Over</th><th class="num">Under</th></tr></thead><tbody>` +
+      r.books.map((b) => `<tr><td>${esc(BOOK[b.book] || b.book)}</td><td class="num"><b>${num(b.line)}</b></td><td class="num">${odds(b.over_price)}</td><td class="num">${odds(b.under_price)}</td></tr>`).join("") + `</tbody></table></details>`).join("") + `</div></div>`;
+    return h + foot;
+  }
+  function chart(rs) {
+    const W = 600, H = 170, pad = 28, n = rs.length;
+    const vals = rs.flatMap((r) => [Number(r.main.line), r.act].filter((v) => v != null));
+    const max = Math.max(...vals, 10) * 1.15, y = (v) => H - pad - ((H - 2 * pad) * v) / max, bw = Math.min(60, (W - 2 * pad) / n / 1.6);
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Actual vs line by game"><line x1="${pad}" y1="${H - pad}" x2="${W - pad}" y2="${H - pad}" stroke="var(--line)"/>`;
+    rs.forEach((r, i) => {
+      const cx = pad + ((W - 2 * pad) * (i + 0.5)) / n, line = Number(r.main.line);
+      if (r.act != null) s += `<rect x="${cx - bw / 2}" y="${y(r.act)}" width="${bw}" height="${H - pad - y(r.act)}" fill="var(--accent)" opacity=".55"/><text x="${cx}" y="${y(r.act) - 4}" text-anchor="middle" font-size="11" fill="var(--ink)">${num(r.act)}</text>`;
+      const col = r.outcome === "over" ? "var(--over)" : r.outcome === "under" ? "var(--under)" : "var(--ink)";
+      s += `<line x1="${cx - bw / 1.2}" y1="${y(line)}" x2="${cx + bw / 1.2}" y2="${y(line)}" stroke="${col}" stroke-width="3"/>`;
+      s += `<text x="${cx}" y="${H - 10}" text-anchor="middle" font-size="11" fill="var(--muted)">Wk ${r.wk}</text>`;
+    });
+    return s + `</svg>`;
+  }
+
   function view(arg) {
-    const tab = arg === "results" ? "results" : "board";
+    arg = arg || "board";
     const acc = ACC();
-    const head = `<h2 class="c-h">College football · Power 4 · passing, rushing and receiving yards</h2>`;
+    const head = `<h2 class="c-h">College football · Power 4</h2>`;
     if (!acc) return `<p class="pad">Sign-in didn't load. Try refreshing.</p>`;
     if (!acc.ready()) {
       const g = acc.gate();
@@ -164,21 +268,29 @@
     }
     if (!C.games && !C.loading && !C.err) setTimeout(start, 0);
     if (C.err) return head + `<p class="pad pk-err">${esc(C.err)} <button id="c-retry">Retry</button></p>`;
-    if (!C.games || C.wk == null) {
-      return head + (C.games && !C.games.length ? `<p class="muted pad">No college football games collected yet.</p>` : `<p class="muted pad">Loading college football…</p>`);
-    }
-    if (!C.weekData[C.wk]) { setTimeout(start, 0); return head + filters(tab) + `<p class="muted pad">Loading week ${C.wk}…</p>`; }
-    const rows = visible(tab);
-    return head + (C.note ? `<p class="callout">${esc(C.note)}</p>` : "") + filters(tab) + (tab === "results" ? summary(rows) : "") + table(rows, tab) +
-      `<p class="muted small">Games with at least one Power 4 team (ACC, Big Ten, Big 12, SEC, Notre Dame). Lines: The Odds API (DraftKings first, then FanDuel; other books listed). Results: ESPN box scores. A player who is in the box score but has no entry for a stat counts as 0 for it. Research tool only.</p>`;
+    if (!C.games || C.wk == null) return head + (C.games && !C.games.length ? `<p class="muted pad">No college football games collected yet.</p>` : `<p class="muted pad">Loading college football…</p>`);
+    const needAll = arg === "results" || arg.startsWith("player-");
+    if (!C.weekData[C.wk] || (needAll && !allLoaded())) { setTimeout(start, 0); return head + `<p class="muted pad">Loading…</p>`; }
+    if (arg.startsWith("player-")) return playerCard(arg.slice(7).replace(/_/g, " "));
+    return head + (C.note && arg === "board" ? `<p class="callout">${esc(C.note)}</p>` : "") + (arg === "results" ? results() : board());
   }
   function bind() {
     const $ = (id) => document.getElementById(id);
     const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
     on("c-retry", "click", () => { C.err = ""; start(); rerender(); });
     on("c-wk", "change", (e) => { C.wk = +e.target.value; C.game = ""; C.note = ""; start(); rerender(); });
+    on("c-rwk", "change", (e) => { C.rWk = e.target.value; rerender(); });
+    on("c-rpos", "change", (e) => { C.rPos = e.target.value; rerender(); });
     document.querySelectorAll("[data-cg]").forEach((b) => b.addEventListener("click", () => { C.game = b.dataset.cg; rerender(); }));
     document.querySelectorAll("[data-cm]").forEach((b) => b.addEventListener("click", () => { C.mk = b.dataset.cm; rerender(); }));
+    document.querySelectorAll("[data-rm]").forEach((b) => b.addEventListener("click", () => { C.rMk = b.dataset.rm; rerender(); }));
+    document.querySelectorAll("[data-rb]").forEach((b) => b.addEventListener("click", () => { C.rBy = b.dataset.rb; rerender(); }));
+    document.querySelectorAll("[data-pm]").forEach((b) => b.addEventListener("click", () => { C.pMk = b.dataset.pm; rerender(); }));
+    document.querySelectorAll("[data-open]").forEach((tr) => {
+      const go = () => { C.open[tr.dataset.open] = !C.open[tr.dataset.open]; rerender(); };
+      tr.addEventListener("click", go);
+      tr.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    });
     on("c-q", "input", (e) => {
       C.q = e.target.value; clearTimeout(bind.t);
       bind.t = setTimeout(() => { rerender(); const el = $("c-q"); if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); } }, 200);
