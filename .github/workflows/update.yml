@@ -15,6 +15,10 @@ on:
         description: "College football: back-fill the 1-hour-before-kickoff lines for these ESPN weeks, e.g. 9 (spends Odds API credits; leave empty normally)"
         type: string
         default: ""
+      cfb_backfill_markets:
+        description: "College football line back-fill: which markets, comma list of pass, rush, rec (empty = all three; each market is about 10 credits per game that returns it)"
+        type: string
+        default: ""
       cfb_season_weeks:
         description: "College football: back-fill earlier weeks' Power 4 games and final results (ESPN, no Odds API credits), e.g. 1-9 (leave empty normally; re-run until the log says all results are stored)"
         type: string
@@ -70,6 +74,7 @@ jobs:
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           CFB_BACKFILL_WEEKS: ${{ inputs.cfb_backfill_weeks }}
+          CFB_BACKFILL_MARKETS: ${{ inputs.cfb_backfill_markets }}
           CFB_SEASON_WEEKS: ${{ inputs.cfb_season_weeks }}
           FORCE_BUILD: ${{ (inputs.force_build || github.event_name == 'push') && '1' || '0' }}
         run: python -m pipeline.run
