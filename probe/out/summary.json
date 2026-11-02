@@ -1,8 +1,6 @@
 {
- "started_utc": "2026-11-02T01:24:15.327779Z",
- "notes": [
-  "CFBD_API_KEY not set; skipped CFBD"
- ],
+ "started_utc": "2026-11-02T01:36:33.644896Z",
+ "notes": [],
  "espn_scoreboard_http": [
   200
  ],
@@ -12,5 +10,86 @@
  "odds_requests_remaining": "20000",
  "odds_requests_last": "0",
  "odds_events_count": 63,
- "finished_utc": "2026-11-02T01:24:22.638699Z"
+ "p4_names_matched_in_odds_events": 35,
+ "props_probe": [
+  {
+   "event": "Virginia Tech Hokies @ SMU Mustangs",
+   "commence": "2026-11-07T00:00:00Z",
+   "http": 200,
+   "credits_last": "0",
+   "remaining": "20000",
+   "players_per_market_per_book": {}
+  },
+  {
+   "event": "Nebraska Cornhuskers @ Illinois Fighting Illini",
+   "commence": "2026-11-07T01:00:00Z",
+   "http": 200,
+   "credits_last": "0",
+   "remaining": "20000",
+   "players_per_market_per_book": {}
+  },
+  {
+   "event": "New Mexico Lobos @ Nevada Wolf Pack",
+   "commence": "2026-11-07T02:00:00Z",
+   "http": 200,
+   "credits_last": "0",
+   "remaining": "20000",
+   "players_per_market_per_book": {}
+  }
+ ],
+ "cfbd": {
+  "games_w9": {
+   "http": 200,
+   "n": 56
+  },
+  "players_w9_passing": {
+   "http": 200,
+   "n_games": 115
+  },
+  "players_w9_rushing": {
+   "http": 200,
+   "n_games": 115
+  },
+  "players_w9_receiving": {
+   "http": 200,
+   "n_games": 115
+  },
+  "games_w10": {
+   "http": 200,
+   "n": 63
+  },
+  "players_w10_passing": {
+   "http": 200,
+   "n_games": 0
+  },
+  "players_w10_rushing": {
+   "http": 200,
+   "n_games": 0
+  },
+  "players_w10_receiving": {
+   "http": 200,
+   "n_games": 0
+  },
+  "info": {
+   "patronLevel": 0,
+   "tierName": "Free",
+   "monthlyLimit": 1000,
+   "remainingCalls": 992,
+   "usedCalls": 8,
+   "resetAt": "2026-12-01T00:00:00.000Z",
+   "sharedPool": true,
+   "products": [
+    "cfb",
+    "cbb"
+   ],
+   "features": {
+    "adjustedMetrics": false,
+    "weather": false,
+    "scoreboard": false,
+    "livePlayByPlay": false,
+    "graphQl": false
+   }
+  }
+ },
+ "finished_utc": "2026-11-02T01:36:48.008212Z"
 }
