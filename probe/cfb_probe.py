@@ -273,6 +273,37 @@ if ckey:
     save("crosscheck.json", {"totals": tot, "first_diffs": diffs[:40]})
     summary["crosscheck"] = tot
 
+
+# ---------- ESPN scoreboard behavior checks (for the real pipeline) ----------
+beh = {}
+for label, q in (("range_group8", "groups=8&dates=20261031-20261108&limit=300"),
+                 ("range_all_p4", "groups=80&dates=20261031-20261108&limit=300"),
+                 ("nodate_group8", "groups=8&limit=300"),
+                 ("week_param", "groups=8&week=9&seasontype=2&limit=300")):
+    code, _, body = get(f"{BASE}/scoreboard?{q}")
+    rep = {"http": code}
+    if code == 200:
+        js = json.loads(body)
+        evs = js.get("events", [])
+        rep["n_events"] = len(evs)
+        rep["days"] = sorted({(e.get("date") or "")[:10] for e in evs})
+        rep["top_keys"] = sorted(js.keys())
+        rep["scoreboard_week"] = js.get("week")
+        if evs:
+            e0 = evs[0]
+            rep["event_keys"] = sorted(e0.keys())
+            rep["event_week"] = e0.get("week")
+            comp = (e0.get("competitions") or [{}])[0]
+            rep["comp_keys"] = sorted(comp.keys())
+            rep["competitor0"] = {k: (v if not isinstance(v, (dict, list)) else "...") for k, v in (comp.get("competitors") or [{}])[0].items()}
+            rep["team0_keys"] = sorted(((comp.get("competitors") or [{}])[0].get("team") or {}).keys())
+            rep["status"] = e0.get("status")
+            rep["conferenceCompetition"] = comp.get("conferenceCompetition")
+            rep["neutralSite"] = comp.get("neutralSite")
+    beh[label] = rep
+save("espn_scoreboard_behavior.json", beh)
+summary["scoreboard_behavior"] = {k: (v.get("http"), v.get("n_events"), v.get("days")) for k, v in beh.items()}
+
 summary["finished_utc"] = dt.datetime.utcnow().isoformat() + "Z"
 save("summary.json", summary)
 print(json.dumps(summary, indent=1))
