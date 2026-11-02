@@ -44,14 +44,27 @@ def p4_label(teams: list[dict]) -> str | None:
     return None
 
 
+def school_name(t: dict, display: str) -> str:
+    """'Baylor' from ESPN's team object: its location field, else the display name minus the mascot."""
+    loc = (t.get("location") or "").strip()
+    if loc:
+        return loc
+    mascot = (t.get("name") or "").strip()
+    if mascot and display.endswith(" " + mascot):
+        return display[: -len(mascot) - 1].strip()
+    return display
+
+
 def parse_event(ev: dict) -> dict | None:
     """One cfb_games row from an ESPN scoreboard event, or None if it isn't a Power 4 game."""
     comp = (ev.get("competitions") or [{}])[0]
     teams = []
     for c in comp.get("competitors") or []:
         t = c.get("team") or {}
-        teams.append({"id": str(t.get("id") or ""), "name": t.get("displayName") or "", "conf": str(t.get("conferenceId") or ""),
-                      "home": c.get("homeAway") == "home", "score": c.get("score")})
+        name = t.get("displayName") or ""
+        teams.append({"id": str(t.get("id") or ""), "name": name, "conf": str(t.get("conferenceId") or ""),
+                      "home": c.get("homeAway") == "home", "score": c.get("score"), "abbr": t.get("abbreviation") or "",
+                      "short": school_name(t, name)})
     home = next((t for t in teams if t["home"]), None)
     away = next((t for t in teams if not t["home"]), None)
     label = p4_label(teams)
@@ -69,6 +82,7 @@ def parse_event(ev: dict) -> dict | None:
         return int(v) if v is not None and state != "pre" else None
     return {"game_id": str(ev["id"]), "week": wk, "kickoff": iso(ko), "home_team": home["name"], "away_team": away["name"],
             "home_id": home["id"], "away_id": away["id"], "conference": label,
+            "home_short": home["short"], "away_short": away["short"], "home_abbr": home["abbr"], "away_abbr": away["abbr"],
             "status": "final" if (state == "post" and completed) else ("in" if state == "in" else "scheduled"),
             "home_score": score(home), "away_score": score(away)}
 
