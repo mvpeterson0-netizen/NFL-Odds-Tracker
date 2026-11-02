@@ -47,7 +47,7 @@ for gname, gid in GROUPS.items():
             teams = []
             for c in comp.get("competitors", []):
                 t = c.get("team", {})
-                teams.append({"name": t.get("displayName"), "abbr": t.get("abbreviation"),
+                teams.append({"id": t.get("id"), "name": t.get("displayName"), "abbr": t.get("abbreviation"),
                               "home": c.get("homeAway"), "score": c.get("score")})
             e = events.setdefault(ev["id"], {"id": ev["id"], "date": ev.get("date"),
                                              "name": ev.get("name"),
@@ -91,6 +91,41 @@ for e in sample:
     box_report.append(rep)
 save("espn_box_sample.json", box_report)
 
+# ---------- ESPN rosters: do they carry positions for the players in those box scores? ----------
+roster_report = []
+team_ids = {}
+for e in sample:
+    for t in events[e["id"]]["teams"]:
+        team_ids[t["id"]] = t["name"]
+bx_by_game = {b["id"]: b for b in box_report}
+for tid, tname in list(team_ids.items())[:8]:
+    code, _, body = get(f"{BASE}/teams/{tid}/roster")
+    rep = {"team": tname, "team_id": tid, "http": code}
+    if code == 200:
+        try:
+            js = json.loads(body)
+            pos = {}
+            groups = js.get("athletes", [])
+            items = []
+            for g in groups:
+                items.extend(g.get("items", []) if isinstance(g, dict) and "items" in g else [g])
+            for a in items:
+                pos[a.get("displayName")] = (a.get("position") or {}).get("abbreviation")
+            rep["n_roster"] = len(pos)
+            rep["positions_present"] = sum(1 for v in pos.values() if v)
+            names = []
+            for b in box_report:
+                for cat, lst in (b.get("categories") or {}).items():
+                    for ent in lst:
+                        if ent["team"] == tname:
+                            for pl in ent["first"]:
+                                names.append((cat, pl["name"], pos.get(pl["name"])))
+            rep["box_players_positions"] = names
+        except Exception as ex:  # noqa
+            rep["error"] = str(ex)
+    roster_report.append(rep)
+save("espn_roster_check.json", roster_report)
+
 # ---------- Odds API: free events list (0 credits expected) ----------
 key = os.environ.get("ODDS_API_KEY_20K", "").strip()
 if key:
@@ -105,6 +140,36 @@ if key:
                                    "home": e["home_team"], "away": e["away_team"]} for e in evs])
 else:
     summary["notes"].append("ODDS_API_KEY_20K not set; skipped Odds API events list")
+
+
+# ---------- Odds API: props probe on the earliest P4 game that has data (stops after first hit; max ~3 credits) ----------
+if key and summary.get("odds_events_count"):
+    p4names = {t["name"] for e in events.values() for t in e["teams"]}
+    cand = [e for e in json.load(open(os.path.join(OUT, "odds_events.json")))
+            if e["home"] in p4names or e["away"] in p4names]
+    cand.sort(key=lambda e: e["commence"])
+    summary["p4_names_matched_in_odds_events"] = len(cand)
+    books = "draftkings,fanduel,betmgm,williamhill_us,fanatics,betrivers,espnbet,hardrockbet,ballybet,fliff"
+    mk = "player_pass_yds,player_rush_yds,player_reception_yds"
+    tried = []
+    for e in cand[:3]:
+        code, hdr, body = get(f"https://api.the-odds-api.com/v4/sports/americanfootball_ncaaf/events/{e['id']}/odds?apiKey={key}&regions=us&markets={mk}&bookmakers={books}&oddsFormat=american")
+        info = {"event": f"{e['away']} @ {e['home']}", "commence": e["commence"], "http": code,
+                "credits_last": hdr.get("x-requests-last"), "remaining": hdr.get("x-requests-remaining")}
+        if code == 200:
+            js = json.loads(body)
+            per = {}
+            for bk in js.get("bookmakers", []):
+                for m in bk.get("markets", []):
+                    names = {o.get("description") for o in m.get("outcomes", [])}
+                    per.setdefault(m["key"], {})[bk["key"]] = len(names)
+            info["players_per_market_per_book"] = per
+            if per:
+                save("odds_props_sample.json", js)
+                tried.append(info)
+                break
+        tried.append(info)
+    summary["props_probe"] = tried
 
 # ---------- CFBD (only if key present) ----------
 ckey = os.environ.get("CFBD_API_KEY", "").strip()
