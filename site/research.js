@@ -75,6 +75,10 @@
       title: "Frozen logistic model with interactions",
       why: "Test whether production, usage and line adjustments work differently in combination.",
       desc: () => `Frozen version <b>2026-10-30-v1</b>, C=0.01, with the same four-market universe and <b>10% estimated-return threshold</b> as lead 11. Adds fixed interactions and position/market slopes. No added injury-return assumptions, context package, retraining or threshold tuning.` },
+    { id: "t13", n: 13, frozen: true, challenger: true, side: "model", label: "Weekly learning challenger",
+      title: "Weekly interaction challenger",
+      why: "Test whether expanding-history learning improves on the frozen interaction model.",
+      desc: () => `Separate experiment: weekly refit on eligible completed 2025/2026 games, same interaction architecture, C=0.01 and 10% estimated-return threshold. Each version is saved; pregame decisions never change. No automatic promotion over the frozen model.` },
   ];
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
   // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
@@ -320,7 +324,7 @@
   }
   const HEADS = {
     t9: ["Saved line / side", "Recorded"], t10: ["Saved line / side", "Recorded"],
-    t11: ["Saved line / side", "Model estimate"], t12: ["Saved line / side", "Model estimate"],
+    t13: ["Saved line / side", "Model estimate"], t11: ["Saved line / side", "Model estimate"], t12: ["Saved line / side", "Model estimate"],
     t1: ["Line", "Last game: his stat vs line"],
     t2: ["Line (last game → now)", "Game"],
     t3: ["Line", "Last 3"], t4: ["Line", "Last 3"],
@@ -328,11 +332,12 @@
     t6: ["Line", "Team"], t7: ["Line", "Team"], t8: ["Line", "Team"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
-  const recLine = (t) => t.frozen ? `Frozen Oct 30, 2026 · forward paper record only. Early-week matches are provisional. Decisions lock at the pregame capture (~3 h before kickoff), at saved odds, 1 unit per bet. No historical results are added.` : `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
+  const recLine = (t) => t.challenger ? `Weekly learning · ${esc(D.challenger?.version || "awaiting first Tuesday training")} · 10% estimated-return trigger. Watchlist is provisional; only pregame-locked decisions enter the forward record.` : t.frozen ? `Frozen Oct 30, 2026 · forward paper record only. Early-week matches are provisional. Decisions lock at the pregame capture (~3 h before kickoff), at saved odds, 1 unit per bet. No historical results are added.` : `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
 
   function frozenEntries(tab) {
     const out = [];
-    for (const [v, locked] of [...Object.values(D.frozen_research?.records || {}).map((v) => [v, true]), ...Object.values(D.frozen_research?.watchlist || {}).filter((v) => !D.frozen_research?.records?.[[v.gid,v.pid,v.mid].join("|")]).map((v) => [v, false])]) {
+    const source = tab === "t13" ? D.challenger : D.frozen_research;
+    for (const [v, locked] of [...Object.values(source?.records || {}).map((v) => [v, true]), ...Object.values(source?.watchlist || {}).filter((v) => !source?.records?.[[v.gid,v.pid,v.mid].join("|")]).map((v) => [v, false])]) {
       const decision = v.decisions?.[tab];
       if (!decision || decision.qualifies === false) continue;
       const p = D.players.find((x) => x.id === v.pid);
@@ -413,6 +418,7 @@
     const t = visibleTabs().find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
     let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${recLine(t)}</span></p>`;
+    if (t.challenger && !D.challenger?.version) return h + `<p class="muted">Awaiting the first Tuesday-afternoon training run. Frozen leads continue unchanged.</p>`;
     if (t.frozen && !list.length) return h + `<p class="muted">No upcoming matches yet. Weekly snapshots populate a provisional watchlist; matches can change until the pregame capture locks the decision. Only locked decisions are scored.</p>`;
     if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
     if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
@@ -591,7 +597,7 @@
     const list = LA.gid ? all.filter((x) => x.r.gid === LA.gid) : all;
     const s = tally(list);
     const scope = allWk ? `All weeks (${wkList[0]}–${wkList[wkList.length - 1]})` : LA.gid ? esc(gameLabel(LA.gid)) : `Week ${LA.wk}${nFinal < games.length ? ` (${nFinal} of ${games.length} games final)` : ""}`;
-    let h = `<p class="callout small">${isAll ? `<b>All ${rules.length} leads together.</b> Each rule's bet counts separately, so a player-stat that fits two rules counts twice.` : `<b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}`}<br><span class="muted">${t.frozen && !isAll ? recLine(t) : (allWk ? `Weeks 1–7 are discovery data for original leads 1–8 (in-sample); week 8 onward is out-of-sample. Leads 9–12: only decisions recorded after the Oct 30 freeze.` : LA.wk <= 7 ? `Weeks 1–7 are discovery data for original leads 1–8.` : "Original leads 1–8: week 8 onward. Leads 9–12: only decisions recorded after the Oct 30 freeze; earlier results are excluded.")}</span></p>`;
+    let h = `<p class="callout small">${isAll ? `<b>All ${rules.length} leads together.</b> Each rule's bet counts separately, so a player-stat that fits two rules counts twice.` : `<b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}`}<br><span class="muted">${t.frozen && !isAll ? recLine(t) : (allWk ? `Weeks 1–7 are discovery data for original leads 1–8 (in-sample); week 8 onward is out-of-sample. Leads 9–12: only decisions recorded after the Oct 30 freeze.` : LA.wk <= 7 ? `Weeks 1–7 are discovery data for original leads 1–8.` : "Original leads 1–8: week 8 onward. Leads 9–12: only decisions after the Oct 30 freeze. Lead 13: only decisions after challenger activation; historical fits are excluded.")}</span></p>`;
     if (!isAll && t.spread && !Object.values(D.games).some((g) => (allWk || g.wk === LA.wk) && g.spread != null)) return h + `<p class="muted">No point spreads in the app's data for ${allWk ? "any week" : `week ${LA.wk}`}, so this rule can't be scored.</p>`;
     h += `<div class="la-sum"><div><span class="muted small">${scope}</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : ""}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : (s.roi > 0 ? "+" : s.roi < 0 ? "−" : "") + Math.abs(s.roi).toFixed(1) + "%"}</b></div></div>`;
     if (isAll && list.length) {
