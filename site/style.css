@@ -480,3 +480,5 @@ tr.gdetail:hover td { background: var(--hover); }
 .c-sum b { font-size: 18px; } .c-sum span { font-size: 11px; color: var(--muted); }
 .c-bar select { max-width: 100%; }
 .la-game.on { background: var(--chip); }
+.la-sum.c3 { grid-template-columns: repeat(3, 1fr); } .la-sum.c3 b { font-size: 16px; }
+@media (max-width: 520px) { .la-sum.c3 { grid-template-columns: repeat(3, 1fr); gap: 6px; } .la-sum.c3 > div { padding: 6px 7px; } .la-sum.c3 .small { font-size: 11px; } }
