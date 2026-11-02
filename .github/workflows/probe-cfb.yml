@@ -1,0 +1,34 @@
+name: probe-cfb
+
+# Throwaway probe on branch probe/cfb-sources. Never merged. Costs 0 Odds API credits.
+on:
+  push:
+    branches: [probe/cfb-sources]
+    paths: ["probe/cfb_probe.py", ".github/workflows/probe-cfb.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run probe
+        env:
+          ODDS_API_KEY_20K: ${{ secrets.ODDS_API_KEY_20K }}
+          CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
+        run: python probe/cfb_probe.py
+      - name: Save results on the probe branch
+        run: |
+          git config user.name "probe-bot"
+          git config user.email "probe-bot@users.noreply.github.com"
+          git add probe/out
+          git commit -m "probe: cfb source results" || echo "nothing to commit"
+          git pull --rebase origin probe/cfb-sources || true
+          git push origin HEAD:probe/cfb-sources
