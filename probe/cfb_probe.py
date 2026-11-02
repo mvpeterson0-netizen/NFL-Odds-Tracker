@@ -200,6 +200,79 @@ if ckey:
 else:
     summary["notes"].append("CFBD_API_KEY not set; skipped CFBD")
 
+
+# ---------- Cross-check: ESPN box scores vs CFBD player stats for every P4 game of the Oct 31 week ----------
+import re, time
+def nn(x):
+    x = (x or "").lower().replace(".", "").replace("'", "").replace("-", " ")
+    x = re.sub(r"\b(jr|sr|ii|iii|iv)\b", "", x)
+    return " ".join(x.split())
+if ckey:
+    h2 = {"Authorization": f"Bearer {ckey}", "Accept": "application/json"}
+    cfbd = {}
+    for cat in ("passing", "rushing", "receiving"):
+        code, _, body = get(f"https://api.collegefootballdata.com/games/players?year=2026&week=9&seasonType=regular&category={cat}", h2)
+        if code != 200:
+            continue
+        for g in json.loads(body):
+            for tm in g.get("teams", []):
+                for c in tm.get("categories", []):
+                    for ty in c.get("types", []):
+                        for a in ty.get("athletes", []):
+                            cfbd.setdefault((tm["team"], c["name"], nn(a["name"])), {})[ty["name"]] = a["stat"]
+    cfbd_teams = {k[0] for k in cfbd}
+    def cfbd_team(espn_name):
+        best = None
+        for t in cfbd_teams:
+            if espn_name.startswith(t) and (best is None or len(t) > len(best)):
+                best = t
+        return best
+    wk = [e for e in events.values() if "2026-10-31T10:00" <= (e["date"] or "") <= "2026-11-01T12:00" and e["status"] == "STATUS_FINAL"]
+    tot = {"games": 0, "compared": 0, "match": 0, "diff": 0, "espn_only": 0, "cfbd_only": 0, "team_unmatched": 0}
+    diffs, espn_games_ok = [], 0
+    for e in wk:
+        code, _, body = get(f"https://site.web.api.espn.com/apis/site/v2/sports/football/college-football/summary?event={e['id']}")
+        time.sleep(0.2)
+        if code != 200:
+            continue
+        espn_games_ok += 1
+        js = json.loads(body)
+        seen = set()
+        for team in (js.get("boxscore") or {}).get("players", []):
+            tn = (team.get("team") or {}).get("displayName") or ""
+            ct = cfbd_team(tn)
+            if not ct:
+                tot["team_unmatched"] += 1
+                continue
+            for st in team.get("statistics", []):
+                cat = st.get("name")
+                labels = st.get("labels") or []
+                if "YDS" not in labels:
+                    continue
+                yi = labels.index("YDS")
+                for a in st.get("athletes", []):
+                    nm = nn((a.get("athlete") or {}).get("displayName"))
+                    ev_y = (a.get("stats") or [None] * (yi + 1))[yi]
+                    key = (ct, cat, nm)
+                    seen.add(key)
+                    cd = cfbd.get(key)
+                    if cd is None:
+                        tot["espn_only"] += 1
+                        diffs.append({"game": e["name"], "key": key, "espn": ev_y, "cfbd": None})
+                        continue
+                    tot["compared"] += 1
+                    if str(cd.get("YDS")) == str(ev_y):
+                        tot["match"] += 1
+                    else:
+                        tot["diff"] += 1
+                        diffs.append({"game": e["name"], "key": key, "espn": ev_y, "cfbd": cd.get("YDS")})
+        for key in cfbd:
+            pass
+    tot["games"] = espn_games_ok
+    tot["espn_games_listed"] = len(wk)
+    save("crosscheck.json", {"totals": tot, "first_diffs": diffs[:40]})
+    summary["crosscheck"] = tot
+
 summary["finished_utc"] = dt.datetime.utcnow().isoformat() + "Z"
 save("summary.json", summary)
 print(json.dumps(summary, indent=1))
