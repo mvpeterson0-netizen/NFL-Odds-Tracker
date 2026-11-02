@@ -494,7 +494,7 @@
   // Scores exactly like claude/frozen-theses.md's frozen.py: slotted players, final games, graded pre-game line with
   // both saved odds, result over/under/push (voids skipped), 1 unit at that line's saved odds for the rule's side.
   // "Last week" = his most recent earlier final game; spread = data.json games[gid].spread (nflverse spread_line).
-  const LA = { tab: "t1", wk: null, gid: "" };
+  const LA = { tab: "t1", wk: null, gid: "", open: new Set() }; // wk: a week number, or "all" (Michael 2026-11-01)
   const payout = (o) => (o > 0 ? o / 100 : 100 / Math.abs(o));
   function ruleHits(r, mid, m, p, past, played, prev) {
     const pm = prev && prev.m ? prev.m[mid] : null;
@@ -585,44 +585,54 @@
     // that fits two rules counts twice (as the rules' separate records add up).
     const isAll = LA.tab === "all", rules = isAll ? visibleTabs() : [TABS.find((x) => x.id === LA.tab)];
     const t = rules[0];
-    const all = rules.flatMap((r) => analyze(r.id, LA.wk));
-    const games = laGames(LA.wk), nFinal = games.filter(([, g]) => g.final).length;
+    const allWk = LA.wk === "all", wkList = allWk ? laWeeks().slice().reverse() : [LA.wk];
+    const all = rules.flatMap((r) => wkList.flatMap((w) => analyze(r.id, w)));
+    const games = allWk ? [] : laGames(LA.wk), nFinal = games.filter(([, g]) => g.final).length;
     const list = LA.gid ? all.filter((x) => x.r.gid === LA.gid) : all;
     const s = tally(list);
-    const scope = LA.gid ? esc(gameLabel(LA.gid)) : `Week ${LA.wk}${nFinal < games.length ? ` (${nFinal} of ${games.length} games final)` : ""}`;
-    let h = `<p class="callout small">${isAll ? `<b>All ${rules.length} leads together.</b> Each rule's bet counts separately, so a player-stat that fits two rules counts twice.` : `<b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}`}<br><span class="muted">${t.frozen && !isAll ? recLine(t) : (LA.wk <= 7 ? `Weeks 1–7 are discovery data for original leads 1–8.` : "Original leads 1–8: week 8 onward. Leads 9–12: only decisions recorded after the Oct 30 freeze; earlier results are excluded.")}</span></p>`;
-    if (!isAll && t.spread && !Object.values(D.games).some((g) => g.wk === LA.wk && g.spread != null)) return h + `<p class="muted">No point spreads in the app's data for week ${LA.wk}, so this rule can't be scored.</p>`;
+    const scope = allWk ? `All weeks (${wkList[0]}–${wkList[wkList.length - 1]})` : LA.gid ? esc(gameLabel(LA.gid)) : `Week ${LA.wk}${nFinal < games.length ? ` (${nFinal} of ${games.length} games final)` : ""}`;
+    let h = `<p class="callout small">${isAll ? `<b>All ${rules.length} leads together.</b> Each rule's bet counts separately, so a player-stat that fits two rules counts twice.` : `<b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}`}<br><span class="muted">${t.frozen && !isAll ? recLine(t) : (allWk ? `Weeks 1–7 are discovery data for original leads 1–8 (in-sample); week 8 onward is out-of-sample. Leads 9–12: only decisions recorded after the Oct 30 freeze.` : LA.wk <= 7 ? `Weeks 1–7 are discovery data for original leads 1–8.` : "Original leads 1–8: week 8 onward. Leads 9–12: only decisions recorded after the Oct 30 freeze; earlier results are excluded.")}</span></p>`;
+    if (!isAll && t.spread && !Object.values(D.games).some((g) => (allWk || g.wk === LA.wk) && g.spread != null)) return h + `<p class="muted">No point spreads in the app's data for ${allWk ? "any week" : `week ${LA.wk}`}, so this rule can't be scored.</p>`;
     h += `<div class="la-sum"><div><span class="muted small">${scope}</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : ""}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : (s.roi > 0 ? "+" : s.roi < 0 ? "−" : "") + Math.abs(s.roi).toFixed(1) + "%"}</b></div></div>`;
     if (isAll && list.length) {
       // per-rule breakdown; tap a rule to see only it
       h += `<div class="panel la-games">${rules.map((r) => { const g = list.filter((x) => x.rule === r); if (!g.length) return ""; const st = tally(g); return `<button type="button" class="la-game" data-larule="${r.id}"><span><span class="rl-n">${r.n}</span> ${esc(r.label)}</span><span class="muted small">${recTxt(st)} · ${st.n ? unitsTxt(st.U) : "push"}</span><span class="muted">›</span></button>`; }).join("")}</div>`;
     }
-    if (!LA.gid && all.length) {
+    if (!allWk && !LA.gid && all.length) {
       // per-game breakdown; tap a game to see only it
       const by = new Map();
       for (const x of all) { if (!by.has(x.r.gid)) by.set(x.r.gid, []); by.get(x.r.gid).push(x); }
       h += `<div class="panel la-games">${games.filter(([g]) => by.has(g)).map(([g]) => { const st = tally(by.get(g)); return `<button type="button" class="la-game" data-lagid="${esc(g)}"><span>${esc(gameLabel(g))}</span><span class="muted small">${recTxt(st)} · ${st.n ? unitsTxt(st.U) : "push"}</span><span class="muted">›</span></button>`; }).join("")}</div>`;
     }
-    if (!list.length) return h + `<p class="muted">${LA.gid && !(D.games[LA.gid] || {}).final ? "This game isn't final yet." : `No graded bets for ${isAll ? "any lead" : `rule ${t.n}`} ${LA.gid ? "in this game" : `in week ${LA.wk}`}.`}</p>`;
+    if (!list.length) return h + `<p class="muted">${LA.gid && !(D.games[LA.gid] || {}).final ? "This game isn't final yet." : `No graded bets for ${isAll ? "any lead" : `rule ${t.n}`} ${LA.gid ? "in this game" : allWk ? "in any week" : `in week ${LA.wk}`}.`}</p>`;
     const sortK = (a, b) => (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid) || a.rule.n - b.rule.n;
     const grp = (k, title) => { const g = list.filter((x) => x.out === k).sort(sortK); return g.length ? `<h3 class="la-h ${k}">${title} (${g.length})</h3><div class="panel rlist">${g.map(laRow).join("")}</div>` : ""; };
-    return h + grp("hit", "Hits") + grp("miss", "Misses") + grp("push", "Pushes") +
-      `<p class="muted small">Graded on the pre-game line (~3 h before kickoff) at its saved odds, 1 unit per bet; voids and lines without both saved odds are left out. Same scoring as the rule's frozen record.</p>`;
+    const foot = `<p class="muted small">Graded on the pre-game line (~3 h before kickoff) at its saved odds, 1 unit per bet; voids and lines without both saved odds are left out. Same scoring as the rule's frozen record.</p>`;
+    if (!allWk) return h + grp("hit", "Hits") + grp("miss", "Misses") + grp("push", "Pushes") + foot;
+    // All weeks: one expandable section per week (newest first); open one to see that week's actual players
+    const sec = (k, title, g) => g.length ? `<h3 class="la-h ${k}">${title} (${g.length})</h3><div class="panel rlist">${g.map(laRow).join("")}</div>` : "";
+    h += wkList.slice().reverse().map((w) => {
+      const g = list.filter((x) => x.r.wk === w); if (!g.length) return "";
+      const st = tally(g), sorted = g.slice().sort(sortK), key = String(w);
+      return `<details class="la-wk" data-lawk="${key}" ${LA.open.has(key) ? "open" : ""}><summary><span class="la-wk-t">Week ${w}${w <= 7 ? ` <span class="muted small">in-sample</span>` : ""}</span><span class="muted small">${recTxt(st)}${st.hit == null ? "" : ` · ${st.hit.toFixed(1)}%`} · ${st.n ? unitsTxt(st.U) : "push"}</span></summary>
+        ${sec("hit", "Hits", sorted.filter((x) => x.out === "hit"))}${sec("miss", "Misses", sorted.filter((x) => x.out === "miss"))}${sec("push", "Pushes", sorted.filter((x) => x.out === "push"))}</details>`;
+    }).join("");
+    return h + foot;
   }
   function analysisHtml() {
     const weeks = laWeeks();
     if (!weeks.length) return `<section id="la"></section>`;
     const tabs = visibleTabs();
     if (LA.tab !== "all" && !tabs.some((t) => t.id === LA.tab)) LA.tab = tabs[0].id;
-    if (LA.wk == null || !weeks.includes(LA.wk)) LA.wk = weeks[0];
-    const games = laGames(LA.wk);
+    if (LA.wk == null || (LA.wk !== "all" && !weeks.includes(LA.wk))) LA.wk = weeks[0];
+    const games = LA.wk === "all" ? [] : laGames(LA.wk);
     if (LA.gid && !games.some(([g]) => g === LA.gid)) LA.gid = "";
     let body;
     try { body = analysisBody(); } catch (e) { console.error("leads analysis failed", e); body = `<p class="muted">Leads Analysis hit an error. Try refreshing.</p>`; }
     return `<section id="la"><h2 class="gsec">Leads Analysis</h2>
       <div class="filters"><label>Lead <select id="la-tab"><option value="all" ${LA.tab === "all" ? "selected" : ""}>All leads</option>${tabs.map((t) => `<option value="${t.id}" ${t.id === LA.tab ? "selected" : ""}>${t.n}. ${esc(t.label)}</option>`).join("")}</select></label>
-        <label>Week <select id="la-wk">${weeks.map((w) => `<option value="${w}" ${w === LA.wk ? "selected" : ""}>Week ${w}</option>`).join("")}</select></label>
-        <label>Game <select id="la-gid"><option value="">All games</option>${games.map(([g, x]) => `<option value="${esc(g)}" ${g === LA.gid ? "selected" : ""}>${esc(gameLabel(g))}${x.final ? "" : " (not final)"}</option>`).join("")}</select></label></div>
+        <label>Week <select id="la-wk"><option value="all" ${LA.wk === "all" ? "selected" : ""}>All weeks</option>${weeks.map((w) => `<option value="${w}" ${w === LA.wk ? "selected" : ""}>Week ${w}</option>`).join("")}</select></label>
+        <label>Game <select id="la-gid" ${LA.wk === "all" ? "disabled" : ""}><option value="">All games</option>${games.map(([g, x]) => `<option value="${esc(g)}" ${g === LA.gid ? "selected" : ""}>${esc(gameLabel(g))}${x.final ? "" : " (not final)"}</option>`).join("")}</select></label></div>
       ${signedIn() ? "" : `<p class="muted small">Rules 4–8 appear here after you sign in, same as the Leads above.</p>`}
       <div id="la-body">${body}</div></section>`;
   }
@@ -630,7 +640,7 @@
   document.addEventListener("change", (e) => {
     const id = e.target && e.target.id;
     if (id === "la-tab") { LA.tab = e.target.value; laRedraw(); }
-    if (id === "la-wk") { LA.wk = +e.target.value; LA.gid = ""; laRedraw(); }
+    if (id === "la-wk") { LA.wk = e.target.value === "all" ? "all" : +e.target.value; LA.gid = ""; laRedraw(); }
     if (id === "la-gid") { LA.gid = e.target.value; laRedraw(); }
   });
   document.addEventListener("click", (e) => {
@@ -642,6 +652,8 @@
     LA.gid = b.dataset.lagid; laRedraw();
     const el = document.getElementById("la"); if (el) el.scrollIntoView({ block: "start" });
   });
+  // remember which week sections are open across redraws (toggle doesn't bubble, so listen in the capture phase)
+  document.addEventListener("toggle", (e) => { const d = e.target; if (d && d.classList && d.classList.contains("la-wk")) { d.open ? LA.open.add(d.dataset.lawk) : LA.open.delete(d.dataset.lawk); } }, true);
   function safeAnalysis() { try { return analysisHtml(); } catch (e) { console.error("leads analysis failed", e); return ""; } }
   // ---------- Guide tab setting ----------
   function settingsHtml() {
