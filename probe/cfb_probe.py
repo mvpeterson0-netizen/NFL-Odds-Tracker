@@ -304,6 +304,61 @@ for label, q in (("range_group8", "groups=8&dates=20261031-20261108&limit=300"),
 save("espn_scoreboard_behavior.json", beh)
 summary["scoreboard_behavior"] = {k: (v.get("http"), v.get("n_events"), v.get("days")) for k, v in beh.items()}
 
+
+# ---------- ESPN: all-FBS scoreboard by week, conference ids, summary keys, roster id matching ----------
+chk = {}
+for wk in (9, 10):
+    code, _, body = get(f"{BASE}/scoreboard?groups=80&week={wk}&seasontype=2&limit=300")
+    rep = {"http": code}
+    if code == 200:
+        js = json.loads(body)
+        rows = []
+        for e in js.get("events", []):
+            comp = (e.get("competitions") or [{}])[0]
+            ts = [((c.get("team") or {}).get("id"), (c.get("team") or {}).get("displayName"),
+                   (c.get("team") or {}).get("conferenceId")) for c in comp.get("competitors", [])]
+            rows.append({"id": e["id"], "date": e.get("date"), "week": (e.get("week") or {}).get("number"),
+                         "status": ((e.get("status") or {}).get("type") or {}).get("name"), "teams": ts})
+        rep["n_events"] = len(rows)
+        P4 = {"1", "4", "5", "8"}
+        rep["n_p4_by_conferenceId"] = sum(1 for r in rows if any(t[2] in P4 or t[0] == "87" for t in r["teams"]))
+        confs = {}
+        for r in rows:
+            for t in r["teams"]:
+                confs.setdefault(t[2], set()).add(t[1])
+        rep["conferenceId_examples"] = {k: sorted(v)[:3] for k, v in confs.items()}
+        rep["has_notre_dame"] = [r for r in rows if any(t[0] == "87" for t in r["teams"])][:1]
+        save(f"espn_all_fbs_week{wk}.json", rows)
+    chk[f"week{wk}"] = rep
+# summary keys + athlete ids for one final game
+if finals:
+    ev = finals[-1]
+    code, _, body = get(f"https://site.web.api.espn.com/apis/site/v2/sports/football/college-football/summary?event={ev['id']}")
+    if code == 200:
+        js = json.loads(body)
+        pl = (js.get("boxscore") or {}).get("players") or []
+        sk = {}
+        ids = {}
+        for t in pl:
+            for st in t.get("statistics", []):
+                sk[st.get("name")] = {"keys": st.get("keys"), "labels": st.get("labels"), "descriptions": st.get("descriptions")}
+                for a in st.get("athletes", []):
+                    ids.setdefault((t.get("team") or {}).get("id"), set()).add((a.get("athlete") or {}).get("id"))
+        chk["summary_stat_keys"] = {k: sk[k] for k in ("passing", "rushing", "receiving") if k in sk}
+        chk["summary_team_ids"] = {k: len(v) for k, v in ids.items()}
+        match = {}
+        for tid, aths in ids.items():
+            c2, _, b2 = get(f"{BASE}/teams/{tid}/roster")
+            if c2 == 200:
+                items = []
+                for g in json.loads(b2).get("athletes", []):
+                    items.extend(g.get("items", []) if isinstance(g, dict) and "items" in g else [g])
+                rids = {a.get("id") for a in items}
+                match[tid] = {"box_athletes": len(aths), "in_roster_by_id": len(aths & rids), "roster_size": len(rids)}
+        chk["roster_id_match"] = match
+save("espn_week_checks.json", chk)
+summary["week_checks"] = {k: (v.get("n_events"), v.get("n_p4_by_conferenceId")) if isinstance(v, dict) and "n_events" in v else None for k, v in chk.items()}
+
 summary["finished_utc"] = dt.datetime.utcnow().isoformat() + "Z"
 save("summary.json", summary)
 print(json.dumps(summary, indent=1))
