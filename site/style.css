@@ -272,6 +272,12 @@ details.rgame table { margin-top: 8px; }
 .la-game:last-child { border-bottom: 0; } .la-game > span:first-child { font-weight: 600; flex: 1; }
 .la-h { font-size: 15px; margin: 14px 0 6px; } .la-h.hit { color: var(--over); } .la-h.miss { color: var(--under); }
 .la-mark { font-weight: 800; width: 1em; } .la-hit .la-mark { color: var(--over); } .la-miss .la-mark { color: var(--under); } .la-push .la-mark { color: var(--muted); }
+.la-wk { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); margin: 8px 0; padding: 0 10px 8px; }
+.la-wk > summary { display: flex; gap: 10px; align-items: center; cursor: pointer; padding: 10px 0; list-style: none; }
+.la-wk > summary::-webkit-details-marker { display: none; }
+.la-wk > summary::after { content: "›"; margin-left: auto; color: var(--muted); transition: transform .15s; }
+.la-wk[open] > summary::after { transform: rotate(90deg); }
+.la-wk-t { font-weight: 600; flex: 1; }
 @media (max-width: 520px) { .la-sum { grid-template-columns: repeat(2, 1fr); } }
 .rlgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 6px 0 10px; } .rlgrid .gchip { width: 100%; margin: 0; white-space: normal; text-align: center; align-items: center; justify-content: center; line-height: 1.2; padding: 8px 6px; }
 .rlgrid.rl8 { grid-template-columns: repeat(2, 1fr); } .rlgrid.rl8 .rl-lock { border-style: dashed; font-weight: 600; text-align: center; } .rlgrid.rl8 .gchip { display: block; text-align: left; font-size: 13px; padding: 6px 8px; } .rlgrid.rl8 .rinfo { width: 16px; height: 16px; font-size: 10px; margin-left: 2px; } .rl-n { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; border-radius: 50%; background: var(--line); color: var(--ink); font-size: 11px; font-weight: 700; margin-right: 2px; flex: none; }
