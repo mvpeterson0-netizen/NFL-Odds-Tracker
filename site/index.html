@@ -15,7 +15,8 @@
 </head>
 <body>
 <header class="top">
-  <div class="brand"><img src="icons/icon-64.png" alt="" width="28" height="28"> Stix <span class="muted">NFL props · 2026</span></div>
+  <div class="brand"><img src="icons/icon-64.png" alt="" width="28" height="28"> Stix <span class="muted" id="brand-sub">NFL props · 2026</span></div>
+  <div class="sport" role="group" aria-label="Sport"><a href="#/board" data-sport="nfl" class="on">NFL</a><a href="#/cfb/board" data-sport="cfb">CFB</a></div>
   <nav id="tabs">
     <a href="#/board" data-tab="board">Board</a>
     <a href="#/search" data-tab="search">Research</a>
@@ -25,16 +26,22 @@
     <a href="#/arb" data-tab="arb">Arbitrage</a>
     <a href="#/guide" data-tab="guide">Guide</a>
   </nav>
+  <nav id="tabs-cfb" hidden>
+    <a href="#/cfb/board" data-ctab="board">Board</a>
+    <a href="#/cfb/results" data-ctab="results">Results</a>
+  </nav>
   <div id="status" class="status">Loading…</div>
-  <label class="allp" title="Also show players who aren't in our 8 slots per team but had a DraftKings/FanDuel line this season"><input type="checkbox" id="all-players" role="switch"><span class="sw" aria-hidden="true"></span>All players</label>
 </header>
 <div id="stale" class="stale" hidden></div>
 <main id="app"><p class="muted pad">Loading data…</p></main>
 <footer class="foot muted">
+  <span class="foot-nfl">
   Stats, injuries, snaps, depth charts and rosters: <a href="https://github.com/nflverse/nflverse-data">nflverse</a> (CC-BY 4.0).
   Weather: <a href="https://open-meteo.com">Open-Meteo</a> (CC-BY 4.0).
   Lines: <a href="https://the-odds-api.com">The Odds API</a> (DraftKings, FanDuel), captured about 3 hours before kickoff — not closing lines.
   Research tool only; flagged props are leads, not predictions.
+  </span>
+  <span class="foot-cfb" hidden>College football (Power 4 games): lines from <a href="https://the-odds-api.com">The Odds API</a> (DraftKings, FanDuel and other books), captured when first posted and about 1 hour before kickoff — not closing lines. Results: ESPN box scores. Research tool only.</span>
   Visit counts by <a href="https://www.goatcounter.com">GoatCounter</a> (anonymous, no cookies). Stix also records how its screens and buttons are used (<a href="privacy.html">details</a>).
   <a href="#/welcome">Welcome tour</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a>
 </footer>
@@ -44,6 +51,7 @@
 <script src="research.js"></script>
 <script src="search.js"></script>
 <script src="account.js"></script>
+<script src="cfb.js"></script>
 <script src="track.js"></script>
 <script src="picks.js"></script>
 <script src="review.js"></script>

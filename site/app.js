@@ -36,7 +36,8 @@ const mkt = {};
 function slotsFor(wk) { return D.slots.filter((s) => s.wk === wk); }
 // "All players" switch (header): also show extra players, i.e. QB/RB/WR/TE who had a DraftKings/FanDuel line
 // but aren't in our 8 slots. Saved per device. Off by default.
-S.all = (() => { try { return localStorage.getItem("stix_all_players") === "1"; } catch { return false; } })();
+// The header switch was removed 2026-11-01 (replaced by the NFL / CFB toggle): extras are never shown now.
+S.all = false;
 const EXTRA_BASIS = "Not in our 8 slots. Shown because DraftKings/FanDuel posted a prop line for him this season (All players is on).";
 function isExtra(pid) { const p = playerById[pid]; return !!(p && p.extra); }
 // Slots for a week, plus extra players with a game that week when the switch is on (slot = their position, e.g. "WR").
@@ -969,6 +970,13 @@ let LIVE = null;
 function render() {
   const hash = location.hash || "#/board";
   const [, tab, arg] = hash.split("/");
+  const isCfb = tab === "cfb"; // college football (cfb.js): separate tabs, data from the Stix database, sign-in + 21+ required
+  document.body.classList.toggle("cfb-on", isCfb);
+  document.getElementById("tabs-cfb").hidden = !isCfb;
+  document.querySelector(".foot-nfl").hidden = isCfb; document.querySelector(".foot-cfb").hidden = !isCfb;
+  document.getElementById("brand-sub").textContent = isCfb ? "CFB props · 2026" : "NFL props · 2026";
+  document.querySelectorAll(".sport a").forEach((a) => a.classList.toggle("on", (a.dataset.sport === "cfb") === isCfb));
+  document.querySelectorAll("#tabs-cfb a").forEach((a) => a.classList.toggle("on", a.dataset.ctab === (arg === "results" ? "results" : "board")));
   document.body.classList.toggle("rv-on", tab === "review"); // review queue: site footer shrinks to one line (review.js)
   document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "slots" || tab === "log" ? "guide" : tab === "review" ? "picks" : tab)));
   // Phone layout (mobile.js) may take over the Board and player pages on narrow screens.
@@ -977,6 +985,10 @@ function render() {
   try { if (window.STIX_MOBILE && window.STIX_MOBILE.active()) mobileHtml = window.STIX_MOBILE.render(tab, arg); }
   catch (e) { console.error("mobile view failed; showing desktop view", e); mobileHtml = null; }
   if (mobileHtml != null) app.innerHTML = mobileHtml;
+  else if (isCfb) {
+    try { app.innerHTML = window.STIX_CFB ? window.STIX_CFB.view(arg) : `<p class="pad">College football didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">College football hit an error. Try refreshing.</p>`; }
+  }
   else if (tab === "player") app.innerHTML = viewPlayer(arg);
   else if (tab === "leads") app.innerHTML = viewLeads();
   else if (tab === "guide" || tab === "slots" || tab === "log") app.innerHTML = viewGuide();
@@ -1008,6 +1020,7 @@ function render() {
   }
   else app.innerHTML = viewBoard();
   bind(tab, arg);
+  if (isCfb && window.STIX_CFB) { try { window.STIX_CFB.bind(arg); } catch (e) { console.error(e); } }
   try { initWeekSliders(); } catch (e) { console.error(e); }
   // Old Slots / Log links now open the Guide page at that section.
   if (tab === "slots" || tab === "log") setTimeout(() => { const el = document.getElementById(tab === "log" ? "g-log" : "g-slots"); if (el) el.scrollIntoView(); }, 0);
@@ -1020,12 +1033,6 @@ function render() {
 }
 function bind(tab, arg) {
   const on = (id, ev, fn) => { const el = document.getElementById(id); if (el) el.addEventListener(ev, fn); };
-  const ap = document.getElementById("all-players");
-  if (ap && !ap.dataset.bound) {
-    ap.dataset.bound = "1";
-    ap.checked = S.all;
-    ap.addEventListener("change", () => { S.all = ap.checked; try { localStorage.setItem("stix_all_players", S.all ? "1" : "0"); } catch { /* ignore */ } render(); });
-  }
   document.querySelectorAll("[data-gid]").forEach((b) => b.addEventListener("click", () => { S.game = b.dataset.gid; render(); }));
   on("f-team", "change", (e) => { S.team = e.target.value; render(); });
   on("f-pos", "change", (e) => { S.pos = e.target.value; render(); });

@@ -91,8 +91,7 @@
   document.addEventListener("change", (ev) => {
     const t = ev.target;
     if (!t || !t.matches) return;
-    if (t.matches("#all-players")) push("tap", "all_players", t.checked ? "on" : "off");
-    else if (t.matches("[data-k]")) push("tap", "filter", `${t.dataset.k}=${t.value}`);
+    if (t.matches("[data-k]")) push("tap", "filter", `${t.dataset.k}=${t.value}`);
     else if (t.matches("#b-team, #b-game, #b-sort")) push("tap", "board_filter", `${t.id}=${t.value}`);
   }, true);
   document.addEventListener("submit", (ev) => { if (ev.target && ev.target.id === "s-form") push("tap", "search_run"); }, true);
