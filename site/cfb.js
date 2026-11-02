@@ -13,7 +13,7 @@
   const BOOK = { draftkings: "DraftKings", fanduel: "FanDuel", betmgm: "BetMGM", williamhill_us: "Caesars", fanatics: "Fanatics", betrivers: "BetRivers", espnbet: "ESPN BET", hardrockbet: "Hard Rock", ballybet: "Bally Bet", fliff: "Fliff" };
   const BOOK_RANK = ["draftkings", "fanduel"];
   const C = { games: null, wk: null, weekData: {}, loading: false, err: "", mk: "player_pass_yds", q: "", game: "", note: "",
-    rWk: "", rMk: "", rPos: "", rBy: "week", rSide: "over", rGame: "", open: {}, pMk: "" };
+    rWk: "", rMk: "", rPos: "", rBy: "week", rGame: "", open: {}, pMk: "" };
 
   const norm = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.'’]/g, "")
     .replace(/[^a-z ]+/g, " ").replace(/\b(jr|sr|ii|iii|iv|v)\b/g, " ").replace(/\s+/g, " ").trim();
@@ -201,52 +201,57 @@
     }
     return out;
   }
-  function betRow(x) {
-    const r = x.r, cls = x.out === "hit" ? "la-hit" : x.out === "miss" ? "la-miss" : "la-push";
-    return `<div class="rlrow ${cls}"><div class="rlhead"><span class="la-mark" aria-hidden="true">${x.out === "hit" ? "✓" : x.out === "miss" ? "✗" : "–"}</span>${pLink(r)}
-      <span class="rlstat">${esc(r.mk.short)}</span><span class="rlsize">${x.out === "push" ? "push" : unitsTxt(x.u)}</span></div>
-      <div class="muted small">${r.pos ? esc(r.pos) + " · " : ""}${esc(teamAbbr(r))} ${r.side === "home" ? "vs" : "@"} ${esc(abbr(r.g, r.side === "home" ? "away" : "home"))} · wk ${r.wk}</div>
-      <div class="rlcells"><span><span class="muted small">${x.side === "over" ? "Over" : "Under"}</span> <b>${num(r.main.line)}</b> <span class="muted small">${odds(x.odds)}</span></span><span><span class="muted small">Actual</span> <b>${num(r.act)}</b></span></div></div>`;
+  // Each graded line, with what 1 unit on the Over and 1 unit on the Under would have returned at the saved odds.
+  function lineRows(rows) {
+    return rows.map((r) => {
+      const ob = bets([r], "over")[0], ub = bets([r], "under")[0];
+      return { r, ou: ob ? ob.u : null, uu: ub ? ub.u : null };
+    });
   }
-  const sectionRows = (list, k, title) => {
-    const g = list.filter((x) => x.out === k).sort((a, b) => a.r.g.kickoff.localeCompare(b.r.g.kickoff) || a.r.name.localeCompare(b.r.name));
-    return g.length ? `<h3 class="la-h ${k}">${title} (${g.length})</h3><div class="panel rlist">${g.map(betRow).join("")}</div>` : "";
+  function resRow(x) {
+    const r = x.r, cls = r.outcome === "over" ? "la-hit" : r.outcome === "under" ? "la-miss" : "la-push";
+    return `<div class="rlrow ${cls}"><div class="rlhead">${pLink(r)}<span class="rlstat">${esc(r.mk.short)}</span><span class="rlsize ${r.outcome === "over" ? "over" : r.outcome === "under" ? "under" : ""}">${r.outcome === "push" ? "push" : r.outcome === "over" ? "Over" : "Under"}</span></div>
+      <div class="muted small">${r.pos ? esc(r.pos) + " · " : ""}${esc(teamAbbr(r))} ${r.side === "home" ? "vs" : "@"} ${esc(abbr(r.g, r.side === "home" ? "away" : "home"))} · wk ${r.wk}</div>
+      <div class="rlcells"><span><span class="muted small">Line</span> <b>${num(r.main.line)}</b> <span class="muted small">${odds(r.main.over_price)} / ${odds(r.main.under_price)}</span></span><span><span class="muted small">Actual</span> <b>${num(r.act)}</b></span></div></div>`;
+  }
+  const sectionRows = (xs, k, title) => {
+    const g = xs.filter((x) => x.r.outcome === k).sort((a, b) => a.r.g.kickoff.localeCompare(b.r.g.kickoff) || a.r.name.localeCompare(b.r.name));
+    return g.length ? `<h3 class="la-h ${k === "over" ? "hit" : k === "under" ? "miss" : ""}">${title} (${g.length})</h3><div class="panel rlist">${g.map(resRow).join("")}</div>` : "";
   };
+  const sideTxt = (t) => (t.n ? `${unitsTxt(t.U)} · ROI ${roiTxt(t.roi)}` : "—");
   function results() {
     const weeks = weeksList();
-    const base = resultRows(false), list = bets(base, C.rSide), s = tally(list);
+    const base = resultRows(false);
     const gamesInWeek = C.rWk === "" ? [] : C.games.filter((g) => g.week === +C.rWk && g.status === "final");
     if (C.rGame && !gamesInWeek.some((g) => g.game_id === C.rGame)) C.rGame = "";
     const pos = [...new Set(weeks.flatMap((w) => rowsFor(w)).filter(graded).map((r) => r.pos).filter(Boolean))].sort();
     const opt = (v, cur, l) => `<option value="${esc(v)}" ${String(v) === String(cur) ? "selected" : ""}>${esc(l)}</option>`;
-    let h = `<div class="c-bar"><label class="small">Bet <select id="c-rside">${opt("over", C.rSide, "All Over")}${opt("under", C.rSide, "All Under")}</select></label>
+    let h = `<div class="c-bar">
       <label class="small">Stat <select id="c-rmk">${opt("", C.rMk, "All stats")}${MK.map((m) => opt(m.id, C.rMk, m.label)).join("")}</select></label>
       <label class="small">Pos <select id="c-rpos">${opt("", C.rPos, "All")}${pos.map((p) => opt(p, C.rPos, p)).join("")}</select></label>
       <label class="small">Week <select id="c-rwk">${opt("", C.rWk, "All weeks")}${weeks.map((w) => opt(w, C.rWk, `Week ${w}`)).join("")}</select></label>
       <label class="small">Game <select id="c-rgame" ${C.rWk === "" ? "disabled" : ""}>${opt("", C.rGame, "All games")}${gamesInWeek.map((g) => opt(g.game_id, C.rGame, matchup(g))).join("")}</select></label>${searchBox}</div>`;
     if (!base.length) return h + `<p class="muted pad">No graded lines for these filters yet.</p>` + foot;
-    const scope = C.rWk === "" ? (() => { const w = base.map((r) => r.wk); const a = Math.min(...w), z = Math.max(...w); return a === z ? `Week ${a}` : `All weeks (${a}–${z})`; })() : C.rGame ? matchup(C.games.find((g) => g.game_id === C.rGame)) : `Week ${C.rWk}`;
-    h += `<p class="callout small"><b>1 unit on every graded line, all ${C.rSide === "over" ? "Over" : "Under"}</b>, at the saved odds. Switch Bet to see the other side. This is a record of what blindly betting each side would have done, not a recommendation.</p>
-      <div class="la-sum"><div><span class="muted small">${esc(scope)}</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : ""}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b class="${s.roi > 0 ? "la-pos" : s.roi < 0 ? "la-neg" : ""}">${roiTxt(s.roi)}</b></div></div>`;
-    // both sides side by side; tap one to switch
-    const so = tally(bets(base, "over")), su = tally(bets(base, "under"));
-    h += `<div class="panel la-games">` + [["over", "All Over", so], ["under", "All Under", su]].map(([k, l, t]) =>
-      `<button type="button" class="la-game ${C.rSide === k ? "on" : ""}" data-rside="${k}"><span>${l}</span><span class="muted small">${recTxt(t)} · ${t.n ? unitsTxt(t.U) : "—"} · ROI ${roiTxt(t.roi)}</span><span class="muted">›</span></button>`).join("") + `</div>`;
-    if (!list.length) return h + `<p class="muted pad">None of these lines has both Over and Under odds saved, so none can be scored.</p>` + foot;
+    const n = base.length, o = base.filter((r) => r.outcome === "over").length, u = base.filter((r) => r.outcome === "under").length, p = n - o - u;
+    const to = tally(bets(base, "over")), tu = tally(bets(base, "under"));
+    const cls = (t) => (t.U > 0 ? "la-pos" : t.U < 0 ? "la-neg" : "");
+    h += `<div class="la-sum c3"><div><span class="muted small">Graded lines</span><b>${n}</b><span class="muted small">${p ? `${p} push${p === 1 ? "" : "es"}` : "no pushes"}</span></div>
+      <div><span class="muted small">Over finished</span><b>${o} · ${pct(o, n)}</b><span class="small ${cls(to)}">1 u on each: ${sideTxt(to)}</span></div>
+      <div><span class="muted small">Under finished</span><b>${u} · ${pct(u, n)}</b><span class="small ${cls(tu)}">1 u on each: ${sideTxt(tu)}</span></div></div>`;
     const opts = [["week", "Week"], ["game", "Game"], ["team", "Team"], ["player", "Player"]].concat(C.rMk === "" ? [["stat", "Stat"]] : []);
     const by = opts.some(([k]) => k === C.rBy) ? C.rBy : "week";
     h += `<div class="c-bar"><span class="small muted">Group by</span><span class="mtabs">${opts.map(([k, l]) => `<button class="gchip ${by === k ? "on" : ""}" data-rb="${k}"><b>${l}</b></button>`).join("")}</span></div>`;
     const keyOf = { week: (x) => `Week ${x.r.wk}`, game: (x) => `${matchup(x.r.g)} (wk ${x.r.wk})`, team: (x) => teamSchool(x.r) || "(unknown team)", player: (x) => x.r.name, stat: (x) => x.r.mk.label }[by];
-    const groups = new Map();
-    for (const x of list) (groups.get(keyOf(x)) || groups.set(keyOf(x), []).get(keyOf(x))).push(x);
-    const arr = [...groups].map(([k, xs]) => ({ k, xs, t: tally(xs) }));
-    arr.sort(by === "week" ? (a, b) => b.xs[0].r.wk - a.xs[0].r.wk : (a, b) => b.t.U - a.t.U || b.t.n - a.t.n || a.k.localeCompare(b.k));
-    h += arr.map(({ k, xs, t }) => {
-      const id = `${by}|${k}`, sorted = xs;
-      return `<details class="la-wk" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small">${recTxt(t)}${t.hit == null ? "" : ` · ${t.hit.toFixed(1)}%`} · ${t.n ? unitsTxt(t.U) : "push"}${t.roi == null ? "" : ` · ROI ${roiTxt(t.roi)}`}</span></summary>
-        ${sectionRows(sorted, "hit", "Hits")}${sectionRows(sorted, "miss", "Misses")}${sectionRows(sorted, "push", "Pushes")}</details>`;
+    const groups = new Map(), xsAll = lineRows(base);
+    for (const x of xsAll) (groups.get(keyOf(x)) || groups.set(keyOf(x), []).get(keyOf(x))).push(x);
+    const arr = [...groups].map(([k, xs]) => ({ k, xs, n: xs.length, o: xs.filter((x) => x.r.outcome === "over").length, u: xs.filter((x) => x.r.outcome === "under").length }));
+    arr.sort(by === "week" ? (a, b) => b.xs[0].r.wk - a.xs[0].r.wk : (a, b) => b.n - a.n || a.k.localeCompare(b.k));
+    h += arr.map(({ k, xs, n: gn, o: go, u: gu }) => {
+      const id = `${by}|${k}`;
+      return `<details class="la-wk" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small">${gn} · <span class="over">${go} Over</span> · <span class="under">${gu} Under</span>${gn - go - gu ? ` · ${gn - go - gu} push` : ""}</span></summary>
+        ${sectionRows(xs, "over", "Over")}${sectionRows(xs, "under", "Under")}${sectionRows(xs, "push", "Pushes")}</details>`;
     }).join("");
-    return h + `<p class="muted small">Graded on the line captured about 1 hour before kickoff at its saved odds (DraftKings first, then FanDuel), 1 unit per bet; lines without both prices saved are left out. A player in the box score with no entry for a stat counts as 0 for it. Research tool only.</p>`;
+    return h + `<p class="muted small">Graded on the line captured about 1 hour before kickoff (DraftKings first, then FanDuel). "1 u on each" is what 1 unit on every line's Over (or Under) would have returned at the saved odds; lines without both prices saved are left out of those two figures only. A player in the box score with no entry for a stat counts as 0 for it. Research tool only.</p>`;
   }
 
   // ---------- Player card ----------
@@ -314,10 +319,8 @@
     on("c-retry", "click", () => { C.err = ""; start(); rerender(); });
     on("c-wk", "change", (e) => { C.wk = +e.target.value; C.game = ""; C.note = ""; start(); rerender(); });
     on("c-rwk", "change", (e) => { C.rWk = e.target.value; C.rGame = ""; rerender(); });
-    on("c-rside", "change", (e) => { C.rSide = e.target.value; rerender(); });
     on("c-rmk", "change", (e) => { C.rMk = e.target.value; rerender(); });
     on("c-rgame", "change", (e) => { C.rGame = e.target.value; rerender(); });
-    document.querySelectorAll("[data-rside]").forEach((b) => b.addEventListener("click", () => { C.rSide = b.dataset.rside; rerender(); }));
     on("c-rpos", "change", (e) => { C.rPos = e.target.value; rerender(); });
     document.querySelectorAll("[data-cg]").forEach((b) => b.addEventListener("click", () => { C.game = b.dataset.cg; rerender(); }));
     document.querySelectorAll("[data-cm]").forEach((b) => b.addEventListener("click", () => { C.mk = b.dataset.cm; rerender(); }));
