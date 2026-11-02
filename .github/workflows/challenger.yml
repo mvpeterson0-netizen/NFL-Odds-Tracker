@@ -1,0 +1,76 @@
+name: Challenger learning and scorecard
+on:
+  schedule:
+    # Both UTC offsets; local-time gate below handles Central daylight saving.
+    - cron: '0 20,21 * * 2'
+    - cron: '0 12,13 * * 3'
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        options: [train, report]
+        default: report
+permissions:
+  contents: write
+concurrency:
+  group: update
+  cancel-in-progress: false
+jobs:
+  learning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Sync latest main
+        run: git pull --ff-only origin main
+      - name: Resolve Central-time action
+        id: action
+        env:
+          REQUESTED: ${{ inputs.action }}
+        run: |
+          python - <<'PY'
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          import os
+          now=datetime.now(ZoneInfo('America/Chicago'))
+          action=os.environ.get('REQUESTED') or ('train' if now.weekday()==1 and 15<=now.hour<18 else 'report' if now.weekday()==2 and 7<=now.hour<9 else '')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('mode='+action+'\n')
+          PY
+      - uses: actions/setup-python@v5
+        if: steps.action.outputs.mode != ''
+        with:
+          python-version: '3.12'
+      - name: Install isolated training dependencies
+        if: steps.action.outputs.mode == 'train'
+        run: pip install numpy==2.2.6 pandas==2.3.3 scipy==1.15.3 scikit-learn==1.6.1
+      - name: Train challenger
+        if: steps.action.outputs.mode == 'train'
+        env:
+          OMP_NUM_THREADS: '2'
+          OPENBLAS_NUM_THREADS: '2'
+        run: python -m pipeline.challenger train
+      - name: Build scorecard
+        if: steps.action.outputs.mode != '' && success()
+        run: python -m pipeline.challenger report
+      - name: Preserve input snapshots and diagnostics
+        if: always() && steps.action.outputs.mode == 'train'
+        uses: actions/upload-artifact@v4
+        with:
+          name: challenger-training-${{ github.run_id }}
+          path: |
+            .cache/challenger
+            data/challenger
+          retention-days: 90
+          include-hidden-files: true
+      - name: Commit version or failure status
+        if: always() && steps.action.outputs.mode != ''
+        run: |
+          git config user.name 'prop-tracker-bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/challenger
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: challenger version and weekly scorecard'
+          git pull --rebase origin main
+          git push origin HEAD:main

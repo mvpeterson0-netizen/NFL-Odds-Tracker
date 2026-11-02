@@ -15,7 +15,7 @@ import traceback
 from . import cfb, espn, espn_box, history, history_2025, nflverse, notify, odds, script, supa, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
-BUILD_VERSION = "2"  # frozen forward research leads 9–12
+BUILD_VERSION = "3"  # separate expanding-history challenger; original frozen models unchanged
 RUN_FIELDS = ["run_utc", "finished_utc", "trigger", "status", "built", "summary", "error"]
 
 
@@ -82,14 +82,16 @@ def main() -> int:
         if changed:
             log.append("nflverse updated: " + ", ".join(changed))
         state = read_json(DATA / "build_state.json", {}) or {}
+        challenger_version = (read_json(DATA / 'challenger' / 'active.json', {}) or {}).get('version')
         need = (sched_changed or odds_changed or history_changed or weather_changed or espn_changed or box_changed or script_changed or changed or not out_path.exists()
+                or state.get('challenger_version') != challenger_version
                 or state.get("version") != BUILD_VERSION or os.environ.get("FORCE_BUILD") == "1")
         if need:
             from .build import build
             from .common import write_json
             build(log)
             built = True
-            write_json(DATA / "build_state.json", {"version": BUILD_VERSION, "built_utc": iso(utcnow())})
+            write_json(DATA / "build_state.json", {"version": BUILD_VERSION, "built_utc": iso(utcnow()), 'challenger_version': challenger_version})
 
         try:  # optional: phone alert when a game's lines first cover most players (never fails the run)
             notify.run(log)

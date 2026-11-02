@@ -812,6 +812,8 @@ def build(log):
     out["frozen_research"] = {**out["frozen_research"], "records": {
         k: {a: b for a, b in v.items() if a != "feature_snapshot"}
         for k, v in out["frozen_research"]["records"].items()}}
+    from .challenger import update as update_challenger
+    out['challenger'] = update_challenger(d, players, rows_out, now)
     write_json(OUT_PATH, out, compact=True)
     log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
                f"{len(unmatched)} unmatched lines, {d.unmapped_snaps} unmapped snap rows")
