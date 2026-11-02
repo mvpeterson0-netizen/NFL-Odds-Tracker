@@ -1,0 +1,220 @@
+{
+ "range_group8": {
+  "http": 400
+ },
+ "range_all_p4": {
+  "http": 400
+ },
+ "nodate_group8": {
+  "http": 200,
+  "n_events": 5,
+  "days": [
+   "2026-10-31"
+  ],
+  "top_keys": [
+   "events",
+   "groups",
+   "leagues",
+   "provider",
+   "season",
+   "week"
+  ],
+  "scoreboard_week": {
+   "number": 9
+  },
+  "event_keys": [
+   "competitions",
+   "date",
+   "id",
+   "links",
+   "name",
+   "season",
+   "shortName",
+   "status",
+   "uid",
+   "week"
+  ],
+  "event_week": {
+   "number": 9
+  },
+  "comp_keys": [
+   "attendance",
+   "broadcast",
+   "broadcasts",
+   "competitors",
+   "conferenceCompetition",
+   "date",
+   "dateValid",
+   "format",
+   "geoBroadcasts",
+   "groups",
+   "headlines",
+   "highlights",
+   "id",
+   "leaders",
+   "neutralSite",
+   "notes",
+   "playByPlayAvailable",
+   "recent",
+   "startDate",
+   "status",
+   "timeValid",
+   "type",
+   "uid",
+   "venue"
+  ],
+  "competitor0": {
+   "id": "61",
+   "uid": "s:20~l:23~t:61",
+   "type": "team",
+   "order": 0,
+   "homeAway": "home",
+   "winner": true,
+   "team": "...",
+   "score": "27",
+   "linescores": "...",
+   "statistics": "...",
+   "curatedRank": "...",
+   "records": "..."
+  },
+  "team0_keys": [
+   "abbreviation",
+   "alternateColor",
+   "color",
+   "conferenceId",
+   "displayName",
+   "id",
+   "isActive",
+   "links",
+   "location",
+   "logo",
+   "logoDark",
+   "name",
+   "shortDisplayName",
+   "uid",
+   "venue"
+  ],
+  "status": {
+   "clock": 0.0,
+   "displayClock": "0:00",
+   "period": 4,
+   "type": {
+    "id": "3",
+    "name": "STATUS_FINAL",
+    "state": "post",
+    "completed": true,
+    "description": "Final",
+    "detail": "Final",
+    "shortDetail": "Final"
+   }
+  },
+  "conferenceCompetition": true,
+  "neutralSite": true
+ },
+ "week_param": {
+  "http": 200,
+  "n_events": 5,
+  "days": [
+   "2026-10-31"
+  ],
+  "top_keys": [
+   "events",
+   "groups",
+   "leagues",
+   "provider",
+   "season",
+   "week"
+  ],
+  "scoreboard_week": {
+   "number": 9
+  },
+  "event_keys": [
+   "competitions",
+   "date",
+   "id",
+   "links",
+   "name",
+   "season",
+   "shortName",
+   "status",
+   "uid",
+   "week"
+  ],
+  "event_week": {
+   "number": 9
+  },
+  "comp_keys": [
+   "attendance",
+   "broadcast",
+   "broadcasts",
+   "competitors",
+   "conferenceCompetition",
+   "date",
+   "dateValid",
+   "format",
+   "geoBroadcasts",
+   "groups",
+   "headlines",
+   "highlights",
+   "id",
+   "leaders",
+   "neutralSite",
+   "notes",
+   "playByPlayAvailable",
+   "recent",
+   "startDate",
+   "status",
+   "timeValid",
+   "type",
+   "uid",
+   "venue"
+  ],
+  "competitor0": {
+   "id": "61",
+   "uid": "s:20~l:23~t:61",
+   "type": "team",
+   "order": 0,
+   "homeAway": "home",
+   "winner": true,
+   "team": "...",
+   "score": "27",
+   "linescores": "...",
+   "statistics": "...",
+   "curatedRank": "...",
+   "records": "..."
+  },
+  "team0_keys": [
+   "abbreviation",
+   "alternateColor",
+   "color",
+   "conferenceId",
+   "displayName",
+   "id",
+   "isActive",
+   "links",
+   "location",
+   "logo",
+   "logoDark",
+   "name",
+   "shortDisplayName",
+   "uid",
+   "venue"
+  ],
+  "status": {
+   "clock": 0.0,
+   "displayClock": "0:00",
+   "period": 4,
+   "type": {
+    "id": "3",
+    "name": "STATUS_FINAL",
+    "state": "post",
+    "completed": true,
+    "description": "Final",
+    "detail": "Final",
+    "shortDetail": "Final"
+   }
+  },
+  "conferenceCompetition": true,
+  "neutralSite": true
+ }
+}
