@@ -16288,6 +16288,100 @@
    },
    "wk": 8
   },
+  "2026_08_PHI_WAS|00-0036567|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.09040252378284275,
+     "probability": 0.6661213861241491,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.027773572441918137,
+     "probability": 0.6278616765501213,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 2.0,
+    "line": 1.5,
+    "line_delta_ratio": null,
+    "market_p": 0.4233170265684967,
+    "mean3_ratio": 2.0,
+    "mean5_ratio": 2.0,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.12121212121212122,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 21.0
+   },
+   "gid": "2026_08_PHI_WAS",
+   "ko": "2026-11-02T01:20:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-02T01:00:30Z",
+   "pid": "00-0036567",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-02T01:00:24Z",
+    "line": 1.5,
+    "op": 123.0,
+    "up": -157.0
+   },
+   "wk": 8
+  },
+  "2026_08_PHI_WAS|00-0036567|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.10015249437469653,
+     "probability": 0.5634927410211861,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.027038714956719168,
+     "probability": 0.4983460240465585,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 3.5384615384615383,
+    "line": 6.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5157232704402516,
+    "mean3_ratio": 3.5384615384615383,
+    "mean5_ratio": 3.5384615384615383,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.12121212121212122,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 21.0
+   },
+   "gid": "2026_08_PHI_WAS",
+   "ko": "2026-11-02T01:20:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-02T01:00:30Z",
+   "pid": "00-0036567",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-02T01:00:24Z",
+    "line": 6.5,
+    "op": -120.0,
+    "up": -105.0
+   },
+   "wk": 8
+  },
   "2026_08_PHI_WAS|00-0036567|rush_yds": {
    "decisions": {
     "t11": {
