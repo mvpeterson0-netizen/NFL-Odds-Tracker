@@ -239,7 +239,7 @@ def refresh_rosters(store: Store, games: list[dict], log: list[str], now, get_js
 def run(keys: list[str], log: list[str], store: Store | None = None, now=None) -> bool:
     """One CFB pass: games, lines, results, rosters, optional back-fill. Needs SUPABASE_SERVICE_KEY; skips without it.
     Each part is independent: a failure in one is logged and the rest still run. Never raises."""
-    from . import cfb_history, cfb_odds, cfb_store
+    from . import cfb_history, cfb_odds, cfb_season, cfb_store
     store = store or cfb_store.from_env()
     if store is None:
         return False
@@ -252,6 +252,7 @@ def run(keys: list[str], log: list[str], store: Store | None = None, now=None) -
     parts = [("odds", lambda: cfb_odds.run(store, keys, games, log, now)),
              ("results", lambda: refresh_results(store, games, log, now)),
              ("rosters", lambda: refresh_rosters(store, games, log, now)),
+             ("season", lambda: cfb_season.run(store, log, now)),
              ("history", lambda: cfb_history.run(store, os.environ.get("ODDS_API_KEY_20K", "").strip(), log, now))]
     for name, fn in parts:
         try:

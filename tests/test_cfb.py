@@ -5,7 +5,7 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
-from pipeline import cfb, cfb_history, cfb_odds
+from pipeline import cfb, cfb_history, cfb_odds, cfb_season
 from pipeline.cfb_store import MemoryStore, StoreError
 
 NOW = datetime(2026, 11, 4, 14, tzinfo=timezone.utc)
@@ -180,6 +180,90 @@ class HistoryTests(unittest.TestCase):
         with patch.dict(os.environ, {"GITHUB_EVENT_NAME": "workflow_dispatch"}):
             cfb_history.run(store, "k", [], NOW, get, weeks=[9])
         self.assertFalse([c for c in calls if "/odds" in c])
+
+
+class SeasonBackfillTests(unittest.TestCase):
+    """Games + results back-fill for earlier weeks (synthetic stubs; no network)."""
+
+    @staticmethod
+    def wk(i, week, hc="5", state="post", completed=True, days_ago=20):
+        e = ev(i, hc=hc, state=state, completed=completed, date=NOW - timedelta(days=days_ago))
+        e["week"] = {"number": week}
+        return e
+
+    BOX = {"boxscore": {"players": [{"team": {"displayName": "Alpha Tigers"}, "statistics": [
+        {"name": "passing", "keys": ["completions/passingAttempts", "passingYards"], "athletes": [
+            {"athlete": {"id": "9", "displayName": "QB One"}, "stats": ["20/30", "250"]}]}]}]}}
+
+    def getter(self, board):
+        calls = []
+
+        def get_json(url):
+            calls.append(url)
+            if "scoreboard" in url:
+                wk = int(url.split("week=")[1].split("&")[0])
+                return {"events": board.get(wk, [])}
+            return self.BOX
+        return get_json, calls
+
+    def test_env_parsing(self):
+        with patch.dict(os.environ, {"CFB_SEASON_WEEKS": "1-3, 5,x,9-8,40-41"}):
+            self.assertEqual(cfb_season.weeks_from_env(), [1, 2, 3, 5])
+        with patch.dict(os.environ, {"CFB_SEASON_WEEKS": ""}):
+            self.assertEqual(cfb_season.weeks_from_env(), [])
+
+    def test_off_without_weeks_and_on_push(self):
+        store = MemoryStore()
+        gj, calls = self.getter({1: [self.wk("a", 1)]})
+        with patch.dict(os.environ, {"GITHUB_EVENT_NAME": "workflow_dispatch"}):
+            self.assertEqual(cfb_season.run(store, [], NOW, gj, weeks=[]), 0)
+        with patch.dict(os.environ, {"GITHUB_EVENT_NAME": "push"}):
+            self.assertEqual(cfb_season.run(store, [], NOW, gj, weeks=[1]), 0)
+        self.assertEqual(calls, [])
+        self.assertNotIn("cfb_games", store.t)
+
+    def test_stores_week_then_results_in_batches_and_finishes(self):
+        store = MemoryStore()
+        board = {1: [self.wk("a", 1), self.wk("b", 1), self.wk("c", 1), self.wk("x", 1, hc="99"),   # x: no Power 4 team
+                     self.wk("odd", 2)],                                                           # wrong week: ignored
+                 2: [self.wk("d", 2, days_ago=13)]}
+        gj, calls = self.getter(board)
+        log = []
+        with patch.dict(os.environ, {"GITHUB_EVENT_NAME": "workflow_dispatch"}):
+            self.assertEqual(cfb_season.run(store, log, NOW, gj, weeks=[1, 2], max_box=2), 2)     # 2 of 4 box scores
+            ids = sorted(g["game_id"] for g in store.t["cfb_games"])
+            self.assertEqual(ids, ["a", "b", "c", "d"])
+            self.assertEqual(len([c for c in calls if "scoreboard" in c]), 2)
+            self.assertTrue(any("still to go" in x for x in log))
+            self.assertEqual(cfb_season.run(store, [], NOW, gj, weeks=[1, 2], max_box=2), 2)
+            self.assertEqual(cfb_season.run(store, [], NOW, gj, weeks=[1, 2], max_box=2), 0)      # nothing left
+            self.assertEqual(len([c for c in calls if "scoreboard" in c]), 2)                     # not asked again
+            self.assertEqual(len([c for c in calls if "summary" in c]), 4)                        # each game once
+        self.assertEqual({r["game_id"] for r in store.t["cfb_results"]}, {"a", "b", "c", "d"})
+        self.assertEqual(store.t["cfb_results"][0]["pass_yds"], 250)
+
+    def test_keeps_odds_event_id_and_unfinished_games_get_no_box_score(self):
+        store = MemoryStore()
+        g = cfb.parse_event(self.wk("a", 1))
+        g["odds_event_id"] = "oe9"
+        store.upsert("cfb_games", [g], "game_id")                        # week 1 already stored by the live collector
+        board = {2: [self.wk("p", 2, state="pre", completed=False, days_ago=-3)]}
+        gj, calls = self.getter(board)
+        with patch.dict(os.environ, {"GITHUB_EVENT_NAME": "workflow_dispatch"}):
+            cfb_season.run(store, [], NOW, gj, weeks=[1, 2])
+        self.assertEqual(store.select("cfb_games", {"game_id": "eq.a"})[0]["odds_event_id"], "oe9")
+        self.assertEqual([c for c in calls if "scoreboard" in c and "week=1" in c], [])               # week 1 not re-downloaded
+        self.assertEqual(len([c for c in calls if "summary" in c]), 1)                                # only the final game "a"
+
+    def test_scoreboard_failure_is_logged_not_raised(self):
+        store = MemoryStore()
+        log = []
+
+        def boom(url):
+            raise RuntimeError("HTTP 503")
+        with patch.dict(os.environ, {"GITHUB_EVENT_NAME": "workflow_dispatch"}):
+            self.assertEqual(cfb_season.run(store, log, NOW, boom, weeks=[3]), 0)
+        self.assertTrue(any("week 3 scoreboard failed" in x for x in log))
 
 
 class RunIsolationTests(unittest.TestCase):
