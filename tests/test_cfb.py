@@ -39,6 +39,14 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(cfb.parse_event(ev("1", home="Notre Dame Fighting Irish", hc="18", hid="87"))["conference"], "Notre Dame")
         self.assertIsNone(cfb.parse_event(ev("1", hc="99", ac="98")))
 
+    def test_short_names(self):
+        e = ev("1")
+        c = e["competitions"][0]["competitors"]
+        c[0]["team"].update({"location": "Alpha", "abbreviation": "ALP"})
+        c[1]["team"].update({"name": "Bears"})            # no location: strip the mascot from the display name
+        g = cfb.parse_event(e)
+        self.assertEqual((g["home_short"], g["home_abbr"], g["away_short"], g["away_abbr"]), ("Alpha", "ALP", "Beta", ""))
+
     def test_status_and_scores(self):
         g = cfb.parse_event(ev("1", state="post", completed=True))
         self.assertEqual((g["status"], g["home_score"], g["away_score"]), ("final", 21, 14))
