@@ -182,6 +182,100 @@ class HistoryTests(unittest.TestCase):
         self.assertFalse([c for c in calls if "/odds" in c])
 
 
+class HistoryMarketTests(unittest.TestCase):
+    """Choosing markets for the line back-fill, topping up later, shared events lookup (synthetic stubs)."""
+    PAST = NOW - timedelta(days=4)
+
+    def setUp(self):
+        self.store = MemoryStore()
+        self.games = []
+        for i, (h, a) in enumerate([("Alpha Tigers", "Beta Bears"), ("Gamma Gators", "Delta Dogs")]):
+            g = cfb.parse_event(ev(f"g{i + 1}", home=h, away=a, state="post", completed=True, date=self.PAST))
+            g["week"] = 9
+            self.games.append(g)
+        self.store.upsert("cfb_games", [dict(g) for g in self.games[:1]], "game_id")
+        self.calls = []
+        self.balance = 19000
+
+    def get(self, url, params):
+        self.calls.append((url.rsplit("/", 1)[-1], params.get("markets")))
+        h = {"x-requests-remaining": str(self.balance), "x-requests-last": "10"}
+        if url.endswith("/events"):
+            data = [{"id": f"oe{i + 1}", "home_team": g["home_team"], "away_team": g["away_team"], "commence_time": g["kickoff"]}
+                    for i, g in enumerate(self.games)]
+            return json.dumps({"data": data}).encode(), h, 200
+        outs = []
+        for m in params["markets"].split(","):
+            outs.append({"key": m, "last_update": "2026-11-04T14:00:00Z", "outcomes": [
+                {"name": "Over", "description": "P One", "price": -110, "point": 50.5},
+                {"name": "Under", "description": "P One", "price": -110, "point": 50.5}]})
+        doc = {"timestamp": iso_(self.PAST - timedelta(hours=1)), "data": {"id": "oe", "bookmakers": [{"key": "fanduel", "markets": outs}]}}
+        return json.dumps(doc).encode(), h, 200
+
+    def run_(self, markets=None, weeks=(9,)):
+        with patch.dict(os.environ, {"GITHUB_EVENT_NAME": "workflow_dispatch"}):
+            return cfb_history.run(self.store, "k", [], NOW, self.get, weeks=list(weeks), markets=markets)
+
+    def odds_calls(self):
+        return [c for c in self.calls if c[0] == "odds"]
+
+    def test_env_parsing(self):
+        for raw, want in [("", ["player_pass_yds", "player_rush_yds", "player_reception_yds"]),
+                          ("pass", ["player_pass_yds"]), ("Rec, pass", ["player_pass_yds", "player_reception_yds"]),
+                          ("nonsense", ["player_pass_yds", "player_rush_yds", "player_reception_yds"])]:
+            with patch.dict(os.environ, {"CFB_BACKFILL_MARKETS": raw}):
+                self.assertEqual(cfb_history.markets_from_env(), want)
+
+    def test_passing_only_requests_one_market_and_tags_the_pull(self):
+        self.assertEqual(self.run_(["player_pass_yds"]), 1)
+        self.assertEqual(self.odds_calls(), [("odds", "player_pass_yds")])
+        pull = self.store.t["cfb_pulls"][0]
+        self.assertIn("markets=pass", pull["note"])
+        self.assertEqual({r["market"] for r in self.store.t["cfb_lines"]}, {"player_pass_yds"})
+        self.assertEqual(self.run_(["player_pass_yds"]), 0)                 # already have passing: nothing requested
+        self.assertEqual(len(self.odds_calls()), 1)
+
+    def test_topping_up_requests_only_the_missing_markets(self):
+        self.run_(["player_pass_yds"])
+        self.assertEqual(self.run_(None), 2)                               # 2 lines stored: one rushing, one receiving
+        self.assertEqual(self.odds_calls()[-1], ("odds", "player_rush_yds,player_reception_yds"))
+        self.assertIn("markets=rush,rec", self.store.t["cfb_pulls"][-1]["note"])
+        n = len(self.odds_calls())
+        self.assertEqual(self.run_(None), 0)
+        self.assertEqual(len(self.odds_calls()), n)
+
+    def test_older_and_live_pulls_count_as_all_three(self):
+        self.store.upsert("cfb_pull_state", [{"game_id": "g1", "pregame_ok_utc": iso_(self.PAST)}], "game_id")
+        self.store.insert("cfb_pulls", [{"game_id": "g1", "pull_type": "pregame", "status": "ok",
+                                         "note": f"historical download {iso_(NOW)}"}])        # earlier back-fill, no tag
+        self.assertEqual(self.run_(None), 0)
+        self.assertEqual(self.run_(["player_pass_yds"]), 0)
+        self.assertEqual(self.calls, [])
+        s2 = MemoryStore()
+        s2.upsert("cfb_games", [dict(self.games[0])], "game_id")
+        s2.upsert("cfb_pull_state", [{"game_id": "g1", "pregame_ok_utc": iso_(self.PAST)}], "game_id")
+        s2.insert("cfb_pulls", [{"game_id": "g1", "pull_type": "pregame", "status": "ok"}])    # live pull, no note
+        self.store = s2
+        self.assertEqual(self.run_(None), 0)
+        self.assertEqual(self.calls, [])
+
+    def test_one_events_lookup_for_games_with_the_same_kickoff(self):
+        self.store.upsert("cfb_games", [dict(g) for g in self.games], "game_id")
+        self.assertEqual(self.run_(["player_pass_yds"]), 2)
+        self.assertEqual(len([c for c in self.calls if c[0] == "events"]), 1)
+        self.assertEqual(len(self.odds_calls()), 2)
+
+    def test_credit_floor_uses_the_cost_of_the_chosen_markets(self):
+        self.balance = 15011                       # passing only = 11 credits: 15011 - 11 = 15000, not below the floor
+        self.assertEqual(self.run_(["player_pass_yds"]), 1)
+        self.store = MemoryStore()
+        self.store.upsert("cfb_games", [dict(self.games[0])], "game_id")
+        self.calls = []
+        self.balance = 15010                       # one credit short
+        self.assertEqual(self.run_(["player_pass_yds"]), 0)
+        self.assertEqual(self.odds_calls(), [])
+
+
 class SeasonBackfillTests(unittest.TestCase):
     """Games + results back-fill for earlier weeks (synthetic stubs; no network)."""
 
