@@ -12,7 +12,7 @@ import os
 import sys
 import traceback
 
-from . import espn, espn_box, history, history_2025, nflverse, notify, odds, script, supa, weather
+from . import cfb, espn, espn_box, history, history_2025, nflverse, notify, odds, script, supa, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
 BUILD_VERSION = "2"  # frozen forward research leads 9–12
@@ -52,6 +52,11 @@ def main() -> int:
         except Exception as ex:
             history_changed = False
             log.append(f"history: skipped ({type(ex).__name__}: {str(ex)[:80]})")
+
+        try:  # college football (Power 4): stored in Supabase, never in this repo; never fails the run
+            cfb.run(keys, log)
+        except Exception as ex:
+            log.append(f"cfb: skipped ({type(ex).__name__}: {str(ex)[:80]})")
 
         weather_changed = weather.refresh(games, log)
 
