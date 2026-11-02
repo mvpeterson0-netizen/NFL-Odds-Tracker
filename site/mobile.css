@@ -115,3 +115,7 @@ main { padding: 10px 12px 32px; }
 
 /* Player page game log: no dotted underline under opponent names (still tappable for the game script). */
 .mlog .scrlink { text-decoration: none; }
+
+/* NFL / CFB toggle sits on the logo row (replaces the removed All players switch) */
+.sport { order: 1; margin-left: auto; }
+#tabs-cfb { order: 3; width: 100%; }

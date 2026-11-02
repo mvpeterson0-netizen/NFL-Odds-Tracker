@@ -446,3 +446,18 @@ body.rv-on footer.foot { display: none; }
 .arb-books { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
 .arb-legs { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 4px 0; }
 .arb-ev { margin-left: auto; font-weight: 700; } .arb-ev.pos { color: var(--over); } .arb-ev.neg { color: var(--muted); }
+
+/* NFL / CFB toggle (header) and college football screens */
+.sport { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex: none; }
+.sport a { padding: 5px 12px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.sport a.on { background: var(--accent); color: #fff; }
+.sport a:hover { text-decoration: none; }
+#tabs-cfb { display: flex; gap: 4px; }
+#tabs-cfb[hidden] { display: none; }
+#tabs-cfb a { padding: 6px 12px; border-radius: 6px; color: var(--ink); }
+#tabs-cfb a.on { background: var(--chip); font-weight: 600; }
+body.cfb-on #tabs { display: none; }
+.c-h { font-size: 16px; margin: 12px 0 8px; }
+.c-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0 10px; }
+.c-bar input[type=search] { min-width: 180px; flex: 1; max-width: 280px; }
+header .brand { white-space: nowrap; }
