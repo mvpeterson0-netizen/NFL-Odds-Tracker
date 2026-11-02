@@ -1,0 +1,257 @@
+{
+ "week9": {
+  "http": 200,
+  "n_events": 56,
+  "n_p4_by_conferenceId": 30,
+  "conferenceId_examples": {
+   "12": [
+    "Delaware Blue Hens",
+    "Florida International Panthers",
+    "Jacksonville State Gamecocks"
+   ],
+   "151": [
+    "Army Black Knights",
+    "Charlotte 49ers",
+    "East Carolina Pirates"
+   ],
+   "37": [
+    "App State Mountaineers",
+    "Coastal Carolina Chanticleers",
+    "Georgia Southern Eagles"
+   ],
+   "4": [
+    "Arizona State Sun Devils",
+    "Arizona Wildcats",
+    "BYU Cougars"
+   ],
+   "15": [
+    "Bowling Green Falcons",
+    "Kent State Golden Flashes",
+    "Sacramento State Hornets"
+   ],
+   "1": [
+    "Boston College Eagles",
+    "California Golden Bears",
+    "Clemson Tigers"
+   ],
+   "5": [
+    "Illinois Fighting Illini",
+    "Indiana Hoosiers",
+    "Iowa Hawkeyes"
+   ],
+   "8": [
+    "Arkansas Razorbacks",
+    "Auburn Tigers",
+    "Florida Gators"
+   ],
+   "18": [
+    "Notre Dame Fighting Irish",
+    "UConn Huskies"
+   ],
+   "17": [
+    "Air Force Falcons",
+    "Nevada Wolf Pack",
+    "New Mexico Lobos"
+   ],
+   "9": [
+    "Boise State Broncos",
+    "Colorado State Rams",
+    "Fresno State Bulldogs"
+   ]
+  },
+  "has_notre_dame": [
+   {
+    "id": "401859185",
+    "date": "2026-10-31T16:00Z",
+    "week": 9,
+    "status": "STATUS_FINAL",
+    "teams": [
+     [
+      "2426",
+      "Navy Midshipmen",
+      "151"
+     ],
+     [
+      "87",
+      "Notre Dame Fighting Irish",
+      "18"
+     ]
+    ]
+   }
+  ]
+ },
+ "week10": {
+  "http": 200,
+  "n_events": 63,
+  "n_p4_by_conferenceId": 32,
+  "conferenceId_examples": {
+   "15": [
+    "Akron Zips",
+    "Ball State Cardinals",
+    "Buffalo Bulls"
+   ],
+   "151": [
+    "Army Black Knights",
+    "Charlotte 49ers",
+    "East Carolina Pirates"
+   ],
+   "37": [
+    "App State Mountaineers",
+    "Arkansas State Red Wolves",
+    "Coastal Carolina Chanticleers"
+   ],
+   "1": [
+    "Boston College Eagles",
+    "Clemson Tigers",
+    "Duke Blue Devils"
+   ],
+   "5": [
+    "Illinois Fighting Illini",
+    "Iowa Hawkeyes",
+    "Maryland Terrapins"
+   ],
+   "17": [
+    "Air Force Falcons",
+    "Hawai'i Rainbow Warriors",
+    "Nevada Wolf Pack"
+   ],
+   "4": [
+    "Arizona State Sun Devils",
+    "Arizona Wildcats",
+    "BYU Cougars"
+   ],
+   "8": [
+    "Alabama Crimson Tide",
+    "Arkansas Razorbacks",
+    "Auburn Tigers"
+   ],
+   "18": [
+    "Notre Dame Fighting Irish",
+    "UConn Huskies"
+   ],
+   "12": [
+    "Delaware Blue Hens",
+    "Florida International Panthers",
+    "Jacksonville State Gamecocks"
+   ],
+   "32": [
+    "Merrimack Warriors"
+   ],
+   "9": [
+    "Boise State Broncos",
+    "Colorado State Rams",
+    "Fresno State Bulldogs"
+   ]
+  },
+  "has_notre_dame": [
+   {
+    "id": "401858291",
+    "date": "2026-11-08T00:30Z",
+    "week": 10,
+    "status": "STATUS_SCHEDULED",
+    "teams": [
+     [
+      "87",
+      "Notre Dame Fighting Irish",
+      "18"
+     ],
+     [
+      "2390",
+      "Miami Hurricanes",
+      "1"
+     ]
+    ]
+   }
+  ]
+ },
+ "summary_stat_keys": {
+  "passing": {
+   "keys": [
+    "completions/passingAttempts",
+    "passingYards",
+    "yardsPerPassAttempt",
+    "passingTouchdowns",
+    "interceptions",
+    "adjQBR"
+   ],
+   "labels": [
+    "C/ATT",
+    "YDS",
+    "AVG",
+    "TD",
+    "INT",
+    "QBR"
+   ],
+   "descriptions": [
+    "Completions/Attempts",
+    "Yards",
+    "Yards Per Pass Attempt",
+    "Touchdowns",
+    "Interceptions",
+    "Adjusted QBR"
+   ]
+  },
+  "rushing": {
+   "keys": [
+    "rushingAttempts",
+    "rushingYards",
+    "yardsPerRushAttempt",
+    "rushingTouchdowns",
+    "longRushing"
+   ],
+   "labels": [
+    "CAR",
+    "YDS",
+    "AVG",
+    "TD",
+    "LONG"
+   ],
+   "descriptions": [
+    "Rushing Attempts",
+    "Yards",
+    "Yards Per Rushing Attempt",
+    "Touchdowns",
+    "Longest Run"
+   ]
+  },
+  "receiving": {
+   "keys": [
+    "receptions",
+    "receivingYards",
+    "yardsPerReception",
+    "receivingTouchdowns",
+    "longReception"
+   ],
+   "labels": [
+    "REC",
+    "YDS",
+    "AVG",
+    "TD",
+    "LONG"
+   ],
+   "descriptions": [
+    "Receptions",
+    "Yards",
+    "Yards Per Reception",
+    "Touchdowns",
+    "Longest Reception"
+   ]
+  }
+ },
+ "summary_team_ids": {
+  "264": 35,
+  "158": 32
+ },
+ "roster_id_match": {
+  "264": {
+   "box_athletes": 35,
+   "in_roster_by_id": 32,
+   "roster_size": 100
+  },
+  "158": {
+   "box_athletes": 32,
+   "in_roster_by_id": 26,
+   "roster_size": 100
+  }
+ }
+}
