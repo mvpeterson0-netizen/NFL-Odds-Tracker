@@ -674,6 +674,31 @@
       ${sections}</section>`;
   }
 
+  function thesisRegistryHtml() {
+    if (!signedIn()) return "";
+    const source = D.research_theses;
+    if (!source?.tracked) return '<p class="muted small">Research registry appears after the next successful data refresh.</p>';
+    const stats = (v) => v ? `${v.wins}–${v.losses} · ${signed(v.units || 0, 2)}u` : "No observations";
+    const items = source.tracked.map((t) => {
+      const prior = (t.evidence || []).filter((x) => x.phase === "discovery");
+      const future = (t.evidence || []).filter((x) => x.phase === "forward_monitoring");
+      const latest = future.length ? future[future.length - 1] : prior.length ? prior[prior.length - 1] : null;
+      const status = t.status === "needs_data" ? "Test not implemented"
+        : t.status === "existing_frozen_lead" ? "Existing locked strategy"
+        : future.length ? "Forward monitoring (descriptive)" : "Awaiting prospective evidence";
+      const detail = latest ? `${latest.model.toUpperCase()} · Week ${latest.week} · Flagged: ${stats(latest.flagged)} · Others: ${stats(latest.comparison)}`
+        : t.status === "existing_frozen_lead" ? "Tracked separately in existing forward lead results"
+        : "No independent performance results established";
+      return `<details><summary><b>${esc(t.id)} · ${esc(t.title)}</b> <span class="muted small">— ${esc(status)}</span></summary>
+        <p>${esc(t.question)}</p>
+        <p class="muted small">${esc(detail)}</p>
+        <p class="muted small">${esc(t.notes || "")}</p></details>`;
+    }).join("");
+    return `<section class="la-diagnostics"><details><summary><b>Research Thesis Registry (${source.registry_count})</b> <span class="muted small">· Independent weekly tracking</span></summary>
+      <p class="muted small">Each hypothesis retains a stable identifier. Week 8 discovery does not count as forward confirmation. Not-yet-implemented ideas do not have win rates or ROI. No automatic changes to T12/T13.</p>
+      ${items}</details></section>`;
+  }
+
   function analysisHtml() {
     const weeks = laWeeks();
     if (!weeks.length) return `<section id="la"></section>`;
@@ -689,7 +714,7 @@
         <label>Week <select id="la-wk"><option value="all" ${LA.wk === "all" ? "selected" : ""}>All weeks</option>${weeks.map((w) => `<option value="${w}" ${w === LA.wk ? "selected" : ""}>Week ${w}</option>`).join("")}</select></label>
         <label>Game <select id="la-gid" ${LA.wk === "all" ? "disabled" : ""}><option value="">All games</option>${games.map(([g, x]) => `<option value="${esc(g)}" ${g === LA.gid ? "selected" : ""}>${esc(gameLabel(g))}${x.final ? "" : " (not final)"}</option>`).join("")}</select></label></div>
       ${signedIn() ? "" : `<p class="muted small">Rules 4–8 appear here after you sign in, same as the Leads above.</p>`}
-      <div id="la-body">${body}</div>${challengerDiagnosticsHtml()}</section>`;
+      <div id="la-body">${body}</div>${challengerDiagnosticsHtml()}${thesisRegistryHtml()}</section>`;
   }
   function laRedraw() { const el = document.getElementById("la"); if (el) el.outerHTML = analysisHtml(); }
   document.addEventListener("change", (e) => {

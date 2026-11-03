@@ -112,6 +112,10 @@ def build_report(now=None):
             'learning_status':'descriptive monitoring; no model promotion or significance declaration','rules':RULES}
     report['checkpoint']={'activated_versions':len(versions),'eight_version_review_due':len(versions)>=8,
                           'regular_season_review_due':latest is not None and latest>=18}
+    from .challenger_theses import weekly_rollup, markdown_lines
+    research=weekly_rollup(diagnostics=diagnostics,model_summary=summary)
+    report['research_theses']=research
+    write_json(ROOT/'weekly_theses.json',research)
     ROOT.mkdir(parents=True,exist_ok=True);write_json(ROOT/'weekly_report.json',report)
     pct=lambda x:'not enough data' if x is None else f'{100*x:+.1f}%'
     lines=['# Stix weekly learning report','',f'Generated: {iso(now)}',f'Active challenger: {version or "awaiting first Tuesday training"}',
@@ -144,6 +148,7 @@ def build_report(now=None):
             f'Site snapshot used: {site.get("generated_utc")}. Training errors or delayed grades must be disclosed; unknown is not zero.',
             'No future outcomes entered original predictions. Later stat corrections may update grading, never the saved decisions.',
             'No causal injury or gameplan explanation is inferred from numerical patterns. No promotion occurs automatically.']
+    lines+=markdown_lines(research)
     if version is None:lines+=['','Challenger has no forward evidence yet; do not compare historical fit with frozen live returns.']
     (ROOT/'weekly_report.md').write_text('\n'.join(lines)+'\n')
     stamp=now.astimezone(__import__('zoneinfo').ZoneInfo('America/Chicago')).strftime('%G-W%V')

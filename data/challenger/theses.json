@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "method": "Immutable versioned hypothesis registry; observations never automatically become model filters; prior results are not prospective validation.",
+  "created": "2026-11-02",
+  "entries": [
+    {
+      "id": "TH-001",
+      "title": "Role expansion versus temporary outlier",
+      "question": "Are Under bets less reliable when pregame role/usage rose >10 points?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "monitoring",
+      "forward_start": "2026-11-03",
+      "metric_source": {
+        "type": "locked_model_diagnostics",
+        "segment": "usage_jump",
+        "lead_ids": [
+          "t12",
+          "t13"
+        ]
+      },
+      "notes": "T12 vs T13 locked graded wagers; correlated bets; 2026 week 8 generated hypothesis.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-002",
+      "title": "Big recent outlier regression",
+      "question": "Do prior production spikes >50% predict overvalued subsequent Unders?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "monitoring",
+      "forward_start": "2026-11-03",
+      "metric_source": {
+        "type": "locked_model_diagnostics",
+        "segment": "surprise_jump",
+        "lead_ids": [
+          "t12",
+          "t13"
+        ]
+      },
+      "notes": "Do not infer causality from the postgame pattern.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-003",
+      "title": "Role growth and statistical spike jointly",
+      "question": "Does usage growth >10 points AND surprise >50% separate real role changes from one-off spikes?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "monitoring",
+      "forward_start": "2026-11-03",
+      "metric_source": {
+        "type": "locked_model_diagnostics",
+        "segment": "combined_jump",
+        "lead_ids": [
+          "t12",
+          "t13"
+        ]
+      },
+      "notes": "Prospective weeks 9+ required to validate Week 8 discovery.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-004",
+      "title": "Participation-disrupted result sensitivity",
+      "question": "How much of each model's returns occur with unexpectedly low actual snap share?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "monitoring",
+      "forward_start": "2026-11-03",
+      "metric_source": {
+        "type": "locked_model_diagnostics",
+        "segment": "low_participation",
+        "lead_ids": [
+          "t12",
+          "t13"
+        ]
+      },
+      "notes": "Postgame diagnostic only; event cause unverified and cannot be used as a prospective filter.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-005",
+      "title": "Tiny QB rushing lines and calibration",
+      "question": "Do QB rushing lines <=1.5 display poor reliability or unusually lumpy returns?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "monitoring",
+      "forward_start": "2026-11-03",
+      "metric_source": {
+        "type": "locked_model_diagnostics",
+        "segment": "tiny_qb_rush",
+        "lead_ids": [
+          "t12",
+          "t13"
+        ]
+      },
+      "notes": "Check scoring/kneels/scrambles and model probability calibration by line bucket.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-006",
+      "title": "Over versus Under asymmetry",
+      "question": "Is the frozen interaction model much better calibrated on Unders than Overs?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "monitoring",
+      "forward_start": "2026-11-03",
+      "metric_source": {
+        "type": "locked_model_diagnostics",
+        "segment": "over",
+        "lead_ids": [
+          "t12",
+          "t13"
+        ]
+      },
+      "notes": "Selection and sportsbook price differences must be controlled.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-007",
+      "title": "Receiving-yards advantage",
+      "question": "Are receiving-yards bets outperforming other prop markets prospectively?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "monitoring",
+      "forward_start": "2026-11-03",
+      "metric_source": {
+        "type": "locked_model_diagnostics",
+        "segment": "receiving_yards",
+        "lead_ids": [
+          "t12",
+          "t13"
+        ]
+      },
+      "notes": "One-week result insufficient; distinct role and price distributions.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-008",
+      "title": "QB rushing Under: mobile high line",
+      "question": "For mobile QBs with >=25 prior-3 rush avg and offered line >=25, do Unders beat comparable alternatives?",
+      "created": "2026-11-01",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Also test stricter >=30/30; requires separate pregame snapshots and independent walk-forward.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-009",
+      "title": "QB rushing Under: line inflation",
+      "question": "Does a QB rushing line >5 yards above prior offered line predict Under value?",
+      "created": "2026-11-01",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Evaluate same sportsbook, fixed pregame quote conventions.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-010",
+      "title": "QB rushing Under: low production inflated line",
+      "question": "When a QB line <15 is >=5 above his prior-three average, is the Under profitable?",
+      "created": "2026-11-01",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Avoid blanket rule non-runner + small line.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-011",
+      "title": "QB rushing contextual moderators",
+      "question": "Do favorite/underdog, runner style, defense, weather, game script, and carry share improve QB rushing Under decisions?",
+      "created": "2026-11-01",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Do not claim positive results until independent tests support interactions.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-012",
+      "title": "Median instead of mean",
+      "question": "Would replacing average-based production features with medians improve out-of-sample ROI and calibration?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Requires separate challenger and chronological re-training; do not rewrite frozen T12 coefficients.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-013",
+      "title": "Previous-game negative/positive script",
+      "question": "Does prior-game leading/trailing duration explain apparent outlier targets/production better than raw recent stats?",
+      "created": "2026-10-30",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Earlier context tests did not establish incremental benefit; evaluate script-conditional effects prospectively.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-014",
+      "title": "Score-state passing behavior",
+      "question": "Does a team's passing rate up/down 13+ versus close game discriminate future player volume?",
+      "created": "2026-10-31",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Only use previous-game and prior-team games known before kickoff.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-015",
+      "title": "Injury exit versus ordinary workload decrease",
+      "question": "Can verified mid-game exits, pre-exit snaps and expected return restrictions separate reduced role from injury contamination?",
+      "created": "2026-10-31",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Requires timestamped, sourced injury information; unknown never equals unrestricted.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-016",
+      "title": "Rest since appearance and missed games",
+      "question": "Do days since last appearance, consecutive absences and first return game improve prop predictions?",
+      "created": "2026-10-31",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Source pregame roster/status, not postgame hindsight.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-017",
+      "title": "Weather severity and position interactions",
+      "question": "Do pregame wind/rain/cold levels and interactions with position and market add incremental predictive value?",
+      "created": "2026-11-02",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Use saved forecast as of lock, not observed conditions as predictor; wind QB/WR, rain QB rushing, weather × spread.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-018",
+      "title": "Late-season and Week 18 robustness",
+      "question": "Does model EV deteriorate in December/January, resting-starters conditions, or Week 18?",
+      "created": "2026-10-31",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Evaluate early/middle/late season splits and expanding-history walk-forward.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-019",
+      "title": "Full-stat distribution instead of classification",
+      "question": "Does a calibrated distribution model outperform Over/Under logistic forecasts at any offered line?",
+      "created": "2026-10-31",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Evaluate tails, calibration, log score and expected ROI using pregame quotes.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-020",
+      "title": "WR yardage three straight Overs reversal",
+      "question": "After three consecutive WR receiving-yards Overs, does next receiving-yards Under retain EV?",
+      "created": "2026-10-30",
+      "origin": "User Stix research conversation",
+      "status": "existing_frozen_lead",
+      "forward_start": null,
+      "metric_source": {
+        "type": "existing_frozen_leads",
+        "lead_id": "t9"
+      },
+      "notes": "Already independently tracked as frozen T9; use its separate existing forward ledger.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-021",
+      "title": "WR catches monotonically rising",
+      "question": "After three strictly increasing WR reception totals, is next receptions Under profitable?",
+      "created": "2026-10-30",
+      "origin": "User Stix research conversation",
+      "status": "existing_frozen_lead",
+      "forward_start": null,
+      "metric_source": {
+        "type": "existing_frozen_leads",
+        "lead_id": "t10"
+      },
+      "notes": "Already independently tracked as frozen T10; use its separate existing forward ledger.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-022",
+      "title": "Teammate competition and QB changes",
+      "question": "Do teammate target competition, absences, QB switches, and role changes explain outliers and line responses?",
+      "created": "2026-10-30",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Prior contextual model comparisons were inconclusive; verified pregame information required.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-023",
+      "title": "Line adjustment after abnormal script",
+      "question": "Does an offered line overreact to an outlier specifically driven by previous-game script without a role change?",
+      "created": "2026-10-30",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Earlier strict backtest generated very few bets; do not represent as validated EV.",
+      "decision": "No promotion or threshold changes without preregistered prospective validation"
+    }
+  ]
+}

@@ -95,3 +95,36 @@ The Tuesday/Wednesday workflow writes `weekly_diagnostics.json` and explains
 the slices in `weekly_report.md`. A new model version alone doesn't grant
 statistical evidence of edge; use later weeks to prospectively test these
 hypotheses, account for overlap/correlation and preserve the frozen baseline.
+
+
+## Independent research thesis registry (November 2, 2026)
+
+`data/challenger/theses.json` is the durable, reviewable registry for proposed
+research theses, separate from the immutable T12 and weekly-refitted T13. Every
+thesis has a stable `TH-###` identifier, an exact research question, a source,
+status, test specification or an explicit unimplemented status. The initial 23
+entries consolidate user-directed questions about QB rushing unders, median vs
+mean, outlier/game-script interpretation, usage persistence, injury-related exits
+and time since last play, weather, end-of-season uncertainty, distribution
+predictions, and the two existing frozen WR signals. This is a seeded inventory,
+not a claim that all 23 have been implemented, independently tested or validated.
+
+`pipeline/challenger_theses.py` compiles the registry into the scheduled
+Wednesday `weekly_report.md`, `weekly_report.json` and
+`weekly_theses.json`. The site build also publishes a browseable registry
+under the signed-in Results view. Existing locked T12/T13 diagnostic slices
+produce descriptive evidence; the originally noticed Week 8 samples are
+*discovery*, never fresh prospective confirmation. T9/T10 refer to their
+separate frozen ledgers and never get duplicate stakes in portfolio totals.
+Unimplemented theses explicitly say `needs_data` and do not receive
+fabricated W/L, unit returns, or ROI.
+
+When new proposals arrive, assign a new ID without modifying the definition
+of an earlier experiment. Record a precise hypothesis, data and timestamp
+requirements, predeclared population, comparator, outcome and testing start.
+An actual candidate with bets requires a separate append-only pregame decision
+ledger, data-integrity checks and explicit authorization before it can claim
+prospective paper ROI. Descriptive segment charts alone do not constitute an
+independent strategy. Use independent weeks, consider game/player clustering,
+price sensitivity and multiple testing; never promote or change T12/T13
+automatically. Include unresolved data dependencies in the weekly summary.
