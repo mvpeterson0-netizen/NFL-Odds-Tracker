@@ -46,6 +46,29 @@
     rerender();
   }
   function rerender() { if ((location.hash || "").startsWith("#/admin") && typeof window.render === "function") window.render(); }
+  // Verify Results-only research access using the same server-enforced admin RPC.
+  // A signed-in account alone never grants access, and localStorage cannot grant it.
+  const RA = { userId: null, allowed: false, pending: false, checked: false };
+  function isResearchAdmin() {
+    const acc = ACC(), uid = acc?.signedIn() ? acc.user()?.id : null;
+    if (!uid) return false;
+    if (RA.userId !== uid) { RA.userId=uid; RA.allowed=false; RA.checked=false; RA.pending=false; }
+    if (!RA.checked && !RA.pending) {
+      RA.pending=true;
+      acc.db("/rest/v1/rpc/admin_users", { method:"POST", body:{} })
+        .then((r) => {
+          // Only a successful, server-authorized RPC establishes admin status.
+          if (RA.userId === uid) { RA.allowed=!!r?.ok; RA.checked=true; }
+        })
+        .catch(() => { if (RA.userId === uid) { RA.allowed=false; RA.checked=true; } })
+        .finally(() => {
+          if (RA.userId !== uid) return;
+          RA.pending=false;
+          if ((location.hash || "").startsWith("#/leads") && typeof render === "function") render();
+        });
+    }
+    return RA.checked && RA.allowed;
+  }
 
   // ---------- pieces ----------
   const card = (label, value, sub) => `<div class="ad-card"><div class="ad-l">${esc(label)}</div><div class="ad-v">${value}</div>${sub ? `<div class="ad-s">${sub}</div>` : ""}</div>`;
@@ -134,11 +157,11 @@
     });
     const x = document.getElementById("ad-close"); if (x) x.addEventListener("click", () => { AD.sel = null; AD.activity = null; rerender(); });
   }
-  if (ACC()) ACC().onChange(() => { AD.loadedFor = null; AD.traffic = null; AD.users = null; AD.sel = null; rerender(); });
+  if (ACC()) ACC().onChange(() => { AD.loadedFor = null; AD.traffic = null; AD.users = null; AD.sel = null; RA.userId=null; RA.checked=false; RA.allowed=false; rerender(); });
   // Fresh numbers every time the admin page is opened (not the ones loaded on an earlier visit).
   window.addEventListener("hashchange", (e) => {
     const was = (e.oldURL || "").includes("#/admin"), now = (location.hash || "").startsWith("#/admin");
     if (now && !was) { AD.loadedFor = null; AD.sel = null; AD.activity = null; }
   });
-  window.STIX_ADMIN = { view, bind };
+  window.STIX_ADMIN = { view, bind, isResearchAdmin };
 })();
