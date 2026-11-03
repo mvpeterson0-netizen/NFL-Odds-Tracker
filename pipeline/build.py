@@ -814,6 +814,16 @@ def build(log):
         for k, v in out["frozen_research"]["records"].items()}}
     from .challenger import update as update_challenger
     out['challenger'] = update_challenger(d, players, rows_out, now)
+    # Descriptive learning slices reuse immutable pregame ledgers. They do not change
+    # model inputs, fitted weights, qualifying decisions or odds-api calls.
+    from .challenger_diagnostics import build_diagnostics
+    from .challenger import ROOT as CHALLENGER_ROOT
+    frozen_records = read_json(DATA/'frozen_leads.json', {}).get('records', {})
+    challenger_records = {}
+    for ledger in sorted((CHALLENGER_ROOT/'ledgers').glob('*.json')):
+        for key, value in read_json(ledger, {}).get('records', {}).items():
+            challenger_records.setdefault(key, value)
+    out['challenger_diagnostics'] = build_diagnostics(out, frozen_records, challenger_records)
     write_json(OUT_PATH, out, compact=True)
     log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
                f"{len(unmatched)} unmatched lines, {d.unmapped_snaps} unmapped snap rows")
