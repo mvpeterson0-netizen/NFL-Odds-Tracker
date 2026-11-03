@@ -625,6 +625,55 @@
     }).join("");
     return h + foot;
   }
+  // Observational diagnostic scorecards produced by the immutable-ledger backend.
+  // Keep these distinct from the bet-selection model and its forward record.
+  function challengerDiagnosticsHtml() {
+    if (!signedIn() || !["t12", "t13", "all"].includes(LA.tab)) return "";
+    const root = D.challenger_diagnostics;
+    if (!root || !root.leads) return "<p class=\"muted small\">Challenger diagnostics will appear after the next data build.</p>";
+    const ids = LA.tab === "all" ? ["t12", "t13"] : [LA.tab];
+    const titles = { t12: "Frozen interaction", t13: "Weekly challenger" };
+    const names = {
+      usage_jump: "Pregame usage increase >10",
+      surprise_jump: "Previous performance surprise >50%",
+      combined_jump: "Both signals",
+      low_participation: "Low participation (cause unverified)",
+      tiny_qb_rush: "QB rushing line at or below 1.5",
+      over: "Over selections",
+      receiving_yards: "Receiving-yard selections"
+    };
+    const stat = (b) => b ? `${b.wins}–${b.losses} · ${signed(b.units, 2)}u` : "No graded bets";
+    const sections = ids.map((id) => {
+      const lead = root.leads[id];
+      if (!lead) return "";
+      const wk = LA.wk === "all"
+        ? Math.max(0, ...Object.keys(lead.weeks || {}).map(Number))
+        : LA.wk;
+      const w = (lead.weeks || {})[String(wk)];
+      if (!w) return `<p class="muted small">${titles[id]}: no graded bets for week ${wk}.</p>`;
+      const games = (w.games || []).filter((g) => !LA.gid || g.gid === LA.gid);
+      const table = `<table class="la-table"><thead><tr><th>Game</th><th>W–L</th><th>Units</th></tr></thead><tbody>${games.map((g) =>
+        `<tr><td>${esc(g.matchup)}</td><td>${g.record.wins}–${g.record.losses}</td><td>${signed(g.record.units, 2)}u</td></tr>`).join("")}</tbody></table>`;
+      const slices = Object.entries(names).map(([key, label]) => {
+        const seg = w.segments[key];
+        return `<tr><td>${label}</td><td>${stat(seg?.flagged)}</td><td>${stat(seg?.other)}</td></tr>`;
+      }).join("");
+      const flags = (w.disruptions || []).filter((v) => !LA.gid || v.gid === LA.gid);
+      return `<details class="la-wk" ${id === "t12" ? "open" : ""}>
+        <summary><b>${titles[id]} — Week ${wk}</b> · ${stat(w.overall)}</summary>
+        <div class="muted small">Saved prices, one unit risked. ${lead.pending} pending and ${lead.voids} void overall.</div>
+        ${table}
+        <h4>Exploratory conditions</h4>
+        <table class="la-table"><thead><tr><th>Condition</th><th>Flagged</th><th>Other</th></tr></thead><tbody>${slices}</tbody></table>
+        <p class="muted small">Conditions can overlap, and bets on one player are correlated. Postgame grouping is not proof of an edge.</p>
+        ${flags.length ? `<p class="muted small">Low-participation flags: ${flags.map((v) => `${esc(v.player)} (${num(v.actual_snap_pct)}% snaps vs ${num(v.prior_snap_pct)}% prior)`).join("; ")}. Cause not verified.</p>` : ""}
+      </details>`;
+    }).join("");
+    return `<section class="la-diagnostics"><h3>Challenger learning diagnostics</h3>
+      <p class="muted small">Exploratory prospective monitoring; no adjustment to model training, thresholds, or locked bets.</p>
+      ${sections}</section>`;
+  }
+
   function analysisHtml() {
     const weeks = laWeeks();
     if (!weeks.length) return `<section id="la"></section>`;
@@ -640,7 +689,7 @@
         <label>Week <select id="la-wk"><option value="all" ${LA.wk === "all" ? "selected" : ""}>All weeks</option>${weeks.map((w) => `<option value="${w}" ${w === LA.wk ? "selected" : ""}>Week ${w}</option>`).join("")}</select></label>
         <label>Game <select id="la-gid" ${LA.wk === "all" ? "disabled" : ""}><option value="">All games</option>${games.map(([g, x]) => `<option value="${esc(g)}" ${g === LA.gid ? "selected" : ""}>${esc(gameLabel(g))}${x.final ? "" : " (not final)"}</option>`).join("")}</select></label></div>
       ${signedIn() ? "" : `<p class="muted small">Rules 4–8 appear here after you sign in, same as the Leads above.</p>`}
-      <div id="la-body">${body}</div></section>`;
+      <div id="la-body">${body}</div>${challengerDiagnosticsHtml()}</section>`;
   }
   function laRedraw() { const el = document.getElementById("la"); if (el) el.outerHTML = analysisHtml(); }
   document.addEventListener("change", (e) => {
