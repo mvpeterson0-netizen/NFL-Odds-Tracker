@@ -675,7 +675,8 @@
   }
 
   function thesisRegistryHtml() {
-    if (!signedIn()) return "";
+    // Display only after a successful server-side admin RPC; ordinary signed-in accounts cannot see this panel.
+    if (!window.STIX_ADMIN?.isResearchAdmin?.()) return "";
     const source = D.research_theses;
     if (!source?.tracked) return '<p class="muted small">Research registry appears after the next successful data refresh.</p>';
     const stats = (v) => v ? `${v.wins}–${v.losses} · ${signed(v.units || 0, 2)}u` : "No observations";
