@@ -105,6 +105,7 @@ def build_report(now=None):
     # Exploratory postgame diagnostics; never used to fit or select T13 bets.
     from .challenger_diagnostics import build_diagnostics
     diagnostics=build_diagnostics(site,original,challenger)
+    ROOT.mkdir(parents=True,exist_ok=True)
     write_json(ROOT/'weekly_diagnostics.json',diagnostics)
     report={'generated_utc':iso(now),'source_generated_utc':site.get('generated_utc'),'training_status':read_json(ROOT/'status.json',{}),
             'active':active,'manifest':manifest,'latest_graded_week':latest,'models':summary,'paired':stats(paired),'agreement':dict(agreement),'changes':changes,
