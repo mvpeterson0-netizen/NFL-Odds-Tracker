@@ -254,6 +254,86 @@
     return h + `<p class="muted small">Graded on the line captured about 1 hour before kickoff (DraftKings first, then FanDuel). "1 u on each" is what 1 unit on every line's Over (or Under) would have returned at the saved odds; lines without both prices saved are left out of those two figures only. A player in the box score with no entry for a stat counts as 0 for it. Research tool only.</p>`;
   }
 
+  // ---------- Opponent defense rank (same idea as the NFL Defense tab) ----------
+  // For a defense and a position group (QB / RB / WR / TE), "allowed" = the sum of a stat (pass, rush or receiving yards) by that
+  // position group's players against that defense in one game. Defenses are ranked by average allowed per game: 1 = fewest allowed.
+  // "As of a game" uses only final games that kicked off before it, so the rank is what was known pre-game. Computed in the browser
+  // from cfb_results + cfb_players; nothing is stored. A defense is ranked only if it is a Power 4 team: the data holds Power 4 games
+  // only, so a team with 5+ games in it is Power 4 and one with fewer is a non-Power-4 opponent (shown with no rank).
+  const PGRP = { QB: "QB", RB: "RB", FB: "RB", WR: "WR", TE: "TE" };
+  const DSTATS = ["pass_yds", "rush_yds", "rec_yds"];
+  const ordinal = (n) => { const v = n % 100; return n + (["th", "st", "nd", "rd"][(v - 20) % 10] || ["th", "st", "nd", "rd"][v] || "th"); };
+  const DEF = { key: "", games: [], ranked: null, cache: new Map() };
+  function defIndex() {
+    const key = `${C.games.length}|${C.games.filter((g) => g.status === "final").length}|${weeksList().filter((w) => C.weekData[w]).length}`;
+    if (DEF.key === key) return DEF;
+    DEF.key = key; DEF.cache = new Map(); DEF.games = [];
+    const cnt = new Map();
+    for (const g of C.games) for (const t of [g.home_team, g.away_team]) cnt.set(t, (cnt.get(t) || 0) + 1);
+    DEF.ranked = new Set([...cnt].filter(([, n]) => n >= 5).map(([t]) => t));
+    if (DEF.ranked.size < 20) DEF.ranked = new Set(cnt.keys()); // early season: too few games to tell them apart, rank everyone
+    for (const g of C.games) {
+      if (g.status !== "final" || !C.weekData[g.week]) continue;
+      const rs = C.weekData[g.week].results.filter((r) => r.game_id === g.game_id);
+      if (!rs.length) continue;
+      const tot = { [g.home_team]: {}, [g.away_team]: {} };
+      for (const r of rs) {
+        const pg = PGRP[r.pos], side = sideOf(g, r.team_name);
+        if (!pg || !side) continue;
+        const t = tot[side === "home" ? g.away_team : g.home_team];
+        for (const s of DSTATS) if (r[s] != null) t[`${pg}|${s}`] = (t[`${pg}|${s}`] || 0) + Number(r[s]);
+      }
+      const ko = Date.parse(g.kickoff);
+      DEF.games.push({ ko, def: g.home_team, tot: tot[g.home_team] }, { ko, def: g.away_team, tot: tot[g.away_team] });
+    }
+    DEF.games.sort((a, b) => a.ko - b.ko);
+    return DEF;
+  }
+  // { "QB|pass_yds": { team: {rk, avg, n, of} } } using final games that kicked off before beforeMs (all games when null)
+  function defTable(beforeMs) {
+    const D = defIndex(), ck = beforeMs == null ? "ALL" : String(beforeMs);
+    if (D.cache.has(ck)) return D.cache.get(ck);
+    const tot = new Map(), n = new Map();
+    for (const g of D.games) {
+      if (beforeMs != null && g.ko >= beforeMs) break;
+      if (!D.ranked.has(g.def)) continue;
+      n.set(g.def, (n.get(g.def) || 0) + 1);
+      const t = tot.get(g.def) || tot.set(g.def, {}).get(g.def);
+      for (const k in g.tot) t[k] = (t[k] || 0) + g.tot[k];
+    }
+    const out = {};
+    for (const pg of ["QB", "RB", "WR", "TE"]) for (const s of DSTATS) {
+      const k = `${pg}|${s}`, avgs = new Map();
+      for (const [team, c] of n) avgs.set(team, (tot.get(team)[k] || 0) / c);
+      const vals = [...avgs.values()];
+      out[k] = {};
+      for (const [team, a] of avgs) out[k][team] = { rk: 1 + vals.filter((v) => v < a).length, avg: a, n: n.get(team), of: vals.length };
+    }
+    D.cache.set(ck, out);
+    return out;
+  }
+  // The rank of the defense `r`'s player faced, as of that game; null when there's none to show.
+  function oppRank(r, pg) {
+    const g = r.g, dfn = r.side ? (r.side === "home" ? g.away_team : g.home_team) : null;
+    if (!dfn || !pg) return null;
+    const k = `${pg}|${r.mk.stat}`, v = (defTable(Date.parse(g.kickoff))[k] || {})[dfn];
+    return v ? { ...v, team: dfn, cur: (defTable(null)[k] || {})[dfn] } : null;
+  }
+  function rankCell(rk, pg, mk) {
+    if (!rk) return "";
+    const tip = `${rk.team} allowed ${num(rk.avg)} ${pg} ${mk.label.toLowerCase()} per game in its ${rk.n} game${rk.n === 1 ? "" : "s"} before this one. ` +
+      `Rank ${rk.rk} of ${rk.of} (1 = fewest allowed, toughest).` + (rk.cur ? ` Season so far: ${ordinal(rk.cur.rk)} (${num(rk.cur.avg)}/g, ${rk.cur.n} gm).` : "");
+    const cls = rk.n < 3 ? "" : rk.rk <= Math.round(rk.of / 4) ? "tough" : rk.rk > rk.of - Math.round(rk.of / 4) ? "easy" : "";
+    return ` <span class="drk ${cls}" title="${esc(tip)}">${ordinal(rk.rk)}</span>`;
+  }
+  const scoreCell = (r) => {
+    const g = r.g;
+    if (g.status !== "final" || g.home_score == null || g.away_score == null) return '<span class="muted">–</span>';
+    if (!r.side) return `${esc(abbr(g, "away"))} ${g.away_score}–${g.home_score} ${esc(abbr(g, "home"))}`;
+    const mine = r.side === "home" ? g.home_score : g.away_score, theirs = r.side === "home" ? g.away_score : g.home_score;
+    return `${mine > theirs ? "W" : mine < theirs ? "L" : "T"} ${mine}–${theirs}`;
+  };
+
   // ---------- Player card ----------
   function playerCard(key) {
     const back = `<p class="small"><a href="#/cfb/board">← Board</a> · <a href="#/cfb/results">Results</a></p>`;
@@ -263,17 +343,22 @@
     const mid = mks.some((m) => m.id === C.pMk) ? C.pMk : mks[0].id;
     const rs = all.filter((r) => r.mk.id === mid).sort((a, b) => a.g.kickoff.localeCompare(b.g.kickoff));
     const latest = all.slice().sort((a, b) => b.g.kickoff.localeCompare(a.g.kickoff))[0];
+    const ptTeam = (all.slice().sort((a, b) => b.g.kickoff.localeCompare(a.g.kickoff)).find((r) => r.team) || {}).team;
+    if (ptTeam) rs.forEach((r) => { if (!r.side) r.side = sideOf(r.g, ptTeam); }); // games he has no box-score line in: take his side from his team
+    const pg = PGRP[(all.find((r) => r.pos) || {}).pos || ""] || null; // QB / RB / WR / TE
     const gr = rs.filter(graded), t = tally(gr);
     const mkObj = MK.find((m) => m.id === mid);
     const avgAct = gr.length ? gr.reduce((s, r) => s + r.act, 0) / gr.length : null, avgLine = rs.reduce((s, r) => s + Number(r.main.line), 0) / rs.length;
     let h = back + `<div class="ph"><h2>${esc(latest.name)}</h2><span class="chip">${esc(teamSchool(latest) || "–")}${latest.pos ? ` · ${esc(latest.pos)}` : ""}</span></div>
       <div class="mtabs">${mks.map((m) => `<button data-pm="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}</div>
-      <div class="c-sum"><div><b>${rs.length}</b><span>games with a line</span></div><div><b>${num(avgLine)}</b><span>avg line</span></div>${gr.length ? `<div><b>${num(avgAct)}</b><span>avg actual</span></div><div class="over"><b>${t.o}</b><span>Over</span></div><div class="under"><b>${t.u}</b><span>Under</span></div>` : ""}</div>`;
-    h += `<div class="panel"><div class="chart">${chart(rs)}</div><div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Line (green = over hit, red = under)</span></div></div>`;
-    h += `<div class="panel"><table class="ctable"><thead><tr><th>Wk</th><th>Opp</th><th class="num">Line</th><th class="num">Over / Under</th><th class="num">Act</th><th>Result</th></tr></thead><tbody>` +
-      rs.map((r) => `<tr><td>${r.wk}</td><td>${r.side ? (r.side === "home" ? "vs " : "@ ") + esc(abbr(r.g, r.side === "home" ? "away" : "home")) : esc(matchup(r.g))}</td>
-        <td class="num"><b>${num(r.main.line)}</b>${r.kind === "first" ? ` <span class="chip snapchip" title="First-posted line; graded line not captured yet">1st</span>` : ""}</td><td class="num small">${odds(r.main.over_price)} / ${odds(r.main.under_price)}</td>
-        <td class="num">${r.act == null ? '<span class="muted">–</span>' : `<b>${num(r.act)}</b>`}</td><td>${resCell(r)}</td></tr>`).join("") + `</tbody></table></div>`;
+      <div class="c-sum"><div><b>${rs.length}</b><span>games with a line</span></div><div><b>${num(avgLine)}</b><span>avg line</span></div>${gr.length ? `<div><b>${num(avgAct)}</b><span>avg actual</span></div><div class="over"><b>${gr.filter((r) => r.outcome === "over").length}</b><span>Over</span></div><div class="under"><b>${gr.filter((r) => r.outcome === "under").length}</b><span>Under</span></div>` : ""}</div>`;
+    const hasFirst = rs.some((r) => r.kind === "first" && r.g.status !== "final");
+    h += `<div class="panel"><div class="chart">${chart(rs)}</div><div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Line (green = over hit, red = under)</span>${hasFirst ? `<span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>First-posted line (not graded yet)</span>` : ""}</div></div>`;
+    h += `<div class="panel"><table class="ctable"><thead><tr><th>Wk</th><th>Opp</th><th class="num">Line</th><th class="num">Act</th><th>Result</th><th class="num">Score</th></tr></thead><tbody>` +
+      rs.map((r) => `<tr><td>${r.wk}</td><td>${r.side ? (r.side === "home" ? "vs " : "@ ") + esc(abbr(r.g, r.side === "home" ? "away" : "home")) + rankCell(oppRank(r, pg), pg, r.mk) : esc(matchup(r.g))}</td>
+        <td class="num"><b>${num(r.main.line)}</b>${r.kind === "first" ? ` <span class="chip snapchip" title="First-posted line; graded line not captured yet">1st</span>` : ""}</td>
+        <td class="num">${r.act == null ? '<span class="muted">–</span>' : `<b>${num(r.act)}</b>`}</td><td>${resCell(r)}</td><td class="num">${scoreCell(r)}</td></tr>`).join("") + `</tbody></table></div>
+      <p class="muted small">${pg ? `Rank next to the opponent: where that defense stood against ${pg} ${esc(mkObj.label.toLowerCase())} before the game (1 = fewest allowed per game), among Power 4 defenses. Hover for the numbers. Positions come from ESPN rosters.` : `No position on file for this player, so there's no opponent rank.`} Score is from this player's team's side (W/L).</p>`;
     // Every book's line for each game (the "other books" box, like the NFL side)
     h += `<div class="panel"><h3>${esc(mkObj.label)}: lines by book</h3><div class="body">` + rs.slice().reverse().map((r, i) =>
       `<details ${i === 0 ? "open" : ""}><summary class="small"><b>Week ${r.wk}</b> ${esc(matchup(r.g))} <span class="muted">· ${r.kind === "first" ? "first-posted lines" : "~1 h before kickoff"}</span></summary>
@@ -281,19 +366,17 @@
       r.books.map((b) => `<tr><td>${esc(BOOK[b.book] || b.book)}</td><td class="num"><b>${num(b.line)}</b></td><td class="num">${odds(b.over_price)}</td><td class="num">${odds(b.under_price)}</td></tr>`).join("") + `</tbody></table></details>`).join("") + `</div></div>`;
     return h + foot;
   }
+  // The NFL side's chart (chartSVG in app.js): actual line + dots with their numbers, the line as a bar colored by the result
+  // with its number, and the first-posted line as a dashed bar until the graded line exists. Rows are reshaped to what it reads.
   function chart(rs) {
-    const W = 600, H = 170, pad = 28, n = rs.length;
-    const vals = rs.flatMap((r) => [Number(r.main.line), r.act].filter((v) => v != null));
-    const max = Math.max(...vals, 10) * 1.15, y = (v) => H - pad - ((H - 2 * pad) * v) / max, bw = Math.min(60, (W - 2 * pad) / n / 1.6);
-    let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Actual vs line by game"><line x1="${pad}" y1="${H - pad}" x2="${W - pad}" y2="${H - pad}" stroke="var(--line)"/>`;
-    rs.forEach((r, i) => {
-      const cx = pad + ((W - 2 * pad) * (i + 0.5)) / n, line = Number(r.main.line);
-      if (r.act != null) s += `<rect x="${cx - bw / 2}" y="${y(r.act)}" width="${bw}" height="${H - pad - y(r.act)}" fill="var(--accent)" opacity=".55"/><text x="${cx}" y="${y(r.act) - 4}" text-anchor="middle" font-size="11" fill="var(--ink)">${num(r.act)}</text>`;
-      const col = r.outcome === "over" ? "var(--over)" : r.outcome === "under" ? "var(--under)" : "var(--ink)";
-      s += `<line x1="${cx - bw / 1.2}" y1="${y(line)}" x2="${cx + bw / 1.2}" y2="${y(line)}" stroke="${col}" stroke-width="3"/>`;
-      s += `<text x="${cx}" y="${H - 10}" text-anchor="middle" font-size="11" fill="var(--muted)">Wk ${r.wk}</text>`;
+    if (typeof chartSVG !== "function") return `<p class="muted pad">Chart didn't load. Try refreshing.</p>`;
+    const rows = rs.map((r) => {
+      const ok = r.kind === "pregame" || r.g.status === "final", line = Number(r.main.line), bk = BOOK[r.main.book] || r.main.book;
+      return { wk: r.wk, m: { x: { act: r.act, line: ok ? line : null, lstat: ok ? "ok" : "pending", res: r.outcome, book: bk,
+        snaps: ok ? [] : [{ label: "1st", line, book: bk, cap: r.main.captured_utc, op: r.main.over_price, up: r.main.under_price }] } } };
     });
-    return s + `</svg>`;
+    const phone = window.STIX_MOBILE && window.STIX_MOBILE.active && window.STIX_MOBILE.active();
+    return chartSVG(rows, "x", phone ? { W: 400, H: 230, L: 30, R: 26, T: 26, B: 24, fs: 12 } : {});
   }
 
   function view(arg) {
