@@ -824,6 +824,8 @@ def build(log):
         for key, value in read_json(ledger, {}).get('records', {}).items():
             challenger_records.setdefault(key, value)
     out['challenger_diagnostics'] = build_diagnostics(out, frozen_records, challenger_records)
+    from .challenger_theses import weekly_rollup
+    out['research_theses'] = weekly_rollup(diagnostics=out['challenger_diagnostics'])
     write_json(OUT_PATH, out, compact=True)
     log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
                f"{len(unmatched)} unmatched lines, {d.unmapped_snaps} unmapped snap rows")
