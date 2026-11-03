@@ -13,7 +13,7 @@
   const BOOK = { draftkings: "DraftKings", fanduel: "FanDuel", betmgm: "BetMGM", williamhill_us: "Caesars", fanatics: "Fanatics", betrivers: "BetRivers", espnbet: "ESPN BET", hardrockbet: "Hard Rock", ballybet: "Bally Bet", fliff: "Fliff" };
   const BOOK_RANK = ["draftkings", "fanduel"];
   const C = { games: null, wk: null, weekData: {}, loading: false, err: "", mk: "player_pass_yds", q: "", game: "", note: "",
-    rWk: "", rMk: "", rPos: "", rBy: "week", rGame: "", open: {}, pMk: "" };
+    rWk: "", rMk: "", rPos: "", rBy: "week", rGame: "", open: {}, pMk: "", pos: {}, gen: 0 };
 
   const norm = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.'’]/g, "")
     .replace(/[^a-z ]+/g, " ").replace(/\b(jr|sr|ii|iii|iv|v)\b/g, " ").replace(/\s+/g, " ").trim();
@@ -45,28 +45,57 @@
   const weeksList = () => [...new Set(C.games.map((g) => g.week).filter((w) => w != null))].sort((a, b) => a - b);
 
   async function loadGames() { C.games = await getAll("/rest/v1/cfb_games?select=*&order=kickoff.asc,game_id.asc"); }
-  async function loadWeek(wk) {
-    if (C.weekData[wk]) return C.weekData[wk];
-    const ids = C.games.filter((g) => g.week === wk).map((g) => g.game_id);
-    const d = { lines: [], results: [] };
-    if (ids.length) {
-      d.lines = await getAll(`/rest/v1/cfb_lines?select=game_id,pull_type,captured_utc,book,market,player_name,line,over_price,under_price&game_id=in.${inList(ids)}&order=id.asc`);
-      d.results = await getAll(`/rest/v1/cfb_results?select=game_id,athlete_id,player_name,team_name,pass_att,pass_yds,rush_att,rush_yds,rec,rec_yds&game_id=in.${inList(ids)}&order=game_id.asc,athlete_id.asc`);
-      const aids = [...new Set(d.results.map((r) => r.athlete_id))], pos = {};
-      for (let i = 0; i < aids.length; i += 150) {
-        for (const p of await getAll(`/rest/v1/cfb_players?select=athlete_id,pos&athlete_id=in.${inList(aids.slice(i, i + 150))}&order=athlete_id.asc`)) pos[p.athlete_id] = p.pos;
-      }
-      d.results.forEach((r) => (r.pos = pos[r.athlete_id] || ""));
-    }
-    C.weekData[wk] = d;
-    return d;
+  // Loading is done in parallel: up to 3 weeks at a time (each week's lines and results together), then every player position
+  // that isn't known yet in a few big batches, once for all the weeks (not once per week). Calls queue behind each other so two
+  // screens asking for the same weeks never download them twice.
+  async function pool(tasks, n) {
+    let i = 0;
+    await Promise.all(Array.from({ length: Math.min(n, tasks.length) }, async () => { while (i < tasks.length) await tasks[i++](); }));
   }
-  async function loadAllWeeks() { for (const w of weeksList()) await loadWeek(w); }
+  let loadChain = Promise.resolve();
+  function loadWeeks(list) {
+    const p = loadChain.catch(() => {}).then(() => doLoad(list));
+    loadChain = p;
+    return p;
+  }
+  async function doLoad(list) {
+    const need = list.filter((w) => !C.weekData[w]), gen = C.gen, raw = {};
+    if (!need.length) return;
+    await pool(need.map((wk) => async () => {
+      const ids = C.games.filter((g) => g.week === wk).map((g) => g.game_id), d = { lines: [], results: [] };
+      if (ids.length) {
+        [d.lines, d.results] = await Promise.all([
+          getAll(`/rest/v1/cfb_lines?select=game_id,pull_type,captured_utc,book,market,player_name,line,over_price,under_price&game_id=in.${inList(ids)}&order=id.asc`),
+          getAll(`/rest/v1/cfb_results?select=game_id,athlete_id,player_name,team_name,pass_att,pass_yds,rush_att,rush_yds,rec,rec_yds&game_id=in.${inList(ids)}&order=game_id.asc,athlete_id.asc`)]);
+      }
+      raw[wk] = d;
+    }), 3);
+    const unknown = [...new Set(need.flatMap((w) => raw[w].results.map((r) => r.athlete_id)).filter((a) => !(a in C.pos)))], batches = [];
+    for (let i = 0; i < unknown.length; i += 200) batches.push(unknown.slice(i, i + 200));
+    await pool(batches.map((b) => async () => {
+      const got = {};
+      for (const p of await getAll(`/rest/v1/cfb_players?select=athlete_id,pos&athlete_id=in.${inList(b)}&order=athlete_id.asc`)) got[p.athlete_id] = p.pos;
+      if (gen === C.gen) for (const a of b) C.pos[a] = got[a] || "";
+    }), 6);
+    if (gen !== C.gen) return; // signed out while loading: drop it
+    for (const wk of need) { raw[wk].results.forEach((r) => (r.pos = C.pos[r.athlete_id] || "")); C.weekData[wk] = raw[wk]; }
+  }
+  const loadWeek = async (wk) => { await loadWeeks([wk]); return C.weekData[wk]; };
+  const loadAllWeeks = () => loadWeeks(weeksList());
   const allLoaded = () => !!C.games && weeksList().every((w) => C.weekData[w]);
 
   // One row per game + market + player: the graded (~1 h before kickoff) line if captured, else the latest line showing.
+  // Built once per week and reused (rebuilt only if that week's data or the games list is replaced). Callers must not change the rows.
+  const RC = new Map();
   function rowsFor(wk) {
     const d = C.weekData[wk]; if (!d) return [];
+    const hit = RC.get(wk);
+    if (hit && hit.d === d && hit.g === C.games) return hit.rows;
+    const rows = buildRows(wk, d);
+    RC.set(wk, { d, g: C.games, rows });
+    return rows;
+  }
+  function buildRows(wk, d) {
     const games = new Map(C.games.filter((g) => g.week === wk).map((g) => [g.game_id, g]));
     const resBy = new Map();
     for (const r of d.results) (resBy.get(r.game_id) || resBy.set(r.game_id, new Map()).get(r.game_id)).set(norm(r.player_name), r);
@@ -113,6 +142,7 @@
     C.loading = true; C.err = "";
     try {
       if (!C.games) await loadGames();
+      if (/^#\/cfb\/(results|player-)/.test(location.hash || "")) await loadAllWeeks();
       if (C.wk == null && C.games.length) {
         const weeks = weeksList();
         const up = weeks.find((w) => C.games.some((g) => g.week === w && g.status !== "final"));
@@ -341,7 +371,7 @@
     if (!all.length) return back + `<p class="muted pad">No lines found for this player.</p>`;
     const mks = MK.filter((m) => all.some((r) => r.mk.id === m.id));
     const mid = mks.some((m) => m.id === C.pMk) ? C.pMk : mks[0].id;
-    const rs = all.filter((r) => r.mk.id === mid).sort((a, b) => a.g.kickoff.localeCompare(b.g.kickoff));
+    const rs = all.filter((r) => r.mk.id === mid).map((r) => ({ ...r })).sort((a, b) => a.g.kickoff.localeCompare(b.g.kickoff));
     const latest = all.slice().sort((a, b) => b.g.kickoff.localeCompare(a.g.kickoff))[0];
     const ptTeam = (all.slice().sort((a, b) => b.g.kickoff.localeCompare(a.g.kickoff)).find((r) => r.team) || {}).team;
     if (ptTeam) rs.forEach((r) => { if (!r.side) r.side = sideOf(r.g, ptTeam); }); // games he has no box-score line in: take his side from his team
@@ -418,7 +448,7 @@
   // remember which groups are open across redraws (toggle doesn't bubble, so listen in the capture phase)
   document.addEventListener("toggle", (e) => { const d = e.target; if (d && d.classList && d.classList.contains("la-wk") && d.dataset.cwk) { if (d.open) C.open[d.dataset.cwk] = true; else delete C.open[d.dataset.cwk]; } }, true);
   if (ACC()) ACC().onChange(() => {
-    if (!ACC().signedIn()) { C.games = null; C.wk = null; C.weekData = {}; C.err = ""; C.note = ""; }
+    if (!ACC().signedIn()) { C.games = null; C.wk = null; C.weekData = {}; C.pos = {}; C.gen++; RC.clear(); DEF.key = ""; C.err = ""; C.note = ""; }
     rerender();
   });
   window.STIX_CFB = { view, bind, norm, rowsFor, _state: C };
