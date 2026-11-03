@@ -70,3 +70,28 @@ promotion requires a separate decision and enough evidence, not a winning week.
 Run `python -m pipeline.challenger report` to rebuild the report offline. Training
 uses `python -m pipeline.challenger train` with numpy, pandas, scipy, scikit-learn.
 All repository tests: `python -m unittest discover -s tests`.
+
+
+## Week 8 diagnostics (added November 2)
+The existing expanding-history challenger remains **T13, expanding-interaction-v1**:
+same architecture, fitted feature columns, C=0.01, 10% estimated-return
+trigger and weekly schedule. The locked T12 frozen comparison is unchanged.
+No Week 8 hindsight labels enter either model's feature construction.
+
+`pipeline/challenger_diagnostics.py` reads only immutable pregame decisions,
+postgame actuals and saved prices, producing per-game win/loss/units plus
+exploratory segments for a >10-point pregame usage increase, >50% positive
+prior-performance surprise, both together, small QB rushing lines, side/market
+slices, and unexpectedly low observed snap share. Low-participation detection
+requires two earlier played appearances and a decline of >=20 percentage
+points *and* >=40% relative to the earlier snap baseline. That flags
+participation changes; it cannot establish injury cause or a pregame
+restriction. Verify such causes separately rather than treating an apparent
+winning Under as proof of predictive skill.
+
+The site publishes `challenger_diagnostics` from the locked T12/T13 ledgers,
+and the signed-in Results panel shows game-level units and conditions.
+The Tuesday/Wednesday workflow writes `weekly_diagnostics.json` and explains
+the slices in `weekly_report.md`. A new model version alone doesn't grant
+statistical evidence of edge; use later weeks to prospectively test these
+hypotheses, account for overlap/correlation and preserve the frozen baseline.
