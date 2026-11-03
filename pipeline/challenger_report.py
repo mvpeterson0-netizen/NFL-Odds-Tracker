@@ -102,6 +102,10 @@ def build_report(now=None):
                     fs={k:(float('nan') if x is None else x) for k,x in fs.items()};group=pos+' '+MARKETS_FOR_REPORT[mid]
                     p1=probability(old,augment(fs,old['columns'],group));p2=probability(cfg,augment(fs,cfg['columns'],group));shifts.append({'gid':v['gid'],'pid':v['pid'],'mid':mid,'delta_over_probability':p2-p1})
             changes+=sorted(shifts,key=lambda x:-abs(x['delta_over_probability']))[:5]
+    # Exploratory postgame diagnostics; never used to fit or select T13 bets.
+    from .challenger_diagnostics import build_diagnostics
+    diagnostics=build_diagnostics(site,original,challenger)
+    write_json(ROOT/'weekly_diagnostics.json',diagnostics)
     report={'generated_utc':iso(now),'source_generated_utc':site.get('generated_utc'),'training_status':read_json(ROOT/'status.json',{}),
             'active':active,'manifest':manifest,'latest_graded_week':latest,'models':summary,'paired':stats(paired),'agreement':dict(agreement),'changes':changes,
             'learning_status':'descriptive monitoring; no model promotion or significance declaration','rules':RULES}
@@ -114,6 +118,23 @@ def build_report(now=None):
            '', '| Strategy | Week bets | Week ROI | Total bets | Total units | Total ROI | Pending |', '|---|---:|---:|---:|---:|---:|---:|']
     for v in summary.values():
         a=v['latest_week'];b=v['cumulative'];lines.append(f'| {v["name"]} | {a["bets"]} | {pct(a["roi"])} | {b["bets"]} | {b["units"]:+.2f} | {pct(b["roi"])} | {v["pending"]} |')
+    diagnostic_week=diagnostics['leads']['t12']['weeks'].get(str(latest),{})
+    if diagnostic_week:
+        segments=diagnostic_week['segments']
+        lines+=['','## Frozen interaction postgame diagnostics',
+                'Exploratory Week '+str(latest)+' results; categories are not new betting rules.']
+        for key,label in [('usage_jump','Pregame usage increase >10 points'),
+                          ('surprise_jump','Prior surprise >50%'),
+                          ('combined_jump','Both signals together'),
+                          ('low_participation','Low participation (cause unverified)'),
+                          ('tiny_qb_rush','QB rush line <=1.5')]:
+            g=segments[key]['flagged']
+            lines.append(f'- {label}: {g["wins"]}-{g["losses"]}, {g["units"]:+.2f} units ({g["bets"]} graded bets).')
+        lines+=['','Game-level frozen interaction returns:']
+        for game in diagnostic_week['games']:
+            g=game['record']
+            lines.append(f'- {game["matchup"]}: {g["wins"]}-{g["losses"]}, {g["units"]:+.2f} units.')
+        lines+=['','These are descriptive outcomes of previously locked bets. Low snap share is not an injury diagnosis. One week does not justify altering frozen model or challenger training policy.']
     lines+=['','## What we have learned',f'Matched graded opportunities: {len(common)}. Challenger minus frozen net units: {report["paired"]["units"]:+.2f}.',
             'A positive week is not proof of an edge. Comparing ROI alone changes the denominator when strategies select different numbers of bets.',
             'Calibration, market comparison, price sensitivity, concentration, paired uncertainty and version changes are included in weekly_report.json.',
