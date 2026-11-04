@@ -1,5 +1,5 @@
 {
- "started_utc": "2026-11-04T14:01:50.683510Z",
+ "started_utc": "2026-11-04T14:04:01.284690Z",
  "notes": [],
  "espn_scoreboard_http": [
   200
@@ -7,7 +7,7 @@
  "espn_events_total": 56,
  "espn_events_final": 56,
  "odds_events_http": 200,
- "odds_requests_remaining": "16134",
+ "odds_requests_remaining": "16131",
  "odds_requests_last": "0",
  "odds_events_count": 61,
  "p4_names_matched_in_odds_events": 35,
@@ -17,7 +17,7 @@
    "commence": "2026-11-07T00:00:00Z",
    "http": 200,
    "credits_last": "3",
-   "remaining": "16131",
+   "remaining": "16128",
    "players_per_market_per_book": {
     "player_pass_yds": {
      "fanduel": 2,
@@ -71,8 +71,8 @@
    "patronLevel": 0,
    "tierName": "Free",
    "monthlyLimit": 1000,
-   "remainingCalls": 951,
-   "usedCalls": 49,
+   "remainingCalls": 940,
+   "usedCalls": 60,
    "resetAt": "2026-12-01T00:00:00.000Z",
    "sharedPool": true,
    "products": [
@@ -96,7 +96,24 @@
   "espn_only": 231,
   "cfbd_only": 0,
   "team_unmatched": 0,
-  "espn_games_listed": 30
+  "espn_games_listed": 30,
+  "by_category": {
+   "passing": {
+    "espn_total": 91,
+    "missing_in_cfbd": 3,
+    "yds_differ": 1
+   },
+   "rushing": {
+    "espn_total": 327,
+    "missing_in_cfbd": 12,
+    "yds_differ": 3
+   },
+   "receiving": {
+    "espn_total": 442,
+    "missing_in_cfbd": 16,
+    "yds_differ": 1
+   }
+  }
  },
  "scoreboard_behavior": {
   "range_group8": [
@@ -138,5 +155,5 @@
   "summary_team_ids": null,
   "roster_id_match": null
  },
- "finished_utc": "2026-11-04T14:03:08.253797Z"
+ "finished_utc": "2026-11-04T14:04:35.278953Z"
 }

@@ -7,79 +7,63 @@
   "espn_only": 231,
   "cfbd_only": 0,
   "team_unmatched": 0,
-  "espn_games_listed": 30
+  "espn_games_listed": 30,
+  "by_category": {
+   "passing": {
+    "espn_total": 91,
+    "missing_in_cfbd": 3,
+    "yds_differ": 1
+   },
+   "rushing": {
+    "espn_total": 327,
+    "missing_in_cfbd": 12,
+    "yds_differ": 3
+   },
+   "receiving": {
+    "espn_total": 442,
+    "missing_in_cfbd": 16,
+    "yds_differ": 1
+   }
+  }
+ },
+ "by_category_all": {
+  "passing": {
+   "espn_total": 91,
+   "missing_in_cfbd": 3,
+   "yds_differ": 1
+  },
+  "rushing": {
+   "espn_total": 327,
+   "missing_in_cfbd": 12,
+   "yds_differ": 3
+  },
+  "receiving": {
+   "espn_total": 442,
+   "missing_in_cfbd": 16,
+   "yds_differ": 1
+  },
+  "kickReturns": {
+   "espn_total": 53,
+   "missing_in_cfbd": 53,
+   "yds_differ": 0
+  },
+  "punting": {
+   "espn_total": 64,
+   "missing_in_cfbd": 64,
+   "yds_differ": 0
+  },
+  "interceptions": {
+   "espn_total": 34,
+   "missing_in_cfbd": 34,
+   "yds_differ": 0
+  },
+  "puntReturns": {
+   "espn_total": 49,
+   "missing_in_cfbd": 49,
+   "yds_differ": 0
+  }
  },
  "first_diffs": [
-  {
-   "game": "Miami Hurricanes at North Carolina Tar Heels",
-   "key": [
-    "Miami",
-    "kickReturns",
-    "somourian wingo"
-   ],
-   "espn": "44",
-   "cfbd": null
-  },
-  {
-   "game": "Miami Hurricanes at North Carolina Tar Heels",
-   "key": [
-    "Miami",
-    "kickReturns",
-    "ezekiel marcelin"
-   ],
-   "espn": "0",
-   "cfbd": null
-  },
-  {
-   "game": "Miami Hurricanes at North Carolina Tar Heels",
-   "key": [
-    "Miami",
-    "punting",
-    "dylan joyce"
-   ],
-   "espn": "43",
-   "cfbd": null
-  },
-  {
-   "game": "Miami Hurricanes at North Carolina Tar Heels",
-   "key": [
-    "North Carolina",
-    "punting",
-    "aeron burrell"
-   ],
-   "espn": "28",
-   "cfbd": null
-  },
-  {
-   "game": "Virginia Cavaliers at Wake Forest Demon Deacons",
-   "key": [
-    "Virginia",
-    "kickReturns",
-    "jacquon gibson"
-   ],
-   "espn": "14",
-   "cfbd": null
-  },
-  {
-   "game": "Virginia Cavaliers at Wake Forest Demon Deacons",
-   "key": [
-    "Virginia",
-    "kickReturns",
-    "xay davis"
-   ],
-   "espn": "0",
-   "cfbd": null
-  },
-  {
-   "game": "Virginia Cavaliers at Wake Forest Demon Deacons",
-   "key": [
-    "Virginia",
-    "punting",
-    "daniel sparks"
-   ],
-   "espn": "192",
-   "cfbd": null
-  },
   {
    "game": "Virginia Cavaliers at Wake Forest Demon Deacons",
    "key": [
@@ -108,36 +92,6 @@
     "kam shanks"
    ],
    "espn": "21",
-   "cfbd": null
-  },
-  {
-   "game": "Virginia Cavaliers at Wake Forest Demon Deacons",
-   "key": [
-    "Wake Forest",
-    "interceptions",
-    "braylon johnson"
-   ],
-   "espn": "2",
-   "cfbd": null
-  },
-  {
-   "game": "Virginia Cavaliers at Wake Forest Demon Deacons",
-   "key": [
-    "Wake Forest",
-    "puntReturns",
-    "kam shanks"
-   ],
-   "espn": "94",
-   "cfbd": null
-  },
-  {
-   "game": "Virginia Cavaliers at Wake Forest Demon Deacons",
-   "key": [
-    "Wake Forest",
-    "punting",
-    "ethan hyams"
-   ],
-   "espn": "56",
    "cfbd": null
   },
   {
@@ -173,46 +127,6 @@
   {
    "game": "SMU Mustangs at Syracuse Orange",
    "key": [
-    "SMU",
-    "kickReturns",
-    "christian rhodes"
-   ],
-   "espn": "43",
-   "cfbd": null
-  },
-  {
-   "game": "SMU Mustangs at Syracuse Orange",
-   "key": [
-    "SMU",
-    "kickReturns",
-    "yamir knight"
-   ],
-   "espn": "17",
-   "cfbd": null
-  },
-  {
-   "game": "SMU Mustangs at Syracuse Orange",
-   "key": [
-    "SMU",
-    "puntReturns",
-    "yamir knight"
-   ],
-   "espn": "4",
-   "cfbd": null
-  },
-  {
-   "game": "SMU Mustangs at Syracuse Orange",
-   "key": [
-    "SMU",
-    "punting",
-    "wade mcsparron"
-   ],
-   "espn": "226",
-   "cfbd": null
-  },
-  {
-   "game": "SMU Mustangs at Syracuse Orange",
-   "key": [
     "Syracuse",
     "passing",
     "steve angeli"
@@ -231,106 +145,6 @@
    "cfbd": null
   },
   {
-   "game": "SMU Mustangs at Syracuse Orange",
-   "key": [
-    "Syracuse",
-    "kickReturns",
-    "davion kerr"
-   ],
-   "espn": "25",
-   "cfbd": null
-  },
-  {
-   "game": "SMU Mustangs at Syracuse Orange",
-   "key": [
-    "Syracuse",
-    "puntReturns",
-    "demetres samuel"
-   ],
-   "espn": "36",
-   "cfbd": null
-  },
-  {
-   "game": "SMU Mustangs at Syracuse Orange",
-   "key": [
-    "Syracuse",
-    "punting",
-    "jimmy gregg"
-   ],
-   "espn": "211",
-   "cfbd": null
-  },
-  {
-   "game": "California Golden Bears at NC State Wolfpack",
-   "key": [
-    "California",
-    "kickReturns",
-    "niles davis"
-   ],
-   "espn": "43",
-   "cfbd": null
-  },
-  {
-   "game": "California Golden Bears at NC State Wolfpack",
-   "key": [
-    "California",
-    "kickReturns",
-    "carson perry smith"
-   ],
-   "espn": "22",
-   "cfbd": null
-  },
-  {
-   "game": "California Golden Bears at NC State Wolfpack",
-   "key": [
-    "California",
-    "puntReturns",
-    "tyree sams"
-   ],
-   "espn": "12",
-   "cfbd": null
-  },
-  {
-   "game": "California Golden Bears at NC State Wolfpack",
-   "key": [
-    "California",
-    "punting",
-    "angus davies"
-   ],
-   "espn": "315",
-   "cfbd": null
-  },
-  {
-   "game": "California Golden Bears at NC State Wolfpack",
-   "key": [
-    "NC State",
-    "interceptions",
-    "jaren sensabaugh"
-   ],
-   "espn": "0",
-   "cfbd": null
-  },
-  {
-   "game": "California Golden Bears at NC State Wolfpack",
-   "key": [
-    "NC State",
-    "puntReturns",
-    "victor snow"
-   ],
-   "espn": "19",
-   "cfbd": null
-  },
-  {
-   "game": "California Golden Bears at NC State Wolfpack",
-   "key": [
-    "NC State",
-    "punting",
-    "jackson waller"
-   ],
-   "espn": "278",
-   "cfbd": null
-  },
-  {
    "game": "Boston College Eagles at Duke Blue Devils",
    "key": [
     "Boston College",
@@ -338,56 +152,6 @@
     "johnathan montague"
    ],
    "espn": "6",
-   "cfbd": null
-  },
-  {
-   "game": "Boston College Eagles at Duke Blue Devils",
-   "key": [
-    "Boston College",
-    "interceptions",
-    "carter davis"
-   ],
-   "espn": "0",
-   "cfbd": null
-  },
-  {
-   "game": "Boston College Eagles at Duke Blue Devils",
-   "key": [
-    "Boston College",
-    "kickReturns",
-    "marcus upton"
-   ],
-   "espn": "81",
-   "cfbd": null
-  },
-  {
-   "game": "Boston College Eagles at Duke Blue Devils",
-   "key": [
-    "Boston College",
-    "punting",
-    "bryce lafollette"
-   ],
-   "espn": "257",
-   "cfbd": null
-  },
-  {
-   "game": "Boston College Eagles at Duke Blue Devils",
-   "key": [
-    "Duke",
-    "puntReturns",
-    "kd cotton"
-   ],
-   "espn": "30",
-   "cfbd": null
-  },
-  {
-   "game": "Boston College Eagles at Duke Blue Devils",
-   "key": [
-    "Duke",
-    "punting",
-    "kade reynoldson"
-   ],
-   "espn": "86",
    "cfbd": null
   },
   {
@@ -408,6 +172,256 @@
     "benji blackburn"
    ],
    "espn": "18",
+   "cfbd": null
+  },
+  {
+   "game": "Stanford Cardinal at Louisville Cardinals",
+   "key": [
+    "Stanford",
+    "receiving",
+    "champ hampton"
+   ],
+   "espn": "1",
+   "cfbd": null
+  },
+  {
+   "game": "Stanford Cardinal at Louisville Cardinals",
+   "key": [
+    "Louisville",
+    "receiving",
+    "terrence mcwilliams"
+   ],
+   "espn": "15",
+   "cfbd": null
+  },
+  {
+   "game": "Clemson Tigers at Florida State Seminoles",
+   "key": [
+    "Florida State",
+    "rushing",
+    "quintrevion wisner"
+   ],
+   "espn": "43",
+   "cfbd": null
+  },
+  {
+   "game": "Clemson Tigers at Florida State Seminoles",
+   "key": [
+    "Florida State",
+    "receiving",
+    "quintrevion wisner"
+   ],
+   "espn": "50",
+   "cfbd": null
+  },
+  {
+   "game": "Utah Utes at Cincinnati Bearcats",
+   "key": [
+    "Cincinnati",
+    "receiving",
+    "jv gibson"
+   ],
+   "espn": "76",
+   "cfbd": null
+  },
+  {
+   "game": "Arizona State Sun Devils at BYU Cougars",
+   "key": [
+    "BYU",
+    "rushing",
+    "sione moa"
+   ],
+   "espn": "20",
+   "cfbd": null
+  },
+  {
+   "game": "Arizona State Sun Devils at BYU Cougars",
+   "key": [
+    "BYU",
+    "receiving",
+    "sione moa"
+   ],
+   "espn": "8",
+   "cfbd": null
+  },
+  {
+   "game": "Arizona Wildcats at Texas Tech Red Raiders",
+   "key": [
+    "Arizona",
+    "rushing",
+    "giovanni richardson"
+   ],
+   "espn": "-4",
+   "cfbd": null
+  },
+  {
+   "game": "Arizona Wildcats at Texas Tech Red Raiders",
+   "key": [
+    "Arizona",
+    "receiving",
+    "giovanni richardson"
+   ],
+   "espn": "90",
+   "cfbd": null
+  },
+  {
+   "game": "Oklahoma State Cowboys at Iowa State Cyclones",
+   "key": [
+    "Iowa State",
+    "receiving",
+    "ty claiborne"
+   ],
+   "espn": "32",
+   "cfbd": null
+  },
+  {
+   "game": "Kansas State Wildcats at Colorado Buffaloes",
+   "key": [
+    "Kansas State",
+    "rushing",
+    "josh manning"
+   ],
+   "espn": "6",
+   "cfbd": null
+  },
+  {
+   "game": "Kansas State Wildcats at Colorado Buffaloes",
+   "key": [
+    "Kansas State",
+    "receiving",
+    "josh manning"
+   ],
+   "espn": "73",
+   "cfbd": null
+  },
+  {
+   "game": "Ohio State Buckeyes at USC Trojans",
+   "key": [
+    "USC",
+    "receiving",
+    "zacharyus williams"
+   ],
+   "espn": "15",
+   "cfbd": null
+  },
+  {
+   "game": "Washington Huskies at Nebraska Cornhuskers",
+   "key": [
+    "Washington",
+    "rushing",
+    "trey cooley"
+   ],
+   "espn": "5",
+   "cfbd": null
+  },
+  {
+   "game": "Washington Huskies at Nebraska Cornhuskers",
+   "key": [
+    "Washington",
+    "receiving",
+    "trey cooley"
+   ],
+   "espn": "11",
+   "cfbd": null
+  },
+  {
+   "game": "Florida Gators at Georgia Bulldogs",
+   "key": [
+    "Florida",
+    "receiving",
+    "lacota dippre"
+   ],
+   "espn": "15",
+   "cfbd": null
+  },
+  {
+   "game": "Florida Gators at Georgia Bulldogs",
+   "key": [
+    "Florida",
+    "receiving",
+    "tj abrams"
+   ],
+   "espn": "9",
+   "cfbd": null
+  },
+  {
+   "game": "Mississippi State Bulldogs at Texas Longhorns",
+   "key": [
+    "Texas",
+    "passing",
+    "kj lacey"
+   ],
+   "espn": "0",
+   "cfbd": null
+  },
+  {
+   "game": "Mississippi State Bulldogs at Texas Longhorns",
+   "key": [
+    "Texas",
+    "rushing",
+    "hollywood smothers"
+   ],
+   "espn": "-6",
+   "cfbd": null
+  },
+  {
+   "game": "Auburn Tigers at Ole Miss Rebels",
+   "key": [
+    "Ole Miss",
+    "rushing",
+    "will echoles"
+   ],
+   "espn": "1",
+   "cfbd": null
+  },
+  {
+   "game": "Missouri Tigers at Arkansas Razorbacks",
+   "key": [
+    "Missouri",
+    "rushing",
+    "preston hatfield"
+   ],
+   "espn": "49",
+   "cfbd": "12"
+  },
+  {
+   "game": "Missouri Tigers at Arkansas Razorbacks",
+   "key": [
+    "Missouri",
+    "rushing",
+    "ahmad hardy"
+   ],
+   "espn": "5",
+   "cfbd": "42"
+  },
+  {
+   "game": "South Carolina Gamecocks at Oklahoma Sooners",
+   "key": [
+    "South Carolina",
+    "rushing",
+    "matt fuller"
+   ],
+   "espn": "17",
+   "cfbd": null
+  },
+  {
+   "game": "Notre Dame Fighting Irish at Navy Midshipmen",
+   "key": [
+    "Navy",
+    "rushing",
+    "jadyn jones"
+   ],
+   "espn": "16",
+   "cfbd": null
+  },
+  {
+   "game": "UConn Huskies at Air Force Falcons",
+   "key": [
+    "UConn",
+    "receiving",
+    "jd willoughby"
+   ],
+   "espn": "11",
    "cfbd": null
   }
  ]
