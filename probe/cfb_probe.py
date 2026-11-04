@@ -230,6 +230,7 @@ if ckey:
     wk = [e for e in events.values() if "2026-10-31T10:00" <= (e["date"] or "") <= "2026-11-01T12:00" and e["status"] == "STATUS_FINAL"]
     tot = {"games": 0, "compared": 0, "match": 0, "diff": 0, "espn_only": 0, "cfbd_only": 0, "team_unmatched": 0}
     diffs, espn_games_ok = [], 0
+    bycat = {}
     for e in wk:
         code, _, body = get(f"https://site.web.api.espn.com/apis/site/v2/sports/football/college-football/summary?event={e['id']}")
         time.sleep(0.2)
@@ -255,9 +256,12 @@ if ckey:
                     ev_y = (a.get("stats") or [None] * (yi + 1))[yi]
                     key = (ct, cat, nm)
                     seen.add(key)
+                    bc = bycat.setdefault(cat, {"espn_total": 0, "missing_in_cfbd": 0, "yds_differ": 0})
+                    bc["espn_total"] += 1
                     cd = cfbd.get(key)
                     if cd is None:
                         tot["espn_only"] += 1
+                        bc["missing_in_cfbd"] += 1
                         diffs.append({"game": e["name"], "key": key, "espn": ev_y, "cfbd": None})
                         continue
                     tot["compared"] += 1
@@ -265,12 +269,14 @@ if ckey:
                         tot["match"] += 1
                     else:
                         tot["diff"] += 1
+                        bc["yds_differ"] += 1
                         diffs.append({"game": e["name"], "key": key, "espn": ev_y, "cfbd": cd.get("YDS")})
         for key in cfbd:
             pass
     tot["games"] = espn_games_ok
     tot["espn_games_listed"] = len(wk)
-    save("crosscheck.json", {"totals": tot, "first_diffs": diffs[:40]})
+    tot["by_category"] = {c: v for c, v in bycat.items() if c in ("passing", "rushing", "receiving")}
+    save("crosscheck.json", {"totals": tot, "by_category_all": bycat, "first_diffs": [d for d in diffs if d["key"][1] in ("passing", "rushing", "receiving")][:80]})
     summary["crosscheck"] = tot
 
 
