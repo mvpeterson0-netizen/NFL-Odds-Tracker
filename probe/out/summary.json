@@ -1,5 +1,5 @@
 {
- "started_utc": "2026-11-02T01:47:43.623707Z",
+ "started_utc": "2026-11-04T14:01:50.683510Z",
  "notes": [],
  "espn_scoreboard_http": [
   200
@@ -7,34 +7,31 @@
  "espn_events_total": 56,
  "espn_events_final": 56,
  "odds_events_http": 200,
- "odds_requests_remaining": "20000",
+ "odds_requests_remaining": "16134",
  "odds_requests_last": "0",
- "odds_events_count": 63,
+ "odds_events_count": 61,
  "p4_names_matched_in_odds_events": 35,
  "props_probe": [
   {
    "event": "Virginia Tech Hokies @ SMU Mustangs",
    "commence": "2026-11-07T00:00:00Z",
    "http": 200,
-   "credits_last": "0",
-   "remaining": "20000",
-   "players_per_market_per_book": {}
-  },
-  {
-   "event": "Nebraska Cornhuskers @ Illinois Fighting Illini",
-   "commence": "2026-11-07T01:00:00Z",
-   "http": 200,
-   "credits_last": "0",
-   "remaining": "20000",
-   "players_per_market_per_book": {}
-  },
-  {
-   "event": "New Mexico Lobos @ Nevada Wolf Pack",
-   "commence": "2026-11-07T02:00:00Z",
-   "http": 200,
-   "credits_last": "0",
-   "remaining": "20000",
-   "players_per_market_per_book": {}
+   "credits_last": "3",
+   "remaining": "16131",
+   "players_per_market_per_book": {
+    "player_pass_yds": {
+     "fanduel": 2,
+     "fliff": 2
+    },
+    "player_reception_yds": {
+     "fanduel": 9,
+     "fliff": 10
+    },
+    "player_rush_yds": {
+     "fanduel": 3,
+     "fliff": 3
+    }
+   }
   }
  ],
  "cfbd": {
@@ -60,22 +57,22 @@
   },
   "players_w10_passing": {
    "http": 200,
-   "n_games": 0
+   "n_games": 2
   },
   "players_w10_rushing": {
    "http": 200,
-   "n_games": 0
+   "n_games": 2
   },
   "players_w10_receiving": {
    "http": 200,
-   "n_games": 0
+   "n_games": 2
   },
   "info": {
    "patronLevel": 0,
    "tierName": "Free",
    "monthlyLimit": 1000,
-   "remainingCalls": 962,
-   "usedCalls": 38,
+   "remainingCalls": 951,
+   "usedCalls": 49,
    "resetAt": "2026-12-01T00:00:00.000Z",
    "sharedPool": true,
    "products": [
@@ -94,8 +91,8 @@
  "crosscheck": {
   "games": 30,
   "compared": 829,
-  "match": 827,
-  "diff": 2,
+  "match": 824,
+  "diff": 5,
   "espn_only": 231,
   "cfbd_only": 0,
   "team_unmatched": 0,
@@ -114,9 +111,10 @@
   ],
   "nodate_group8": [
    200,
-   5,
+   8,
    [
-    "2026-10-31"
+    "2026-11-07",
+    "2026-11-08"
    ]
   ],
   "week_param": [
@@ -140,5 +138,5 @@
   "summary_team_ids": null,
   "roster_id_match": null
  },
- "finished_utc": "2026-11-02T01:48:26.569703Z"
+ "finished_utc": "2026-11-04T14:03:08.253797Z"
 }
