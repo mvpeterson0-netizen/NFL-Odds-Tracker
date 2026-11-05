@@ -43,6 +43,18 @@
     if (m.lstat === "pending") { const sn = latestSnap(m); if (sn && sn.line != null) return { line: sn.line, op: sn.op, up: sn.up, book: sn.book, src: sn.label, cap: sn.cap }; }
     return null;
   }
+  // The line the player page's Over/Under buttons offer. Normally lineNow() (the DraftKings / pre-game line). When FanDuel is
+  // showing a different line for the same player and stat in its latest pull, FanDuel's line, odds and capture time are offered
+  // (and saved) instead, so the pick matches what he'd bet there (Michael, 2026-11-05). Needs both FanDuel prices; otherwise
+  // the usual line. Only the player page uses this; the Review queue still saves lineNow().
+  function offerNow(pid, mid, r) {
+    const ln = lineNow(r.m[mid]);
+    if (!ln) return ln;
+    const e = ((((D.links || {})[pid] || {})[mid]) || {}).fanduel;
+    const ok = (v) => typeof v === "number" && isFinite(v);
+    if (!e || e.gid !== r.gid || !ok(e.point) || e.point === ln.line || !e.o || !e.u || !ok(e.o.price) || !ok(e.u.price)) return ln;
+    return { line: e.point, op: e.o.price, up: e.u.price, book: "FanDuel", src: "Latest line", cap: e.cap };
+  }
   function nextRow(pid) {
     const rows = (D.rows[pid] || []).filter((r) => r.ko && !started(r.ko)).sort((a, b) => a.ko.localeCompare(b.ko));
     return rows[0] || null;
@@ -112,7 +124,7 @@
   }
   function askSignIn(pid, mid, side) {
     const r = nextRow(pid);
-    const ln = r ? lineNow(r.m[mid]) : null;
+    const ln = r ? offerNow(pid, mid, r) : null;
     if (!r || !ln || started(r.ko)) return;
     lsSet(LS_WANT, { pid, mid, side, gid: r.gid, line: ln.line, back: location.hash || "#/board", at: Date.now() });
     if (ACC().signedIn()) { location.hash = "#/picks"; return; } // signed in: the 21+ step comes next on the Picks tab
@@ -133,7 +145,7 @@
     else {
       const id = `${r.wk}|${w.pid}|${w.mid}`;
       const old = AC.picks.find((x) => x.id === id);
-      if (!old || old.side !== w.side) setPick(w.pid, w.mid, w.side);
+      if (!old || old.side !== w.side) setPick(w.pid, w.mid, w.side, true);
     }
     if ((location.hash || "").startsWith("#/picks") && w.back && !w.back.startsWith("#/picks")) location.hash = w.back;
   }
@@ -222,11 +234,10 @@
   function sync() { if (mode() === "acct") acLoad(); if (cfg()) ghSync(); }
 
   // ---------- making a pick ----------
-  function setPick(pid, mid, side) {
+  function setPick(pid, mid, side, fd) { // fd = a player-page pick: use FanDuel's line when it differs (offerNow)
     const r = nextRow(pid);
     if (!r) return;
-    const m = r.m[mid];
-    const ln = lineNow(m);
+    const ln = fd ? offerNow(pid, mid, r) : lineNow(r.m[mid]);
     if (!ln || started(r.ko)) return;
     const id = `${r.wk}|${pid}|${mid}`;
     const t = new Date().toISOString();
@@ -302,7 +313,7 @@
     if (offer()) {
       const r = nextRow(pid);
       if (!r) return "";
-      const ln = lineNow(r.m[mid]);
+      const ln = offerNow(pid, mid, r);
       const mk = mkt[mid];
       if (!ln) return "";
       const b = (s) => `<button class="pk-btn" data-pick="${s}" data-pid="${esc(pid)}" data-pmid="${esc(mid)}">${sideWord(s)} ${lineNum(ln.line)}</button>`;
@@ -321,7 +332,7 @@
     }
     const id = `${r.wk}|${pid}|${mid}`;
     const mine = live().find((p) => p.id === id);
-    const ln = lineNow(r.m[mid]);
+    const ln = offerNow(pid, mid, r);
     const head = `<div class="pk-h"><div><b>Week ${r.wk} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${esc(mk.label)}</b><div class="muted small">${fmtTime(r.ko)}${ln ? ` · ${esc(ln.book)}` : ""}</div></div>
       ${ln ? `<div class="pk-line"><b>${lineNum(ln.line)}</b></div>` : ""}</div>`;
     if (!ln) return `<div class="pickbox">${head}<p class="muted small">No line posted yet for this market. Pick buttons appear once one is captured.</p></div>`;
@@ -444,7 +455,10 @@
     // Opening the Picks tab refreshes from the account (at most every 15 s), so picks made on another device show up.
     if (tab === "picks" && mode() === "acct" && AC.loaded && !AC.saving && Date.now() - AC.at > 15000) acLoad();
     if (ACC()) ACC().bind();
-    document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => (enabled() ? setPick : offer() ? askSignIn : () => {})(b.dataset.pid, b.dataset.pmid, b.dataset.pick)));
+    document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => {
+      const a = [b.dataset.pid, b.dataset.pmid, b.dataset.pick];
+      if (enabled()) setPick(a[0], a[1], a[2], true); else if (offer()) askSignIn(...a);
+    }));
     document.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => removePick(b.dataset.del)));
     const rt = document.getElementById("pk-retry"); if (rt) rt.addEventListener("click", sync);
     const sh = document.getElementById("pk-share");
