@@ -8,7 +8,7 @@ from collections import defaultdict
 from .common import DATA, read_json
 
 REGISTRY_PATH=DATA/'challenger'/'theses.json'
-VALID={'monitoring','needs_data','existing_frozen_lead','validated','rejected','paused'}
+VALID={'monitoring','needs_data','existing_frozen_lead','validated','rejected','paused','historical_descriptive'}
 LATEST_SCHEMA=1
 
 def registry():
