@@ -333,6 +333,18 @@
       "metric_source": null,
       "notes": "Earlier strict backtest generated very few bets; do not represent as validated EV.",
       "decision": "No promotion or threshold changes without preregistered prospective validation"
+    },
+    {
+      "id": "TH-024",
+      "title": "Individual player temperature-band O/U records",
+      "question": "Do individual player/market Over and Under records and price-based ROI differ across fixed game-temperature bands, and do those differences persist prospectively?",
+      "created": "2026-11-05",
+      "origin": "User Stix temperature research request",
+      "status": "historical_descriptive",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "2025 and completed 2026 research: fixed <32, 32–49, 50–69, 70–84, 85+ F bands; game-specific roof status; reported temperature then historical archive fallback; indoor/closed separate. 12,043 distinct graded props. Historical discovery only; multiple-comparison and confounding risks. Full queryable dataset saved with analysis deliverable.",
+      "decision": "No frozen-model changes; preregister a future sample before using discovered player/weather records as predictive filters."
     }
   ]
 }
