@@ -318,9 +318,6 @@ body.wn-lock { overflow: hidden; }
 .wn-stat-r { font-weight: 600; line-height: 1.35; }
 .wn-stat-n { margin: 6px 0 2px; font-size: 17px; }
 .wn-go-btn { display: block; text-align: center; padding: 11px 12px; border-radius: 10px; background: var(--accent); color: var(--panel); text-decoration: none; }
-/* "Hello Brian" pop-up (hello.js) */
-.hello-box { max-width: 360px; }
-.hello-msg { margin: 22px 0 6px; font-size: 28px; font-weight: 700; text-align: center; }
 /* First-open sign-in pop-up (whatsnew.js) */
 .su-box { max-width: 420px; }
 .su-list { margin: 4px 0 14px; padding-left: 20px; font-size: 15px; line-height: 1.5; }
