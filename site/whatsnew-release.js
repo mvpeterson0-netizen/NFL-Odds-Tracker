@@ -48,7 +48,7 @@
     ov.remove(); document.body.classList.remove("wn-lock"); markSeen();
   }
   function open() {
-    if (document.getElementById("wn-ov") || document.getElementById("su-ov") || document.getElementById("hello-ov")) return;
+    if (document.getElementById("wn-ov") || document.getElementById("su-ov")) return;
     const card = (it, i) => `<section class="wn-card">
       <h3><span class="wn-num" aria-hidden="true">${i + 1}</span>${it.title}</h3><p>${it.text}</p>
       ${it.stat ? `<div class="wn-stat"><div class="wn-stat-r">${it.stat.rule}</div><div class="wn-stat-n">${it.stat.rec}</div><div class="small muted">Weeks 1–7, 1 unit per bet at the saved odds</div></div>` : ""}
