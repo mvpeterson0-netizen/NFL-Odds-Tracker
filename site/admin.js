@@ -91,7 +91,7 @@
     const chips = [7, 30, 90].map((d) => `<button class="gchip ${AD.days === d ? "on" : ""}" data-addays="${d}">${d} days</button>`).join("");
     const screens = (t.screens || []).map((s) => `<tr><td>${esc(SCREEN[s.name] || s.name)}</td><td class="num">${fmtN(s.views)}</td><td class="num">${fmtN(s.devices)}</td><td class="num">${dur(s.secs)}</td><td class="num">${dur(s.views ? s.secs / s.views : 0)}</td></tr>`);
     const taps = (t.taps_by_name || []).map((s) => `<tr><td>${esc(TAP[s.name] || s.name)}</td><td class="num">${fmtN(s.count)}</td><td class="num">${fmtN(s.devices)}</td></tr>`);
-    const players = (t.players || []).map((s) => `<tr><td><a href="#/player/${esc(s.id)}">${esc(playerName(s.id))}</a></td><td class="num">${fmtN(s.views)}</td><td class="num">${dur(s.secs)}</td></tr>`);
+    const players = (t.players || []).map((s) => `<tr><td><a href="#/player/${esc(s.id)}">${esc(playerName(s.id))}</a></td><td class="num">${fmtN(s.visitors)}</td><td class="num">${fmtN(s.visits ?? s.views)}</td><td class="num">${dur(s.secs)}</td></tr>`);
     const plats = (t.platforms || []).map((s) => `<tr><td>${esc(s.platform)}${s.home_screen ? " · home-screen app" : ""}</td><td class="num">${fmtN(s.devices)}</td></tr>`);
     const urows = users.map((u) => `<tr class="ad-u ${AD.sel === u.user_id ? "on" : ""}" data-aduser="${esc(u.user_id)}" tabindex="0">
       <td>${esc(u.email)}</td><td>${esc(u.provider)}</td><td>${day(u.created_at)}</td><td>${when(u.last_active || u.last_sign_in_at)}</td>
@@ -120,7 +120,7 @@
       <div class="ad-grid">
         <div class="panel"><h3>Screens</h3><div class="body">${table(["Screen", "Views", "Visitors", "Total time", "Avg"], screens)}</div></div>
         <div class="panel"><h3>Taps</h3><div class="body">${table(["Button", "Taps", "Visitors"], taps)}</div></div>
-        <div class="panel"><h3>Most-viewed players</h3><div class="body">${table(["Player", "Views", "Time"], players)}</div></div>
+        <div class="panel"><h3>Most-viewed players</h3><div class="body">${table(["Player", "Visitors", "Visits", "Time"], players)}<p class="muted small">Ranked by visitors (devices), then visits. A visit = a look at the player 30+ min after the last one on the same device, so switching apps and back isn't counted again.</p></div></div>
         <div class="panel"><h3>Devices</h3><div class="body">${table(["Device", "Visitors"], plats)}</div></div>
       </div>
       <div class="panel"><h3>Users (${fmtN(users.length)})</h3><div class="body">
@@ -162,6 +162,10 @@
   window.addEventListener("hashchange", (e) => {
     const was = (e.oldURL || "").includes("#/admin"), now = (location.hash || "").startsWith("#/admin");
     if (now && !was) { AD.loadedFor = null; AD.sel = null; AD.activity = null; }
+  });
+  // Coming back to the app (or tab) while the admin page is open: reload so the numbers aren't from earlier.
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && (location.hash || "").startsWith("#/admin") && ACC() && ACC().signedIn()) { AD.loadedFor = null; load(); }
   });
   window.STIX_ADMIN = { view, bind, isResearchAdmin };
 })();
