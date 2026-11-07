@@ -482,3 +482,7 @@ tr.gdetail:hover td { background: var(--hover); }
 .la-game.on { background: var(--chip); }
 .la-sum.c3 { grid-template-columns: repeat(3, 1fr); } .la-sum.c3 b { font-size: 16px; }
 @media (max-width: 520px) { .la-sum.c3 { grid-template-columns: repeat(3, 1fr); gap: 6px; } .la-sum.c3 > div { padding: 6px 7px; } .la-sum.c3 .small { font-size: 11px; } }
+.rl-ck { width: 20px; height: 20px; margin: 0 2px 0 0; align-self: center; flex: none; accent-color: var(--accent, #4c8dff); }
+.rl-pick { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.linkbtn { background: none; border: 0; padding: 4px 0; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+.rl-off { pointer-events: none; }
