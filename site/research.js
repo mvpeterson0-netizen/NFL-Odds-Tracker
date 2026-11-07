@@ -351,7 +351,7 @@
       && (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk)).map((x) => {
         const { v, decision, p, r, mid } = x, cur = { line: v.quote.line, label: x.locked ? "locked pregame quote" : "provisional weekly snapshot", cap: v.quote.cap };
         const price = decision.side === "over" ? v.quote.op : v.quote.up;
-        return { c: { p, r, mid, cur }, rank: decision.edge || -new Date(r.ko).getTime(),
+        return { side: decision.side, c: { p, r, mid, cur }, rank: decision.edge || -new Date(r.ko).getTime(),
           badge: `${x.locked ? "Locked" : "Watchlist"} · ${decision.side === "over" ? "Over" : "Under"}`,
           cells: [`<b>${decision.side === "over" ? "Over" : "Under"} ${num(cur.line)}</b> ${odds(price)} · ${esc(v.quote.book)}`,
             decision.edge != null ? `${num(100 * decision.probability)}% win · ${signed(100 * decision.edge)}% estimated ROI` : fmtTime(v.observed_at)] };
@@ -369,10 +369,17 @@
   // 2026-11-01: he mostly taps it to try the slip, not to log picks). Per browser: localStorage `stix_fd_save` = "1" (save) / "0".
   const fdSave = () => { try { return localStorage.getItem("stix_fd_save") === "1"; } catch { return false; } };
   const setFdSave = (on) => { try { localStorage.setItem("stix_fd_save", on ? "1" : "0"); } catch { /* ignore */ } };
+  // Checkboxes (Michael 2026-11-07): the slip holds only the players whose box is checked, per lead, nothing checked to start.
+  // Selection lives in memory only (per lead; survives the 5-minute refresh, not a reload).
+  const rowKey = (x) => `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}`;
+  const selOf = (id) => (RL.sel = RL.sel || {})[id] || (RL.sel[id] = new Set());
   function fdSlip(t, rows) {
-    const now = Date.now(), side = t.side === "over" ? "o" : "u", legs = [], missing = [];
+    const now = Date.now(), legs = [], missing = [], chosen = selOf(t.id);
     for (const x of rows) {
+      if (!chosen.has(rowKey(x))) continue;
       const { p, r, mid } = x.c;
+      // Leads 1–8 have one side for the whole rule; frozen leads 9–12 carry each row's own recorded side (the models can pick Over or Under per player).
+      const side = (x.side || t.side) === "over" ? "o" : "u";
       const e = ((((D.links || {})[p.id] || {})[mid]) || {}).fanduel, o = e && e[side], g = e && D.games[e.gid];
       let m = null, sel = null;
       if (o && FD_SLIP.test(o.url || "") && g && e.gid === r.gid && new Date(g.ko).getTime() > now) {
@@ -396,19 +403,40 @@
     return `<label class="rl-fdsave small"><input type="checkbox" data-fdsave ${fdSave() ? "checked" : ""}> Also save these to My picks when I tap <span class="muted">(${fdSave() ? "on" : "off: the slip opens, nothing is saved"})</span></label>`;
   }
   function fdSlipBox(t, rows) {
-    if (t.frozen) return ""; // Paper tracking; model sides/prices must never be replaced by current FD quotes.
+    if (t.challenger) return ""; // Lead 13 (learning challenger): no slip button.
+    RL.fdT = t; RL.fdRows = rows;
     const f = fdSlip(t, rows); RL.fdChunks = f.chunks;
-    if (!f.legs.length) return "";
-    const word = t.side === "over" ? "Over" : "Under", many = f.chunks.length > 1;
-    const btns = f.chunks.map((c, k) => `<a class="betbtn${many ? " rl-slip" : ""}" href="${esc(c.url)}" target="_blank" rel="noopener" data-fdall="${esc(t.id)}" data-fdchunk="${k}" title="Opens FanDuel with ${c.legs.length} bets on the slip">${many ? `Slip ${k + 1} · ${c.from === c.to ? `bet ${c.from}` : `bets ${c.from}–${c.to}`} ↗` : `Add all ${f.legs.length} ${word}s to FanDuel slip ↗`}</a>`).join("");
-    return `<div class="betbox rl-fd">${many ? `<span class="muted small rl-fdnote">FanDuel takes up to ${FD_SLIP_MAX} bets per link, so these ${f.legs.length} ${word}s are split into ${f.chunks.length} slips. Open each one.</span><div class="rl-slips">${btns}</div>` : btns}${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}${saveSwitch()}</div>`;
+    const nSel = selOf(t.id).size;
+    const picker = `<span class="small rl-pick"><button type="button" class="linkbtn" data-rlall="1">Select all</button> · <button type="button" class="linkbtn" data-rlall="0">Clear</button> <span class="muted">${nSel} selected</span></span>`;
+    if (!f.legs.length && !f.missing.length) return `<div class="betbox rl-fd">${picker}<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">Check players to add them to the FanDuel slip</span></div>`;
+    if (!f.legs.length) return `<div class="betbox rl-fd">${picker}<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">None of the checked players are on FanDuel</span><span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span></div>`;
+    // Frozen leads 9–12: the slip only opens FanDuel with the recorded side at FanDuel's current line. It never changes the frozen
+    // paper record (side, saved quote), which is written elsewhere and scored on the saved pregame quote.
+    const sides = new Set(f.legs.map((l) => l.side)), word = sides.size > 1 ? "bet" : sides.has("o") ? "Over" : "Under", many = f.chunks.length > 1;
+    const btns = f.chunks.map((c, k) => `<a class="betbtn${many ? " rl-slip" : ""}" href="${esc(c.url)}" target="_blank" rel="noopener" data-fdall="${esc(t.id)}" data-fdchunk="${k}" title="Opens FanDuel with ${c.legs.length} bets on the slip">${many ? `Slip ${k + 1} · ${c.from === c.to ? `bet ${c.from}` : `bets ${c.from}–${c.to}`} ↗` : `Add ${f.legs.length} checked ${word}${f.legs.length > 1 ? "s" : ""} to FanDuel slip ↗`}</a>`).join("");
+    return `<div class="betbox rl-fd">${picker}${many ? `<span class="muted small rl-fdnote">FanDuel takes up to ${FD_SLIP_MAX} bets per link, so these ${f.legs.length} ${word}s are split into ${f.chunks.length} slips. Open each one.</span><div class="rl-slips">${btns}</div>` : btns}${t.frozen ? `<span class="muted small">Opens FanDuel at its current line, which can differ from the saved line shown. The frozen record is not changed.</span>` : ""}${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}${saveSwitch()}</div>`;
   }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("[data-rlall]");
+    if (a && RL.fdT && RL.fdRows) {
+      const s = selOf(RL.fdT.id); s.clear();
+      if (a.dataset.rlall === "1") RL.fdRows.forEach((x) => s.add(rowKey(x)));
+      document.querySelectorAll("[data-rlck]").forEach((el) => { el.checked = s.has(el.dataset.rlck); });
+      refreshSlipBox(); return;
+    }
+  });
   document.addEventListener("click", (e) => {
     // Switch off: FanDuel opens and nothing is saved. Switch on: save only the slip (chunk) that was tapped.
     const b = e.target.closest && e.target.closest("[data-fdall]"); if (!b || !window.STIX_PICKS || !fdSave()) return;
     try { window.STIX_PICKS.recordBets(((RL.fdChunks || [])[+b.dataset.fdchunk || 0] || {}).legs || []); } catch (err) { console.error("picks from FanDuel slip failed", err); }
   });
+  function refreshSlipBox() {
+    const box = document.querySelector(".rl-fd"); if (!box || !RL.fdT || !RL.fdRows) return;
+    box.outerHTML = fdSlipBox(RL.fdT, RL.fdRows);
+  }
   document.addEventListener("change", (e) => {
+    const k = e.target && e.target.matches && e.target.matches("[data-rlck]") ? e.target : null;
+    if (k && RL.fdT) { const s = selOf(RL.fdT.id); if (k.checked) s.add(k.dataset.rlck); else s.delete(k.dataset.rlck); refreshSlipBox(); return; }
     const c = e.target && e.target.matches && e.target.matches("[data-fdsave]") ? e.target : null; if (!c) return;
     setFdSave(c.checked);
     const note = c.parentNode && c.parentNode.querySelector(".muted"); if (note) note.textContent = `(${c.checked ? "on" : "off: the slip opens, nothing is saved"})`;
@@ -428,7 +456,7 @@
     h += `<div class="panel rlist">`;
     for (const x of list.slice(0, 40)) {
       const { p, r, mid, cur } = x.c;
-      h += `<div class="rlrow"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+      h += `<div class="rlrow"><div class="rlhead">${t.challenger ? "" : `<input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(t.id).has(rowKey(x)) ? "checked" : ""}>`}<a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
           <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${x.badge || ""}</span></div>
         <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)} · line from ${esc(cur.label)}</div>
         <div class="rlcells">${x.cells.map((v, k) => `<span><span class="muted small">${heads[k]}</span> ${v}</span>`).join("")}</div></div>`;
