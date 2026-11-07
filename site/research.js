@@ -442,6 +442,8 @@
     const note = c.parentNode && c.parentNode.querySelector(".muted"); if (note) note.textContent = `(${c.checked ? "on" : "off: the slip opens, nothing is saved"})`;
   });
 
+  const PAGE = 10;
+  const pageKey = (t) => `${t.id}|${RL.gid || ""}|${RL.mk || ""}`;
   function body() {
     const t = visibleTabs().find((x) => x.id === RL.tab) || TABS[0];
     const list = compute(t.id);
@@ -452,16 +454,20 @@
     if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
     const heads = HEADS[t.id];
-    h += fdSlipBox(t, list.slice(0, 40));
+    // 10 players per page (Michael 2026-11-07). The FanDuel slip and Select all work on the whole list, not just the page shown.
+    const pages = Math.ceil(list.length / PAGE), key = pageKey(t), pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
+    (RL.pg = RL.pg || {})[key] = pg;
+    h += fdSlipBox(t, list);
     h += `<div class="panel rlist">`;
-    for (const x of list.slice(0, 40)) {
+    for (const x of list.slice(pg * PAGE, pg * PAGE + PAGE)) {
       const { p, r, mid, cur } = x.c;
       h += `<div class="rlrow"><div class="rlhead">${t.challenger ? "" : `<input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(t.id).has(rowKey(x)) ? "checked" : ""}>`}<a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
           <span class="rlstat">${esc(mkt[mid].label)}</span><span class="rlsize">${x.badge || ""}</span></div>
         <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)} · line from ${esc(cur.label)}</div>
         <div class="rlcells">${x.cells.map((v, k) => `<span><span class="muted small">${heads[k]}</span> ${v}</span>`).join("")}</div></div>`;
     }
-    return h + `</div>${list.length > 40 ? `<p class="muted small">Showing the top 40 of ${list.length}.</p>` : ""}`;
+    const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(list.length, pg * PAGE + PAGE)} of ${list.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
+    return h + `</div>${pager}`;
   }
 
   function openInfo(id) {
@@ -503,6 +509,12 @@
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-rtab]"); if (!b) return;
     RL.tab = b.dataset.rtab; redraw();
+  });
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[data-rlpg]"); if (!b) return;
+    const key = pageKey(visibleTabs().find((x) => x.id === RL.tab) || TABS[0]); (RL.pg = RL.pg || {})[key] = (+RL.pg[key] || 0) + (+b.dataset.rlpg);
+    redraw();
+    const top = document.querySelector("#rl .rl-fd") || document.getElementById("rl"); if (top && top.scrollIntoView) top.scrollIntoView({ block: "start" });
   });
   // "Sign in to see all 8": the Google sign-in pop-up (whatsnew.js); signing in there keeps the visitor on Research.
   document.addEventListener("click", (e) => {
