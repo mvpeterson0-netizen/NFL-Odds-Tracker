@@ -486,3 +486,6 @@ tr.gdetail:hover td { background: var(--hover); }
 .rl-pick { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 .linkbtn { background: none; border: 0; padding: 4px 0; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
 .rl-off { pointer-events: none; }
+.rl-pager { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 2px; }
+.rl-pager .linkbtn { text-decoration: none; font-weight: 600; padding: 8px 10px; }
+.rl-pager .linkbtn:disabled { opacity: .35; }
