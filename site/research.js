@@ -462,7 +462,7 @@
     const mks = D.markets, gopts = gameOptions();
     if (RL.gid && !gopts.some(([g]) => g === RL.gid)) RL.gid = ""; // that game started or has no lines: back to all games
     return `<section id="rl"><h2 class="gsec">Leads</h2>
-      <div class="rlgrid rl8" role="tablist">${visibleTabs().map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}${signedIn() ? "" : `<button type="button" class="gchip rl-lock" data-rlsignin>🔒 Sign in to see all ${TABS.length}</button>`}</div>
+      <div class="rlgrid rl8" role="tablist">${visibleTabs().map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}${signedIn() ? "" : `<button type="button" class="gchip rl-lock" data-rlsignin>Connect with Google to see all ${TABS.length}</button>`}</div>
       <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label>
         <label>Game <select id="rl-gid"><option value="">All games</option>${gopts.map(([g, ko]) => `<option value="${esc(g)}" ${g === RL.gid ? "selected" : ""}>${esc(gameLabel(g))} · ${fmtTime(ko)}</option>`).join("")}</select></label></div>
       <div id="rl-body">${body()}</div></section>`;
