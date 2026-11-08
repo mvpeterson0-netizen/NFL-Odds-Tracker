@@ -346,6 +346,17 @@
     }
     return `<div class="pickbox">${head}<div class="pk-btns">${btn("o")}${btn("u")}</div>${note} ${saveBadge()}</div>`;
   }
+  // Inside the "Bet on FanDuel" box (app.js betBox): checkbox "Save to My picks" (on by default, remembered per browser) and
+  // the pick saved for this player/market, with a Remove link. Empty on devices without My picks.
+  function fdOptions(pid, mid) {
+    if (!enabled()) return "";
+    const r = nextRow(pid);
+    const id = r ? `${r.wk}|${pid}|${mid}` : null;
+    const mine = id ? live().find((p) => p.id === id) : null;
+    let on = true; try { on = localStorage.getItem("stix_fd_save") !== "0"; } catch (e) { /* default on */ }
+    const note = mine ? `<div class="betnote small">Saved: <b>${sideWord(mine.side)} ${lineNum(mine.line)}</b> ${oddsTxt(mine.odds)} (${esc(mine.src)}, ${esc(mine.book)}) <button class="betrm" data-del="${esc(id)}" ${mine.saving ? "disabled" : ""}>Remove</button> ${saveBadge()}</div>` : "";
+    return `<label class="betsave"><input type="checkbox" id="fd-save" ${on ? "checked" : ""}> Also save to My picks</label>${note}`;
+  }
   function saveBadge() {
     if (mode() === "acct") {
       if (AC.saving) return `<span class="muted small">· saving…</span>`;
@@ -459,6 +470,8 @@
       const a = [b.dataset.pid, b.dataset.pmid, b.dataset.pick];
       if (enabled()) setPick(a[0], a[1], a[2], true); else if (offer()) askSignIn(...a);
     }));
+    const fs = document.getElementById("fd-save");
+    if (fs) fs.addEventListener("change", () => { try { localStorage.setItem("stix_fd_save", fs.checked ? "1" : "0"); } catch (e) { /* not remembered */ } });
     document.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => removePick(b.dataset.del)));
     const rt = document.getElementById("pk-retry"); if (rt) rt.addEventListener("click", sync);
     const sh = document.getElementById("pk-share");
@@ -509,7 +522,7 @@
   }
   const pickFor = (key) => (mode() === "acct" ? AC.picks.find((p) => p.id === key) || null : null);
   const acctReady = () => mode() === "acct" && AC.loaded;
-  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
+  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, fdOptions, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
   // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
   if (ACC()) ACC().onChange(() => {
     if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }

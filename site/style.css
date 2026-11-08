@@ -245,6 +245,10 @@ details.rgame table { margin-top: 8px; }
 .betbox { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 10px 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
 .betlbl { font-weight: 600; font-size: 14px; }
 .betbtn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); font-weight: 600; white-space: nowrap; }
+.betsave { flex-basis: 100%; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.betsave input { width: 18px; height: 18px; margin: 0; }
+.betnote { flex-basis: 100%; }
+.betrm { padding: 0 8px; min-height: 26px; font-size: 12px; margin-left: 6px; }
 .betbtn:hover { text-decoration: none; background: var(--hover); }
 .betnote { flex-basis: 100%; }
 .betalt { color: var(--accent); }
