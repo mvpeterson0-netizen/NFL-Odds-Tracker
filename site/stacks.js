@@ -138,6 +138,54 @@
     fillDrawer(boxEl);
   });
 
+  // ---------- running hit rate (admin-only, replay on 2025 + 2026 lines) ----------
+  const BE = 0.5238;   // break-even hit rate at -110
+  function hitRate(sid) {
+    if (!admin()) return "";
+    loadAdmin();
+    if (!ADM.rows) return `<p class="muted small">${ADM.err ? esc(ADM.err) : "Loading hit rate…"}</p>`;
+    const row = ADM.rows["series:" + sid], b = row && row.body;
+    if (!b || !Array.isArray(b.weeks) || !b.weeks.length) return `<p class="muted small">No 2025/2026 hit-rate series for this signal yet.</p>`;
+    let W = 0, L = 0, P = 0; const pts = [];
+    for (const x of b.weeks) {
+      W += x.W; L += x.L; P += x.P;
+      if (W + L) pts.push({ s: x.s, w: x.w, h: W / (W + L), n: W + L });
+    }
+    if (!pts.length) return `<p class="muted small">No graded bets in this series yet.</p>`;
+    const tot = (s) => b.weeks.filter((x) => x.s === s).reduce((a, x) => ({ W: a.W + x.W, L: a.L + x.L, P: a.P + x.P, u: a.u + x.u }), { W: 0, L: 0, P: 0, u: 0 });
+    const t25 = tot(2025), t26 = tot(2026);
+    const line = (t) => (t.W + t.L ? `${t.W}–${t.L}${t.P ? "–" + t.P : ""} · ${pctf(t.W / (t.W + t.L))}` : "no bets");
+    // chart: x = each week with bets (2025 then 2026), y = cumulative hit %
+    const w = 320, h = 150, l = 34, r = 8, t = 10, bt = 24;
+    const ys = pts.map((q) => q.h).concat([BE]);
+    let lo = Math.floor((Math.min(...ys) - 0.04) * 20) / 20, hi = Math.ceil((Math.max(...ys) + 0.04) * 20) / 20;
+    lo = Math.max(0, lo); hi = Math.min(1, hi);
+    const X = (i) => l + (pts.length < 2 ? (w - l - r) / 2 : (i * (w - l - r)) / (pts.length - 1));
+    const Y = (v) => t + ((hi - v) / (hi - lo)) * (h - t - bt);
+    const path = pts.map((q, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(q.h).toFixed(1)}`).join(" ");
+    const split = pts.findIndex((q) => q.s === 2026);
+    const grid = [];
+    for (let v = lo; v <= hi + 1e-9; v += 0.05) grid.push(`<line x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="currentColor" stroke-opacity=".12"/><text x="${l - 4}" y="${(Y(v) + 3).toFixed(1)}" text-anchor="end" font-size="9" fill="currentColor" fill-opacity=".6">${Math.round(v * 100)}%</text>`);
+    const last = pts[pts.length - 1];
+    const svg = `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="Cumulative hit rate by week, 2025 and 2026. Now ${pctf(last.h)} over ${last.n} graded bets." style="max-width:520px">
+      ${grid.join("")}
+      <line x1="${l}" x2="${w - r}" y1="${Y(BE).toFixed(1)}" y2="${Y(BE).toFixed(1)}" stroke="#d29922" stroke-dasharray="4 3"/>
+      <text x="${w - r}" y="${(Y(BE) - 3).toFixed(1)}" text-anchor="end" font-size="9" fill="#d29922">break-even 52.4%</text>
+      ${split > 0 ? `<line x1="${((X(split - 1) + X(split)) / 2).toFixed(1)}" x2="${((X(split - 1) + X(split)) / 2).toFixed(1)}" y1="${t}" y2="${h - bt}" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="2 3"/>` : ""}
+      <path d="${path}" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="${X(pts.length - 1).toFixed(1)}" cy="${Y(last.h).toFixed(1)}" r="3.5" fill="#58a6ff"/>
+      <text x="${Math.min(X(pts.length - 1), w - r - 2).toFixed(1)}" y="${(Y(last.h) - 7).toFixed(1)}" text-anchor="end" font-size="10" font-weight="700" fill="currentColor">${pctf(last.h)}</text>
+      <text x="${l}" y="${h - 8}" font-size="9" fill="currentColor" fill-opacity=".7">${pts[0].s} wk ${pts[0].w}</text>
+      ${split > 0 ? `<text x="${((X(split - 1) + X(split)) / 2 - 3).toFixed(1)}" y="${h - 8}" text-anchor="end" font-size="9" fill="currentColor" fill-opacity=".7">2026 starts ▸</text>` : ""}
+      </svg>`;
+    const weekRows = b.weeks.filter((x) => x.W + x.L + x.P).map((x) => `<tr><td>${x.s} wk ${x.w}</td><td>${x.W}–${x.L}${x.P ? "–" + x.P : ""}</td><td>${x.W + x.L ? pctf(x.W / (x.W + x.L)) : "—"}</td><td>${sgn(x.W + x.L ? x.u / (x.W + x.L) : null)}</td></tr>`).join("");
+    return `<div class="sk-hit"><div class="small"><b>Running hit rate</b> <span class="muted">· cumulative, 2025 → 2026 · replay on past lines</span></div>
+      ${svg}
+      <div class="small">2025: <b>${line(t25)}</b> · 2026: <b>${line(t26)}</b> · All: <b>${line({ W, L, P })}</b> · units ${(t25.u + t26.u > 0 ? "+" : "") + (t25.u + t26.u).toFixed(1)}</div>
+      <details class="small"><summary>Week by week</summary><div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Week</th><th>W–L–P</th><th>Hit</th><th>ROI</th></tr></thead><tbody>${weekRows}</tbody></table></div></details>
+      <p class="muted small">${esc(b.note || "")} Hit rate leaves out pushes. Not a forward record: forward results (locked before kickoff) are listed separately.</p></div>`;
+  }
+
   // ---------- slate ----------
   function rows() {
     const s = SS(), out = [];
@@ -186,7 +234,8 @@
         ${ST.sig ? `<button id="sk-clear-sig" class="on" type="button">Signal ${esc(ST.sig)} ✕</button>` : ""}
       </div>
       <p class="small"><b>${rs.length}</b> prop-sides${rs.length > 150 ? " (first 150 shown)" : ""}.</p>
-      <div class="sk-list">${items || `<p class="muted pad">No props match these filters.</p>`}</div></div>`;
+      <div class="sk-list">${items || `<p class="muted pad">No props match these filters.</p>`}</div>
+      ${research()}</div>`;
   }
   function bind() {
     const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("change", fn); };
@@ -212,8 +261,7 @@
       return `<details class="sk-rule"><summary><b>${esc(r.id)}</b> · ${esc(r.label)} <span class="sk-tag sk-${r.status}">${TIER_ICON[r.status]} ${TIER_NAME[r.status]}</span> <span class="muted small">${esc(famLabel(r.family))} · ${SIDE[r.side]}</span></summary>
         <div class="small"><b>Rule</b> (${esc(r.version)}): ${esc(r.rule)}</div>
         <div class="small">Matches <b>${matches[r.id] || 0}</b> upcoming props. ${matches[r.id] ? `<a href="#/stacks/${esc(r.id)}">See them on the slate</a>` : ""}</div>
-        ${adm ? adminDetail(r.id) : `<p class="muted small">Coverage, season splits, game counts, price-based ROI and forward results are private research (admin access only).</p>`}
-        ${adm && f ? "" : ""}</details>`;
+        ${adm ? hitRate(r.id) + adminDetail(r.id) : `<p class="muted small">Coverage, season splits, game counts, price-based ROI and forward results are private research (admin access only).</p>`}</details>`;
     }).join("");
     const fwdHtml = (() => {
       if (!adm) return "";

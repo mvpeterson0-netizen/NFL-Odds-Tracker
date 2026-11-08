@@ -382,7 +382,7 @@
     // Research tab (Michael 2026-10-30): Leads, then Leads Analysis. The Builder, typed search and its results were
     // removed from the page; old #/search/... links just open this page.
     const R = window.STIX_RESEARCH;
-    return `<div class="srch">${R ? R.html() + R.analysis() + (window.STIX_STACKS ? window.STIX_STACKS.research() : "") : `<p class="pad">Research didn't load. Try refreshing.</p>`}</div>`;
+    return `<div class="srch">${R ? R.html() + R.analysis() : `<p class="pad">Research didn't load. Try refreshing.</p>`}</div>`;
   }
   function save() {
     // keep the builder state in the address so Back / refresh / sharing a link restore it
