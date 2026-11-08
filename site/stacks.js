@@ -109,7 +109,7 @@
       out += `<div class="small"><b>Research history</b> <span class="muted">(${esc(h.body.note)})</span></div>
         <div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Market</th><th>Condition</th><th>W–L–P</th><th>Hit</th><th>ROI</th><th>Games</th><th>2025</th><th>2026</th><th>ROI −5¢</th><th>q</th></tr></thead><tbody>${h.body.cells.map(cellRow).join("")}</tbody></table></div>
         <p class="muted small">q = Benjamini–Hochberg across ${h.body.family_size_for_q} cells tried. ${esc(h.body.status_reason || "")}</p>`;
-    } else out += `<p class="muted small">No historical research row for this signal (existing leads keep their own records in Results).</p>`;
+    }
     out += f ? `<div class="small"><b>Forward</b> (locked, graded): ${f.bets} bets · ${f.W}–${f.L}–${f.P} · ROI ${sgn(f.roi)} · ${f.games} games · ${f.weeks} weeks. ${f.qualification.qualified ? "Meets every criterion." : "Not qualified yet."}</div>`
       : `<div class="muted small">Forward: no graded locked bets yet.</div>`;
     return out;
@@ -179,11 +179,11 @@
       ${split > 0 ? `<text x="${((X(split - 1) + X(split)) / 2 - 3).toFixed(1)}" y="${h - 8}" text-anchor="end" font-size="9" fill="currentColor" fill-opacity=".7">2026 starts ▸</text>` : ""}
       </svg>`;
     const weekRows = b.weeks.filter((x) => x.W + x.L + x.P).map((x) => `<tr><td>${x.s} wk ${x.w}</td><td>${x.W}–${x.L}${x.P ? "–" + x.P : ""}</td><td>${x.W + x.L ? pctf(x.W / (x.W + x.L)) : "—"}</td><td>${sgn(x.W + x.L ? x.u / (x.W + x.L) : null)}</td></tr>`).join("");
-    return `<div class="sk-hit"><div class="small"><b>Running hit rate</b> <span class="muted">· cumulative, 2025 → 2026 · replay on past lines</span></div>
+    return `<div class="sk-hit"><div class="small"><b>Running hit rate</b> <span class="muted">· cumulative, 2025 → 2026</span></div>
       ${svg}
       <div class="small">2025: <b>${line(t25)}</b> · 2026: <b>${line(t26)}</b> · All: <b>${line({ W, L, P })}</b> · units ${(t25.u + t26.u > 0 ? "+" : "") + (t25.u + t26.u).toFixed(1)}</div>
       <details class="small"><summary>Week by week</summary><div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Week</th><th>W–L–P</th><th>Hit</th><th>ROI</th></tr></thead><tbody>${weekRows}</tbody></table></div></details>
-      <p class="muted small">${esc(b.note || "")} Hit rate leaves out pushes. Not a forward record: forward results (locked before kickoff) are listed separately.</p></div>`;
+      ${b.note ? `<p class="muted small">${esc(b.note)}</p>` : ""}</div>`;
   }
 
   // ---------- slate ----------
