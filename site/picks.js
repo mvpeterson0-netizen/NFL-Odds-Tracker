@@ -355,7 +355,7 @@
     const mine = id ? live().find((p) => p.id === id) : null;
     let on = true; try { on = localStorage.getItem("stix_fd_save") !== "0"; } catch (e) { /* default on */ }
     const note = mine ? `<div class="betnote small">Saved: <b>${sideWord(mine.side)} ${lineNum(mine.line)}</b> ${oddsTxt(mine.odds)} (${esc(mine.src)}, ${esc(mine.book)}) <button class="betrm" data-del="${esc(id)}" ${mine.saving ? "disabled" : ""}>Remove</button> ${saveBadge()}</div>` : "";
-    return `<label class="betsave"><input type="checkbox" id="fd-save" ${on ? "checked" : ""}> Also save to My picks</label>${note}`;
+    return `<label class="betsave"><input type="checkbox" id="fd-save" ${on ? "checked" : ""}> Save to My picks</label>${note}`;
   }
   function saveBadge() {
     if (mode() === "acct") {
