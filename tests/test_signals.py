@@ -293,3 +293,33 @@ class ModelOverlap(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RemoteLedger(unittest.TestCase):
+    def test_failed_remote_read_never_locks_or_saves(self):
+        import os
+        from pipeline import supa
+        saves = []
+        o_read, o_sync = supa.read_signal_research, supa.sync_signal_research
+        supa.read_signal_research = lambda rid: ("error", None)
+        supa.sync_signal_research = lambda rows, log: saves.extend(rows)
+        try:
+            players = {"p1": {"pos": "RB"}}
+            r = row("g1", 10, {"rush_yds": good_market(cap=NOW - timedelta(minutes=5))})
+            res = S.update({**out_with(), "games": {"g1": {"spread": 4}}}, players, {"p1": [r]}, NOW, log=[])
+            self.assertEqual(res["locked_total"], 0)
+            self.assertEqual(saves, [])
+        finally:
+            supa.read_signal_research, supa.sync_signal_research = o_read, o_sync
+
+    def test_remote_mode_saves_ledger_row_not_a_file(self):
+        from pipeline import supa
+        saves = []
+        o_read, o_sync = supa.read_signal_research, supa.sync_signal_research
+        supa.read_signal_research = lambda rid: ("absent", None)
+        supa.sync_signal_research = lambda rows, log: saves.extend(rows)
+        try:
+            S.update({**out_with(), "games": {}}, {}, {}, NOW, log=[])
+        finally:
+            supa.read_signal_research, supa.sync_signal_research = o_read, o_sync
+        self.assertEqual([(s["id"], s["kind"]) for s in saves], [("ledger", "ledger")])

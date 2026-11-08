@@ -4,8 +4,8 @@
 --     The pipeline writes with the service key (supabase/…/signal_research?on_conflict=id); the app never reads it directly.
 --   * admin_signal_research(): returns every row, only for accounts in public.admins (same server-side check as 006_admin.sql).
 create table if not exists public.signal_research (
-  id text primary key,                       -- 'forward' and 'display' (written by the pipeline), 'history:<signal id>' (seeded by hand)
-  kind text not null check (kind in ('forward', 'history', 'display')),
+  id text primary key,                       -- 'forward', 'display' and 'ledger' (the locked-snapshot ledger; written by the pipeline), 'history:<signal id>' (seeded by hand)
+  kind text not null check (kind in ('forward', 'history', 'display', 'ledger')),
   body jsonb not null,
   updated_utc timestamptz not null default now()
 );

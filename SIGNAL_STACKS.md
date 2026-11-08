@@ -13,7 +13,7 @@ The frozen models (T11/T12) and Challenger (T13) are shown as a separate "model 
 
 ## Workflow
 1. Watchlist: recomputed every build from the latest pending capture; not persisted.
-2. Lock: at the first eligible pregame capture (graded `ok`, before kickoff, within 4 h of it, after the ledger start, line and both prices present) the record is written once to `data/signal_stacks.json` with line, book, both prices, inputs, timestamps, rule versions and registry hash. It is never recomputed; repeat captures change nothing.
+2. Lock (ledger stored in the admin-only Supabase row `ledger` when the service key is set, never in git; local runs use a git-ignored file; a failed remote read means no locks that run): at the first eligible pregame capture (graded `ok`, before kickoff, within 4 h of it, after the ledger start, line and both prices present) the record is written once to `data/signal_stacks.json` with line, book, both prices, inputs, timestamps, rule versions and registry hash. It is never recomputed; repeat captures change nothing.
 3. If the rule registry changes without a version bump, no new locks are written.
 4. Forward grading: `forward_report` (writes `data/challenger/signal_stacks_forward.json`, and the admin-only `signal_research` table when a service key exists) grades each locked prop-side once for groups 1, 2, 3+ clean, 3+ with opposition, weekly and cumulative, against a same-market/side baseline, and compares frozen-model picks with the stack-supported subset (coverage lost).
 

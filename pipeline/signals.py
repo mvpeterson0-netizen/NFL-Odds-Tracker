@@ -342,12 +342,39 @@ def _watch_quote(m, now):
     return {k: s.get(k) for k in ("line", "op", "up", "book", "cap")}
 
 
-def update(out, players, rows, now, path=LEDGER_PATH, log=None):
+def _load_ledger(path, log):
+    """-> (saved, mode).  mode 'remote' (admin-only Supabase row 'ledger'; used when SUPABASE_SERVICE_KEY is set and no explicit
+    path is given), 'local' (a file; tests / local runs, git-ignored), or 'blocked' (remote read failed: never create or
+    overwrite a ledger on a failed read)."""
+    if path is not None:
+        return read_json(path, None), "local"
+    from . import supa
+    status, body = supa.read_signal_research("ledger")
+    if status == "nokey":
+        return read_json(LEDGER_PATH, None), "local"
+    if status == "error":
+        if log is not None:
+            log.append("signal stacks: admin ledger could not be read; no new locks this run (watchlist only)")
+        return None, "blocked"
+    return body, "remote"
+
+
+def _save_ledger(saved, mode, path, log):
+    if mode == "local":
+        write_json(path or LEDGER_PATH, saved)
+    elif mode == "remote":
+        from . import supa
+        supa.sync_signal_research([{"id": "ledger", "kind": "ledger", "body": saved}], log if log is not None else [])
+
+
+def update(out, players, rows, now, path=None, log=None):
     """Lock new eligible props and rebuild the watchlist.  Returns the PUBLIC payload (display fields only)."""
     sha = registry_sha()
-    saved = read_json(path, None)
-    new_ledger = saved is None
-    if new_ledger:
+    saved, mode = _load_ledger(path, log)
+    new_ledger = saved is None and mode != "blocked"
+    if mode == "blocked":
+        saved = {"version": None, "frozen_at": iso(now), "registry_sha256": sha, "records": {}}   # in-memory only, never saved
+    elif new_ledger:
         saved = {"version": VERSION, "frozen_at": iso(now), "registry_sha256": sha, "records": {}}
     locking_ok = saved.get("version") == VERSION and saved.get("registry_sha256") == sha
     if not locking_ok and log is not None:
@@ -383,8 +410,8 @@ def update(out, players, rows, now, path=LEDGER_PATH, log=None):
                     ev = evaluate_prop(pid, p, r, mid, wq, rows.get(pid, []), games.get(r["gid"]), out, now)
                     watch[key] = {"gid": r["gid"], "pid": pid, "mid": mid, "wk": r["wk"], "ko": r["ko"], "evaluated_utc": iso(now),
                                   "quote": wq, **ev, "stack": stack_summary(ev["signals"])}
-    if changed:
-        write_json(path, saved)
+    if changed and mode != "blocked":
+        _save_ledger(saved, mode, path, log)
     props = {}
     for k, rec in watch.items():
         if rec["signals"]:
@@ -534,16 +561,21 @@ def _model_records():
 FORWARD_PATH = DATA / "challenger" / "signal_stacks_forward.json"
 
 
-def publish_forward(rows, now, log=None, path=LEDGER_PATH, forward_path=FORWARD_PATH, display=None):
+def publish_forward(rows, now, log=None, path=None, forward_path=None, display=None):
     """Forward grading wired into the Challenger outputs: writes data/challenger/signal_stacks_forward.json (only when the
     numbers change) and sends the same report to the admin-only Supabase table `signal_research` (never to the site payload)."""
-    records = read_json(path, {}).get("records", {})
+    saved, mode = _load_ledger(path, log)
+    if mode == "blocked":
+        return None
+    records = (saved or {}).get("records", {})
     report = forward_report(records, rows, _model_records())
     report["registry_sha256"] = registry_sha()
     body = json.dumps(report, sort_keys=True)
-    old = read_json(forward_path, None)
-    if old is None or json.dumps({k: v for k, v in old.items() if k != "generated_utc"}, sort_keys=True) != body:
-        write_json(forward_path, {**report, "generated_utc": iso(now)})
+    if mode == "local":    # remote mode: the report goes ONLY to the admin table (nothing is written into git)
+        fp = forward_path or FORWARD_PATH
+        old = read_json(fp, None)
+        if old is None or json.dumps({k: v for k, v in old.items() if k != "generated_utc"}, sort_keys=True) != body:
+            write_json(fp, {**report, "generated_utc": iso(now)})
     try:
         from . import supa
         rows_out = [{"id": "forward", "kind": "forward", "body": {**report, "generated_utc": iso(now)}}]

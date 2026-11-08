@@ -70,3 +70,19 @@ def sync_signal_research(rows: list[dict], log: list[str]) -> None:
         log.append(f"signal stacks: admin sync failed (HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:160]})")
     except Exception as e:
         log.append(f"signal stacks: admin sync failed ({type(e).__name__}: {e})"[:300])
+
+
+def read_signal_research(row_id: str):
+    """Read one admin-only row body with the service key.  Returns (status, body): ('absent', None) when the row does not
+    exist, ('ok', body), or ('error', None) on any failure (the caller must then NOT create or overwrite state)."""
+    key = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    if not key:
+        return "nokey", None
+    h = _headers(key); h.pop("Prefer", None)
+    req = urllib.request.Request(f"{SUPABASE_URL}/rest/v1/signal_research?id=eq.{row_id}&select=body", headers=h)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            rows = json.loads(r.read().decode())
+    except Exception:
+        return "error", None
+    return ("ok", rows[0]["body"]) if rows else ("absent", None)
