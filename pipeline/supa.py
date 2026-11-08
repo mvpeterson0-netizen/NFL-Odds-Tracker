@@ -52,3 +52,21 @@ def sync_games(games: list[dict], log: list[str], announce: bool = False) -> Non
         log.append(f"accounts db: kickoff sync failed (HTTP {e.code}: {body})")
     except Exception as e:  # network trouble etc.; try again next run
         log.append(f"accounts db: kickoff sync failed ({type(e).__name__}: {e})"[:300])
+
+
+def sync_signal_research(rows: list[dict], log: list[str]) -> None:
+    """Admin-only research rows for Signal Stacks (table `signal_research`, supabase/014_signal_research.sql).
+    Rows: {id, kind, body}.  The table has row-level security and no public policy; only admin_signal_research() reads it.
+    Skipped without SUPABASE_SERVICE_KEY; a failure is logged and never stops the run."""
+    key = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    if not key or not rows:
+        return
+    req = urllib.request.Request(f"{SUPABASE_URL}/rest/v1/signal_research?on_conflict=id",
+                                 data=json.dumps(rows).encode(), headers=_headers(key), method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=30):
+            pass
+    except urllib.error.HTTPError as e:
+        log.append(f"signal stacks: admin sync failed (HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:160]})")
+    except Exception as e:
+        log.append(f"signal stacks: admin sync failed ({type(e).__name__}: {e})"[:300])

@@ -826,6 +826,13 @@ def build(log):
     out['challenger_diagnostics'] = build_diagnostics(out, frozen_records, challenger_records)
     from .challenger_theses import weekly_rollup
     out['research_theses'] = weekly_rollup(diagnostics=out['challenger_diagnostics'])
+    try:  # Signal Stacks (display fields only in the payload; research detail stays admin-only). Never stops the build.
+        from . import signals
+        out['signal_stacks'] = signals.update(out, players, rows_out, now, log=log)
+        signals.publish_forward(rows_out, now, log)
+    except Exception as ex:
+        out['signal_stacks'] = None
+        log.append(f"build: signal stacks skipped ({type(ex).__name__}: {str(ex)[:80]})")
     write_json(OUT_PATH, out, compact=True)
     log.append(f"build: {len(players)} players ({n_extra} extra, with lines but not slotted), {len(slots)} slot rows, {len(leads)} leads, "
                f"{len(unmatched)} unmatched lines, {d.unmapped_snaps} unmapped snap rows")
