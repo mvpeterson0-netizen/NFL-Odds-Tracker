@@ -253,10 +253,9 @@
     const base = resultRows(true);
     const pos = [...new Set(weeks.flatMap((w) => rowsFor(w)).filter(graded).map((r) => r.pos).filter(Boolean))].sort();
     const opt = (v, cur, l) => `<option value="${esc(v)}" ${String(v) === String(cur) ? "selected" : ""}>${esc(l)}</option>`;
-    let h = `<div class="c-bar">
-      <label class="small">Position <select id="c-rpos">${opt("", C.rPos, "All")}${pos.map((p) => opt(p, C.rPos, p)).join("")}</select></label>
-      <label class="small">Market <select id="c-rmk">${opt("", C.rMk, "All")}${MK.map((m) => opt(m.id, C.rMk, m.label)).join("")}</select></label>
-      <label class="small">Week <select id="c-rwk">${opt("", C.rWk, "All")}${weeks.map((w) => opt(w, C.rWk, `Week ${w}`)).join("")}</select></label></div>`;
+    const chips = (key, cur, items) => items.map(([v, l]) => `<button class="gchip ${String(v) === String(cur) ? "on" : ""}" data-rf="${key}" data-v="${esc(v)}"><b>${esc(l)}</b></button>`).join("");
+    const row = (label, key, cur, items) => `<div class="crow"><span class="small muted">${label}</span><div class="crow-s">${chips(key, cur, [["", "All"]].concat(items))}</div></div>`;
+    let h = row("Position", "pos", C.rPos, pos.map((p) => [p, p])) + row("Market", "mk", C.rMk, MK.map((m) => [m.id, m.short])) + row("Week", "wk", C.rWk, weeks.slice().reverse().map((w) => [w, String(w)]));
     if (!base.length) return h + `<p class="muted pad">No graded lines for these filters yet.</p>` + foot;
     const n = base.length, o = base.filter((r) => r.outcome === "over").length, u = base.filter((r) => r.outcome === "under").length, p = n - o - u;
     const to = tally(bets(base, "over")), tu = tally(bets(base, "under"));
@@ -271,7 +270,7 @@
     arr.sort((a, b) => b.xs[0].r.wk - a.xs[0].r.wk);
     h += arr.map(({ k, xs, n: gn, o: go, u: gu }) => {
       const id = `${by}|${k}`, wo = tally(bets(xs.map((x) => x.r), "over")), wu = tally(bets(xs.map((x) => x.r), "under"));
-      return `<details class="la-wk cw" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small">${gn} · <span class="over">${go} Over</span> · <span class="under">${gu} Under</span>${gn - go - gu ? ` · ${gn - go - gu} push` : ""}</span><span class="small"><span class="${wo.U > 0 ? "la-pos" : wo.U < 0 ? "la-neg" : ""}">Over ${wo.n ? unitsTxt(wo.U) : "—"}</span> · <span class="${wu.U > 0 ? "la-pos" : wu.U < 0 ? "la-neg" : ""}">Under ${wu.n ? unitsTxt(wu.U) : "—"}</span></span></summary>
+      return `<details class="la-wk cw" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small cw-c"><span class="over">${go} O</span> · <span class="under">${gu} U</span>${gn - go - gu ? ` · ${gn - go - gu} P` : ""}</span><span class="small cw-u"><span class="${wo.U > 0 ? "la-pos" : wo.U < 0 ? "la-neg" : ""}">O ${wo.n ? unitsTxt(wo.U) : "—"}</span> · <span class="${wu.U > 0 ? "la-pos" : wu.U < 0 ? "la-neg" : ""}">U ${wu.n ? unitsTxt(wu.U) : "—"}</span></span></summary>
         ${sectionRows(xs, "over", "Over")}${sectionRows(xs, "under", "Under")}${sectionRows(xs, "push", "Pushes")}</details>`;
     }).join("");
     return h + `<p class="muted small">Graded on the line captured about 1 hour before kickoff (DraftKings first, then FanDuel). "1 u on each" is what 1 unit on every line's Over (or Under) would have returned at the saved odds; lines without both prices saved are left out of those two figures only. A player in the box score with no entry for a stat counts as 0 for it. Research tool only.</p>`;
@@ -424,9 +423,7 @@
     const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
     on("c-retry", "click", () => { C.err = ""; start(); rerender(); });
     on("c-wk", "change", (e) => { C.wk = +e.target.value; C.game = ""; C.note = ""; start(); rerender(); });
-    on("c-rwk", "change", (e) => { C.rWk = e.target.value; rerender(); });
-    on("c-rmk", "change", (e) => { C.rMk = e.target.value; rerender(); });
-    on("c-rpos", "change", (e) => { C.rPos = e.target.value; rerender(); });
+    document.querySelectorAll("[data-rf]").forEach((b) => b.addEventListener("click", () => { C[{ pos: "rPos", mk: "rMk", wk: "rWk" }[b.dataset.rf]] = b.dataset.v; rerender(); }));
     document.querySelectorAll("[data-cg]").forEach((b) => b.addEventListener("click", () => { C.game = b.dataset.cg; rerender(); }));
     document.querySelectorAll("[data-cm]").forEach((b) => b.addEventListener("click", () => { C.mk = b.dataset.cm; rerender(); }));
     document.querySelectorAll("[data-rb]").forEach((b) => b.addEventListener("click", () => { C.rBy = b.dataset.rb; rerender(); }));
