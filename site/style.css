@@ -535,3 +535,5 @@ tr.gdetail:hover td { background: var(--hover); }
 .sk-pill { font-weight: 700; padding: 1px 8px; border-radius: 10px; border: 2px solid var(--muted); } .sk-pill.sk-over { border-color: var(--over); } .sk-pill.sk-under { border-color: var(--under); }
 .sk-mini { font-size: 11px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--muted); } .sk-mini.sk-opp { border-style: double; border-width: 3px; }
 .sk-research { margin: 16px 0; padding: 0 12px; } .sk-rule { border-top: 1px solid var(--line); padding: 8px 0; } .sk-rule summary { cursor: pointer; }
+
+.sk-rowwrap { display: flex; align-items: flex-start; gap: 8px; } .sk-rowwrap .sk-row { flex: 1 1 auto; min-width: 0; } .sk-ck { margin-top: 14px; }

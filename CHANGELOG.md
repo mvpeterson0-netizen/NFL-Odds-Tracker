@@ -141,3 +141,4 @@
 - 2026-11-08 · PR: CFB Results text · CFB side only, UI only. Removed "1 u on each" from the summary boxes; weekly O/U counts are uncolored with the larger one in bold.
 - 2026-11-08 · PR: Signal Stacks units + weekly dots · UI only, admin-only. Signal Stacks tables show units instead of ROI (rule week table, research history, forward lines/groups; baseline ROI unchanged); hit-rate charts add a dot per week (green at/above 52.4%, red below).
 - 2026-11-08 · PR: CFB Results week filter removed · CFB side only, UI only. Results keep Position and Market buttons; weeks are already listed below.
+- 2026-11-08 · PR: Signal Stacks FanDuel slip · Each slate row has a checkbox; Select all / Clear and an "Add N checked ... to FanDuel slip" button (up to 25 bets per link, same as Research), optional save to My picks via the same switch. Admin-only page; UI only.

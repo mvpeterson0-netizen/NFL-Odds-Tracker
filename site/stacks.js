@@ -189,6 +189,70 @@
       ${b.note ? `<p class="muted small">${esc(b.note)}</p>` : ""}</div>`;
   }
 
+  // ---------- FanDuel slip (Michael 2026-11-08): same checkboxes + slip button as the Research tab ----------
+  // Selection is in memory only (survives filter changes, not a reload). The slip covers every checked prop-side in the filtered slate
+  // (not just the first 150 shown). Each bet opens at FanDuel's own current line, as on Research. Players without a FanDuel link in the
+  // latest pull, or whose game has started, are named, not added. Tapping also saves to My picks only when the shared switch is on.
+  const FD_SLIP_MAX = 25, FD_SLIP = /^https:\/\/sportsbook\.fanduel\.com\/addToBetslip\?/;
+  const SEL = new Set(); let FDROWS = [], FDCHUNKS = [];
+  const rkey = (r) => `${r.key}|${r.side}`;
+  const fdSave = () => { try { return localStorage.getItem("stix_fd_save") === "1"; } catch { return false; } };
+  function fdSlip(rs) {
+    const now = Date.now(), legs = [], missing = [];
+    for (const r of rs) {
+      if (!SEL.has(rkey(r))) continue;
+      const side = r.side === "over" ? "o" : "u";
+      const e = ((((D.links || {})[r.pid] || {})[r.mid]) || {}).fanduel, o = e && e[side], g = e && D.games[e.gid];
+      let m = null, sel = null;
+      if (o && FD_SLIP.test(o.url || "") && g && e.gid === r.gid && new Date(g.ko).getTime() > now) {
+        try { const u = new URL(o.url); m = u.searchParams.get("marketId"); sel = u.searchParams.get("selectionId"); } catch (err) { m = sel = null; }
+      }
+      if (m && sel && /^[\d.]+$/.test(m) && /^\d+$/.test(sel)) legs.push({ pid: r.pid, mid: r.mid, side, m, sel, bet: { line: e.point, odds: o.price, cap: e.cap, gid: e.gid, book: "FanDuel", src: "Bet on FD" } });
+      else missing.push(`${r.pl.name} (${MK[r.mid] || r.mid})`);
+    }
+    const chunks = [];
+    for (let i = 0; i < legs.length; i += FD_SLIP_MAX) {
+      const part = legs.slice(i, i + FD_SLIP_MAX);
+      chunks.push({ legs: part, from: i + 1, to: i + part.length, url: "https://sportsbook.fanduel.com/addToBetslip?" + part.map((l, j) => `marketId[${j}]=${l.m}&selectionId[${j}]=${l.sel}`).join("&") });
+    }
+    return { legs, missing, chunks };
+  }
+  function saveSwitch() {
+    if (!window.STIX_PICKS || !window.STIX_PICKS.enabled()) return "";
+    return `<label class="rl-fdsave small"><input type="checkbox" data-skfdsave ${fdSave() ? "checked" : ""}> Also save these to My picks when I tap <span class="muted">(${fdSave() ? "on" : "off: the slip opens, nothing is saved"})</span></label>`;
+  }
+  function slipBox(rs) {
+    FDROWS = rs;
+    const f = fdSlip(rs); FDCHUNKS = f.chunks;
+    const picker = `<span class="small rl-pick"><button type="button" class="linkbtn" data-skall="1">Select all</button> · <button type="button" class="linkbtn" data-skall="0">Clear</button> <span class="muted">${SEL.size} selected</span></span>`;
+    if (!f.legs.length && !f.missing.length) return `<div class="betbox rl-fd sk-fd">${picker}<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">Check props to add them to the FanDuel slip</span></div>`;
+    if (!f.legs.length) return `<div class="betbox rl-fd sk-fd">${picker}<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">None of the checked props are on FanDuel</span><span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span></div>`;
+    const sides = new Set(f.legs.map((l) => l.side)), word = sides.size > 1 ? "bet" : sides.has("o") ? "Over" : "Under", many = f.chunks.length > 1;
+    const btns = f.chunks.map((c, k) => `<a class="betbtn${many ? " rl-slip" : ""}" href="${esc(c.url)}" target="_blank" rel="noopener" data-skfd="${k}" title="Opens FanDuel with ${c.legs.length} bets on the slip">${many ? `Slip ${k + 1} · ${c.from === c.to ? `bet ${c.from}` : `bets ${c.from}–${c.to}`} ↗` : `Add ${f.legs.length} checked ${word}${f.legs.length > 1 ? "s" : ""} to FanDuel slip ↗`}</a>`).join("");
+    return `<div class="betbox rl-fd sk-fd">${picker}${many ? `<span class="muted small rl-fdnote">FanDuel takes up to ${FD_SLIP_MAX} bets per link, so these ${f.legs.length} bets are split into ${f.chunks.length} slips. Open each one.</span><div class="rl-slips">${btns}</div>` : btns}<span class="muted small">Opens FanDuel at its current line, which can differ from the quote shown.</span>${f.missing.length ? `<span class="muted small">Not on FanDuel: ${esc(f.missing.join(", "))}</span>` : ""}${saveSwitch()}</div>`;
+  }
+  function refreshSlip() { const b = document.querySelector(".sk-fd"); if (b) b.outerHTML = slipBox(FDROWS); }
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest && e.target.closest("[data-skall]");
+    if (t && FDROWS.length) {
+      if (t.dataset.skall === "1") FDROWS.forEach((r) => SEL.add(rkey(r))); else FDROWS.forEach((r) => SEL.delete(rkey(r)));
+      document.querySelectorAll("[data-skck]").forEach((el) => { el.checked = SEL.has(el.dataset.skck); });
+      refreshSlip(); return;
+    }
+    // Switch off: FanDuel opens and nothing is saved. Switch on: save only the slip (chunk) that was tapped.
+    const b = e.target.closest && e.target.closest("[data-skfd]");
+    if (b && window.STIX_PICKS && fdSave()) {
+      try { window.STIX_PICKS.recordBets(((FDCHUNKS || [])[+b.dataset.skfd || 0] || {}).legs || []); } catch (err) { console.error("picks from FanDuel slip failed", err); }
+    }
+  });
+  document.addEventListener("change", (e) => {
+    const k = e.target && e.target.matches && e.target.matches("[data-skck]") ? e.target : null;
+    if (k) { if (k.checked) SEL.add(k.dataset.skck); else SEL.delete(k.dataset.skck); refreshSlip(); return; }
+    const c = e.target && e.target.matches && e.target.matches("[data-skfdsave]") ? e.target : null; if (!c) return;
+    try { localStorage.setItem("stix_fd_save", c.checked ? "1" : "0"); } catch { /* ignore */ }
+    const note = c.parentNode && c.parentNode.querySelector(".muted"); if (note) note.textContent = `(${c.checked ? "on" : "off: the slip opens, nothing is saved"})`;
+  });
+
   // ---------- slate ----------
   function rows() {
     const s = SS(), out = [];
@@ -216,7 +280,7 @@
     if (arg && /^[A-Z0-9]+$/.test(arg) && ST.sig !== arg) ST.sig = arg;
     const rs = rows(), qn = Object.values(s.props).filter((p) => ["over", "under"].some((sd) => counts(p.stack, sd, "qualified").support > 0)).length;
     const sel = (id, opts, v) => `<select id="${id}" aria-label="${id}">${opts.map(([k, l]) => `<option value="${k}" ${String(k) === String(v) ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
-    const items = rs.slice(0, 150).map((r) => `<a class="sk-row" href="#/player/${esc(r.pid)}" data-sk-open="${esc(r.pid)}|${esc(r.mid)}">
+    const items = rs.slice(0, 150).map((r) => `<div class="sk-rowwrap"><input type="checkbox" class="rl-ck sk-ck" data-skck="${esc(rkey(r))}" aria-label="Add ${esc(r.pl.name)} ${esc(MK[r.mid] || r.mid)} ${r.side} to the FanDuel slip" ${SEL.has(rkey(r)) ? "checked" : ""}><a class="sk-row" href="#/player/${esc(r.pid)}" data-sk-open="${esc(r.pid)}|${esc(r.mid)}">
       <div class="sk-r1"><b>${esc(r.pl.name)}</b> <span class="muted small">${esc(r.pl.team)} · ${esc(r.pl.pos)} · ${esc(MK[r.mid] || r.mid)}</span>${stateBadge(r.p.state)}</div>
       <div class="sk-r2"><span class="sk-pill sk-${r.side}">${SIDE[r.side]} ${num(r.p.quote.line)}</span> <span class="small">${odds(r.side === "over" ? r.p.quote.op : r.p.quote.up)}</span>
         <span class="sk-cnt"><b>${r.c.support}</b> support · ${r.c.oppose} ${r.c.oppose === 1 ? "opposes" : "oppose"}</span>
@@ -224,7 +288,7 @@
         ${r.leads ? `<span class="sk-leads" title="Existing leads on this side">Leads ${r.leads}</span>` : ""}</div>
       <div class="sk-r3">${r.p.chips.filter((c) => c.side === r.side).map((c) => `<span class="sk-mini sk-${c.status}">${TIER_ICON[c.status]} ${esc(c.label)}</span>`).join("")}
         ${r.p.chips.filter((c) => c.side !== r.side).map((c) => `<span class="sk-mini sk-opp" title="Opposes ${SIDE[r.side]}">⇄ ${esc(c.label)}</span>`).join("")}</div>
-      <div class="muted small">${esc(r.g.away)} @ ${esc(r.g.home)} · ${fmtTime(r.g.ko)}</div></a>`).join("");
+      <div class="muted small">${esc(r.g.away)} @ ${esc(r.g.home)} · ${fmtTime(r.g.ko)}</div></a></div>`).join("");
     return `<div class="sk-page pad"><h2>Signal Stacks <span class="muted small">slate</span></h2>
       <p class="muted small">Upcoming props where distinct families of evidence agree. <b>${qn}</b> props have a Qualified family right now${qn ? "" : " — none yet, so counts include Testing rules"}. Lead count is separate from family count.</p>
       <div class="sk-filters" role="group" aria-label="Filters">
@@ -237,6 +301,7 @@
         ${ST.sig ? `<button id="sk-clear-sig" class="on" type="button">Signal ${esc(ST.sig)} ✕</button>` : ""}
       </div>
       <p class="small"><b>${rs.length}</b> prop-sides${rs.length > 150 ? " (first 150 shown)" : ""}.</p>
+      ${slipBox(rs)}
       <div class="sk-list">${items || `<p class="muted pad">No props match these filters.</p>`}</div>
       ${research()}</div>`;
   }
