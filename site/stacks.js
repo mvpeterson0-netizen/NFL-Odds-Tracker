@@ -19,6 +19,7 @@
   const BASIS = { active: ["qualified", "testing"], qualified: ["qualified"], testing: ["testing"], all: ["qualified", "testing", "context"] };
   const pctf = (v, d = 1) => (v == null ? "—" : `${(v * 100).toFixed(d)}%`);
   const sgn = (v, d = 1) => (v == null ? "—" : `${v > 0 ? "+" : ""}${(v * 100).toFixed(d)}%`);
+  const un = (v, d = 1) => (v == null ? "—" : `${v > 0 ? "+" : ""}${Number(v).toFixed(d)}u`);
   let IDX = null, IDXKEY = null;
 
   function index() {
@@ -97,7 +98,7 @@
   function cellRow(c) {
     const s = c.season_roi || {};
     const sp = (y) => (s[y] ? `${s[y].W}–${s[y].L} (${sgn(s[y].roi)})` : "—");
-    return `<tr><td>${esc(c.market)}</td><td>${esc(c.condition)}</td><td>${c.W}–${c.L}–${c.P}</td><td>${pctf(c.hit)}</td><td>${sgn(c.roi)}</td><td>${c.games}</td><td>${sp(2025)}</td><td>${sp(2026)}</td><td>${sgn(c.roi_shaded_5)}</td><td>${c.bh_q == null ? "—" : c.bh_q.toFixed(2)}</td></tr>`;
+    return `<tr><td>${esc(c.market)}</td><td>${esc(c.condition)}</td><td>${c.W}–${c.L}–${c.P}</td><td>${pctf(c.hit)}</td><td>${un(c.units)}</td><td>${c.games}</td><td>${sp(2025)}</td><td>${sp(2026)}</td><td>${sgn(c.roi_shaded_5)}</td><td>${c.bh_q == null ? "—" : c.bh_q.toFixed(2)}</td></tr>`;
   }
   function adminDetail(sid) {
     if (!admin()) return `<p class="muted small">Season splits, sample sizes and ROI are private research (admin access only).</p>`;
@@ -107,10 +108,10 @@
     let out = "";
     if (h) {
       out += `<div class="small"><b>Research history</b> <span class="muted">(${esc(h.body.note)})</span></div>
-        <div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Market</th><th>Condition</th><th>W–L–P</th><th>Hit</th><th>ROI</th><th>Games</th><th>2025</th><th>2026</th><th>ROI −5¢</th><th>q</th></tr></thead><tbody>${h.body.cells.map(cellRow).join("")}</tbody></table></div>
+        <div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Market</th><th>Condition</th><th>W–L–P</th><th>Hit</th><th>Units</th><th>Games</th><th>2025</th><th>2026</th><th>ROI −5¢</th><th>q</th></tr></thead><tbody>${h.body.cells.map(cellRow).join("")}</tbody></table></div>
         <p class="muted small">q = Benjamini–Hochberg across ${h.body.family_size_for_q} cells tried. ${esc(h.body.status_reason || "")}</p>`;
     }
-    out += f ? `<div class="small"><b>Forward</b> (locked, graded): ${f.bets} bets · ${f.W}–${f.L}–${f.P} · ROI ${sgn(f.roi)} · ${f.games} games · ${f.weeks} weeks. ${f.qualification.qualified ? "Meets every criterion." : "Not qualified yet."}</div>`
+    out += f ? `<div class="small"><b>Forward</b> (locked, graded): ${f.bets} bets · ${f.W}–${f.L}–${f.P} · ${un(f.units)} · ${f.games} games · ${f.weeks} weeks. ${f.qualification.qualified ? "Meets every criterion." : "Not qualified yet."}</div>`
       : `<div class="muted small">Forward: no graded locked bets yet.</div>`;
     return out;
   }
@@ -149,23 +150,24 @@
     let W = 0, L = 0, P = 0; const pts = [];
     for (const x of b.weeks) {
       W += x.W; L += x.L; P += x.P;
-      if (W + L) pts.push({ s: x.s, w: x.w, h: W / (W + L), n: W + L });
+      if (W + L) pts.push({ s: x.s, w: x.w, h: W / (W + L), n: W + L, wk: x.W + x.L ? x.W / (x.W + x.L) : null, wn: x.W + x.L, ww: x.W, wl: x.L });
     }
     if (!pts.length) return `<p class="muted small">No graded bets in this series yet.</p>`;
     const tot = (s) => b.weeks.filter((x) => x.s === s).reduce((a, x) => ({ W: a.W + x.W, L: a.L + x.L, P: a.P + x.P, u: a.u + x.u }), { W: 0, L: 0, P: 0, u: 0 });
     const t25 = tot(2025), t26 = tot(2026);
     const line = (t) => (t.W + t.L ? `${t.W}–${t.L}${t.P ? "–" + t.P : ""} · ${pctf(t.W / (t.W + t.L))}` : "no bets");
     // chart: x = each week with bets (2025 then 2026), y = cumulative hit %
-    const w = 320, h = 150, l = 34, r = 8, t = 10, bt = 24;
-    const ys = pts.map((q) => q.h).concat([BE]);
-    let lo = Math.floor((Math.min(...ys) - 0.04) * 20) / 20, hi = Math.ceil((Math.max(...ys) + 0.04) * 20) / 20;
+    const w = 320, h = 170, l = 34, r = 8, t = 10, bt = 24;
+    const ys = pts.map((q) => q.h).concat(pts.filter((q) => q.wk != null).map((q) => q.wk), [BE]);
+    let lo = Math.floor((Math.min(...ys) - 0.04) * 10) / 10, hi = Math.ceil((Math.max(...ys) + 0.04) * 10) / 10;
     lo = Math.max(0, lo); hi = Math.min(1, hi);
     const X = (i) => l + (pts.length < 2 ? (w - l - r) / 2 : (i * (w - l - r)) / (pts.length - 1));
     const Y = (v) => t + ((hi - v) / (hi - lo)) * (h - t - bt);
     const path = pts.map((q, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(q.h).toFixed(1)}`).join(" ");
     const split = pts.findIndex((q) => q.s === 2026);
     const grid = [];
-    for (let v = lo; v <= hi + 1e-9; v += 0.05) grid.push(`<line x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="currentColor" stroke-opacity=".12"/><text x="${l - 4}" y="${(Y(v) + 3).toFixed(1)}" text-anchor="end" font-size="9" fill="currentColor" fill-opacity=".6">${Math.round(v * 100)}%</text>`);
+    const stp = hi - lo > 0.6 ? 0.2 : hi - lo > 0.3 ? 0.1 : 0.05;
+    for (let v = lo; v <= hi + 1e-9; v += stp) grid.push(`<line x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="currentColor" stroke-opacity=".12"/><text x="${l - 4}" y="${(Y(v) + 3).toFixed(1)}" text-anchor="end" font-size="9" fill="currentColor" fill-opacity=".6">${Math.round(v * 100)}%</text>`);
     const last = pts[pts.length - 1];
     const svg = `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="Cumulative hit rate by week, 2025 and 2026. Now ${pctf(last.h)} over ${last.n} graded bets." style="max-width:520px">
       ${grid.join("")}
@@ -173,16 +175,17 @@
       <text x="${w - r}" y="${(Y(BE) - 3).toFixed(1)}" text-anchor="end" font-size="9" fill="#d29922">break-even 52.4%</text>
       ${split > 0 ? `<line x1="${((X(split - 1) + X(split)) / 2).toFixed(1)}" x2="${((X(split - 1) + X(split)) / 2).toFixed(1)}" y1="${t}" y2="${h - bt}" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="2 3"/>` : ""}
       <path d="${path}" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linejoin="round"/>
+      ${pts.filter((q) => q.wk != null).map((q) => `<circle cx="${X(pts.indexOf(q)).toFixed(1)}" cy="${Y(q.wk).toFixed(1)}" r="2.6" fill="${q.wk >= BE ? "#3fb950" : "#f85149"}" fill-opacity=".85"><title>${q.s} wk ${q.w}: ${q.ww}–${q.wl} (${pctf(q.wk)}) that week</title></circle>`).join("")}
       <circle cx="${X(pts.length - 1).toFixed(1)}" cy="${Y(last.h).toFixed(1)}" r="3.5" fill="#58a6ff"/>
       <text x="${Math.min(X(pts.length - 1), w - r - 2).toFixed(1)}" y="${(Y(last.h) - 7).toFixed(1)}" text-anchor="end" font-size="10" font-weight="700" fill="currentColor">${pctf(last.h)}</text>
       <text x="${l}" y="${h - 8}" font-size="9" fill="currentColor" fill-opacity=".7">${pts[0].s} wk ${pts[0].w}</text>
       ${split > 0 ? `<text x="${((X(split - 1) + X(split)) / 2 - 3).toFixed(1)}" y="${h - 8}" text-anchor="end" font-size="9" fill="currentColor" fill-opacity=".7">2026 starts ▸</text>` : ""}
       </svg>`;
-    const weekRows = b.weeks.filter((x) => x.W + x.L + x.P).map((x) => `<tr><td>${x.s} wk ${x.w}</td><td>${x.W}–${x.L}${x.P ? "–" + x.P : ""}</td><td>${x.W + x.L ? pctf(x.W / (x.W + x.L)) : "—"}</td><td>${sgn(x.W + x.L ? x.u / (x.W + x.L) : null)}</td></tr>`).join("");
-    return `<div class="sk-hit"><div class="small"><b>Running hit rate</b> <span class="muted">· cumulative, 2025 → 2026</span></div>
+    const weekRows = b.weeks.filter((x) => x.W + x.L + x.P).map((x) => `<tr><td>${x.s} wk ${x.w}</td><td>${x.W}–${x.L}${x.P ? "–" + x.P : ""}</td><td>${x.W + x.L ? pctf(x.W / (x.W + x.L)) : "—"}</td><td>${un(x.u)}</td></tr>`).join("");
+    return `<div class="sk-hit"><div class="small"><b>Running hit rate</b> <span class="muted">· line = cumulative, dots = that week (green at or above 52.4%)</span></div>
       ${svg}
-      <div class="small">2025: <b>${line(t25)}</b> · 2026: <b>${line(t26)}</b> · All: <b>${line({ W, L, P })}</b> · units ${(t25.u + t26.u > 0 ? "+" : "") + (t25.u + t26.u).toFixed(1)}</div>
-      <details class="small"><summary>Week by week</summary><div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Week</th><th>W–L–P</th><th>Hit</th><th>ROI</th></tr></thead><tbody>${weekRows}</tbody></table></div></details>
+      <div class="small">2025: <b>${line(t25)}</b> · 2026: <b>${line(t26)}</b> · All: <b>${line({ W, L, P })}</b> · ${un(t25.u + t26.u)}</div>
+      <details class="small"><summary>Week by week</summary><div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Week</th><th>W–L–P</th><th>Hit</th><th>Units</th></tr></thead><tbody>${weekRows}</tbody></table></div></details>
       ${b.note ? `<p class="muted small">${esc(b.note)}</p>` : ""}</div>`;
   }
 
@@ -266,10 +269,10 @@
     const fwdHtml = (() => {
       if (!adm) return "";
       if (!fwd) return `<p class="muted small">Forward grading: no graded locked props yet. The ledger starts at the first pregame lock after launch.</p>`;
-      const grp = (basis) => Object.entries(fwd.bases[basis] || {}).map(([g, v]) => `<tr><td>${esc(g)}</td><td>${v.bets}</td><td>${v.W}–${v.L}–${v.P}</td><td>${pctf(v.hit)}</td><td>${sgn(v.roi)}</td><td>${sgn(v.matched_baseline.roi)}</td><td>${v.games}</td></tr>`).join("");
+      const grp = (basis) => Object.entries(fwd.bases[basis] || {}).map(([g, v]) => `<tr><td>${esc(g)}</td><td>${v.bets}</td><td>${v.W}–${v.L}–${v.P}</td><td>${pctf(v.hit)}</td><td>${un(v.units)}</td><td>${sgn(v.matched_baseline.roi)}</td><td>${v.games}</td></tr>`).join("");
       const cmp = Object.entries(fwd.frozen_model_vs_stack || {}).map(([k, v]) => `<tr><td>${k.toUpperCase()}</td><td>${v.model_picks.bets}</td><td>${sgn(v.model_picks.roi)}</td><td>${v.with_stack_support.bets}</td><td>${sgn(v.with_stack_support.roi)}</td><td>${v.coverage_lost == null ? "—" : pctf(v.coverage_lost, 0)}</td></tr>`).join("");
       return `<section class="sk-fwd"><h4>Forward results (Challenger · locked before kickoff)</h4><p class="muted small">Separate from exploratory history above. One bet per prop-side per group; saved prices; one unit.</p>
-        <div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Active families</th><th>Bets</th><th>W–L–P</th><th>Hit</th><th>ROI</th><th>Matched baseline ROI</th><th>Games</th></tr></thead><tbody>${grp("active") || `<tr><td colspan="7" class="muted">No graded bets yet</td></tr>`}</tbody></table></div>
+        <div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Active families</th><th>Bets</th><th>W–L–P</th><th>Hit</th><th>Units</th><th>Matched baseline ROI</th><th>Games</th></tr></thead><tbody>${grp("active") || `<tr><td colspan="7" class="muted">No graded bets yet</td></tr>`}</tbody></table></div>
         <div class="sk-scroll"><table class="sk-t small"><thead><tr><th>Frozen model</th><th>Picks</th><th>ROI</th><th>With stack support</th><th>ROI</th><th>Coverage lost</th></tr></thead><tbody>${cmp || `<tr><td colspan="6" class="muted">No graded model picks yet</td></tr>`}</tbody></table></div></section>`;
     })();
     return `<section class="sk-research" id="sk-research"><h3>Signal Stacks <span class="muted small">rules, status, matches</span></h3>
