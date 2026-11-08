@@ -441,3 +441,4 @@ run_utc,finished_utc,trigger,status,built,summary,error
 2026-11-08T09:00:25Z,2026-11-08T09:00:55Z,workflow_dispatch,error,no,,RuntimeError: nflverse schedule download failed: HTTP 504
 2026-11-08T09:30:18Z,2026-11-08T09:33:03Z,workflow_dispatch,error,no,"cfb results: 4 game(s) fetched | espn: 397 status notes, headlines for 78 players (unchanged) | game script: nflverse play-by-play timestamp unavailable; kept previous",RuntimeError: nflverse stats download failed: HTTP 504
 2026-11-08T10:00:20Z,2026-11-08T10:03:44Z,workflow_dispatch,error,no,"weather: 24 Open-Meteo calls | espn: 397 status notes, headlines for 78 players (unchanged) | game script: nflverse play-by-play timestamp unavailable; kept previous",RuntimeError: nflverse stats download failed: HTTP 504
+2026-11-08T10:30:21Z,2026-11-08T10:30:59Z,workflow_dispatch,error,no,,RuntimeError: nflverse schedule download failed: HTTP 504
