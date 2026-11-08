@@ -255,7 +255,7 @@
     const opt = (v, cur, l) => `<option value="${esc(v)}" ${String(v) === String(cur) ? "selected" : ""}>${esc(l)}</option>`;
     const chips = (key, cur, items) => items.map(([v, l]) => `<button class="gchip ${String(v) === String(cur) ? "on" : ""}" data-rf="${key}" data-v="${esc(v)}"><b>${esc(l)}</b></button>`).join("");
     const row = (label, key, cur, items) => `<div class="crow"><span class="small muted">${label}</span><div class="crow-s">${chips(key, cur, [["", "All"]].concat(items))}</div></div>`;
-    let h = row("Position", "pos", C.rPos, pos.map((p) => [p, p])) + row("Market", "mk", C.rMk, MK.map((m) => [m.id, m.short])) + row("Week", "wk", C.rWk, weeks.slice().reverse().map((w) => [w, String(w)]));
+    let h = row("Position", "pos", C.rPos, pos.map((p) => [p, p])) + row("Market", "mk", C.rMk, MK.map((m) => [m.id, m.short]));
     if (!base.length) return h + `<p class="muted pad">No graded lines for these filters yet.</p>` + foot;
     const n = base.length, o = base.filter((r) => r.outcome === "over").length, u = base.filter((r) => r.outcome === "under").length, p = n - o - u;
     const to = tally(bets(base, "over")), tu = tally(bets(base, "under"));
