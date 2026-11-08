@@ -219,13 +219,12 @@
     return { W, L, P, U, n, hit: n ? (100 * W) / n : null, roi: n ? (100 * U) / n : null };
   }
   function resultRows(skipGame) {
-    const q = norm(C.q), out = [];
+    const out = [];
     for (const w of weeksList()) {
       if (C.rWk !== "" && w !== +C.rWk) continue;
       for (const r of rowsFor(w)) {
         if (!graded(r) || (C.rMk && r.mk.id !== C.rMk) || (C.rPos && r.pos !== C.rPos)) continue;
         if (!skipGame && C.rGame && r.g.game_id !== C.rGame) continue;
-        if (q && !(r.key.includes(q) || norm(teamSchool(r)).includes(q) || norm(teamAbbr(r)).includes(q))) continue;
         out.push(r);
       }
     }
@@ -251,16 +250,13 @@
   const sideTxt = (t) => (t.n ? `${unitsTxt(t.U)} · ROI ${roiTxt(t.roi)}` : "—");
   function results() {
     const weeks = weeksList();
-    const base = resultRows(false);
-    const gamesInWeek = C.rWk === "" ? [] : C.games.filter((g) => g.week === +C.rWk && g.status === "final");
-    if (C.rGame && !gamesInWeek.some((g) => g.game_id === C.rGame)) C.rGame = "";
+    const base = resultRows(true);
     const pos = [...new Set(weeks.flatMap((w) => rowsFor(w)).filter(graded).map((r) => r.pos).filter(Boolean))].sort();
     const opt = (v, cur, l) => `<option value="${esc(v)}" ${String(v) === String(cur) ? "selected" : ""}>${esc(l)}</option>`;
     let h = `<div class="c-bar">
-      <label class="small">Stat <select id="c-rmk">${opt("", C.rMk, "All stats")}${MK.map((m) => opt(m.id, C.rMk, m.label)).join("")}</select></label>
-      <label class="small">Pos <select id="c-rpos">${opt("", C.rPos, "All")}${pos.map((p) => opt(p, C.rPos, p)).join("")}</select></label>
-      <label class="small">Week <select id="c-rwk">${opt("", C.rWk, "All weeks")}${weeks.map((w) => opt(w, C.rWk, `Week ${w}`)).join("")}</select></label>
-      <label class="small">Game <select id="c-rgame" ${C.rWk === "" ? "disabled" : ""}>${opt("", C.rGame, "All games")}${gamesInWeek.map((g) => opt(g.game_id, C.rGame, matchup(g))).join("")}</select></label>${searchBox}</div>`;
+      <label class="small">Position <select id="c-rpos">${opt("", C.rPos, "All")}${pos.map((p) => opt(p, C.rPos, p)).join("")}</select></label>
+      <label class="small">Market <select id="c-rmk">${opt("", C.rMk, "All")}${MK.map((m) => opt(m.id, C.rMk, m.label)).join("")}</select></label>
+      <label class="small">Week <select id="c-rwk">${opt("", C.rWk, "All")}${weeks.map((w) => opt(w, C.rWk, `Week ${w}`)).join("")}</select></label></div>`;
     if (!base.length) return h + `<p class="muted pad">No graded lines for these filters yet.</p>` + foot;
     const n = base.length, o = base.filter((r) => r.outcome === "over").length, u = base.filter((r) => r.outcome === "under").length, p = n - o - u;
     const to = tally(bets(base, "over")), tu = tally(bets(base, "under"));
@@ -268,17 +264,14 @@
     h += `<div class="la-sum c3"><div><span class="muted small">Graded lines</span><b>${n}</b><span class="muted small">${p ? `${p} push${p === 1 ? "" : "es"}` : "no pushes"}</span></div>
       <div><span class="muted small">Over finished</span><b>${o} · ${pct(o, n)}</b><span class="small ${cls(to)}">1 u on each: ${sideTxt(to)}</span></div>
       <div><span class="muted small">Under finished</span><b>${u} · ${pct(u, n)}</b><span class="small ${cls(tu)}">1 u on each: ${sideTxt(tu)}</span></div></div>`;
-    const opts = [["week", "Week"], ["game", "Game"], ["team", "Team"], ["player", "Player"]].concat(C.rMk === "" ? [["stat", "Stat"]] : []);
-    const by = opts.some(([k]) => k === C.rBy) ? C.rBy : "week";
-    h += `<div class="c-bar"><span class="small muted">Group by</span><span class="mtabs">${opts.map(([k, l]) => `<button class="gchip ${by === k ? "on" : ""}" data-rb="${k}"><b>${l}</b></button>`).join("")}</span></div>`;
-    const keyOf = { week: (x) => `Week ${x.r.wk}`, game: (x) => `${matchup(x.r.g)} (wk ${x.r.wk})`, team: (x) => teamSchool(x.r) || "(unknown team)", player: (x) => x.r.name, stat: (x) => x.r.mk.label }[by];
+    const by = "week", keyOf = (x) => `Week ${x.r.wk}`;
     const groups = new Map(), xsAll = lineRows(base);
     for (const x of xsAll) (groups.get(keyOf(x)) || groups.set(keyOf(x), []).get(keyOf(x))).push(x);
     const arr = [...groups].map(([k, xs]) => ({ k, xs, n: xs.length, o: xs.filter((x) => x.r.outcome === "over").length, u: xs.filter((x) => x.r.outcome === "under").length }));
-    arr.sort(by === "week" ? (a, b) => b.xs[0].r.wk - a.xs[0].r.wk : (a, b) => b.n - a.n || a.k.localeCompare(b.k));
+    arr.sort((a, b) => b.xs[0].r.wk - a.xs[0].r.wk);
     h += arr.map(({ k, xs, n: gn, o: go, u: gu }) => {
-      const id = `${by}|${k}`;
-      return `<details class="la-wk" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small">${gn} · <span class="over">${go} Over</span> · <span class="under">${gu} Under</span>${gn - go - gu ? ` · ${gn - go - gu} push` : ""}</span></summary>
+      const id = `${by}|${k}`, wo = tally(bets(xs.map((x) => x.r), "over")), wu = tally(bets(xs.map((x) => x.r), "under"));
+      return `<details class="la-wk cw" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small">${gn} · <span class="over">${go} Over</span> · <span class="under">${gu} Under</span>${gn - go - gu ? ` · ${gn - go - gu} push` : ""}</span><span class="small"><span class="${wo.U > 0 ? "la-pos" : wo.U < 0 ? "la-neg" : ""}">Over ${wo.n ? unitsTxt(wo.U) : "—"}</span> · <span class="${wu.U > 0 ? "la-pos" : wu.U < 0 ? "la-neg" : ""}">Under ${wu.n ? unitsTxt(wu.U) : "—"}</span></span></summary>
         ${sectionRows(xs, "over", "Over")}${sectionRows(xs, "under", "Under")}${sectionRows(xs, "push", "Pushes")}</details>`;
     }).join("");
     return h + `<p class="muted small">Graded on the line captured about 1 hour before kickoff (DraftKings first, then FanDuel). "1 u on each" is what 1 unit on every line's Over (or Under) would have returned at the saved odds; lines without both prices saved are left out of those two figures only. A player in the box score with no entry for a stat counts as 0 for it. Research tool only.</p>`;
@@ -431,9 +424,8 @@
     const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
     on("c-retry", "click", () => { C.err = ""; start(); rerender(); });
     on("c-wk", "change", (e) => { C.wk = +e.target.value; C.game = ""; C.note = ""; start(); rerender(); });
-    on("c-rwk", "change", (e) => { C.rWk = e.target.value; C.rGame = ""; rerender(); });
+    on("c-rwk", "change", (e) => { C.rWk = e.target.value; rerender(); });
     on("c-rmk", "change", (e) => { C.rMk = e.target.value; rerender(); });
-    on("c-rgame", "change", (e) => { C.rGame = e.target.value; rerender(); });
     on("c-rpos", "change", (e) => { C.rPos = e.target.value; rerender(); });
     document.querySelectorAll("[data-cg]").forEach((b) => b.addEventListener("click", () => { C.game = b.dataset.cg; rerender(); }));
     document.querySelectorAll("[data-cm]").forEach((b) => b.addEventListener("click", () => { C.mk = b.dataset.cm; rerender(); }));
