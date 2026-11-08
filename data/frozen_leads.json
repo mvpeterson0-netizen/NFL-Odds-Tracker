@@ -20621,6 +20621,1372 @@
    },
    "wk": 8
   },
+  "2026_09_ARI_SEA|00-0033908|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06702275498534394,
+     "probability": 0.5361656629528345,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.037653058898629244,
+     "probability": 0.5214077559639878,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0.4,
+    "line": 2.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5259594617046021,
+    "mean3_ratio": 1.0666666666666667,
+    "mean5_ratio": 0.8800000000000001,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.08823529411764706,
+    "share_change": -0.045956869060023345,
+    "snap_change": 0.15000000000000002,
+    "surprise": -0.6666666666666667,
+    "usage_delta": -4.243474981966029,
+    "usage_last": 8.823529411764707
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033908",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 2.5,
+    "op": -126.0,
+    "up": -101.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0033908|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.013255520130279086,
+     "probability": 0.5256489285287298,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.030926040095111462,
+     "probability": 0.5162356608839126,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0.2857142857142857,
+    "line": 24.5,
+    "line_delta_ratio": -0.14035087719298245,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.0476190476190477,
+    "mean5_ratio": 0.8571428571428571,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.08823529411764706,
+    "share_change": -0.045956869060023345,
+    "snap_change": 0.15000000000000002,
+    "surprise": -0.7529411764705882,
+    "usage_delta": -4.243474981966029,
+    "usage_last": 8.823529411764707
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033908",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 24.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0035289|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.055348464141012466,
+     "probability": 0.5575425848292141,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.0551308191413602,
+     "probability": 0.5574276025652469,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 0.9567430025445293,
+    "line": 196.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5,
+    "mean3_ratio": 0.9567430025445293,
+    "mean5_ratio": 0.9567430025445293,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.42,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 42.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0035289",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 196.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0035289|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.02014678631360145,
+     "probability": 0.5064941732581867,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.007412742846076625,
+     "probability": 0.5207399202151217,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 0,
+    "line": 5.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5105400733589106,
+    "mean3_ratio": 0,
+    "mean5_ratio": 0,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.0,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 42.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0035289",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 5.5,
+    "op": -117.0,
+    "up": -107.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0035704|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.11193724503324254,
+     "probability": 0.5899009797594197,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.13441242103428253,
+     "probability": 0.6018244299383753,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 1.1491442542787287,
+    "line": 204.5,
+    "line_delta_ratio": null,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.0317848410757946,
+    "mean5_ratio": 1.0317848410757946,
+    "nprior": 2,
+    "rise3": null,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0035704",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 204.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0035704|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.02028520478159812,
+     "probability": 0.521904143247186,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.00041322356681705585,
+     "probability": 0.532930408815968,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 0,
+    "line": 7.5,
+    "line_delta_ratio": null,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 0.8666666666666667,
+    "mean5_ratio": 0.8666666666666667,
+    "nprior": 2,
+    "rise3": null,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0035704",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 7.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0037263|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.21074535905469083,
+     "probability": 0.5605302588216161,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.18263974827543183,
+     "probability": 0.5475184019793665,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 2.0,
+    "line": 2.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5631341600901917,
+    "mean3_ratio": 1.2,
+    "mean5_ratio": 1.04,
+    "nprior": 8,
+    "rise3": 1.0,
+    "share": 0.12195121951219512,
+    "share_change": 0.06512335002447908,
+    "snap_change": 0.09999999999999998,
+    "surprise": 1.5,
+    "usage_delta": 0.6666666666666643,
+    "usage_last": 59.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037263",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 2.5,
+    "op": -148.0,
+    "up": 116.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0037263|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.16092081794550395,
+     "probability": 0.615887570083765,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.12536501828691926,
+     "probability": 0.5970246341146567,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 2.6666666666666665,
+    "line": 16.5,
+    "line_delta_ratio": null,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.696969696969697,
+    "mean5_ratio": 1.2121212121212122,
+    "nprior": 8,
+    "rise3": 1.0,
+    "share": 0.12195121951219512,
+    "share_change": 0.06512335002447908,
+    "snap_change": 0.09999999999999998,
+    "surprise": 1.6938775510204085,
+    "usage_delta": 0.6666666666666643,
+    "usage_last": 59.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037263",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 16.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0037263|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.22185893838828785,
+     "probability": 0.6455103825447559,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.36338905985805403,
+     "probability": 0.7202810127551984,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 2.9696969696969697,
+    "line": 49.5,
+    "line_delta_ratio": 2.6666666666666665,
+    "market_p": 0.5,
+    "mean3_ratio": 1.3737373737373737,
+    "mean5_ratio": 1.0222222222222221,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.44,
+    "share_change": 0.0885357779475427,
+    "snap_change": 0.09999999999999998,
+    "surprise": 5,
+    "usage_delta": 0.6666666666666643,
+    "usage_last": 59.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037263",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 49.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0037744|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.052382388138878966,
+     "probability": 0.5011344705423233,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.04873202395370568,
+     "probability": 0.49939620188271694,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.0769230769230769,
+    "line": 6.5,
+    "line_delta_ratio": -0.13333333333333333,
+    "market_p": 0.550561797752809,
+    "mean3_ratio": 1.2307692307692308,
+    "mean5_ratio": 1.2307692307692308,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.1951219512195122,
+    "share_change": -0.0640619594989254,
+    "snap_change": 0.016666666666666607,
+    "surprise": -0.1923076923076923,
+    "usage_delta": -5.153192925041218,
+    "usage_last": 19.51219512195122
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037744",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 6.5,
+    "op": -140.0,
+    "up": 110.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0037744|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.05118063619881186,
+     "probability": 0.5599747314330119,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.0335929488237261,
+     "probability": 0.5506055895603027,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.152,
+    "line": 62.5,
+    "line_delta_ratio": -0.14965986394557823,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.2586666666666668,
+    "mean5_ratio": 1.0655999999999999,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.1951219512195122,
+    "share_change": -0.0640619594989254,
+    "snap_change": 0.016666666666666607,
+    "surprise": -0.0608695652173914,
+    "usage_delta": -5.153192925041218,
+    "usage_last": 19.51219512195122
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037744",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 62.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0038543|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.03564323877162057,
+     "probability": 0.6059157538041431,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.008232636603508148,
+     "probability": 0.5898788454817205,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0.8,
+    "line": 7.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4487060137776951,
+    "mean3_ratio": 1.2,
+    "mean5_ratio": 0.9866666666666667,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.3235294117647059,
+    "share_change": -0.03932619746771493,
+    "snap_change": 0.1266666666666666,
+    "surprise": -0.3076923076923076,
+    "usage_delta": 2.7879636308877593,
+    "usage_last": 32.35294117647059
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038543",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 7.5,
+    "op": 110.0,
+    "up": -141.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0038543|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.01611018075324311,
+     "probability": 0.519790847903947,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.022754464686676634,
+     "probability": 0.5162806601655293,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t9": {
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2486772486772486,
+    "line": 94.5,
+    "line_delta_ratio": -0.05970149253731343,
+    "market_p": 0.5,
+    "mean3_ratio": 1.417989417989418,
+    "mean5_ratio": 1.2275132275132274,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.3235294117647059,
+    "share_change": -0.03932619746771493,
+    "snap_change": 0.1266666666666666,
+    "surprise": -0.08290155440414504,
+    "usage_delta": 2.7879636308877593,
+    "usage_last": 32.35294117647059
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038543",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 94.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0038559|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.11778549431651264,
+     "probability": 0.638049230661357,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.1301867780990571,
+     "probability": 0.6451280750522514,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.7777777777777777,
+    "line": 4.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4620082487309644,
+    "mean3_ratio": 1.1851851851851851,
+    "mean5_ratio": 1.2000000000000002,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.36585365853658536,
+    "share_change": 0.18589550926897316,
+    "snap_change": -0.09666666666666668,
+    "surprise": 1.0,
+    "usage_delta": 1.918512087185281,
+    "usage_last": 36.58536585365854
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038559",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 4.5,
+    "op": 104.0,
+    "up": -133.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0038559|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.13808338771012507,
+     "probability": 0.5987073745773643,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.20493658834085315,
+     "probability": 0.6338765938665152,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 2.288659793814433,
+    "line": 48.5,
+    "line_delta_ratio": -0.18487394957983194,
+    "market_p": 0.5021058838394474,
+    "mean3_ratio": 1.3608247422680413,
+    "mean5_ratio": 1.3319587628865979,
+    "nprior": 8,
+    "rise3": 1.0,
+    "share": 0.36585365853658536,
+    "share_change": 0.18589550926897316,
+    "snap_change": -0.09666666666666668,
+    "surprise": 1.8461538461538463,
+    "usage_delta": 1.918512087185281,
+    "usage_last": 36.58536585365854
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038559",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 48.5,
+    "op": -113.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0039041|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.11361677656078628,
+     "probability": 0.5485796928870867,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.10904226821866114,
+     "probability": 0.5463262405018035,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.3333333333333333,
+    "line": 1.5,
+    "line_delta_ratio": -0.4,
+    "market_p": 0.5351457951824201,
+    "mean3_ratio": 1.7777777777777777,
+    "mean5_ratio": 1.7333333333333334,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.0975609756097561,
+    "share_change": 0.023682807741818412,
+    "snap_change": -0.16333333333333333,
+    "surprise": -0.33333333333333337,
+    "usage_delta": 3.7772139801645137,
+    "usage_last": 9.75609756097561
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039041",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 1.5,
+    "op": -131.0,
+    "up": 103.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0039041|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.11240389065680123,
+     "probability": 0.5997753696168007,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.13690677090400394,
+     "probability": 0.6129865999804998,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0.6896551724137931,
+    "line": 14.5,
+    "line_delta_ratio": -0.12121212121212122,
+    "market_p": 0.48945992664108945,
+    "mean3_ratio": 1.264367816091954,
+    "mean5_ratio": 1.806896551724138,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.0975609756097561,
+    "share_change": 0.023682807741818412,
+    "snap_change": -0.16333333333333333,
+    "surprise": -0.7058823529411764,
+    "usage_delta": 3.7772139801645137,
+    "usage_last": 9.75609756097561
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039041",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 14.5,
+    "op": -107.0,
+    "up": -117.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0039165|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.014783789588463936,
+     "probability": 0.590188061727182,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03799589845016138,
+     "probability": 0.559491925169153,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 2.0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4513606919604918,
+    "mean3_ratio": 2.0,
+    "mean5_ratio": 2.0,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.11764705882352941,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 37.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039165",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 1.5,
+    "op": 109.0,
+    "up": -139.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0039165|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.026616875410013785,
+     "probability": 0.5227427891316593,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.012164903474908506,
+     "probability": 0.5305040333190306,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 0.9230769230769231,
+    "line": 6.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5084288604180714,
+    "mean3_ratio": 0.9230769230769231,
+    "mean5_ratio": 0.9230769230769231,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.11764705882352941,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 37.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039165",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 6.5,
+    "op": -116.0,
+    "up": -108.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0039165|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.002255784785271442,
+     "probability": 0.5271101514341963,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03346671314638627,
+     "probability": 0.5106213590924752,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 0.6865671641791045,
+    "line": 33.5,
+    "line_delta_ratio": 0.17543859649122806,
+    "market_p": 0.5,
+    "mean3_ratio": 0.6865671641791045,
+    "mean5_ratio": 0.6865671641791045,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.35294117647058826,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 37.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039165",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 33.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0039793|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.011322208026366853,
+     "probability": 0.4815820038220794,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.014156553035260977,
+     "probability": 0.48293169192155283,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.8,
+    "line": 2.5,
+    "line_delta_ratio": -0.2857142857142857,
+    "market_p": 0.550561797752809,
+    "mean3_ratio": 1.2,
+    "mean5_ratio": 1.04,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.14705882352941177,
+    "share_change": -0.005383473840421815,
+    "snap_change": 0.05666666666666664,
+    "surprise": -0.4,
+    "usage_delta": 4.213257457076724,
+    "usage_last": 14.705882352941178
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039793",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 2.5,
+    "op": -140.0,
+    "up": 110.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0039793|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.007028303501201982,
+     "probability": 0.5332625777493545,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.001662341895556363,
+     "probability": 0.5379297762031692,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.9019607843137255,
+    "line": 25.5,
+    "line_delta_ratio": -0.16393442622950818,
+    "market_p": 0.49157113958192844,
+    "mean3_ratio": 1.0588235294117647,
+    "mean5_ratio": 0.8862745098039216,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.14705882352941177,
+    "share_change": -0.005383473840421815,
+    "snap_change": 0.05666666666666664,
+    "surprise": -0.11538461538461542,
+    "usage_delta": 4.213257457076724,
+    "usage_last": 14.705882352941178
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039793",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 25.5,
+    "op": -108.0,
+    "up": -116.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0040648|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.03693960814209052,
+     "probability": 0.6115784970192564,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.008294278993804749,
+     "probability": 0.42724333855669683,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 2.0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5997896704837579,
+    "mean3_ratio": 0.8888888888888888,
+    "mean5_ratio": 0.6666666666666666,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.17647058823529413,
+    "share_change": 0.12789302516497744,
+    "snap_change": 0.32000000000000006,
+    "surprise": 5,
+    "usage_delta": 6.168134886804963,
+    "usage_last": 17.647058823529413
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040648",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 1.5,
+    "op": -174.0,
+    "up": 136.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0040648|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.04549964656480765,
+     "probability": 0.5569484098522807,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.025696393796194483,
+     "probability": 0.5463990135175989,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.4857142857142858,
+    "line": 17.5,
+    "line_delta_ratio": -0.18604651162790697,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 0.7428571428571429,
+    "mean5_ratio": 0.5142857142857142,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.17647058823529413,
+    "share_change": 0.12789302516497744,
+    "snap_change": 0.32000000000000006,
+    "surprise": 5,
+    "usage_delta": 6.168134886804963,
+    "usage_last": 17.647058823529413
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040648",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 17.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0041070|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0946638125935122,
+     "probability": 0.6550397914716197,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.0401842477214196,
+     "probability": 0.6224395699216527,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 1.5,
+    "line_delta_ratio": 1.0,
+    "market_p": 0.43619928526382173,
+    "mean3_ratio": 0,
+    "mean5_ratio": 0.3333333333333333,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.04878048780487805,
+    "share_change": 0.012548603746907035,
+    "snap_change": 0.3833333333333333,
+    "surprise": -1,
+    "usage_delta": -2.99575821845175,
+    "usage_last": 4.878048780487805
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041070",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 1.5,
+    "op": 116.0,
+    "up": -149.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0041070|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.03213505721914445,
+     "probability": 0.5047716687230299,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.024159829272746736,
+     "probability": 0.5478064203086785,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 14.5,
+    "line_delta_ratio": 0.2608695652173913,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 0,
+    "mean5_ratio": 0.5,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.04878048780487805,
+    "share_change": 0.012548603746907035,
+    "snap_change": 0.3833333333333333,
+    "surprise": -1,
+    "usage_delta": -2.99575821845175,
+    "usage_last": 4.878048780487805
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041070",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 14.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0041512|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04563551394206089,
+     "probability": 0.5465164150930079,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.002047749902306384,
+     "probability": 0.5738222157560217,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.3333333333333333,
+    "line": 1.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5400039315903282,
+    "mean3_ratio": 0.8888888888888888,
+    "mean5_ratio": 1.0,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.11764705882352941,
+    "share_change": 0.042006033182503774,
+    "snap_change": 0.11333333333333329,
+    "surprise": 0.5,
+    "usage_delta": -3.0,
+    "usage_last": 48.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041512",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 1.5,
+    "op": -134.0,
+    "up": 105.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0041512|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.000974699613251806,
+     "probability": 0.5343623699743072,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.007147340823239645,
+     "probability": 0.5387067171845236,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.7619047619047619,
+    "line": 10.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 0.7301587301587302,
+    "mean5_ratio": 0.6904761904761905,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.11764705882352941,
+    "share_change": 0.042006033182503774,
+    "snap_change": 0.11333333333333329,
+    "surprise": 0.1428571428571428,
+    "usage_delta": -3.0,
+    "usage_last": 48.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041512",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 10.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_ARI_SEA|00-0041512|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06277470901688842,
+     "probability": 0.5590900128003536,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.028581640130665775,
+     "probability": 0.5456794616655645,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.5321100917431193,
+    "line": 54.5,
+    "line_delta_ratio": 0.9818181818181818,
+    "market_p": 0.5021058838394474,
+    "mean3_ratio": 0.5871559633027523,
+    "mean5_ratio": 0.6788990825688074,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.5882352941176471,
+    "share_change": 0.21519607843137256,
+    "snap_change": 0.11333333333333329,
+    "surprise": -0.26890756302521,
+    "usage_delta": -3.0,
+    "usage_last": 48.0
+   },
+   "gid": "2026_09_ARI_SEA",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041512",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 54.5,
+    "op": -113.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
   "2026_09_CIN_ATL|00-0032392|rec": {
    "decisions": {
     "t11": {
@@ -28300,6 +29666,3402 @@
    },
    "wk": 9
   },
+  "2026_09_GB_NE|00-0033090|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.01349649072709913,
+     "probability": 0.5285699401399704,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.05705916583093407,
+     "probability": 0.5512892300266594,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.8571428571428571,
+    "line": 3.5,
+    "line_delta_ratio": -0.2222222222222222,
+    "market_p": 0.5083149711054754,
+    "mean3_ratio": 1.3333333333333335,
+    "mean5_ratio": 1.2571428571428573,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.15789473684210525,
+    "share_change": -0.01844934917940011,
+    "snap_change": -0.59,
+    "surprise": -0.3571428571428572,
+    "usage_delta": 5.626004976599203,
+    "usage_last": 15.789473684210526
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033090",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 3.5,
+    "op": -117.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0033090|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.004000454222049754,
+     "probability": 0.5348413634640825,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.07241846584204792,
+     "probability": 0.5712883416167919,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.821917808219178,
+    "line": 36.5,
+    "line_delta_ratio": -0.16091954022988506,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.360730593607306,
+    "mean5_ratio": 1.3972602739726028,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.15789473684210525,
+    "share_change": -0.01844934917940011,
+    "snap_change": -0.59,
+    "surprise": -0.4478527607361964,
+    "usage_delta": 5.626004976599203,
+    "usage_last": 15.789473684210526
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033090",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 36.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0033555|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.14427669899548068,
+     "probability": 0.5248975683465509,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.1839409787346158,
+     "probability": 0.5430921920800991,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2,
+    "line": 2.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5667244367417678,
+    "mean3_ratio": 1.4666666666666666,
+    "mean5_ratio": 1.5,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": 7.729134664618538,
+    "usage_last": 11.11111111111111
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033555",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 2.5,
+    "op": -150.0,
+    "up": 118.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0033555|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.07605449996964952,
+     "probability": 0.5708645938806122,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.10586457208278732,
+     "probability": 0.5866793269734975,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.6307692307692307,
+    "line": 32.5,
+    "line_delta_ratio": null,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.6205128205128205,
+    "mean5_ratio": 1.6076923076923078,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": 7.729134664618538,
+    "usage_last": 11.11111111111111
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033555",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 32.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0035700|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.10453118164789044,
+     "probability": 0.602471553626122,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.0739786603653163,
+     "probability": 0.5858065420174452,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 1.7142857142857142,
+    "line": 3.5,
+    "line_delta_ratio": 0.4,
+    "market_p": 0.48656469615543607,
+    "mean3_ratio": 1.5714285714285714,
+    "mean5_ratio": 1.5714285714285714,
+    "nprior": 2,
+    "rise3": null,
+    "share": 0.15384615384615385,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 71.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0035700",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 3.5,
+    "op": -107.0,
+    "up": -120.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0035700|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.04242945892381189,
+     "probability": 0.5530259570816467,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.05838460897838349,
+     "probability": 0.5614904263594241,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 0.6046511627906976,
+    "line": 21.5,
+    "line_delta_ratio": 0.16216216216216217,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.5813953488372092,
+    "mean5_ratio": 1.5813953488372092,
+    "nprior": 2,
+    "rise3": null,
+    "share": 0.15384615384615385,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 71.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0035700",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 21.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0035700|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.011468879948632216,
+     "probability": 0.5222428558761943,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.010417736738130401,
+     "probability": 0.5338055967673142,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 0.8210526315789474,
+    "line": 47.5,
+    "line_delta_ratio": -0.20168067226890757,
+    "market_p": 0.5,
+    "mean3_ratio": 0.7894736842105263,
+    "mean5_ratio": 0.7894736842105263,
+    "nprior": 2,
+    "rise3": null,
+    "share": 0.8076923076923077,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 71.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0035700",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 47.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0036264|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.024258653490793147,
+     "probability": 0.5433860462181203,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03817398273149697,
+     "probability": 0.5102645068138068,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.0491803278688525,
+    "line": 274.5,
+    "line_delta_ratio": 0.045714285714285714,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.0176077717061323,
+    "mean5_ratio": 1.0214936247723132,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 1.0,
+    "share_change": 0.010000000000000009,
+    "snap_change": 0.010000000000000009,
+    "surprise": -0.05779716466739371,
+    "usage_delta": 0.5,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036264",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 274.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0036264|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.004703564437116392,
+     "probability": 0.5323678608824727,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.006165593509121381,
+     "probability": 0.5315858453323304,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 3.5,
+    "line_delta_ratio": -0.2222222222222222,
+    "market_p": 0.4936802190857383,
+    "mean3_ratio": 1.1428571428571428,
+    "mean5_ratio": 0.5714285714285714,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": -0.07004830917874395,
+    "snap_change": 0.010000000000000009,
+    "surprise": -1,
+    "usage_delta": 0.5,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036264",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 3.5,
+    "op": -109.0,
+    "up": -115.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0036875|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.02649313358494787,
+     "probability": 0.5400034968148304,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.09258380015672452,
+     "probability": 0.5747715725942958,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.8571428571428571,
+    "line": 3.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5041554124246832,
+    "mean3_ratio": 0.7619047619047619,
+    "mean5_ratio": 0.7999999999999999,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.15789473684210525,
+    "share_change": 0.07008111677042067,
+    "snap_change": 0.10333333333333339,
+    "surprise": 0.125,
+    "usage_delta": 11.333333333333336,
+    "usage_last": 77.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036875",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 3.5,
+    "op": -115.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0036875|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.019435616278931755,
+     "probability": 0.5362907744405755,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.05726470350896329,
+     "probability": 0.5561913843104025,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.3404255319148936,
+    "line": 23.5,
+    "line_delta_ratio": -0.0784313725490196,
+    "market_p": 0.5021058838394474,
+    "mean3_ratio": 1.4326241134751772,
+    "mean5_ratio": 1.2680851063829788,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.15789473684210525,
+    "share_change": 0.07008111677042067,
+    "snap_change": 0.10333333333333339,
+    "surprise": -0.7894736842105263,
+    "usage_delta": 11.333333333333336,
+    "usage_last": 77.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036875",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 23.5,
+    "op": -113.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0036875|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0390393651176244,
+     "probability": 0.5557652418071015,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.08326085408632933,
+     "probability": 0.5794185963717576,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.4513274336283186,
+    "line": 56.5,
+    "line_delta_ratio": -0.06611570247933884,
+    "market_p": 0.4936802190857383,
+    "mean3_ratio": 0.8259587020648967,
+    "mean5_ratio": 0.888495575221239,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.6333333333333333,
+    "share_change": 0.1713095238095238,
+    "snap_change": 0.10333333333333339,
+    "surprise": 1.016393442622951,
+    "usage_delta": 11.333333333333336,
+    "usage_last": 77.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036875",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 56.5,
+    "op": -109.0,
+    "up": -115.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0038124|rec": {
+   "decisions": {
+    "t10": {
+     "side": "under"
+    },
+    "t11": {
+     "edge": 0.18265177258346643,
+     "probability": 0.6300107573575475,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.2178795731564349,
+     "probability": 0.648776968877727,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.7777777777777777,
+    "line": 4.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4968624497991968,
+    "mean3_ratio": 1.1851851851851851,
+    "mean5_ratio": 1.1111111111111112,
+    "nprior": 8,
+    "rise3": 1.0,
+    "share": 0.2564102564102564,
+    "share_change": 0.040230020875182154,
+    "snap_change": -0.3400000000000001,
+    "surprise": 0.7142857142857142,
+    "usage_delta": 0.12010080550288649,
+    "usage_last": 25.64102564102564
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038124",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 4.5,
+    "op": -111.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0038124|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.05625603776826704,
+     "probability": 0.5532769721643304,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.08898411808353979,
+     "probability": 0.5704202523294732,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.6496350364963503,
+    "line": 68.5,
+    "line_delta_ratio": -0.04195804195804196,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 1.1386861313868613,
+    "mean5_ratio": 1.237956204379562,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.2564102564102564,
+    "share_change": 0.040230020875182154,
+    "snap_change": -0.3400000000000001,
+    "surprise": 0.28409090909090917,
+    "usage_delta": 0.12010080550288649,
+    "usage_last": 25.64102564102564
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038124",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 68.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0038621|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.039295341626886415,
+     "probability": 0.5536433128292759,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.036302341588066556,
+     "probability": 0.5520489109394373,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.8571428571428571,
+    "line": 3.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4968624497991968,
+    "mean3_ratio": 1.238095238095238,
+    "mean5_ratio": 1.0857142857142856,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.15789473684210525,
+    "share_change": -0.02920203735144314,
+    "snap_change": 0.07333333333333336,
+    "surprise": -0.3571428571428572,
+    "usage_delta": -2.088622092866574,
+    "usage_last": 15.789473684210526
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038621",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 3.5,
+    "op": -111.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0038621|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.020592201525817422,
+     "probability": 0.5174229878731531,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.030895154759810417,
+     "probability": 0.5446238553448055,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.9240506329113924,
+    "line": 39.5,
+    "line_delta_ratio": 0.05333333333333334,
+    "market_p": 0.5,
+    "mean3_ratio": 1.5611814345991561,
+    "mean5_ratio": 1.3417721518987342,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.15789473684210525,
+    "share_change": -0.02920203735144314,
+    "snap_change": 0.07333333333333336,
+    "surprise": 0.31034482758620685,
+    "usage_delta": -2.088622092866574,
+    "usage_last": 15.789473684210526
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038621",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 39.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0038996|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.08043388838507681,
+     "probability": 0.5731879313967778,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.06982777387301109,
+     "probability": 0.56756121336925,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.3333333333333333,
+    "line": 4.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5,
+    "mean3_ratio": 1.1111111111111112,
+    "mean5_ratio": 1.1555555555555557,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.15384615384615385,
+    "share_change": -0.014203001299775475,
+    "snap_change": 0.07333333333333336,
+    "surprise": 0.2857142857142856,
+    "usage_delta": -1.9137464460699434,
+    "usage_last": 15.384615384615385
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038996",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 4.5,
+    "op": -113.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0038996|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.16757640817860042,
+     "probability": 0.6115876423792669,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.13765868769864564,
+     "probability": 0.5959164554611953,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.164835164835165,
+    "line": 45.5,
+    "line_delta_ratio": 0.04597701149425287,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 1.010989010989011,
+    "mean5_ratio": 1.0725274725274725,
+    "nprior": 8,
+    "rise3": 1.0,
+    "share": 0.15384615384615385,
+    "share_change": -0.014203001299775475,
+    "snap_change": 0.07333333333333336,
+    "surprise": 0.06711409395973167,
+    "usage_delta": -1.9137464460699434,
+    "usage_last": 15.384615384615385
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038996",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 45.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0039811|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.01123870930698867,
+     "probability": 0.5267233043878659,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.018491846132760337,
+     "probability": 0.5425610769118443,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.9333333333333333,
+    "line": 7.5,
+    "line_delta_ratio": -0.5714285714285714,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.6444444444444446,
+    "mean5_ratio": 2.1599999999999997,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.11538461538461539,
+    "share_change": -0.24591718985311659,
+    "snap_change": -0.24000000000000002,
+    "surprise": -0.6557377049180328,
+    "usage_delta": -12.833333333333336,
+    "usage_last": 16.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039811",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 7.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0039851|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.029546914750140374,
+     "probability": 0.5148413081372495,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.02006798153277667,
+     "probability": 0.5155092608998189,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.8671023965141612,
+    "line": 229.5,
+    "line_delta_ratio": -0.02959830866807611,
+    "market_p": 0.5021058838394474,
+    "mean3_ratio": 1.0965867828612925,
+    "mean5_ratio": 1.2183006535947714,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 1.0,
+    "share_change": 0.0,
+    "snap_change": 0.0,
+    "surprise": -0.35806451612903223,
+    "usage_delta": 3.1666666666666714,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039851",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 229.5,
+    "op": -113.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0039851|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04798059517957598,
+     "probability": 0.502953647829658,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.039662103152028116,
+     "probability": 0.5073483228630795,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.19607843137254902,
+    "line": 25.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5,
+    "mean3_ratio": 0.7189542483660131,
+    "mean5_ratio": 1.0509803921568628,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.26666666666666666,
+    "share_change": 0.03642857142857142,
+    "snap_change": 0.0,
+    "surprise": -0.8,
+    "usage_delta": 3.1666666666666714,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039851",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 25.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040009|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.08947952946259496,
+     "probability": 0.4558491755073619,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.02476818328925101,
+     "probability": 0.42877329844738543,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 1.5,
+    "line_delta_ratio": -0.4,
+    "market_p": 0.6047880355975094,
+    "mean3_ratio": 1.7777777777777777,
+    "mean5_ratio": 1.7777777777777777,
+    "nprior": 3,
+    "rise3": 0.0,
+    "share": 0.05128205128205128,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 5.128205128205128
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040009",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 1.5,
+    "op": -178.0,
+    "up": 139.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040009|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.009260281190214492,
+     "probability": 0.5256037005892289,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03809738629514137,
+     "probability": 0.5103051424819203,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.2564102564102564,
+    "line": 19.5,
+    "line_delta_ratio": -0.20408163265306123,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.435897435897436,
+    "mean5_ratio": 1.435897435897436,
+    "nprior": 3,
+    "rise3": 0.0,
+    "share": 0.05128205128205128,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 5.128205128205128
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040009",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 19.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040131|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.042043472018150396,
+     "probability": 0.6698850891545253,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.01522373384869069,
+     "probability": 0.6526438289027297,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.39325842696629215,
+    "mean3_ratio": 0.4444444444444444,
+    "mean5_ratio": 0.6666666666666666,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.05263157894736842,
+    "share_change": -0.0018487077909828328,
+    "snap_change": 0.4566666666666666,
+    "surprise": -0.25,
+    "usage_delta": -2.0501073472210996,
+    "usage_last": 5.263157894736842
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040131",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 1.5,
+    "op": 140.0,
+    "up": -180.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040131|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.038855080830643374,
+     "probability": 0.5120117793705918,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.022045038892247404,
+     "probability": 0.5209666615246906,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 2.606060606060606,
+    "line": 16.5,
+    "line_delta_ratio": -0.2978723404255319,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.111111111111111,
+    "mean5_ratio": 1.7696969696969695,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.05263157894736842,
+    "share_change": -0.0018487077909828328,
+    "snap_change": 0.4566666666666666,
+    "surprise": 0.2524271844660193,
+    "usage_delta": -2.0501073472210996,
+    "usage_last": 5.263157894736842
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040131",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 16.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040556|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.013572780099680548,
+     "probability": 0.5377170147946662,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.042248898395405465,
+     "probability": 0.55293016675437,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.7674418604651163,
+    "line": 21.5,
+    "line_delta_ratio": -0.37681159420289856,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.6744186046511629,
+    "mean5_ratio": 1.4883720930232558,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.23333333333333334,
+    "share_change": -0.056488095238095226,
+    "snap_change": 0.016666666666666663,
+    "surprise": -0.06557377049180324,
+    "usage_delta": 2.5,
+    "usage_last": 18.0
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040556",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 21.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040563|rec": {
+   "decisions": {
+    "t10": {
+     "side": "under"
+    },
+    "t11": {
+     "edge": 0.12446679423925189,
+     "probability": 0.6312796037834396,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.18455020682312506,
+     "probability": 0.6650106424270176,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 2.0,
+    "line": 2.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4698318496538082,
+    "mean3_ratio": 0.8,
+    "mean5_ratio": 1.04,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.2631578947368421,
+    "share_change": 0.1764195434823618,
+    "snap_change": 0.20999999999999996,
+    "surprise": 1.5,
+    "usage_delta": 5.7789904869701125,
+    "usage_last": 26.31578947368421
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040563",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 2.5,
+    "op": 101.0,
+    "up": -128.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040563|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.07128891940720972,
+     "probability": 0.5611513387371099,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.09687465445799592,
+     "probability": 0.5745533904303788,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.574468085106383,
+    "line": 23.5,
+    "line_delta_ratio": -0.0784313725490196,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 0.7517730496453902,
+    "mean5_ratio": 1.2936170212765956,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.2631578947368421,
+    "share_change": 0.1764195434823618,
+    "snap_change": 0.20999999999999996,
+    "surprise": 0.5205479452054795,
+    "usage_delta": 5.7789904869701125,
+    "usage_last": 26.31578947368421
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040563",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 23.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040667|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.11111353239261135,
+     "probability": 0.6382992632893725,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.12579505980892192,
+     "probability": 0.6467333322306573,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2727272727272727,
+    "line": 5.5,
+    "line_delta_ratio": 0.2222222222222222,
+    "market_p": 0.45800038978756574,
+    "mean3_ratio": 1.1515151515151514,
+    "mean5_ratio": 1.018181818181818,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.3333333333333333,
+    "share_change": 0.05449308755760368,
+    "snap_change": 0.040000000000000036,
+    "surprise": 0.16666666666666674,
+    "usage_delta": 5.513540047090395,
+    "usage_last": 33.33333333333333
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040667",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 5.5,
+    "op": 106.0,
+    "up": -135.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0040667|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.08091335992441828,
+     "probability": 0.5734422989270388,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.05497934967634022,
+     "probability": 0.559683880344725,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.1366906474820144,
+    "line": 69.5,
+    "line_delta_ratio": 0.20869565217391303,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.064748201438849,
+    "mean5_ratio": 1.0532374100719424,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.3333333333333333,
+    "share_change": 0.05449308755760368,
+    "snap_change": 0.040000000000000036,
+    "surprise": -0.10902255639097747,
+    "usage_delta": 5.513540047090395,
+    "usage_last": 33.33333333333333
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040667",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 69.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0041395|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.03830377031537635,
+     "probability": 0.5508372114818663,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.00309593586282797,
+     "probability": 0.5321588767722985,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.4,
+    "line": 2.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4989542374299339,
+    "mean3_ratio": 0.6666666666666667,
+    "mean5_ratio": 0.8800000000000001,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.21052631578947367,
+    "share_change": 0.07898509715148083,
+    "snap_change": 0.3600000000000001,
+    "surprise": -0.6666666666666667,
+    "usage_delta": 9.258522650712802,
+    "usage_last": 21.052631578947366
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041395",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 2.5,
+    "op": -112.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_GB_NE|00-0041395|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.024223949102351483,
+     "probability": 0.5341646433117526,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.016438629716325703,
+     "probability": 0.5301043571247823,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.19607843137254902,
+    "line": 25.5,
+    "line_delta_ratio": 0.04081632653061224,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 0.9411764705882353,
+    "mean5_ratio": 1.1058823529411765,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.21052631578947367,
+    "share_change": 0.07898509715148083,
+    "snap_change": 0.3600000000000001,
+    "surprise": -0.8790322580645161,
+    "usage_delta": 9.258522650712802,
+    "usage_last": 21.052631578947366
+   },
+   "gid": "2026_09_GB_NE",
+   "ko": "2026-11-08T21:25:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041395",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:22Z",
+    "line": 25.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0034383|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.15825252347568752,
+     "probability": 0.7110507769599781,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.1457198866423144,
+     "probability": 0.7033569960468262,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.1111111111111112,
+    "line": 4.5,
+    "line_delta_ratio": 0.2857142857142857,
+    "market_p": 0.4210286754665452,
+    "mean3_ratio": 0.8888888888888888,
+    "mean5_ratio": 0.7555555555555555,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.21428571428571427,
+    "share_change": 0.08574064824064823,
+    "snap_change": 0.04999999999999993,
+    "surprise": 0.6666666666666667,
+    "usage_delta": 3.8022574272574268,
+    "usage_last": 21.428571428571427
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0034383",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 4.5,
+    "op": 124.0,
+    "up": -159.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0034383|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.17220248262815918,
+     "probability": 0.6140108242337976,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.14349981437477943,
+     "probability": 0.5989760932439321,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.267605633802817,
+    "line": 35.5,
+    "line_delta_ratio": 0.2909090909090909,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 1.0140845070422535,
+    "mean5_ratio": 0.828169014084507,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.21428571428571427,
+    "share_change": 0.08574064824064823,
+    "snap_change": 0.04999999999999993,
+    "surprise": 0.875,
+    "usage_delta": 3.8022574272574268,
+    "usage_last": 21.428571428571427
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0034383",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 35.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0034981|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06830196632374519,
+     "probability": 0.6826333864234762,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.07641027695661617,
+     "probability": 0.6878145091022421,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.3967003694898748,
+    "mean3_ratio": 0.8888888888888888,
+    "mean5_ratio": 0.9333333333333332,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": -0.06395687645687646,
+    "snap_change": -0.11666666666666664,
+    "surprise": -1,
+    "usage_delta": -4.543493668493669,
+    "usage_last": 0.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0034981",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": 138.0,
+    "up": -177.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0034981|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0667684450085213,
+     "probability": 0.5705970752371161,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.06811459392433683,
+     "probability": 0.5713171083781337,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0,
+    "line": 9.5,
+    "line_delta_ratio": 0.11764705882352941,
+    "market_p": 0.4936802190857383,
+    "mean3_ratio": 0.5263157894736842,
+    "mean5_ratio": 0.4842105263157894,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": -0.06395687645687646,
+    "snap_change": -0.11666666666666664,
+    "surprise": -1,
+    "usage_delta": -4.543493668493669,
+    "usage_last": 0.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0034981",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 9.5,
+    "op": -109.0,
+    "up": -115.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0036355|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.03981450230979766,
+     "probability": 0.5072678101004843,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.041938885956738,
+     "probability": 0.5061454942115347,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2094117647058824,
+    "line": 212.5,
+    "line_delta_ratio": 0.024096385542168676,
+    "market_p": 0.5,
+    "mean3_ratio": 0.9129411764705883,
+    "mean5_ratio": 0.9383529411764706,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 1.0,
+    "share_change": 0.0,
+    "snap_change": 0.0,
+    "surprise": 0.5,
+    "usage_delta": 0.0,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036355",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 212.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0036355|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.0417521719764129,
+     "probability": 0.497551756858401,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.02777696240406813,
+     "probability": 0.5048081156748108,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 22.5,
+    "line_delta_ratio": -0.08163265306122448,
+    "market_p": 0.49157113958192844,
+    "mean3_ratio": 1.4074074074074074,
+    "mean5_ratio": 1.3511111111111112,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.18181818181818182,
+    "share_change": -0.04449131953376434,
+    "snap_change": 0.0,
+    "surprise": -0.625,
+    "usage_delta": 0.0,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036355",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 22.5,
+    "op": -108.0,
+    "up": -116.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0036554|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.047938160044044276,
+     "probability": 0.6401801211164007,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.05853377769493662,
+     "probability": 0.6466529303428212,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0.36363636363636365,
+    "line": 5.5,
+    "line_delta_ratio": 0.2222222222222222,
+    "market_p": 0.4233170265684967,
+    "mean3_ratio": 0.6060606060606061,
+    "mean5_ratio": 0.8727272727272727,
+    "nprior": 5,
+    "rise3": 0.0,
+    "share": 0.17857142857142858,
+    "share_change": -0.046783078033078046,
+    "snap_change": -0.039999999999999925,
+    "surprise": -0.6,
+    "usage_delta": -9.595054907554907,
+    "usage_last": 17.857142857142858
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036554",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 5.5,
+    "op": 123.0,
+    "up": -157.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0036554|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.02964230884038843,
+     "probability": 0.5082826001312251,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.0007701925781178343,
+     "probability": 0.5234060896019382,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.08759124087591241,
+    "line": 68.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 0.661800486618005,
+    "mean5_ratio": 0.9605839416058394,
+    "nprior": 5,
+    "rise3": 0.0,
+    "share": 0.17857142857142858,
+    "share_change": -0.046783078033078046,
+    "snap_change": -0.039999999999999925,
+    "surprise": -0.9274193548387097,
+    "usage_delta": -9.595054907554907,
+    "usage_last": 17.857142857142858
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0036554",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 68.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038046|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04580545699869465,
+     "probability": 0.5843516968767684,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.04657551613587607,
+     "probability": 0.42754461159826185,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 1.5,
+    "line_delta_ratio": -0.4,
+    "market_p": 0.5772847920831012,
+    "mean3_ratio": 1.5555555555555556,
+    "mean5_ratio": 1.3333333333333333,
+    "nprior": 5,
+    "rise3": 0.0,
+    "share": 0.13333333333333333,
+    "share_change": -0.024175824175824173,
+    "snap_change": -0.06000000000000005,
+    "surprise": -0.6666666666666667,
+    "usage_delta": 4.804639804639805,
+    "usage_last": 13.333333333333334
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038046",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": -158.0,
+    "up": 123.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038046|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.03960808894064183,
+     "probability": 0.5178149935204834,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.0401922642801843,
+     "probability": 0.5175000234065366,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2903225806451613,
+    "line": 15.5,
+    "line_delta_ratio": -0.11428571428571428,
+    "market_p": 0.5105400733589106,
+    "mean3_ratio": 1.6559139784946237,
+    "mean5_ratio": 1.2645161290322582,
+    "nprior": 5,
+    "rise3": 0.0,
+    "share": 0.13333333333333333,
+    "share_change": -0.024175824175824173,
+    "snap_change": -0.06000000000000005,
+    "surprise": -0.23076923076923073,
+    "usage_delta": 4.804639804639805,
+    "usage_last": 13.333333333333334
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038046",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 15.5,
+    "op": -117.0,
+    "up": -107.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038454|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.02338411129947493,
+     "probability": 0.5159480166719755,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.01859405843470996,
+     "probability": 0.5426155264558735,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 2.0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5020774472328402,
+    "mean3_ratio": 1.3333333333333333,
+    "mean5_ratio": 1.8666666666666665,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.1,
+    "share_change": -0.03726745178358079,
+    "snap_change": -0.010000000000000009,
+    "surprise": 0.125,
+    "usage_delta": -5.0,
+    "usage_last": 31.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038454",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": -114.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038454|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.03533389180327007,
+     "probability": 0.5221587191156611,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.08958187453836519,
+     "probability": 0.5897736752088399,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 2.6153846153846154,
+    "line": 6.5,
+    "line_delta_ratio": -0.13333333333333333,
+    "market_p": 0.5126539564703898,
+    "mean3_ratio": 1.7948717948717947,
+    "mean5_ratio": 1.6615384615384616,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.1,
+    "share_change": -0.03726745178358079,
+    "snap_change": -0.010000000000000009,
+    "surprise": 0.2142857142857142,
+    "usage_delta": -5.0,
+    "usage_last": 31.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038454",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 6.5,
+    "op": -118.0,
+    "up": -106.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038454|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.028824564629378213,
+     "probability": 0.4997310492683782,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.014501164832202873,
+     "probability": 0.5071013423678956,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.5217391304347826,
+    "line": 11.5,
+    "line_delta_ratio": -0.25806451612903225,
+    "market_p": 0.5126539564703898,
+    "mean3_ratio": 0.6086956521739131,
+    "mean5_ratio": 1.9478260869565216,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.18181818181818182,
+    "share_change": -0.041242456635778635,
+    "snap_change": -0.010000000000000009,
+    "surprise": -0.6666666666666667,
+    "usage_delta": -5.0,
+    "usage_last": 31.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038454",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 11.5,
+    "op": -118.0,
+    "up": -106.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038544|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.0286341811934524,
+     "probability": 0.5562522210259717,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.0012423919044382004,
+     "probability": 0.5733610278427125,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.6,
+    "line": 2.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.45999606840967167,
+    "mean3_ratio": 0.8,
+    "mean5_ratio": 0.8,
+    "nprior": 6,
+    "rise3": 0.0,
+    "share": 0.13333333333333333,
+    "share_change": 0.02344411860540893,
+    "snap_change": 0.006666666666666599,
+    "surprise": 1.4,
+    "usage_delta": -5.68827230117553,
+    "usage_last": 13.333333333333334
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038544",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 2.5,
+    "op": 105.0,
+    "up": -134.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038544|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.05280336789108364,
+     "probability": 0.4939925019132626,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.01464612475847693,
+     "probability": 0.5138926909154354,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t9": {
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2542372881355932,
+    "line": 29.5,
+    "line_delta_ratio": -0.06349206349206349,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 1.5593220338983051,
+    "mean5_ratio": 1.2542372881355932,
+    "nprior": 6,
+    "rise3": 0.0,
+    "share": 0.13333333333333333,
+    "share_change": 0.02344411860540893,
+    "snap_change": 0.006666666666666599,
+    "surprise": -0.21276595744680848,
+    "usage_delta": -5.68827230117553,
+    "usage_last": 13.333333333333334
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038544",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 29.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038608|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.10077280298948899,
+     "probability": 0.6656847385667661,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.1083775678789285,
+     "probability": 0.670283667531526,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.42910447761194026,
+    "mean3_ratio": 1.3333333333333333,
+    "mean5_ratio": 1.4666666666666668,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.07142857142857142,
+    "share_change": -0.06160853035853037,
+    "snap_change": -0.23000000000000004,
+    "surprise": -0.625,
+    "usage_delta": -2.529378616878617,
+    "usage_last": 7.142857142857142
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038608",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": 120.0,
+    "up": -153.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038608|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06280300728721921,
+     "probability": 0.5542848219823296,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.14547510529025165,
+     "probability": 0.597400892232715,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.6129032258064515,
+    "line": 15.5,
+    "line_delta_ratio": 0.631578947368421,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 1.6989247311827955,
+    "mean5_ratio": 1.7548387096774194,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.07142857142857142,
+    "share_change": -0.06160853035853037,
+    "snap_change": -0.23000000000000004,
+    "surprise": -0.16666666666666663,
+    "usage_delta": -2.529378616878617,
+    "usage_last": 7.142857142857142
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038608",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 15.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038618|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.11712479381689289,
+     "probability": 0.7265217190557416,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.17201764205683467,
+     "probability": 0.7622212637152841,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2,
+    "line": 2.5,
+    "line_delta_ratio": 0.6666666666666666,
+    "market_p": 0.3856006471619253,
+    "mean3_ratio": 1.2,
+    "mean5_ratio": 1.2,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.21428571428571427,
+    "share_change": 0.06842809967809965,
+    "snap_change": 0.14000000000000007,
+    "surprise": 0.0,
+    "usage_delta": -3.1179144054144086,
+    "usage_last": 21.428571428571427
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038618",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 2.5,
+    "op": 145.0,
+    "up": -186.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038618|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.09098572512606684,
+     "probability": 0.5664733572769962,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.06823870452647429,
+     "probability": 0.5546624042733617,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.7906976744186046,
+    "line": 21.5,
+    "line_delta_ratio": 0.5925925925925926,
+    "market_p": 0.5084288604180714,
+    "mean3_ratio": 1.426356589147287,
+    "mean5_ratio": 1.7581395348837208,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.21428571428571427,
+    "share_change": 0.06842809967809965,
+    "snap_change": 0.14000000000000007,
+    "surprise": -0.578512396694215,
+    "usage_delta": -3.1179144054144086,
+    "usage_last": 21.428571428571427
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038618",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 21.5,
+    "op": -116.0,
+    "up": -108.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038977|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.13345852486823673,
+     "probability": 0.6924240793942147,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.17610096989796742,
+     "probability": 0.7184741333617934,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 0.6666666666666666,
+    "line": 1.5,
+    "line_delta_ratio": 1.0,
+    "market_p": 0.42441457211744893,
+    "mean3_ratio": 0.6666666666666666,
+    "mean5_ratio": 0.6666666666666666,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.03571428571428571,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 3.571428571428571
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038977",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": 122.0,
+    "up": -157.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0038977|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.1549184299862767,
+     "probability": 0.6101455856531274,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.38030863425968864,
+     "probability": 0.7292196558353072,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": null,
+    "last_ratio": 2.774193548387097,
+    "line": 15.5,
+    "line_delta_ratio": 1.0666666666666667,
+    "market_p": 0.5,
+    "mean3_ratio": 2.774193548387097,
+    "mean5_ratio": 2.774193548387097,
+    "nprior": 1,
+    "rise3": null,
+    "share": 0.03571428571428571,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 3.571428571428571
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038977",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 15.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039163|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.021112150488382442,
+     "probability": 0.5149599587478177,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.017818355810500286,
+     "probability": 0.5354399881277987,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.6132264529058116,
+    "line": 249.5,
+    "line_delta_ratio": -0.023483365949119372,
+    "market_p": 0.5021058838394474,
+    "mean3_ratio": 0.969939879759519,
+    "mean5_ratio": 0.9939879759519038,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 1.0,
+    "share_change": 0.0,
+    "snap_change": 0.0,
+    "surprise": -0.5010869565217392,
+    "usage_delta": 0.0,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039163",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 249.5,
+    "op": -113.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039163|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04605311374357446,
+     "probability": 0.5102506600906462,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.0032946539017277843,
+     "probability": 0.5331214641920992,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.5333333333333333,
+    "line": 7.5,
+    "line_delta_ratio": -0.21052631578947367,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 0.6222222222222222,
+    "mean5_ratio": 0.9600000000000001,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.08333333333333333,
+    "share_change": -0.04977124183006536,
+    "snap_change": 0.0,
+    "surprise": -0.4545454545454545,
+    "usage_delta": 0.0,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039163",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 7.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039391|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.00629880063394106,
+     "probability": 0.5382528468507127,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.10581287531054007,
+     "probability": 0.591481305398661,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.3333333333333333,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4958445875753168,
+    "mean3_ratio": 1.3333333333333333,
+    "mean5_ratio": 1.2,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.06666666666666667,
+    "share_change": -0.034374466632531145,
+    "snap_change": 0.08000000000000002,
+    "surprise": 0.0,
+    "usage_delta": 17.7,
+    "usage_last": 46.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039391",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": -111.0,
+    "up": -115.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039391|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04728831182360416,
+     "probability": 0.5196609208234886,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.04644945429645142,
+     "probability": 0.48840393804328097,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.9333333333333333,
+    "line": 7.5,
+    "line_delta_ratio": -0.11764705882352941,
+    "market_p": 0.5157232704402516,
+    "mean3_ratio": 1.1111111111111112,
+    "mean5_ratio": 1.3333333333333333,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.06666666666666667,
+    "share_change": -0.034374466632531145,
+    "snap_change": 0.08000000000000002,
+    "surprise": -0.27586206896551724,
+    "usage_delta": 17.7,
+    "usage_last": 46.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039391",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 7.5,
+    "op": -120.0,
+    "up": -105.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039391|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06659247866628304,
+     "probability": 0.5562611491608844,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.15229807509397242,
+     "probability": 0.6009592831829809,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.1794871794871795,
+    "line": 19.5,
+    "line_delta_ratio": -0.09302325581395349,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 1.7264957264957264,
+    "mean5_ratio": 1.3538461538461537,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.36363636363636365,
+    "share_change": 0.09307944565443155,
+    "snap_change": 0.08000000000000002,
+    "surprise": -0.33009708737864085,
+    "usage_delta": 17.7,
+    "usage_last": 46.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039391",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 19.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039849|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0689431183198399,
+     "probability": 0.6670848031620054,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.05725661387404801,
+     "probability": 0.6597917214401954,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.4,
+    "line": 2.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.41062056190182156,
+    "mean3_ratio": 0.6666666666666667,
+    "mean5_ratio": 0.64,
+    "nprior": 6,
+    "rise3": 0.0,
+    "share": 0.14285714285714285,
+    "share_change": 0.029761904761904753,
+    "snap_change": -0.32666666666666666,
+    "surprise": -0.5714285714285714,
+    "usage_delta": 5.047148797148797,
+    "usage_last": 14.285714285714285
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039849",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 2.5,
+    "op": 130.0,
+    "up": -166.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039849|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.008953526859955319,
+     "probability": 0.5235717216588915,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.02776784332394,
+     "probability": 0.5136320827722581,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.26666666666666666,
+    "line": 22.5,
+    "line_delta_ratio": -0.23728813559322035,
+    "market_p": 0.5,
+    "mean3_ratio": 0.7703703703703704,
+    "mean5_ratio": 0.8177777777777777,
+    "nprior": 6,
+    "rise3": 0.0,
+    "share": 0.14285714285714285,
+    "share_change": 0.029761904761904753,
+    "snap_change": -0.32666666666666666,
+    "surprise": -0.7906976744186047,
+    "usage_delta": 5.047148797148797,
+    "usage_last": 14.285714285714285
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039849",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 22.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039915|rec": {
+   "decisions": {
+    "t10": {
+     "side": "under"
+    },
+    "t11": {
+     "edge": 0.08609153520156632,
+     "probability": 0.6699645102201234,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.11977999898796288,
+     "probability": 0.6907455166170959,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.8888888888888888,
+    "line": 4.5,
+    "line_delta_ratio": 0.2857142857142857,
+    "market_p": 0.4176935633581922,
+    "mean3_ratio": 0.3703703703703704,
+    "mean5_ratio": 0.5333333333333333,
+    "nprior": 6,
+    "rise3": 1.0,
+    "share": 0.2,
+    "share_change": 0.11873031389160422,
+    "snap_change": 0.45333333333333337,
+    "surprise": 1.4,
+    "usage_delta": -3.377989990893216,
+    "usage_last": 20.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039915",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 4.5,
+    "op": 126.0,
+    "up": -161.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0039915|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.02352196720345634,
+     "probability": 0.5361305542494295,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.12746321204082256,
+     "probability": 0.5905759682118594,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.638095238095238,
+    "line": 52.5,
+    "line_delta_ratio": 0.08247422680412371,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 0.653968253968254,
+    "mean5_ratio": 0.7771428571428571,
+    "nprior": 6,
+    "rise3": 1.0,
+    "share": 0.2,
+    "share_change": 0.11873031389160422,
+    "snap_change": 0.45333333333333337,
+    "surprise": 2.108433734939759,
+    "usage_delta": -3.377989990893216,
+    "usage_last": 20.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039915",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 52.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040189|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.12570568145668815,
+     "probability": 0.49373056204240706,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.11979137790885908,
+     "probability": 0.4911365692582714,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 3.3333333333333335,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5855918315895626,
+    "mean3_ratio": 1.7777777777777777,
+    "mean5_ratio": 1.7333333333333334,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.16666666666666666,
+    "share_change": 0.018475849121010413,
+    "snap_change": -0.06000000000000005,
+    "surprise": 0.875,
+    "usage_delta": 4.325981664691341,
+    "usage_last": 16.666666666666664
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040189",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": -163.0,
+    "up": 128.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040189|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.04676878510677396,
+     "probability": 0.5576244930008047,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.02828013830168541,
+     "probability": 0.5176451599701302,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 3.1515151515151514,
+    "line": 16.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.393939393939394,
+    "mean5_ratio": 1.2727272727272727,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.16666666666666666,
+    "share_change": 0.018475849121010413,
+    "snap_change": -0.06000000000000005,
+    "surprise": 1.9433962264150941,
+    "usage_delta": 4.325981664691341,
+    "usage_last": 16.666666666666664
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040189",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 16.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040583|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.08384169507162431,
+     "probability": 0.7075077731717547,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.22182191647154115,
+     "probability": 0.7975781954744783,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0.4,
+    "line": 2.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.383754397185801,
+    "mean3_ratio": 0.9333333333333333,
+    "mean5_ratio": 0.64,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.03571428571428571,
+    "share_change": -0.04876026751026752,
+    "snap_change": 0.20000000000000007,
+    "surprise": -0.5,
+    "usage_delta": 30.5,
+    "usage_last": 89.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040583",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 2.5,
+    "op": 146.0,
+    "up": -188.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040583|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0319745660915951,
+     "probability": 0.5310160388626655,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.08544720609474621,
+     "probability": 0.5585310866312772,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2,
+    "line": 12.5,
+    "line_delta_ratio": -0.1935483870967742,
+    "market_p": 0.5126539564703898,
+    "mean3_ratio": 1.68,
+    "mean5_ratio": 1.104,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.03571428571428571,
+    "share_change": -0.04876026751026752,
+    "snap_change": 0.20000000000000007,
+    "surprise": -0.0625,
+    "usage_delta": 30.5,
+    "usage_last": 89.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040583",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 12.5,
+    "op": -118.0,
+    "up": -106.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040583|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.13592590310588437,
+     "probability": 0.6051194063274337,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.24293426957610498,
+     "probability": 0.6621238632321307,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.0393700787401574,
+    "line": 63.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 0.9658792650918635,
+    "mean5_ratio": 0.6960629921259843,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.7916666666666666,
+    "share_change": 0.26568627450980387,
+    "snap_change": 0.20000000000000007,
+    "surprise": 0.41428571428571437,
+    "usage_delta": 30.5,
+    "usage_last": 89.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040583",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 63.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040666|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.018487392960879978,
+     "probability": 0.5717823960482133,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.05411855181226943,
+     "probability": 0.4705877851680252,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.3333333333333333,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4698318496538082,
+    "mean3_ratio": 1.5555555555555556,
+    "mean5_ratio": 1.2,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.1,
+    "share_change": 0.025584570745861082,
+    "snap_change": -0.08333333333333331,
+    "surprise": -0.1428571428571429,
+    "usage_delta": -5.600000000000001,
+    "usage_last": 30.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040666",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": 101.0,
+    "up": -128.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040666|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.0286705558839907,
+     "probability": 0.5087916135845763,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.04412898648177643,
+     "probability": 0.5092023156125116,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.0769230769230769,
+    "line": 6.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 1.7435897435897436,
+    "mean5_ratio": 1.2923076923076924,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.1,
+    "share_change": 0.025584570745861082,
+    "snap_change": -0.08333333333333331,
+    "surprise": -0.4,
+    "usage_delta": -5.600000000000001,
+    "usage_last": 30.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040666",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 6.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040666|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0010321568518540936,
+     "probability": 0.535435804827736,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03717190056260966,
+     "probability": 0.5150010764432553,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.547945205479452,
+    "line": 36.5,
+    "line_delta_ratio": 0.057971014492753624,
+    "market_p": 0.4936802190857383,
+    "mean3_ratio": 0.6484018264840183,
+    "mean5_ratio": 0.9424657534246575,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.4090909090909091,
+    "share_change": 0.02463514602733624,
+    "snap_change": -0.08333333333333331,
+    "surprise": -0.375,
+    "usage_delta": -5.600000000000001,
+    "usage_last": 30.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040666",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 36.5,
+    "op": -109.0,
+    "up": -115.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040727|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.038630391799499675,
+     "probability": 0.4759255486141091,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.009939656540064123,
+     "probability": 0.49012888290095835,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2,
+    "line": 2.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5322521344826178,
+    "mean3_ratio": 1.0666666666666667,
+    "mean5_ratio": 1.2,
+    "nprior": 6,
+    "rise3": 0.0,
+    "share": 0.1,
+    "share_change": -0.08796257505934924,
+    "snap_change": -0.1433333333333333,
+    "surprise": -0.18181818181818177,
+    "usage_delta": -3.2516497839078493,
+    "usage_last": 10.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040727",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 2.5,
+    "op": -129.0,
+    "up": 102.0
+   },
+   "wk": 9
+  },
+  "2026_09_HOU_LAC|00-0040727|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.0049149340545026066,
+     "probability": 0.5212350345428796,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.031966871282883114,
+     "probability": 0.5070649721851564,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.0508474576271187,
+    "line": 29.5,
+    "line_delta_ratio": -0.11940298507462686,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.2090395480225988,
+    "mean5_ratio": 1.6,
+    "nprior": 6,
+    "rise3": 0.0,
+    "share": 0.1,
+    "share_change": -0.08796257505934924,
+    "snap_change": -0.1433333333333333,
+    "surprise": -0.38815789473684204,
+    "usage_delta": -3.2516497839078493,
+    "usage_last": 10.0
+   },
+   "gid": "2026_09_HOU_LAC",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040727",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 29.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
   "2026_09_JAX_BAL|00-0032764|rec": {
    "decisions": {
     "t11": {
@@ -31825,6 +36587,1516 @@
     "line": 49.5,
     "op": -110.0,
     "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0029604|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.057974818207534806,
+     "probability": 0.5612730256218377,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.026636978474176454,
+     "probability": 0.5120535326510256,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0.997979797979798,
+    "line": 247.5,
+    "line_delta_ratio": 0.0737527114967462,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.1515151515151516,
+    "mean5_ratio": 1.1822222222222223,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 1.0,
+    "share_change": 0.05666666666666664,
+    "snap_change": 0.05666666666666664,
+    "surprise": -0.12925969447708585,
+    "usage_delta": 2.8333333333333286,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0029604",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 247.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0029604|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.12485933290600637,
+     "probability": 0.6064909767281232,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.43605687477126653,
+     "probability": 0.7742795131255216,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 2.0,
+    "line": 1.5,
+    "line_delta_ratio": 1.0,
+    "market_p": 0.48945992664108945,
+    "mean3_ratio": 2.0,
+    "mean5_ratio": 1.2,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.16129032258064516,
+    "share_change": 0.09462365591397849,
+    "snap_change": 0.05666666666666664,
+    "surprise": 0.5,
+    "usage_delta": 2.8333333333333286,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0029604",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": -107.0,
+    "up": -117.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0029892|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.14100222262824347,
+     "probability": 0.6615895240449479,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.15741309109658963,
+     "probability": 0.6711050696274343,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 2.0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.45329879628218805,
+    "mean3_ratio": 1.3333333333333333,
+    "mean5_ratio": 1.0666666666666667,
+    "nprior": 5,
+    "rise3": null,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": 5.0,
+    "usage_last": 48.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0029892",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": 108.0,
+    "up": -138.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0029892|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.09661416461371197,
+     "probability": 0.5668488676988752,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.10884708650006103,
+     "probability": 0.5731721654855387,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 1.1578947368421053,
+    "line": 9.5,
+    "line_delta_ratio": -0.17391304347826086,
+    "market_p": 0.5115178421846206,
+    "mean3_ratio": 1.7192982456140349,
+    "mean5_ratio": 1.5999999999999999,
+    "nprior": 5,
+    "rise3": null,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": 5.0,
+    "usage_last": 48.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0029892",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 9.5,
+    "op": -118.0,
+    "up": -107.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0031236|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04503486209149943,
+     "probability": 0.4462453915460284,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.023416783999941737,
+     "probability": 0.4782321420560476,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 1.5,
+    "line_delta_ratio": -0.4,
+    "market_p": 0.441202953358545,
+    "mean3_ratio": 0.6666666666666666,
+    "mean5_ratio": 0.5,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.07692307692307693,
+    "share_change": 0.017748960277695916,
+    "snap_change": 0.33333333333333337,
+    "surprise": 0.5,
+    "usage_delta": 1.8665880734846247,
+    "usage_last": 7.6923076923076925
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0031236",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": 114.0,
+    "up": -145.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0031236|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06320739135348075,
+     "probability": 0.5520499916643072,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.08650004936476585,
+     "probability": 0.5641442564009361,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.896551724137931,
+    "line": 14.5,
+    "line_delta_ratio": -0.40816326530612246,
+    "market_p": 0.49157113958192844,
+    "mean3_ratio": 0.7586206896551724,
+    "mean5_ratio": 0.5689655172413793,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.07692307692307693,
+    "share_change": 0.017748960277695916,
+    "snap_change": 0.33333333333333337,
+    "surprise": 0.95,
+    "usage_delta": 1.8665880734846247,
+    "usage_last": 7.6923076923076925
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0031236",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 14.5,
+    "op": -108.0,
+    "up": -116.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0032775|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.10295898686603233,
+     "probability": 0.5701285584283355,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.08421735610236847,
+     "probability": 0.5604408555698233,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 1.2,
+    "line": 2.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5124828361003619,
+    "mean3_ratio": 1.0,
+    "mean5_ratio": 1.0,
+    "nprior": 2,
+    "rise3": null,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 14.285714285714285
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0032775",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 2.5,
+    "op": -119.0,
+    "up": -107.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0032775|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0426698844682345,
+     "probability": 0.5461604156738371,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.010235546343598578,
+     "probability": 0.5291710004656944,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": null,
+    "last_ratio": 0.9855072463768116,
+    "line": 34.5,
+    "line_delta_ratio": null,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 1.2173913043478262,
+    "mean5_ratio": 1.2173913043478262,
+    "nprior": 2,
+    "rise3": null,
+    "share": null,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 14.285714285714285
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0032775",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 34.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0033280|rec": {
+   "decisions": {
+    "t11": {
+     "edge": -0.031980604951250435,
+     "probability": 0.5560962482194944,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.056034640548658254,
+     "probability": 0.5422779724507708,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.0909090909090908,
+    "line": 5.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.45800038978756574,
+    "mean3_ratio": 1.0909090909090908,
+    "mean5_ratio": 0.9090909090909091,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.1794871794871795,
+    "share_change": -0.029963650653305834,
+    "snap_change": -0.2833333333333333,
+    "surprise": 0.19999999999999996,
+    "usage_delta": -0.7000000000000028,
+    "usage_last": 52.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033280",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 5.5,
+    "op": 106.0,
+    "up": -135.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0033280|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.007982708765538415,
+     "probability": 0.519628104932337,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03642739197641087,
+     "probability": 0.5133050341807904,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.4698795180722892,
+    "line": 41.5,
+    "line_delta_ratio": -0.12631578947368421,
+    "market_p": 0.5042122999157539,
+    "mean3_ratio": 1.036144578313253,
+    "mean5_ratio": 0.9060240963855422,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.1794871794871795,
+    "share_change": -0.029963650653305834,
+    "snap_change": -0.2833333333333333,
+    "surprise": 1.1279069767441858,
+    "usage_delta": -0.7000000000000028,
+    "usage_last": 52.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033280",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 41.5,
+    "op": -114.0,
+    "up": -110.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0033280|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04103671364145334,
+     "probability": 0.5087457810258956,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03810357961451383,
+     "probability": 0.510301856824225,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0.6341463414634146,
+    "line": 61.5,
+    "line_delta_ratio": 0.06956521739130435,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 0.926829268292683,
+    "mean5_ratio": 0.9691056910569106,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.30434782608695654,
+    "share_change": -0.25652750547803027,
+    "snap_change": -0.2833333333333333,
+    "surprise": -0.36413043478260876,
+    "usage_delta": -0.7000000000000028,
+    "usage_last": 52.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033280",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 61.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0033288|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.0010613707123596772,
+     "probability": 0.5924648928705802,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.009387037485704464,
+     "probability": 0.5862811410798892,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2307692307692308,
+    "line": 6.5,
+    "line_delta_ratio": 0.18181818181818182,
+    "market_p": 0.44235803918028344,
+    "mean3_ratio": 0.9230769230769231,
+    "mean5_ratio": 0.8615384615384615,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.2564102564102564,
+    "share_change": 0.021416642106297262,
+    "snap_change": 0.0033333333333332993,
+    "surprise": 0.7142857142857142,
+    "usage_delta": 5.806798565419253,
+    "usage_last": 25.64102564102564
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033288",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 6.5,
+    "op": 113.0,
+    "up": -145.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0033288|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.07964176377560794,
+     "probability": 0.5727676962753225,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.08265894361207748,
+     "probability": 0.574368359756642,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.2307692307692308,
+    "line": 71.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 0.8438228438228439,
+    "mean5_ratio": 0.9314685314685314,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.2564102564102564,
+    "share_change": 0.021416642106297262,
+    "snap_change": 0.0033333333333332993,
+    "surprise": 0.6196319018404908,
+    "usage_delta": 5.806798565419253,
+    "usage_last": 25.64102564102564
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0033288",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 71.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0037291|rec": {
+   "decisions": {
+    "t10": {
+     "side": "under"
+    },
+    "t11": {
+     "edge": 0.148135915377271,
+     "probability": 0.7291082090352012,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.1695666266562479,
+     "probability": 0.742717492840099,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.6,
+    "line": 2.5,
+    "line_delta_ratio": 0.6666666666666666,
+    "market_p": 0.400210329516242,
+    "mean3_ratio": 0.9333333333333333,
+    "mean5_ratio": 0.64,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.16,
+    "share_change": 0.08705227588948519,
+    "snap_change": -0.08000000000000002,
+    "surprise": 3.0,
+    "usage_delta": 4.245430057779696,
+    "usage_last": 16.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037291",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 2.5,
+    "op": 136.0,
+    "up": -174.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0037291|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06617261516396389,
+     "probability": 0.5608775368872038,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.031571455156249595,
+     "probability": 0.5426750309115815,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.7674418604651163,
+    "line": 21.5,
+    "line_delta_ratio": 0.30303030303030304,
+    "market_p": 0.5021058838394474,
+    "mean3_ratio": 0.945736434108527,
+    "mean5_ratio": 0.7162790697674418,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.16,
+    "share_change": 0.08705227588948519,
+    "snap_change": -0.08000000000000002,
+    "surprise": 3.9565217391304346,
+    "usage_delta": 4.245430057779696,
+    "usage_last": 16.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037291",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 21.5,
+    "op": -113.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0037834|pass_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.009888066048561406,
+     "probability": 0.5230780028422695,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.029459181176910487,
+     "probability": 0.5438652277915754,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.1975051975051976,
+    "line": 240.5,
+    "line_delta_ratio": -0.008247422680412371,
+    "market_p": 0.5,
+    "mean3_ratio": 1.027027027027027,
+    "mean5_ratio": 1.0444906444906445,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 1.0,
+    "share_change": 0.0,
+    "snap_change": 0.0,
+    "surprise": 0.2876304023845009,
+    "usage_delta": 3.0,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "pass_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037834",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 240.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0037834|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.05058945065458009,
+     "probability": 0.5526797584012245,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": 0.09350909510112992,
+     "probability": 0.5752583391290303,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0.3225806451612903,
+    "line": 15.5,
+    "line_delta_ratio": -0.20512820512820512,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 0.8387096774193549,
+    "mean5_ratio": 1.3161290322580643,
+    "nprior": 7,
+    "rise3": 0.0,
+    "share": 0.08695652173913043,
+    "share_change": -0.1754219044323992,
+    "snap_change": 0.0,
+    "surprise": -0.7619047619047619,
+    "usage_delta": 3.0,
+    "usage_last": 100.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0037834",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 15.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0038563|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.06689722173651558,
+     "probability": 0.6612328788709203,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.05896852083365545,
+     "probability": 0.6563188931402504,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 3.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4154752689530971,
+    "mean3_ratio": 0.9523809523809524,
+    "mean5_ratio": 1.0285714285714287,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.04,
+    "share_change": -0.1591486119393096,
+    "snap_change": -0.21666666666666656,
+    "surprise": -1,
+    "usage_delta": -0.6746185146345525,
+    "usage_last": 4.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038563",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 3.5,
+    "op": 127.0,
+    "up": -163.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0038563|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.016078228553059404,
+     "probability": 0.5390461963685245,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.02800107253723083,
+     "probability": 0.5453714610174041,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 34.5,
+    "line_delta_ratio": -0.25806451612903225,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 1.9323671497584543,
+    "mean5_ratio": 1.6521739130434783,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.04,
+    "share_change": -0.1591486119393096,
+    "snap_change": -0.21666666666666656,
+    "surprise": -1,
+    "usage_delta": -0.6746185146345525,
+    "usage_last": 4.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0038563",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 34.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0039066|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.14218596176842113,
+     "probability": 0.6853115770610527,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.14496175228852914,
+     "probability": 0.6869770513731176,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.4285714285714286,
+    "line": 3.5,
+    "line_delta_ratio": 0.4,
+    "market_p": 0.43327556325823224,
+    "mean3_ratio": 1.4285714285714286,
+    "mean5_ratio": 1.3714285714285714,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.24,
+    "share_change": 0.13056184986417543,
+    "snap_change": 0.036666666666666736,
+    "surprise": 0.36363636363636376,
+    "usage_delta": -0.28147268544221404,
+    "usage_last": 24.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039066",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 3.5,
+    "op": 118.0,
+    "up": -150.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0039066|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.14149862383141953,
+     "probability": 0.6030558767411274,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.10800951290684213,
+     "probability": 0.5853635162526714,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.7966101694915255,
+    "line": 29.5,
+    "line_delta_ratio": 0.1568627450980392,
+    "market_p": 0.5,
+    "mean3_ratio": 2.0338983050847457,
+    "mean5_ratio": 1.7898305084745763,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.24,
+    "share_change": 0.13056184986417543,
+    "snap_change": 0.036666666666666736,
+    "surprise": 0.2325581395348837,
+    "usage_delta": -0.28147268544221404,
+    "usage_last": 24.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039066",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 29.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0039338|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.17564407974971186,
+     "probability": 0.5936420600716367,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.19980953853223515,
+     "probability": 0.6058444204469702,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.0769230769230769,
+    "line": 6.5,
+    "line_delta_ratio": 0.18181818181818182,
+    "market_p": 0.5238589211618258,
+    "mean3_ratio": 0.8717948717948718,
+    "mean5_ratio": 0.9538461538461539,
+    "nprior": 6,
+    "rise3": 1.0,
+    "share": 0.4,
+    "share_change": 0.16846882660836152,
+    "snap_change": 0.020000000000000018,
+    "surprise": 0.16666666666666674,
+    "usage_delta": 0.026150367720138235,
+    "usage_last": 40.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039338",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 6.5,
+    "op": -125.0,
+    "up": -102.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0039338|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.1788946480396123,
+     "probability": 0.6228122668888518,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.19612930009607465,
+     "probability": 0.6319173660884922,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.218543046357616,
+    "line": 75.5,
+    "line_delta_ratio": 0.10218978102189781,
+    "market_p": 0.5,
+    "mean3_ratio": 1.0375275938189845,
+    "mean5_ratio": 1.141721854304636,
+    "nprior": 6,
+    "rise3": 1.0,
+    "share": 0.4,
+    "share_change": 0.16846882660836152,
+    "snap_change": 0.020000000000000018,
+    "surprise": 0.09090909090909105,
+    "usage_delta": 0.026150367720138235,
+    "usage_last": 40.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0039338",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 75.5,
+    "op": -112.0,
+    "up": -112.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040122|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.08063502742587847,
+     "probability": 0.5982086758964684,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": -0.03668894341266349,
+     "probability": 0.5332614777537041,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 4.5,
+    "line_delta_ratio": 0.2857142857142857,
+    "market_p": 0.47823563551944287,
+    "mean3_ratio": 1.1111111111111112,
+    "mean5_ratio": 1.0666666666666667,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.16,
+    "share_change": -0.008853110713575835,
+    "snap_change": -0.20999999999999996,
+    "surprise": -0.4,
+    "usage_delta": -13.5,
+    "usage_last": 40.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040122",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 4.5,
+    "op": -103.0,
+    "up": -124.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040122|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.1475169743715603,
+     "probability": 0.6036700670864606,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.08767732584177446,
+     "probability": 0.5721904415565733,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 1.7534246575342465,
+    "line": 36.5,
+    "line_delta_ratio": 0.32727272727272727,
+    "market_p": 0.5021058838394474,
+    "mean3_ratio": 1.4703196347031964,
+    "mean5_ratio": 1.5287671232876712,
+    "nprior": 8,
+    "rise3": 1.0,
+    "share": 0.16,
+    "share_change": -0.008853110713575835,
+    "snap_change": -0.20999999999999996,
+    "surprise": 0.30612244897959173,
+    "usage_delta": -13.5,
+    "usage_last": 40.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040122",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 36.5,
+    "op": -113.0,
+    "up": -111.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040122|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.019308171545915354,
+     "probability": 0.5266678337994158,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.03779234876599458,
+     "probability": 0.4996078189099643,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 1.0,
+    "last_ratio": 0.33962264150943394,
+    "line": 26.5,
+    "line_delta_ratio": -0.4752475247524752,
+    "market_p": 0.5084288604180714,
+    "mean3_ratio": 0.5786163522012578,
+    "mean5_ratio": 0.9886792452830189,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.06451612903225806,
+    "share_change": -0.47600674678473537,
+    "snap_change": -0.20999999999999996,
+    "surprise": -0.578125,
+    "usage_delta": -13.5,
+    "usage_last": 40.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040122",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 26.5,
+    "op": -116.0,
+    "up": -108.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040172|rec": {
+   "decisions": {
+    "t10": {
+     "side": "under"
+    },
+    "t11": {
+     "edge": -0.014124664174513857,
+     "probability": 0.4090769028321519,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.10328427952580554,
+     "probability": 0.4577943068571807,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 2.0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.6086703116760567,
+    "mean3_ratio": 0.8888888888888888,
+    "mean5_ratio": 0.7999999999999999,
+    "nprior": 5,
+    "rise3": 1.0,
+    "share": 0.15384615384615385,
+    "share_change": 0.14235190097259065,
+    "snap_change": 0.2566666666666667,
+    "surprise": 5,
+    "usage_delta": 6.852343059239612,
+    "usage_last": 15.384615384615385
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040172",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": -182.0,
+    "up": 141.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040172|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.05036166140941434,
+     "probability": 0.5037987430081511,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.02516869992408166,
+     "probability": 0.5438688408047945,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 2.1132075471698113,
+    "line": 26.5,
+    "line_delta_ratio": 0.1276595744680851,
+    "market_p": 0.4978941161605526,
+    "mean3_ratio": 0.9811320754716981,
+    "mean5_ratio": 1.0415094339622641,
+    "nprior": 5,
+    "rise3": 1.0,
+    "share": 0.15384615384615385,
+    "share_change": 0.14235190097259065,
+    "snap_change": 0.2566666666666667,
+    "surprise": 5,
+    "usage_delta": 6.852343059239612,
+    "usage_last": 15.384615384615385
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040172",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 26.5,
+    "op": -111.0,
+    "up": -113.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040729|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.009390952709174227,
+     "probability": 0.5743086455069439,
+     "qualifies": false,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.0037449293481257584,
+     "probability": 0.5710962529049681,
+     "qualifies": false,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.46403712296983757,
+    "mean3_ratio": 0.4444444444444444,
+    "mean5_ratio": 0.8333333333333334,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": -0.06896551724137931,
+    "snap_change": 0.033333333333333326,
+    "surprise": -1,
+    "usage_delta": -10.344827586206897,
+    "usage_last": 0.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040729",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 1.5,
+    "op": 103.0,
+    "up": -132.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040729|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": -0.04946243768188674,
+     "probability": 0.49790062788091644,
+     "qualifies": false,
+     "side": "over"
+    },
+    "t12": {
+     "edge": -0.050618455235558635,
+     "probability": 0.4972950948766121,
+     "qualifies": false,
+     "side": "over"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 10.5,
+    "line_delta_ratio": 0.10526315789473684,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 0.7936507936507937,
+    "mean5_ratio": 1.1428571428571428,
+    "nprior": 4,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": -0.06896551724137931,
+    "snap_change": 0.033333333333333326,
+    "surprise": -1,
+    "usage_delta": -10.344827586206897,
+    "usage_last": 0.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040729",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 10.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0040878|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.20189134338294412,
+     "probability": 0.6402598745124095,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.31354426958504233,
+     "probability": 0.699738536134088,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 1.0,
+    "fall3": 0.0,
+    "last_ratio": 2.4776119402985075,
+    "line": 33.5,
+    "line_delta_ratio": 0.03076923076923077,
+    "market_p": 0.495787700084246,
+    "mean3_ratio": 1.5223880597014925,
+    "mean5_ratio": 1.0507462686567166,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.8064516129032258,
+    "share_change": 0.5035104364326375,
+    "snap_change": 0.37,
+    "surprise": 2.32,
+    "usage_delta": 23.333333333333332,
+    "usage_last": 60.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0040878",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 33.5,
+    "op": -110.0,
+    "up": -114.0
+   },
+   "wk": 9
+  },
+  "2026_09_LV_SF|00-0041052|rush_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.17011726662649007,
+     "probability": 0.6258766774978901,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.1805160755227997,
+     "probability": 0.6314388310935906,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 1.5180722891566265,
+    "line": 41.5,
+    "line_delta_ratio": 0.509090909090909,
+    "market_p": 0.4936802190857383,
+    "mean3_ratio": 0.9076305220883534,
+    "mean5_ratio": 0.6891566265060242,
+    "nprior": 7,
+    "rise3": 1.0,
+    "share": 0.5217391304347826,
+    "share_change": 0.25020951062930075,
+    "snap_change": 0.24666666666666665,
+    "surprise": 2.0,
+    "usage_delta": 8.0,
+    "usage_last": 47.0
+   },
+   "gid": "2026_09_LV_SF",
+   "ko": "2026-11-08T21:05:00Z",
+   "mid": "rush_yds",
+   "observed_at": "2026-11-08T18:00:32Z",
+   "pid": "00-0041052",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-08T18:00:21Z",
+    "line": 41.5,
+    "op": -109.0,
+    "up": -115.0
    },
    "wk": 9
   },
