@@ -47,7 +47,7 @@
     const last3 = played.slice(-3).map((r) => r.m[mid].act);
     return { p, mk, mid, slot, up, upM: up ? up.m[mid] : null, past, fm,
       last3: last3.length ? last3.reduce((a, b) => a + b, 0) / last3.length : null, n3: last3.length,
-      chartRows: rows.filter((r) => r.final || r === up).slice(-8) };
+      chartRows: rows.filter((r) => r.final || r === up) };
   }
 
   // ---------- drawing ----------
@@ -81,13 +81,20 @@
       ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(L, ys(v)); ctx.lineTo(R, ys(v)); ctx.stroke();
       text(ctx, n1(Math.round(v * 10) / 10), L - 12, ys(v) + 8, f(22), C.muted, "right");
     }
-    pts.forEach((p, i) => text(ctx, `W${p.wk}`, xs(i), B + 34, f(22), C.muted, "center"));
+    pts.forEach((p, i) => text(ctx, `W${p.wk}`, xs(i), B + 34, f(pts.length > 12 ? 17 : 22), C.muted, "center"));
     // pre-game lines (short bars), snapshot for the upcoming game (dashed amber)
+    // many weeks: shrink labels/bars so they still fit side by side
+    const fs = pts.length > 12 ? 17 : pts.length > 9 ? 20 : 24, bw = pts.length > 12 ? 14 : pts.length > 9 ? 17 : 22;
     pts.forEach((p, i) => {
-      if (p.line != null) { ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(xs(i) - 22, ys(p.line)); ctx.lineTo(xs(i) + 22, ys(p.line)); ctx.stroke(); }
+      if (p.line != null) {
+        ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(xs(i) - bw, ys(p.line)); ctx.lineTo(xs(i) + bw, ys(p.line)); ctx.stroke();
+        // line label goes on the side away from the actual point so the two never collide
+        const below = p.act == null || p.act >= p.line;
+        text(ctx, n1(p.line), xs(i), below ? ys(p.line) + fs + 12 : ys(p.line) - 14, f(fs, 700), C.ink, "center");
+      }
       if (p.proj != null) {
         ctx.strokeStyle = C.warnInk; ctx.lineWidth = 5; ctx.setLineDash([10, 8]); ctx.beginPath(); ctx.moveTo(xs(i) - 26, ys(p.proj)); ctx.lineTo(xs(i) + 26, ys(p.proj)); ctx.stroke(); ctx.setLineDash([]);
-        text(ctx, n1(p.proj), xs(i), ys(p.proj) - 16, f(24, 700), C.warnInk, "center");
+        text(ctx, n1(p.proj), xs(i), ys(p.proj) - 16, f(fs, 700), C.warnInk, "center");
       }
     });
     // actuals
@@ -99,7 +106,9 @@
       if (p.act == null) return;
       const col = p.res === "over" ? C.over : p.res === "under" ? C.under : C.accent;
       ctx.fillStyle = col; ctx.beginPath(); ctx.arc(xs(i), ys(p.act), 9, 0, Math.PI * 2); ctx.fill();
-      text(ctx, n1(p.act), xs(i), ys(p.act) - 18, f(24, 600), col, "center");
+      const lowAct = p.line != null && p.act < p.line; // point under its line: label goes below the point
+      if (lowAct && ys(p.act) + fs + 16 > B - 2) text(ctx, n1(p.act), xs(i) + 16, ys(p.act) + 8, f(fs, 600), col, "left"); // near the axis: label beside the point
+      else text(ctx, n1(p.act), xs(i), lowAct ? ys(p.act) + fs + 16 : ys(p.act) - 18, f(fs, 600), col, "center");
     });
     // legend
     let lx = X, ly = Y + h + 12;
@@ -110,6 +119,7 @@
   }
 
   function draw(d) {
+    const H = Math.max(1350, 1150 + d.past.length * 40); // taller card when the table lists every week
     const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
     const ctx = cv.getContext("2d");
     ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
@@ -174,7 +184,7 @@
 
     // recent games table (newest first)
     y = 1022;
-    const recent = d.past.slice(-5).reverse();
+    const recent = d.past.slice().reverse(); // every finished week, newest first
     const cols = [PAD, PAD + 110, PAD + 300, PAD + 480, PAD + 660];
     ["WK", "OPP", "LINE", "ACTUAL", "RESULT"].forEach((h, i) => text(ctx, h, cols[i], y, f(20, 600), C.muted));
     ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(PAD, y + 14); ctx.lineTo(W - PAD, y + 14); ctx.stroke();
