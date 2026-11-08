@@ -261,8 +261,8 @@
     const to = tally(bets(base, "over")), tu = tally(bets(base, "under"));
     const cls = (t) => (t.U > 0 ? "la-pos" : t.U < 0 ? "la-neg" : "");
     h += `<div class="la-sum c3"><div><span class="muted small">Graded lines</span><b>${n}</b><span class="muted small">${p ? `${p} push${p === 1 ? "" : "es"}` : "no pushes"}</span></div>
-      <div><span class="muted small">Over finished</span><b>${o} · ${pct(o, n)}</b><span class="small ${cls(to)}">1 u on each: ${sideTxt(to)}</span></div>
-      <div><span class="muted small">Under finished</span><b>${u} · ${pct(u, n)}</b><span class="small ${cls(tu)}">1 u on each: ${sideTxt(tu)}</span></div></div>`;
+      <div><span class="muted small">Over finished</span><b>${o} · ${pct(o, n)}</b><span class="small ${cls(to)}">${sideTxt(to)}</span></div>
+      <div><span class="muted small">Under finished</span><b>${u} · ${pct(u, n)}</b><span class="small ${cls(tu)}">${sideTxt(tu)}</span></div></div>`;
     const by = "week", keyOf = (x) => `Week ${x.r.wk}`;
     const groups = new Map(), xsAll = lineRows(base);
     for (const x of xsAll) (groups.get(keyOf(x)) || groups.set(keyOf(x), []).get(keyOf(x))).push(x);
@@ -270,10 +270,10 @@
     arr.sort((a, b) => b.xs[0].r.wk - a.xs[0].r.wk);
     h += arr.map(({ k, xs, n: gn, o: go, u: gu }) => {
       const id = `${by}|${k}`, wo = tally(bets(xs.map((x) => x.r), "over")), wu = tally(bets(xs.map((x) => x.r), "under"));
-      return `<details class="la-wk cw" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small cw-c"><span class="over">${go} O</span> · <span class="under">${gu} U</span>${gn - go - gu ? ` · ${gn - go - gu} P` : ""}</span><span class="small cw-u"><span class="${wo.U > 0 ? "la-pos" : wo.U < 0 ? "la-neg" : ""}">O ${wo.n ? unitsTxt(wo.U) : "—"}</span> · <span class="${wu.U > 0 ? "la-pos" : wu.U < 0 ? "la-neg" : ""}">U ${wu.n ? unitsTxt(wu.U) : "—"}</span></span></summary>
+      return `<details class="la-wk cw" data-cwk="${esc(id)}" ${C.open[id] ? "open" : ""}><summary><span class="la-wk-t">${esc(k)}</span><span class="muted small cw-c">${go > gu ? `<b>${go} O</b>` : `${go} O`} · ${gu > go ? `<b>${gu} U</b>` : `${gu} U`}${gn - go - gu ? ` · ${gn - go - gu} P` : ""}</span><span class="small cw-u"><span class="${wo.U > 0 ? "la-pos" : wo.U < 0 ? "la-neg" : ""}">O ${wo.n ? unitsTxt(wo.U) : "—"}</span> · <span class="${wu.U > 0 ? "la-pos" : wu.U < 0 ? "la-neg" : ""}">U ${wu.n ? unitsTxt(wu.U) : "—"}</span></span></summary>
         ${sectionRows(xs, "over", "Over")}${sectionRows(xs, "under", "Under")}${sectionRows(xs, "push", "Pushes")}</details>`;
     }).join("");
-    return h + `<p class="muted small">Graded on the line captured about 1 hour before kickoff (DraftKings first, then FanDuel). "1 u on each" is what 1 unit on every line's Over (or Under) would have returned at the saved odds; lines without both prices saved are left out of those two figures only. A player in the box score with no entry for a stat counts as 0 for it. Research tool only.</p>`;
+    return h + `<p class="muted small">Graded on the line captured about 1 hour before kickoff (DraftKings first, then FanDuel). Units and ROI are what 1 unit on every line's Over (or Under) would have returned at the saved odds; lines without both prices saved are left out of those two figures only. A player in the box score with no entry for a stat counts as 0 for it. Research tool only.</p>`;
   }
 
   // ---------- Opponent defense rank (same idea as the NFL Defense tab) ----------
