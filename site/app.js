@@ -647,13 +647,17 @@ function betBox(pid, mid) {
   if (!g || new Date(g.ko) <= new Date()) return "";
   const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens FanDuel with this bet on the slip"
     data-bet="${side === "Over" ? "o" : "u"}" data-pid="${esc(pid)}" data-bmid="${esc(mid)}">${side} ${num(e.point)} <span class="muted">${x.price == null ? "" : odds(x.price)}</span> ↗</a>` : "";
-  return `<div class="betbox"><span class="betlbl">Bet on FanDuel</span>${a("Over", o)}${a("Under", u)}</div>`;
+  // Signed-in / set-up devices get a "Save to My picks" checkbox (on by default) that replaces the separate pick box.
+  const opt = window.STIX_PICKS && window.STIX_PICKS.fdOptions ? window.STIX_PICKS.fdOptions(pid, mid) : "";
+  return `<div class="betbox"><span class="betlbl">Bet on FanDuel</span>${a("Over", o)}${a("Under", u)}${opt}</div>`;
 }
 // Tapping a FanDuel Over/Under button also records the pick in My picks (picks.js) at the line and odds shown here
 // (Michael's choice), then the link opens FanDuel as usual.
 document.addEventListener("click", (ev) => {
   const b = ev.target.closest && ev.target.closest("[data-bet]");
   if (!b || !window.STIX_PICKS) return;
+  const cb = b.closest(".betbox") && b.closest(".betbox").querySelector("#fd-save");
+  if (cb && !cb.checked) return; // box unticked: just open FanDuel, save nothing
   try {
     const e = D.links[b.dataset.pid][b.dataset.bmid].fanduel, x = b.dataset.bet === "o" ? e.o : e.u;
     window.STIX_PICKS.recordBet(b.dataset.pid, b.dataset.bmid, b.dataset.bet,
@@ -663,7 +667,9 @@ document.addEventListener("click", (ev) => {
 
 // My picks box (picks.js). Empty unless this browser has the owner's picks key; never breaks the page.
 function pickBoxSafe(pid, mid) {
-  try { return window.STIX_PICKS ? window.STIX_PICKS.box(pid, mid) : ""; } catch (e) { console.error("picks box failed", e); return ""; }
+  try {
+    // The Bet on FanDuel box (with its Save to My picks checkbox) takes over when it is showing on a device with My picks.
+    if (window.STIX_PICKS && window.STIX_PICKS.enabled() && betBox(pid, mid)) return ""; return window.STIX_PICKS ? window.STIX_PICKS.box(pid, mid) : ""; } catch (e) { console.error("picks box failed", e); return ""; }
 }
 
 // ---------- Results tab: how graded pre-game lines finished, over vs under (pushes and voids left out) ----------
