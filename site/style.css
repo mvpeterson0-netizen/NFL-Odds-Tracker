@@ -281,8 +281,16 @@ details.rgame table { margin-top: 8px; }
 .la-wk > summary::-webkit-details-marker { display: none; }
 .la-wk > summary::after { content: "›"; margin-left: auto; color: var(--muted); transition: transform .15s; }
 .la-wk[open] > summary::after { transform: rotate(90deg); }
-.la-wk.cw > summary { flex-wrap: wrap; gap: 4px 10px; }
-.la-wk.cw > summary::after { align-self: center; }
+.la-wk.cw > summary { flex-wrap: nowrap; white-space: nowrap; gap: 8px; font-size: 13px; }
+.la-wk.cw .la-wk-t { flex: 0 0 auto; font-size: 15px; }
+.la-wk.cw .cw-c { flex: 0 0 auto; }
+.la-wk.cw .cw-u { margin-left: auto; }
+.la-wk.cw > summary::after { margin-left: 0; flex: 0 0 auto; }
+.crow { display: flex; align-items: center; gap: 8px; margin: 4px 0 8px; }
+.crow > span { flex: 0 0 60px; }
+.crow-s { display: flex; gap: 6px; overflow-x: auto; flex: 1; min-width: 0; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0; }
+.crow-s::-webkit-scrollbar { display: none; }
+.crow-s .gchip { flex: 0 0 auto; white-space: nowrap; padding: 7px 14px; }
 .la-wk-t { font-weight: 600; flex: 1; }
 @media (max-width: 520px) { .la-sum { grid-template-columns: repeat(2, 1fr); } }
 .rlgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 6px 0 10px; } .rlgrid .gchip { width: 100%; margin: 0; white-space: normal; text-align: center; align-items: center; justify-content: center; line-height: 1.2; padding: 8px 6px; }
