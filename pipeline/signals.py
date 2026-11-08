@@ -534,7 +534,7 @@ def _model_records():
 FORWARD_PATH = DATA / "challenger" / "signal_stacks_forward.json"
 
 
-def publish_forward(rows, now, log=None, path=LEDGER_PATH, forward_path=FORWARD_PATH):
+def publish_forward(rows, now, log=None, path=LEDGER_PATH, forward_path=FORWARD_PATH, display=None):
     """Forward grading wired into the Challenger outputs: writes data/challenger/signal_stacks_forward.json (only when the
     numbers change) and sends the same report to the admin-only Supabase table `signal_research` (never to the site payload)."""
     records = read_json(path, {}).get("records", {})
@@ -546,7 +546,10 @@ def publish_forward(rows, now, log=None, path=LEDGER_PATH, forward_path=FORWARD_
         write_json(forward_path, {**report, "generated_utc": iso(now)})
     try:
         from . import supa
-        supa.sync_signal_research([{"id": "forward", "kind": "forward", "body": {**report, "generated_utc": iso(now)}}], log if log is not None else [])
+        rows_out = [{"id": "forward", "kind": "forward", "body": {**report, "generated_utc": iso(now)}}]
+        if display is not None:    # the admin-only display payload used by the Stacks surfaces
+            rows_out.append({"id": "display", "kind": "display", "body": display})
+        supa.sync_signal_research(rows_out, log if log is not None else [])
     except Exception as ex:  # optional: never stops a build
         if log is not None:
             log.append(f"signal stacks: admin sync skipped ({type(ex).__name__}: {str(ex)[:80]})")

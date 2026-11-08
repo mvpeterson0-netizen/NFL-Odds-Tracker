@@ -251,17 +251,28 @@ class PublicBoundary(unittest.TestCase):
                 self.assertNotIn(banned, blob.replace("registry_sha256", ""))
             self.assertEqual(set(next(iter(res["props"].values()))), S.PUBLIC_FIELDS)
 
-    def test_site_files_contain_no_private_data(self):
+    def test_data_json_has_no_signal_stacks(self):
         site = Path(__file__).resolve().parent.parent / "site" / "data" / "data.json"
         if not site.exists():
             self.skipTest("no built data.json")
-        d = json.loads(site.read_text())
-        ss = d.get("signal_stacks")
-        if not ss:
-            self.skipTest("no signal_stacks in data.json")
-        for p in ss["props"].values():
-            self.assertEqual(set(p), S.PUBLIC_FIELDS)
-        self.assertNotIn("by_signal", json.dumps(ss))
+        self.assertNotIn("signal_stacks", json.loads(site.read_text()))
+
+    def test_publish_forward_sends_display_only_to_admin_table(self):
+        sent = []
+        from pipeline import supa
+        orig = supa.sync_signal_research
+        supa.sync_signal_research = lambda rows, log: sent.extend(rows)
+        try:
+            with tempfile.TemporaryDirectory() as t:
+                S.publish_forward({}, NOW, [], path=Path(t) / "l.json", forward_path=Path(t) / "f.json", display={"props": {}})
+        finally:
+            supa.sync_signal_research = orig
+        self.assertEqual({r["id"]: r["kind"] for r in sent}, {"forward": "forward", "display": "display"})
+
+    def test_site_js_never_reads_public_payload(self):
+        js = (Path(__file__).resolve().parent.parent / "site" / "stacks.js").read_text()
+        self.assertNotIn("D.signal_stacks", js)
+        self.assertIn("admin_signal_research", js)
 
 
 class ModelOverlap(unittest.TestCase):

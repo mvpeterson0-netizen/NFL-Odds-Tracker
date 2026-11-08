@@ -21,7 +21,7 @@ The frozen models (T11/T12) and Challenger (T13) are shown as a separate "model 
 Spread read must be <=36 h old; forecast <=8 h old and roof "open" (domes = indoor; retractable = unknown).
 
 ## Public/private boundary
-The public payload (`signal_stacks` in `data.json`) carries only the fields in `PUBLIC_FIELDS` / `PUBLIC_CHIP_FIELDS` / `PUBLIC_REGISTRY_FIELDS` (tests enforce this). Season splits, ROI and forward results are admin-only (Supabase `signal_research` via `admin_signal_research()`). Caveats: this repo is public, so the committed ledger and forward JSON are visible in git, and `data/history_2025` is already public.
+Signal Stacks is ADMIN ONLY for now: `data.json` has no `signal_stacks` key; the display payload and research rows live in the admin-only `signal_research` table and are read by `admin_signal_research()` after the server-side admin check. The nav link is hidden for everyone else. The display payload carries only the fields in `PUBLIC_FIELDS` / `PUBLIC_CHIP_FIELDS` / `PUBLIC_REGISTRY_FIELDS` (tests enforce this). Season splits, ROI and forward results are admin-only (Supabase `signal_research` via `admin_signal_research()`). Caveats: this repo is public, so the committed ledger and forward JSON are visible in git, and `data/history_2025` is already public.
 
 ## Spread orientation
 nflverse `spread_line` = points the HOME team is favored by. Team spread = `-spread_line` (home) or `+spread_line` (away); negative = player's team favored. This is the opposite sign of `frozen.py` (+ = favored); code converts explicitly.

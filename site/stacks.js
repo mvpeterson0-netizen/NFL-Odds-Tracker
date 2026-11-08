@@ -1,11 +1,11 @@
 "use strict";
 // Signal Stacks (2026-11-07): when several DISTINCT FAMILIES of evidence support the same side of a prop.
 // Three surfaces: a "Signal Stack" box on player pages (box), the slate (#/stacks, view) and the Research section (research).
-// Public data (data.json "signal_stacks") carries display fields ONLY: chips (id, family, side, status, label, trigger), counts, quote,
-// state and update time. Season splits, sample sizes, ROI and forward results are private research: they come from the admin-only
-// database function admin_signal_research() and are shown only after a successful server-side admin check.
+// ADMIN ONLY (2026-11-07): nothing here is in data.json or any public endpoint. The display payload (chips, counts, quote, state,
+// update time) and all research detail come from the server-checked admin_signal_research() RPC, after a successful admin check.
 (function () {
-  const SS = () => (typeof D !== "undefined" && D && D.signal_stacks) || null;
+  // ADMIN ONLY: the payload is not in data.json. It is fetched through the server-checked admin_signal_research() RPC.
+  const SS = () => { if (!admin()) return null; loadAdmin(); return (ADM.rows && ADM.rows.display && ADM.rows.display.body) || null; };
   const ST = { basis: "active", min: 1, mk: "", side: "", leads: false, state: "", sig: "" };
   const MK = { pass_yds: "Pass yds", rush_yds: "Rush yds", rec: "Receptions", rec_yds: "Rec yds" };
   const SIDE = { over: "▲ Over", under: "▼ Under" };
@@ -91,8 +91,7 @@
       else ADM.err = "Research detail isn't available yet (the admin research table may not be set up).";
     }).catch(() => { ADM.err = "Research detail failed to load."; }).finally(() => {
       ADM.pending = false;
-      document.querySelectorAll(".sk-drawer:not([hidden])").forEach((d) => fillDrawer(d.closest("[data-sk-box]")));
-      const r = document.getElementById("sk-research"); if (r && typeof render === "function") render();
+      if (typeof render === "function") render();
     });
   }
   function cellRow(c) {
@@ -162,7 +161,7 @@
   }
   function view(arg) {
     const s = SS();
-    if (!s) return `<div class="pad"><h2>Signal Stacks</h2><p class="muted">Signal stacks appear after the next successful data refresh.</p></div>`;
+    if (!s) return `<div class="pad"><h2>Signal Stacks</h2><p class="muted">${admin() ? (ADM.err || "Loading…") : "Not available."}</p></div>`;
     if (arg && /^[A-Z0-9]+$/.test(arg) && ST.sig !== arg) ST.sig = arg;
     const rs = rows(), qn = Object.values(s.props).filter((p) => ["over", "under"].some((sd) => counts(p.stack, sd, "qualified").support > 0)).length;
     const sel = (id, opts, v) => `<select id="${id}" aria-label="${id}">${opts.map(([k, l]) => `<option value="${k}" ${String(k) === String(v) ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
@@ -230,5 +229,12 @@
       ${rowsHtml}${fwdHtml}</section>`;
   }
 
+  // Reveal the nav link only for a verified admin (checked server-side); re-check for up to 30 s while the admin RPC answers.
+  function reveal() {
+    const a = document.querySelector('a[data-tab="stacks"]');
+    if (a) a.hidden = !admin();
+    return admin();
+  }
+  let tries = 0; const iv = setInterval(() => { if (reveal() || ++tries > 60) clearInterval(iv); if (admin()) loadAdmin(); }, 500);
   window.STIX_STACKS = { box, view, bind, research, rows };
 })();
