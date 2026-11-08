@@ -281,6 +281,8 @@ details.rgame table { margin-top: 8px; }
 .la-wk > summary::-webkit-details-marker { display: none; }
 .la-wk > summary::after { content: "›"; margin-left: auto; color: var(--muted); transition: transform .15s; }
 .la-wk[open] > summary::after { transform: rotate(90deg); }
+.la-wk.cw > summary { flex-wrap: wrap; gap: 4px 10px; }
+.la-wk.cw > summary::after { align-self: center; }
 .la-wk-t { font-weight: 600; flex: 1; }
 @media (max-width: 520px) { .la-sum { grid-template-columns: repeat(2, 1fr); } }
 .rlgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 6px 0 10px; } .rlgrid .gchip { width: 100%; margin: 0; white-space: normal; text-align: center; align-items: center; justify-content: center; line-height: 1.2; padding: 8px 6px; }
