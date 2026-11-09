@@ -199,6 +199,22 @@ def main():
     sql.append(",\n".join("  ('%s', 'history', '%s'::jsonb)" % (i, json.dumps(b, separators=(",", ":")).replace("'", "''")) for i, b in rows))
     sql.append("on conflict (id) do update set body = excluded.body, updated_utc = now();")
     (out / "series_signal_research.sql").write_text("\n".join(sql) + "\n")
+
+    # In CI/production, publish the exact same generic series rows to the admin-only
+    # signal_research table. Local research runs without a service key still only
+    # write reproducible files/SQL.
+    try:
+        from pipeline import supa
+        log = []
+        supa.sync_signal_research(
+            [{"id": i, "kind": "history", "body": b} for i, b in rows],
+            log,
+        )
+        for msg in log:
+            print(msg)
+    except Exception as ex:
+        print(f"signal series admin sync skipped: {type(ex).__name__}: {str(ex)[:120]}")
+
     for sid, v in summary.items():
         print(f"{sid:4} W {v[0]:4} L {v[1]:4} hit {v[2]}%  weeks {v[3]}")
 
