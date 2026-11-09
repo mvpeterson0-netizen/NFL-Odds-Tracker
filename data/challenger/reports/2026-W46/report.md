@@ -1,6 +1,6 @@
 # Stix weekly learning report
 
-Generated: 2026-11-09T14:00:01Z
+Generated: 2026-11-09T14:02:31Z
 Active challenger: awaiting first Tuesday training
 Training status: awaiting first training
 
@@ -45,7 +45,7 @@ Calibration, market comparison, price sensitivity, concentration, paired uncerta
 Intervals require at least four independent week clusters and remain nominal; repeated weekly monitoring is not a stopping rule.
 
 ## Data quality and limitations
-Site snapshot used: 2026-11-09T13:59:31Z. Training errors or delayed grades must be disclosed; unknown is not zero.
+Site snapshot used: 2026-11-09T14:01:35Z. Training errors or delayed grades must be disclosed; unknown is not zero.
 No future outcomes entered original predictions. Later stat corrections may update grading, never the saved decisions.
 No causal injury or gameplan explanation is inferred from numerical patterns. No promotion occurs automatically.
 
