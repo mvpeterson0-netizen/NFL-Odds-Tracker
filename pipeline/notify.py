@@ -215,6 +215,7 @@ def run(log: list[str]) -> bool:
 # Under at another for each player/stat (Over line <= Under line), same math as the Arbitrage tab (site/books.js).
 # An opportunity whose profit on $100 total, split so either side pays the same, is at least $0.01 is alerted once
 # (key: game, player, stat, both books and lines). State: data/arb_alert_state.json (pruned after kickoff).
+# Arbitrage of $3+ per $100 also sends Michael a separate ntfy ("draft a tweet"), once per opportunity (state key "tweeted").
 ARB_STATE = DATA / "arb_alert_state.json"
 ARB_URL = "https://www.sharpstix.com/#/arb"
 ARB_EXCLUDE_BOOKS: tuple[str, ...] = ()  # books never used for arbitrage alerts
@@ -267,6 +268,9 @@ def arb_message(new: list[dict], d: dict) -> tuple[str, str]:
     return title, "\n".join(lines)
 
 
+ARB_TWEET_MIN = 3.0  # Michael 2026-11-09: a guaranteed return of at least $3 per $100 (rounded to cents) also sends him a "tweet this" ntfy
+
+
 def arb_run(log: list[str]) -> bool:
     """Returns True when the state file changed."""
     topic = os.environ.get("NTFY_TOPIC", "").strip()
@@ -279,31 +283,49 @@ def arb_run(log: list[str]) -> bool:
     now = utcnow()
     state = read_json(ARB_STATE, {}) or {}
     seen = state.get("alerted", {})
+    tweeted = state.get("tweeted", {})
     found = arbs(d, now)
     key = lambda x: f"{x['gid']}|{x['pid']}|{x['mid']}|{x['o'][0]}|{x['o'][1]}|{x['u'][0]}|{x['u'][1]}"
-    new = [x for x in found if key(x) not in seen]
-    if not new:
-        return False
-    title, body = arb_message(new, d)
-    ok = False
-    if topic:
-        try:
-            send(topic, title, body, click=ARB_URL)
-            ok = True
-            log.append("arb: ntfy sent")
-        except Exception as ex:
-            log.append(f"arb: ntfy failed ({type(ex).__name__}: {str(ex)[:80]})")
-    if push_ready:
-        try:
-            ok = bool(push_all(title, body, log, url=ARB_URL)) or ok
-        except Exception as ex:
-            log.append(f"arb: push skipped ({type(ex).__name__}: {str(ex)[:80]})")
-    if not ok:
-        return False  # nothing recorded, so the next run retries
     stamp = iso(now)
-    for x in new:
-        seen[key(x)] = {"utc": stamp, "ko": iso(x["ko"]), "ret": round(x["ret"], 4)}
-    keep = {k: v for k, v in seen.items() if v.get("ko", "9999") > iso(now)}
-    write_json(ARB_STATE, {"alerted": keep})
-    log.append(f"arb: alert for {len(new)} arbitrage(s)")
+    changed = False
+    new = [x for x in found if key(x) not in seen]
+    if new:
+        title, body = arb_message(new, d)
+        ok = False
+        if topic:
+            try:
+                send(topic, title, body, click=ARB_URL)
+                ok = True
+                log.append("arb: ntfy sent")
+            except Exception as ex:
+                log.append(f"arb: ntfy failed ({type(ex).__name__}: {str(ex)[:80]})")
+        if push_ready:
+            try:
+                ok = bool(push_all(title, body, log, url=ARB_URL)) or ok
+            except Exception as ex:
+                log.append(f"arb: push skipped ({type(ex).__name__}: {str(ex)[:80]})")
+        if ok:  # otherwise nothing is recorded, so the next run retries
+            for x in new:
+                seen[key(x)] = {"utc": stamp, "ko": iso(x["ko"]), "ret": round(x["ret"], 4)}
+            log.append(f"arb: alert for {len(new)} arbitrage(s)")
+            changed = True
+    # Tweet-worthy arbitrage: only to Michael's ntfy (everyone else already got the alert above), once per opportunity.
+    big = [x for x in found if round(x["ret"] * 10000) / 100 >= ARB_TWEET_MIN and key(x) not in tweeted]
+    if big and topic:
+        title, body = arb_message(big, d)
+        try:
+            send(topic, f"Stix Arb {ARB_TWEET_MIN:g}%+ - draft a tweet", body, click=ARB_URL)
+            for x in big:
+                tweeted[key(x)] = {"utc": stamp, "ko": iso(x["ko"]), "ret": round(x["ret"], 4)}
+            log.append(f"arb: tweet alert for {len(big)} arbitrage(s) of {ARB_TWEET_MIN:g}%+")
+            changed = True
+        except Exception as ex:
+            log.append(f"arb: tweet alert failed ({type(ex).__name__}: {str(ex)[:80]})")
+    if not changed:
+        return False
+    cut = iso(now)
+    out = {"alerted": {k: v for k, v in seen.items() if v.get("ko", "9999") > cut}}
+    if tweeted:
+        out["tweeted"] = {k: v for k, v in tweeted.items() if v.get("ko", "9999") > cut}
+    write_json(ARB_STATE, out)
     return True
