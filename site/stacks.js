@@ -83,7 +83,17 @@
 
   // ---------- admin-only research detail ----------
   const ADM = { rows: null, pending: false, err: "" };
-  function admin() { try { return !!(window.STIX_ADMIN && window.STIX_ADMIN.isResearchAdmin && window.STIX_ADMIN.isResearchAdmin()); } catch (e) { return false; } }
+  // Signal Stacks stay hidden until the Stix logo is tapped 3 times (this app session only), and only for verified admins.
+  const UNLOCK_KEY = "stix_stacks_open";
+  function unlocked() { try { return sessionStorage.getItem(UNLOCK_KEY) === "1"; } catch (e) { return !!window.__stixStacksOpen; } }
+  function admin() { try { return unlocked() && !!(window.STIX_ADMIN && window.STIX_ADMIN.isResearchAdmin && window.STIX_ADMIN.isResearchAdmin()); } catch (e) { return false; } }
+  function unlock() {
+    try { sessionStorage.setItem(UNLOCK_KEY, "1"); } catch (e) { window.__stixStacksOpen = true; }
+    const a = document.querySelector('a[data-tab="stacks"]');
+    if (a) a.hidden = !admin();
+    if (admin()) loadAdmin();
+    let n = 0; const iv2 = setInterval(() => { const a2 = document.querySelector('a[data-tab="stacks"]'); if (a2) a2.hidden = !admin(); if (admin()) { loadAdmin(); clearInterval(iv2); } if (++n > 60) clearInterval(iv2); }, 500);
+  }
   function loadAdmin() {
     if (ADM.rows || ADM.pending || !admin() || !window.STIX_ACCOUNT || !window.STIX_ACCOUNT.db) return;
     ADM.pending = true;
@@ -352,5 +362,5 @@
     return admin();
   }
   let tries = 0; const iv = setInterval(() => { if (reveal() || ++tries > 60) clearInterval(iv); if (admin()) loadAdmin(); }, 500);
-  window.STIX_STACKS = { box, view, bind, research, rows };
+  window.STIX_STACKS = { box, view, bind, research, rows, unlock };
 })();
