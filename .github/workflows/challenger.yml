@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - "research/signal_stacks/series.py"
+      - ".github/workflows/challenger.yml"
   workflow_dispatch:
     inputs:
       action:
@@ -65,6 +66,24 @@ jobs:
         run: |
           python -m research.signal_stacks.dataset --cache .cache/signal_series --out .cache/signal_series/out
           python -m research.signal_stacks.series --cache .cache/signal_series --out .cache/signal_series/out
+      - name: Verify CM1 history published to admin database
+        if: steps.action.outputs.mode == 'report' && success()
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          python - <<'PY'
+          from pipeline.supa import read_signal_research
+          status, body = read_signal_research('series:CM1')
+          if status != 'ok' or not isinstance(body, dict):
+              raise SystemExit(f'CM1 historical upload verification failed: {status}')
+          weeks = body.get('weeks') or []
+          seasons = sorted({int(w['s']) for w in weeks})
+          W = sum(int(w['W']) for w in weeks)
+          L = sum(int(w['L']) for w in weeks)
+          if not weeks or not (W + L):
+              raise SystemExit('CM1 history is present but contains no graded historical bets')
+          print(f'CM1 VERIFIED in admin database: W={W} L={L} weeks={len(weeks)} seasons={seasons}')
+          PY
       - name: Preserve input snapshots and diagnostics
         if: always() && steps.action.outputs.mode == 'train'
         uses: actions/upload-artifact@v4
