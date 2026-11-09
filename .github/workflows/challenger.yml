@@ -4,6 +4,9 @@ on:
     # Both UTC offsets; local-time gate below handles Central daylight saving.
     - cron: '0 20,21 * * 2'
     - cron: '0 12,13 * * 3'
+  push:
+    paths:
+      - "research/signal_stacks/series.py"
   workflow_dispatch:
     inputs:
       action:
@@ -35,7 +38,8 @@ jobs:
           from zoneinfo import ZoneInfo
           import os
           now=datetime.now(ZoneInfo('America/Chicago'))
-          action=os.environ.get('REQUESTED') or ('train' if now.weekday()==1 and 15<=now.hour<18 else 'report' if now.weekday()==2 and 7<=now.hour<9 else '')
+          event=os.environ.get('GITHUB_EVENT_NAME', '')
+          action=os.environ.get('REQUESTED') or ('report' if event == 'push' else 'train' if now.weekday()==1 and 15<=now.hour<18 else 'report' if now.weekday()==2 and 7<=now.hour<9 else '')
           with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('mode='+action+'\n')
           PY
       - uses: actions/setup-python@v5
