@@ -492,7 +492,7 @@
       <div class="nw-h"><b>Rule ${t.n} · ${t.side === "model" ? "Model selects Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</b><button class="nw-x" aria-label="Close">✕</button></div>
       <p class="small"><b>${esc(t.title)}.</b> ${t.desc()}</p>
       <p class="small"><b>Why it might work</b> (an interpretation, not proven): ${esc(t.why)}</p>
-      <p class="small">${recLine(t)} ${t.frozen ? "Exploratory candidates selected after historical research; future performance is uncertain." : "Picked from many conditions tested on weeks 1–7, so the real rate is likely lower; break-even at −110 is about 52.4%."}</p>
+      <p class="small">${recLine(t)} ${t.frozen ? "Exploratory candidates selected after historical research; future performance is uncertain." : "Break-even at −110 is about 52.4%."}</p>
       <p class="muted small">${t.frozen ? "DK primary, FD fallback. No offseason history. Eligibility, features, selected side and quote are recorded before kickoff; the decision is not recalculated after results." : UNIVERSE}${t.spread ? " " + SPREAD_NOTE : ""}</p></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
