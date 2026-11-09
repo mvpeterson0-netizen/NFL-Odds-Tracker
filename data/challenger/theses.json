@@ -345,6 +345,18 @@
       "metric_source": null,
       "notes": "2025 and completed 2026 research: fixed <32, 32–49, 50–69, 70–84, 85+ F bands; game-specific roof status; reported temperature then historical archive fallback; indoor/closed separate. 12,043 distinct graded props. Historical discovery only; multiple-comparison and confounding risks. Full queryable dataset saved with analysis deliverable.",
       "decision": "No frozen-model changes; preregister a future sample before using discovered player/weather records as predictive filters."
+    },
+    {
+      "id": "TH-025",
+      "title": "Prior-game ATS result and player prop O/U",
+      "question": "Do player-prop Over/Under hit rates and price-based ROI differ based on whether the player's team and upcoming opponent covered or failed to cover their respective prior-game spreads?",
+      "created": "2026-11-09",
+      "origin": "User Stix research conversation",
+      "status": "needs_data",
+      "forward_start": null,
+      "metric_source": null,
+      "notes": "Test full 2x2 prior-game ATS state (team cover/non-cover x opponent cover/non-cover), single-team states, pushes separately, market/position/side splits, favorite/underdog and home/away interactions, cover-margin buckets, and multi-game ATS streaks. Use only information known before kickoff. Require sample-size floors, compare to same-market/side baseline, control multiple testing, and validate any discovered rule prospectively before promotion.",
+      "decision": "Historical discovery may nominate signals; no Signal Stack qualification or frozen-model change without preregistered prospective validation."
     }
   ]
 }
