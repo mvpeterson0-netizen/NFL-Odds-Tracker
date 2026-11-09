@@ -269,6 +269,11 @@ class PublicBoundary(unittest.TestCase):
             supa.sync_signal_research = orig
         self.assertEqual({r["id"]: r["kind"] for r in sent}, {"forward": "forward", "display": "display"})
 
+    def test_every_signal_has_historical_series_replay(self):
+        from research.signal_stacks.series import SERIES_REPLAY_IMPLEMENTED
+        self.assertEqual(set(S.REGISTRY), SERIES_REPLAY_IMPLEMENTED,
+                         "Every live signal must implement 2025/2026 weekly historical-series replay before publishing")
+
     def test_site_js_never_reads_public_payload(self):
         js = (Path(__file__).resolve().parent.parent / "site" / "stacks.js").read_text()
         self.assertNotIn("D.signal_stacks", js)
