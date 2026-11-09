@@ -128,8 +128,7 @@ def main():
                 if qprev and qprev["book"] == r["book"]:
                     qb_moves.append((qr, qprev, qr["line"] - qprev["line"]))
             if qb_moves:
-                qr, qprev, qb_delta = min(qb_moves, key=lambda x: x[2])
-                rec_moves = {}
+                # Live receiving_gap() selects the QB tuple with the highest prior passing line\n                # (normally the starter when multiple QBs have quoted lines). Mirror that here.\n                qr, qprev, qb_delta = max(qb_moves, key=lambda x: (x[1]["line"], x[0]["pid"]))\n                rec_moves = {}
                 for cr in current_group:
                     if cr["market"] != "rec_yds" or cr["pos"] not in ("WR", "TE", "RB"):
                         continue
