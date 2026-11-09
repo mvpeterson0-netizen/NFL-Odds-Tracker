@@ -332,7 +332,16 @@
     t6: ["Line", "Team"], t7: ["Line", "Team"], t8: ["Line", "Team"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
-  const recLine = (t) => t.challenger ? `Weekly learning · ${esc(D.challenger?.version || "awaiting first Tuesday training")} · 10% estimated-return trigger. Watchlist is provisional; only pregame-locked decisions enter the forward record.` : t.frozen ? `Frozen Oct 30, 2026 · forward paper record only. Early-week matches are provisional. Decisions lock at the pregame capture (~3 h before kickoff), at saved odds, 1 unit per bet. No historical results are added.` : `Weeks 1–7, when the rule was picked: <b>${t.rec}</b>. A candidate, not proven; scored from week 8 on.`;
+  // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
+  // recomputed from data.json each time, so it updates as games finish. Same grading as Leads Analysis.
+  function seasonRecLine(t) {
+    const wks = laWeeks().slice().reverse();
+    if (!wks.length) return "No graded games yet.";
+    const s = tally(wks.flatMap((w) => analyze(t.id, w)));
+    const label = wks.length === 1 ? `Week ${wks[0]}` : `Weeks ${wks[0]}–${wks[wks.length - 1]}`;
+    return `${label}: <b>${recTxt(s)} · ${s.hit == null ? "–" : s.hit.toFixed(1) + "%"} · ${unitsTxt(s.U)}${s.roi == null ? "" : ` · ${s.roi >= 0 ? "+" : "−"}${Math.abs(s.roi).toFixed(1)}% ROI`}</b>.`;
+  }
+  const recLine = (t) => t.challenger ? `Weekly learning · ${esc(D.challenger?.version || "awaiting first Tuesday training")} · 10% estimated-return trigger. Watchlist is provisional; only pregame-locked decisions enter the forward record.` : t.frozen ? `Frozen Oct 30, 2026 · forward paper record only. Early-week matches are provisional. Decisions lock at the pregame capture (~3 h before kickoff), at saved odds, 1 unit per bet. No historical results are added.` : seasonRecLine(t);
 
   function frozenEntries(tab) {
     const out = [];
