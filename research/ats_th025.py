@@ -107,6 +107,7 @@ def main():
  for z in obs:baseline[(z['market'],z['position'],z['side'])].append(z)
  families={
   'joint':('state','market','position','side'),
+  'season_joint':('season','state','market','position','side'),
   'joint_market':('state','market','side'),
   'all_market':('state','side'),
   'team':('team_state','market','position','side'),
@@ -131,6 +132,7 @@ def main():
  report=dict(thesis='TH-025',status='historical_discovery_only',quotes=len(qs),graded_props=len(obs)//2,
   **diag,overall_states=[z for z in results if z['family']=='all_market'],
   sampled_joint_buckets=selected[:30],n_sampled_joint=len(selected),
+  season_split_for_top=[r for r in results if r['family']=='season_joint' and any((r.get('state'),r.get('market'),r.get('position'),r.get('side'))==(t.get('state'),t.get('market'),t.get('position'),t.get('side')) for t in selected[:10])],
   caveats=['No prospective positive-EV result established','Exploratory multiple comparisons and game clustering can inflate apparent edge','DK preferred, FD fallback at pregame capture; sample coverage may vary by season and market','Pushes excluded from denominators; prior ATS pushes separate'])
  with open(OUT/'report.json','w') as f:json.dump(report,f,indent=2)
  with open(OUT/'report.md','w') as f:
