@@ -24,7 +24,8 @@ from pathlib import Path
 
 from .common import DATA, iso, parse_iso, read_json, to_float, write_json
 
-VERSION = "signal-stacks-v1"
+VERSION = "signal-stacks-v2"
+PREVIOUS_REGISTRY_SHA = "3beda300217b314061c40c166ce07fd43e0a7ce346f1bd9c9b88252654182ae9"
 LEDGER_PATH = DATA / "signal_stacks.json"
 OVERLAP_MODEL_PATH = Path(__file__).with_name("frozen_models.json")
 
@@ -50,6 +51,10 @@ FAMILIES = {
 
 # id -> definition.  `version` changes whenever the rule text/threshold changes (a changed rule is a NEW signal).
 REGISTRY = {
+    "CM1": dict(family="line_move", side="under", markets=["rec_yds"], pos=["WR", "TE", "RB"],
+                status="testing", version="v1", label="QB pass yards down · receiving lines lag",
+                rule="Same QB down 15+ passing yards week over week; sum of 3+ matched teammate receiving lines falls at least 10 yards less -> receiving yards Under",
+                origin="Stix week-to-week correlated prop research"),
     "SP1": dict(family="game_script", side="under", markets=["rec_yds"], pos=["WR", "TE", "RB"], status="testing", version="v1",
                 label="Team +10 or more", rule="Team spread +10 or longer (team is a 10+ point underdog) -> receiving yards Under",
                 origin="spread band >=+10 (pre-set band, not refined)"),
@@ -93,6 +98,7 @@ TIERS = ("qualified", "testing", "context")
 # The frozen interaction model (T12) / additive model (T11) / Challenger (T13) are shown SEPARATELY and never counted as a family.
 # Which model input columns each stack signal reuses (checked against frozen_models.json by tests):
 MODEL_INPUT_OVERLAP = {
+    "CM1": ["line_delta_ratio"],
     "L1": ["last_ratio", "mean3_ratio"], "L9": ["last_ratio", "mean3_ratio", "rise3"], "L10": ["rise3"],
     "L2": ["away", "line_delta_ratio"], "L5": ["usage_last", "usage_delta"],
     "L3": ["group_TE player_reception_yds"], "L4": ["group_QB player_rush_yds"],
@@ -239,7 +245,45 @@ def weather_signals(pos, mid, fc):
     return out
 
 
-def evaluate_prop(pid, p, r, mid, quote, history, game, out, now):
+def receiving_gap(pid, quote, team_rows, now):
+    """Measure consecutive-week changes using one book and synchronized captures."""
+    book, cap = quote.get("book"), quote.get("cap")
+    if not book or not cap:
+        return None
+    qb_moves, receivers = [], {}
+    for teammate, pos, current, previous in team_rows:
+        market = "pass_yds" if pos == "QB" else "rec_yds"
+        old = (previous.get("m") or {}).get(market) or {}
+        old_cap = parse_iso(old.get("cap") or "")
+        old_ko = parse_iso(previous.get("ko") or "")
+        if (old.get("lstat") != "ok" or old.get("book") != book or old.get("line") is None
+                or old_cap is None or old_ko is None or not old_cap < old_ko <= now):
+            continue
+        m = (current.get("m") or {}).get(market) or {}
+        if m.get("lstat") == "pending":
+            m = _watch_quote(m, now) or {}
+        elif m.get("lstat") != "ok":
+            continue
+        if m.get("cap") != cap or m.get("book") != book or m.get("line") is None:
+            continue
+        move = m["line"] - old["line"]
+        if pos == "QB":
+            qb_moves.append((old["line"], teammate, move, old_cap))
+        else:
+            receivers[teammate] = (move, old_cap)
+    if not qb_moves:
+        return None
+    _, qb, qb_move, prior_cap = max(qb_moves)
+    receivers = {player: move for player, (move, captured) in receivers.items() if captured == prior_cap}
+    if len(receivers) < 3 or pid not in receivers:
+        return None
+    rec_move = sum(receivers.values())
+    return {"qb_pid": qb, "qb_delta": qb_move, "receiving_delta": rec_move,
+            "gap": rec_move - qb_move, "matched_receivers": len(receivers),
+            "receiver_delta": receivers[pid], "book": book, "cap": cap}
+
+
+def evaluate_prop(pid, p, r, mid, quote, history, game, out, now, team_rows=()):
     """All signals for one prop at evaluation time `now`.  Never reads same-game results."""
     pos = p["pos"]
     hf, sstate, sinfo = _spread_state(out, game, now)
@@ -247,6 +291,14 @@ def evaluate_prop(pid, p, r, mid, quote, history, game, out, now):
     fc, wstate, winfo = _forecast_state(game, now)
     fired = lead_signals(pos, r, mid, quote, history, hf, sstate == "ok") + spread_signals(pos, mid, ts) + weather_signals(pos, mid, fc)
     sigs, unavailable = [], []
+    if _applies(REGISTRY["CM1"], pos, mid):
+        gap = receiving_gap(pid, quote, team_rows, now)
+        if gap is None:
+            unavailable.append({"id": "CM1", "reason": "missing matched QB or teammate quotes"})
+        elif gap["qb_delta"] <= -15 and gap["gap"] >= 10:
+            fired.append(("CM1", f"QB passing {gap['qb_delta']:+g} yd; "
+                          f"{gap['matched_receivers']} teammate receiving lines {gap['receiving_delta']:+g} yd combined "
+                          f"({gap['gap']:g} yd gap)", gap))
     for sid, trigger, inputs in fired:
         d = REGISTRY[sid]
         sigs.append({"id": sid, "family": d["family"], "side": d["side"], "status": d["status"], "version": d["version"],
@@ -376,13 +428,26 @@ def update(out, players, rows, now, path=None, log=None):
         saved = {"version": None, "frozen_at": iso(now), "registry_sha256": sha, "records": {}}   # in-memory only, never saved
     elif new_ledger:
         saved = {"version": VERSION, "frozen_at": iso(now), "registry_sha256": sha, "records": {}}
+    migrated = saved.get("version") == "signal-stacks-v1" and saved.get("registry_sha256") == PREVIOUS_REGISTRY_SHA
+    if migrated:
+        saved.update(version=VERSION, registry_sha256=sha)
     locking_ok = saved.get("version") == VERSION and saved.get("registry_sha256") == sha
     if not locking_ok and log is not None:
         log.append("signal stacks: rule registry changed without a new ledger version; no new locks (watchlist only)")
     frozen_at = parse_iso(saved["frozen_at"])
-    records, changed = saved["records"], new_ledger
+    records, changed = saved["records"], new_ledger or migrated
     watch = {}
     games = out.get("games") or {}
+    team_rows = defaultdict(list)
+    for pid, rs in rows.items():
+        pos = (players.get(pid) or {}).get("pos")
+        if pos not in ("QB", "WR", "TE", "RB"):
+            continue
+        by_week_team = {(r["wk"], r.get("team")): r for r in rs if r.get("team") and r.get("final")}
+        for r in rs:
+            previous = by_week_team.get((r["wk"] - 1, r.get("team")))
+            if not r.get("final") and previous:
+                team_rows[r["gid"], r["team"]].append((pid, pos, r, previous))
     for pid, rs in rows.items():
         p = players.get(pid)
         if not p:
@@ -399,7 +464,7 @@ def update(out, players, rows, now, path=None, log=None):
                     continue                               # locked: never recomputed (repeat captures change nothing)
                 quote = _lock_quote(m, ko, now, frozen_at) if locking_ok else None
                 if quote:
-                    ev = evaluate_prop(pid, p, r, mid, quote, rows.get(pid, []), games.get(r["gid"]), out, now)
+                    ev = evaluate_prop(pid, p, r, mid, quote, rows.get(pid, []), games.get(r["gid"]), out, now, team_rows[r["gid"], r.get("team")])
                     records[key] = {"gid": r["gid"], "pid": pid, "mid": mid, "wk": r["wk"], "ko": r["ko"], "pos": p["pos"],
                                     "evaluated_utc": iso(now), "quote": quote, "rule_versions": {s["id"]: s["version"] for s in ev["signals"]},
                                     "registry_sha256": sha, **ev, "stack": stack_summary(ev["signals"])}
@@ -407,7 +472,7 @@ def update(out, players, rows, now, path=None, log=None):
                     continue
                 wq = _watch_quote(m, now)
                 if wq:
-                    ev = evaluate_prop(pid, p, r, mid, wq, rows.get(pid, []), games.get(r["gid"]), out, now)
+                    ev = evaluate_prop(pid, p, r, mid, wq, rows.get(pid, []), games.get(r["gid"]), out, now, team_rows[r["gid"], r.get("team")])
                     watch[key] = {"gid": r["gid"], "pid": pid, "mid": mid, "wk": r["wk"], "ko": r["ko"], "evaluated_utc": iso(now),
                                   "quote": wq, **ev, "stack": stack_summary(ev["signals"])}
     if changed and mode != "blocked":
@@ -586,3 +651,4 @@ def publish_forward(rows, now, log=None, path=None, forward_path=None, display=N
         if log is not None:
             log.append(f"signal stacks: admin sync skipped ({type(ex).__name__}: {str(ex)[:80]})")
     return report
+
