@@ -54,6 +54,13 @@ jobs:
       - name: Build scorecard
         if: steps.action.outputs.mode != '' && success()
         run: python -m pipeline.challenger report
+      - name: Refresh Signal Stacks historical series
+        if: steps.action.outputs.mode == 'report' && success()
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          python -m research.signal_stacks.dataset --cache .cache/signal_series --out .cache/signal_series/out
+          python -m research.signal_stacks.series --cache .cache/signal_series --out .cache/signal_series/out
       - name: Preserve input snapshots and diagnostics
         if: always() && steps.action.outputs.mode == 'train'
         uses: actions/upload-artifact@v4
