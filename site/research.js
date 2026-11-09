@@ -336,12 +336,16 @@
   // recomputed from data.json each time, so it updates as games finish. Same grading as Leads Analysis.
   function seasonRecLine(t) {
     const wks = laWeeks().slice().reverse();
-    if (!wks.length) return "No graded games yet.";
-    const s = tally(wks.flatMap((w) => analyze(t.id, w)));
-    const label = wks.length === 1 ? `Week ${wks[0]}` : `Weeks ${wks[0]}–${wks[wks.length - 1]}`;
+    const by = wks.map((w) => [w, analyze(t.id, w)]);
+    const used = by.filter(([, l]) => l.length).map(([w]) => w);
+    if (!used.length) return t.frozen ? "No graded bets yet." : "No graded games yet.";
+    // Original leads cover week 1 on; leads 9–12 only have bets recorded after their Oct 30 freeze, so they start at their first week.
+    const first = t.frozen ? used[0] : wks[0], last = t.frozen ? used[used.length - 1] : wks[wks.length - 1];
+    const s = tally(by.flatMap(([, l]) => l));
+    const label = first === last ? `Week ${first}` : `Weeks ${first}–${last}`;
     return `${label}: <b>${recTxt(s)} · ${s.hit == null ? "–" : s.hit.toFixed(1) + "%"} · ${unitsTxt(s.U)}${s.roi == null ? "" : ` · ${s.roi >= 0 ? "+" : "−"}${Math.abs(s.roi).toFixed(1)}% ROI`}</b>.`;
   }
-  const recLine = (t) => t.challenger ? `Weekly learning · ${esc(D.challenger?.version || "awaiting first Tuesday training")} · 10% estimated-return trigger. Watchlist is provisional; only pregame-locked decisions enter the forward record.` : t.frozen ? `Frozen Oct 30, 2026 · forward paper record only. Early-week matches are provisional. Decisions lock at the pregame capture (~3 h before kickoff), at saved odds, 1 unit per bet. No historical results are added.` : seasonRecLine(t);
+  const recLine = (t) => t.challenger ? `Weekly learning · ${esc(D.challenger?.version || "awaiting first Tuesday training")} · 10% estimated-return trigger. Watchlist is provisional; only pregame-locked decisions enter the forward record.` : t.frozen ? `${seasonRecLine(t)} Frozen Oct 30, 2026 · forward paper record only. Early-week matches are provisional. Decisions lock at the pregame capture (~3 h before kickoff), at saved odds, 1 unit per bet. No historical results are added.` : seasonRecLine(t);
 
   function frozenEntries(tab) {
     const out = [];
