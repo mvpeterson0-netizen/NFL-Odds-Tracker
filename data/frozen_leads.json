@@ -42908,6 +42908,100 @@
     "up": -114.0
    },
    "wk": 9
+  },
+  "2026_09_TB_CHI|00-0041558|rec": {
+   "decisions": {
+    "t11": {
+     "edge": 0.1126672309007899,
+     "probability": 0.7638687259162162,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.14682898754820894,
+     "probability": 0.78732146794062,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.3512790300734493,
+    "mean3_ratio": 0,
+    "mean5_ratio": 0.13333333333333333,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": 0.0,
+    "snap_change": 0.33666666666666667,
+    "surprise": null,
+    "usage_delta": -2.6944971537001896,
+    "usage_last": 0.0
+   },
+   "gid": "2026_09_TB_CHI",
+   "ko": "2026-11-09T01:20:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-09T00:30:34Z",
+   "pid": "00-0041558",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-09T00:30:22Z",
+    "line": 1.5,
+    "op": 169.0,
+    "up": -219.0
+   },
+   "wk": 9
+  },
+  "2026_09_TB_CHI|00-0041558|rec_yds": {
+   "decisions": {
+    "t11": {
+     "edge": 0.10690558742932743,
+     "probability": 0.5772856891377832,
+     "qualifies": true,
+     "side": "under"
+    },
+    "t12": {
+     "edge": 0.23200956998308242,
+     "probability": 0.6425313068332822,
+     "qualifies": true,
+     "side": "under"
+    }
+   },
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 0.0,
+    "last_ratio": 0,
+    "line": 6.5,
+    "line_delta_ratio": -0.3157894736842105,
+    "market_p": 0.5063197809142617,
+    "mean3_ratio": 0,
+    "mean5_ratio": 0.24615384615384617,
+    "nprior": 8,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": 0.0,
+    "snap_change": 0.33666666666666667,
+    "surprise": null,
+    "usage_delta": -2.6944971537001896,
+    "usage_last": 0.0
+   },
+   "gid": "2026_09_TB_CHI",
+   "ko": "2026-11-09T01:20:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-09T00:30:34Z",
+   "pid": "00-0041558",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-09T00:30:22Z",
+    "line": 6.5,
+    "op": -115.0,
+    "up": -109.0
+   },
+   "wk": 9
   }
  },
  "version": "2026-10-30-v1"
