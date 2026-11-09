@@ -27,7 +27,16 @@ from pipeline.signals import REGISTRY
 ROOT = Path(__file__).resolve().parents[2]
 NOTE_BASE = ("Replay of the rule as written on past lines (DraftKings, FanDuel fallback, about 3 h before kickoff), flat 1 unit at the saved price, "
              "pushes refunded; four markets only (pass yds, rush yds, receptions, rec yds). Spread = nflverse schedule spread_line (closing-type, not a capture-time quote); weather = observed, not a forecast.")
-NO_SLOT_2025 = "2025 weeks are not shown: this rule needs the depth-chart slot, which was only captured from 2026."\n\n# Every live registry signal must be explicitly covered by the historical-series generator.\n# This prevents a future signal from appearing in the app with a blank expansion simply because\n# its replay trigger was forgotten here. Add the new ID here only after implementing its replay.\nSERIES_REPLAY_IMPLEMENTED = {\n    "CM1", "SP1", "SP2", "SP3", "SP4", "SP5", "WX1", "WX2",\n    "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10",\n}\n
+NO_SLOT_2025 = "2025 weeks are not shown: this rule needs the depth-chart slot, which was only captured from 2026."
+
+# Every live registry signal must be explicitly covered by the historical-series generator.
+# This prevents a future signal from appearing in the app with a blank expansion simply because
+# its replay trigger was forgotten here. Add the new ID here only after implementing its replay.
+SERIES_REPLAY_IMPLEMENTED = {
+    "CM1", "SP1", "SP2", "SP3", "SP4", "SP5", "WX1", "WX2",
+    "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10",
+}
+
 
 def payout(p):
     p = float(p)
@@ -83,7 +92,16 @@ def main():
     ap.add_argument("--cache", default="/home/claude/stix_research/cache")
     a = ap.parse_args()
     out, cache = Path(a.out), Path(a.cache)
-    props = load(out / "props.csv", cache)\n    slot, use26, ts25, sn25 = usage_tables(cache)\n    missing_replay = sorted(set(REGISTRY) - SERIES_REPLAY_IMPLEMENTED)\n    stale_replay = sorted(SERIES_REPLAY_IMPLEMENTED - set(REGISTRY))\n    if missing_replay or stale_replay:\n        raise RuntimeError(\n            "Signal-series coverage mismatch. Implement historical replay before publishing a new signal. " +\n            f"missing={missing_replay} stale={stale_replay}"\n        )\n
+    props = load(out / "props.csv", cache)
+    slot, use26, ts25, sn25 = usage_tables(cache)
+    missing_replay = sorted(set(REGISTRY) - SERIES_REPLAY_IMPLEMENTED)
+    stale_replay = sorted(SERIES_REPLAY_IMPLEMENTED - set(REGISTRY))
+    if missing_replay or stale_replay:
+        raise RuntimeError(
+            "Signal-series coverage mismatch. Implement historical replay before publishing a new signal. " +
+            f"missing={missing_replay} stale={stale_replay}"
+        )
+
     by = defaultdict(dict)               # (season, pid) -> week -> {"m": {mid: row}, ...}
     for r in props:
         g = by[(r["season"], r["pid"])].setdefault(r["week"], {"m": {}, "ha": r["ha"], "team": r["team"], "played": False, "pos": r["pos"], "name": r["name"]})
@@ -98,7 +116,15 @@ def main():
         v = ts25.get((wk, pid))
         return None if v is None else v * 100
 
-    bets = defaultdict(list)             # signal id -> [(season, week, result, side, op, up, gid)]\n\n    # Lookup tables used by CM1. The live rule compares synchronized same-book lines\n    # week over week for a team QB and at least three receiving options.\n    prop_by = {(r["season"], r["week"], r["pid"], r["market"]): r for r in props}\n    team_game = defaultdict(list)\n    for rr in props:\n        team_game[(rr["season"], rr["week"], rr["gid"], rr["team"])].append(rr)\n
+    bets = defaultdict(list)             # signal id -> [(season, week, result, side, op, up, gid)]
+
+    # Lookup tables used by CM1. The live rule compares synchronized same-book lines
+    # week over week for a team QB and at least three receiving options.
+    prop_by = {(r["season"], r["week"], r["pid"], r["market"]): r for r in props}
+    team_game = defaultdict(list)
+    for rr in props:
+        team_game[(rr["season"], rr["week"], rr["gid"], rr["team"])].append(rr)
+
     def add(sid, r):
         bets[sid].append((r["season"], r["week"], r["result"], REGISTRY[sid]["side"], r["over_price"], r["under_price"], r["gid"]))
 
@@ -128,7 +154,10 @@ def main():
                 if qprev and qprev["book"] == r["book"]:
                     qb_moves.append((qr, qprev, qr["line"] - qprev["line"]))
             if qb_moves:
-                # Live receiving_gap() selects the QB tuple with the highest prior passing line\n                # (normally the starter when multiple QBs have quoted lines). Mirror that here.\n                qr, qprev, qb_delta = max(qb_moves, key=lambda x: (x[1]["line"], x[0]["pid"]))\n                rec_moves = {}
+                # Live receiving_gap() selects the QB tuple with the highest prior passing line
+                # (normally the starter when multiple QBs have quoted lines). Mirror that here.
+                qr, qprev, qb_delta = max(qb_moves, key=lambda x: (x[1]["line"], x[0]["pid"]))
+                rec_moves = {}
                 for cr in current_group:
                     if cr["market"] != "rec_yds" or cr["pos"] not in ("WR", "TE", "RB"):
                         continue
@@ -187,8 +216,11 @@ def main():
             else:
                 c[1] += 1; c[3] -= 1
         weeks = [{"s": s, "w": w, "W": c[0], "L": c[1], "P": c[2], "u": round(c[3], 3)} for (s, w), c in sorted(wk.items())]
-        note = NO_SLOT_2025 if sid in ("L1", "L3", "L4") else ""      # shown under the chart; the method text stays in the row only\n        if sid == "CM1":\n            note = ("Historical replay of the synchronized correlated-line rule. Requires the same book/capture for the current team lines, "
-                    "the same book and synchronized capture in the prior calendar week, one QB passing line, and at least three matched receiving-yard lines.")\n        W = sum(x["W"] for x in weeks); L = sum(x["L"] for x in weeks)
+        note = NO_SLOT_2025 if sid in ("L1", "L3", "L4") else ""      # shown under the chart; the method text stays in the row only
+        if sid == "CM1":
+            note = ("Historical replay of the synchronized correlated-line rule. Requires the same book/capture for the current team lines, "
+                    "the same book and synchronized capture in the prior calendar week, one QB passing line, and at least three matched receiving-yard lines.")
+        W = sum(x["W"] for x in weeks); L = sum(x["L"] for x in weeks)
         summary[sid] = (W, L, round(100 * W / (W + L), 1) if W + L else None, len(weeks))
         rows.append((f"series:{sid}", {"signal": sid, "side": d["side"], "weeks": weeks, "note": note, "method": NOTE_BASE, "breakeven": 0.5238}))
     (out / "series.json").write_text(json.dumps(dict(rows), indent=1))
