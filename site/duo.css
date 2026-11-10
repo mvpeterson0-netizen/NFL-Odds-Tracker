@@ -1,0 +1,36 @@
+/* Stix iPhone duo mode (foldable iPhone, two panes). Everything here is scoped to body.duo-on, which mobile.js sets only
+   for signed-in users who switched it on, on the NFL side, on a 600-1100 px wide screen. Otherwise nothing changes. */
+.ac > .body > .ac-check { display: flex; align-items: center; gap: 8px; margin: 10px 0 2px; font-size: 15px; }
+.ac > .body > .ac-check input { width: 20px; height: 20px; flex: none; }
+
+body.duo-on main { padding: 8px 12px 0; max-width: none; }
+body.duo-on .duo { display: grid; grid-template-columns: minmax(300px, 40%) minmax(0, 1fr); gap: 0;
+  height: calc(100vh - var(--duo-top, 120px) - 8px); height: calc(100dvh - var(--duo-top, 120px) - 8px); }
+body.duo-on .duo-l, body.duo-on .duo-r { position: relative; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; min-width: 0; padding-bottom: 28px; }
+body.duo-on .duo-l { padding-right: 12px; border-right: 1px solid var(--line); }
+body.duo-on .duo-r { padding-left: 14px; }
+body.duo-on .duo-l::-webkit-scrollbar, body.duo-on .duo-r::-webkit-scrollbar { width: 0; }
+
+/* left pane: the game chips and filters stay one tidy block; selected card is outlined */
+body.duo-on .duo-l .gamebar { margin: 0 -12px 6px 0; padding-right: 12px; }
+body.duo-on .duo-l .mcard.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+body.duo-on .duo-l .mgame-h { top: 0; }
+
+/* right pane: no "back to Board" (the list is always there); share button stays on the right */
+body.duo-on .duo-r .mback { display: none; }
+body.duo-on .duo-r .mp-top { justify-content: flex-end; margin: 0 0 4px; }
+body.duo-on .duo-r .mplayer { animation: none; }
+body.duo-on .duo-r .mtiles { flex-direction: row; flex: 0 0 auto; gap: 8px; }
+body.duo-on .duo-r .mtiles > div { min-width: 92px; padding: 6px 8px; }
+body.duo-on .duo-r .mtabs { flex-wrap: wrap; overflow: visible; }
+
+.duo-empty { height: 100%; min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 0 24px; font-size: 17px; }
+
+/* other tabs (Research, Results, Defense, ...) keep the phone styling but use the full width */
+body.duo-on main > :not(.duo) { max-width: 760px; margin-left: auto; margin-right: auto; }
+
+/* narrow right pane: header info on its own line, summary tiles underneath, so the name never wraps letter by letter */
+body.duo-on .duo-r .mp-h { flex-wrap: wrap; }
+body.duo-on .duo-r .mp-info { flex: 1 1 160px; }
+body.duo-on .duo-r .mtiles { flex: 1 0 100%; }
+body.duo-on .duo-r .mtiles > div { flex: 1; }
