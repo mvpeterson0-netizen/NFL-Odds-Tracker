@@ -105,10 +105,7 @@
     items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
     let h = gameBar(wk) + `<div class="filters mfilters">
       <div class="flab">Week ${weekSlider(wk)}</div>
-      <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
-      <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
-      <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label></div>
-      <p class="muted small mnote">${items.length} players · tap a player for details · <a href="#/guide">how AVG, OPP and trend work</a></p>`;
+      <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label></div>`;
     if (!items.length) return h + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
     let lastGid = null;
     for (const { s, r } of items) {

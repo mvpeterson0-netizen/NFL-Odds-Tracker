@@ -75,7 +75,7 @@
   }
   function rerender() {
     const t = (location.hash || "").split("/")[1];
-    if ((t === "picks" || t === "player") && typeof render === "function" && D) {
+    if ((t === "picks" || t === "player" || t === "guide" || t === "slots" || t === "log") && typeof render === "function" && D) {
       const y = window.scrollY; render(); window.scrollTo(0, y);
     }
     showTab();
@@ -430,7 +430,7 @@
     if (nShare && window.STIX_SHARE && window.STIX_SHARE.openPicks) h += `<p class="pk-sharerow"><button id="pk-share" class="sh-main" type="button">Share this week's picks (${nShare})</button></p>`;
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
     h += sec("Locked · game started", locked, "Picks move here at kickoff. They can't be changed or removed after that.");
-    h += sec("Graded", graded, "Graded picks appear here once the game's stats are published.");
+    h += `<details class="panel pk-graded" ${ST.gradedOpen ? "open" : ""}><summary><b>Graded (${graded.length})</b> <span class="muted small">· tap to show</span></summary><div class="body">${graded.length ? graded.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">Graded picks appear here once the game's stats are published.</p>`}</div></details>`;
     h += `<p class="muted small">Picks are graded against the line saved when you made the pick (a Mon / Thu / Sun AM snapshot or the pre-game line), not the app's graded line.
       Over hits when the actual stat is above that line; equal = push; a player who doesn't play = void. ${lockNote}</p>`;
     return h;
@@ -453,9 +453,9 @@
     if (acc && acc.signedIn()) {
       const g = acc.gate();
       if (g) return g;
-      if (!AC.loaded) { if (!AC.loading) setTimeout(acLoad, 0); return `<p class="muted pad">Loading your picks…</p>${acc.accountBox()}`; }
+      if (!AC.loaded) { if (!AC.loading) setTimeout(acLoad, 0); return `<p class="muted pad">Loading your picks…</p>`; }
       const st = AC.saving ? "Saving…" : AC.err ? `<span class="pk-err">${esc(AC.err)}</span> <button id="pk-retry">Retry</button>` : "Saved to your account";
-      return picksView(AC.picks, st, "Locks are enforced by the Stix server at the scheduled kickoff, so a device's clock can't change them.") + ghLegacy() + acc.accountBox();
+      return picksView(AC.picks, st, "Locks are enforced by the Stix server at the scheduled kickoff, so a device's clock can't change them.") + ghLegacy();
     }
     if (cfg()) return (acc ? `<div class="panel ac"><div class="body"><p class="small"><b>New:</b> sign in with your email to keep your picks in a Stix account, on every device. <a href="#/picks" id="pk-goacct">Sign in</a></p></div></div>` : "") + ghView();
     return acc ? acc.gate() || "" : setupView();
@@ -466,6 +466,7 @@
     // Opening the Picks tab refreshes from the account (at most every 15 s), so picks made on another device show up.
     if (tab === "picks" && mode() === "acct" && AC.loaded && !AC.saving && Date.now() - AC.at > 15000) acLoad();
     if (ACC()) ACC().bind();
+    document.querySelectorAll(".pk-graded").forEach((d) => d.addEventListener("toggle", () => { ST.gradedOpen = d.open; }));
     document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => {
       const a = [b.dataset.pid, b.dataset.pmid, b.dataset.pick];
       if (enabled()) setPick(a[0], a[1], a[2], true); else if (offer()) askSignIn(...a);
