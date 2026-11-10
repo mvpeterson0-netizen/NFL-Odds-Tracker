@@ -327,10 +327,7 @@ function viewBoard() {
   items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
   let html = gameBar(wk) + `<div class="filters">
     <div class="flab">Week ${weekSlider(wk)}</div>
-    <label>Team <select id="f-team">${teamOptions(S.team)}</select></label>
-    <label>Position <select id="f-pos"><option value="">All</option>${["QB", "RB", "WR", "TE"].map((p) => `<option ${p === S.pos ? "selected" : ""}>${p}</option>`).join("")}</select></label>
     <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label>
-    <span class="muted small">${items.length} players · graded lines are the pre-game line (~3h before kickoff), not closing lines; yellow chips are earlier snapshots (Mon / Thu / Sun AM) · Opp D rank: 1 = toughest, 32 = most allowed</span>
   </div>`;
   if (!items.length) return html + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
   html += `<div class="panel scroll board"><table><thead><tr>
@@ -715,7 +712,6 @@ function viewResults() {
   if (S.resMk && !mkList.some((m) => m.id === S.resMk)) S.resMk = "";
   const sel = (id, val, opts) => `<select id="${id}">${opts.map(([v, l]) => `<option value="${esc(v)}" ${String(v) === String(val) ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
   let h = `<h2 class="gsec">Results</h2>
-    <p class="callout">Every graded pre-game line (captured ~3 h before kickoff) that finished over or under the actual stat. Pushes and voids are left out.${S.all ? " Includes extra players (All players is on)." : ""}</p>
     <div class="filters">
       <label>Week ${sel("r-wk", S.resWk || "", [["", "All weeks"], ...weeks.map((w) => [w, `Week ${w}`])])}</label>
       <label>Position ${sel("r-pos", S.resPos || "", [["", "All"], ...RES_POS.map((p) => [p, p])])}</label>
@@ -884,7 +880,10 @@ function weekLinesPanel() {
 }
 
 function viewGuide() {
-  return `${window.alertsPanel ? window.alertsPanel() : ""}${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
+  // Account info (signed-in users only) sits at the top of the Guide page; it used to be at the bottom of Picks.
+  let acct = "";
+  try { const A = window.STIX_ACCOUNT; if (A && A.signedIn()) acct = A.accountBox(); } catch (e) { console.error("account box failed", e); }
+  return `${acct}${window.alertsPanel ? window.alertsPanel() : ""}${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
     <section id="g-guide"><h2 class="gsec">Guide</h2>${guideBody()}</section>
     <section id="g-log"><h2 class="gsec">Log &amp; sources</h2>${viewLog(LIVE)}</section>`;
 }
