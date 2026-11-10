@@ -549,8 +549,7 @@
   function controls() {
     const mks = D.markets, gopts = gameOptions();
     if (RL.gid && !gopts.some(([g]) => g === RL.gid)) RL.gid = "";
-    return `<div class="sg-bar"><label class="grow">Player <input type="search" id="rl-q" placeholder="Search name" value="${esc(RL.q)}"></label></div>
-      <details class="sg-filters" data-fopen ${RL.fopen ? "open" : ""}><summary>Filters${RL.mk || RL.gid ? " (on)" : ""}</summary>
+    return `<details class="sg-filters" data-fopen ${RL.fopen ? "open" : ""}><summary>Filters${RL.mk || RL.gid ? " (on)" : ""}</summary>
         <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label>
         <label>Game <select id="rl-gid"><option value="">All games</option>${gopts.map(([g, ko]) => `<option value="${esc(g)}" ${g === RL.gid ? "selected" : ""}>${esc(gameLabel(g))} · ${fmtTime(ko)}</option>`).join("")}</select></label></div></details>`;
   }
