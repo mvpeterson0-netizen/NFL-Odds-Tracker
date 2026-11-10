@@ -546,13 +546,6 @@
     return lists[0].filter((x) => keep.has(bkey(x)));
   }
   const byWeek = (bets) => laWeeks().slice().reverse().map((w) => ({ w, list: bets.filter((x) => x.r.wk === w) }));
-  function controls() {
-    const mks = D.markets, gopts = gameOptions();
-    if (RL.gid && !gopts.some(([g]) => g === RL.gid)) RL.gid = "";
-    return `<details class="sg-filters" data-fopen ${RL.fopen ? "open" : ""}><summary>Filters${RL.mk || RL.gid ? " (on)" : ""}</summary>
-        <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label>
-        <label>Game <select id="rl-gid"><option value="">All games</option>${gopts.map(([g, ko]) => `<option value="${esc(g)}" ${g === RL.gid ? "selected" : ""}>${esc(gameLabel(g))} · ${fmtTime(ko)}</option>`).join("")}</select></label></div></details>`;
-  }
   // tiny run chart: cumulative units by week (all season), green if up, red if down
   function spark(by) {
     let u = 0; const pts = by.map(({ list }) => (u += tally(list).U));
@@ -564,7 +557,7 @@
   }
   function tileHtml(t, st) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
-    return `<button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}"><div class="sg-top"><span class="rl-n">${t.n}</span><b>${esc(t.label)}</b></div>
+    return `<button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}"><div class="sg-top"><b>${esc(t.label)}</b></div>
       <div class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}<span class="muted small"> ROI</span></div>
       <div class="small">${s.n ? `${recTxt(s)} · <span class="${cls}">${unitsTxt(s.U)}</span>` : `<span class="muted">no graded bets ${scopeName() === "season" ? "yet" : "in " + scopeName()}</span>`}</div>${spark(st.by)}</button>`;
   }
@@ -607,7 +600,7 @@
   // Record panel for the picked signal(s): summary, running hit rate, week by week (week = smallest level)
   function recordPanel(ts) {
     const bets = betsFor(ts), by = byWeek(bets), key0 = ts.map((t) => t.id).join("+");
-    const many = ts.length > 1, title = ts.map((t) => `<span class="rl-n">${t.n}</span> ${esc(t.label)}`).join(" + ");
+    const many = ts.length > 1, title = ts.map((t) => esc(t.label)).join(" + ");
     let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${many ? `Fits all of: ${title}` : "Run chart"}</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>`;
     if (!bets.length) return h + `<p class="muted small">${many ? "No graded bets fit all of these signals (or they point opposite ways)." : "No graded bets yet."}</p></div></div>`;
     const s = tally(bets), cls = s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "";
@@ -648,7 +641,7 @@
       h += `<div class="rlrow"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span><span class="rlsize">${x.sigs.length} signal${x.sigs.length === 1 ? "" : "s"}</span></div>
         <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</div>
-        <div class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${t.n} ${esc(t.label)}</span>`).join("")}</div></div>`;
+        <div class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</div></div>`;
     }
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
     return h + `</div>${pager}`;
@@ -660,7 +653,7 @@
     if (LA.wk == null) LA.wk = laWeeks()[0] || null; // the Challenger diagnostics below read these
     let inner = topSection(tabs);
     if (picked.length) inner += recordPanel(picked);
-    inner += controls() + `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
+    inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     if (laWeeks().length) inner += `<details class="sg-diag"><summary>Research diagnostics</summary>${challengerDiagnosticsHtml()}${thesisRegistryHtml()}</details>`;
     return `<section id="rl"><h2 class="gsec">Signals</h2>${inner}</section>`;
   }
@@ -704,8 +697,6 @@
     const a = e.target.closest && e.target.closest("[data-rmid]"); if (!a) return;
     try { S.market[a.dataset.rpid] = a.dataset.rmid; } catch (err) { console.error(err); }
   }, true);
-  document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-mk") { RL.mk = e.target.value; redraw(); } });
-  document.addEventListener("change", (e) => { if (e.target && e.target.id === "rl-gid") { RL.gid = e.target.value; redraw(); } });
   function safeHtml() { try { return html(); } catch (e) { console.error("research leads failed", e); return ""; } }
 
   // ---------- Leads Analysis (Michael 2026-10-30): how one rule did in one week, optionally one game ----------
