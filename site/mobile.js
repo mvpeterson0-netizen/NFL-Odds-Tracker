@@ -87,7 +87,7 @@
   }
 
   // ---------- Board (cards) ----------
-  function board() {
+  function board(selPid) {
     const wk = S.wk, q = S.q.trim().toLowerCase();
     if (S.game && !(D.games[S.game] && D.games[S.game].wk === wk)) S.game = "";
     let slots = typeof slotsShown === "function" ? slotsShown(wk) : slotsFor(wk);
@@ -124,7 +124,7 @@
         const f = form(s.pid, mk.id, pos, wk);
         rows += `<div class="mrow"><span class="mlab">${esc(mk.label)}</span><span>${lineHtml(m)}</span><span>${f.avg == null ? `<span class="na">—</span>` : num(f.avg)}</span><span>${oppHtml(m)}</span><span>${trendHtml(f)}</span></div>`;
       }
-      h += `<a class="mcard" href="#/player/${s.pid}">
+      h += `<a class="mcard${selPid && selPid === s.pid ? " sel" : ""}" href="#/player/${s.pid}">
         <div class="mcard-h">${headshot(s.pid, 40)}<div><div class="mname">${esc(s.name)} ${window.STIX_NEWS ? window.STIX_NEWS.icon(s.pid) : ""}</div><div class="muted small">${esc(s.team)} · <span class="chip ${s.change ? "chg" : ""} ${s.extra ? "xtra" : ""}">${s.slot}${s.change ? " ↺" : ""}</span></div>${tgtLine(targets(s.pid, pos, wk))}</div><span class="mchev">›</span></div>
         <div class="mrow mhead"><span></span><span>LINE</span><span>AVG</span><span>OPP</span><span>TREND</span></div>${rows}</a>`;
     }
@@ -189,11 +189,50 @@
     return h;
   }
 
+  // ---------- iPhone duo mode (foldable iPhone, two panes) ----------
+  // Signed-in users can switch it on from the Account box (account.js; saved on this device as stix_duo).
+  // It only applies on the NFL side, and only while the screen is wide (600-1100 px: an unfolded foldable, or a phone
+  // turned sideways). Board + player pages show the card list on the left and the player page on the right.
+  const DUO_MQ = window.matchMedia("(min-width: 600px) and (max-width: 1100px)");
+  const duoPref = () => { try { return localStorage.getItem("stix_duo") === "1"; } catch (e) { return false; } };
+  function duoOn() {
+    const a = window.STIX_ACCOUNT;
+    return !!(a && a.signedIn && a.signedIn()) && duoPref() && DUO_MQ.matches && !/^#\/cfb/.test(location.hash || "");
+  }
+  // Keeps the page's look in step with duo mode: body class + the phone stylesheet (normally only <= 760 px).
+  function duoSync() {
+    const on = duoOn();
+    document.body.classList.toggle("duo-on", on);
+    const link = document.querySelector('link[href="mobile.css"]');
+    if (link) link.media = on ? "all" : "(max-width: 760px)";
+  }
+  let duoKeep = null;
+  function duoView(tab, arg) {
+    const l = document.querySelector(".duo-l"), r = document.querySelector(".duo-r");
+    duoKeep = { l: l ? l.scrollTop : 0, r: r && r.dataset.pid === (arg || "") ? r.scrollTop : 0 };
+    const sel = tab === "player" && playerById[arg] ? arg : "";
+    const right = sel ? player(arg) : `<div class="duo-empty"><b>Pick a player</b><span class="muted small">Tap a card on the left to see his chart, line movement and game log here.</span></div>`;
+    return `<div class="duo"><div class="duo-l">${board(sel)}</div><div class="duo-r" data-pid="${esc(sel)}">${right}</div></div>`;
+  }
+  function duoBind() {
+    const app = document.getElementById("app"), l = document.querySelector(".duo-l"), r = document.querySelector(".duo-r");
+    if (!app || !l) return;
+    document.documentElement.style.setProperty("--duo-top", Math.max(0, Math.round(app.getBoundingClientRect().top + window.scrollY)) + "px");
+    const k = duoKeep; duoKeep = null;
+    if (k && k.l) l.scrollTop = k.l;
+    else { const sel = l.querySelector(".mcard.sel"); if (sel) l.scrollTop = Math.max(0, sel.offsetTop - l.clientHeight / 3); }
+    if (k && k.r && r) r.scrollTop = k.r;
+  }
+
   window.STIX_MOBILE = {
     active: () => MQ.matches,
+    duo: duoOn,
+    sync: duoSync,
     form, // season avg / trend rules, reused by the share image (share.js)
     gameLog, // game log panel, reused by the review queue (review.js)
     render(tab, arg) {
+      duoSync();
+      if (duoOn() && (tab === "player" || !tab || tab === "board" || tab === "")) return duoView(tab, arg);
       if (tab === "player") return player(arg);
       if (!tab || tab === "board" || tab === "") return board();
       return null; // other tabs use the shared views
@@ -201,9 +240,12 @@
     bind(tab) {
       const back = document.getElementById("m-back");
       if (back) back.addEventListener("click", (e) => { if (history.length > 1) { e.preventDefault(); history.back(); } });
+      if (document.querySelector(".duo")) duoBind();
     },
   };
-  // Re-render when crossing the phone/desktop breakpoint (e.g. rotating a tablet).
+  // Re-render when crossing the phone/desktop breakpoint (e.g. rotating a tablet), or when duo mode is switched on/off / the fold opens.
   const onChange = () => { try { if (typeof render === "function" && D) render(); } catch (e) { /* app not ready yet */ } };
-  if (MQ.addEventListener) MQ.addEventListener("change", onChange); else if (MQ.addListener) MQ.addListener(onChange);
+  if (MQ.addEventListener) { MQ.addEventListener("change", onChange); DUO_MQ.addEventListener("change", onChange); }
+  else if (MQ.addListener) { MQ.addListener(onChange); DUO_MQ.addListener(onChange); }
+  window.addEventListener("stix-duo", onChange);
 })();

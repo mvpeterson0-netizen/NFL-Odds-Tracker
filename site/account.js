@@ -221,6 +221,12 @@
     else A.err = `Couldn't delete the account: ${r.error}`;
     changed();
   }
+  // iPhone duo mode (two-pane layout, mobile.js): a per-device display setting, so it lives in this browser, not in the database.
+  const duoPref = () => { try { return localStorage.getItem("stix_duo") === "1"; } catch { return false; } };
+  function setDuo(on) {
+    try { on ? localStorage.setItem("stix_duo", "1") : localStorage.removeItem("stix_duo"); } catch { /* ignore */ }
+    window.dispatchEvent(new Event("stix-duo"));
+  }
   const unitSize = () => (A.profile && Number(A.profile.unit_size)) || 10;
   const ready = () => signedIn() && A.profile && !!A.profile.age_confirmed_at;
 
@@ -281,6 +287,8 @@
       <form id="ac-unit" class="ac-form"><label class="small">Unit size ($ per pick) <input id="ac-unit-in" type="number" inputmode="decimal" min="0.01" step="0.01" value="${unitSize()}"></label>
         <button type="submit">Save</button></form>
       <p class="small muted">Every pick counts as 1 unit. Results are tracked in units; dollars = units × your unit size, so changing it rescales your whole record.</p>
+      <label class="ac-check small"><input type="checkbox" id="ac-duo" ${duoPref() ? "checked" : ""}> iPhone duo mode (foldable iPhone: player list and details side by side)</label>
+      <p class="small muted">Saved on this device. It switches on when the screen is wide (an unfolded foldable, or a phone turned sideways); on a narrow screen you still get the normal phone layout. NFL side only.</p>
       ${note()}
       <p class="small muted">${helpLine()}</p>
       ${privacy()}
@@ -305,6 +313,7 @@
     on("ac-out", "click", signOut);
     on("ac-age-in", "change", () => { $("ac-age-go").disabled = !$("ac-age-in").checked; });
     on("ac-age", "submit", (e) => { e.preventDefault(); if ($("ac-age-in").checked) confirmAge(); });
+    on("ac-duo", "change", (e) => setDuo(e.target.checked));
     on("ac-unit", "submit", (e) => { e.preventDefault(); setUnit($("ac-unit-in").value); });
     on("ac-del", "click", () => { A.confirmDelete = true; A.err = ""; A.msg = ""; changed(); });
     on("ac-del-no", "click", () => { A.confirmDelete = false; changed(); });

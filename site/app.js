@@ -989,7 +989,8 @@ function render() {
   // Phone layout (mobile.js) may take over the Board and player pages on narrow screens.
   // If it is missing or throws, the normal desktop view renders instead.
   let mobileHtml = null;
-  try { if (window.STIX_MOBILE && window.STIX_MOBILE.active()) mobileHtml = window.STIX_MOBILE.render(tab, arg); }
+  try { if (window.STIX_MOBILE) window.STIX_MOBILE.sync(); } catch (e) { /* duo look only */ }
+  try { if (window.STIX_MOBILE && (window.STIX_MOBILE.active() || window.STIX_MOBILE.duo())) mobileHtml = window.STIX_MOBILE.render(tab, arg); }
   catch (e) { console.error("mobile view failed; showing desktop view", e); mobileHtml = null; }
   if (mobileHtml != null) app.innerHTML = mobileHtml;
   else if (isCfb) {
