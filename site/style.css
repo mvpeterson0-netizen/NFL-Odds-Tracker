@@ -551,3 +551,5 @@ tr.gdetail:hover td { background: var(--hover); }
 .sg-sec { margin: 16px 0 4px; } .sg-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; } .sg-chips .chip { cursor: pointer; } .sg-chips .chip.on { background: var(--accent); color: #fff; }
 .sg-chart { width: 100%; max-width: 520px; display: block; margin: 4px 0 10px; }
 .sg-weeks { margin-top: 6px; } .sg-weeks > summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
+
+.rbtns { display: flex; flex-wrap: wrap; gap: 6px; } .rfilters { flex-direction: column; align-items: stretch; gap: 8px; } .rbtns button { padding: 5px 10px; font-size: 13px; }

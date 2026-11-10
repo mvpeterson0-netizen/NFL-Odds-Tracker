@@ -710,13 +710,13 @@ function viewResults() {
   const f = all.filter((x) => (!S.resWk || x.wk === +S.resWk) && (!S.resMk || x.mid === S.resMk) && (!S.resPos || x.pos === S.resPos));
   const mkList = D.markets.filter((m) => !S.resPos || m.pos.includes(S.resPos));
   if (S.resMk && !mkList.some((m) => m.id === S.resMk)) S.resMk = "";
-  const sel = (id, val, opts) => `<select id="${id}">${opts.map(([v, l]) => `<option value="${esc(v)}" ${String(v) === String(val) ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
+  // Button rows (no drop-downs): the first button is "All" and is the default; clicking the active button keeps it selected.
+  const btns = (key, val, opts) => `<div class="rbtns">${opts.map(([v, l]) => `<button type="button" class="${String(v) === String(val) ? "on" : ""}" data-rf="${key}" data-v="${esc(v)}">${esc(l)}</button>`).join("")}</div>`;
   let h = `<h2 class="gsec">Results</h2>
-    <div class="filters">
-      <label>Week ${sel("r-wk", S.resWk || "", [["", "All weeks"], ...weeks.map((w) => [w, `Week ${w}`])])}</label>
-      <label>Position ${sel("r-pos", S.resPos || "", [["", "All"], ...RES_POS.map((p) => [p, p])])}</label>
-      <label>Market ${sel("r-mk", S.resMk || "", [["", "All markets"], ...mkList.map((m) => [m.id, m.label])])}</label>
-      ${S.resWk || S.resPos || S.resMk ? `<button id="r-clear" type="button">Clear</button>` : ""}
+    <div class="filters rfilters">
+      <div class="flab">Week ${btns("resWk", S.resWk || "", [["", "All"], ...weeks.map((w) => [w, `Wk ${w}`])])}</div>
+      <div class="flab">Position ${btns("resPos", S.resPos || "", [["", "All"], ...RES_POS.map((p) => [p, p])])}</div>
+      <div class="flab">Market ${btns("resMk", S.resMk || "", [["", "All"], ...mkList.map((m) => [m.id, m.label])])}</div>
     </div>`;
   if (!all.length) return h + `<p class="muted">No graded lines yet. Results appear once a game with a captured pre-game line has final stats.</p>`;
   const tot = resCount(f);
@@ -1054,10 +1054,7 @@ function bind(tab, arg) {
   on("an-toggle", "click", () => { S.showAn = !S.showAn; render(); });
   document.querySelectorAll("[data-dm]").forEach((b) => b.addEventListener("click", () => { S.defMk = b.dataset.dm; render(); }));
   on("d-sort", "click", () => { S.defAsc = !S.defAsc; render(); });
-  on("r-wk", "change", (e) => { S.resWk = e.target.value; render(); });
-  on("r-pos", "change", (e) => { S.resPos = e.target.value; render(); });
-  on("r-mk", "change", (e) => { S.resMk = e.target.value; render(); });
-  on("r-clear", "click", () => { S.resWk = S.resPos = S.resMk = ""; render(); });
+  document.querySelectorAll("[data-rf]").forEach((b) => b.addEventListener("click", () => { S[b.dataset.rf] = b.dataset.v; render(); }));
   document.querySelectorAll("[data-note]").forEach((b) => b.addEventListener("click", () => {
     const nr = b.closest("tr").nextElementSibling;
     if (nr && nr.classList.contains("noterow")) { nr.hidden = !nr.hidden; b.classList.toggle("on", !nr.hidden); }
