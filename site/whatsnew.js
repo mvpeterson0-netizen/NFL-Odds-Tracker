@@ -38,9 +38,9 @@
     const ov = document.createElement("div");
     ov.id = "su-ov"; ov.className = "share-ov";
     ov.innerHTML = `<div class="share-box wn-box su-box" role="dialog" aria-modal="true" aria-labelledby="su-title">
-      <div class="wn-h"><b id="su-title">${forPick ? "Sign in to save your pick" : forLeads ? `Sign in to see all ${forLeads} leads` : "Save your picks with a free Stix account"}</b><button type="button" class="nw-x wn-x" aria-label="Close">✕</button></div>
+      <div class="wn-h"><b id="su-title">${forPick ? "Sign in to save your pick" : forLeads ? `Sign in to see all ${forLeads} signals` : "Save your picks with a free Stix account"}</b><button type="button" class="nw-x wn-x" aria-label="Close">✕</button></div>
       ${forPick && pick ? `<p class="su-pick">Your pick: <b>${esc(pick)}</b>. It's saved as soon as you sign in and confirm you're 21+.</p>` : ""}
-      ${forLeads ? `<p class="su-pick">Leads 4–${forLeads} are free with a Stix account.</p>` : ""}
+      ${forLeads ? `<p class="su-pick">Signals 4–${forLeads} are free with a Stix account.</p>` : ""}
       <ul class="su-list">
         ${forPick ? "" : "<li>Tap <b>Over</b> or <b>Under</b> on any player page to save a pick.</li>"}
         <li>Picks lock at kickoff and are graded automatically.</li>

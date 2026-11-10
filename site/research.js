@@ -74,7 +74,7 @@
     { id: "t12", n: 12, frozen: true, side: "model", label: "Frozen interaction model",
       title: "Frozen logistic model with interactions",
       why: "Test whether production, usage and line adjustments work differently in combination.",
-      desc: () => `Frozen version <b>2026-10-30-v1</b>, C=0.01, with the same four-market universe and <b>10% estimated-return threshold</b> as lead 11. Adds fixed interactions and position/market slopes. No added injury-return assumptions, context package, retraining or threshold tuning.` },
+      desc: () => `Frozen version <b>2026-10-30-v1</b>, C=0.01, with the same four-market universe and <b>10% estimated-return threshold</b> as signal 11. Adds fixed interactions and position/market slopes. No added injury-return assumptions, context package, retraining or threshold tuning.` },
     { id: "t13", n: 13, frozen: true, challenger: true, side: "model", label: "Weekly learning challenger",
       title: "Weekly interaction challenger",
       why: "Test whether expanding-history learning improves on the frozen interaction model.",
@@ -384,7 +384,7 @@
   const setFdSave = (on) => { try { localStorage.setItem("stix_fd_save", on ? "1" : "0"); } catch { /* ignore */ } };
   // Checkboxes (Michael 2026-11-07): the slip holds only the players whose box is checked, per lead, nothing checked to start.
   // Selection lives in memory only (per lead; survives the 5-minute refresh, not a reload).
-  const rowKey = (x) => `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}`;
+  const rowKey = (x) => `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}${x.bp ? "|" + x.side : ""}`;
   const selOf = (id) => (RL.sel = RL.sel || {})[id] || (RL.sel[id] = new Set());
   function fdSlip(t, rows) {
     const now = Date.now(), legs = [], missing = [], chosen = selOf(t.id);
@@ -457,11 +457,11 @@
 
   const PAGE = 10;
   const pageKey = (t) => `${t.id}|${RL.gid || ""}|${RL.mk || ""}`;
-  function body() {
+  function body(head) {
     const t = visibleTabs().find((x) => x.id === RL.tab) || TABS[0];
-    const list = compute(t.id);
-    let h = `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${recLine(t)}</span></p>`;
-    if (t.challenger && !D.challenger?.version) return h + `<p class="muted">Awaiting the first Tuesday-afternoon training run. Frozen leads continue unchanged.</p>`;
+    const list = compute(t.id).filter(nm);
+    let h = head === false ? "" : `<p class="callout small"><b>${t.n}. ${esc(t.title)}.</b> ${sideChip(t)}<br><span class="muted">${recLine(t)}</span></p>`;
+    if (t.challenger && !D.challenger?.version) return h + `<p class="muted">Awaiting the first Tuesday-afternoon training run. Frozen signals continue unchanged.</p>`;
     if (t.frozen && !list.length) return h + `<p class="muted">No upcoming matches yet. Weekly snapshots populate a provisional watchlist; matches can change until the pregame capture locks the decision. Only locked decisions are scored.</p>`;
     if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
     if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
@@ -469,7 +469,7 @@
     const heads = HEADS[t.id];
     // 10 players per page (Michael 2026-11-07). The FanDuel slip and Select all work on the whole list, not just the page shown.
     const pages = Math.ceil(list.length / PAGE), key = pageKey(t), pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
-    (RL.pg = RL.pg || {})[key] = pg;
+    (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
     h += fdSlipBox(t, list);
     h += `<div class="panel rlist">`;
     for (const x of list.slice(pg * PAGE, pg * PAGE + PAGE)) {
@@ -505,27 +505,187 @@
   };
   document.addEventListener("click", infoHandler, true);
   document.addEventListener("keydown", infoHandler, true);
-  function html() {
+  // ---------- Signals (Michael 2026-11-10): the old Leads + Leads Analysis, redone as one page ----------
+  // Top: how every signal is doing (Today / This week / Last week / Season), ranked by ROI, each with a run chart of units.
+  // Tap a signal (or several) to see its run chart and week-by-week record, and to narrow the players below to those who fit
+  // ALL the picked signals. Below: this week's players ranked by how many signals fit them, with FanDuel checkboxes.
+  // Week is the smallest level shown (no per-game split). Scoring is unchanged: same analyze() as before.
+  Object.assign(RL, { sigs: [], scope: "season", showAll: false, q: "" });
+  const BE = 52.38; // break-even hit rate (%) at -110
+  const memo = { d: null, m: new Map() };
+  function AN(tab, wk) {
+    if (memo.d !== D) { memo.d = D; memo.m = new Map(); }
+    const k = tab + "|" + wk;
+    if (!memo.m.has(k)) memo.m.set(k, analyze(tab, wk));
+    return memo.m.get(k);
+  }
+  const nm = (x) => !RL.q || x.c.p.name.toLowerCase().includes(RL.q.trim().toLowerCase());
+  const roiTxt = (s) => (s.roi == null ? "—" : `${s.roi >= 0 ? "+" : "−"}${Math.abs(s.roi).toFixed(1)}% ROI`);
+  const curWk = () => (typeof defaultWeek === "function" ? defaultWeek() : D.current_week);
+  const SCOPES = [["today", "Today"], ["week", "This week"], ["last", "Last week"], ["season", "Season"]];
+  const todayCT = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Chicago" });
+  function inScope(x) {
+    if (RL.scope === "today") return typeof ctDate === "function" && ctDate(new Date(x.r.ko)) === todayCT();
+    if (RL.scope === "week") return x.r.wk === curWk();
+    if (RL.scope === "last") return x.r.wk === curWk() - 1;
+    return true;
+  }
+  const scopeName = () => (SCOPES.find((x) => x[0] === RL.scope) || SCOPES[3])[1].toLowerCase();
+  function sigRec(t) {
+    const by = laWeeks().slice().reverse().map((w) => ({ w, list: AN(t.id, w) }));
+    const all = by.flatMap((x) => x.list);
+    return { by, all, s: tally(all) };
+  }
+  const bkey = (x) => `${x.p.id}|${x.mid}|${x.r.gid}|${x.side}`;
+  // bets for the picked signals: one signal = its bets; several = only bets that fit every picked signal (same player, stat, game, side)
+  function betsFor(ts) {
+    const lists = ts.map((t) => sigRec(t).all);
+    if (lists.length === 1) return lists[0];
+    let keep = new Set(lists[0].map(bkey));
+    for (const l of lists.slice(1)) { const k2 = new Set(l.map(bkey)); keep = new Set([...keep].filter((k) => k2.has(k))); }
+    return lists[0].filter((x) => keep.has(bkey(x)));
+  }
+  const byWeek = (bets) => laWeeks().slice().reverse().map((w) => ({ w, list: bets.filter((x) => x.r.wk === w) }));
+  function controls() {
     const mks = D.markets, gopts = gameOptions();
-    if (RL.gid && !gopts.some(([g]) => g === RL.gid)) RL.gid = ""; // that game started or has no lines: back to all games
-    return `<section id="rl"><h2 class="gsec">Leads</h2>
-      <div class="rlgrid rl8" role="tablist">${visibleTabs().map((t) => `<button class="gchip ${t.id === RL.tab ? "on" : ""}" data-rtab="${t.id}"><span class="rl-n">${t.n}</span> ${esc(t.label)} <span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About rule ${t.n}" title="About this rule">i</span></button>`).join("")}${signedIn() ? "" : `<button type="button" class="gchip rl-lock" data-rlsignin>Connect with Google to see all ${TABS.length}</button>`}</div>
-      <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label>
-        <label>Game <select id="rl-gid"><option value="">All games</option>${gopts.map(([g, ko]) => `<option value="${esc(g)}" ${g === RL.gid ? "selected" : ""}>${esc(gameLabel(g))} · ${fmtTime(ko)}</option>`).join("")}</select></label></div>
-      <div id="rl-body">${body()}</div></section>`;
+    if (RL.gid && !gopts.some(([g]) => g === RL.gid)) RL.gid = "";
+    return `<div class="sg-bar"><label class="grow">Player <input type="search" id="rl-q" placeholder="Search name" value="${esc(RL.q)}"></label></div>
+      <details class="sg-filters" data-fopen ${RL.fopen ? "open" : ""}><summary>Filters${RL.mk || RL.gid ? " (on)" : ""}</summary>
+        <div class="filters"><label>Stat <select id="rl-mk"><option value="">All stats</option>${mks.map((m) => `<option value="${m.id}" ${m.id === RL.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label>
+        <label>Game <select id="rl-gid"><option value="">All games</option>${gopts.map(([g, ko]) => `<option value="${esc(g)}" ${g === RL.gid ? "selected" : ""}>${esc(gameLabel(g))} · ${fmtTime(ko)}</option>`).join("")}</select></label></div></details>`;
+  }
+  // tiny run chart: cumulative units by week (all season), green if up, red if down
+  function spark(by) {
+    let u = 0; const pts = by.map(({ list }) => (u += tally(list).U));
+    if (!by.some((x) => x.list.length)) return `<div class="sg-nospark muted small">no graded bets yet</div>`;
+    const w = 120, h = 30, mn = Math.min(0, ...pts), mx = Math.max(0, ...pts), rg = mx - mn || 1;
+    const X = (i) => (pts.length < 2 ? w / 2 : (i * (w - 4)) / (pts.length - 1) + 2), Y = (v) => 2 + ((mx - v) / rg) * (h - 4);
+    const last = pts[pts.length - 1], col = last >= 0 ? "--over" : "--under";
+    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Units by week, now ${unitsTxt(last)}"><line x1="0" x2="${w}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" style="stroke:var(--line)" stroke-dasharray="3 3"/><path d="${pts.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ")}" fill="none" style="stroke:var(${col})" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
+  }
+  function tileHtml(t, st) {
+    const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
+    return `<button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}"><div class="sg-top"><span class="rl-n">${t.n}</span><b>${esc(t.label)}</b></div>
+      <div class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}<span class="muted small"> ROI</span></div>
+      <div class="small">${s.n ? `${recTxt(s)} · <span class="${cls}">${unitsTxt(s.U)}</span>` : `<span class="muted">no graded bets ${scopeName() === "season" ? "yet" : "in " + scopeName()}</span>`}</div>${spark(st.by)}</button>`;
+  }
+  const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
+  function topSection(tabs) {
+    const rows = tabs.map((t) => { const r = sigRec(t); const sc = r.all.filter(inScope); return { t, by: r.by, s: tally(sc) }; });
+    rows.sort((a, b) => (b.s.n ? 1 : 0) - (a.s.n ? 1 : 0) || (b.s.roi ?? -1e9) - (a.s.roi ?? -1e9) || a.t.n - b.t.n);
+    const shown = RL.showAll ? rows : rows.slice(0, 6);
+    let h = `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>
+      <div class="sg-grid">${shown.map((x) => tileHtml(x.t, x)).join("")}</div>`;
+    if (rows.length > 6) h += `<p><button type="button" class="linkbtn" data-rshowall>${RL.showAll ? "Show top 6" : `Show all ${rows.length} signals`}</button></p>`;
+    if (!signedIn()) h += `<button type="button" class="sg-card rl-lock" data-rlsignin><b>Connect with Google to see all ${TABS.length} signals</b></button>`;
+    return h;
+  }
+  function sigChart(by) {
+    let W = 0, L = 0; const pts = [];
+    for (const { w, list } of by) {
+      const s = tally(list); W += s.W; L += s.L;
+      if (W + L) pts.push({ w, h: (100 * W) / (W + L), wk: s.n ? (100 * s.W) / s.n : null, s });
+    }
+    if (!pts.length) return "";
+    const w = 320, h = 170, l = 34, r = 8, tp = 10, bt = 24;
+    const vals = pts.map((q) => q.h).concat(pts.filter((q) => q.wk != null).map((q) => q.wk), [BE]);
+    const lo = Math.max(0, Math.floor((Math.min(...vals) - 5) / 10) * 10), hi = Math.min(100, Math.ceil((Math.max(...vals) + 5) / 10) * 10);
+    const X = (i) => l + (pts.length < 2 ? (w - l - r) / 2 : (i * (w - l - r)) / (pts.length - 1));
+    const Y = (v) => tp + ((hi - v) / (hi - lo)) * (h - tp - bt);
+    const stp = hi - lo > 60 ? 20 : 10, grid = [];
+    for (let v = lo; v <= hi; v += stp) grid.push(`<line x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" style="stroke:var(--line)"/><text x="${l - 4}" y="${(Y(v) + 3).toFixed(1)}" text-anchor="end" font-size="10" style="fill:var(--muted)">${v}%</text>`);
+    const path = pts.map((q, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(q.h).toFixed(1)}`).join(" "), last = pts[pts.length - 1], every = pts.length > 12 ? 2 : 1;
+    return `<svg class="sg-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Running hit rate by week. Now ${last.h.toFixed(1)}%.">
+      ${grid.join("")}
+      <line x1="${l}" x2="${w - r}" y1="${Y(BE).toFixed(1)}" y2="${Y(BE).toFixed(1)}" stroke="#d29922" stroke-dasharray="4 3"/>
+      <text x="${w - r}" y="${(Y(BE) - 3).toFixed(1)}" text-anchor="end" font-size="10" fill="#d29922">break-even 52.4%</text>
+      <path d="${path}" fill="none" style="stroke:var(--accent)" stroke-width="2" stroke-linejoin="round"/>
+      ${pts.filter((q) => q.wk != null).map((q) => `<circle cx="${X(pts.indexOf(q)).toFixed(1)}" cy="${Y(q.wk).toFixed(1)}" r="3" style="fill:var(${q.wk >= BE ? "--over" : "--under"})"><title>Week ${q.w}: ${recTxt(q.s)} (${q.wk.toFixed(0)}%) that week</title></circle>`).join("")}
+      <circle cx="${X(pts.length - 1).toFixed(1)}" cy="${Y(last.h).toFixed(1)}" r="4" style="fill:var(--accent)"/>
+      <text x="${Math.min(X(pts.length - 1), w - r - 2).toFixed(1)}" y="${(Y(last.h) - 8).toFixed(1)}" text-anchor="end" font-size="11" font-weight="700" style="fill:var(--ink)">${last.h.toFixed(1)}%</text>
+      ${pts.map((q, i) => (i % every ? "" : `<text x="${X(i).toFixed(1)}" y="${h - 8}" text-anchor="middle" font-size="10" style="fill:var(--muted)">W${q.w}</text>`)).join("")}</svg>`;
+  }
+  // Record panel for the picked signal(s): summary, running hit rate, week by week (week = smallest level)
+  function recordPanel(ts) {
+    const bets = betsFor(ts), by = byWeek(bets), key0 = ts.map((t) => t.id).join("+");
+    const many = ts.length > 1, title = ts.map((t) => `<span class="rl-n">${t.n}</span> ${esc(t.label)}`).join(" + ");
+    let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${many ? `Fits all of: ${title}` : "Run chart"}</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>`;
+    if (!bets.length) return h + `<p class="muted small">${many ? "No graded bets fit all of these signals (or they point opposite ways)." : "No graded bets yet."}</p></div></div>`;
+    const s = tally(bets), cls = s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "";
+    const sortK = (a, b) => (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid);
+    const sec = (k, t2, g) => (g.length ? `<h3 class="la-h ${k}">${t2} (${g.length})</h3><div class="panel rlist">${g.map(laRow).join("")}</div>` : "");
+    const weeks = by.slice().reverse().filter((x) => x.list.length).map(({ w, list }) => {
+      const st = tally(list), key = `${key0}|${w}`, sorted = list.slice().sort(sortK);
+      return `<details class="la-wk" data-lawk="${key}" ${LA.open.has(key) ? "open" : ""}><summary><span class="la-wk-t">Week ${w}</span><span class="muted small">${recTxt(st)} · ${st.n ? unitsTxt(st.U) : "push"}${st.roi == null ? "" : ` · ${roiTxt(st)}`}</span></summary>
+        ${sec("hit", "Hits", sorted.filter((x) => x.out === "hit"))}${sec("miss", "Misses", sorted.filter((x) => x.out === "miss"))}${sec("push", "Pushes", sorted.filter((x) => x.out === "push"))}</details>`;
+    }).join("");
+    return h + `${many ? `<div class="la-sum"><div><span class="muted small">Season</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${cls}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%`}</b></div></div>` : ""}
+      ${sigChart(by)}
+      <details class="sg-weeks" data-wopen ${RL.wopen ? "open" : ""}><summary>Week by week (${by.filter((x) => x.list.length).length} weeks)</summary>${weeks}</details></div></div>`;
+  }
+  const BP = { id: "bp", n: 0, side: "mixed", title: "Players" };
+  function playersHtml(tabs, picked) {
+    const map = new Map();
+    for (const t of tabs) {
+      if (t.challenger) continue;
+      for (const x of compute(t.id).filter(nm)) {
+        const side = x.side || t.side;
+        if (side !== "over" && side !== "under") continue;
+        const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
+        if (!map.has(k)) map.set(k, { ...x, side, bp: true, sigs: [] });
+        map.get(k).sigs.push(t);
+      }
+    }
+    let rows = [...map.values()];
+    if (picked.length) rows = rows.filter((x) => picked.every((t) => x.sigs.some((y) => y.id === t.id)));
+    rows.sort((a, b) => b.sigs.length - a.sigs.length || koMs(a.c) - koMs(b.c) || a.c.p.name.localeCompare(b.c.p.name));
+    const head = `<h3 class="sg-sec">${picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
+    if (!rows.length) return head + `<p class="muted">${picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>`;
+    const pages = Math.ceil(rows.length / PAGE), key = `bp|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
+    (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
+    let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
+    for (const x of rows.slice(pg * PAGE, pg * PAGE + PAGE)) {
+      const { p, r, mid, cur } = x.c;
+      h += `<div class="rlrow"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+        <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span><span class="rlsize">${x.sigs.length} signal${x.sigs.length === 1 ? "" : "s"}</span></div>
+        <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</div>
+        <div class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${t.n} ${esc(t.label)}</span>`).join("")}</div></div>`;
+    }
+    const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
+    return h + `</div>${pager}`;
+  }
+  function html() {
+    const tabs = visibleTabs();
+    RL.sigs = RL.sigs.filter((id) => tabs.some((t) => t.id === id));
+    const picked = RL.sigs.map((id) => tabs.find((t) => t.id === id));
+    if (LA.wk == null) LA.wk = laWeeks()[0] || null; // the Challenger diagnostics below read these
+    let inner = topSection(tabs);
+    if (picked.length) inner += recordPanel(picked);
+    inner += controls() + `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
+    if (laWeeks().length) inner += `<details class="sg-diag"><summary>Research diagnostics</summary>${challengerDiagnosticsHtml()}${thesisRegistryHtml()}</details>`;
+    return `<section id="rl"><h2 class="gsec">Signals</h2>${inner}</section>`;
   }
   function redraw() {
     const el = document.getElementById("rl"); if (!el) return;
     el.outerHTML = html();
-    const an = document.getElementById("la"); if (an) an.outerHTML = analysisHtml(); // rules 4–8 follow sign-in here too
   }
   document.addEventListener("click", (e) => {
-    const b = e.target.closest("[data-rtab]"); if (!b) return;
-    RL.tab = b.dataset.rtab; redraw();
+    const c = e.target.closest && e.target.closest("[data-sig]");
+    if (c) { const id = c.dataset.sig; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : [...RL.sigs, id]; redraw(); return; }
+    if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; redraw(); return; }
+    const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
+    if (e.target.closest && e.target.closest("[data-rshowall]")) { RL.showAll = !RL.showAll; redraw(); }
+  });
+  document.addEventListener("toggle", (e) => { if (e.target && e.target.matches && e.target.matches("[data-fopen]")) RL.fopen = e.target.open; if (e.target && e.target.matches && e.target.matches("[data-wopen]")) RL.wopen = e.target.open; }, true);
+  let qT = 0;
+  document.addEventListener("input", (e) => {
+    if (!e.target || e.target.id !== "rl-q") return;
+    RL.q = e.target.value; clearTimeout(qT);
+    qT = setTimeout(() => { redraw(); const el = document.getElementById("rl-q"); if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); } }, 250);
   });
   document.addEventListener("click", (e) => {
     const b = e.target.closest && e.target.closest("[data-rlpg]"); if (!b) return;
-    const key = pageKey(visibleTabs().find((x) => x.id === RL.tab) || TABS[0]); (RL.pg = RL.pg || {})[key] = (+RL.pg[key] || 0) + (+b.dataset.rlpg);
+    const key = RL.curKey || pageKey(visibleTabs().find((x) => x.id === RL.tab) || TABS[0]); (RL.pg = RL.pg || {})[key] = (+RL.pg[key] || 0) + (+b.dataset.rlpg);
     redraw();
     const top = document.querySelector("#rl .rl-fd") || document.getElementById("rl"); if (top && top.scrollIntoView) top.scrollIntoView({ block: "start" });
   });
@@ -788,7 +948,7 @@
   });
   // remember which week sections are open across redraws (toggle doesn't bubble, so listen in the capture phase)
   document.addEventListener("toggle", (e) => { const d = e.target; if (d && d.classList && d.classList.contains("la-wk")) { d.open ? LA.open.add(d.dataset.lawk) : LA.open.delete(d.dataset.lawk); } }, true);
-  function safeAnalysis() { try { return analysisHtml(); } catch (e) { console.error("leads analysis failed", e); return ""; } }
+  function safeAnalysis() { return ""; } // folded into Signals (html) 2026-11-10
   // ---------- Guide tab setting ----------
   function settingsHtml() {
     const ms = scriptMargins();
