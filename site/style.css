@@ -542,7 +542,7 @@ tr.gdetail:hover td { background: var(--hover); }
 .sg-tile.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; } .sg-card.rl-lock { border-style: dashed; text-align: center; margin-top: 8px; }
 .sg-top { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; line-height: 1.25; min-height: 34px; }
 .sg-roi { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 4px; }
-.sg-spark { width: 100%; height: 30px; display: block; margin-top: 6px; } .sg-nospark { margin-top: 10px; }
+.sg-spark { width: 100%; max-width: 230px; height: auto; display: block; margin-top: 6px; } .sg-ax line { stroke: var(--line); stroke-width: 1; opacity: .7; } .sg-ax .sg-gl { opacity: .35; } .sg-ax text { fill: var(--muted); font-size: 8px; opacity: .75; font-variant-numeric: tabular-nums; } .sg-nospark { margin-top: 10px; }
 .sg-rec { margin: 12px 0; } .sg-rec-h { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; margin-bottom: 6px; }
 .sg-sec { margin: 16px 0 4px; } .sg-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; } .sg-chips .chip { cursor: pointer; } .sg-chips .chip.on { background: var(--accent); color: #fff; }
 .sg-chart { width: 100%; max-width: 520px; display: block; margin: 4px 0 10px; }
