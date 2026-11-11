@@ -1,6 +1,7 @@
 "use strict";
 // "Welcome to Stix" page (#/welcome; Michael, 2026-10-27): a short tour of the six main parts of the app, with real
-// screenshots of the built site (site/welcome/, captured 10/27 from Week 7–8 data).
+// screenshots of the built site (site/welcome/). Board and Player pages images retaken 11/11 from Week 10 data;
+// copy trimmed the same day (Michael: let the pictures carry it, make the tour fast).
 // Shown automatically only on a browser's first-ever visit: no Stix setting saved in this browser yet, nobody signed
 // in, and the visit opens on the Board (a shared player link or a sign-in link opens as usual). Returning browsers
 // never see it again unless they open #/welcome themselves (link in the Guide footer).
@@ -22,10 +23,10 @@
   if (firstVisit) history.replaceState(null, "", location.pathname + location.search + "#/welcome");
 
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  // Photo spots in the screenshots (CSS px in a 390 × 620 frame, from the capture).
+  // Photo spots in the screenshots (CSS px in a 390-wide frame of height h, from the capture).
   const FACES = {
-    board: [{ pid: "00-0039150", x: 25, y: 354.8, s: 40 }, { pid: "00-0036555", x: 25, y: 588.2, s: 40 }],
-    player: [{ pid: "00-0038543", x: 12, y: 69.4, s: 64 }],
+    board: [{ pid: "00-0034857", x: 25, y: 230.5, s: 40, h: 620 }, { pid: "00-0037248", x: 25, y: 472.6, s: 40, h: 620 }],
+    player: [{ pid: "00-0038543", x: 12, y: 81.1, s: 56, h: 614 }],
   };
   function faces(key) {
     let players = [];
@@ -34,57 +35,55 @@
       const p = players.find((x) => x.id === f.pid);
       if (!p || !p.img) return "";
       return `<img class="wl-face" src="${esc(p.img)}" alt="" referrerpolicy="no-referrer" loading="lazy" onerror="this.remove()"
-        style="left:${(f.x / 390) * 100}%;top:${(f.y / 620) * 100}%;width:${(f.s / 390) * 100}%">`;
+        style="left:${(f.x / 390) * 100}%;top:${(f.y / f.h) * 100}%;width:${(f.s / 390) * 100}%">`;
     }).join("");
   }
   const shot = (file, alt, key, cls) => `<div class="wl-shot ${cls || ""}"><img src="welcome/${file}" alt="${esc(alt)}" loading="lazy">${key ? faces(key) : ""}</div>`;
 
+  // Tap-through tour (Michael, 2026-11-11): one page at a time; tap Next to move on. The first page is Board with the welcome heading on top.
   const SECTIONS = [
-    { id: "board", title: "The Board", link: "#/board", go: "Open the Board",
-      text: "Every starter's pre-game lines for the week (passing, rushing and receiving), next to his average, how the defense ranks against his position, and the trend. Filter by game, team, position or name.",
-      img: () => shot("board.jpg", "The Board on a phone: Bryce Young and Chuba Hubbard with their Week 8 lines", "board") },
-    { id: "player", title: "Player pages", link: "#/player/00-0038543", go: "See Jaxon Smith-Njigba",
-      text: "Tap any player for his week-by-week results against the line, the current line with FanDuel odds, how the line has moved, and his game log with snaps and targets.",
-      img: () => shot("player.jpg", "Jaxon Smith-Njigba's player page: receptions line, average, opponent rank and a week-by-week chart", "player") },
-    { id: "script", title: "Game script", link: "#/player/00-0038543", go: "Try it on a game log",
-      text: "Tap an opponent in a game log to see how that game went: who led, by how much and for how long, and how pass-heavy each team was. A blowout can explain a big or small stat line.",
+    { id: "board", title: "The Board", text: "This week's lines for every starter.",
+      img: () => shot("board-w10.jpg", "The Board on a phone: Josh Allen and James Cook III with their Week 10 lines", "board") },
+    { id: "player", title: "Player pages", text: "Every week's line next to the actual result.",
+      img: () => shot("player-w10.jpg", "Jaxon Smith-Njigba's player page: FanDuel odds and a chart of his receptions against the line, weeks 1 to 9", "player") },
+    { id: "script", title: "Game script", text: "Tap an opponent in a game log to see how the game went.",
       img: () => shot("script.jpg", "Game script pop-up for Seattle's Week 7 win over Kansas City", "", "wl-pop") },
-    { id: "research", title: "Research & Leads", link: "#/search", go: "Open Research",
-      text: "Leads apply 8 rules picked from weeks 1–7 (for example TE1 receiving yards Under, or a 7+ point underdog's QB passing yards Over) to this week's lines.",
-      img: () => shot("research.jpg", "Research tab: lead filters and the largest line moves from the previous week") },
-    { id: "results", title: "Results", link: "#/leads", go: "Open Results",
-      text: "How every graded pre-game line finished this season, over or under, by market, position and week.",
+    { id: "signals", title: "Signals", text: "Rules ranked by past ROI, matched to this week's lines.",
+      img: () => shot("signals-w10.jpg", "Signals tab: top signals with ROI, record and units, and the players hitting the most signals") },
+    { id: "results", title: "Results", text: "How every graded line finished.",
       img: () => shot("results.jpg", "Results tab: graded lines over and under by market") },
-    { id: "picks", title: "My picks", link: "#/picks", go: "Open My picks",
-      text: "Tap Over or Under on a player page to save a pick at that line and price. Picks lock at kickoff, are graded automatically once stats are in, and add up to your record and profit in units. Free with a Google sign-in; only you see your picks.",
+    { id: "picks", title: "My picks", text: "Tap Over or Under to save a pick. It's graded for you. Free sign-in.",
       img: () => `<div class="wl-ex"><span class="wl-badge">Example</span>${shot("picks-record.jpg", "Example record: 16–9, 64% hit rate, +5.69 units")}${shot("picks-list.jpg", "Example graded picks with Hit and Miss labels")}
-        <p class="small muted wl-excap">Example picks to show how tracking works, not real results. They use real Week 7 lines, odds and outcomes, graded by Stix.</p></div>` },
+        <p class="small muted wl-excap">Example picks to show how tracking works, not real results.</p></div>` },
   ];
+  let page = 1; // 1..N = SECTIONS[page - 1]; page 1 also carries the welcome heading
 
   function view() {
-    return `<div class="wl">
-      <section class="wl-hero">
-        <h1>Welcome to Stix</h1>
-        <p class="wl-lead">Research NFL player props: every starter's pre-game line from DraftKings and FanDuel, what actually happened, and leads on lines that may be off.</p>
-        <a class="wl-cta" href="#/board">Get started</a>
-      </section>
-      <nav class="wl-toc">${SECTIONS.map((s, i) => `<a href="#/welcome" data-wl="${s.id}">${i + 1}. ${esc(s.title)}</a>`).join("")}</nav>
-      ${SECTIONS.map((s, i) => `<section class="wl-sec" id="wl-${s.id}">
-        <div class="wl-txt"><span class="wl-n">${i + 1}</span><h2>${esc(s.title)}</h2><p>${esc(s.text)}</p><a href="${s.link}">${esc(s.go)} ›</a></div>
-        <div class="wl-pic">${s.img()}</div>
-      </section>`).join("")}
-      <section class="wl-end">
-        <a class="wl-cta" href="#/board">Get started</a>
-        <p class="small muted">Lines are captured about 3 hours before kickoff. Stix is a research tool for adults 21 and over; leads are not predictions. <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>
-      </section>
+    const n = SECTIONS.length, last = page === n;
+    const s = SECTIONS[page - 1];
+    return `<div class="wl wl-pg">
+      ${page === 1 ? '<h1 class="wl-h1">Welcome to Stix</h1>' : ""}
+      <div class="wl-top"><span class="wl-n">${page}</span><h2>${esc(s.title)}</h2>${last ? "" : '<a class="wl-skip" href="#/board">Skip</a>'}</div>
+      <p class="wl-line">${esc(s.text)}</p>
+      <div class="wl-pic" data-wl-go="${last ? "" : page + 1}">${s.img()}</div>
+      <div class="wl-nav">
+        <button class="wl-back" data-wl-go="${page - 1}" aria-label="Back"${page === 1 ? ' style="visibility:hidden"' : ""}>‹ Back</button>
+        <span class="wl-dots">${SECTIONS.map((_, i) => `<i class="${i + 1 === page ? "on" : ""}"></i>`).join("")}</span>
+        ${last ? '<a class="wl-cta" href="#/board">Get started</a>' : `<button class="wl-cta" data-wl-go="${page + 1}">Next ›</button>`}
+      </div>
+      ${last ? '<p class="small muted wl-fine">For adults 21+. A research tool, not predictions. <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>' : ""}
     </div>`;
   }
-  // The contents links scroll to a section without changing the address.
+  // Taps move between pages in place (the address stays #/welcome).
   document.addEventListener("click", (e) => {
-    const a = e.target.closest && e.target.closest("[data-wl]"); if (!a) return;
+    const a = e.target.closest && e.target.closest("[data-wl-go]"); if (!a) return;
+    const to = a.dataset.wlGo; if (to === "") return;
     e.preventDefault();
-    const el = document.getElementById("wl-" + a.dataset.wl); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.querySelector(".wl"); if (!el) return;
+    page = Math.max(1, Math.min(SECTIONS.length, Number(to)));
+    el.outerHTML = view(); window.scrollTo(0, 0);
   });
+  window.addEventListener("hashchange", () => { if (!/^#\/welcome/.test(location.hash)) page = 1; });
 
   window.STIX_WELCOME = { view, firstVisit: () => firstVisit };
 })();
