@@ -523,10 +523,12 @@
   const roiTxt = (s) => (s.roi == null ? "—" : `${s.roi >= 0 ? "+" : "−"}${Math.abs(s.roi).toFixed(1)}% ROI`);
   const curWk = () => (typeof defaultWeek === "function" ? defaultWeek() : D.current_week);
   const SCOPES = [["last", "Last week"], ["month", "Last month"], ["season", "This season"]];
-  // Last month = the 4 most recent completed weeks (week is the smallest level, so no mid-week cut-offs)
+  // Last month = the past 30 days from today (by kickoff date, Central time)
+  const monthCut = () => ctDate(new Date(Date.now() - 30 * 864e5));
+  const inMonth = (ko) => !!ko && ctDate(new Date(ko)) >= monthCut();
   function inScope(x) {
     if (RL.scope === "last") return x.r.wk === curWk() - 1;
-    if (RL.scope === "month") return x.r.wk >= curWk() - 4 && x.r.wk <= curWk() - 1;
+    if (RL.scope === "month") return inMonth(x.r.ko);
     return true;
   }
   const scopeName = () => (SCOPES.find((x) => x[0] === RL.scope) || SCOPES[2])[1].toLowerCase();
@@ -548,7 +550,7 @@
   // tiny run chart: cumulative units by week (all season), green if up, red if down.
   // A dot for every week, plus very faint axes: weeks (W#) along the bottom, cumulative units up the side.
   function spark(by) {
-    if (!by.some((x) => x.list.length)) return `<div class="sg-nospark muted small">no graded bets yet</div>`;
+    if (!by.some((x) => x.list.length)) return `<div class="sg-nospark muted small">no graded bets</div>`;
     let u = 0; const pts = by.map(({ w, list }) => { const s = tally(list); u += s.U; return { w, n: list.length, d: s.U, u }; });
     const w = 150, h = 80, l = 30, r = 6, tp = 7, bt = 15, n = pts.length;
     const mn = Math.min(0, ...pts.map((p) => p.u)), mx = Math.max(0, ...pts.map((p) => p.u)), rg = mx - mn || 1;
@@ -571,11 +573,17 @@
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
     return `<button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}"><div class="sg-top"><b>${esc(t.label)}</b></div>
       <div class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}<span class="muted small"> ROI</span></div>
-      <div class="small">${s.n ? `${recTxt(s)} · <span class="${cls}">${unitsTxt(s.U)}</span>` : `<span class="muted">no graded bets ${RL.scope === "season" ? "yet" : "for " + scopeName()}</span>`}</div>${spark(st.by)}</button>`;
+      <div class="small">${s.n ? `${recTxt(s)} · <span class="${cls}">${unitsTxt(s.U)}</span>` : `<span class="muted">no graded bets ${RL.scope === "season" ? "yet" : "for " + scopeName()}</span>`}</div>${st.by ? spark(st.by) : ""}</button>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
   function topSection(tabs) {
-    const rows = tabs.map((t) => { const r = sigRec(t); const sc = r.all.filter(inScope); return { t, by: r.by, s: tally(sc) }; });
+    // Run chart = what the signal would have done starting from zero at the start of the selected window (none for Last week: just the result)
+    const mWeeks = RL.scope === "month" ? new Set(Object.values(D.games).filter((g) => g.final && inMonth(g.ko)).map((g) => g.wk)) : null;
+    const rows = tabs.map((t) => {
+      const r = sigRec(t), sc = r.all.filter(inScope);
+      const by = RL.scope === "last" ? null : RL.scope === "month" ? r.by.filter((x) => mWeeks.has(x.w)).map((x) => ({ w: x.w, list: x.list.filter(inScope) })) : r.by;
+      return { t, by, s: tally(sc) };
+    });
     rows.sort((a, b) => (b.s.n ? 1 : 0) - (a.s.n ? 1 : 0) || (b.s.roi ?? -1e9) - (a.s.roi ?? -1e9) || a.t.n - b.t.n);
     const shown = RL.showAll ? rows : rows.slice(0, 6);
     let h = `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>
