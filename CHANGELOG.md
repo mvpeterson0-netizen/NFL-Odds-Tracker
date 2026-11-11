@@ -152,3 +152,4 @@
 - 2026-11-10 · PR: results filter buttons · NFL Results tab: Week, Position and Market drop-downs replaced by rows of buttons, "All" selected by default; the Clear button is gone since "All" does that. UI only; CFB untouched.
 - 2026-11-10 · PR: Signals page, player name search removed (NFL side). UI only.
 - 2026-11-10 · PR: Signals page cleanup (NFL side) · Stat/Game "Filters" box removed; signal numbers removed from the signal tiles, the picked-signal title and the player chips (names only). UI only; scoring unchanged.
+- 2026-11-11 · PR: Welcome tour refresh · Board and Player pages images retaken from Week 10 data (Josh Allen's game; Jaxon Smith-Njigba's page showing weekly lines vs. results, weeks 1–9). Research section now shows the Signals tab. The tour is now tap-through (Welcome heading on the Board page): one page per section with Back, Next and Skip; text cut to one short line per page. UI only.
