@@ -506,7 +506,7 @@
   document.addEventListener("click", infoHandler, true);
   document.addEventListener("keydown", infoHandler, true);
   // ---------- Signals (Michael 2026-11-10): the old Leads + Leads Analysis, redone as one page ----------
-  // Top: how every signal is doing (Today / This week / Last week / Season), ranked by ROI, each with a run chart of units.
+  // Top: how every signal is doing (Last week / Last month / This season), ranked by ROI, each with a run chart of units.
   // Tap a signal (or several) to see its run chart and week-by-week record, and to narrow the players below to those who fit
   // ALL the picked signals. Below: this week's players ranked by how many signals fit them, with FanDuel checkboxes.
   // Week is the smallest level shown (no per-game split). Scoring is unchanged: same analyze() as before.
@@ -522,15 +522,14 @@
   const nm = (x) => !RL.q || x.c.p.name.toLowerCase().includes(RL.q.trim().toLowerCase());
   const roiTxt = (s) => (s.roi == null ? "—" : `${s.roi >= 0 ? "+" : "−"}${Math.abs(s.roi).toFixed(1)}% ROI`);
   const curWk = () => (typeof defaultWeek === "function" ? defaultWeek() : D.current_week);
-  const SCOPES = [["today", "Today"], ["week", "This week"], ["last", "Last week"], ["season", "Season"]];
-  const todayCT = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Chicago" });
+  const SCOPES = [["last", "Last week"], ["month", "Last month"], ["season", "This season"]];
+  // Last month = the 4 most recent completed weeks (week is the smallest level, so no mid-week cut-offs)
   function inScope(x) {
-    if (RL.scope === "today") return typeof ctDate === "function" && ctDate(new Date(x.r.ko)) === todayCT();
-    if (RL.scope === "week") return x.r.wk === curWk();
     if (RL.scope === "last") return x.r.wk === curWk() - 1;
+    if (RL.scope === "month") return x.r.wk >= curWk() - 4 && x.r.wk <= curWk() - 1;
     return true;
   }
-  const scopeName = () => (SCOPES.find((x) => x[0] === RL.scope) || SCOPES[3])[1].toLowerCase();
+  const scopeName = () => (SCOPES.find((x) => x[0] === RL.scope) || SCOPES[2])[1].toLowerCase();
   function sigRec(t) {
     const by = laWeeks().slice().reverse().map((w) => ({ w, list: AN(t.id, w) }));
     const all = by.flatMap((x) => x.list);
@@ -546,20 +545,33 @@
     return lists[0].filter((x) => keep.has(bkey(x)));
   }
   const byWeek = (bets) => laWeeks().slice().reverse().map((w) => ({ w, list: bets.filter((x) => x.r.wk === w) }));
-  // tiny run chart: cumulative units by week (all season), green if up, red if down
+  // tiny run chart: cumulative units by week (all season), green if up, red if down.
+  // A dot for every week, plus very faint axes: weeks (W#) along the bottom, cumulative units up the side.
   function spark(by) {
-    let u = 0; const pts = by.map(({ list }) => (u += tally(list).U));
     if (!by.some((x) => x.list.length)) return `<div class="sg-nospark muted small">no graded bets yet</div>`;
-    const w = 120, h = 30, mn = Math.min(0, ...pts), mx = Math.max(0, ...pts), rg = mx - mn || 1;
-    const X = (i) => (pts.length < 2 ? w / 2 : (i * (w - 4)) / (pts.length - 1) + 2), Y = (v) => 2 + ((mx - v) / rg) * (h - 4);
-    const last = pts[pts.length - 1], col = last >= 0 ? "--over" : "--under";
-    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Units by week, now ${unitsTxt(last)}"><line x1="0" x2="${w}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" style="stroke:var(--line)" stroke-dasharray="3 3"/><path d="${pts.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ")}" fill="none" style="stroke:var(${col})" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
+    let u = 0; const pts = by.map(({ w, list }) => { const s = tally(list); u += s.U; return { w, n: list.length, d: s.U, u }; });
+    const w = 150, h = 80, l = 30, r = 6, tp = 7, bt = 15, n = pts.length;
+    const mn = Math.min(0, ...pts.map((p) => p.u)), mx = Math.max(0, ...pts.map((p) => p.u)), rg = mx - mn || 1;
+    const X = (i) => (n < 2 ? (l + w - r) / 2 : l + (i * (w - l - r)) / (n - 1)), Y = (v) => tp + ((mx - v) / rg) * (h - tp - bt);
+    const last = pts[n - 1].u, col = last >= 0 ? "--over" : "--under", base = h - bt;
+    const fmt = (v) => { const a = Math.abs(v), t = a < 10 ? a.toFixed(1).replace(/\.0$/, "") : String(Math.round(a)); return `${v > 0 ? "+" : v < 0 ? "−" : ""}${t}u`; };
+    // y ticks: top, zero, bottom (skip any that would crowd the one above)
+    const ticks = []; let prevY = -99;
+    for (const v of [...new Set([mx, 0, mn])].sort((a, b) => b - a)) { if (Y(v) - prevY >= 11) { ticks.push(v); prevY = Y(v); } }
+    const every = n > 9 ? 2 : 1;
+    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Cumulative units by week, now ${unitsTxt(last)}">
+      <g class="sg-ax"><line x1="${l}" x2="${l}" y1="${tp}" y2="${base}"/><line x1="${l}" x2="${w - r}" y1="${base}" y2="${base}"/>
+      ${ticks.map((v) => `<line class="sg-gl" x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${l - 3}" y="${(Y(v) + 2.8).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`).join("")}
+      ${pts.map((p, i) => ((n - 1 - i) % every ? "" : `<text x="${X(i).toFixed(1)}" y="${h - 3}" text-anchor="middle">${p.w}</text>`)).join("")}</g>
+      <line x1="${l}" x2="${w - r}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" style="stroke:var(--line)" stroke-dasharray="3 3"/>
+      <path d="${pts.map((p, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(p.u).toFixed(1)}`).join(" ")}" fill="none" style="stroke:var(${col})" stroke-width="1.6" stroke-linejoin="round"/>
+      ${pts.map((p, i) => `<circle cx="${X(i).toFixed(1)}" cy="${Y(p.u).toFixed(1)}" r="2.3" style="${p.n ? `fill:var(${col})` : `fill:var(--panel)`};stroke:var(${col})" stroke-width="1"><title>Week ${p.w}: ${p.n ? `${unitsTxt(p.d)} that week` : "no graded bets"} · ${unitsTxt(p.u)} total</title></circle>`).join("")}</svg>`;
   }
   function tileHtml(t, st) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
     return `<button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}"><div class="sg-top"><b>${esc(t.label)}</b></div>
       <div class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}<span class="muted small"> ROI</span></div>
-      <div class="small">${s.n ? `${recTxt(s)} · <span class="${cls}">${unitsTxt(s.U)}</span>` : `<span class="muted">no graded bets ${scopeName() === "season" ? "yet" : "in " + scopeName()}</span>`}</div>${spark(st.by)}</button>`;
+      <div class="small">${s.n ? `${recTxt(s)} · <span class="${cls}">${unitsTxt(s.U)}</span>` : `<span class="muted">no graded bets ${RL.scope === "season" ? "yet" : "for " + scopeName()}</span>`}</div>${spark(st.by)}</button>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
   function topSection(tabs) {
