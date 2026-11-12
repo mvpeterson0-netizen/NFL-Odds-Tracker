@@ -8,7 +8,7 @@
   const getIncl = () => { try { return localStorage.getItem(inclKey) === "1"; } catch { return false; } };
   const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, sel: null, activity: null, actErr: "", tab: "traffic" };
   // Tweet plan tab (supabase/015_tweet_plan.sql): edits are held here until "Submit changes"; Claude acts on the request.
-  const TP = { data: null, err: "", loading: false, edits: {}, openText: {}, msg: "", sending: false };
+  const TP = { data: null, err: "", loading: false, edits: {}, msg: "", sending: false };
   const TP_STATUS = ["Not drafted", "Drafted (chat only)", "Scheduled on X", "Posted", "Failed / skipped", "Manual"];
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtN = (n) => Number(n || 0).toLocaleString("en-US");
@@ -147,6 +147,7 @@
     rerender();
   }
   const tpChangeCount = () => Object.values(TP.edits).reduce((n, f) => n + Object.keys(f).length, 0);
+  const tpBase = (row, f) => { const v = row[f]; return f === "post_time" && v ? String(v).slice(0, 5) : (v ?? ""); };
   function tweetsPage() {
     if (!TP.data && !TP.loading && !TP.err) setTimeout(loadTweets, 0);
     if (TP.err) return `<div class="ad">${tabsBar()}<div class="panel ac"><h3>Tweet plan</h3><div class="body"><p class="small pk-err">${esc(TP.err)}</p><button id="tp-reload">Try again</button></div></div></div>`;
@@ -154,18 +155,23 @@
     const plan = TP.data.plan || [], reqs = TP.data.requests || [];
     const pending = {};
     reqs.filter((q) => q.status === "pending").forEach((q) => (q.changes || []).forEach((c) => { pending[c.slot_key] = Object.assign(pending[c.slot_key] || {}, c.fields); }));
-    const val = (row, f) => (TP.edits[row.slot_key] && f in TP.edits[row.slot_key]) ? TP.edits[row.slot_key][f] : (row[f] ?? "");
-    const inp = (row, f, w) => `<input class="tp-in ${TP.edits[row.slot_key] && f in TP.edits[row.slot_key] ? "dirty" : ""}" style="min-width:${w}px" data-tpk="${esc(row.slot_key)}" data-tpf="${f}" value="${esc(val(row, f))}" aria-label="${f} for ${esc(row.slot)}">`;
+    const dirty = (r, f) => !!(TP.edits[r.slot_key] && f in TP.edits[r.slot_key]);
+    const val = (r, f) => dirty(r, f) ? TP.edits[r.slot_key][f] : tpBase(r, f);
+    const ctl = (r, f, label, extra) => `class="tp-in ${dirty(r, f) ? "dirty" : ""}" data-tpk="${esc(r.slot_key)}" data-tpf="${f}" aria-label="${label} for ${esc(r.slot)}" ${extra || ""}`;
     let lastDay = null;
     const rows = plan.map((r) => {
-      const head = r.day_label !== lastDay ? `<tr class="tp-day"><td colspan="8">${esc(r.day_label || "")}</td></tr>` : ""; lastDay = r.day_label;
+      const head = r.day_label !== lastDay ? `<tr class="tp-day"><td colspan="6">${esc(r.day_label || "")}</td></tr>` : ""; lastDay = r.day_label;
       const st = val(r, "status");
-      const sel = `<select class="tp-in ${TP.edits[r.slot_key] && "status" in TP.edits[r.slot_key] ? "dirty" : ""}" style="min-width:150px" data-tpk="${esc(r.slot_key)}" data-tpf="status" aria-label="Status for ${esc(r.slot)}">${TP_STATUS.map((o) => `<option ${o === st ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+      const sel = `<select ${ctl(r, "status", "Status", 'style="min-width:150px"')}>${TP_STATUS.map((o) => `<option ${o === st ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
       const pend = pending[r.slot_key] ? `<span class="tp-pend" title="${esc(JSON.stringify(pending[r.slot_key]))}">Claude is working on a change</span>` : "";
-      const open = TP.openText[r.slot_key];
-      return head + `<tr class="tp-r"><td data-l="Slot"><b>${esc(r.slot)}</b></td><td data-l="Tweet about">${inp(r, "topic", 220)}</td><td data-l="Data first available" class="muted small">${esc(r.data_ready || "")}</td><td data-l="Draft run" class="muted small">${esc(r.draft_run || "")}</td>
-        <td data-l="Post time">${inp(r, "post_time", 90)}</td><td data-l="Status">${sel}</td><td data-l="Scheduled on X for" class="small">${esc(r.x_time || "—")} ${pend}</td><td data-l="Notes">${inp(r, "notes", 200)} <button class="tp-txt" data-tptext="${esc(r.slot_key)}">${open ? "Hide text" : "Tweet text"}</button></td></tr>`
-        + (open ? `<tr class="tp-tr"><td class="tp-e"></td><td colspan="7" data-l="Tweet text"><textarea class="tp-ta ${TP.edits[r.slot_key] && "tweet_text" in TP.edits[r.slot_key] ? "dirty" : ""}" rows="5" data-tpk="${esc(r.slot_key)}" data-tpf="tweet_text" placeholder="Tweet text for this slot (Claude uses it instead of drafting one)">${esc(val(r, "tweet_text"))}</textarea></td></tr>` : "");
+      const info = [r.data_ready ? `Data first available: ${esc(r.data_ready)}` : "", r.draft_run ? `Draft run: ${esc(r.draft_run)}` : "", `On X: ${esc(r.x_time || "not scheduled")}`, r.last_result ? `Claude: ${esc(r.last_result)}` : ""].filter(Boolean).join(" · ");
+      return head + `<tr class="tp-r"><td data-l="Slot"><b>${esc(r.slot)}</b></td>
+        <td data-l="Tweet about"><input ${ctl(r, "topic", "Tweet about", 'style="min-width:220px"')} value="${esc(val(r, "topic"))}"></td>
+        <td data-l="Direction for Claude"><textarea ${ctl(r, "direction", "Direction for Claude", 'rows="2" style="min-width:220px" placeholder="Notes / prompt direction for Claude"')}>${esc(val(r, "direction"))}</textarea></td>
+        <td data-l="Date"><input type="date" ${ctl(r, "post_date", "Post date")} value="${esc(val(r, "post_date"))}"></td>
+        <td data-l="Time (Central)"><input type="time" ${ctl(r, "post_time", "Post time")} value="${esc(val(r, "post_time"))}"></td>
+        <td data-l="Status">${sel}</td></tr>
+        <tr class="tp-i"><td class="tp-e"></td><td colspan="5" class="muted small">${info} ${pend}</td></tr>`;
     }).join("");
     const n = tpChangeCount();
     const reqRows = reqs.slice(0, 8).map((q) => {
@@ -175,9 +181,9 @@
     return `<div class="ad">${tabsBar()}
       <div class="ad-head"><h2>Tweet plan</h2><div class="ad-chips"><button id="tp-reload">Refresh</button></div></div>
       ${TP.data.agent_configured ? "" : `<p class="pk-err small">Claude's task isn't connected yet (no agent token set), so submitted changes will wait. See the end of supabase/015_tweet_plan.sql.</p>`}
-      <p class="muted small ad-note">Change a post time, status, topic, note or the tweet text, then press Submit changes. Claude picks it up (about every 15 minutes), carries it out in X, and the result shows below. "Scheduled on X for" is only updated by Claude after it has actually done it.</p>
+      <p class="muted small ad-note">Edit what a tweet is about, give Claude direction, or change its date and time (Central), then press Submit changes. Claude's scheduled tasks read this plan before drafting, and Claude moves X to match. "On X" is updated only after Claude has actually done it.</p>
       <div class="tp-bar"><button id="tp-submit" class="gchip on" ${n && !TP.sending ? "" : "disabled"}>${TP.sending ? "Sending…" : `Submit changes${n ? ` (${n})` : ""}`}</button><button id="tp-discard" ${n ? "" : "disabled"}>Discard edits</button><span id="tp-msg" class="small ${/^Couldn't|^Not/.test(TP.msg) ? "pk-err" : "muted"}">${esc(TP.msg)}</span></div>
-      <div class="panel"><div class="body"><div class="ad-tw"><table class="ad-t tp-t"><thead><tr><th>Slot</th><th>Tweet about</th><th>Data first available</th><th>Draft run</th><th>Post time</th><th>Status</th><th>Scheduled on X for</th><th>Notes</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>
+      <div class="panel"><div class="body"><div class="ad-tw"><table class="ad-t tp-t"><thead><tr><th>Slot</th><th>Tweet about</th><th>Direction for Claude</th><th>Date</th><th>Time (Central)</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>
       <div class="panel"><h3>Requests to Claude</h3><div class="body">${table(["Sent", "What", "State", "Claude's result"], reqRows)}</div></div>
     </div>`;
   }
@@ -190,7 +196,7 @@
     document.querySelectorAll("[data-tpk]").forEach((el) => {
       const on = () => {
         const k = el.dataset.tpk, f = el.dataset.tpf, row = (TP.data.plan || []).find((x) => x.slot_key === k); if (!row) return;
-        const base = row[f] ?? "";
+        const base = tpBase(row, f);
         if (el.value === base) { if (TP.edits[k]) { delete TP.edits[k][f]; if (!Object.keys(TP.edits[k]).length) delete TP.edits[k]; } }
         else { (TP.edits[k] = TP.edits[k] || {})[f] = el.value; }
         el.classList.toggle("dirty", el.value !== base); TP.msg = ""; const m = document.getElementById("tp-msg"); if (m) m.textContent = "";
@@ -198,7 +204,6 @@
       };
       el.addEventListener(el.tagName === "SELECT" ? "change" : "input", on);
     });
-    document.querySelectorAll("[data-tptext]").forEach((b) => b.addEventListener("click", () => { TP.openText[b.dataset.tptext] = !TP.openText[b.dataset.tptext]; rerender(); }));
     const rl = document.getElementById("tp-reload"); if (rl) rl.addEventListener("click", () => { TP.data = null; TP.err = ""; TP.msg = ""; loadTweets(); });
     const dc = document.getElementById("tp-discard"); if (dc) dc.addEventListener("click", () => { TP.edits = {}; TP.msg = ""; rerender(); });
     const sb = document.getElementById("tp-submit");
