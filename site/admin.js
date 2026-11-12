@@ -6,7 +6,10 @@
   const ACC = () => window.STIX_ACCOUNT;
   const inclKey = "stix_admin_include_me";
   const getIncl = () => { try { return localStorage.getItem(inclKey) === "1"; } catch { return false; } };
-  const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, sel: null, activity: null, actErr: "" };
+  const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, sel: null, activity: null, actErr: "", tab: "traffic" };
+  // Tweet plan tab (supabase/015_tweet_plan.sql): edits are held here until "Submit changes"; Claude acts on the request.
+  const TP = { data: null, err: "", loading: false, edits: {}, adds: [], dels: {}, msg: "", sending: false };
+  const TP_STATUS = ["Not drafted", "Drafted (chat only)", "Scheduled on X", "Posted", "Failed / skipped", "Manual"];
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtN = (n) => Number(n || 0).toLocaleString("en-US");
   const dur = (s) => { s = Math.round(Number(s) || 0); if (s < 60) return `${s}s`; const m = Math.floor(s / 60); if (m < 60) return `${m}m ${s % 60}s`; return `${Math.floor(m / 60)}h ${m % 60}m`; };
@@ -105,6 +108,7 @@
         <p class="muted small">Latest 200 events.</p></div></div>`;
     }
     return `<div class="ad">
+      ${tabsBar()}
       <div class="ad-head"><h2>Stix admin</h2><div class="ad-chips">${chips}<button id="ad-refresh">Refresh</button>
         <label class="ad-incl"><input type="checkbox" id="ad-incl" ${AD.incl ? "checked" : ""}> Include my activity</label></div></div>
       <p class="muted small ad-note">${AD.incl ? "Traffic includes admin accounts (you)." : "Traffic leaves out admin accounts (you), including what a device did before you signed in on it."}</p>
@@ -132,6 +136,108 @@
     </div>`;
   }
 
+  // ---------- Tweet plan tab ----------
+  const tabsBar = () => `<div class="ad-tabs"><button class="gchip ${AD.tab === "traffic" ? "on" : ""}" data-adtab="traffic">Traffic &amp; users</button><button class="gchip ${AD.tab === "tweets" ? "on" : ""}" data-adtab="tweets">Tweet plan</button></div>`;
+  async function loadTweets() {
+    if (!ACC() || !ACC().signedIn() || TP.loading) return;
+    TP.loading = true; TP.err = ""; rerender();
+    const r = await ACC().db("/rest/v1/rpc/admin_tweet_plan", { method: "POST", body: {} });
+    TP.loading = false;
+    if (r.ok) TP.data = r.data; else TP.err = /404|42501|not allowed/i.test(`${r.error} ${r.status}`) ? "The tweet plan isn't set up in the database yet (run supabase/015_tweet_plan.sql)." : (r.error || "Couldn't load.");
+    rerender();
+  }
+  const tpChangeCount = () => Object.values(TP.edits).reduce((n, f) => n + Object.keys(f).length, 0) + TP.adds.length + Object.keys(TP.dels).length;
+  const tpBase = (row, f) => { const v = row[f]; return f === "post_time" && v ? String(v).slice(0, 5) : (v ?? ""); };
+  function tweetsPage() {
+    if (!TP.data && !TP.loading && !TP.err) setTimeout(loadTweets, 0);
+    if (TP.err) return `<div class="ad">${tabsBar()}<div class="panel ac"><h3>Tweet plan</h3><div class="body"><p class="small pk-err">${esc(TP.err)}</p><button id="tp-reload">Try again</button></div></div></div>`;
+    if (!TP.data) return `<div class="ad">${tabsBar()}<p class="muted pad">Loading tweet plan…</p></div>`;
+    const plan = TP.data.plan || [], reqs = TP.data.requests || [];
+    const pending = {};
+    const pendAdds = [];
+    reqs.filter((q) => q.status === "pending").forEach((q) => (q.changes || []).forEach((c) => {
+      if (c.op === "add") pendAdds.push(c); else if (c.op === "delete") pending[c.slot_key] = Object.assign(pending[c.slot_key] || {}, { delete: true }); else pending[c.slot_key] = Object.assign(pending[c.slot_key] || {}, c.fields);
+    }));
+    const dirty = (r, f) => !!(TP.edits[r.slot_key] && f in TP.edits[r.slot_key]);
+    const val = (r, f) => dirty(r, f) ? TP.edits[r.slot_key][f] : tpBase(r, f);
+    const ctl = (r, f, label, extra) => `class="tp-in ${dirty(r, f) ? "dirty" : ""}" data-tpk="${esc(r.slot_key)}" data-tpf="${f}" aria-label="${label} for ${esc(r.slot)}" ${extra || ""}`;
+    let lastDay = null;
+    const rows = plan.map((r) => {
+      const head = r.day_label !== lastDay ? `<tr class="tp-day"><td colspan="6">${esc(r.day_label || "")}</td></tr>` : ""; lastDay = r.day_label;
+      const st = val(r, "status");
+      const sel = `<select ${ctl(r, "status", "Status", 'style="min-width:150px"')}>${TP_STATUS.map((o) => `<option ${o === st ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+      const pend = pending[r.slot_key] ? `<span class="tp-pend" title="${esc(JSON.stringify(pending[r.slot_key]))}">${pending[r.slot_key].delete ? "Claude is deleting this tweet" : "Claude is working on a change"}</span>` : "";
+      const info = [r.data_ready ? `Data first available: ${esc(r.data_ready)}` : "", r.draft_run ? `Draft run: ${esc(r.draft_run)}` : "", `On X: ${esc(r.x_time || "not scheduled")}`, r.last_result ? `Claude: ${esc(r.last_result)}` : ""].filter(Boolean).join(" · ");
+      return head + `<tr class="tp-r ${TP.dels[r.slot_key] ? "tp-gone" : ""}"><td data-l="Slot"><b>${esc(r.slot)}</b></td>
+        <td data-l="Tweet about"><input ${ctl(r, "topic", "Tweet about", 'style="min-width:220px"')} value="${esc(val(r, "topic"))}"></td>
+        <td data-l="Direction for Claude"><textarea ${ctl(r, "direction", "Direction for Claude", 'rows="2" style="min-width:220px" placeholder="Notes / prompt direction for Claude"')}>${esc(val(r, "direction"))}</textarea></td>
+        <td data-l="Date"><input type="date" ${ctl(r, "post_date", "Post date")} value="${esc(val(r, "post_date"))}"></td>
+        <td data-l="Time (Central)"><input type="time" ${ctl(r, "post_time", "Post time")} value="${esc(val(r, "post_time"))}"></td>
+        <td data-l="Status">${sel}<br><button class="tp-del ${TP.dels[r.slot_key] ? "on" : ""}" data-tpdel="${esc(r.slot_key)}" aria-label="Delete tweet ${esc(r.slot)}">${TP.dels[r.slot_key] ? "Undo delete" : "Delete tweet"}</button></td></tr>
+        <tr class="tp-i"><td class="tp-e"></td><td colspan="5" class="muted small">${info} ${pend}</td></tr>`;
+    }).join("");
+    const addRows = TP.adds.map((a, i) => `<tr class="tp-r tp-new"><td data-l="Slot"><b>New</b><br><button class="tp-del" data-tpnew-del="${i}">Remove</button></td>
+        <td data-l="Tweet about"><input class="tp-in dirty" data-tpnew="${i}" data-f="topic" style="min-width:220px" aria-label="New tweet: tweet about" value="${esc(a.topic)}" placeholder="What is this tweet about?"></td>
+        <td data-l="Direction for Claude"><textarea class="tp-in dirty" data-tpnew="${i}" data-f="direction" rows="2" style="min-width:220px" aria-label="New tweet: direction for Claude" placeholder="Notes / prompt direction for Claude">${esc(a.direction)}</textarea></td>
+        <td data-l="Date"><input type="date" class="tp-in dirty" data-tpnew="${i}" data-f="post_date" aria-label="New tweet: date" value="${esc(a.post_date)}"></td>
+        <td data-l="Time (Central)"><input type="time" class="tp-in dirty" data-tpnew="${i}" data-f="post_time" aria-label="New tweet: time" value="${esc(a.post_time)}"></td>
+        <td data-l="Status"><span class="muted small">Not drafted</span></td></tr>`).join("");
+    const pendAddRows = pendAdds.map((c) => `<tr class="tp-r"><td data-l="Slot"><b>New</b></td><td colspan="5" class="small">${esc((c.fields || {}).topic || "")} · ${esc((c.fields || {}).post_date || "no date")} ${esc((c.fields || {}).post_time || "")} <span class="tp-pend">Claude is adding this tweet</span></td></tr>`).join("");
+    const n = tpChangeCount();
+    const reqRows = reqs.slice(0, 8).map((q) => {
+      const what = (q.changes || []).map((c) => { const p = plan.find((x) => x.slot_key === c.slot_key); if (c.op === "delete") return `Delete ${esc(p ? p.slot + " – " + p.topic : c.slot_key)}`; if (c.op === "add") return `Add: ${esc((c.fields || {}).topic || "")}`; return `${esc(p ? p.slot : c.slot_key)}: ${Object.entries(c.fields).map(([k, v]) => `${esc(k.replace("_", " "))} → ${esc(String(v ?? "").slice(0, 60))}`).join(", ")}`; }).join("<br>");
+      return `<tr><td>${when(q.created_at)}</td><td>${what}</td><td>${esc(q.status === "needs_attention" ? "Needs attention" : q.status === "done" ? "Done" : "Waiting for Claude")}</td><td class="small">${esc(q.result || "")}</td></tr>`;
+    });
+    return `<div class="ad">${tabsBar()}
+      <div class="ad-head"><h2>Tweet plan</h2><div class="ad-chips"><button id="tp-reload">Refresh</button></div></div>
+      ${TP.data.agent_configured ? "" : `<p class="pk-err small">Claude's task isn't connected yet (no agent token set), so submitted changes will wait. See the end of supabase/015_tweet_plan.sql.</p>`}
+      <p class="muted small ad-note">Edit what a tweet is about, give Claude direction, or change its date and time (Central), then press Submit changes. Claude's scheduled tasks read this plan before drafting, and Claude moves X to match. "On X" is updated only after Claude has actually done it.</p>
+      <div class="tp-bar"><button id="tp-submit" class="gchip on" ${n && !TP.sending ? "" : "disabled"}>${TP.sending ? "Sending…" : `Submit changes${n ? ` (${n})` : ""}`}</button><button id="tp-discard" ${n ? "" : "disabled"}>Discard edits</button><span id="tp-msg" class="small ${/^Couldn't|^Not/.test(TP.msg) ? "pk-err" : "muted"}">${esc(TP.msg)}</span></div>
+      <div class="panel"><div class="body"><div class="ad-tw"><table class="ad-t tp-t"><thead><tr><th>Slot</th><th>Tweet about</th><th>Direction for Claude</th><th>Date</th><th>Time (Central)</th><th>Status</th></tr></thead><tbody>${rows}${pendAddRows}${addRows}</tbody></table></div><p><button id="tp-add">+ Add a tweet</button></p></div></div>
+      <div class="panel"><h3>Requests to Claude</h3><div class="body">${table(["Sent", "What", "State", "Claude's result"], reqRows)}</div></div>
+    </div>`;
+  }
+  function tpUpdateBar() {
+    const n = tpChangeCount(), b = document.getElementById("tp-submit"), d = document.getElementById("tp-discard");
+    if (b) { b.disabled = !n || TP.sending; b.textContent = `Submit changes${n ? ` (${n})` : ""}`; }
+    if (d) d.disabled = !n;
+  }
+  function tweetsBind() {
+    document.querySelectorAll("[data-tpk]").forEach((el) => {
+      const on = () => {
+        const k = el.dataset.tpk, f = el.dataset.tpf, row = (TP.data.plan || []).find((x) => x.slot_key === k); if (!row) return;
+        const base = tpBase(row, f);
+        if (el.value === base) { if (TP.edits[k]) { delete TP.edits[k][f]; if (!Object.keys(TP.edits[k]).length) delete TP.edits[k]; } }
+        else { (TP.edits[k] = TP.edits[k] || {})[f] = el.value; }
+        el.classList.toggle("dirty", el.value !== base); TP.msg = ""; const m = document.getElementById("tp-msg"); if (m) m.textContent = "";
+        tpUpdateBar();
+      };
+      el.addEventListener(el.tagName === "SELECT" ? "change" : "input", on);
+    });
+    document.querySelectorAll("[data-tpnew]").forEach((el) => el.addEventListener("input", () => { TP.adds[+el.dataset.tpnew][el.dataset.f] = el.value; TP.msg = ""; }));
+    document.querySelectorAll("[data-tpnew-del]").forEach((b) => b.addEventListener("click", () => { TP.adds.splice(+b.dataset.tpnewDel, 1); rerender(); }));
+    document.querySelectorAll("[data-tpdel]").forEach((b) => b.addEventListener("click", () => { const k = b.dataset.tpdel; if (TP.dels[k]) delete TP.dels[k]; else TP.dels[k] = true; rerender(); }));
+    const ad = document.getElementById("tp-add"); if (ad) ad.addEventListener("click", () => { TP.adds.push({ topic: "", direction: "", post_date: "", post_time: "" }); rerender(); });
+    const rl = document.getElementById("tp-reload"); if (rl) rl.addEventListener("click", () => { TP.data = null; TP.err = ""; TP.msg = ""; loadTweets(); });
+    const dc = document.getElementById("tp-discard"); if (dc) dc.addEventListener("click", () => { TP.edits = {}; TP.adds = []; TP.dels = {}; TP.msg = ""; rerender(); });
+    const sb = document.getElementById("tp-submit");
+    if (sb) sb.addEventListener("click", async () => {
+      const changes = Object.entries(TP.edits).filter(([k]) => !TP.dels[k]).map(([slot_key, fields]) => ({ slot_key, fields }));
+      Object.keys(TP.dels).forEach((slot_key) => changes.push({ op: "delete", slot_key }));
+      for (const a of TP.adds) {
+        if (!a.topic.trim()) { TP.msg = "Not sent: every new tweet needs a \"Tweet about\"."; rerender(); return; }
+        const fields = { topic: a.topic.trim() }; ["direction", "post_date", "post_time"].forEach((f) => { if (a[f]) fields[f] = a[f]; });
+        changes.push({ op: "add", slot_key: "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), fields });
+      }
+      if (!changes.length || TP.sending) return;
+      TP.sending = true; TP.msg = ""; rerender();
+      const r = await ACC().db("/rest/v1/rpc/admin_tweet_submit", { method: "POST", body: { p_changes: changes } });
+      TP.sending = false;
+      if (r.ok) { TP.edits = {}; TP.adds = []; TP.dels = {}; TP.msg = "Sent. Claude will pick it up within about 15 minutes."; TP.data = null; loadTweets(); }
+      else { TP.msg = `Couldn't send: ${r.error || "try again"}`; rerender(); }
+    });
+  }
+
   function view() {
     if (!ACC()) return `<p class="pad">Admin page didn't load. Try refreshing.</p>`;
     if (!ACC().signedIn()) {
@@ -142,9 +248,11 @@
     if (AD.loading || AD.loadedFor !== key) return `<p class="muted pad">Loading admin data…</p>`;
     if (AD.denied) return `<div class="panel ac"><h3>Stix admin</h3><div class="body"><p class="small">This page is only for Stix admins. You're signed in as <b>${esc(ACC().user().email)}</b>.</p></div></div>`;
     if (AD.err) return `<div class="panel ac"><h3>Stix admin</h3><div class="body"><p class="small pk-err">${esc(AD.err)}</p><button id="ad-refresh">Try again</button></div></div>`;
-    return dashboard();
+    return AD.tab === "tweets" ? tweetsPage() : dashboard();
   }
   function bind() {
+    document.querySelectorAll("[data-adtab]").forEach((b) => b.addEventListener("click", () => { AD.tab = b.dataset.adtab; rerender(); }));
+    if (AD.tab === "tweets") { tweetsBind(); return; }
     if (document.getElementById("ad-gis")) ACC().bindGoogle("ad");
     document.querySelectorAll("[data-addays]").forEach((b) => b.addEventListener("click", () => { AD.days = Number(b.dataset.addays); AD.sel = null; load(); }));
     const inc = document.getElementById("ad-incl");
