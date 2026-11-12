@@ -572,3 +572,5 @@ textarea.tp-in { resize: vertical; }
   .tp-t tr.tp-r td:first-child::before { display: none; }
   .tp-t td .tp-in { min-width: 0 !important; }
 }
+
+.tp-del{font-size:12px;padding:2px 8px;margin-top:4px}.tp-del.on{background:#fde8e8}.tp-gone td{opacity:.45;text-decoration:line-through}.tp-gone td:last-child{text-decoration:none;opacity:1}.tp-new td{background:rgba(0,120,255,.05)}

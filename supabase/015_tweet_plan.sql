@@ -67,13 +67,14 @@ begin
 end $$;
 
 -- ---------- admin page: Submit changes ----------
+-- op is 'update' (default), 'add' (new slot_key + fields) or 'delete'.
 -- p_changes = [{"slot_key": "...", "fields": {"post_time": "9:00 AM", "status": "Failed / skipped", ...}}, ...]
 -- Nothing in tweet_plan changes here: the request is a to-do for Claude, which updates the plan when it has acted.
 create or replace function public.admin_tweet_submit(p_changes jsonb)
 returns bigint
 language plpgsql security definer set search_path = public as $$
 declare
-  item jsonb; k text; v jsonb; clean jsonb := '[]'::jsonb; fields jsonb; new_id bigint;
+  item jsonb; op text; k text; v jsonb; clean jsonb := '[]'::jsonb; fields jsonb; new_id bigint;
 begin
   if not is_admin() then raise exception 'Not allowed' using errcode = '42501'; end if;
   if p_changes is null or jsonb_typeof(p_changes) <> 'array' or jsonb_array_length(p_changes) = 0
@@ -81,8 +82,19 @@ begin
     raise exception 'Send 1 to 60 changes' using errcode = '22023';
   end if;
   for item in select * from jsonb_array_elements(p_changes) loop
-    if not exists (select 1 from tweet_plan where slot_key = item->>'slot_key') then
-      raise exception 'Unknown slot %', coalesce(item->>'slot_key', '(none)') using errcode = '22023';
+    op := coalesce(item->>'op', 'update');
+    if op not in ('update','add','delete') then raise exception 'Unknown operation' using errcode = '22023'; end if;
+    if op = 'add' then
+      if coalesce(item->>'slot_key','') !~ '^[a-z0-9_-]{3,40}$' then raise exception 'Bad new slot id' using errcode = '22023'; end if;
+      if exists (select 1 from tweet_plan where slot_key = item->>'slot_key') then raise exception 'Slot already exists' using errcode = '22023'; end if;
+    else
+      if not exists (select 1 from tweet_plan where slot_key = item->>'slot_key') then
+        raise exception 'Unknown slot %', coalesce(item->>'slot_key', '(none)') using errcode = '22023';
+      end if;
+    end if;
+    if op = 'delete' then
+      clean := clean || jsonb_build_array(jsonb_build_object('op','delete','slot_key', item->>'slot_key'));
+      continue;
     end if;
     fields := '{}'::jsonb;
     for k, v in select * from jsonb_each(coalesce(item->'fields', '{}'::jsonb)) loop
@@ -96,8 +108,11 @@ begin
       end if;
       fields := fields || jsonb_build_object(k, v);
     end loop;
-    if fields <> '{}'::jsonb then
-      clean := clean || jsonb_build_array(jsonb_build_object('slot_key', item->>'slot_key', 'fields', fields));
+    if op = 'add' then
+      if coalesce(fields->>'topic','') = '' then raise exception 'A new tweet needs a "Tweet about"' using errcode = '22023'; end if;
+      clean := clean || jsonb_build_array(jsonb_build_object('op','add','slot_key', item->>'slot_key', 'fields', fields));
+    elsif fields <> '{}'::jsonb then
+      clean := clean || jsonb_build_array(jsonb_build_object('op','update','slot_key', item->>'slot_key', 'fields', fields));
     end if;
   end loop;
   if jsonb_array_length(clean) = 0 then raise exception 'No changes to send' using errcode = '22023'; end if;
@@ -163,6 +178,15 @@ begin
   on conflict (slot_key) do nothing;
 end $$;
 
+-- Claude removes a plan row after it has cancelled any tweet scheduled for it on X.
+create or replace function public.tweet_agent_delete_row(p_token text, p_slot_key text)
+returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if not tweet_agent_ok(p_token) then raise exception 'Not allowed' using errcode = '42501'; end if;
+  delete from tweet_plan where slot_key = p_slot_key;
+end $$;
+
 create or replace function public.tweet_agent_finish(p_token text, p_id bigint, p_status text, p_result text)
 returns void
 language plpgsql security definer set search_path = public as $$
@@ -181,12 +205,14 @@ revoke all on function public.tweet_agent_pending(text) from public;
 revoke all on function public.tweet_agent_update_plan(text, text, jsonb) from public;
 revoke all on function public.tweet_agent_finish(text, bigint, text, text) from public;
 revoke all on function public.tweet_agent_add_row(text, jsonb) from public;
+revoke all on function public.tweet_agent_delete_row(text, text) from public;
 grant execute on function public.admin_tweet_plan() to authenticated;
 grant execute on function public.admin_tweet_submit(jsonb) to authenticated;
 grant execute on function public.tweet_agent_pending(text) to anon, authenticated;
 grant execute on function public.tweet_agent_update_plan(text, text, jsonb) to anon, authenticated;
 grant execute on function public.tweet_agent_finish(text, bigint, text, text) to anon, authenticated;
 grant execute on function public.tweet_agent_add_row(text, jsonb) to anon, authenticated;
+grant execute on function public.tweet_agent_delete_row(text, text) to anon, authenticated;
 
 -- ---------- starting plan (Nov 11-17, 2026); existing rows are left alone ----------
 insert into public.tweet_plan (slot_key, sort_order, day_label, slot, topic, direction, post_date, post_time, status, x_time, last_result, data_ready, draft_run) values
