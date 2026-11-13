@@ -547,39 +547,6 @@ tr.gdetail:hover td { background: var(--hover); }
 .rl-pager .linkbtn { text-decoration: none; font-weight: 600; padding: 8px 10px; }
 .rl-pager .linkbtn:disabled { opacity: .35; }
 
-/* ---- Signal Stacks (stacks.js) ---- */
-.skbox { margin: 10px 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
-.sk-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-.sk-st { font-size: 11px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--muted); white-space: nowrap; }
-.sk-st.sk-locked { border-style: solid; font-weight: 600; } .sk-st.sk-watch { border-style: dashed; }
-.sk-line { margin: 4px 0; }
-.sk-sums { margin: 6px 0; display: grid; gap: 4px; }
-.sk-sum-s { font-size: 15px; } .sk-sum-s.sk-over b { color: var(--over); } .sk-sum-s.sk-under b { color: var(--under); }
-.sk-qn { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 0 6px; margin-left: 4px; white-space: nowrap; }
-.sk-leads { font-size: 11px; border: 1px solid var(--accent); color: var(--accent); border-radius: 8px; padding: 0 6px; margin-left: 4px; white-space: nowrap; }
-.sk-mixed { color: var(--push); }
-.sk-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
-.sk-chip { font-size: 12px; padding: 5px 9px; border-radius: 14px; border: 2px solid var(--muted); background: transparent; color: inherit; min-height: 32px; text-align: left; cursor: pointer; }
-.sk-chip.sk-testing, .sk-tag.sk-testing, .sk-mini.sk-testing { border-style: dashed; }
-.sk-chip.sk-context, .sk-tag.sk-context, .sk-mini.sk-context { border-style: dotted; opacity: .85; }
-.sk-chip.sk-qualified, .sk-tag.sk-qualified, .sk-mini.sk-qualified { border-style: solid; font-weight: 600; }
-.sk-chip.sk-over { border-color: var(--over); } .sk-chip.sk-under { border-color: var(--under); }
-.sk-chip[aria-expanded="true"] { background: var(--chip); }
-.sk-tag { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; border: 1px solid var(--muted); border-radius: 8px; padding: 0 5px; margin-left: 3px; white-space: nowrap; }
-.sk-drawer { margin: 6px 0; padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--chip); border-radius: 6px; display: grid; gap: 4px; }
-.sk-drawer[hidden] { display: none; }
-.sk-scroll { overflow-x: auto; } .sk-t { border-collapse: collapse; width: 100%; } .sk-t th, .sk-t td { padding: 3px 6px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
-.sk-model { margin-top: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg, transparent); }
-.sk-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; align-items: end; }
-.sk-filters label { display: grid; font-size: 11px; color: var(--muted); gap: 2px; } .sk-filters select { font-size: 14px; min-height: 36px; }
-.sk-filters .sk-chk { display: flex; align-items: center; gap: 4px; font-size: 13px; color: inherit; min-height: 36px; }
-.sk-row { display: block; padding: 10px 12px; margin: 8px 0; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: inherit; }
-.sk-r1, .sk-r2, .sk-r3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-bottom: 4px; }
-.sk-pill { font-weight: 700; padding: 1px 8px; border-radius: 10px; border: 2px solid var(--muted); } .sk-pill.sk-over { border-color: var(--over); } .sk-pill.sk-under { border-color: var(--under); }
-.sk-mini { font-size: 11px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--muted); } .sk-mini.sk-opp { border-style: double; border-width: 3px; }
-.sk-research { margin: 16px 0; padding: 0 12px; } .sk-rule { border-top: 1px solid var(--line); padding: 8px 0; } .sk-rule summary { cursor: pointer; }
-
-.sk-rowwrap { display: flex; align-items: flex-start; gap: 8px; } .sk-rowwrap .sk-row { flex: 1 1 auto; min-width: 0; } .sk-ck { margin-top: 14px; }
 /* Signals (Research tab), 2026-11-10 */
 .sg-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 6px 0 8px; } .sg-bar label { display: flex; flex-direction: column; flex: 1; font-size: 12px; color: var(--muted); gap: 3px; } .sg-bar input[type=search] { min-width: 0; width: 100%; }
 .sg-tag { margin: -6px 0 6px; }

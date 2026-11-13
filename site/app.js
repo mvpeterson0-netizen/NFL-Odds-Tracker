@@ -601,7 +601,6 @@ function viewPlayer(pid) {
     ${curSlot && curSlot.change ? `<p class="callout">Slot change: ${esc(curSlot.change)}</p>` : ""}
     <div class="mtabs">${ms.map((m) => `<button data-mid="${m.id}" class="${m.id === mid ? "on" : ""}">${esc(m.label)}</button>`).join("")}
     <span style="flex:1"></span><button id="an-toggle" class="${S.showAn ? "on" : ""}">${S.showAn ? "Hide analysis" : "Show analysis"}</button></div>
-    ${window.STIX_STACKS ? window.STIX_STACKS.box(pid, mid) : ""}
     ${betBox(pid, mid)}
     ${pickBoxSafe(pid, mid)}
     <div class="panel"><div class="chart">${chartSVG(rows, mid, { edgeAbove: true })}</div>
@@ -1000,10 +999,6 @@ function render() {
   else if (tab === "leads") app.innerHTML = viewLeads();
   else if (tab === "guide" || tab === "slots" || tab === "log") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
-  else if (tab === "stacks") {
-    try { app.innerHTML = window.STIX_STACKS ? window.STIX_STACKS.view(arg) : `<p class="pad">Signal Stacks didn't load. Try refreshing.</p>`; }
-    catch (e) { console.error(e); app.innerHTML = `<p class="pad">Signal Stacks hit an error. Try refreshing.</p>`; }
-  }
   else if (tab === "arb") {
     try { app.innerHTML = window.STIX_BOOKS ? window.STIX_BOOKS.view() : `<p class="pad">Arbitrage didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">Arbitrage hit an error. Try refreshing.</p>`; }
@@ -1040,7 +1035,6 @@ function render() {
   if (window.STIX_PICKS) { try { window.STIX_PICKS.bind(tab, arg); } catch (e) { console.error(e); } }
   if (tab === "review" && window.STIX_REVIEW) { try { window.STIX_REVIEW.bind(tab); } catch (e) { console.error(e); } }
   if (tab === "admin" && window.STIX_ADMIN) { try { window.STIX_ADMIN.bind(); } catch (e) { console.error(e); } }
-  if (tab === "stacks" && window.STIX_STACKS) { try { window.STIX_STACKS.bind(); } catch (e) { console.error(e); } }
   if (tab === "arb" && window.STIX_BOOKS) { try { window.STIX_BOOKS.bind(); } catch (e) { console.error(e); } }
 }
 function bind(tab, arg) {
