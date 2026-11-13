@@ -33,19 +33,19 @@
   const TABS = [
     { id: "qbr1", n: 1, side: "under", combo: true, label: "QB-R1",
       title: "QB rushing yards → Under (rushes a lot, high line)", why: "Books may price a rushing QB's recent output too high.",
-      desc: () => `QB rushing yards line of <b>25 or more</b> and his last <b>3 games played</b> averaged <b>25+</b> rushing yards. Bet Under.` },
+      desc: () => `Bet a QB's <b>rushing yards Under</b> when two things are true: this week's rushing-yards line is <b>25 or more</b>, and in his <b>last 3 games played</b> he averaged <b>25 or more</b> rushing yards. The idea is that a QB who runs a lot gets a high line, and that line may be set too high.` },
     { id: "sc2", n: 2, side: "under", combo: true, label: "SC2",
       title: "RB rush Under after a game his team led big", why: "A rushing Over built in a game his team led may not repeat.",
-      desc: () => `His team led by 7+ on at least half its plays last game, he went Over his rushing line, and this week's line is higher. Bet RB rushing yards Under.` },
+      desc: () => `Bet an RB's <b>rushing yards Under</b> when all three are true: in his team's <b>previous game</b> it led by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play), he finished <b>Over</b> his rushing line in that game, and this week's rushing line is <b>higher</b> than that game's line. The idea is that a big rushing game in a game his team led may not repeat.` },
     { id: "sc1", n: 3, side: "under", combo: true, label: "SC1",
       title: "WR/TE rec yds Under after a game his team trailed big", why: "Catch-up volume may not repeat.",
-      desc: () => `His team trailed by 7+ on at least half its plays last game, he went Over his receiving-yards line, and this week's line is higher. Bet Under.` },
+      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when all three are true: in his team's <b>previous game</b> it trailed by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play), he finished <b>Over</b> his receiving-yards line in that game, and this week's line is <b>higher</b> than that game's line. The idea is that catch-up passing volume may not repeat.` },
     { id: "qbr2", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`,
       title: "QB rush Under when the line jumps", why: "A raised QB rushing line may overshoot.",
-      desc: () => `QB rushing line is at least the toggle value above his previous game's line. Bet Under.` },
+      desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>${RL.opt.qbr2} yards higher</b> than his line in his previous game. The toggle changes the size of the jump. The idea is that a big raise may overshoot.` },
     { id: "qbr4", n: 5, side: "under", label: "QB-R4", opts: [25, 40], optFmt: (v) => `${v}+`,
       title: "QB rush Under on high lines", why: "High QB rushing lines may be inflated by a few big games.",
-      desc: () => `QB rushing line at or above the toggle value. Bet Under.` },
+      desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>${RL.opt.qbr4} or higher</b>. The toggle changes the minimum line. The idea is that a few big games can inflate high QB rushing lines.` },
   ];
   const OPT0 = { qbr2: 5, qbr4: 25 }; // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
@@ -429,12 +429,12 @@
     const t = TABS.find((x) => x.id === id); if (!t) return;
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
-    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Rule ${t.n}">
-      <div class="nw-h"><b>Rule ${t.n} · ${t.side === "model" ? "Model selects Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</b><button class="nw-x" aria-label="Close">✕</button></div>
-      <p class="small"><b>${esc(t.title)}.</b> ${t.desc()}</p>
+    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="${esc(t.label)}">
+      <div class="nw-h"><b>${esc(t.label)} · Bet ${t.side === "over" ? "Over" : "Under"}</b><button class="nw-x" aria-label="Close">✕</button></div>
+      <p class="small"><b>${esc(t.title)}.</b></p>
+      <p class="small">${t.desc()}</p>
       <p class="small"><b>Why it might work</b> (an interpretation, not proven): ${esc(t.why)}</p>
-      <p class="small">${recLine(t)} ${t.frozen ? "Exploratory candidates selected after historical research; future performance is uncertain." : "Break-even at −110 is about 52.4%."}</p>
-      <p class="muted small">${t.frozen ? "DK primary, FD fallback. No offseason history. Eligibility, features, selected side and quote are recorded before kickoff; the decision is not recalculated after results." : UNIVERSE}${t.spread ? " " + SPREAD_NOTE : ""}</p></div>`;
+      <p class="muted small">Chosen from a historical replay of the 2025–26 seasons (thesis audit, 2026-11-11) on the same data it was tested on, so it is a candidate, not a proven edge. Here it is scored on 2026 games only: the pre-game line (DraftKings, FanDuel as fallback) at its saved odds, 1 unit per bet, break-even about 52.4% at −110.</p></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
@@ -518,7 +518,7 @@
     const cnt = compute(t.id).length;
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
     return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
-      <div class="sg-hd"><b>${esc(t.label)}</b></div>
+      <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
       <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}<span class="muted small"> ROI</span></span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> this wk</span></div>
       ${st.by ? spark(st.by) : ""}</button>${tg}</div>`;
   }

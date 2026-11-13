@@ -587,3 +587,5 @@ textarea.tp-in { resize: vertical; }
 .sg-r2 { display: flex; justify-content: space-between; align-items: center; gap: 6px; } .sg-r2 .sg-roi { margin-top: 0; font-size: 19px; } .sg-st { text-align: right; line-height: 1.15; color: var(--muted); } .sg-st b { color: var(--ink); }
 .sg-tg { top: 7px; } .sg-pr .rlhead { flex-wrap: nowrap; } .sg-pr .rlhead .pname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sg-m { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 2px; } .sg-m .muted { min-width: 0; line-height: 1.2; } .sg-m .sg-chips { margin: 0; flex: none; }
+
+.sg-hd { align-items: center; justify-content: flex-start; } .sg-hd .rinfo { width: 16px; height: 16px; font-size: 10px; margin-left: 5px; color: var(--muted); cursor: pointer; }
