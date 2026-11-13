@@ -589,3 +589,8 @@ textarea.tp-in { resize: vertical; }
 .sg-m { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 2px; } .sg-m .muted { min-width: 0; line-height: 1.2; } .sg-m .sg-chips { margin: 0; flex: none; }
 
 .sg-hd { align-items: center; justify-content: flex-start; } .sg-hd .rinfo { width: 16px; height: 16px; font-size: 10px; margin-left: 5px; color: var(--muted); cursor: pointer; }
+
+.sg-gap { color: var(--ink); margin-top: 2px; font-variant-numeric: tabular-nums; }
+
+.sg-r2 .sg-roi { white-space: nowrap; } .sg-gap { min-width: 0; line-height: 1.2; }
+.sg-st { white-space: nowrap; }
