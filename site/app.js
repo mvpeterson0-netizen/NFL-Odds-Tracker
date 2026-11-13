@@ -1154,3 +1154,25 @@ function index() {
   D.players.forEach((p) => (playerById[p.id] = p));
   D.markets.forEach((m) => (mkt[m.id] = m));
 }
+
+// Long-press the Signals tab (about 0.6 s) to open the Indicator page (#/search/indicators). Hidden on purpose: no link anywhere.
+(function () {
+  const tab = () => document.querySelector('#tabs a[data-tab="search"]');
+  let timer = 0, fired = false, sx = 0, sy = 0;
+  const clear = () => { clearTimeout(timer); timer = 0; };
+  function bindTab() {
+    const a = tab(); if (!a || a.dataset.lp) return;
+    a.dataset.lp = "1";
+    a.style.webkitTouchCallout = "none"; a.style.userSelect = "none"; a.style.webkitUserSelect = "none";
+    a.addEventListener("pointerdown", (e) => {
+      if (e.button) return;
+      fired = false; sx = e.clientX; sy = e.clientY; clear();
+      timer = setTimeout(() => { fired = true; timer = 0; try { navigator.vibrate && navigator.vibrate(15); } catch (x) { /* ignore */ } location.hash = "#/search/indicators"; }, 600);
+    });
+    a.addEventListener("pointermove", (e) => { if (timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) clear(); });
+    for (const ev of ["pointerup", "pointercancel"]) a.addEventListener(ev, clear);
+    a.addEventListener("click", (e) => { if (fired) { e.preventDefault(); e.stopPropagation(); fired = false; } }, true); // the release after a long press is not a tap
+    a.addEventListener("contextmenu", (e) => e.preventDefault());
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTab); else bindTab();
+})();
