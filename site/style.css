@@ -535,6 +535,7 @@ tr.gdetail:hover td { background: var(--hover); }
 .sk-rowwrap { display: flex; align-items: flex-start; gap: 8px; } .sk-rowwrap .sk-row { flex: 1 1 auto; min-width: 0; } .sk-ck { margin-top: 14px; }
 /* Signals (Research tab), 2026-11-10 */
 .sg-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 6px 0 8px; } .sg-bar label { display: flex; flex-direction: column; flex: 1; font-size: 12px; color: var(--muted); gap: 3px; } .sg-bar input[type=search] { min-width: 0; width: 100%; }
+.sg-tag { margin: -6px 0 6px; }
 .sg-scope { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 6px; } .sg-scope .gchip { margin: 0; }
 .sg-filters, .sg-diag { margin: 0 0 10px; } .sg-filters > summary, .sg-diag > summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 4px 0; }
 .sg-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 8px 0; } .sg-cell { position: relative; min-width: 0; }
