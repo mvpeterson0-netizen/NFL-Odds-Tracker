@@ -537,7 +537,7 @@ tr.gdetail:hover td { background: var(--hover); }
 .sg-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 6px 0 8px; } .sg-bar label { display: flex; flex-direction: column; flex: 1; font-size: 12px; color: var(--muted); gap: 3px; } .sg-bar input[type=search] { min-width: 0; width: 100%; }
 .sg-scope { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 6px; } .sg-scope .gchip { margin: 0; }
 .sg-filters, .sg-diag { margin: 0 0 10px; } .sg-filters > summary, .sg-diag > summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 4px 0; }
-.sg-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 8px 0; } @media (min-width: 760px) { .sg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.sg-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 8px 0; } .sg-cell { position: relative; min-width: 0; } .sg-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .sg-tile, .sg-card { display: block; width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
 .sg-tile.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; } .sg-card.rl-lock { border-style: dashed; text-align: center; margin-top: 8px; }
 .sg-top { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; line-height: 1.25; min-height: 34px; }
@@ -574,3 +574,8 @@ textarea.tp-in { resize: vertical; }
 }
 
 .tp-del{font-size:12px;padding:2px 8px;margin-top:4px}.tp-del.on{background:#fde8e8}.tp-gone td{opacity:.45;text-decoration:line-through}.tp-gone td:last-child{text-decoration:none;opacity:1}.tp-new td{background:rgba(0,120,255,.05)}
+
+.sg-tg { position: absolute; top: 6px; right: 6px; display: inline-flex; gap: 2px; } .sg-tg button { font-size: 11px; padding: 1px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--muted); } .sg-tg button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.sg-wrap { position: relative; } .sg-locked { opacity: .28; pointer-events: none; user-select: none; }
+.sg-gate { position: absolute; left: 50%; transform: translateX(-50%); z-index: 2; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; box-shadow: 0 2px 10px rgba(0,0,0,.18); }
+.sg-gate .ac-gis { min-height: 40px; }
