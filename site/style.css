@@ -372,7 +372,7 @@ body.wn-lock { overflow: hidden; }
 .wl-hero h1 { font-size: 30px; line-height: 1.2; margin: 0 0 10px; }
 .wl-lead { font-size: 17px; line-height: 1.5; margin: 0 auto 20px; color: var(--muted); }
 .wl-cta { display: inline-block; padding: 12px 28px; border: 0; border-radius: 10px; background: var(--accent); color: var(--bg); font-weight: 700; font-size: 16px; cursor: pointer; font-family: inherit; }
-.wl-cta:hover { text-decoration: none; opacity: .92; }
+.wl-cta:hover, button.wl-cta:hover { text-decoration: none; opacity: .92; background: var(--accent); } /* keeps the global button:hover from turning Next pale (it stuck after a tap on phones) */
 .wl-skip { font-size: 14px; color: var(--muted); }
 /* first page */
 .wl-h1 { font-size: 26px; line-height: 1.2; margin: 14px 0 12px; text-align: center; }
@@ -384,17 +384,25 @@ body.wn-lock { overflow: hidden; }
 .wl-shot { position: relative; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #f7f7f5; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
 .wl-shot + .wl-shot { margin-top: 10px; }
 .wl-shot > img:first-child { display: block; width: 100%; height: auto; }
-.wl-pop { max-width: 300px; margin: 0 auto; }
+.wl-pop { width: 100%; }
+.wl-fit { margin: 0 auto; }
 .wl-face { position: absolute; border-radius: 50%; aspect-ratio: 1; object-fit: cover; object-position: top; background: #eef1f6; }
 .wl-ex { position: relative; }
 .wl-badge { position: absolute; z-index: 2; top: -10px; right: 10px; padding: 3px 10px; border-radius: 999px; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-ink); font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
 .wl-excap { margin: 8px 2px 0; }
-.wl-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 16px; }
+.wl-pg { padding-bottom: 0; }
+body:has(.wl-pg) .foot { display: none; } /* the tour fills one screen; footer links are on the other pages */
+body:has(.wl-pg) main { padding-bottom: 0; }
+/* Back / dots / Next sit in a bar fixed to the bottom of the screen so Next is always under the right thumb, never below the fold.
+   Padding keeps it off the phone's rounded corners, home bar and browser toolbar. */
+.wl-nav { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 420px); box-sizing: border-box; z-index: 6; background: var(--bg); border-top: 1px solid var(--line);
+  padding: 10px max(22px, env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left)); }
+.wl-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .wl-back { border: 0; background: none; color: var(--muted); font-size: 15px; padding: 10px 4px; cursor: pointer; font-family: inherit; }
 .wl-dots { display: flex; gap: 6px; }
 .wl-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
 .wl-dots i.on { background: var(--accent); }
-.wl-fine { text-align: center; margin-top: 14px; }
+.wl-fine { text-align: center; margin: 0 0 8px; }
 
 /* Review queue (#/review) — compact so a card fits one phone screen */
 .rv-entry { margin: 4px 0 10px; }
