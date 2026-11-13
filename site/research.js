@@ -630,8 +630,8 @@
     });
     const rk = new Map(tabs.map((t) => [t.id, rankStat(t)]));
     rows.sort((a, b) => { const x = rk.get(a.t.id), y = rk.get(b.t.id); return (y.n ? 1 : 0) - (x.n ? 1 : 0) || (y.roi ?? -1e9) - (x.roi ?? -1e9) || a.t.n - b.t.n; });
-    // First FREE_TILES tiles in this order are open to everyone; the rest are faded behind a Google sign-in until signed in.
-    const gate = !signedIn();
+    // Michael 2026-11-13: every Signals tile is open to everyone; no sign-in gate. (FREE_TILES / placeGate / the sign-in box stay in the file, unused.)
+    const gate = false;
     RL.unlocked = new Set(rows.filter((x, i) => !gate || i < FREE_TILES).map((x) => x.t.id));
     let h = `${SGPAGE === "ind" ? `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>` : ""}<div class="sg-wrap"><div class="sg-grid">${rows.map((x) => tileHtml(x.t, x, !RL.unlocked.has(x.t.id))).join("")}</div>`;
     if (gate && rows.length > FREE_TILES) h += `<div class="sg-gate" id="sg-gate">${ACCT() ? ACCT().googleBlock("sg") : ""}</div>`;
