@@ -165,7 +165,6 @@
           <div><span>TREND</span>${trendHtml(f, true)}</div>
         </div></div>
       <div class="mtabs">${ms.map((x) => `<button data-mid="${x.id}" class="${x.id === mid ? "on" : ""}">${esc(x.label)}</button>`).join("")}</div>
-      ${window.STIX_STACKS ? window.STIX_STACKS.box(pid, mid) : ""}
       ${typeof betBox === "function" ? betBox(pid, mid) : ""}
       ${typeof pickBoxSafe === "function" ? pickBoxSafe(pid, mid) : ""}
       <div class="panel"><h3>${esc(mk.label)} by week</h3><div class="chart">${chartSVG(rows, mid, { W: 400, H: 230, L: 30, R: 26, T: 26, B: 24, fs: 12, edgeAbove: true })}</div>
