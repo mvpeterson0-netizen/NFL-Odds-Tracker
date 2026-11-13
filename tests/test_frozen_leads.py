@@ -101,3 +101,10 @@ class FrozenLeadTests(unittest.TestCase):
         self.assertTrue(all(x['threshold']==.1 for x in c['models'].values()))
 
 if __name__=='__main__':unittest.main()
+
+
+def test_decide_with_no_models_logs_only_rule_leads():
+    from pipeline.frozen_leads import decide
+    prev = [{'result': 'over', 'act': 50.0}] * 3
+    ds = decide('WR', 'rec_yds', prev, 60.5, '-110', '-110', {}, {})
+    assert set(ds) == {'t9'}

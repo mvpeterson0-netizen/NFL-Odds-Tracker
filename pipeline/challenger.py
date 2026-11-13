@@ -189,11 +189,12 @@ def train(now=None):
     write_json(ROOT/'active.json',{'version':version});status={'status':'activated','version':version,'at':iso(activated)};write_json(ROOT/'status.json',status)
     return status
 
-def update(d,players,rows,now):
+def update(d,players,rows,now,log=True):
     active=read_json(ROOT/'active.json',{});version=active.get('version');records={}
     for p in sorted((ROOT/'ledgers').glob('*.json')):
         for k,v in read_json(p,{}).get('records',{}).items():records.setdefault(k,{**v,'model_version':p.stem})
     if not version:return {'records':records,'watchlist':{},'status':read_json(ROOT/'status.json',{'status':'awaiting_first_training'})}
+    if not log:return {'version':version,'frozen_at':read_json(ROOT/'versions'/version/'model.json',{}).get('frozen_at'),'records':{k:{**{x:y for x,y in v.items() if x!='feature_snapshot'},'decisions':{'t13':v['decisions']['t13']} if 't13' in v.get('decisions',{}) else {}} for k,v in records.items()},'watchlist':{},'status':read_json(ROOT/'status.json',{})}
     cfgpath=ROOT/'versions'/version/'model.json';cfg=read_json(cfgpath,{})
     if cfg.get('frozen_at','')>iso(now):raise ValueError('Challenger activation is in the future')
     own=read_json(ROOT/'ledgers'/f'{version}.json',{}).get('records',{})
