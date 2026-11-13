@@ -385,7 +385,9 @@ body.wn-lock { overflow: hidden; }
 .wl-shot + .wl-shot { margin-top: 10px; }
 .wl-shot > img:first-child { display: block; width: 100%; height: auto; }
 .wl-pop { width: 100%; }
-.wl-fit { margin: 0 auto; }
+/* Picture width = the largest that still leaves room (--off: header, heading, text, bottom bar) for it on one screen, from its shape (--r = width / height). Pure CSS: no measuring. */
+.wl-fit { margin: 0 auto; width: min(100%, calc((100vh - var(--off, 340px)) * var(--r, .63))); width: min(100%, calc((100dvh - var(--off, 340px)) * var(--r, .63))); }
+.wl-fit[data-pop] { max-width: 300px; }
 .wl-face { position: absolute; border-radius: 50%; aspect-ratio: 1; object-fit: cover; object-position: top; background: #eef1f6; }
 .wl-ex { position: relative; }
 .wl-badge { position: absolute; z-index: 2; top: -10px; right: 10px; padding: 3px 10px; border-radius: 999px; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-ink); font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
@@ -397,7 +399,22 @@ body:has(.wl-pg) main { padding-bottom: 0; }
    Padding keeps it off the phone's rounded corners, home bar and browser toolbar. */
 .wl-nav { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 420px); box-sizing: border-box; z-index: 6; background: var(--bg); border-top: 1px solid var(--line);
   padding: 10px max(22px, env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left)); }
-.wl-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.wl-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.wl-row.wl-lastrow { display: flex; justify-content: space-between; } .wl-cta { white-space: nowrap; }
+.wl-row .wl-back { justify-self: start; } .wl-row .wl-cta { justify-self: end; }
+/* No Next button: tapping the right side of the screen advances. The right edge glows and pulses to say so. The zone sits under the
+   header, Skip link and bottom bar (the bar lets taps through except on Back / Get started). */
+.wl-zonewrap { position: fixed; top: 0; bottom: 0; left: 50%; width: min(100%, 420px); transform: translateX(-50%); pointer-events: none; z-index: 3; }
+.wl-zone { position: absolute; top: 0; bottom: 0; right: 0; width: 42%; pointer-events: auto; cursor: pointer; -webkit-tap-highlight-color: transparent; display: flex; align-items: center; justify-content: flex-end;
+  background: linear-gradient(to left, rgba(70,120,220,.30), rgba(70,120,220,0) 55%); background: linear-gradient(to left, color-mix(in srgb, var(--accent) 32%, transparent), transparent 55%); animation: wl-pulse 2.2s ease-in-out infinite; }
+.wl-zone:active { background: linear-gradient(to left, color-mix(in srgb, var(--accent) 50%, transparent), transparent 70%); }
+.wl-chev { font-style: normal; font-size: 40px; font-weight: 300; line-height: 1; color: var(--accent); padding-right: 6px; margin-bottom: 6px; }
+@keyframes wl-pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .wl-zone { animation: none; opacity: .7; } }
+.wl-pg .wl-top, .wl-pg .wl-line, .wl-pg .wl-h1 { position: relative; z-index: 4; pointer-events: none; }
+.wl-pg .wl-skip { pointer-events: auto; position: relative; z-index: 4; padding: 6px 4px; }
+.wl-nav { pointer-events: none; }
+.wl-nav .wl-back, .wl-nav .wl-cta, .wl-nav a { pointer-events: auto; }
 .wl-back { border: 0; background: none; color: var(--muted); font-size: 15px; padding: 10px 4px; cursor: pointer; font-family: inherit; }
 .wl-dots { display: flex; gap: 6px; }
 .wl-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
