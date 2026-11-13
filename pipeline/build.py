@@ -813,7 +813,8 @@ def build(log):
         k: {a: b for a, b in v.items() if a != "feature_snapshot"}
         for k, v in out["frozen_research"]["records"].items()}}
     from .challenger import update as update_challenger
-    out['challenger'] = update_challenger(d, players, rows_out, now)
+    # T13 (challenger) is retired: existing ledgers are republished, no new decisions are logged.
+    out['challenger'] = update_challenger(d, players, rows_out, now, log=False)
     # Descriptive learning slices reuse immutable pregame ledgers. They do not change
     # model inputs, fitted weights, qualifying decisions or odds-api calls.
     from .challenger_diagnostics import build_diagnostics

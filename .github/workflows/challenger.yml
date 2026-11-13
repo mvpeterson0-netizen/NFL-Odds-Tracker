@@ -40,7 +40,8 @@ jobs:
           import os
           now=datetime.now(ZoneInfo('America/Chicago'))
           event=os.environ.get('GITHUB_EVENT_NAME', '')
-          action=os.environ.get('REQUESTED') or ('report' if event == 'push' else 'train' if now.weekday()==1 and 15<=now.hour<18 else 'report' if now.weekday()==2 and 7<=now.hour<9 else '')
+          action=os.environ.get('REQUESTED') or ('report' if event == 'push' else 'report' if now.weekday()==2 and 7<=now.hour<9 else '')
+          if action=='train': action='report'  # challenger (T13) training is retired
           with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('mode='+action+'\n')
           PY
       - uses: actions/setup-python@v5
@@ -56,9 +57,6 @@ jobs:
           OMP_NUM_THREADS: '2'
           OPENBLAS_NUM_THREADS: '2'
         run: python -m pipeline.challenger train
-      - name: Build scorecard
-        if: steps.action.outputs.mode != '' && success()
-        run: python -m pipeline.challenger report
       - name: Refresh Signal Stacks historical series
         if: steps.action.outputs.mode == 'report' && success()
         env:

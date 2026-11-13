@@ -196,7 +196,8 @@ def update(d, players, rows, now, path=LEDGER_PATH, model_path=MODEL_PATH):
                     mm = x.get('m', {}).get(mid, {})
                     prior.append({'act': engine.stat(x,pid,MARKETS[mid][1]), 'result': mm.get('res')})
                 f = engine.make(pid,p['pos'],r,mid,q,hist)
-                ds = decide(p['pos'],mid,prior,q['line'],q['op'],q['up'],f,cfg['models'])
+                # T11/T12 (fitted models) are retired: no new model decisions are logged. Only the rule leads (t9/t10) are.
+                ds = decide(p['pos'],mid,prior,q['line'],q['op'],q['up'],f,{})
                 entry = {'gid':r['gid'],'pid':pid,'mid':mid,'wk':r['wk'],'ko':r['ko'],
                                 'observed_at':iso(now),'quote':q,'decisions':ds,
                                 'feature_snapshot':{k:v if math.isfinite(v) else None for k,v in f.items()}}
