@@ -836,7 +836,7 @@
   function qbchBets(final) {
     const out = [];
     for (const g of qbchTeams(final)) {
-      const note = `${g.starter.name} ${final ? "started" : "starts"}, ${g.prev.name} started last game`;
+      const note = `${g.starter.name} (last game: ${g.prev.name})`;
       for (const p of D.players) {
         if (p.pos !== "WR" && p.pos !== "TE") continue;
         const r = (D.rows[p.id] || []).find((x) => x.gid === g.gid && x.team === g.team), m = r && r.m && r.m.rec_yds; if (!m) continue;
