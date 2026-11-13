@@ -40,6 +40,12 @@
     { id: "sc1", n: 3, side: "under", combo: true, label: "SC1",
       title: "WR/TE rec yds Under after a game his team trailed big", why: "Catch-up volume may not repeat.",
       desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when all three are true: in his team's <b>previous game</b> it trailed by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play), he finished <b>Over</b> his receiving-yards line in that game, and this week's line is <b>higher</b> than that game's line. The idea is that catch-up passing volume may not repeat.` },
+    { id: "cm1te", n: 6, side: "under", combo: true, cm: true, label: "CM1-TE", minDrop: 15, only: "TE",
+      title: "TE rec yds Under when the QB line drops but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
+      desc: () => `QB passing-yards line down 15+ vs last week, at least 3 teammates (WR/TE/RB) with receiving-yards lines both weeks, and their line changes added up minus the QB change (the gap) at least 10. Bet the TE's receiving yards Under.` },
+    { id: "cm120", n: 7, side: "under", combo: true, cm: true, label: "CM1-20", minDrop: 20, only: null,
+      title: "Receiving yards Under when the QB line drops 20+ but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
+      desc: () => `Same as CM1-TE but the QB line is down 20+ and every qualifying receiver (WR/TE/RB) is a bet.` },
     { id: "qbr2", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`,
       title: "QB rush Under when the line jumps", why: "A raised QB rushing line may overshoot.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>${RL.opt.qbr2} yards higher</b> than his line in his previous game. The toggle changes the size of the jump. The idea is that a big raise may overshoot.` },
@@ -251,6 +257,7 @@
   const koMs = (c) => new Date(c.r.ko).getTime();
 
   function compute(tab) {
+    if (TABS.find((t) => t.id === tab)?.cm) return computeCM(TABS.find((t) => t.id === tab));
     if (TABS.find((t) => t.id === tab)?.frozen) return frozenCandidates(tab);
     const out = [];
     for (const c of candidates()) {
@@ -270,6 +277,7 @@
   }
   const HEADS = {
     qbr1: ["Line", "Last 3"], qbr4: ["Line", "Last 3"], qbr2: ["Line (last game → now)", "Last 3"],
+    cm1te: ["Line (last week → now)", "QB vs receivers"], cm120: ["Line (last week → now)", "QB vs receivers"],
     sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
@@ -600,7 +608,8 @@
     let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${many ? `Fits all of: ${title}` : title}</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>`;
     if (!bets.length) return h + `<p class="muted small">${many ? "No graded bets fit all of these signals (or they point opposite ways)." : "No graded bets yet."}</p></div></div>`;
     const s = tally(bets), cls = s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "";
-    const sortK = (a, b) => (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid);
+    const gapSort = ts.length === 1 && ts[0].cm;
+    const sortK = (a, b) => (gapSort ? (b.gap ?? -1e9) - (a.gap ?? -1e9) : 0) || (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid);
     const sec = (k, t2, g) => (g.length ? `<h3 class="la-h ${k}">${t2} (${g.length})</h3><div class="panel rlist">${g.map(laRow).join("")}</div>` : "");
     const weeks = by.slice().reverse().filter((x) => x.list.length).map(({ w, list }) => {
       const st = tally(list), key = `${key0}|${w}`, sorted = list.slice().sort(sortK);
@@ -625,7 +634,8 @@
     }
     let rows = [...map.values()];
     if (picked.length) rows = rows.filter((x) => picked.every((t) => x.sigs.some((y) => y.id === t.id)));
-    rows.sort((a, b) => b.sigs.length - a.sigs.length || koMs(a.c) - koMs(b.c) || a.c.p.name.localeCompare(b.c.p.name));
+    const byGap = picked.length === 1 && picked[0].cm;
+    rows.sort((a, b) => (byGap ? (b.gap ?? -1e9) - (a.gap ?? -1e9) : 0) || b.sigs.length - a.sigs.length || (b.gap ?? -1e9) - (a.gap ?? -1e9) || koMs(a.c) - koMs(b.c) || a.c.p.name.localeCompare(b.c.p.name));
     const head = `<h3 class="sg-sec">${picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
     if (!rows.length) return head + `<p class="muted">${picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>`;
     const pages = Math.ceil(rows.length / PAGE), key = `bp|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
@@ -635,7 +645,8 @@
       const { p, r, mid, cur } = x.c;
       h += `<div class="rlrow sg-pr"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
-        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span></div></div>`;
+        ${(() => { const chips = `<span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span>`, meta = `<span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span>`;
+          return x.note ? `<div class="sg-m"><span class="small sg-gap">${esc(x.note)}</span>${chips}</div><div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${chips}</div>`; })()}</div>`;
     }
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
     return h + `</div>${pager}`;
@@ -720,9 +731,67 @@
     if (sh && p.pos === "RB" && mid === "rush_yds" && sh.lead >= 0.5) hits.push("sc2");
     return { hits, pm, pl, f: null };
   }
+  // CM1 (correlated line movement): per team-game, the QB's passing-yards line change vs the previous week (his previous
+  // game, which must be the week before) against the receiving-yards line changes of his WR/TE/RB teammates (matched = a line both weeks).
+  // gap = sum of the receivers' line changes minus the QB's change; the rule needs >= 3 matched receivers, a QB drop of at least
+  // the rule's minimum and gap >= CM_GAP (receivers' lines fell 10+ yards less than the QB's).
+  // Lines are the app's pre-game line per player (DraftKings, FanDuel fallback); the audit matched the same book one calendar week
+  // earlier from raw captures, so results here can differ slightly. This week's line is the latest one showing until it is captured.
+  const CM_GAP = 10, CM_RECS = 3;
+  function cmGames(final) {
+    const now = Date.now(), by = new Map();
+    for (const p of D.players) {
+      const rows = (D.rows[p.id] || []).slice().sort((a, b) => a.wk - b.wk);
+      for (const r of rows) {
+        if (final ? !r.final : (r.final || !r.ko || new Date(r.ko).getTime() <= now)) continue;
+        const mid = p.pos === "QB" ? "pass_yds" : (p.pos === "WR" || p.pos === "TE" || p.pos === "RB") ? "rec_yds" : null;
+        const m = mid && r.m && r.m[mid]; if (!m) continue;
+        const prev = rows.filter((x) => x.wk < r.wk && x.final).pop();
+        if (!prev || prev.wk !== r.wk - 1) continue;
+        const pm = prev.m && prev.m[mid], pl = pm && pm.lstat === "ok" && pm.line != null ? pm.line : null;
+        const cur = final ? (m.lstat === "ok" && m.line != null ? { line: m.line, label: "pre-game", cap: m.cap } : null) : curLine(m);
+        if (pl == null || !cur) continue;
+        const k = r.gid + "|" + r.team; if (!by.has(k)) by.set(k, { gid: r.gid, team: r.team, qb: null, recs: [] });
+        const e = { p, r, mid, m, cur, pl, pm, chg: cur.line - pl };
+        if (mid === "pass_yds") { if (!by.get(k).qb) by.get(k).qb = e; } else by.get(k).recs.push(e);
+      }
+    }
+    const out = [];
+    for (const g of by.values()) {
+      if (!g.qb || g.recs.length < CM_RECS) continue;
+      const sum = g.recs.reduce((a, x) => a + x.chg, 0);
+      out.push({ ...g, qbChg: g.qb.chg, sum, gap: sum - g.qb.chg });
+    }
+    return out;
+  }
+  const cmNote = (g) => `QB ${signed(g.qbChg)} · recs ${signed(g.sum)} (${g.recs.length}) · gap ${signed(g.gap)}`;
+  function cmBets(t, final) {
+    const out = [];
+    for (const g of cmGames(final)) {
+      if (!(g.qbChg <= -t.minDrop && g.gap >= CM_GAP)) continue;
+      for (const e of g.recs) if (!t.only || e.p.pos === t.only) out.push({ g, e });
+    }
+    return out;
+  }
+  function computeCM(t) {
+    return cmBets(t, false).filter(({ e }) => (!RL.gid || e.r.gid === RL.gid) && (!RL.mk || e.mid === RL.mk)).map(({ g, e }) => ({
+      c: { p: e.p, r: e.r, mid: e.mid, cur: e.cur }, gap: g.gap, note: cmNote(g), rank: g.gap,
+      cells: [`${num(e.pl)} → <b>${num(e.cur.line)}</b>`, cmNote(g)] }));
+  }
+  function analyzeCM(t, wk) {
+    const out = [];
+    for (const { g, e } of cmBets(t, true)) {
+      const { p, r, mid, m } = e;
+      if (r.wk !== wk || m.op == null || m.up == null || !["over", "under", "push"].includes(m.res)) continue;
+      const o = m.res === "push" ? "push" : m.res === "under" ? "hit" : "miss";
+      out.push({ p, r, mid, m, rule: t, side: "under", out: o, u: o === "hit" ? payout(m.up) : o === "miss" ? -1 : 0, odds: m.up, pl: e.pl, pm: e.pm, f: null, gap: g.gap, note: cmNote(g) });
+    }
+    return out;
+  }
   // Every graded bet one rule made in one week: [{p, r, mid, m, side, out: "hit"|"miss"|"push", u, pm, pl, f}]
   function analyze(tab, wk) {
     const t = TABS.find((x) => x.id === tab), out = [];
+    if (t && t.cm) return analyzeCM(t, wk);
     if (t?.frozen) {
       for (const x of frozenEntries(tab)) {
         const { v, decision, p, r, mid } = x;
@@ -768,6 +837,7 @@
     const line = num(x.m.line);
     switch (x.rule.id) {
       case "qbr2": case "sc1": case "sc2": return `Line ${num(x.pl)} → ${line}`;
+      case "cm1te": case "cm120": return `Line ${num(x.pl)} → ${line} · ${esc(x.note)}`;
       default: return "";
     }
   }
