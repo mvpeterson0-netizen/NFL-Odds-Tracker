@@ -60,6 +60,13 @@ class FrozenLeadTests(unittest.TestCase):
                for s,k,t in [('0','0','run'),('1','0','run'),('0','1','run'),('0','0','no_play')]]
         self.assertEqual(_team(plays,'A')['designed_runs'],1)
 
+    def test_s7_counts_plays_trailing_and_leading_by_seven(self):
+        def play(sd, **kw):
+            return {'posteam':'A','pass':'1','rush':'0','score_differential':str(sd),'play_type':'pass',**kw}
+        plays=[play(-7),play(-10),play(-6),play(0),play(7),play(14),play(-14,qb_kneel='1'),play(-14,qb_spike='1'),
+               {'posteam':'B','pass':'1','score_differential':'-20'}]
+        self.assertEqual(_team(plays,'A')['s7'],[6,2,2])
+
     def test_midnight_capture_never_includes_same_game(self):
         # Local game date is Oct 25 but both pregame quote and kickoff are Oct 26 UTC.
         # Even if a retrospective fixture contains its final stats, it cannot be history.
