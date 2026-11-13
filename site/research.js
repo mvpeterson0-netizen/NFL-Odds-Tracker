@@ -30,25 +30,26 @@
   // Each is a historical replay, not a proven edge; it is scored here on 2026 data only, with the same grading as before
   // (graded pre-game line, saved odds, 1 unit). Thresholds are the audit's; QB-R2 / QB-R4 carry a viewer toggle.
   // Not on this page yet (own PRs): CM1-TE, CM1-20 (needs prior-week QB/receiver line gap) and QBCH (needs the starter data).
+  const CM_READ = `<div class="sg-sub"><b>Reading a player row:</b></div><ul class="sg-ul"><li>"QB −34yds": the QB's passing-yards line change vs last week.</li><li>"7 receivers +46yds": the 7 receivers' receiving-yards line changes added up.</li><li>"net +80": receivers minus QB.</li></ul>`;
   const TABS = [
     { id: "qbr1", n: 1, side: "under", combo: true, label: "QB-R1", short: () => "L3 gm avg ≥25yd and line ≥25yd",
       title: "QB rushing yards → Under (rushes a lot, high line)", why: "Books may price a rushing QB's recent output too high.",
-      desc: () => `Bet a QB's <b>rushing yards Under</b> when two things are true: this week's rushing-yards line is <b>25 or more</b>, and in his <b>last 3 games played</b> he averaged <b>25 or more</b> rushing yards. The idea is that a QB who runs a lot gets a high line, and that line may be set too high.` },
+      desc: () => `Bet a QB's <b>rushing yards Under</b> when both are true:<ul class="sg-ul"><li>This week's rushing-yards line is <b>25 or more</b>.</li><li>In his <b>last 3 games played</b> he averaged <b>25 or more</b> rushing yards.</li></ul><div class="sg-sub">The idea is that a QB who runs a lot gets a high line, and that line may be set too high.</div>` },
     { id: "sc2", n: 2, side: "under", combo: true, label: "SC2", short: () => "RB rush yd under after leading big and hitting the over",
       title: "RB rush Under after a game his team led big", why: "A rushing Over built in a game his team led may not repeat.",
-      desc: () => `Bet an RB's <b>rushing yards Under</b> when all three are true: in his team's <b>previous game</b> it led by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play), he finished <b>Over</b> his rushing line in that game, and this week's rushing line is <b>higher</b> than that game's line. The idea is that a big rushing game in a game his team led may not repeat.` },
+      desc: () => `Bet an RB's <b>rushing yards Under</b> when all three are true:<ul class="sg-ul"><li>In his team's <b>previous game</b> it led by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play).</li><li>He finished <b>Over</b> his rushing line in that game.</li><li>This week's rushing line is <b>higher</b> than that game's line.</li></ul><div class="sg-sub">The idea is that a big rushing game in a game his team led may not repeat.</div>` },
     { id: "sc1", n: 3, side: "under", combo: true, label: "SC1", short: () => "Rec yd under after trailing big and hitting the over",
       title: "WR/TE rec yds Under after a game his team trailed big", why: "Catch-up volume may not repeat.",
-      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when all three are true: in his team's <b>previous game</b> it trailed by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play), he finished <b>Over</b> his receiving-yards line in that game, and this week's line is <b>higher</b> than that game's line. The idea is that catch-up passing volume may not repeat.` },
+      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when all three are true:<ul class="sg-ul"><li>In his team's <b>previous game</b> it trailed by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play).</li><li>He finished <b>Over</b> his receiving-yards line in that game.</li><li>This week's line is <b>higher</b> than that game's line.</li></ul><div class="sg-sub">The idea is that catch-up passing volume may not repeat.</div>` },
     { id: "cm1te", n: 6, side: "under", combo: true, cm: true, label: "CM1-TE", short: () => "TE rec yd under when QB line drops 15+ and receivers' lines don't follow", minDrop: 15, only: "TE",
       title: "TE rec yds Under when the QB line drops but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
-      desc: () => `QB passing-yards line down 15+ vs last week, at least 3 teammates (WR/TE/RB) with receiving-yards lines both weeks, and their line changes added up minus the QB change (the gap) at least 10. Bet the TE's receiving yards Under. <b>Reading a player row:</b> "QB −34yds" is the QB's passing-yards line change vs last week; "7 receivers +46yds" is the 7 receivers' receiving-yards line changes added up; "net +80" is receivers minus QB.` },
+      desc: () => `Bet the TE's <b>receiving yards Under</b> when all three are true:<ul class="sg-ul"><li>The QB's passing-yards line is down <b>15+</b> vs last week.</li><li>At least 3 teammates (WR/TE/RB) have receiving-yards lines both weeks.</li><li>Their line changes added up, minus the QB change (the gap), is at least <b>10</b>.</li></ul>${CM_READ}` },
     { id: "cm120", n: 7, side: "under", combo: true, cm: true, label: "CM1-20", short: () => "Rec yd under when QB line drops 20+ and receivers' lines don't follow", minDrop: 20, only: null,
       title: "Receiving yards Under when the QB line drops 20+ but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
-      desc: () => `Same as CM1-TE but the QB line is down 20+ and every qualifying receiver (WR/TE/RB) is a bet. <b>Reading a player row:</b> "QB −34yds" is the QB's passing-yards line change vs last week; "7 receivers +46yds" is the 7 receivers' receiving-yards line changes added up; "net +80" is receivers minus QB.` },
+      desc: () => `Same as CM1-TE, with two differences:<ul class="sg-ul"><li>The QB line is down <b>20+</b>.</li><li>Every qualifying receiver (WR/TE/RB) is a bet.</li></ul>${CM_READ}` },
     { id: "qbch", n: 8, side: "under", qbch: true, label: "QBCH", short: () => "WR/TE rec yd under when the starting QB changed",
       title: "WR/TE rec yds Under when the starting QB changed", why: "A new starting QB may mean lower passing volume or a less proven connection, while the receivers' lines still reflect the old QB.",
-      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when his team's starting QB is <b>not the QB who started its previous game</b>. For past games the starter is the QB with the most snaps; for this week's games it is the QB the book has posted a passing-yards line for, so players can be flagged before kickoff.` },
+      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when his team's starting QB is <b>not the QB who started its previous game</b>.<div class="sg-sub"><b>How the starter is picked:</b></div><ul class="sg-ul"><li>Past games: the QB with the most snaps.</li><li>This week's games: the QB the book has posted a passing-yards line for, so players can be flagged before kickoff.</li></ul>` },
     { id: "qbr2", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`, short: () => `QB rush yd under when line is ${RL.opt.qbr2}+yd above his last-game line`,
       title: "QB rush Under when the line jumps", why: "A raised QB rushing line may overshoot.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>${RL.opt.qbr2} yards higher</b> than his line in his previous game. The toggle changes the size of the jump. The idea is that a big raise may overshoot.` },
@@ -504,7 +505,7 @@
     ov.id = "scr-ov"; ov.className = "share-ov";
     ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="${esc(t.label)}">
       <div class="nw-h"><b>${esc(t.label)} - ${esc(t.short ? t.short() : t.title)}</b><button class="nw-x" aria-label="Close">✕</button></div>
-      <p class="small">${t.desc()}</p>
+      <div class="small sg-desc">${t.desc()}</div>
       <p class="small"><b>Why it might work:</b> ${esc(t.why)}</p>
       <p class="small">${auditLine(t)}</p>
       <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck. It does not account for picking the best rules out of many tried, so it is likely optimistic.</p></div>`;
