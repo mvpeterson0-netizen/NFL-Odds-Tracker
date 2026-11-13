@@ -36,6 +36,11 @@ NAME_INDEX_PATH = DATA / "name_index.json"
 OUT_PATH = SITE / "data" / "data.json"
 
 
+def _starter(g, side):
+    qid, qn = g.get(f"{side}_qb_id", ""), g.get(f"{side}_qb_name", "")
+    return {"id": qid, "n": qn} if qid else None
+
+
 def _int_or_none(v):
     try:
         return int(float(v))
@@ -786,7 +791,11 @@ def build(log):
                                  "hs": _int_or_none(g.get("home_score")) if g.get("result", "") != "" else None,
                                  "scr": scr_out(g["game_id"]),
                                  # nflverse spread_line: points the HOME team is favored by (negative = home underdog); None if not posted
-                                 "spread": to_float(g.get("spread_line"))} for g in games},
+                                 "spread": to_float(g.get("spread_line")),
+                                 # starting QBs from the nflverse game file (a post-game record, so only for final games):
+                                 # {"id": gsis id, "n": name} for the home ("hq") and away ("aq") team; used by the QBCH signal
+                                 "hq": _starter(g, "home") if g.get("result", "") != "" else None,
+                                 "aq": _starter(g, "away") if g.get("result", "") != "" else None} for g in games},
         "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},

@@ -34,7 +34,8 @@ SOURCES_PATH = DATA / "sources.json"
 SCHEDULE_PATH = DATA / "schedule.csv"
 SCHEDULE_FIELDS = ["game_id", "season", "game_type", "week", "gameday", "gametime", "kickoff_utc",
                    "away_team", "home_team", "away_score", "home_score", "result", "location", "stadium",
-                   "spread_line"]  # spread_line = points the home team is favored by (nflverse)
+                   "spread_line",  # spread_line = points the home team is favored by (nflverse)
+                   "away_qb_id", "home_qb_id", "away_qb_name", "home_qb_name"]  # starting QBs (nflverse game file; a post-game record)
 
 
 def remote_timestamp(name: str) -> str | None:

@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from pipeline.frozen_leads import decide, update, probability, MODEL_PATH, Features
 from pipeline.script import _team
+from pipeline.build import _starter
 
 
 class FrozenLeadTests(unittest.TestCase):
@@ -49,10 +50,22 @@ class FrozenLeadTests(unittest.TestCase):
             q['cap']='2026-11-01T19:00:00Z'
             self.assertEqual(update(d,p,{'p':[row]},now,path),original)
 
+    def test_starter_reads_nflverse_game_row(self):
+        g={'home_qb_id':'00-1','home_qb_name':'A B','away_qb_id':'','away_qb_name':''}
+        self.assertEqual(_starter(g,'home'),{'id':'00-1','n':'A B'})
+        self.assertIsNone(_starter(g,'away'))
+
     def test_designed_runs_exclude_scrambles_kneels_no_plays(self):
         plays=[{'posteam':'A','rush_attempt':'1','qb_scramble':s,'qb_kneel':k,'play_type':t}
                for s,k,t in [('0','0','run'),('1','0','run'),('0','1','run'),('0','0','no_play')]]
         self.assertEqual(_team(plays,'A')['designed_runs'],1)
+
+    def test_s7_counts_plays_trailing_and_leading_by_seven(self):
+        def play(sd, **kw):
+            return {'posteam':'A','pass':'1','rush':'0','score_differential':str(sd),'play_type':'pass',**kw}
+        plays=[play(-7),play(-10),play(-6),play(0),play(7),play(14),play(-14,qb_kneel='1'),play(-14,qb_spike='1'),
+               {'posteam':'B','pass':'1','score_differential':'-20'}]
+        self.assertEqual(_team(plays,'A')['s7'],[6,2,2])
 
     def test_midnight_capture_never_includes_same_game(self):
         # Local game date is Oct 25 but both pregame quote and kickoff are Oct 26 UTC.
