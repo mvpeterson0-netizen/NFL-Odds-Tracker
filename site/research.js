@@ -55,13 +55,39 @@
     { id: "qbr4", n: 5, side: "under", label: "QB-R4", opts: [25, 40], optFmt: (v) => `${v}+`, short: () => `QB rush yd under when line is ${RL.opt.qbr4}+yd`,
       title: "QB rush Under on high lines", why: "High QB rushing lines may be inflated by a few big games.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>${RL.opt.qbr4} or higher</b>. The toggle changes the minimum line. The idea is that a few big games can inflate high QB rushing lines.` },
+    // ---- Indicator page (#/search/indicators, long-press the Signals tab): the audit's tracked indicator rules, same format ----
+    { id: "l9", n: 21, page: "ind", side: "under", label: "L9",
+      title: "WR rec yds Under after three straight Overs", why: "A run of Overs may be priced into the next line.",
+      desc: () => `Bet a WR's <b>receiving yards Under</b> when each of his <b>last 3 games played</b> finished <b>Over</b> that game's graded pre-game receiving-yards line (a push or a missing line breaks the run).` },
+    { id: "l10", n: 22, page: "ind", side: "under", label: "L10",
+      title: "WR receptions Under after three rising games", why: "Steadily rising catch totals may overstate the next game's opportunity.",
+      desc: () => `Bet a WR's <b>receptions Under</b> when his catches rose in each of his <b>last 3 games played</b> (for example 2 → 4 → 6; ties do not count).` },
+    { id: "s03", n: 23, page: "ind", side: "under", label: "S03",
+      title: "WR rec yds Under after three rising games", why: "Rising yardage may overshoot his true level.",
+      desc: () => `Bet a WR's <b>receiving yards Under</b> when his receiving yards rose in each of his <b>last 3 games played</b> (strictly higher each game).` },
+    { id: "sp1", n: 24, page: "ind", side: "under", label: "SP1",
+      title: "Team a 10+ point underdog → rec yds Under", why: "Big underdogs' passing games may underperform.",
+      desc: () => `Bet a WR's, TE's or RB's <b>receiving yards Under</b> when his team is a <b>10+ point underdog</b> (the opponent is favored by 10 or more). ${SPREAD_NOTE}` },
+    { id: "sp2", n: 25, page: "ind", side: "under", label: "SP2",
+      title: "Team a 10+ point underdog → receptions Under", why: "Same idea as SP1, measured in catches (largely the same games).",
+      desc: () => `Bet a WR's, TE's or RB's <b>receptions Under</b> when his team is a <b>10+ point underdog</b>. ${SPREAD_NOTE}` },
+    { id: "sp3", n: 26, page: "ind", side: "over", label: "SP3",
+      title: "Team favored by 10+ → QB pass yds Over", why: "A heavy favorite's QB may get more drives.",
+      desc: () => `Bet a QB's <b>passing yards Over</b> when his team is <b>favored by 10 or more</b>. ${SPREAD_NOTE}` },
+    { id: "sp4", n: 27, page: "ind", side: "under", label: "SP4",
+      title: "Team a 10+ point underdog → QB pass yds Under", why: "The opposite of the trailing-teams-throw-more belief; it flips sign between seasons in the audit.",
+      desc: () => `Bet a QB's <b>passing yards Under</b> when his team is a <b>10+ point underdog</b>. ${SPREAD_NOTE}` },
+    { id: "sp5", n: 28, page: "ind", side: "under", label: "SP5",
+      title: "Team a 3 to 6.5 point underdog → rushing Under", why: "Small underdogs play from slightly behind and may run less.",
+      desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when his team is a <b>3 to 6.5 point underdog</b>. ${SPREAD_NOTE}` },
   ];
   const OPT0 = { qbr2: 5, qbr4: 25 }; // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
   // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
   const FREE_RULES = 3;
   const signedIn = () => { try { return !!(window.STIX_ACCOUNT && window.STIX_ACCOUNT.signedIn()); } catch (e) { return false; } };
-  const visibleTabs = () => TABS; // gating is by tile order on the page (first 3 free), see topSection
+  let SGPAGE = "main"; // "main" = Signals, "ind" = the Indicator page (#/search/indicators)
+  const visibleTabs = () => TABS.filter((t) => (t.page || "main") === SGPAGE); // gating is by tile order on the page (first 3 free), see topSection
   const SPREAD_NOTE = "Spread = nflverse schedule spread_line (source book and time not stated by nflverse); it can move during the week, and the rule is scored on the value nflverse shows after the game.";
 
   // ---------- helpers ----------
@@ -216,10 +242,10 @@
   }
 
   // Every upcoming (not started) player × market with a line showing, plus his history. Slotted players only (the rules' universe).
-  function candidates() {
+  function candidates(withExtras) {
     const now = Date.now(), out = [];
     for (const p of D.players) {
-      if (p.extra) continue;
+      if (p.extra && !withExtras) continue;
       const rows = D.rows[p.id] || [];
       for (const r of rows) {
         if (r.final || !r.ko || new Date(r.ko).getTime() <= now) continue;
@@ -264,17 +290,24 @@
     if (TABS.find((t) => t.id === tab)?.qbch) return computeQBCH();
     if (TABS.find((t) => t.id === tab)?.frozen) return frozenCandidates(tab);
     const out = [];
-    for (const c of candidates()) {
+    const indTab = TABS.find((t) => t.id === tab)?.page === "ind"; // Indicator rules cover every quoted player (as the audit did), not just slotted ones
+    for (const c of candidates(indTab)) {
       const pl = prevLine(c), line = c.cur.line;
       if (!ruleHits(c.r, c.mid, { line }, c.p, c.past, c.played, c.prev).hits.includes(tab)) continue;
       const l3 = c.played.map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).slice(-3);
       const l3t = l3.length ? l3.map((v) => num(v, 0)).join(", ") : `<span class="muted">—</span>`;
       const sh = sharesOf(c.prev);
-      let cells;
-      if (tab === "qbr1" || tab === "qbr4") cells = [`<b>${num(line)}</b>`, l3t];
+      let cells, note;
+      const ind = TABS.find((t) => t.id === tab)?.page === "ind";
+      if (ind) {
+        const fb = favBy(c.r), last = c.played.slice(-3).map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).map((v) => num(v, 0)).join(", ");
+        cells = [`<b>${num(line)}</b>`, fb != null && tab.startsWith("sp") ? esc(spreadTxt(fb)) : esc(last || "—")];
+        note = tab.startsWith("sp") ? `Team ${spreadTxt(fb)}` : `Last 3: ${last}`;
+      }
+      else if (tab === "qbr1" || tab === "qbr4") cells = [`<b>${num(line)}</b>`, l3t];
       else if (tab === "qbr2") cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, l3t];
       else cells = [`${num(pl)} → <b>${num(line)}</b>`, `${num(c.pm.act)} vs ${num(pl)} · ${Math.round(100 * (tab === "sc1" ? sh.trail : sh.lead))}% of plays ${tab === "sc1" ? "trailing" : "leading"} 7+`];
-      out.push({ c, rank: -koMs(c), cells });
+      out.push({ c, rank: -koMs(c), cells, note });
     }
     out.sort((a, b) => b.rank - a.rank || a.c.p.name.localeCompare(b.c.p.name));
     return out;
@@ -284,6 +317,8 @@
     cm1te: ["Line (last week → now)", "QB vs receivers"], cm120: ["Line (last week → now)", "QB vs receivers"],
     qbch: ["Line", "QB"],
     sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
+    l9: ["Line", "Last 3"], l10: ["Line", "Last 3"], s03: ["Line", "Last 3"],
+    sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
   // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
@@ -442,6 +477,9 @@
     qbr1: { rec: "62–28", roi: 30.2, lo: 11.3, hi: 48.2 }, sc1: { rec: "187–132", roi: 10.9, lo: 1.9, hi: 19.6 },
     sc2: { rec: "50–26", roi: 24.2, lo: -0.2, hi: 44.3 }, cm1te: { rec: "32–14", roi: 31.4, lo: 8.8, hi: 53.6 },
     cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 }, qbch: { rec: "182–126", roi: 11.5, lo: 2.8, hi: 19.3 },
+    l9: { rec: "91–56", roi: 17.1, lo: 2.9, hi: 31.4 }, l10: { rec: "106–72", roi: 10.1, lo: -2.8, hi: 22.8 }, s03: { rec: "159–119", roi: 8.3, lo: -1.1, hi: 18.6 },
+    sp1: { rec: "126–80", roi: 15.9, lo: -1.5, hi: 31.3 }, sp2: { rec: "121–81", roi: 12.7, lo: -1.8, hi: 28.8 }, sp3: { rec: "24–17", roi: 10.9, lo: -23.2, hi: 44.4 },
+    sp4: { rec: "23–16", roi: 11.7, lo: -20.3, hi: 40.9 }, sp5: { rec: "297–224", roi: 7.6, lo: 1.2, hi: 13.9 },
     qbr2: { 5: { rec: "29–12", roi: 33.8, lo: 14.5, hi: 54.9 } },
     qbr4: { 25: { rec: "85–59", roi: 11.7, lo: -1.9, hi: 26.3, note: "tested as lines of 25 to 39.5" }, 40: { rec: "16–9", roi: 20.8, lo: -26.7, hi: 70.8 } },
   };
@@ -449,6 +487,7 @@
   const AUDIT_YR = {
     qbr1: [23.2, 46.6], sc1: [5.0, 20.3], sc2: [20.9, 30.7], cm1te: [29.8, 35.1], cm120: [24.7, 19.6], qbch: [8.4, 16.5],
     qbr2: { 5: [32.5, 37.1] }, qbr4: { 25: [6.2, 21.2], 40: [13.2, 51.3] },
+    l9: [20.0, 10.9], l10: [12.6, 3.7], s03: [7.5, 10.3], sp1: [17.8, 10.0], sp2: [16.6, 0.5], sp3: [9.0, 18.5], sp4: [22.2, -28.9], sp5: [7.5, 7.9],
   };
   const pc = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
   function auditLine(t) {
@@ -485,8 +524,8 @@
   // Tap a signal (or several) to see its run chart and week-by-week record, and to narrow the players below to those who fit
   // ALL the picked signals. Below: this week's players ranked by how many signals fit them, with FanDuel checkboxes.
   // Week is the smallest level shown (no per-game split). Scoring is unchanged: same analyze() as before.
-  // Multi-select (Michael 2026-11-12): off on this page, since these signals are already combinations. Set true on a page of single indicators.
-  const MULTI_SELECT = false;
+  // Multi-select (Michael 2026-11-12): off on the Signals page, since those signals are already combinations; still on for the Indicators page.
+  const multiSelect = () => SGPAGE === "ind";
   Object.assign(RL, { sigs: [], scope: "season", q: "", opt: { ...OPT0 } });
   const BE = 52.38; // break-even hit rate (%) at -110
   const memo = { d: null, m: new Map() };
@@ -504,6 +543,7 @@
   const monthCut = () => ctDate(new Date()).slice(0, 8) + "01";
   const inMonth = (ko) => !!ko && ctDate(new Date(ko)) >= monthCut();
   function inScope(x) {
+    if (SGPAGE !== "ind") return true; // Signals page: this season only (no time buttons)
     if (RL.scope === "last") return x.r.wk === curWk() - 1;
     if (RL.scope === "month") return inMonth(x.r.ko);
     return true;
@@ -569,8 +609,9 @@
   }
   const seasonTally = (t) => tally(sigRec(t).all);
   function initOpts(tabs) {
-    if (RL.optInit || !laWeeks().length) return;
-    RL.optInit = true; RL.optTouched = RL.optTouched || {};
+    RL.optInit = RL.optInit || {};
+    if (RL.optInit[SGPAGE] || !laWeeks().length) return;
+    RL.optInit[SGPAGE] = true; RL.optTouched = RL.optTouched || {};
     for (const t of tabs) if (t.opts && !RL.optTouched[t.id]) RL.opt[t.id] = bestOpt(t, seasonTally);
   }
   // Card order (Michael 2026-11-12): changes once a week, not as the toggles are tapped or games finish. Cards are ranked on ROI through
@@ -579,10 +620,11 @@
   function rankStat(t) { return t.opts ? withOpt(t, bestOpt(t, rankTally), () => rankTally(t)) : rankTally(t); }
   function topSection(tabs) {
     // Chart window: Prior week = just that week; This month / This season = every week in the window.
-    const mWeeks = RL.scope === "month" ? new Set(Object.values(D.games).filter((g) => g.final && inMonth(g.ko)).map((g) => g.wk)) : null;
+    const scopeNow = SGPAGE === "ind" ? RL.scope : "season";
+    const mWeeks = scopeNow === "month" ? new Set(Object.values(D.games).filter((g) => g.final && inMonth(g.ko)).map((g) => g.wk)) : null;
     const rows = tabs.map((t) => {
       const r = sigRec(t), sc = r.all.filter(inScope);
-      const by = RL.scope === "last" ? r.by.filter((x) => x.w === curWk() - 1) : RL.scope === "month" ? r.by.filter((x) => mWeeks.has(x.w)).map((x) => ({ w: x.w, list: x.list.filter(inScope) })) : r.by;
+      const by = scopeNow === "last" ? r.by.filter((x) => x.w === curWk() - 1) : scopeNow === "month" ? r.by.filter((x) => mWeeks.has(x.w)).map((x) => ({ w: x.w, list: x.list.filter(inScope) })) : r.by;
       return { t, by, s: tally(sc) };
     });
     const rk = new Map(tabs.map((t) => [t.id, rankStat(t)]));
@@ -590,7 +632,7 @@
     // First FREE_TILES tiles in this order are open to everyone; the rest are faded behind a Google sign-in until signed in.
     const gate = !signedIn();
     RL.unlocked = new Set(rows.filter((x, i) => !gate || i < FREE_TILES).map((x) => x.t.id));
-    let h = `<div class="sg-wrap"><div class="sg-grid">${rows.map((x) => tileHtml(x.t, x, !RL.unlocked.has(x.t.id))).join("")}</div>`;
+    let h = `${SGPAGE === "ind" ? `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>` : ""}<div class="sg-wrap"><div class="sg-grid">${rows.map((x) => tileHtml(x.t, x, !RL.unlocked.has(x.t.id))).join("")}</div>`;
     if (gate && rows.length > FREE_TILES) h += `<div class="sg-gate" id="sg-gate">${ACCT() ? ACCT().googleBlock("sg") : ""}</div>`;
     return h + `</div>`;
   }
@@ -682,7 +724,8 @@
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
     return h + `</div>${pager}`;
   }
-  function html() {
+  function html(page) {
+    if (page !== undefined && page !== SGPAGE) { SGPAGE = page === "ind" ? "ind" : "main"; RL.sigs = []; }
     const tabs = visibleTabs();
     initOpts(tabs);
     let inner = topSection(tabs); // also sets RL.unlocked
@@ -691,7 +734,8 @@
     if (picked.length) inner += recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
-    return `<section id="rl"><h2 class="gsec">Signals</h2><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>${inner}</section>`;
+    const head = SGPAGE === "ind" ? `<h2 class="gsec">Signals · Indicators</h2><p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, covering every quoted player. Same tiles, charts and lists as Signals.</span></p>` : `<h2 class="gsec">Signals</h2><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
+    return `<section id="rl" data-page="${SGPAGE}">${head}${inner}</section>`;
   }
   function redraw() {
     const el = document.getElementById("rl"); if (!el) return;
@@ -701,7 +745,7 @@
     const o = e.target.closest && e.target.closest("[data-sgopt]");
     if (o) { const [k, v] = o.dataset.sgopt.split(":"); RL.opt[k] = +v; (RL.optTouched = RL.optTouched || {})[k] = true; redraw(); return; }
     const c = e.target.closest && e.target.closest("[data-sig]");
-    if (c) { const id = c.dataset.sig; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : MULTI_SELECT ? [...RL.sigs, id] : [id]; redraw(); return; }
+    if (c) { const id = c.dataset.sig; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : multiSelect() ? [...RL.sigs, id] : [id]; redraw(); return; }
     if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
   });
@@ -761,6 +805,25 @@
     const raised = pm && pm.res === "over" && pl != null && line > pl, sh = raised ? sharesOf(prev) : null;
     if (sh && (p.pos === "WR" || p.pos === "TE") && mid === "rec_yds" && sh.trail >= 0.5) hits.push("sc1");
     if (sh && p.pos === "RB" && mid === "rush_yds" && sh.lead >= 0.5) hits.push("sc2");
+    // Indicator page rules. Streaks use his last 3 games played; spread rules use his team's spread (negative = underdog).
+    const l3 = played.slice(-3);
+    if (p.pos === "WR" && l3.length === 3) {
+      if (mid === "rec_yds") {
+        if (l3.every((x) => x.m && x.m.rec_yds && x.m.rec_yds.lstat === "ok" && x.m.rec_yds.res === "over")) hits.push("l9");
+        const a = l3.map((x) => (x.m && x.m.rec_yds ? x.m.rec_yds.act : null));
+        if (a.every((v) => v != null) && a[0] < a[1] && a[1] < a[2]) hits.push("s03");
+      }
+      if (mid === "rec") {
+        const a = l3.map((x) => (x.m && x.m.rec ? x.m.rec.act : null));
+        if (a.every((v) => v != null) && a[0] < a[1] && a[1] < a[2]) hits.push("l10");
+      }
+    }
+    const fb = favBy(r);
+    if (fb != null) {
+      if (fb <= -10 && ["WR", "TE", "RB"].includes(p.pos)) { if (mid === "rec_yds") hits.push("sp1"); if (mid === "rec") hits.push("sp2"); }
+      if (p.pos === "QB" && mid === "pass_yds") { if (fb >= 10) hits.push("sp3"); if (fb <= -10) hits.push("sp4"); }
+      if (fb <= -3 && fb >= -6.5 && (p.pos === "QB" || p.pos === "RB") && mid === "rush_yds") hits.push("sp5");
+    }
     return { hits, pm, pl, f: null };
   }
   // CM1 (correlated line movement): per team-game, the QB's passing-yards line change vs the previous week (his previous
@@ -908,7 +971,7 @@
       return out;
     }
     for (const p of D.players) {
-      if (p.extra) continue;
+      if (p.extra && t?.page !== "ind") continue;
       const rows = (D.rows[p.id] || []).slice().sort((a, b) => a.wk - b.wk);
       for (const r of rows) {
         if (r.wk !== wk || !r.final) continue;
@@ -940,6 +1003,7 @@
     switch (x.rule.id) {
       case "qbr2": case "sc1": case "sc2": return `Line ${num(x.pl)} → ${line}`;
       case "qbch": return esc(x.note);
+      case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
       case "cm1te": case "cm120": return `Line ${num(x.pl)} → ${line} · ${esc(x.note)}`;
       default: return "";
     }
@@ -1129,5 +1193,5 @@
   document.addEventListener("click", (e) => { if (e.target && e.target.id === "gs-reset") { Object.assign(SCRIPT, SCRIPT_DEFAULT); saveScript(); } });
 
   function safeSettings() { try { return settingsHtml(); } catch (e) { console.error("game script setting failed", e); return ""; } }
-  window.STIX_RESEARCH = { html: safeHtml, analysis: safeAnalysis, analyze, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
+  window.STIX_RESEARCH = { html: safeHtml, htmlFor: (pg) => { try { return html(pg); } catch (e) { console.error("research page failed", e); return ""; } }, analysis: safeAnalysis, analyze, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
 })();
