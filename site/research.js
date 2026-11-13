@@ -424,6 +424,20 @@
     return h + `</div>${pager}`;
   }
 
+  // Week-cluster 95% intervals from the 2026-11-11 thesis audit (2025 wk1-18 + 2026 wk1-9 replay, flat 1-unit bets). Historical, not live.
+  const AUDIT = {
+    qbr1: { rec: "62–28", roi: 30.2, lo: 11.3, hi: 48.2 }, sc1: { rec: "187–132", roi: 10.9, lo: 1.9, hi: 19.6 },
+    sc2: { rec: "50–26", roi: 24.2, lo: -0.2, hi: 44.3 }, cm1te: { rec: "32–14", roi: 31.4, lo: 8.8, hi: 53.6 },
+    cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 },
+    qbr2: { 5: { rec: "29–12", roi: 33.8, lo: 14.5, hi: 54.9 } },
+    qbr4: { 25: { rec: "85–59", roi: 11.7, lo: -1.9, hi: 26.3, note: "tested as lines of 25 to 39.5" }, 40: { rec: "16–9", roi: 20.8, lo: -26.7, hi: 70.8 } },
+  };
+  const pc = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
+  function auditLine(t) {
+    const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
+    if (!x) return `The audit did not test this setting (${t.optFmt(RL.opt[t.id])}), so there is no interval for it.`;
+    return `Audit replay (2025–26): <b>${x.rec}</b>, <b>${pc(x.roi)}</b> ROI, 95% interval <b>${pc(x.lo)} to ${pc(x.hi)}</b>${x.note ? ` (${x.note})` : ""}.`;
+  }
   function openInfo(id) {
     closePop();
     const t = TABS.find((x) => x.id === id); if (!t) return;
@@ -433,8 +447,9 @@
       <div class="nw-h"><b>${esc(t.label)} · Bet ${t.side === "over" ? "Over" : "Under"}</b><button class="nw-x" aria-label="Close">✕</button></div>
       <p class="small"><b>${esc(t.title)}.</b></p>
       <p class="small">${t.desc()}</p>
-      <p class="small"><b>Why it might work</b> (an interpretation, not proven): ${esc(t.why)}</p>
-      <p class="muted small">Chosen from a historical replay of the 2025–26 seasons (thesis audit, 2026-11-11) on the same data it was tested on, so it is a candidate, not a proven edge. Here it is scored on 2026 games only: the pre-game line (DraftKings, FanDuel as fallback) at its saved odds, 1 unit per bet, break-even about 52.4% at −110.</p></div>`;
+      <p class="small"><b>Why it might work:</b> ${esc(t.why)}</p>
+      <p class="small">${auditLine(t)}</p>
+      <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck. It does not account for picking the best rules out of many tried, so it is likely optimistic.</p></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
@@ -519,7 +534,7 @@
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
     return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
-      <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}<span class="muted small"> ROI</span></span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> this wk</span></div>
+      <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> this wk</span></div>
       ${st.by ? spark(st.by) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
