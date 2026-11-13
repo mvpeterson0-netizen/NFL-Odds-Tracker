@@ -46,6 +46,9 @@
     { id: "cm120", n: 7, side: "under", combo: true, cm: true, label: "CM1-20", minDrop: 20, only: null,
       title: "Receiving yards Under when the QB line drops 20+ but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
       desc: () => `Same as CM1-TE but the QB line is down 20+ and every qualifying receiver (WR/TE/RB) is a bet.` },
+    { id: "qbch", n: 8, side: "under", qbch: true, label: "QBCH",
+      title: "WR/TE rec yds Under when the starting QB changed", why: "A new starting QB may mean lower passing volume or a less proven connection, while the receivers' lines still reflect the old QB.",
+      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when his team's starting QB is <b>not the QB who started its previous game</b>. For past games the starter is the QB with the most snaps; for this week's games it is the QB the book has posted a passing-yards line for, so players can be flagged before kickoff.` },
     { id: "qbr2", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`,
       title: "QB rush Under when the line jumps", why: "A raised QB rushing line may overshoot.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>${RL.opt.qbr2} yards higher</b> than his line in his previous game. The toggle changes the size of the jump. The idea is that a big raise may overshoot.` },
@@ -258,6 +261,7 @@
 
   function compute(tab) {
     if (TABS.find((t) => t.id === tab)?.cm) return computeCM(TABS.find((t) => t.id === tab));
+    if (TABS.find((t) => t.id === tab)?.qbch) return computeQBCH();
     if (TABS.find((t) => t.id === tab)?.frozen) return frozenCandidates(tab);
     const out = [];
     for (const c of candidates()) {
@@ -278,6 +282,7 @@
   const HEADS = {
     qbr1: ["Line", "Last 3"], qbr4: ["Line", "Last 3"], qbr2: ["Line (last game → now)", "Last 3"],
     cm1te: ["Line (last week → now)", "QB vs receivers"], cm120: ["Line (last week → now)", "QB vs receivers"],
+    qbch: ["Line", "QB"],
     sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
@@ -436,7 +441,7 @@
   const AUDIT = {
     qbr1: { rec: "62–28", roi: 30.2, lo: 11.3, hi: 48.2 }, sc1: { rec: "187–132", roi: 10.9, lo: 1.9, hi: 19.6 },
     sc2: { rec: "50–26", roi: 24.2, lo: -0.2, hi: 44.3 }, cm1te: { rec: "32–14", roi: 31.4, lo: 8.8, hi: 53.6 },
-    cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 },
+    cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 }, qbch: { rec: "182–126", roi: 11.5, lo: 2.8, hi: 19.3 },
     qbr2: { 5: { rec: "29–12", roi: 33.8, lo: 14.5, hi: 54.9 } },
     qbr4: { 25: { rec: "85–59", roi: 11.7, lo: -1.9, hi: 26.3, note: "tested as lines of 25 to 39.5" }, 40: { rec: "16–9", roi: 20.8, lo: -26.7, hi: 70.8 } },
   };
@@ -788,10 +793,78 @@
     }
     return out;
   }
+  // QBCH (starting QB changed): bet WR/TE receiving yards Under for a team whose starting QB is not the one who started its previous game.
+  // Past games (scoring): the starter is the one in nflverse's game file (a post-game record, g.hq / g.aq); if a game has none yet, the QB with the
+  // most snaps. This week's games (flags): the QB the book has posted a passing-yards line for, so a player can be flagged before kickoff; if lines
+  // move to another QB the flag can change until the line is captured. "Previous game" = the team's most recent earlier final game.
+  function qbchTeams(final) {
+    const now = Date.now(), starters = new Map(), snapQB = new Map(); // team -> [{wk, gid, id, name}]
+    const teamList = (t) => { if (!starters.has(t)) starters.set(t, []); return starters.get(t); };
+    for (const p of D.players) if (p.pos === "QB") for (const r of D.rows[p.id] || []) {
+      if (!r.final || r.played !== true) continue;
+      const k = r.gid + "|" + r.team, cur = snapQB.get(k);
+      if (!cur || (r.snap ?? 0) > (cur.snap ?? 0)) snapQB.set(k, { id: p.id, name: p.name, snap: r.snap, wk: r.wk, gid: r.gid, team: r.team });
+    }
+    const startOf = (gid, team) => {
+      const g = D.games[gid], f = g && (g.home === team ? g.hq : g.away === team ? g.aq : null);
+      return f && f.id ? { id: f.id, name: f.n } : (snapQB.get(gid + "|" + team) || null);
+    };
+    for (const [gid, g] of Object.entries(D.games)) {
+      if (!g.final) continue;
+      for (const team of [g.home, g.away]) { const s = startOf(gid, team); if (s) teamList(team).push({ wk: g.wk, gid, id: s.id, name: s.name }); }
+    }
+    const prevOf = (team, wk) => (starters.get(team) || []).filter((x) => x.wk < wk).sort((a, b) => a.wk - b.wk).pop();
+    const out = [];
+    for (const [gid, g] of Object.entries(D.games)) {
+      for (const team of [g.home, g.away]) {
+        let starter = null;
+        if (final) { if (!g.final) continue; starter = startOf(gid, team); }
+        else {
+          if (g.final || !g.ko || new Date(g.ko).getTime() <= now) continue;
+          const lined = D.players.filter((p) => p.pos === "QB").map((p) => ({ p, r: (D.rows[p.id] || []).find((x) => x.gid === gid && x.team === team) }))
+            .filter((x) => x.r && curLine(x.r.m && x.r.m.pass_yds));
+          const pick = lined.find((x) => x.r.slot === "QB1") || lined[0]; starter = pick && { id: pick.p.id, name: pick.p.name };
+        }
+        if (!starter) continue;
+        const prev = prevOf(team, g.wk);
+        if (!prev || prev.id === starter.id) continue;
+        out.push({ gid, team, wk: g.wk, starter, prev });
+      }
+    }
+    return out;
+  }
+  function qbchBets(final) {
+    const out = [];
+    for (const g of qbchTeams(final)) {
+      const note = `${g.starter.name} (last game: ${g.prev.name})`;
+      for (const p of D.players) {
+        if (p.pos !== "WR" && p.pos !== "TE") continue;
+        const r = (D.rows[p.id] || []).find((x) => x.gid === g.gid && x.team === g.team), m = r && r.m && r.m.rec_yds; if (!m) continue;
+        const cur = final ? (m.lstat === "ok" && m.line != null ? { line: m.line, label: "pre-game", cap: m.cap } : null) : curLine(m);
+        if (cur) out.push({ g, p, r, m, cur, note });
+      }
+    }
+    return out;
+  }
+  function computeQBCH() {
+    return qbchBets(false).filter((e) => (!RL.gid || e.r.gid === RL.gid) && (!RL.mk || RL.mk === "rec_yds")).map((e) => ({
+      c: { p: e.p, r: e.r, mid: "rec_yds", cur: e.cur }, note: e.note, rank: -koMs({ r: e.r }), cells: [`<b>${num(e.cur.line)}</b>`, e.note] }));
+  }
+  function analyzeQBCH(t, wk) {
+    const out = [];
+    for (const e of qbchBets(true)) {
+      const { p, r, m } = e;
+      if (r.wk !== wk || m.op == null || m.up == null || !["over", "under", "push"].includes(m.res)) continue;
+      const o = m.res === "push" ? "push" : m.res === "under" ? "hit" : "miss";
+      out.push({ p, r, mid: "rec_yds", m, rule: t, side: "under", out: o, u: o === "hit" ? payout(m.up) : o === "miss" ? -1 : 0, odds: m.up, pl: null, pm: null, f: null, note: e.note });
+    }
+    return out;
+  }
   // Every graded bet one rule made in one week: [{p, r, mid, m, side, out: "hit"|"miss"|"push", u, pm, pl, f}]
   function analyze(tab, wk) {
     const t = TABS.find((x) => x.id === tab), out = [];
     if (t && t.cm) return analyzeCM(t, wk);
+    if (t && t.qbch) return analyzeQBCH(t, wk);
     if (t?.frozen) {
       for (const x of frozenEntries(tab)) {
         const { v, decision, p, r, mid } = x;
@@ -837,6 +910,7 @@
     const line = num(x.m.line);
     switch (x.rule.id) {
       case "qbr2": case "sc1": case "sc2": return `Line ${num(x.pl)} → ${line}`;
+      case "qbch": return esc(x.note);
       case "cm1te": case "cm120": return `Line ${num(x.pl)} → ${line} · ${esc(x.note)}`;
       default: return "";
     }
