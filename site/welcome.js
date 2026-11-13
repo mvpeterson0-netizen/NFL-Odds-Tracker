@@ -38,7 +38,7 @@
         style="left:${(f.x / 390) * 100}%;top:${(f.y / f.h) * 100}%;width:${(f.s / 390) * 100}%">`;
     }).join("");
   }
-  const shot = (file, alt, key, cls) => `<div class="wl-shot ${cls || ""}"><img src="welcome/${file}" alt="${esc(alt)}" loading="lazy">${key ? faces(key) : ""}</div>`;
+  const shot = (file, alt, key, cls) => `<div class="wl-shot ${cls || ""}"><img src="welcome/${file}" alt="${esc(alt)}">${key ? faces(key) : ""}</div>`;
 
   // Tap-through tour (Michael, 2026-11-11): one page at a time; tap Next to move on. The first page is Board with the welcome heading on top.
   const SECTIONS = [
@@ -55,8 +55,8 @@
     { id: "results", title: "Results", text: "How every graded line finished.",
       img: () => shot("results.jpg", "Results tab: graded lines over and under by market") },
     { id: "picks", title: "My picks", text: "Tap Over or Under to save a pick. It's graded for you. Free sign-in.",
-      img: () => `<div class="wl-ex"><span class="wl-badge">Example</span>${shot("picks-record.jpg", "Example record: 16–9, 64% hit rate, +5.69 units")}${shot("picks-list.jpg", "Example graded picks with Hit and Miss labels")}
-        <p class="small muted wl-excap">Example picks to show how tracking works, not real results.</p></div>` },
+      img: () => `<div class="wl-ex"><span class="wl-badge">Example</span>${shot("picks-record.jpg", "Example record: 16–9, 64% hit rate, +5.69 units")}${shot("picks-list.jpg", "Example graded picks with Hit and Miss labels")}</div>`,
+      cap: '<p class="small muted wl-excap">Example picks to show how tracking works, not real results.</p>' },
   ];
   let page = 1; // 1..N = SECTIONS[page - 1]; page 1 also carries the welcome heading
 
@@ -67,15 +67,38 @@
       ${page === 1 ? '<h1 class="wl-h1">Welcome to Stix</h1>' : ""}
       <div class="wl-top"><span class="wl-n">${page}</span><h2>${esc(s.title)}</h2>${last ? "" : '<a class="wl-skip" href="#/board">Skip</a>'}</div>
       <p class="wl-line">${esc(s.text)}</p>
-      <div class="wl-pic" data-wl-go="${last ? "" : page + 1}">${s.img()}</div>
+      <div class="wl-pic" data-wl-go="${last ? "" : page + 1}"><div class="wl-fit"${s.id === "script" ? ' data-max="300"' : ""}>${s.img()}</div>${s.cap || ""}</div>
       <div class="wl-nav">
-        <button class="wl-back" data-wl-go="${page - 1}" aria-label="Back"${page === 1 ? ' style="visibility:hidden"' : ""}>‹ Back</button>
-        <span class="wl-dots">${SECTIONS.map((_, i) => `<i class="${i + 1 === page ? "on" : ""}"></i>`).join("")}</span>
-        ${last ? '<a class="wl-cta" href="#/board">Get started</a>' : `<button class="wl-cta" data-wl-go="${page + 1}">Next ›</button>`}
+        ${last ? '<p class="small muted wl-fine">For adults 21+. A research tool, not predictions. <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>' : ""}
+        <div class="wl-row">
+          <button class="wl-back" data-wl-go="${page - 1}" aria-label="Back"${page === 1 ? ' style="visibility:hidden"' : ""}>‹ Back</button>
+          <span class="wl-dots">${SECTIONS.map((_, i) => `<i class="${i + 1 === page ? "on" : ""}"></i>`).join("")}</span>
+          ${last ? '<a class="wl-cta" href="#/board">Get started</a>' : `<button class="wl-cta" data-wl-go="${page + 1}">Next ›</button>`}
+        </div>
       </div>
-      ${last ? '<p class="small muted wl-fine">For adults 21+. A research tool, not predictions. <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p>' : ""}
     </div>`;
   }
+  // Fit each page on one screen with no scrolling (Michael, 2026-11-12): the screenshot is scaled down to the space left
+  // between the heading and the fixed Back/Next bar. Runs after each page draw, when an image finishes loading, and on resize.
+  function fit() {
+    const el = document.querySelector(".wl-pg"); if (!el) return;
+    const f = el.querySelector(".wl-fit"), box = el.querySelector(".wl-pic"), nav = el.querySelector(".wl-nav"); if (!f || !box || !nav) return;
+    const cap = el.querySelector(".wl-excap");
+    const vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+    const avail = vh - f.getBoundingClientRect().top - nav.offsetHeight - (cap ? cap.offsetHeight + 8 : 0) - 10;
+    const base = Math.min(box.clientWidth, Number(f.dataset.max) || box.clientWidth);
+    f.style.width = base + "px";
+    const h = f.offsetHeight;
+    if (h > avail && avail > 120) f.style.width = Math.floor((base * avail) / h) + "px";
+  }
+  const draw = () => { const el = document.querySelector(".wl"); if (!el) return; el.outerHTML = view(); window.scrollTo(0, 0); fit(); };
+  document.addEventListener("load", (e) => { if (e.target && e.target.closest && e.target.closest(".wl-fit")) fit(); }, true);
+  window.addEventListener("resize", fit);
+  window.addEventListener("orientationchange", fit);
+  // app.js puts the page in with innerHTML: fit once it is in the document.
+  new MutationObserver(() => { if (document.querySelector(".wl-pg") && !document.querySelector(".wl-fit[style]")) fit(); })
+    .observe(document.documentElement, { childList: true, subtree: true });
+
   // Taps move between pages in place (the address stays #/welcome).
   document.addEventListener("click", (e) => {
     const a = e.target.closest && e.target.closest("[data-wl-go]"); if (!a) return;
@@ -83,7 +106,7 @@
     e.preventDefault();
     const el = document.querySelector(".wl"); if (!el) return;
     page = Math.max(1, Math.min(SECTIONS.length, Number(to)));
-    el.outerHTML = view(); window.scrollTo(0, 0);
+    draw();
   });
   window.addEventListener("hashchange", () => { if (!/^#\/welcome/.test(location.hash)) page = 1; });
 
