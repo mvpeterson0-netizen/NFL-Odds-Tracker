@@ -26,65 +26,33 @@
   const COUNT_MKTS = ["rec", "rush_att", "pass_att", "pass_cmp"];
   const BIG_SPREAD = 7;
   const UNIVERSE = "Slotted players only (not All players extras). The rule is scored on the graded pre-game line (~3 h before kickoff); until that line is captured this list uses the latest line showing, so players can join or leave as lines move.";
+  // Signals page (Michael 2026-11-12): the page now holds only the "bet every time" theses from the 2026-11-11 thesis audit.
+  // Each is a historical replay, not a proven edge; it is scored here on 2026 data only, with the same grading as before
+  // (graded pre-game line, saved odds, 1 unit). Thresholds are the audit's; QB-R2 / QB-R4 carry a viewer toggle.
+  // Not on this page yet (own PRs): CM1-TE, CM1-20 (needs prior-week QB/receiver line gap) and QBCH (needs the starter data).
   const TABS = [
-    { id: "t1", n: 1, side: "under", label: "WR2 went over → Under",
-      title: "WR2 who went over his line last week (same stat) → Under",
-      why: "Books may overreact to a secondary receiver's good game.", rec: "99–54 · 64.7% · +34.1 u · +22.3% ROI",
-      desc: () => `His slot this week is <b>WR2</b> and, in his previous game, he finished <b>over</b> that game's graded pre-game line for the same stat. "Previous game" = his team's most recent earlier final game (even if he didn't play). Ordered by how far over he went (actual − line, ÷ √line).` },
-    { id: "t2", n: 2, side: "under", label: "Away, line raised → Under",
-      title: "Away game and his line is higher than last week (same stat) → Under",
-      why: "Fading a raised line, with road-game drag.", rec: "333–239 · 58.2% · +50.9 u · +8.9% ROI",
-      desc: () => `His team is <b>away</b> and this week's line is <b>higher</b> than the graded pre-game line from his previous game for the same stat (any amount). Ordered by size of the raise ÷ √(last game's line), as on the old Line move tab.` },
-    { id: "t3", n: 3, side: "under", label: "TE1 rec yds → Under",
-      title: "TE1 receiving yards → Under",
-      why: "Tight-end yardage is lumpy: a few big games lift the average, so the typical game lands below a line set near it.", rec: "122–85 · 58.9% · +24.0 u · +11.6% ROI",
-      desc: () => `Every player slotted <b>TE1</b> this week with a receiving yards line. Ordered by kickoff.` },
-    { id: "t4", n: 4, side: "under", label: "QB1 rush yds → Under",
-      title: "QB1 rushing yards → Under",
-      why: "Same lumpiness: occasional scrambles inflate the average.", rec: "125–86 · 59.2% · +23.5 u · +11.2% ROI",
-      desc: () => `Every player slotted <b>QB1</b> this week with a rushing yards line. Ordered by kickoff.` },
-    { id: "t5", n: 5, side: "under", label: "Usage down, line flat → Under",
-      title: "Usage down, line flat → Under",
-      why: "The line hasn't caught up with a shrinking role.", rec: "68–46 · 59.6% · +11.2 u · +9.8% ROI",
-      desc: () => `Usage = target share for WR/TE, snap share for RB (QBs not included). Down = average of his last ${USAGE_N} games played is at least <b>${USAGE_DROP.tshare} points</b> of target share (WR/TE) or <b>${USAGE_DROP.snap} points</b> of snap share (RB) below his average in his earlier games this season (min 2 earlier games). Line flat = within ±${FLAT.count} for receptions / carries / attempts / completions, ±${FLAT.yds} for rushing and receiving yards, ±${FLAT.pass_yds} for passing yards, compared with his previous game's graded line. The ${USAGE_N}-game window is fixed because the rule was frozen with it. Ordered by the usage drop.` },
-    { id: "t6", n: 6, side: "under", label: "Favored by 7+: RB rush → Under", spread: true,
-      title: "His team favored by 7+ → RB rushing yards Under",
-      why: "The expected-blowout run game may already be priced in, possibly over-priced.", rec: "29–14 · 67.4% · +11.8 u · +27.5% ROI",
-      desc: () => `RBs with a rushing yards line whose team is favored by <b>${BIG_SPREAD} or more</b> points. Ordered by spread, then kickoff.` },
-    { id: "t7", n: 7, side: "over", label: "7+ underdog: QB pass → Over", spread: true,
-      title: "His team a 7+ underdog → QB passing yards Over",
-      why: "Trailing teams may throw more than the line assumes.", rec: "18–6 · 75.0% · +10.1 u · +42.1% ROI",
-      desc: () => `Players with a passing yards line whose team is a <b>${BIG_SPREAD}+ point underdog</b>. Ordered by spread, then kickoff.` },
-    { id: "t8", n: 8, side: "over", label: "7+ underdog: WR/TE rec → Over", spread: true,
-      title: "His team a 7+ underdog → WR/TE receiving yards Over",
-      why: "Same trailing-team passing volume.", rec: "59–42 · 58.4% · +10.6 u · +10.5% ROI",
-      desc: () => `WRs and TEs with a receiving yards line whose team is a <b>${BIG_SPREAD}+ point underdog</b>. Ordered by spread, then kickoff.` },
-    { id: "t9", n: 9, frozen: true, side: "under", label: "WR: 3 yardage Overs → Under",
-      title: "WR receiving yards: three consecutive Overs → Under",
-      why: "Test whether a run of Overs is overvalued in the next quoted line.",
-      desc: () => `Any quoted WR, including All players extras. Each of his last <b>three offensive appearances</b> this season must have a known receiving-yards pregame line and an Over result. A push or missing line breaks the streak. Zero-production appearances count; inactive games do not. Bet Under at the saved pregame quote.` },
-    { id: "t10", n: 10, frozen: true, side: "under", label: "WR: rising catches → Under",
-      title: "WR receptions: three rising games → Under",
-      why: "Test whether steadily rising catch totals overstate the next game's opportunity.",
-      desc: () => `Any quoted WR. Receptions in his last <b>three offensive appearances</b> this season must be strictly increasing (for example 2 → 4 → 6: three observations, two increases). Ties fail. Zero-production appearances count; inactive games do not. Bet Under at the saved pregame quote.` },
-    { id: "t11", n: 11, frozen: true, side: "model", label: "Frozen basic model",
-      title: "Frozen basic logistic model",
-      why: "Combine line, market probability, recent production, usage and streak inputs.",
-      desc: () => `Frozen model version <b>2026-10-30-v1</b>, trained on 2025 weeks 1–10 with C=0.01. QB passing yards, QB/RB rushing yards, RB/WR/TE receptions and receiving yards. Any quoted player. Select the higher estimated-return side only if its estimated return is <b>at least 10%</b>. Fixed preprocessing and coefficients; no retraining. This threshold is a trigger, not a promised return.` },
-    { id: "t12", n: 12, frozen: true, side: "model", label: "Frozen interaction model",
-      title: "Frozen logistic model with interactions",
-      why: "Test whether production, usage and line adjustments work differently in combination.",
-      desc: () => `Frozen version <b>2026-10-30-v1</b>, C=0.01, with the same four-market universe and <b>10% estimated-return threshold</b> as signal 11. Adds fixed interactions and position/market slopes. No added injury-return assumptions, context package, retraining or threshold tuning.` },
-    { id: "t13", n: 13, frozen: true, challenger: true, side: "model", label: "Weekly learning challenger",
-      title: "Weekly interaction challenger",
-      why: "Test whether expanding-history learning improves on the frozen interaction model.",
-      desc: () => `Separate experiment: weekly refit on eligible completed 2025/2026 games, same interaction architecture, C=0.01 and 10% estimated-return threshold. Each version is saved; pregame decisions never change. No automatic promotion over the frozen model.` },
+    { id: "qbr1", n: 1, side: "under", combo: true, label: "QB-R1",
+      title: "QB rushing yards → Under (rushes a lot, high line)", why: "Books may price a rushing QB's recent output too high.",
+      desc: () => `Bet a QB's <b>rushing yards Under</b> when two things are true: this week's rushing-yards line is <b>25 or more</b>, and in his <b>last 3 games played</b> he averaged <b>25 or more</b> rushing yards. The idea is that a QB who runs a lot gets a high line, and that line may be set too high.` },
+    { id: "sc2", n: 2, side: "under", combo: true, label: "SC2",
+      title: "RB rush Under after a game his team led big", why: "A rushing Over built in a game his team led may not repeat.",
+      desc: () => `Bet an RB's <b>rushing yards Under</b> when all three are true: in his team's <b>previous game</b> it led by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play), he finished <b>Over</b> his rushing line in that game, and this week's rushing line is <b>higher</b> than that game's line. The idea is that a big rushing game in a game his team led may not repeat.` },
+    { id: "sc1", n: 3, side: "under", combo: true, label: "SC1",
+      title: "WR/TE rec yds Under after a game his team trailed big", why: "Catch-up volume may not repeat.",
+      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when all three are true: in his team's <b>previous game</b> it trailed by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play), he finished <b>Over</b> his receiving-yards line in that game, and this week's line is <b>higher</b> than that game's line. The idea is that catch-up passing volume may not repeat.` },
+    { id: "qbr2", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`,
+      title: "QB rush Under when the line jumps", why: "A raised QB rushing line may overshoot.",
+      desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>${RL.opt.qbr2} yards higher</b> than his line in his previous game. The toggle changes the size of the jump. The idea is that a big raise may overshoot.` },
+    { id: "qbr4", n: 5, side: "under", label: "QB-R4", opts: [25, 40], optFmt: (v) => `${v}+`,
+      title: "QB rush Under on high lines", why: "High QB rushing lines may be inflated by a few big games.",
+      desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>${RL.opt.qbr4} or higher</b>. The toggle changes the minimum line. The idea is that a few big games can inflate high QB rushing lines.` },
   ];
+  const OPT0 = { qbr2: 5, qbr4: 25 }; // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
   // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
   const FREE_RULES = 3;
   const signedIn = () => { try { return !!(window.STIX_ACCOUNT && window.STIX_ACCOUNT.signedIn()); } catch (e) { return false; } };
-  const visibleTabs = () => (signedIn() ? TABS : TABS.slice(0, FREE_RULES));
+  const visibleTabs = () => TABS; // gating is by tile order on the page (first 3 free), see topSection
   const SPREAD_NOTE = "Spread = nflverse schedule spread_line (source book and time not stated by nflverse); it can move during the week, and the rule is scored on the value nflverse shows after the game.";
 
   // ---------- helpers ----------
@@ -286,50 +254,23 @@
     if (TABS.find((t) => t.id === tab)?.frozen) return frozenCandidates(tab);
     const out = [];
     for (const c of candidates()) {
-      const pl = prevLine(c), pos = c.p.pos, line = c.cur.line;
-      if (tab === "t1") {
-        if (c.r.slot !== "WR2" || !c.pm || c.pm.res !== "over" || pl == null) continue;
-        const by = c.pm.act - pl;
-        out.push({ c, rank: pl > 0 ? by / Math.sqrt(pl) : 0, cells: [`<b>${num(line)}</b>`, `${num(c.pm.act)} vs ${num(pl)} <span class="muted small">(over by ${num(by)})</span>`] });
-      } else if (tab === "t2") {
-        if (c.r.ha !== "away" || pl == null || !(line > pl)) continue;
-        const ch = line - pl;
-        out.push({ c, rank: pl > 0 ? ch / Math.sqrt(pl) : 0, cells: [`${num(pl)} → <b>${num(line)}</b> <b>${signed(ch)}</b>`, `@ ${esc(c.r.opp)}`] });
-      } else if (tab === "t3" || tab === "t4") {
-        if (tab === "t3" ? !(c.r.slot === "TE1" && c.mid === "rec_yds") : !(c.r.slot === "QB1" && c.mid === "rush_yds")) continue;
-        const l3 = c.played.map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).slice(-3);
-        out.push({ c, rank: -koMs(c), cells: [`<b>${num(line)}</b>`, l3.length ? l3.map((v) => num(v, 0)).join(", ") : `<span class="muted">—</span>`] });
-      } else if (tab === "t5") {
-        if (pos === "QB" || pl == null) continue;
-        const us = c.played.map((x) => usageOf(pos, x)).filter((v) => v != null);
-        if (us.length < USAGE_N + 2) continue; // 2 recent games + at least 2 earlier
-        const rec = us.slice(-USAGE_N), early = us.slice(0, -USAGE_N);
-        const ar = rec.reduce((a, b) => a + b, 0) / USAGE_N, ae = early.reduce((a, b) => a + b, 0) / early.length, drop = ar - ae;
-        if (drop > -(pos === "RB" ? USAGE_DROP.snap : USAGE_DROP.tshare)) continue;
-        const tol = COUNT_MKTS.includes(c.mid) ? FLAT.count : c.mid === "pass_yds" ? FLAT.pass_yds : FLAT.yds;
-        if (Math.abs(line - pl) > tol) continue;
-        const kind = pos === "RB" ? "snap" : "tgt share";
-        out.push({ c, rank: -drop, badge: `−${Math.round(-drop)} pts`, cells: [`${num(pl)} → <b>${num(line)}</b>`, `${kind} ${Math.round(ae)}% → <b>${Math.round(ar)}%</b> <span class="muted small">(last ${USAGE_N}: ${rec.map((v) => Math.round(v) + "%").join(", ")})</span>`] });
-      } else if (tab === "t6" || tab === "t7" || tab === "t8") {
-        const f = favBy(c.r); if (f == null) continue;
-        const ok = tab === "t6" ? f >= BIG_SPREAD && pos === "RB" && c.mid === "rush_yds"
-          : tab === "t7" ? f <= -BIG_SPREAD && c.mid === "pass_yds"
-          : f <= -BIG_SPREAD && (pos === "WR" || pos === "TE") && c.mid === "rec_yds";
-        if (!ok) continue;
-        out.push({ c, rank: Math.abs(f) * 1e13 - koMs(c), cells: [`<b>${num(line)}</b>`, esc(spreadTxt(f))] });
-      }
+      const pl = prevLine(c), line = c.cur.line;
+      if (!ruleHits(c.r, c.mid, { line }, c.p, c.past, c.played, c.prev).hits.includes(tab)) continue;
+      const l3 = c.played.map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).slice(-3);
+      const l3t = l3.length ? l3.map((v) => num(v, 0)).join(", ") : `<span class="muted">—</span>`;
+      const sh = sharesOf(c.prev);
+      let cells;
+      if (tab === "qbr1" || tab === "qbr4") cells = [`<b>${num(line)}</b>`, l3t];
+      else if (tab === "qbr2") cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, l3t];
+      else cells = [`${num(pl)} → <b>${num(line)}</b>`, `${num(c.pm.act)} vs ${num(pl)} · ${Math.round(100 * (tab === "sc1" ? sh.trail : sh.lead))}% of plays ${tab === "sc1" ? "trailing" : "leading"} 7+`];
+      out.push({ c, rank: -koMs(c), cells });
     }
     out.sort((a, b) => b.rank - a.rank || a.c.p.name.localeCompare(b.c.p.name));
     return out;
   }
   const HEADS = {
-    t9: ["Saved line / side", "Recorded"], t10: ["Saved line / side", "Recorded"],
-    t13: ["Saved line / side", "Model estimate"], t11: ["Saved line / side", "Model estimate"], t12: ["Saved line / side", "Model estimate"],
-    t1: ["Line", "Last game: his stat vs line"],
-    t2: ["Line (last game → now)", "Game"],
-    t3: ["Line", "Last 3"], t4: ["Line", "Last 3"],
-    t5: ["Line (last game → now)", "Usage"],
-    t6: ["Line", "Team"], t7: ["Line", "Team"], t8: ["Line", "Team"],
+    qbr1: ["Line", "Last 3"], qbr4: ["Line", "Last 3"], qbr2: ["Line (last game → now)", "Last 3"],
+    sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
   // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
@@ -483,17 +424,32 @@
     return h + `</div>${pager}`;
   }
 
+  // Week-cluster 95% intervals from the 2026-11-11 thesis audit (2025 wk1-18 + 2026 wk1-9 replay, flat 1-unit bets). Historical, not live.
+  const AUDIT = {
+    qbr1: { rec: "62–28", roi: 30.2, lo: 11.3, hi: 48.2 }, sc1: { rec: "187–132", roi: 10.9, lo: 1.9, hi: 19.6 },
+    sc2: { rec: "50–26", roi: 24.2, lo: -0.2, hi: 44.3 }, cm1te: { rec: "32–14", roi: 31.4, lo: 8.8, hi: 53.6 },
+    cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 },
+    qbr2: { 5: { rec: "29–12", roi: 33.8, lo: 14.5, hi: 54.9 } },
+    qbr4: { 25: { rec: "85–59", roi: 11.7, lo: -1.9, hi: 26.3, note: "tested as lines of 25 to 39.5" }, 40: { rec: "16–9", roi: 20.8, lo: -26.7, hi: 70.8 } },
+  };
+  const pc = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
+  function auditLine(t) {
+    const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
+    if (!x) return `The audit did not test this setting (${t.optFmt(RL.opt[t.id])}), so there is no interval for it.`;
+    return `Audit replay (2025–26): <b>${x.rec}</b>, <b>${pc(x.roi)}</b> ROI, 95% interval <b>${pc(x.lo)} to ${pc(x.hi)}</b>${x.note ? ` (${x.note})` : ""}.`;
+  }
   function openInfo(id) {
     closePop();
     const t = TABS.find((x) => x.id === id); if (!t) return;
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
-    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="Rule ${t.n}">
-      <div class="nw-h"><b>Rule ${t.n} · ${t.side === "model" ? "Model selects Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</b><button class="nw-x" aria-label="Close">✕</button></div>
-      <p class="small"><b>${esc(t.title)}.</b> ${t.desc()}</p>
-      <p class="small"><b>Why it might work</b> (an interpretation, not proven): ${esc(t.why)}</p>
-      <p class="small">${recLine(t)} ${t.frozen ? "Exploratory candidates selected after historical research; future performance is uncertain." : "Break-even at −110 is about 52.4%."}</p>
-      <p class="muted small">${t.frozen ? "DK primary, FD fallback. No offseason history. Eligibility, features, selected side and quote are recorded before kickoff; the decision is not recalculated after results." : UNIVERSE}${t.spread ? " " + SPREAD_NOTE : ""}</p></div>`;
+    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="${esc(t.label)}">
+      <div class="nw-h"><b>${esc(t.label)} · Bet ${t.side === "over" ? "Over" : "Under"}</b><button class="nw-x" aria-label="Close">✕</button></div>
+      <p class="small"><b>${esc(t.title)}.</b></p>
+      <p class="small">${t.desc()}</p>
+      <p class="small"><b>Why it might work:</b> ${esc(t.why)}</p>
+      <p class="small">${auditLine(t)}</p>
+      <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck. It does not account for picking the best rules out of many tried, so it is likely optimistic.</p></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
@@ -510,21 +466,21 @@
   // Tap a signal (or several) to see its run chart and week-by-week record, and to narrow the players below to those who fit
   // ALL the picked signals. Below: this week's players ranked by how many signals fit them, with FanDuel checkboxes.
   // Week is the smallest level shown (no per-game split). Scoring is unchanged: same analyze() as before.
-  Object.assign(RL, { sigs: [], scope: "season", showAll: false, q: "" });
+  Object.assign(RL, { sigs: [], scope: "season", q: "", opt: { ...OPT0 } });
   const BE = 52.38; // break-even hit rate (%) at -110
   const memo = { d: null, m: new Map() };
   function AN(tab, wk) {
     if (memo.d !== D) { memo.d = D; memo.m = new Map(); }
-    const k = tab + "|" + wk;
+    const k = tab + "|" + wk + "|" + RL.opt.qbr2 + "|" + RL.opt.qbr4;
     if (!memo.m.has(k)) memo.m.set(k, analyze(tab, wk));
     return memo.m.get(k);
   }
   const nm = (x) => !RL.q || x.c.p.name.toLowerCase().includes(RL.q.trim().toLowerCase());
   const roiTxt = (s) => (s.roi == null ? "—" : `${s.roi >= 0 ? "+" : "−"}${Math.abs(s.roi).toFixed(1)}% ROI`);
   const curWk = () => (typeof defaultWeek === "function" ? defaultWeek() : D.current_week);
-  const SCOPES = [["last", "Last week"], ["month", "Last month"], ["season", "This season"]];
-  // Last month = the past 30 days from today (by kickoff date, Central time)
-  const monthCut = () => ctDate(new Date(Date.now() - 30 * 864e5));
+  const SCOPES = [["last", "Prior week"], ["month", "This month"], ["season", "This season"]];
+  // This month = from the 1st of the current month (by kickoff date, Central time)
+  const monthCut = () => ctDate(new Date()).slice(0, 8) + "01";
   const inMonth = (ko) => !!ko && ctDate(new Date(ko)) >= monthCut();
   function inScope(x) {
     if (RL.scope === "last") return x.r.wk === curWk() - 1;
@@ -547,51 +503,71 @@
     return lists[0].filter((x) => keep.has(bkey(x)));
   }
   const byWeek = (bets) => laWeeks().slice().reverse().map((w) => ({ w, list: bets.filter((x) => x.r.wk === w) }));
-  // tiny run chart: cumulative units by week (all season), green if up, red if down.
-  // A dot for every week, plus very faint axes: weeks (W#) along the bottom, cumulative units up the side.
+  // Tile chart (Michael 2026-11-12): a dot for each week's ROI plus a line for the running (cumulative) ROI, with real axes:
+  // weeks (W#) along the bottom, ROI % up the side. Weeks with no bets get no dot; the cumulative line carries through.
   function spark(by) {
-    if (!by.some((x) => x.list.length)) return `<div class="sg-nospark muted small">no graded bets</div>`;
-    let u = 0; const pts = by.map(({ w, list }) => { const s = tally(list); u += s.U; return { w, n: list.length, d: s.U, u }; });
-    const w = 150, h = 80, l = 30, r = 6, tp = 7, bt = 15, n = pts.length;
-    const mn = Math.min(0, ...pts.map((p) => p.u)), mx = Math.max(0, ...pts.map((p) => p.u)), rg = mx - mn || 1;
-    const X = (i) => (n < 2 ? (l + w - r) / 2 : l + (i * (w - l - r)) / (n - 1)), Y = (v) => tp + ((mx - v) / rg) * (h - tp - bt);
-    const last = pts[n - 1].u, col = last >= 0 ? "--over" : "--under", base = h - bt;
-    const fmt = (v) => { const a = Math.abs(v), t = a < 10 ? a.toFixed(1).replace(/\.0$/, "") : String(Math.round(a)); return `${v > 0 ? "+" : v < 0 ? "−" : ""}${t}u`; };
-    // y ticks: top, zero, bottom (skip any that would crowd the one above)
+    let W = 0, L = 0, U = 0; const pts = by.map(({ w, list }) => {
+      const s = tally(list); U += s.U; W += s.W + s.L;
+      return { w, n: s.n, roi: s.n ? s.roi : null, cum: W ? (100 * U) / W : null };
+    });
+    if (!pts.some((q) => q.n)) return `<div class="sg-nospark muted small">no graded bets</div>`;
+    const w = 170, h = 70, l = 30, r = 11, tp = 6, bt = 13, n = pts.length, base = h - bt;
+    const vals = pts.flatMap((q) => [q.roi, q.cum]).filter((v) => v != null).concat(0);
+    let mn = Math.min(...vals), mx = Math.max(...vals); if (mx - mn < 20) { mx += 10; mn -= 10; }
+    const rg = mx - mn, X = (i) => (n < 2 ? (l + w - r) / 2 : l + (i * (w - l - r)) / (n - 1)), Y = (v) => tp + ((mx - v) / rg) * (base - tp);
+    const fmt = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(Math.round(v))}%`;
     const ticks = []; let prevY = -99;
     for (const v of [...new Set([mx, 0, mn])].sort((a, b) => b - a)) { if (Y(v) - prevY >= 11) { ticks.push(v); prevY = Y(v); } }
-    const every = n > 9 ? 2 : 1;
-    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Cumulative units by week, now ${unitsTxt(last)}">
+    const every = n > 9 ? 2 : 1, cp = pts.map((q, i) => [i, q]).filter(([, q]) => q.cum != null);
+    const last = cp.length ? cp[cp.length - 1][1].cum : 0, col = last >= 0 ? "--over" : "--under";
+    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Weekly ROI and running ROI by week, now ${fmt(last)}">
       <g class="sg-ax"><line x1="${l}" x2="${l}" y1="${tp}" y2="${base}"/><line x1="${l}" x2="${w - r}" y1="${base}" y2="${base}"/>
       ${ticks.map((v) => `<line class="sg-gl" x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${l - 3}" y="${(Y(v) + 2.8).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`).join("")}
-      ${pts.map((p, i) => ((n - 1 - i) % every ? "" : `<text x="${X(i).toFixed(1)}" y="${h - 3}" text-anchor="middle">${p.w}</text>`)).join("")}</g>
+      ${pts.map((q, i) => ((n - 1 - i) % every ? "" : `<text x="${X(i).toFixed(1)}" y="${h - 3}" text-anchor="middle">W${q.w}</text>`)).join("")}</g>
       <line x1="${l}" x2="${w - r}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" style="stroke:var(--line)" stroke-dasharray="3 3"/>
-      <path d="${pts.map((p, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(p.u).toFixed(1)}`).join(" ")}" fill="none" style="stroke:var(${col})" stroke-width="1.6" stroke-linejoin="round"/>
-      ${pts.map((p, i) => `<circle cx="${X(i).toFixed(1)}" cy="${Y(p.u).toFixed(1)}" r="2.3" style="${p.n ? `fill:var(${col})` : `fill:var(--panel)`};stroke:var(${col})" stroke-width="1"><title>Week ${p.w}: ${p.n ? `${unitsTxt(p.d)} that week` : "no graded bets"} · ${unitsTxt(p.u)} total</title></circle>`).join("")}</svg>`;
+      <path d="${cp.map(([i, q], k) => `${k ? "L" : "M"}${X(i).toFixed(1)},${Y(q.cum).toFixed(1)}`).join(" ")}" fill="none" style="stroke:var(${col})" stroke-width="1.6" stroke-linejoin="round"/>
+      ${pts.filter((q) => q.n).map((q) => `<circle cx="${X(pts.indexOf(q)).toFixed(1)}" cy="${Y(q.roi).toFixed(1)}" r="2.3" style="fill:var(${q.roi >= 0 ? "--over" : "--under"})"><title>Week ${q.w}: ${fmt(q.roi)} ROI (${q.n} bets) · running ${fmt(q.cum)}</title></circle>`).join("")}</svg>`;
   }
-  function tileHtml(t, st) {
+  function tileHtml(t, st, locked) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
-    return `<button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}"><div class="sg-top"><b>${esc(t.label)}</b></div>
-      <div class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}<span class="muted small"> ROI</span></div>
-      <div class="small">${s.n ? `${recTxt(s)} · <span class="${cls}">${unitsTxt(s.U)}</span>` : `<span class="muted">no graded bets ${RL.scope === "season" ? "yet" : "for " + scopeName()}</span>`}</div>${st.by ? spark(st.by) : ""}</button>`;
+    const cnt = compute(t.id).length;
+    const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
+    return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
+      <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
+      <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> this wk</span></div>
+      ${st.by ? spark(st.by) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
   function topSection(tabs) {
-    // Run chart = what the signal would have done starting from zero at the start of the selected window (none for Last week: just the result)
+    // Chart window: Prior week = just that week; This month / This season = every week in the window.
     const mWeeks = RL.scope === "month" ? new Set(Object.values(D.games).filter((g) => g.final && inMonth(g.ko)).map((g) => g.wk)) : null;
     const rows = tabs.map((t) => {
       const r = sigRec(t), sc = r.all.filter(inScope);
-      const by = RL.scope === "last" ? null : RL.scope === "month" ? r.by.filter((x) => mWeeks.has(x.w)).map((x) => ({ w: x.w, list: x.list.filter(inScope) })) : r.by;
+      const by = RL.scope === "last" ? r.by.filter((x) => x.w === curWk() - 1) : RL.scope === "month" ? r.by.filter((x) => mWeeks.has(x.w)).map((x) => ({ w: x.w, list: x.list.filter(inScope) })) : r.by;
       return { t, by, s: tally(sc) };
     });
     rows.sort((a, b) => (b.s.n ? 1 : 0) - (a.s.n ? 1 : 0) || (b.s.roi ?? -1e9) - (a.s.roi ?? -1e9) || a.t.n - b.t.n);
-    const shown = RL.showAll ? rows : rows.slice(0, 6);
+    // First FREE_TILES tiles in this order are open to everyone; the rest are faded behind a Google sign-in until signed in.
+    const gate = !signedIn();
+    RL.unlocked = new Set(rows.filter((x, i) => !gate || i < FREE_TILES).map((x) => x.t.id));
     let h = `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>
-      <div class="sg-grid">${shown.map((x) => tileHtml(x.t, x)).join("")}</div>`;
-    if (rows.length > 6) h += `<p><button type="button" class="linkbtn" data-rshowall>${RL.showAll ? "Show top 6" : `Show all ${rows.length} signals`}</button></p>`;
-    if (!signedIn()) h += `<button type="button" class="sg-card rl-lock" data-rlsignin><b>Connect with Google to see all ${TABS.length} signals</b></button>`;
-    return h;
+      <div class="sg-wrap"><div class="sg-grid">${rows.map((x) => tileHtml(x.t, x, !RL.unlocked.has(x.t.id))).join("")}</div>`;
+    if (gate && rows.length > FREE_TILES) h += `<div class="sg-gate" id="sg-gate">${ACCT() ? ACCT().googleBlock("sg") : ""}</div>`;
+    return h + `</div>`;
   }
+  const ACCT = () => window.STIX_ACCOUNT;
+  const FREE_TILES = 3;
+  // Put the sign-in box over the faded tiles (they share the grid with the free ones, so it is placed after drawing).
+  function placeGate() {
+    const g = document.getElementById("sg-gate"), grid = document.querySelector("#rl .sg-grid"); if (!g || !grid) return;
+    const cells = [...grid.querySelectorAll(".sg-locked")]; if (!cells.length) return;
+    const gr = grid.getBoundingClientRect(), free = [...grid.querySelectorAll(".sg-cell:not(.sg-locked)")].map((c) => c.getBoundingClientRect().bottom - gr.top);
+    // centre the box on the faded tiles below the last free one, so it never sits on a free tile
+    const top = Math.max(Math.max(0, ...free), Math.min(...cells.map((c) => c.getBoundingClientRect().top - gr.top))), bot = Math.max(...cells.map((c) => c.getBoundingClientRect().bottom - gr.top));
+    g.style.top = Math.max(0, (top + bot) / 2 - g.offsetHeight / 2) + "px";
+    try { if (ACCT() && ACCT().bindGoogle) ACCT().bindGoogle("sg"); } catch (e) { console.error("sign-in button failed", e); }
+  }
+  window.addEventListener("resize", () => { try { placeGate(); } catch (e) { /* ignore */ } });
   function sigChart(by) {
     let W = 0, L = 0; const pts = [];
     for (const { w, list } of by) {
@@ -621,7 +597,7 @@
   function recordPanel(ts) {
     const bets = betsFor(ts), by = byWeek(bets), key0 = ts.map((t) => t.id).join("+");
     const many = ts.length > 1, title = ts.map((t) => esc(t.label)).join(" + ");
-    let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${many ? `Fits all of: ${title}` : "Run chart"}</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>`;
+    let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${many ? `Fits all of: ${title}` : title}</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>`;
     if (!bets.length) return h + `<p class="muted small">${many ? "No graded bets fit all of these signals (or they point opposite ways)." : "No graded bets yet."}</p></div></div>`;
     const s = tally(bets), cls = s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "";
     const sortK = (a, b) => (a.r.ko || "").localeCompare(b.r.ko || "") || a.r.gid.localeCompare(b.r.gid) || a.p.name.localeCompare(b.p.name) || a.mid.localeCompare(b.mid);
@@ -632,13 +608,12 @@
         ${sec("hit", "Hits", sorted.filter((x) => x.out === "hit"))}${sec("miss", "Misses", sorted.filter((x) => x.out === "miss"))}${sec("push", "Pushes", sorted.filter((x) => x.out === "push"))}</details>`;
     }).join("");
     return h + `${many ? `<div class="la-sum"><div><span class="muted small">Season</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${cls}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%`}</b></div></div>` : ""}
-      ${sigChart(by)}
       <details class="sg-weeks" data-wopen ${RL.wopen ? "open" : ""}><summary>Week by week (${by.filter((x) => x.list.length).length} weeks)</summary>${weeks}</details></div></div>`;
   }
   const BP = { id: "bp", n: 0, side: "mixed", title: "Players" };
   function playersHtml(tabs, picked) {
     const map = new Map();
-    for (const t of tabs) {
+    for (const t of tabs.filter((x) => !RL.unlocked || RL.unlocked.has(x.id))) {
       if (t.challenger) continue;
       for (const x of compute(t.id).filter(nm)) {
         const side = x.side || t.side;
@@ -658,23 +633,21 @@
     let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
     for (const x of rows.slice(pg * PAGE, pg * PAGE + PAGE)) {
       const { p, r, mid, cur } = x.c;
-      h += `<div class="rlrow"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
-        <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span><span class="rlsize">${x.sigs.length} signal${x.sigs.length === 1 ? "" : "s"}</span></div>
-        <div class="muted small">${esc(p.pos)} · ${esc(r.slot || "")} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</div>
-        <div class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</div></div>`;
+      h += `<div class="rlrow sg-pr"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+        <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
+        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span></div></div>`;
     }
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
     return h + `</div>${pager}`;
   }
   function html() {
     const tabs = visibleTabs();
-    RL.sigs = RL.sigs.filter((id) => tabs.some((t) => t.id === id));
+    let inner = topSection(tabs); // also sets RL.unlocked
+    RL.sigs = RL.sigs.filter((id) => RL.unlocked.has(id));
     const picked = RL.sigs.map((id) => tabs.find((t) => t.id === id));
-    if (LA.wk == null) LA.wk = laWeeks()[0] || null; // the Challenger diagnostics below read these
-    let inner = topSection(tabs);
     if (picked.length) inner += recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
-    if (laWeeks().length) inner += `<details class="sg-diag"><summary>Research diagnostics</summary>${challengerDiagnosticsHtml()}${thesisRegistryHtml()}</details>`;
+    setTimeout(placeGate, 0);
     return `<section id="rl"><h2 class="gsec">Signals</h2>${inner}</section>`;
   }
   function redraw() {
@@ -682,11 +655,12 @@
     el.outerHTML = html();
   }
   document.addEventListener("click", (e) => {
+    const o = e.target.closest && e.target.closest("[data-sgopt]");
+    if (o) { const [k, v] = o.dataset.sgopt.split(":"); RL.opt[k] = +v; redraw(); return; }
     const c = e.target.closest && e.target.closest("[data-sig]");
     if (c) { const id = c.dataset.sig; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : [...RL.sigs, id]; redraw(); return; }
     if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
-    if (e.target.closest && e.target.closest("[data-rshowall]")) { RL.showAll = !RL.showAll; redraw(); }
   });
   document.addEventListener("toggle", (e) => { if (e.target && e.target.matches && e.target.matches("[data-fopen]")) RL.fopen = e.target.open; if (e.target && e.target.matches && e.target.matches("[data-wopen]")) RL.wopen = e.target.open; }, true);
   let qT = 0;
@@ -725,26 +699,26 @@
   // "Last week" = his most recent earlier final game; spread = data.json games[gid].spread (nflverse spread_line).
   const LA = { tab: "t1", wk: null, gid: "", open: new Set() }; // wk: a week number, or "all" (Michael 2026-11-01)
   const payout = (o) => (o > 0 ? o / 100 : 100 / Math.abs(o));
+  // Share of the team's offensive plays last game spent trailing / leading by 7+ (game_script.json s7; null until the data is there).
+  function sharesOf(prev) {
+    if (!prev) return null;
+    const g = D.games[prev.gid], t = g && g.scr && g.scr.t && g.scr.t[g.home === prev.team ? "h" : "a"], v = t && t.s7;
+    return v && v[0] ? { trail: v[1] / v[0], lead: v[2] / v[0] } : null;
+  }
   function ruleHits(r, mid, m, p, past, played, prev) {
     const pm = prev && prev.m ? prev.m[mid] : null;
     const pl = pm && pm.lstat === "ok" && pm.line != null ? pm.line : null;
-    const f = favBy(r), hits = [];
-    if (r.slot === "WR2" && pm && pm.res === "over") hits.push("t1");
-    if (r.ha === "away" && pl != null && m.line > pl) hits.push("t2");
-    if (r.slot === "TE1" && mid === "rec_yds") hits.push("t3");
-    if (r.slot === "QB1" && mid === "rush_yds") hits.push("t4");
-    if (p.pos !== "QB" && pl != null) {
-      const us = played.map((x) => usageOf(p.pos, x)).filter((u) => u != null);
-      if (us.length >= USAGE_N + 2) {
-        const early = us.slice(0, -USAGE_N), drop = us.slice(-USAGE_N).reduce((a, b) => a + b, 0) / USAGE_N - early.reduce((a, b) => a + b, 0) / early.length;
-        const tol = COUNT_MKTS.includes(mid) ? FLAT.count : mid === "pass_yds" ? FLAT.pass_yds : FLAT.yds;
-        if (drop <= -(p.pos === "RB" ? USAGE_DROP.snap : USAGE_DROP.tshare) && Math.abs(m.line - pl) <= tol) hits.push("t5");
-      }
+    const hits = [], line = m.line;
+    if (p.pos === "QB" && mid === "rush_yds") {
+      const l3 = played.map((x) => (x.m && x.m[mid] ? x.m[mid].act : null)).filter((v) => v != null).slice(-3);
+      if (line >= 25 && l3.length === 3 && l3.reduce((a, b) => a + b, 0) / 3 >= 25) hits.push("qbr1");
+      if (pl != null && line - pl >= RL.opt.qbr2) hits.push("qbr2");
+      if (line >= RL.opt.qbr4) hits.push("qbr4");
     }
-    if (f != null && f >= BIG_SPREAD && p.pos === "RB" && mid === "rush_yds") hits.push("t6");
-    if (f != null && f <= -BIG_SPREAD && mid === "pass_yds") hits.push("t7");
-    if (f != null && f <= -BIG_SPREAD && (p.pos === "WR" || p.pos === "TE") && mid === "rec_yds") hits.push("t8");
-    return { hits, pm, pl, f };
+    const raised = pm && pm.res === "over" && pl != null && line > pl, sh = raised ? sharesOf(prev) : null;
+    if (sh && (p.pos === "WR" || p.pos === "TE") && mid === "rec_yds" && sh.trail >= 0.5) hits.push("sc1");
+    if (sh && p.pos === "RB" && mid === "rush_yds" && sh.lead >= 0.5) hits.push("sc2");
+    return { hits, pm, pl, f: null };
   }
   // Every graded bet one rule made in one week: [{p, r, mid, m, side, out: "hit"|"miss"|"push", u, pm, pl, f}]
   function analyze(tab, wk) {
@@ -791,12 +765,9 @@
   }
   const recTxt = (s) => `${s.W}–${s.L}${s.P ? `–${s.P}` : ""}`;
   function why(x) {
-    const t = x.r, line = num(x.m.line);
+    const line = num(x.m.line);
     switch (x.rule.id) {
-      case "t1": return `Last game ${num(x.pm.act)} vs ${num(x.pl)} line (over)`;
-      case "t2": return `Line ${num(x.pl)} → ${line} · @ ${esc(t.opp)}`;
-      case "t5": return `Line ${num(x.pl)} → ${line}`;
-      case "t6": case "t7": case "t8": return esc(spreadTxt(x.f));
+      case "qbr2": case "sc1": case "sc2": return `Line ${num(x.pl)} → ${line}`;
       default: return "";
     }
   }

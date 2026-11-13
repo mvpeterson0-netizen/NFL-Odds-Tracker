@@ -7,18 +7,14 @@
 // Numbers: frozen theses baseline (claude/frozen-theses.md), weeks 1–7, in-sample. To announce a future release: change
 // ITEMS — any content change shows the pop-up once more to everyone (see fingerprint below).
 (function () {
-  const RELEASE_ID = "2026-10-29-season-signals";
+  const RELEASE_ID = "2026-11-12-signals-rebuilt";
   const KEY = "stix_release";
   const ITEMS = [
     { title: "Lines for the whole season",
       text: "Every game this season now has its real DraftKings / FanDuel pre-game lines, back to week 1. Charts, game logs and Results now cover weeks 1–7, not just the weeks since Stix started collecting." },
-    { title: "8 signals to watch",
-      text: "We tested more than 1,900 conditions on weeks 1–7 and kept 8. One of them:",
-      stat: { rule: "WR2 who went over his line last week → bet the Under (same stat)",
-              rec: "99–54 · 64.7% hit · +34.1 units · <b>+22.3% ROI</b>" },
-      after: "Not financial advice, additional data may prove or disprove thesis",
-      imgs: [["whatsnew/signals.jpg", 640, 720, "Research tab Leads showing rule 1, WR2 went over, with its weeks 1–7 record"]],
-      go: ["#/search", "See all 8 on the Research tab"] },
+    { title: "Signals, rebuilt",
+      text: "The Signals page now tracks 5 rules from our thesis audit (more coming), scored on 2026 games only: ROI by week, a running total, and this week's players for each rule. Past results are a historical replay, not proof of an edge. Not financial advice.",
+      go: ["#/search", "See the Signals"] },
   ];
 
   // 2026-10-29 (Michael): the pop-up shows again automatically whenever its content changes. The saved value is a
