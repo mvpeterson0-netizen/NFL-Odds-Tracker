@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from pipeline.frozen_leads import decide, update, probability, MODEL_PATH, Features
 from pipeline.script import _team
+from pipeline.build import _starter
 
 
 class FrozenLeadTests(unittest.TestCase):
@@ -48,6 +49,11 @@ class FrozenLeadTests(unittest.TestCase):
             self.assertEqual(update(d,p,{'p':[row]},now,path),original)
             q['cap']='2026-11-01T19:00:00Z'
             self.assertEqual(update(d,p,{'p':[row]},now,path),original)
+
+    def test_starter_reads_nflverse_game_row(self):
+        g={'home_qb_id':'00-1','home_qb_name':'A B','away_qb_id':'','away_qb_name':''}
+        self.assertEqual(_starter(g,'home'),{'id':'00-1','n':'A B'})
+        self.assertIsNone(_starter(g,'away'))
 
     def test_designed_runs_exclude_scrambles_kneels_no_plays(self):
         plays=[{'posteam':'A','rush_attempt':'1','qb_scramble':s,'qb_kneel':k,'play_type':t}
