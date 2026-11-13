@@ -1154,3 +1154,17 @@ function index() {
   D.players.forEach((p) => (playerById[p.id] = p));
   D.markets.forEach((m) => (mkt[m.id] = m));
 }
+
+// Triple-tap the Signals tab (three taps within about 0.8 s) to open the Indicator page (#/search/indicators). Hidden on purpose: no link anywhere.
+(function () {
+  let taps = 0, timer = 0;
+  function bindTab() {
+    const a = document.querySelector('#tabs a[data-tab="search"]'); if (!a || a.dataset.tt) return;
+    a.dataset.tt = "1";
+    a.addEventListener("click", (e) => {
+      taps++; clearTimeout(timer); timer = setTimeout(() => { taps = 0; }, 800);
+      if (taps >= 3) { taps = 0; clearTimeout(timer); e.preventDefault(); location.hash = "#/search/indicators"; }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTab); else bindTab();
+})();
