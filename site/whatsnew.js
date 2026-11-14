@@ -4,14 +4,14 @@
 //  • when a visitor taps Over or Under on a player page (picks.js remembers that pick and saves it after sign-in + 21+), or
 //  • when a visitor taps "Sign in to see all 8" on the Research Leads (signing in there stays on Research), or
 //  • once, after more than 1 minute in total on the site (visible time, added up across visits in this browser).
-// The 1-minute pop-up shows once per browser: closing it (✕, Not now, tapping outside, Escape) or signing in saves PROMPT_ID.
+// The 2-minute pop-up shows once per browser: closing it (✕, Not now, tapping outside, Escape) or signing in saves PROMPT_ID.
 // A pick tap always opens it (they asked to save a pick). Never shown to someone signed in, over a sign-in link, on the
 // Welcome page, or on the Picks tab (which already shows the sign-in screen). To show the 1-minute pop-up again, change PROMPT_ID.
 // (The old What's new screenshots stay in site/whatsnew/ but aren't used.)
 (function () {
   const PROMPT_ID = "2026-10-28-signin";
   const KEY = "stix_signin_prompt";
-  const SECS_KEY = "stix_site_secs", AFTER_SECS = 60, TICK = 5;
+  const SECS_KEY = "stix_site_secs", AFTER_SECS = 120, TICK = 5;
   const ACC = () => window.STIX_ACCOUNT;
   const PICKS = () => window.STIX_PICKS;
   let forPick = false, forLeads = 0;
@@ -72,7 +72,7 @@
     });
   }
 
-  // The 1-minute pop-up: only when nothing would be covered that shouldn't be.
+  // The 2-minute pop-up: only when nothing would be covered that shouldn't be.
   function okToShowNow() {
     const h = location.hash || "";
     if (/access_token|sign-in|error_description/i.test(h + location.search)) return false; // a sign-in link
