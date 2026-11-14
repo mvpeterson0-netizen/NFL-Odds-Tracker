@@ -68,7 +68,7 @@
       return `<b>${num(m.line)}</b>${res}`;
     }
     const sn = m.lstat === "pending" ? latestSnap(m) : null;
-    if (sn) return noDay ? `<b>${num(sn.line)}</b>` : `<b>${num(sn.line)}</b> <span class="chip snapchip">${esc(sn.label)}</span>`;
+    if (sn) return noDay || sn.label === "Check" ? `<b>${num(sn.line)}</b>` : `<b>${num(sn.line)}</b> <span class="chip snapchip">${esc(sn.label)}</span>`; // no chip for line checks (Michael 2026-11-14)
     const t = { not_collected: "n/c", pending: "pending", no_pregame: "none", not_offered: "n/o", not_requested: "n/r" }[m.lstat] || "—";
     return `<span class="na" title="${esc(m.lnote || m.lstat || "")}">${t}</span>`;
   }
