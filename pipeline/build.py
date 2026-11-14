@@ -16,7 +16,7 @@ from .common import (COLLECTION_START_UTC, DATA, SITE, iso, norm_name, parse_iso
 from .defense import DefenseRanks, as_fields
 from .weather import load as load_weather
 from .nflverse import Data, load_sources
-from .odds import CAPTURES_PATH, LINKS_PATH, PULL_LOG_PATH, SNAPSHOTS, WINDOW_CLOSE, WINDOW_OPEN, ptype
+from .odds import CAPTURES_PATH, LINKS_PATH, PULL_LOG_PATH, SNAPSHOTS, TRACK_DIR, WINDOW_CLOSE, WINDOW_OPEN, ptype
 from .slots import update_slots
 from . import espn_box
 
@@ -406,6 +406,23 @@ def build(log):
             caps_by[(c["game_id"], c["gsis_id"], c["market"])].append(c)
         else:
             snaps_by[(c["game_id"], c["gsis_id"], c["market"], ptype(c))].append(c)
+    # Line checks (pull type "track", stored in data/line_checks/) for games that have not kicked off: keep only the
+    # latest check per player/market so it can show as the newest line-movement snapshot (Michael 2026-11-14; before this
+    # the app showed only Mon / Thu / Sun AM lines even when a later check had moved the line). Not graded.
+    chk_by = {}  # (game, player, market) -> (captured_utc, [rows at that capture time])
+    for wk_ in sorted({int(g["week"]) for g in games if parse_iso(g["kickoff_utc"]) > now}):
+        chk_path = TRACK_DIR / f"week_{wk_:02d}.csv"
+        if not chk_path.exists():
+            continue
+        for c in read_csv(chk_path):
+            if not c.get("gsis_id"):
+                continue
+            k = (c["game_id"], c["gsis_id"], c["market"])
+            cur_ = chk_by.get(k)
+            if cur_ is None or c["captured_utc"] > cur_[0]:
+                chk_by[k] = (c["captured_utc"], [c])
+            elif c["captured_utc"] == cur_[0]:
+                cur_[1].append(c)
     pull_rows = read_csv(PULL_LOG_PATH)
     pulls_by_game = defaultdict(list)
     for p in pull_rows:
@@ -588,6 +605,13 @@ def build(log):
                         snaps.append({"t": t, "label": label, "line": to_float(sm["line"]),
                                       "op": to_float(sm["over_price"]), "up": to_float(sm["under_price"]),
                                       "book": BOOK_NAMES.get(sm["book"], sm["book"]), "cap": sm["captured_utc"]})
+                if m.get("lstat") == "pending":
+                    cc = chk_by.get((gid, pid, okey))
+                    if cc and (not snaps or cc[0] > snaps[-1]["cap"]):
+                        cm, _alts = choose_main(cc[1])
+                        snaps.append({"t": "track", "label": "Check", "line": to_float(cm["line"]),
+                                      "op": to_float(cm["over_price"]), "up": to_float(cm["under_price"]),
+                                      "book": BOOK_NAMES.get(cm["book"], cm["book"]), "cap": cm["captured_utc"]})
                 if snaps:
                     m["snaps"] = snaps
                 if m.get("lstat") == "ok":
