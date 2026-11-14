@@ -331,7 +331,7 @@ function viewBoard() {
   </div>`;
   if (!items.length) return html + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
   html += `<div class="panel scroll board"><table><thead><tr>
-    <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
+    <th>Game</th><th>Team</th><th>Slot</th><th>Player</th><th>Market</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM / Check chip (not graded).">Line</th>
     <th class="num">Over</th><th class="num">Under</th><th>Book · captured</th><th class="num">Actual</th><th>Result</th>
     <th class="num">Snap %</th><th>Usage</th><th>Notes</th></tr></thead><tbody>`;
   // Rows per run of the same game, so the Game cell can span every row of that run. (A game can appear twice
@@ -604,8 +604,8 @@ function viewPlayer(pid) {
     ${betBox(pid, mid)}
     ${pickBoxSafe(pid, mid)}
     <div class="panel"><div class="chart">${chartSVG(rows, mid, { edgeAbove: true })}</div>
-    <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM), until the pre-game line arrives</span></div></div>
-    <div class="panel scroll"><table class="ptable"><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th title="Label · temperature (°F) · wind · precipitation. Hover for details.">Weather</th><th>Slot</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM chip (not graded).">Line</th>
+    <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line (green = over hit, red = under)</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Latest snapshot (Mon / Thu / Sun AM, or a later line check), until the pre-game line arrives</span></div></div>
+    <div class="panel scroll"><table class="ptable"><thead><tr><th>Wk</th><th>Opponent</th><th title="Opponent defense rank in this stat vs. this position, using only games before this one. 1 = fewest allowed (toughest).">Opp D rank</th><th title="Label · temperature (°F) · wind · precipitation. Hover for details.">Weather</th><th>Slot</th><th class="num" title="Pre-game line captured ~3 h before kickoff (graded). Before that, the latest snapshot is shown with a yellow Mon / Thu / Sun AM / Check chip (not graded).">Line</th>
     <th class="num" title="Over / Under odds">Odds</th><th title="Book · which pull (hover for the exact time and line movement)">Book</th><th class="num">Actual</th><th>Result</th>
     <th class="num" title="Offensive snap share · usage (targets; carries for RBs)">Snap · use</th><th></th></tr></thead><tbody>`;
   for (const r of rows) {
@@ -874,7 +874,7 @@ function weekLinesPanel() {
   }
   return `<div class="panel"><h3>Week ${wk} lines · ${showing} of ${games.length} games showing lines</h3><div class="body">
     <table class="wrap wltable"><tbody>${body}</tbody></table>
-    <p class="muted small">Players = our slotted players in that game (QB1, RB1–2, WR1–3, TE1–2) with at least one line showing; lines = player-and-stat lines the app shows for them now (the pre-game line once captured, otherwise the latest Mon / Thu / Sun AM snapshot). "Came back empty" means the odds service answered but DraftKings/FanDuel had no player props posted for that game yet; empty checks use no credits. From Monday 8 AM Central this shows the coming Sunday's week.</p>
+    <p class="muted small">Players = our slotted players in that game (QB1, RB1–2, WR1–3, TE1–2) with at least one line showing; lines = player-and-stat lines the app shows for them now (the pre-game line once captured, otherwise the latest snapshot or line check). "Came back empty" means the odds service answered but DraftKings/FanDuel had no player props posted for that game yet; empty checks use no credits. From Monday 8 AM Central this shows the coming Sunday's week.</p>
   </div></div>`;
 }
 
@@ -916,7 +916,7 @@ function guideBody() {
     <p class="muted small">Rules of thumb for spotting a player whose recent production differs from his season, not predictions.</p>
   </div></div>
   <div class="panel"><h3>Other symbols</h3><div class="body"><table class="wrap"><tbody>
-    <tr><td><span class="chip snapchip">Mon</span> <span class="chip snapchip">Thu</span> <span class="chip snapchip">Sun AM</span></td><td class="wrapcell">Line-movement snapshots (Monday 8 AM, Thursday 2 PM, Sunday 8 AM Central). Shown until the pre-game line arrives; never graded.</td></tr>
+    <tr><td><span class="chip snapchip">Mon</span> <span class="chip snapchip">Thu</span> <span class="chip snapchip">Sun AM</span> <span class="chip snapchip">Check</span></td><td class="wrapcell">Line-movement snapshots (Monday 8 AM, Thursday 2 PM, Sunday 8 AM Central) and the latest line check (8 AM / 2 PM / 8 PM Central). Shown until the pre-game line arrives; never graded.</td></tr>
     <tr><td><b>Line</b> (no chip)</td><td class="wrapcell">Pre-game line captured about 3 hours before kickoff. This is the line that is graded over / under / push / void.</td></tr>
     <tr><td><span class="drk tough">5th</span> / <span class="drk easy">28th</span></td><td class="wrapcell">Opp D rank: how the opponent ranks in that stat against that position, using only games before that game. 1 = fewest allowed (toughest), 32 = most allowed. Colored only after 3+ games: red = top quarter (toughest), green = bottom quarter.</td></tr>
     <tr><td><span class="chip chg">WR2 ↺</span></td><td class="wrapcell">The player's slot changed from the prior week (hover for the reason).</td></tr>
@@ -957,7 +957,7 @@ function viewDefense() {
   h += `<div class="panel scroll"><table class="dtable"><thead><tr>
     <th class="num"><button class="sortb" id="d-sort" title="Reverse order">Rank ${S.defAsc ? "▲" : "▼"}</button></th><th>Defense</th>
     <th class="num">${esc(sel.m.label)} allowed / game</th><th class="num">Games</th><th>This week</th>
-    <th title="The opponent's slotted ${sel.pos}s this week and their ${esc(sel.m.label.toLowerCase())} line. Pre-game line (~3 h before kickoff) once captured; before that, the latest snapshot with a yellow Mon / Thu / Sun AM chip.">Facing · ${esc(sel.m.label)} line</th></tr></thead><tbody>`;
+    <th title="The opponent's slotted ${sel.pos}s this week and their ${esc(sel.m.label.toLowerCase())} line. Pre-game line (~3 h before kickoff) once captured; before that, the latest snapshot with a yellow Mon / Thu / Sun AM / Check chip.">Facing · ${esc(sel.m.label)} line</th></tr></thead><tbody>`;
   for (const r of rows) {
     const cls = r.n < 3 ? "" : r.rk <= q ? "tough" : r.rk > of - q ? "easy" : "";
     const f = facing[r.team];

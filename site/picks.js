@@ -431,7 +431,7 @@
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
     h += sec("Locked · game started", locked, "Picks move here at kickoff. They can't be changed or removed after that.");
     h += `<details class="panel pk-graded" ${ST.gradedOpen ? "open" : ""}><summary><b>Graded (${graded.length})</b> <span class="muted small">· tap to show</span></summary><div class="body">${graded.length ? graded.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">Graded picks appear here once the game's stats are published.</p>`}</div></details>`;
-    h += `<p class="muted small">Picks are graded against the line saved when you made the pick (a Mon / Thu / Sun AM snapshot or the pre-game line), not the app's graded line.
+    h += `<p class="muted small">Picks are graded against the line saved when you made the pick (a Mon / Thu / Sun AM snapshot, a line check, or the pre-game line), not the app's graded line.
       Over hits when the actual stat is above that line; equal = push; a player who doesn't play = void. ${lockNote}</p>`;
     return h;
   }
