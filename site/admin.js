@@ -8,7 +8,7 @@
   const getIncl = () => { try { return localStorage.getItem(inclKey) === "1"; } catch { return false; } };
   const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, sel: null, activity: null, actErr: "", tab: "traffic" };
   // Tweet plan tab (supabase/015_tweet_plan.sql): edits are held here until "Submit changes"; Claude acts on the request.
-  const TP = { data: null, err: "", loading: false, edits: {}, adds: [], dels: {}, msg: "", sending: false, open: {}, showPast: false, imgs: {}, copied: "", busy: "" };
+  const TP = { data: null, err: "", loading: false, edits: {}, adds: [], dels: {}, msg: "", sending: false, open: {}, showPast: false, imgs: {}, copied: "", busy: "", rnote: {}, rmsg: {}, rerr: {}, rbusy: "" };
   const TP_STATUS = ["Not drafted", "Drafted (chat only)", "Scheduled on X", "Posted", "Failed / skipped", "Manual"];
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtN = (n) => Number(n || 0).toLocaleString("en-US");
@@ -158,6 +158,26 @@
     if (r.ok) { TP.data = null; TP.msg = posted ? "Marked posted." : "Posted mark removed."; loadTweets(); }
     else { TP.msg = `Couldn't update: ${/404|42501|not allowed/i.test(`${r.error} ${r.status}`) ? "run supabase/016_tweet_drafts.sql first" : (r.error || "try again")}`; rerender(); }
   }
+  async function redraft(k) {
+    if (TP.rbusy) return;
+    TP.rbusy = k; TP.rmsg[k] = ""; TP.rerr[k] = false; rerender();
+    const r = await ACC().db("/rest/v1/rpc/admin_tweet_redraft", { method: "POST", body: { p_slot_key: k, p_note: TP.rnote[k] || "" } });
+    if (!r.ok) {
+      TP.rbusy = ""; TP.rerr[k] = true;
+      TP.rmsg[k] = `Couldn't send: ${/404/.test(String(r.status)) ? "run supabase/017_tweet_redraft.sql first" : (r.error || "try again")}`; rerender(); return;
+    }
+    let st = null;
+    for (let i = 0; i < 6 && !st; i++) {
+      await new Promise((res) => setTimeout(res, 2000));
+      const s = await ACC().db("/rest/v1/rpc/admin_tweet_redraft_status", { method: "POST", body: { p_log_id: r.data } });
+      if (s.ok && s.data && (s.data.http_status != null || s.data.error)) st = s.data;
+    }
+    TP.rbusy = "";
+    if (st && st.http_status >= 200 && st.http_status < 300) { TP.rnote[k] = ""; TP.rmsg[k] = "Sent. Claude is working on it; a new draft usually appears in a few minutes. Tap Refresh to check."; }
+    else if (st) { TP.rerr[k] = true; TP.rmsg[k] = `Claude did not accept the request (${st.http_status != null ? "HTTP " + st.http_status : st.error}). Nothing changed.`; }
+    else TP.rmsg[k] = "Sent, but no confirmation yet. Tap Refresh in a minute to check.";
+    TP.data = null; loadTweets();
+  }
   const tpChangeCount = () => Object.values(TP.edits).reduce((n, f) => n + Object.keys(f).length, 0) + TP.adds.length + Object.keys(TP.dels).length;
   const tpBase = (row, f) => { const v = row[f]; return f === "post_time" && v ? String(v).slice(0, 5) : (v ?? ""); };
   function tweetsPage() {
@@ -180,6 +200,14 @@
     const isPast = (r) => (r.post_date && r.post_date < today) || r.status === "Posted";
     const upcoming = plan.filter((r) => !isPast(r) || TP.open[r.slot_key] || TP.edits[r.slot_key]), earlier = plan.filter((r) => !upcoming.includes(r));
     const drafts = TP.data.drafts || {};
+    const redraftBlock = (r) => {
+      if (r.status === "Posted" || !TP.data.redraft_configured) return "";
+      const k = r.slot_key, unsaved = !!TP.edits[k] || !!TP.dels[k], msg = TP.rmsg[k];
+      return `<div class="tp-draft tp-wide"><div class="tp-dh">Redraft with Claude</div>
+        <textarea class="tp-in" data-tprnote="${esc(k)}" rows="2" aria-label="What to change for ${esc(r.slot)}" placeholder="What to change (optional). Claude also reads this tweet's Direction for Claude, so save that first.">${esc(TP.rnote[k] || "")}</textarea>
+        <div class="tp-acts"><button class="tp-markbtn" data-tpredraft="${esc(k)}" ${TP.rbusy || unsaved ? "disabled" : ""}>${TP.rbusy === k ? "Sending…" : "Redraft now"}</button>${unsaved ? `<span class="muted small">Submit your changes first so Claude sees them.</span>` : ""}</div>
+        ${msg ? `<div class="small ${TP.rerr[k] ? "pk-err" : "muted"}">${esc(msg)}</div>` : ""}</div>`;
+    };
     const draftBlock = (r) => {
       const d = drafts[r.slot_key], k = r.slot_key, posted = r.status === "Posted";
       if (!d) return `<div class="tp-draft tp-wide"><div class="tp-dh">Draft</div><div class="muted small">No draft saved yet. Claude saves the text and screenshots here when its task runs.</div>${markBtn(r, posted)}</div>`;
@@ -209,6 +237,7 @@
           <label class="tp-f"><span>Status</span>${sel}</label>
           <div class="tp-f"><span>&nbsp;</span><button class="tp-del ${gone ? "on" : ""}" data-tpdel="${esc(r.slot_key)}" aria-label="Delete tweet ${esc(r.slot)}">${gone ? "Undo delete" : "Delete tweet"}</button></div>
           ${draftBlock(r)}
+          ${redraftBlock(r)}
           <div class="tp-info muted small tp-wide">${info}</div></div>` : ""}</div>`;
     };
     const dayBlocks = (list) => { let out = "", last = null; list.forEach((r) => { if (r.day_label !== last) { out += `<div class="tp-dayh">${esc(r.day_label || fmtD(r.post_date))}</div>`; last = r.day_label; } out += card(r); }); return out; };
@@ -255,6 +284,8 @@
     document.querySelectorAll("[data-tpnew-del]").forEach((b) => b.addEventListener("click", () => { TP.adds.splice(+b.dataset.tpnewDel, 1); rerender(); }));
     document.querySelectorAll("[data-tpdel]").forEach((b) => b.addEventListener("click", () => { const k = b.dataset.tpdel; if (TP.dels[k]) delete TP.dels[k]; else TP.dels[k] = true; rerender(); }));
     document.querySelectorAll("[data-tpopen]").forEach((b) => b.addEventListener("click", () => { const k = b.dataset.tpopen; if (TP.open[k]) delete TP.open[k]; else TP.open[k] = true; rerender(); }));
+    document.querySelectorAll("[data-tprnote]").forEach((el) => el.addEventListener("input", () => { TP.rnote[el.dataset.tprnote] = el.value; }));
+    document.querySelectorAll("[data-tpredraft]").forEach((b) => b.addEventListener("click", () => redraft(b.dataset.tpredraft)));
     document.querySelectorAll("[data-tpmark]").forEach((b) => b.addEventListener("click", () => markPosted(b.dataset.tpmark, b.dataset.posted === "1")));
     document.querySelectorAll("[data-tpcopy]").forEach((b) => b.addEventListener("click", async () => {
       const k = b.dataset.tpcopy, d = (TP.data.drafts || {})[k]; if (!d) return;
