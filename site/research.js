@@ -30,7 +30,7 @@
   // Each is a historical replay, not a proven edge; it is scored here on 2026 data only, with the same grading as before
   // (graded pre-game line, saved odds, 1 unit). Thresholds are the audit's; QB-R2 / QB-R4 carry a viewer toggle.
   // Not on this page yet (own PRs): CM1-TE, CM1-20 (needs prior-week QB/receiver line gap) and QBCH (needs the starter data).
-  const CM_READ = `<div class="sg-sub"><b>Reading a player row:</b></div><ul class="sg-ul"><li>"QB −34yds": the QB's passing-yards line change vs last week.</li><li>"7 receivers +46yds": the 7 receivers' receiving-yards line changes added up.</li><li>"net +80": receivers minus QB.</li></ul>`;
+  const CM_READ = `<div class="sg-sub"><b>Reading a player row:</b></div><ul class="sg-ul"><li>"QB −20yds": the QB's passing-yards line fell 20 yards vs last week.</li><li>"6 receivers −4yds": the 6 receivers' receiving-yards lines changed by 4 yards in total, all added up.</li><li>"net +16": the receivers' total minus the QB's change (−4 − (−20)), so the QB's line fell 16 yards more.</li></ul>`;
   const TABS = [
     { id: "qbr1", n: 1, side: "under", combo: true, label: "QB-R1", short: () => "L3 gm avg ≥25yd and line ≥25yd",
       title: "QB rushing yards → Under (rushes a lot, high line)", why: "Books may price a rushing QB's recent output too high.",
@@ -43,7 +43,7 @@
       desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when all three are true:<ul class="sg-ul"><li>In his team's <b>previous game</b> it trailed by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play).</li><li>He finished <b>Over</b> his receiving-yards line in that game.</li><li>This week's line is <b>higher</b> than that game's line.</li></ul><div class="sg-sub">The idea is that catch-up passing volume may not repeat.</div>` },
     { id: "cm1te", n: 6, side: "under", combo: true, cm: true, label: "CM1-TE", short: () => "TE rec yd under when QB line drops 15+ and receivers' lines don't follow", minDrop: 15, only: "TE",
       title: "TE rec yds Under when the QB line drops but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
-      desc: () => `Bet the TE's <b>receiving yards Under</b> when all three are true:<ul class="sg-ul"><li>The QB's passing-yards line is down <b>15+</b> vs last week.</li><li>At least 3 teammates (WR/TE/RB) have receiving-yards lines both weeks.</li><li>Their line changes added up, minus the QB change (the gap), is at least <b>10</b>.</li></ul>${CM_READ}` },
+      desc: () => `Bet the TE's <b>receiving yards Under</b> when both are true:<ul class="sg-ul"><li>The QB's passing-yards line is down <b>15+</b> vs last week.</li><li>The QB's line is down at least <b>10</b> yards more than all the receivers' line changes added up.</li></ul>${CM_READ}` },
     { id: "cm120", n: 7, side: "under", combo: true, cm: true, label: "CM1-20", short: () => "Rec yd under when QB line drops 20+ and receivers' lines don't follow", minDrop: 20, only: null,
       title: "Receiving yards Under when the QB line drops 20+ but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
       desc: () => `Same as CM1-TE, with two differences:<ul class="sg-ul"><li>The QB line is down <b>20+</b>.</li><li>Every qualifying receiver (WR/TE/RB) is a bet.</li></ul>${CM_READ}` },
