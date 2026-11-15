@@ -178,6 +178,24 @@
     else TP.rmsg[k] = "Sent, but no confirmation yet. Tap Refresh in a minute to check.";
     TP.data = null; loadTweets();
   }
+  function tpImgFile(k, i) {
+    const x = (TP.imgs[k] || [])[i]; if (!x) return null;
+    const bin = atob(x.data), u8 = new Uint8Array(bin.length); for (let n = 0; n < bin.length; n++) u8[n] = bin.charCodeAt(n);
+    return new File([u8], x.name || `tweet-${i + 1}.png`, { type: x.mime || "image/png" });
+  }
+  async function tpImgAct(kind, key) {
+    const [k, i] = key.split("|"), f = tpImgFile(k, +i), box = document.querySelector(`[data-tpimgmsg="${key}"]`);
+    const say = (t) => { if (box) box.textContent = t; };
+    if (!f) { say("Image not loaded yet."); return; }
+    try {
+      if (kind === "share") {
+        if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); say("Choose Save Image to put it in Photos."); }
+        else say("Sharing isn't available here. Press and hold the image to save it.");
+      } else if (navigator.clipboard && window.ClipboardItem) {
+        await navigator.clipboard.write([new ClipboardItem({ [f.type]: f })]); say("Image copied. Paste it into the X post.");
+      } else say("Copy isn't available here. Press and hold the image and choose Copy.");
+    } catch (e) { if (e && e.name !== "AbortError") say("Couldn't do that here. Press and hold the image to save or copy it."); }
+  }
   const tpChangeCount = () => Object.values(TP.edits).reduce((n, f) => n + Object.keys(f).length, 0) + TP.adds.length + Object.keys(TP.dels).length;
   const tpBase = (row, f) => { const v = row[f]; return f === "post_time" && v ? String(v).slice(0, 5) : (v ?? ""); };
   function tweetsPage() {
@@ -213,7 +231,7 @@
       if (!d) return `<div class="tp-draft tp-wide"><div class="tp-dh">Draft</div><div class="muted small">No draft saved yet. Claude saves the text and screenshots here when its task runs.</div>${markBtn(r, posted)}</div>`;
       setTimeout(() => loadDraftImages(k), 0);
       const im = TP.imgs[k];
-      const thumbs = im === undefined || im === null ? `<div class="muted small">Loading images…</div>` : im.map((x, i) => { const src = `data:${esc(x.mime)};base64,${esc(x.data)}`; return `<figure class="tp-img"><img src="${src}" alt="Screenshot ${i + 1} for ${esc(r.slot)}"><a class="tp-dl" href="${src}" download="${esc(x.name || `${r.slot}-${i + 1}.png`)}">Download</a></figure>`; }).join("");
+      const thumbs = im === undefined || im === null ? `<div class="muted small">Loading images…</div>` : im.map((x, i) => { const src = `data:${esc(x.mime)};base64,${esc(x.data)}`; return `<figure class="tp-img"><img src="${src}" alt="Screenshot ${i + 1} for ${esc(r.slot)}"><div class="tp-acts"><button class="tp-markbtn" data-tpshare="${esc(k)}|${i}">Save / share</button><button data-tpcopyimg="${esc(k)}|${i}">Copy image</button><a class="tp-dl" href="${src}" download="${esc(x.name || `${r.slot}-${i + 1}.png`)}">Download</a></div><div class="muted small" data-tpimgmsg="${esc(k)}|${i}"></div></figure>`; }).join("");
       return `<div class="tp-draft tp-wide"><div class="tp-dh">Draft <span class="muted small">saved ${esc(when(d.saved_at))}</span></div>
         <pre class="tp-body" id="tp-body-${esc(k)}">${esc(d.body)}</pre>
         <div class="tp-acts"><button class="tp-copy" data-tpcopy="${esc(k)}">${TP.copied === k ? "Copied" : "Copy text"}</button><span class="muted small">${[...d.body].length} characters</span></div>
@@ -286,6 +304,8 @@
     document.querySelectorAll("[data-tpopen]").forEach((b) => b.addEventListener("click", () => { const k = b.dataset.tpopen; if (TP.open[k]) delete TP.open[k]; else TP.open[k] = true; rerender(); }));
     document.querySelectorAll("[data-tprnote]").forEach((el) => el.addEventListener("input", () => { TP.rnote[el.dataset.tprnote] = el.value; }));
     document.querySelectorAll("[data-tpredraft]").forEach((b) => b.addEventListener("click", () => redraft(b.dataset.tpredraft)));
+    document.querySelectorAll("[data-tpshare]").forEach((b) => b.addEventListener("click", () => tpImgAct("share", b.dataset.tpshare)));
+    document.querySelectorAll("[data-tpcopyimg]").forEach((b) => b.addEventListener("click", () => tpImgAct("copy", b.dataset.tpcopyimg)));
     document.querySelectorAll("[data-tpmark]").forEach((b) => b.addEventListener("click", () => markPosted(b.dataset.tpmark, b.dataset.posted === "1")));
     document.querySelectorAll("[data-tpcopy]").forEach((b) => b.addEventListener("click", async () => {
       const k = b.dataset.tpcopy, d = (TP.data.drafts || {})[k]; if (!d) return;
