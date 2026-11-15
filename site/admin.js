@@ -6,9 +6,12 @@
   const ACC = () => window.STIX_ACCOUNT;
   const inclKey = "stix_admin_include_me";
   const getIncl = () => { try { return localStorage.getItem(inclKey) === "1"; } catch { return false; } };
-  const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, sel: null, activity: null, actErr: "", tab: "traffic" };
+  const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, loadedAt: 0, sel: null, activity: null, actErr: "", tab: (() => { try { return localStorage.getItem("stix_admin_tab") === "tweets" ? "tweets" : "traffic"; } catch { return "traffic"; } })() };
+  // Read-only admin requests: give up on a hung connection after 12 s and retry once (safe to repeat). Writes never retry.
+  const RD = { timeoutMs: 12000, retries: 1 };
+  const STALE_MS = 120000; // coming back to the app within 2 minutes does not reload anything
   // Tweet plan tab (supabase/015_tweet_plan.sql): edits are held here until "Submit changes"; Claude acts on the request.
-  const TP = { data: null, err: "", loading: false, edits: {}, adds: [], dels: {}, msg: "", sending: false, open: {}, showPast: false, imgs: {}, copied: "", busy: "", rnote: {}, rmsg: {}, rerr: {}, rbusy: "" };
+  const TP = { data: null, err: "", loading: false, edits: {}, adds: [], dels: {}, msg: "", sending: false, open: {}, showPast: false, imgs: {}, copied: "", busy: "", rnote: {}, rmsg: {}, rerr: {}, rbusy: "", loadedAt: 0 };
   const TP_STATUS = ["Not drafted", "Drafted (chat only)", "Scheduled on X", "Posted", "Failed / skipped", "Manual"];
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtN = (n) => Number(n || 0).toLocaleString("en-US");
@@ -26,24 +29,25 @@
     return d;
   };
 
-  async function load() {
+  async function load(keep) {
     if (!ACC() || !ACC().signedIn() || AD.loading) return;
-    AD.loading = true; AD.err = ""; AD.denied = false; rerender();
+    AD.loading = true; AD.err = ""; AD.denied = false; if (!keep) rerender();
     const [t, u] = await Promise.all([
-      ACC().db("/rest/v1/rpc/admin_traffic", { method: "POST", body: { p_days: AD.days, p_include_admins: AD.incl } }),
-      ACC().db("/rest/v1/rpc/admin_users", { method: "POST", body: {} }),
+      ACC().db("/rest/v1/rpc/admin_traffic", { method: "POST", body: { p_days: AD.days, p_include_admins: AD.incl }, ...RD }),
+      ACC().db("/rest/v1/rpc/admin_users", { method: "POST", body: {}, ...RD }),
     ]);
     AD.loading = false; AD.loadedFor = `${ACC().user().id}|${AD.days}|${AD.incl}`;
+    if ((!t.ok || !u.ok) && keep && AD.traffic && !AD.denied && ![t, u].some((x) => x.status === 401 || x.status === 403)) { rerender(); return; } // background refresh failed: keep showing the earlier numbers
     if (!t.ok || !u.ok) {
       const e = (!t.ok ? t : u);
       if (/not allowed|permission|42501|404/i.test(`${e.error} ${e.status}`)) AD.denied = true; else AD.err = e.error || "Couldn't load.";
       AD.traffic = null; AD.users = null;
-    } else { AD.traffic = t.data; AD.users = u.data || []; }
+    } else { AD.traffic = t.data; AD.users = u.data || []; AD.loadedAt = Date.now(); }
     rerender();
   }
   async function loadActivity(uid) {
     AD.sel = uid; AD.activity = null; AD.actErr = ""; rerender();
-    const r = await ACC().db("/rest/v1/rpc/admin_user_activity", { method: "POST", body: { p_user: uid } });
+    const r = await ACC().db("/rest/v1/rpc/admin_user_activity", { method: "POST", body: { p_user: uid }, ...RD });
     if (AD.sel !== uid) return;
     if (r.ok) AD.activity = r.data || []; else AD.actErr = r.error || "Couldn't load.";
     rerender();
@@ -138,17 +142,19 @@
 
   // ---------- Tweet plan tab ----------
   const tabsBar = () => `<div class="ad-tabs"><button class="gchip ${AD.tab === "traffic" ? "on" : ""}" data-adtab="traffic">Traffic &amp; users</button><button class="gchip ${AD.tab === "tweets" ? "on" : ""}" data-adtab="tweets">Tweet plan</button></div>`;
-  async function loadTweets() {
+  async function loadTweets(keep) {
     if (!ACC() || !ACC().signedIn() || TP.loading) return;
-    TP.loading = true; TP.err = ""; rerender();
-    const r = await ACC().db("/rest/v1/rpc/admin_tweet_plan", { method: "POST", body: {} });
+    TP.loading = true; TP.err = ""; if (!keep) rerender();
+    const r = await ACC().db("/rest/v1/rpc/admin_tweet_plan", { method: "POST", body: {}, ...RD });
     TP.loading = false;
-    if (r.ok) { TP.data = r.data; TP.imgs = {}; } else TP.err = /404|42501|not allowed/i.test(`${r.error} ${r.status}`) ? "The tweet plan isn't set up in the database yet (run supabase/015_tweet_plan.sql)." : (r.error || "Couldn't load.");
+    if (r.ok) { TP.data = r.data; TP.loadedAt = Date.now(); if (!keep) TP.imgs = {}; if (/^Couldn.t refresh/.test(TP.msg)) TP.msg = ""; }
+    else if (keep && TP.data) TP.msg = "Couldn't refresh (no connection?). Showing what was loaded earlier.";
+    else TP.err = /404|42501|not allowed/i.test(`${r.error} ${r.status}`) ? "The tweet plan isn't set up in the database yet (run supabase/015_tweet_plan.sql)." : (r.error || "Couldn't load.");
     rerender();
   }
   async function loadDraftImages(k) {
     if (TP.imgs[k] !== undefined) return; TP.imgs[k] = null;
-    const r = await ACC().db("/rest/v1/rpc/admin_tweet_draft_images", { method: "POST", body: { p_slot_key: k } });
+    const r = await ACC().db("/rest/v1/rpc/admin_tweet_draft_images", { method: "POST", body: { p_slot_key: k }, ...RD });
     TP.imgs[k] = r.ok ? (r.data || []) : []; rerender();
   }
   async function markPosted(k, posted) {
@@ -339,15 +345,16 @@
     if (!ACC().signedIn()) {
       return `<div class="panel ac"><h3>Stix admin</h3><div class="body"><p class="small">Sign in with your admin account.</p>${ACC().googleBlock("ad")}</div></div>`;
     }
+    if (AD.tab === "tweets") return tweetsPage(); // the tweet plan no longer waits for the traffic numbers
     const key = `${ACC().user().id}|${AD.days}|${AD.incl}`;
     if (AD.loadedFor !== key && !AD.loading) setTimeout(load, 0);
-    if (AD.loading || AD.loadedFor !== key) return `<p class="muted pad">Loading admin data…</p>`;
+    if ((AD.loading && !AD.traffic) || AD.loadedFor !== key) return `<p class="muted pad">Loading admin data…</p>`;
     if (AD.denied) return `<div class="panel ac"><h3>Stix admin</h3><div class="body"><p class="small">This page is only for Stix admins. You're signed in as <b>${esc(ACC().user().email)}</b>.</p></div></div>`;
     if (AD.err) return `<div class="panel ac"><h3>Stix admin</h3><div class="body"><p class="small pk-err">${esc(AD.err)}</p><button id="ad-refresh">Try again</button></div></div>`;
     return AD.tab === "tweets" ? tweetsPage() : dashboard();
   }
   function bind() {
-    document.querySelectorAll("[data-adtab]").forEach((b) => b.addEventListener("click", () => { AD.tab = b.dataset.adtab; rerender(); }));
+    document.querySelectorAll("[data-adtab]").forEach((b) => b.addEventListener("click", () => { AD.tab = b.dataset.adtab; try { localStorage.setItem("stix_admin_tab", AD.tab); } catch { /* ignore */ } rerender(); }));
     if (AD.tab === "tweets") { tweetsBind(); return; }
     if (document.getElementById("ad-gis")) ACC().bindGoogle("ad");
     document.querySelectorAll("[data-addays]").forEach((b) => b.addEventListener("click", () => { AD.days = Number(b.dataset.addays); AD.sel = null; load(); }));
@@ -367,9 +374,19 @@
     const was = (e.oldURL || "").includes("#/admin"), now = (location.hash || "").startsWith("#/admin");
     if (now && !was) { AD.loadedFor = null; AD.sel = null; AD.activity = null; }
   });
-  // Coming back to the app (or tab) while the admin page is open: reload so the numbers aren't from earlier.
+  // Coming back to the app (or tab) while the admin page is open: refresh only if what is shown is over 2 minutes old,
+  // after a short wait so the phone's connection can wake up, and keep showing the old data if the refresh fails.
+  let resumeT = null;
+  const onAdmin = () => (location.hash || "").startsWith("#/admin") && ACC() && ACC().signedIn();
+  function refreshIfStale() {
+    if (!onAdmin()) return;
+    if (AD.tab === "tweets") { if (!TP.loadedAt || Date.now() - TP.loadedAt > STALE_MS) loadTweets(true); }
+    else if (!AD.loadedAt || Date.now() - AD.loadedAt > STALE_MS) load(true);
+  }
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible" && (location.hash || "").startsWith("#/admin") && ACC() && ACC().signedIn()) { AD.loadedFor = null; load(); }
+    clearTimeout(resumeT);
+    if (document.visibilityState === "visible" && onAdmin()) resumeT = setTimeout(refreshIfStale, 800);
   });
+  window.addEventListener("online", () => { clearTimeout(resumeT); resumeT = setTimeout(refreshIfStale, 500); });
   window.STIX_ADMIN = { view, bind, isResearchAdmin };
 })();
