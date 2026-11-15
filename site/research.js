@@ -597,7 +597,7 @@
   }
   function tileHtml(t, st, locked) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
-    const cnt = compute(t.id).length + computeLiveCount(t.id); // this week's players, including those whose game is in progress
+    const cnt = compute(t.id).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
     return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
@@ -701,6 +701,16 @@
   const BP = { id: "bp", n: 0, side: "mixed", title: "Players" };
   // Players who fit the picked signals. live=false: games not started yet (the main list). live=true: games that have started but
   // are not final (the "Game in progress" list). Same rules and sorting either way; only the games looked at differ.
+  // The week in play = the earliest week that still has a game not final (all final: the last week). Its finished games feed the
+  // "Completed" list and stay in the signal cards' "this wk" counts, so the count doesn't shrink as games end.
+  function sigWeek() {
+    const gs = Object.values(D.games), open = gs.filter((g) => !g.final).map((g) => g.wk);
+    return open.length ? Math.min(...open) : Math.max(...gs.map((g) => g.wk));
+  }
+  // Graded bets for one rule in the week in play (final games only), honoring the game and market filters like compute() does.
+  function doneBets(tab) {
+    return analyze(tab, sigWeek()).filter((x) => (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk));
+  }
   function computeLiveCount(tab) {
     LIVE_PASS = true;
     try { return compute(tab).length; } finally { LIVE_PASS = false; }
@@ -739,8 +749,34 @@
     }
     return h + `</div>`;
   }
+  // "Completed this week" list: same players as the cards count, graded hit / miss / push against the line the signal used.
+  function doneHtml(tabs, picked) {
+    const map = new Map();
+    for (const t of tabs.filter((x) => !RL.unlocked || RL.unlocked.has(x.id))) {
+      if (t.challenger) continue;
+      for (const x of doneBets(t.id)) {
+        const k = `${x.p.id}|${x.mid}|${x.r.gid}|${x.side}`;
+        if (!map.has(k)) map.set(k, { ...x, sigs: [] });
+        map.get(k).sigs.push(t);
+      }
+    }
+    let rows = [...map.values()];
+    if (picked.length) rows = rows.filter((x) => picked.every((t) => x.sigs.some((y) => y.id === t.id)));
+    if (!rows.length) return "";
+    const ord = { hit: 0, miss: 1, push: 2 };
+    rows.sort((a, b) => ord[a.out] - ord[b.out] || b.sigs.length - a.sigs.length || new Date(a.r.ko) - new Date(b.r.ko) || a.p.name.localeCompare(b.p.name));
+    const n = (o) => rows.filter((x) => x.out === o).length, push = n("push");
+    let h = `<h3 class="sg-sec">Completed this week (${rows.length})</h3><p class="muted small">${n("hit")} hit · ${n("miss")} missed${push ? ` · ${push} push` : ""}. Graded against the line the signal used.</p><div class="panel rlist">`;
+    for (const x of rows) {
+      const { p, r, mid } = x, line = x.m.line, act = x.m.act;
+      h += `<div class="rlrow sg-pr"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+        <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(line)}</span><span class="pk-res ${x.out}">${x.out === "hit" ? "Hit" : x.out === "miss" ? "Miss" : "Push"}${act != null ? ` · ${num(act)}` : ""}</span></div>
+        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span></div></div>`;
+    }
+    return h + `</div>`;
+  }
   function playersHtml(tabs, picked) {
-    const rows = playerRows(tabs, picked, false), live = liveHtml(tabs, picked);
+    const rows = playerRows(tabs, picked, false), live = liveHtml(tabs, picked) + doneHtml(tabs, picked);
     const head = `<h3 class="sg-sec">${picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
     if (!rows.length) return head + `<p class="muted">${picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
     const pages = Math.ceil(rows.length / PAGE), key = `bp|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
