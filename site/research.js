@@ -242,6 +242,11 @@
     return null;
   }
 
+  // Which games a pass looks at. Normal pass: games not started yet. In-progress pass (LIVE_PASS, used only to build the
+  // "Game in progress" list on Signals): games that kicked off but are not final. Nothing else reads LIVE_PASS.
+  let LIVE_PASS = false;
+  const gameScope = (final, ko, now) => !final && !!ko && (LIVE_PASS ? new Date(ko).getTime() <= now : new Date(ko).getTime() > now);
+
   // Every upcoming (not started) player × market with a line showing, plus his history. Slotted players only (the rules' universe).
   function candidates(withExtras) {
     const now = Date.now(), out = [];
@@ -249,7 +254,7 @@
       if (p.extra && !withExtras) continue;
       const rows = D.rows[p.id] || [];
       for (const r of rows) {
-        if (r.final || !r.ko || new Date(r.ko).getTime() <= now) continue;
+        if (!gameScope(r.final, r.ko, now)) continue;
         if (RL.gid && r.gid !== RL.gid) continue;
         const past = rows.filter((x) => x.wk < r.wk && x.final).sort((a, b) => a.wk - b.wk);
         const played = past.filter((x) => x.played === true);
@@ -350,7 +355,7 @@
     return out;
   }
   function frozenCandidates(tab) {
-    return frozenEntries(tab).filter((x) => !x.r.final && new Date(x.r.ko).getTime() > Date.now()
+    return frozenEntries(tab).filter((x) => gameScope(x.r.final, x.r.ko, Date.now())
       && (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk)).map((x) => {
         const { v, decision, p, r, mid } = x, cur = { line: v.quote.line, label: x.locked ? "locked pregame quote" : "provisional weekly snapshot", cap: v.quote.cap };
         const price = decision.side === "over" ? v.quote.op : v.quote.up;
@@ -592,7 +597,7 @@
   }
   function tileHtml(t, st, locked) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
-    const cnt = compute(t.id).length;
+    const cnt = compute(t.id).length + computeLiveCount(t.id); // this week's players, including those whose game is in progress
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
     return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
@@ -694,24 +699,50 @@
       <details class="sg-weeks" data-wopen ${RL.wopen ? "open" : ""}><summary>Week by week (${by.filter((x) => x.list.length).length} weeks)</summary>${weeks}</details></div></div>`;
   }
   const BP = { id: "bp", n: 0, side: "mixed", title: "Players" };
-  function playersHtml(tabs, picked) {
+  // Players who fit the picked signals. live=false: games not started yet (the main list). live=true: games that have started but
+  // are not final (the "Game in progress" list). Same rules and sorting either way; only the games looked at differ.
+  function computeLiveCount(tab) {
+    LIVE_PASS = true;
+    try { return compute(tab).length; } finally { LIVE_PASS = false; }
+  }
+  function playerRows(tabs, picked, live) {
     const map = new Map();
-    for (const t of tabs.filter((x) => !RL.unlocked || RL.unlocked.has(x.id))) {
-      if (t.challenger) continue;
-      for (const x of compute(t.id).filter(nm)) {
-        const side = x.side || t.side;
-        if (side !== "over" && side !== "under") continue;
-        const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
-        if (!map.has(k)) map.set(k, { ...x, side, bp: true, sigs: [] });
-        map.get(k).sigs.push(t);
+    LIVE_PASS = !!live;
+    try {
+      for (const t of tabs.filter((x) => !RL.unlocked || RL.unlocked.has(x.id))) {
+        if (t.challenger) continue;
+        for (const x of compute(t.id).filter(nm)) {
+          const side = x.side || t.side;
+          if (side !== "over" && side !== "under") continue;
+          const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
+          if (!map.has(k)) map.set(k, { ...x, side, bp: true, sigs: [] });
+          map.get(k).sigs.push(t);
+        }
       }
-    }
+    } finally { LIVE_PASS = false; }
     let rows = [...map.values()];
     if (picked.length) rows = rows.filter((x) => picked.every((t) => x.sigs.some((y) => y.id === t.id)));
     const byGap = picked.length === 1 && picked[0].cm;
     rows.sort((a, b) => (byGap ? (b.gap ?? -1e9) - (a.gap ?? -1e9) : 0) || b.sigs.length - a.sigs.length || (b.gap ?? -1e9) - (a.gap ?? -1e9) || koMs(a.c) - koMs(b.c) || a.c.p.name.localeCompare(b.c.p.name));
+    return rows;
+  }
+  // "Game in progress" list (Michael 2026-11-15): players who fit a signal this week whose game has started but isn't final.
+  // Shown below the main list. No FanDuel checkboxes (betting on the game is closed); the line shown is the one captured for the signal.
+  function liveHtml(tabs, picked) {
+    const rows = playerRows(tabs, picked, true); if (!rows.length) return "";
+    let h = `<h3 class="sg-sec">Game in progress (${rows.length})</h3><p class="muted small">These players fit a signal this week, but their game has started. Lines shown are the ones the signal used; no new picks.</p><div class="panel rlist">`;
+    for (const x of rows) {
+      const { p, r, mid, cur } = x.c;
+      h += `<div class="rlrow sg-pr"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
+        <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
+        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span></div></div>`;
+    }
+    return h + `</div>`;
+  }
+  function playersHtml(tabs, picked) {
+    const rows = playerRows(tabs, picked, false), live = liveHtml(tabs, picked);
     const head = `<h3 class="sg-sec">${picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
-    if (!rows.length) return head + `<p class="muted">${picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>`;
+    if (!rows.length) return head + `<p class="muted">${picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
     const pages = Math.ceil(rows.length / PAGE), key = `bp|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
     (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
     let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
@@ -723,7 +754,7 @@
           return x.note ? `<div class="sg-m"><span class="small sg-gap">${esc(x.note)}</span>${chips}</div><div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${chips}</div>`; })()}</div>`;
     }
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
-    return h + `</div>${pager}`;
+    return h + `</div>${pager}` + live;
   }
   function html(page) {
     if (page !== undefined && page !== SGPAGE) { SGPAGE = page === "ind" ? "ind" : "main"; RL.sigs = []; }
@@ -839,7 +870,7 @@
     for (const p of D.players) {
       const rows = (D.rows[p.id] || []).slice().sort((a, b) => a.wk - b.wk);
       for (const r of rows) {
-        if (final ? !r.final : (r.final || !r.ko || new Date(r.ko).getTime() <= now)) continue;
+        if (final ? !r.final : !gameScope(r.final, r.ko, now)) continue;
         const mid = p.pos === "QB" ? "pass_yds" : (p.pos === "WR" || p.pos === "TE" || p.pos === "RB") ? "rec_yds" : null;
         const m = mid && r.m && r.m[mid]; if (!m) continue;
         const prev = rows.filter((x) => x.wk < r.wk && x.final).pop();
@@ -913,7 +944,7 @@
         let starter = null;
         if (final) { if (!g.final) continue; starter = startOf(gid, team); }
         else {
-          if (g.final || !g.ko || new Date(g.ko).getTime() <= now) continue;
+          if (!gameScope(g.final, g.ko, now)) continue;
           const lined = D.players.filter((p) => p.pos === "QB").map((p) => ({ p, r: (D.rows[p.id] || []).find((x) => x.gid === gid && x.team === team) }))
             .filter((x) => x.r && curLine(x.r.m && x.r.m.pass_yds));
           const pick = lined.find((x) => x.r.slot === "QB1") || lined[0]; starter = pick && { id: pick.p.id, name: pick.p.name };
