@@ -63,14 +63,24 @@
   })();
 
   // ---------- requests ----------
-  async function raw(path, { method = "GET", body, prefer, auth = true } = {}) {
+  // timeoutMs / retries are opt-in (used for safe, repeatable reads): after the app was in the background the
+  // first request can hang on a dead connection, so give up after timeoutMs and try again on a fresh one.
+  async function raw(path, { method = "GET", body, prefer, auth = true, timeoutMs = 0, retries = 0 } = {}) {
     const headers = { apikey: KEY };
     if (body !== undefined) headers["Content-Type"] = "application/json";
     if (prefer) headers.Prefer = prefer;
     if (auth && signedIn()) headers.Authorization = `Bearer ${A.session.access_token}`;
-    let r;
-    try { r = await fetch(BASE + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body), cache: "no-store" }); }
-    catch { return { ok: false, status: 0, data: null, error: "No connection. Check your internet and try again." }; }
+    let r, tries = 0;
+    for (;;) {
+      const ac = timeoutMs && typeof AbortController !== "undefined" ? new AbortController() : null;
+      const t = ac ? setTimeout(() => ac.abort(), timeoutMs) : null;
+      try { r = await fetch(BASE + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body), cache: "no-store", signal: ac ? ac.signal : undefined }); if (t) clearTimeout(t); break; }
+      catch {
+        if (t) clearTimeout(t);
+        if (tries++ < retries) { await new Promise((res) => setTimeout(res, 600)); continue; }
+        return { ok: false, status: 0, data: null, error: "No connection. Check your internet and try again." };
+      }
+    }
     let data = null;
     const txt = await r.text();
     try { data = txt ? JSON.parse(txt) : null; } catch { data = txt; }
@@ -82,7 +92,7 @@
     if (!signedIn()) return false;
     if (A.session.expires_at && A.session.expires_at - 60 > Date.now() / 1000) return true;
     if (!refreshing) refreshing = (async () => {
-      const r = await raw("/auth/v1/token?grant_type=refresh_token", { method: "POST", body: { refresh_token: A.session.refresh_token }, auth: false });
+      const r = await raw("/auth/v1/token?grant_type=refresh_token", { method: "POST", body: { refresh_token: A.session.refresh_token }, auth: false, timeoutMs: 15000 });
       if (r.ok) saveSession(r.data);
       else if (r.status >= 400 && r.status < 500) { saveSession(null); A.profile = null; A.err = "You were signed out. Sign in again to see your picks."; changed(); }
       return r.ok;
