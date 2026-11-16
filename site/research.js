@@ -419,6 +419,41 @@
   // Selection lives in memory only (per lead; survives the 5-minute refresh, not a reload).
   const rowKey = (x) => `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}${x.bp ? "|" + x.side : ""}`;
   const selOf = (id) => (RL.sel = RL.sel || {})[id] || (RL.sel[id] = new Set());
+  // DraftKings comparison (Michael 2026-11-16): before FanDuel opens, flag any bet where DraftKings (same game, same market,
+  // pre-game, same latest pull) offers a better number on the same side. Better = a lower line for an Over, a higher line for
+  // an Under; on the same line, better odds (higher American price). Returns null when DraftKings has no comparable line.
+  function dkBetter(pid, mid, side, gid, fd) {
+    const dk = ((((D.links || {})[pid] || {})[mid]) || {}).draftkings, g = D.games[gid];
+    if (!dk || dk.gid !== gid || !g || new Date(g.ko).getTime() <= Date.now()) return null;
+    const x = dk[side], fp = fd && fd.point, fx = fd && fd[side];
+    if (!x || x.price == null || dk.point == null || fp == null || !fx || fx.price == null) return null;
+    const lineWin = side === "o" ? dk.point < fp : dk.point > fp;
+    const priceWin = dk.point === fp && x.price > fx.price;
+    return (lineWin || priceWin) ? { line: dk.point, odds: x.price, why: lineWin ? "line" : "odds" } : null;
+  }
+  const slipUrl = (legs) => "https://sportsbook.fanduel.com/addToBetslip?" + legs.map((l, j) => `marketId[${j}]=${l.m}&selectionId[${j}]=${l.sel}`).join("&");
+  // Popup shown when a tapped slip link includes bets with a better DraftKings number. Both choices are real links
+  // (so the phone doesn't block them); "best FD only" opens a slip without the flagged bets.
+  function dkPopup(chunk, tId) {
+    document.querySelector(".rl-dkpop")?.remove();
+    const flagged = chunk.legs.filter((l) => l.dk), keep = chunk.legs.filter((l) => !l.dk);
+    const rows = flagged.map((l) => `<li><b>${esc(l.name)}</b> ${esc(l.label)} ${l.side === "o" ? "Over" : "Under"}<br><span class="muted small">FD ${num(l.bet.line)} ${odds(l.bet.odds)} · DK ${num(l.dk.line)} ${odds(l.dk.odds)} (better ${l.dk.why})</span></li>`).join("");
+    const only = keep.length
+      ? `<a class="betbtn" data-dkpick="best" href="${esc(slipUrl(keep))}" target="_blank" rel="noopener">Only take best FD lines to FD (${keep.length}) ↗</a>`
+      : `<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">No bets have the best line on FD</span>`;
+    const el = document.createElement("div"); el.className = "rl-dkpop"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
+    el.innerHTML = `<div class="rl-dkcard"><b>${flagged.length} of ${chunk.legs.length} bets ${flagged.length === 1 ? "has" : "have"} a better line on DraftKings</b><ul>${rows}</ul>
+      <div class="rl-dkbtns">${only}<a class="betbtn" data-dkpick="all" href="${esc(chunk.url)}" target="_blank" rel="noopener">Take all ${chunk.legs.length} to FD ↗</a><button type="button" class="betbtn" data-dkpick="cancel">Cancel</button></div></div>`;
+    el.addEventListener("click", (ev) => {
+      const b = ev.target.closest && ev.target.closest("[data-dkpick]");
+      if (!b && ev.target !== el) return; // tap on the card itself does nothing
+      if (b && b.dataset.dkpick !== "cancel" && window.STIX_PICKS && fdSave()) {
+        try { window.STIX_PICKS.recordBets(b.dataset.dkpick === "best" ? keep : chunk.legs); } catch (err) { console.error("picks from FanDuel slip failed", err); }
+      }
+      el.remove(); // links still navigate; Cancel and the backdrop just close
+    });
+    document.body.appendChild(el);
+  }
   function fdSlip(t, rows) {
     const now = Date.now(), legs = [], missing = [], chosen = selOf(t.id);
     for (const x of rows) {
@@ -431,7 +466,7 @@
       if (o && FD_SLIP.test(o.url || "") && g && e.gid === r.gid && new Date(g.ko).getTime() > now) {
         try { const u = new URL(o.url); m = u.searchParams.get("marketId"); sel = u.searchParams.get("selectionId"); } catch (err) { m = sel = null; }
       }
-      if (m && sel && /^[\d.]+$/.test(m) && /^\d+$/.test(sel)) legs.push({ pid: p.id, mid, side, m, sel, bet: { line: e.point, odds: o.price, cap: e.cap, gid: e.gid, book: "FanDuel", src: "Bet on FD" } });
+      if (m && sel && /^[\d.]+$/.test(m) && /^\d+$/.test(sel)) legs.push({ pid: p.id, mid, side, m, sel, name: p.name, label: mkt[mid].label, dk: dkBetter(p.id, mid, side, r.gid, e), bet: { line: e.point, odds: o.price, cap: e.cap, gid: e.gid, book: "FanDuel", src: "Bet on FD" } });
       else missing.push(`${p.name} (${mkt[mid].label})`);
     }
     // More than FD_SLIP_MAX bets are split into several links of at most FD_SLIP_MAX bets each, in list order.
@@ -439,7 +474,7 @@
     for (let i = 0; i < legs.length; i += FD_SLIP_MAX) {
       const part = legs.slice(i, i + FD_SLIP_MAX);
       chunks.push({ legs: part, from: i + 1, to: i + part.length,
-        url: "https://sportsbook.fanduel.com/addToBetslip?" + part.map((l, j) => `marketId[${j}]=${l.m}&selectionId[${j}]=${l.sel}`).join("&") });
+        url: slipUrl(part) });
     }
     return { legs, missing, chunks };
   }
@@ -473,8 +508,12 @@
   });
   document.addEventListener("click", (e) => {
     // Switch off: FanDuel opens and nothing is saved. Switch on: save only the slip (chunk) that was tapped.
-    const b = e.target.closest && e.target.closest("[data-fdall]"); if (!b || !window.STIX_PICKS || !fdSave()) return;
-    try { window.STIX_PICKS.recordBets(((RL.fdChunks || [])[+b.dataset.fdchunk || 0] || {}).legs || []); } catch (err) { console.error("picks from FanDuel slip failed", err); }
+    const b = e.target.closest && e.target.closest("[data-fdall]"); if (!b) return;
+    const chunk = (RL.fdChunks || [])[+b.dataset.fdchunk || 0];
+    // Any bet with a better DraftKings number: hold the tap and ask first (the popup's links open FanDuel and save as chosen).
+    if (chunk && chunk.legs.some((l) => l.dk)) { e.preventDefault(); dkPopup(chunk, b.dataset.fdall); return; }
+    if (!window.STIX_PICKS || !fdSave()) return;
+    try { window.STIX_PICKS.recordBets((chunk || {}).legs || []); } catch (err) { console.error("picks from FanDuel slip failed", err); }
   });
   function refreshSlipBox() {
     const box = document.querySelector(".rl-fd"); if (!box || !RL.fdT || !RL.fdRows) return;
