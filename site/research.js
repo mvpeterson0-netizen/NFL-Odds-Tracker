@@ -597,11 +597,11 @@
   }
   function tileHtml(t, st, locked) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
-    const cnt = compute(t.id).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
+    const cnt = sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
     return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
-      <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> this wk</span></div>
+      <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> ${sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this"} wk</span></div>
       ${st.by ? spark(st.by) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
@@ -707,13 +707,33 @@
     const gs = Object.values(D.games), open = gs.filter((g) => !g.final).map((g) => g.wk);
     return open.length ? Math.min(...open) : Math.max(...gs.map((g) => g.wk));
   }
+  // Last week / Upcoming week toggle (Michael 2026-11-16): Monday 8 AM through Wednesday (Central) the Signals page can show last week's
+  // games (still to play tonight, in progress, completed) or the upcoming week's games, one at a time. Other days: no toggle, and the page
+  // behaves as before (sgWk() is null, so every week filter below is a no-op). "Upcoming" = curWk() (the coming Sunday's week).
+  function sgToggleOn() {
+    const ct = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Chicago" })), dow = ct.getDay();
+    if (!(dow === 2 || dow === 3 || (dow === 1 && ct.getHours() >= 8))) return false;
+    return curWk() > 1 && laGames(curWk() - 1).length > 0;
+  }
+  function sgView() { // "last" | "next" | null (toggle not shown)
+    if (!sgToggleOn()) return null;
+    if (RL.sgView) return RL.sgView;
+    // Not picked yet: open on last week while any of its games is not final, else on the upcoming week.
+    return laGames(curWk() - 1).some(([, g]) => !g.final) ? "last" : "next";
+  }
+  const sgWk = () => { const v = sgView(); return v == null ? null : v === "next" ? curWk() : curWk() - 1; };
+  const sgFilt = (list) => { const w = sgWk(); return w == null ? list : list.filter((x) => x.c.r.wk === w); };
+  function sgToggleHtml() {
+    const v = sgView(); if (v == null) return "";
+    return `<div class="sgview" role="tablist" aria-label="Week"><button type="button" role="tab" aria-selected="${v === "last"}" class="${v === "last" ? "on" : ""}" data-sgview="last">Last week · W${curWk() - 1}</button><button type="button" role="tab" aria-selected="${v === "next"}" class="${v === "next" ? "on" : ""}" data-sgview="next">Upcoming · W${curWk()}</button></div>`;
+  }
   // Graded bets for one rule in the week in play (final games only), honoring the game and market filters like compute() does.
   function doneBets(tab) {
-    return analyze(tab, sigWeek()).filter((x) => (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk));
+    return analyze(tab, sgWk() ?? sigWeek()).filter((x) => (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk));
   }
   function computeLiveCount(tab) {
     LIVE_PASS = true;
-    try { return compute(tab).length; } finally { LIVE_PASS = false; }
+    try { return sgFilt(compute(tab)).length; } finally { LIVE_PASS = false; }
   }
   function playerRows(tabs, picked, live) {
     const map = new Map();
@@ -721,7 +741,7 @@
     try {
       for (const t of tabs.filter((x) => !RL.unlocked || RL.unlocked.has(x.id))) {
         if (t.challenger) continue;
-        for (const x of compute(t.id).filter(nm)) {
+        for (const x of sgFilt(compute(t.id)).filter(nm)) {
           const side = x.side || t.side;
           if (side !== "over" && side !== "under") continue;
           const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
@@ -777,9 +797,10 @@
   }
   function playersHtml(tabs, picked) {
     const rows = playerRows(tabs, picked, false), live = liveHtml(tabs, picked) + doneHtml(tabs, picked);
-    const head = `<h3 class="sg-sec">${picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
-    if (!rows.length) return head + `<p class="muted">${picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
-    const pages = Math.ceil(rows.length / PAGE), key = `bp|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
+    const lastV = sgView() === "last";
+    const head = `<h3 class="sg-sec">${lastV ? `Still to play, week ${sgWk()}${picked.length ? ` · ${picked.length > 1 ? "fit all " + picked.length + " picked signals" : "fit this signal"}` : ""} (${rows.length})` : picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
+    if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
+    const pages = Math.ceil(rows.length / PAGE), key = `bp|${sgWk() ?? ""}|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
     (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
     let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
     for (const x of rows.slice(pg * PAGE, pg * PAGE + PAGE)) {
@@ -803,7 +824,7 @@
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
     const head = SGPAGE === "ind" ? `<h2 class="gsec">Signals · Indicators</h2><p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, covering every quoted player. Same tiles, charts and lists as Signals.</span></p>` : `<h2 class="gsec">Signals</h2><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
-    return `<section id="rl" data-page="${SGPAGE}">${head}${inner}</section>`;
+    return `<section id="rl" data-page="${SGPAGE}">${head}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
     const el = document.getElementById("rl"); if (!el) return;
@@ -815,6 +836,7 @@
     const c = e.target.closest && e.target.closest("[data-sig]");
     if (c) { const id = c.dataset.sig; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : multiSelect() ? [...RL.sigs, id] : [id]; redraw(); return; }
     if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; redraw(); return; }
+    const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
   });
   document.addEventListener("toggle", (e) => { if (e.target && e.target.matches && e.target.matches("[data-fopen]")) RL.fopen = e.target.open; if (e.target && e.target.matches && e.target.matches("[data-wopen]")) RL.wopen = e.target.open; }, true);
