@@ -31,6 +31,15 @@
   // (graded pre-game line, saved odds, 1 unit). Thresholds are the audit's; QB-R2 / QB-R4 carry a viewer toggle.
   // Not on this page yet (own PRs): CM1-TE, CM1-20 (needs prior-week QB/receiver line gap) and QBCH (needs the starter data).
   const CM_READ = `<div class="sg-sub"><b>Reading a player row:</b></div><ul class="sg-ul"><li>"QB −20yds": the QB's passing-yards line fell 20 yards vs last week.</li><li>"6 receivers −4yds": the 6 receivers' receiving-yards lines changed by 4 yards in total, all added up.</li><li>"net +16": the receivers' total minus the QB's change (−4 − (−20)), so the QB's line fell 16 yards more.</li></ul>`;
+  // Late-yardage indicator wording (shared by SY-*, FH-*, BL-200, NL-U20).
+  const LY_WHO = `Bet a WR's, TE's or RB's <b>receiving yards Under</b> when all of these are true:`;
+  const LY_SHORT = `<li>He is a <b>short-yardage receiver</b>: before that game he averaged <b>under 10.6 yards per catch</b> over his career since 2024 (at least 20 catches).</li>`;
+  const LY_PREV = `<li>In his <b>previous game</b> he finished <b>Over</b> his receiving-yards line with <b>40 or more</b> receiving yards.</li>`;
+  const LY_UP = (pct) => pct ? `<li>This week's receiving-yards line is <b>${pct}% or more higher</b> than that game's line.</li>` : `<li>This week's receiving-yards line is <b>higher</b> than that game's line.</li>`;
+  const LY_NOLONG = `<li>He would <b>still have been Over</b> that line without his single longest catch.</li>`;
+  const LY_FH = `<li>His <b>first-half yards alone</b> were already above that game's line.</li>`;
+  const LY_NOTE = `<div class="sg-sub">From the 2026-11-15 late-yardage study: a historical replay chosen after seeing the results. Tracked forward from the day it was added to Stix. Play-by-play numbers (first half, longest catch, yards per catch) come from nflverse.</div>`;
+  const LY_IDS = new Set(["sy25", "synl", "syypc", "fhr30", "fhnl", "bl200", "nlu20"]);
   const TABS = [
     { id: "qbr1", n: 1, side: "under", combo: true, label: "QB-R1", short: () => "L3 gm avg ≥25yd and line ≥25yd",
       title: "QB rushing yards → Under (rushes a lot, high line)", why: "Books may price a rushing QB's recent output too high.",
@@ -81,6 +90,29 @@
     { id: "sp5", n: 28, page: "ind", side: "under", label: "SP5",
       title: "Team a 3 to 6.5 point underdog → rushing Under", why: "Small underdogs play from slightly behind and may run less.",
       desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when his team is a <b>3 to 6.5 point underdog</b>. ${SPREAD_NOTE}` },
+    // ---- Late-yardage indicators (2026-11-16, Michael's picks from the 2026-11-15 late-yardage study; receiving yards, WR/TE/RB) ----
+    // Historical replay picked after seeing results (see STUDY below); scored here on 2026 games, tracked forward from the day they were added.
+    { id: "sy25", n: 29, page: "ind", side: "under", label: "SY-R25", short: () => "Short-yardage receiver, line raised 25%+",
+      title: "Short-yardage receiver, line raised 25%+ → rec yds Under", why: "A big raise for a receiver who gets his yards on short catches may overshoot.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP(25)}</ul>${LY_NOTE}` },
+    { id: "synl", n: 30, page: "ind", side: "under", label: "SY-NL", short: () => "Short-yardage receiver, Over without his longest catch",
+      title: "Short-yardage receiver who didn't need his longest catch → rec yds Under", why: "His Over came from several short catches, not one play, yet the line still went up.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP()}${LY_NOLONG}</ul>${LY_NOTE}` },
+    { id: "syypc", n: 31, page: "ind", side: "under", label: "SY-YPC", short: () => "Short-yardage receiver with a long-catch game",
+      title: "Short-yardage receiver whose yards per catch spiked → rec yds Under", why: "A game of unusually long catches for a short-catch receiver may not repeat.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP()}<li>In that game his yards per catch were at least <b>1.5 times</b> his own career average (since 2024).</li></ul>${LY_NOTE}` },
+    { id: "fhr30", n: 32, page: "ind", side: "under", label: "FH-R30", short: () => "First half alone beat the line, line raised 30%+",
+      title: "First-half Over, line raised 30%+ → rec yds Under", why: "A line that jumps after a game where he was already Over by halftime may overreact.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_FH}${LY_UP(30)}</ul>${LY_NOTE}` },
+    { id: "fhnl", n: 33, page: "ind", side: "under", label: "FH-NL", short: () => "First half alone beat the line, Over without his longest catch",
+      title: "First-half Over without his longest catch → rec yds Under", why: "He was Over early and across several catches, yet the line still went up.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}${LY_FH}${LY_NOLONG}</ul>${LY_NOTE}` },
+    { id: "bl200", n: 34, page: "ind", side: "under", label: "BL-200", short: () => "Beat his line by 200%+",
+      title: "Beat his line by 200%+ → rec yds Under", why: "A huge game may be priced as a new normal.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>He <b>beat that line by 200% or more</b> (at least 3 times the line).</li></ul>${LY_NOTE}` },
+    { id: "nlu20", n: 35, page: "ind", side: "under", label: "NL-U20", short: () => "Longest catch under 20 yards",
+      title: "Over with no catch of 20+ yards → rec yds Under", why: "A game with no long catch means the Over came from steady volume the line may now overstate.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>His longest catch in that game was <b>under 20 yards</b>.</li></ul>${LY_NOTE}` },
   ];
   const OPT0 = { qbr2: 5, qbr4: 25 }; // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
@@ -305,7 +337,11 @@
       const sh = sharesOf(c.prev);
       let cells, note;
       const ind = TABS.find((t) => t.id === tab)?.page === "ind";
-      if (ind) {
+      if (ind && LY_IDS.has(tab)) {
+        const d = c.prev && c.prev.rd;
+        cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, d ? `${d.rc} catches, ${num(c.pm.act, 0)} yds · 1st half ${num(d.h1, 0)} · longest ${num(d.lc, 0)}` : "—"];
+        note = d ? `Last game: ${num(c.pm.act, 0)} yds vs ${num(pl)} line` : "";
+      } else if (ind) {
         const fb = favBy(c.r), last = c.played.slice(-3).map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).map((v) => num(v, 0)).join(", ");
         cells = [`<b>${num(line)}</b>`, fb != null && tab.startsWith("sp") ? esc(spreadTxt(fb)) : esc(last || "—")];
         note = tab.startsWith("sp") ? `Team ${spreadTxt(fb)}` : `Last 3: ${last}`;
@@ -325,6 +361,8 @@
     sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
     l9: ["Line", "Last 3"], l10: ["Line", "Last 3"], s03: ["Line", "Last 3"],
     sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
+    sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
+    fhr30: ["Line (last game → now)", "Last game"], fhnl: ["Line (last game → now)", "Last game"], bl200: ["Line (last game → now)", "Last game"], nlu20: ["Line (last game → now)", "Last game"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
   // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
@@ -496,7 +534,17 @@
     l9: [20.0, 10.9], l10: [12.6, 3.7], s03: [7.5, 10.3], sp1: [17.8, 10.0], sp2: [16.6, 0.5], sp3: [9.0, 18.5], sp4: [22.2, -28.9], sp5: [7.5, 7.9],
   };
   const pc = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
+  // Late-yardage study (2026-11-15, 2025 wk1-18 + 2026 wk1-10, receiving yards, 1 unit at the saved price, week-cluster 95% intervals).
+  // Picked after seeing results; yr = ROI by season [2025, 2026]. Historical, not live.
+  const STUDY = {
+    sy25: { rec: "58–24", roi: 33.7, lo: 15.8, hi: 51.1, yr: [24.0, 53.6] }, synl: { rec: "105–57", roi: 22.5, lo: 6.7, hi: 36.7, yr: [14.5, 37.0] },
+    syypc: { rec: "54–30", roi: 21.5, lo: 4.8, hi: 37.5, yr: [19.2, 29.3] }, fhr30: { rec: "95–53", roi: 21.2, lo: 10.3, hi: 32.0, yr: [16.9, 29.3] },
+    fhnl: { rec: "193–118", roi: 17.4, lo: 9.8, hi: 25.3, yr: [11.9, 26.0] }, bl200: { rec: "117–78", roi: 13.4, lo: 5.0, hi: 22.8, yr: [6.6, 22.3] },
+    nlu20: { rec: "112–74", roi: 14.1, lo: 2.8, hi: 23.7, yr: [4.2, 25.6] },
+  };
   function auditLine(t) {
+    const st = STUDY[t.id];
+    if (st) return `<b>Late-yardage study replay</b> (2025 weeks 1–18 + 2026 weeks 1–10)<br>2025: <b>${pc(st.yr[0])}</b> ROI<br>2026: <b>${pc(st.yr[1])}</b> ROI<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>Chosen after seeing these results, so expect the forward record to be lower. Many of these rules overlap: the same prop can fit several of them.`;
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
     if (!x) return `The audit did not test this setting (${t.optFmt(RL.opt[t.id])}), so there is no interval for it.`;
     const y = AUDIT_YR[t.id], yr = y && (t.opts ? y[RL.opt[t.id]] : y);
@@ -823,7 +871,7 @@
     if (picked.length) inner += recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
-    const head = SGPAGE === "ind" ? `<h2 class="gsec">Signals · Indicators</h2><p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, covering every quoted player. Same tiles, charts and lists as Signals.</span></p>` : `<h2 class="gsec">Signals</h2><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
+    const head = SGPAGE === "ind" ? `<h2 class="gsec">Signals · Indicators</h2><p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the late-yardage rules (SY-, FH-, BL-, NL-), covering every quoted player. Same tiles, charts and lists as Signals.</span></p>` : `<h2 class="gsec">Signals</h2><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
     return `<section id="rl" data-page="${SGPAGE}">${head}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
@@ -913,6 +961,19 @@
       if (fb <= -10 && ["WR", "TE", "RB"].includes(p.pos)) { if (mid === "rec_yds") hits.push("sp1"); if (mid === "rec") hits.push("sp2"); }
       if (p.pos === "QB" && mid === "pass_yds") { if (fb >= 10) hits.push("sp3"); if (fb <= -10) hits.push("sp4"); }
       if (fb <= -3 && fb >= -6.5 && (p.pos === "QB" || p.pos === "RB") && mid === "rush_yds") hits.push("sp5");
+    }
+    // Late-yardage indicators: receiving yards Under for WR/TE/RB after an Over of 40+ yards with a higher line this week.
+    // Needs his previous game's play-by-play detail (prev.rd, from data/rec_detail.json); no detail yet = no signal, never a guess.
+    if (mid === "rec_yds" && ["WR", "TE", "RB"].includes(p.pos) && pm && pm.res === "over" && pl != null && line > pl && prev.rd && prev.rd.tot >= 40) {
+      const d = prev.rd, up = line / pl - 1, needLong = d.tot - d.lc < pl;
+      const ypc = d.hc >= 20 ? d.hy / d.hc : null, short = ypc != null && ypc < 10.6;
+      if (short && up >= 0.25) hits.push("sy25");
+      if (short && !needLong) hits.push("synl");
+      if (short && d.rc > 0 && d.tot / d.rc >= 1.5 * ypc) hits.push("syypc");
+      if (d.h1 > pl && up >= 0.30) hits.push("fhr30");
+      if (d.h1 > pl && !needLong) hits.push("fhnl");
+      if (pm.act != null && pm.act / pl - 1 >= 2) hits.push("bl200");
+      if (d.lc < 20) hits.push("nlu20");
     }
     return { hits, pm, pl, f: null };
   }
@@ -1091,7 +1152,7 @@
   function why(x) {
     const line = num(x.m.line);
     switch (x.rule.id) {
-      case "qbr2": case "sc1": case "sc2": return `Line ${num(x.pl)} → ${line}`;
+      case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
       case "qbch": return esc(x.note);
       case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
       case "cm1te": case "cm120": return `Line ${num(x.pl)} → ${line} · ${esc(x.note)}`;
