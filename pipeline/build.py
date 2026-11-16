@@ -19,6 +19,7 @@ from .nflverse import Data, load_sources
 from .odds import CAPTURES_PATH, LINKS_PATH, PULL_LOG_PATH, SNAPSHOTS, TRACK_DIR, WINDOW_CLOSE, WINDOW_OPEN, ptype
 from .slots import update_slots
 from . import espn_box
+from .rec_detail import RecDetail
 
 MARKETS = [
     # id, odds key, nflverse stat column, label, positions
@@ -368,6 +369,7 @@ def build(log):
     slots = update_slots(d)
     name_index = build_name_index(d)
     dranks = DefenseRanks(d, MARKETS)
+    recd = RecDetail()  # first-half yards, longest catch, catch history from play-by-play (data/rec_detail.json); empty until it exists
     now = utcnow()
 
     games = [g for g in d.games if g.get("kickoff_utc")]
@@ -539,6 +541,10 @@ def build(log):
             if played is True and not st:
                 r["tgt"], r["car"] = 0.0, 0.0
                 r["note"] = f"Played {int(off_snaps or 0)} offensive snaps; no stat line recorded (counted as 0)"
+            if played is True and info.get("pos") in ("WR", "TE", "RB"):
+                rd = recd.fields(pid, gid, wk)  # None until nflverse publishes that game's play-by-play
+                if rd:
+                    r["rd"] = rd
 
             pulls = pulls_by_game.get(gid, [])
             ok_pull = next((p for p in pulls if p["status"] == "ok"), None)

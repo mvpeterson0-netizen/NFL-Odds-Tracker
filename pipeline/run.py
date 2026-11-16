@@ -12,7 +12,7 @@ import os
 import sys
 import traceback
 
-from . import cfb, espn, espn_box, history, history_2025, nflverse, notify, odds, script, supa, weather
+from . import cfb, espn, espn_box, history, history_2025, nflverse, notify, odds, rec_detail, script, supa, weather
 from .common import DATA, SITE, append_csv, iso, read_json, utcnow
 
 BUILD_VERSION = "3"  # separate expanding-history challenger; original frozen models unchanged
@@ -78,12 +78,18 @@ def main() -> int:
             script_changed = False
             log.append(f"game script: skipped ({type(ex).__name__}: {str(ex)[:80]})")
 
+        try:  # optional source: receiving detail (first-half yards, longest catch, catch history) from nflverse play-by-play
+            rec_changed = rec_detail.refresh(log)
+        except Exception as ex:
+            rec_changed = False
+            log.append(f"rec detail: skipped ({type(ex).__name__}: {str(ex)[:80]})")
+
         changed = nflverse.changed_datasets()
         if changed:
             log.append("nflverse updated: " + ", ".join(changed))
         state = read_json(DATA / "build_state.json", {}) or {}
         challenger_version = (read_json(DATA / 'challenger' / 'active.json', {}) or {}).get('version')
-        need = (sched_changed or odds_changed or history_changed or weather_changed or espn_changed or box_changed or script_changed or changed or not out_path.exists()
+        need = (sched_changed or odds_changed or history_changed or weather_changed or espn_changed or box_changed or script_changed or rec_changed or changed or not out_path.exists()
                 or state.get('challenger_version') != challenger_version
                 or state.get("version") != BUILD_VERSION or os.environ.get("FORCE_BUILD") == "1")
         if need:
