@@ -1,6 +1,5 @@
 """Throwaway (branch probe/novig-pull only; never merged). One-time real pull through the merged Novig code path
-(odds.BOOKS + odds.NFL_EXTRA_BOOKS + williamhill_us = 11 books, to observe whether an 11th book doubles the cost and whether
-Caesars returns anything), for every upcoming NFL game within 6 days. Empty responses cost 0. Writes probe/pull_*.* only."""
+(production 10-book list), for every upcoming NFL game within 6 days. Empty responses cost 0. Writes probe/pull_*.* only."""
 import csv, json, os, collections
 from datetime import timedelta
 from pipeline import odds
@@ -8,7 +7,7 @@ from pipeline.common import http_get, iso, utcnow, parse_iso
 
 KEY = os.environ["ODDS_API_KEY_20K"]
 FLOOR = 5000
-BOOKS = odds.BOOKS + odds.NFL_EXTRA_BOOKS + ["williamhill_us"]
+BOOKS = odds.BOOKS + odds.NFL_EXTRA_BOOKS  # production list (10 books)
 now = utcnow()
 out = {"run_utc": iso(now), "books_requested": BOOKS, "games": []}
 events, h = odds.fetch_events(KEY)
@@ -34,9 +33,6 @@ for e in evs:
         g["caesars_players"] = len({(r["market"], r["player_book_name"]) for r in raw if r["book"] == "williamhill_us"})
         allrows += rows
     out["games"].append(g)
-    paid = [x for x in out["games"] if x.get("raw_rows_by_book")]
-    if len(paid) == 1 and g.get("raw_rows_by_book") and str(g["credits_last"]).isdigit() and int(g["credits_last"]) > 7:
-        stop = f'first paid game cost {g["credits_last"]} (>7): stopped to avoid doubling cost'; break
 out["stopped"] = stop
 # Novig vs the books at the SAME line (Novig stored at the DK line when it has one)
 by = collections.defaultdict(dict)
