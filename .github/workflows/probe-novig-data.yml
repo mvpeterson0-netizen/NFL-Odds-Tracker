@@ -1,0 +1,30 @@
+name: probe-novig-data
+# Throwaway (branch probe/novig-data only; never merged).
+on:
+  push:
+    branches: [probe/novig-data]
+    paths: ["probe/novig_real_pull.py", ".github/workflows/probe-novig-data.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: probe-novig-data
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Real pull through the new code path
+        env:
+          ODDS_API_KEY_20K: ${{ secrets.ODDS_API_KEY_20K }}
+          PYTHONPATH: .
+        run: python probe/novig_real_pull.py
+      - name: Commit result to this branch
+        run: |
+          git config user.name "prop-tracker-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe/novig_real_rows.csv probe/novig_real_result.json
+          git commit -q -m "probe: novig real rows" && git push -q origin HEAD:probe/novig-data
