@@ -1,0 +1,230 @@
+{
+ "run_utc": "2026-11-17T16:33:31Z",
+ "books_requested": [
+  "draftkings",
+  "fanduel",
+  "betmgm",
+  "novig",
+  "fanatics",
+  "betrivers",
+  "espnbet",
+  "hardrockbet",
+  "ballybet",
+  "fliff",
+  "williamhill_us"
+ ],
+ "games": [
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "kickoff": "2026-11-20T01:15:00Z",
+   "status": 200,
+   "credits_last": "14",
+   "remaining": "12504",
+   "raw_rows_by_book": {
+    "draftkings": 35,
+    "fanduel": 28,
+    "ballybet": 26,
+    "betrivers": 22,
+    "novig": 323,
+    "fliff": 37,
+    "fanatics": 7,
+    "espnbet": 28,
+    "betmgm": 26,
+    "hardrockbet": 35
+   },
+   "kept_rows_by_book": {
+    "draftkings": 35,
+    "fanduel": 28,
+    "ballybet": 26,
+    "betrivers": 22,
+    "fliff": 37,
+    "fanatics": 7,
+    "espnbet": 28,
+    "betmgm": 26,
+    "hardrockbet": 35,
+    "novig": 60
+   },
+   "caesars_players": 0
+  }
+ ],
+ "balance_start": "12518",
+ "stopped": "first paid game cost 14 (>7): stopped to avoid doubling cost",
+ "same_line_comparison": {
+  "pairs": 63,
+  "novig_better_over": 40,
+  "novig_better_under": 19,
+  "median_overround_novig": 1.08,
+  "median_overround_draftkings": null,
+  "median_overround_fanduel": 1.065
+ },
+ "sample": [
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "C.J. Stroud",
+   "market": "player_pass_attempts",
+   "line": 32.5,
+   "novig": [
+    -108,
+    -115
+   ],
+   "draftkings": [
+    -123,
+    -104
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Daniel Jones",
+   "market": "player_pass_attempts",
+   "line": 32.5,
+   "novig": [
+    106,
+    -127
+   ],
+   "draftkings": [
+    -105,
+    -121
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "C.J. Stroud",
+   "market": "player_pass_completions",
+   "line": 21.5,
+   "novig": [
+    100,
+    -144
+   ],
+   "draftkings": [
+    101,
+    -128
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Daniel Jones",
+   "market": "player_pass_completions",
+   "line": 18.5,
+   "novig": [
+    -138,
+    -190
+   ],
+   "draftkings": [
+    -124,
+    -103
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "C.J. Stroud",
+   "market": "player_pass_yds",
+   "line": 261.5,
+   "novig": [
+    -113,
+    -122
+   ],
+   "draftkings": [
+    -113,
+    -111
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "C.J. Stroud",
+   "market": "player_pass_yds",
+   "line": 261.5,
+   "novig": [
+    -113,
+    -122
+   ],
+   "fanduel": [
+    -114,
+    -114
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Daniel Jones",
+   "market": "player_pass_yds",
+   "line": 181.5,
+   "novig": [
+    -113,
+    -113
+   ],
+   "draftkings": [
+    -111,
+    -113
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Daniel Jones",
+   "market": "player_pass_yds",
+   "line": 181.5,
+   "novig": [
+    -113,
+    -113
+   ],
+   "fanduel": [
+    -114,
+    -114
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Nico Collins",
+   "market": "player_reception_yds",
+   "line": 70.5,
+   "novig": [
+    -108,
+    -292
+   ],
+   "draftkings": [
+    -111,
+    -113
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Nico Collins",
+   "market": "player_reception_yds",
+   "line": 70.5,
+   "novig": [
+    -108,
+    -292
+   ],
+   "fanduel": [
+    -114,
+    -114
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Tyler Warren",
+   "market": "player_reception_yds",
+   "line": 41.5,
+   "novig": [
+    -113,
+    -208
+   ],
+   "draftkings": [
+    -112,
+    -112
+   ]
+  },
+  {
+   "game": "Indianapolis Colts @ Houston Texans",
+   "player": "Tyler Warren",
+   "market": "player_reception_yds",
+   "line": 40.5,
+   "novig": [
+    -113,
+    -203
+   ],
+   "fanduel": [
+    -114,
+    -114
+   ]
+  }
+ ]
+}
