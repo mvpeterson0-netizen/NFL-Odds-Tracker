@@ -1,5 +1,5 @@
 {
- "run_utc": "2026-11-17T16:33:31Z",
+ "run_utc": "2026-11-17T16:35:22Z",
  "books_requested": [
   "draftkings",
   "fanduel",
@@ -10,16 +10,15 @@
   "espnbet",
   "hardrockbet",
   "ballybet",
-  "fliff",
-  "williamhill_us"
+  "fliff"
  ],
  "games": [
   {
    "game": "Indianapolis Colts @ Houston Texans",
    "kickoff": "2026-11-20T01:15:00Z",
    "status": 200,
-   "credits_last": "14",
-   "remaining": "12504",
+   "credits_last": "7",
+   "remaining": "12497",
    "raw_rows_by_book": {
     "draftkings": 35,
     "fanduel": 28,
@@ -42,18 +41,176 @@
     "espnbet": 28,
     "betmgm": 26,
     "hardrockbet": 35,
-    "novig": 60
+    "novig": 61
+   },
+   "caesars_players": 0
+  },
+  {
+   "game": "Arizona Cardinals @ Kansas City Chiefs",
+   "kickoff": "2026-11-22T18:00:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12497",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "Baltimore Ravens @ Carolina Panthers",
+   "kickoff": "2026-11-22T18:00:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12497",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "Miami Dolphins @ Buffalo Bills",
+   "kickoff": "2026-11-22T18:00:00Z",
+   "status": 200,
+   "credits_last": "7",
+   "remaining": "12490",
+   "raw_rows_by_book": {
+    "draftkings": 24,
+    "fanduel": 17,
+    "novig": 189,
+    "fliff": 24,
+    "hardrockbet": 24,
+    "fanatics": 7
+   },
+   "kept_rows_by_book": {
+    "draftkings": 24,
+    "fanduel": 17,
+    "fliff": 24,
+    "hardrockbet": 24,
+    "fanatics": 7,
+    "novig": 44
+   },
+   "caesars_players": 0
+  },
+  {
+   "game": "New Orleans Saints @ Chicago Bears",
+   "kickoff": "2026-11-22T18:00:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12490",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "Tennessee Titans @ Dallas Cowboys",
+   "kickoff": "2026-11-22T18:00:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12490",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "Tampa Bay Buccaneers @ Detroit Lions",
+   "kickoff": "2026-11-22T18:00:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12490",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "Pittsburgh Steelers @ Philadelphia Eagles",
+   "kickoff": "2026-11-22T18:00:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12490",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "New York Jets @ Los Angeles Chargers",
+   "kickoff": "2026-11-22T21:05:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12490",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "Las Vegas Raiders @ Denver Broncos",
+   "kickoff": "2026-11-22T21:25:00Z",
+   "status": 200,
+   "credits_last": "0",
+   "remaining": "12490",
+   "raw_rows_by_book": {},
+   "kept_rows_by_book": {},
+   "caesars_players": 0
+  },
+  {
+   "game": "Jacksonville Jaguars @ New York Giants",
+   "kickoff": "2026-11-22T21:25:00Z",
+   "status": 200,
+   "credits_last": "3",
+   "remaining": "12487",
+   "raw_rows_by_book": {
+    "draftkings": 6,
+    "fanduel": 2,
+    "ballybet": 6,
+    "betrivers": 4,
+    "novig": 15,
+    "fliff": 6,
+    "hardrockbet": 6
+   },
+   "kept_rows_by_book": {
+    "draftkings": 6,
+    "fanduel": 2,
+    "ballybet": 6,
+    "betrivers": 4,
+    "fliff": 6,
+    "hardrockbet": 6,
+    "novig": 9
+   },
+   "caesars_players": 0
+  },
+  {
+   "game": "Minnesota Vikings @ San Francisco 49ers",
+   "kickoff": "2026-11-23T01:20:00Z",
+   "status": 200,
+   "credits_last": "7",
+   "remaining": "12480",
+   "raw_rows_by_book": {
+    "draftkings": 24,
+    "fanduel": 14,
+    "betrivers": 14,
+    "ballybet": 19,
+    "novig": 164,
+    "fliff": 23,
+    "hardrockbet": 24,
+    "fanatics": 7
+   },
+   "kept_rows_by_book": {
+    "draftkings": 24,
+    "fanduel": 14,
+    "betrivers": 14,
+    "ballybet": 19,
+    "fliff": 23,
+    "hardrockbet": 24,
+    "fanatics": 7,
+    "novig": 37
    },
    "caesars_players": 0
   }
  ],
- "balance_start": "12518",
- "stopped": "first paid game cost 14 (>7): stopped to avoid doubling cost",
+ "balance_start": "12504",
+ "stopped": null,
  "same_line_comparison": {
-  "pairs": 63,
-  "novig_better_over": 40,
-  "novig_better_under": 19,
-  "median_overround_novig": 1.08,
+  "pairs": 147,
+  "novig_better_over": 72,
+  "novig_better_under": 26,
+  "median_overround_novig": 1.194,
   "median_overround_draftkings": null,
   "median_overround_fanduel": 1.065
  },
@@ -176,7 +333,7 @@
    "market": "player_reception_yds",
    "line": 70.5,
    "novig": [
-    -108,
+    -113,
     -292
    ],
    "draftkings": [
@@ -190,7 +347,7 @@
    "market": "player_reception_yds",
    "line": 70.5,
    "novig": [
-    -108,
+    -113,
     -292
    ],
    "fanduel": [
