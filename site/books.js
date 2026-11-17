@@ -5,12 +5,17 @@
 // Under, consensus) and the Arbitrage tab (#/arb).
 (function () {
   const BOOKS = { draftkings: "DraftKings", fanduel: "FanDuel", betmgm: "BetMGM", williamhill_us: "Caesars", fanatics: "Fanatics",
-    betrivers: "BetRivers", espnbet: "theScore Bet", hardrockbet: "Hard Rock", ballybet: "Bally Bet", fliff: "Fliff" };
+    betrivers: "BetRivers", espnbet: "theScore Bet", hardrockbet: "Hard Rock", ballybet: "Bally Bet", fliff: "Fliff", novig: "Novig" };
   const bname = (b) => BOOKS[b] || b;
   const LS_OFF = "stix_arb_off"; // books the viewer switched off on the Arbitrage tab (this browser only)
   const A = { mk: "", off: (() => { try { const v = JSON.parse(localStorage.getItem(LS_OFF) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } })() };
   const dec = (o) => (o == null ? null : o > 0 ? 1 + o / 100 : 1 + 100 / Math.abs(o));
   const sg = (v) => (v > 0 ? `+${v}` : String(v));
+  // Novig is an exchange: its American price is shown first, with the contract price in cents in parentheses, e.g. "-113 (53¢)"
+  // (the American price converted back: probability x 100). Novig's fee schedule (support.novig.com "Fees on Novig", dated
+  // 2026-10-15) charges no fee on pregame straight trades, maker or taker, and Stix only shows pregame lines, so the price
+  // shown is the all-in price; the fee applies to live trades, futures and parlays only.
+  const px = (book, v) => (book === "novig" ? `${sg(v)} (${Math.round(100 * (v > 0 ? 100 / (v + 100) : -v / (-v + 100)))}¢)` : sg(v));
   const median = (xs) => { const s = [...xs].sort((a, b) => a - b), n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
   const started = (gid) => { const g = D.games[gid]; return !g || new Date(g.ko) <= new Date(); };
   const ago = (iso) => { const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : `${Math.round(m / 1440)} d ago`; };
@@ -35,10 +40,10 @@
     const cell = (r, side) => {
       const p = r[side === "o" ? 2 : 3]; if (p == null) return `<td class="muted">—</td>`;
       const best = side === "o" ? r === bestO : r === bestU;
-      return `<td class="${best ? "bk-best" : ""}">${sg(p)}${best ? " ★" : ""}</td>`;
+      return `<td class="${best ? "bk-best" : ""}">${px(r[0], p)}${best ? " ★" : ""}</td>`;
     };
     return `<div class="bkbox"><div class="bk-h"><b>Lines at other books</b><span class="muted small">${x.rows.length} books · ${fmtTime(x.cap)}</span></div>
-      <div class="bk-sum small">Best Over <b>${num(bestO[1])}</b> ${esc(bname(bestO[0]))} ${sg(bestO[2])} · Best Under <b>${num(bestU[1])}</b> ${esc(bname(bestU[0]))} ${sg(bestU[3])} · Consensus <b>${num(cons)}</b></div>
+      <div class="bk-sum small">Best Over <b>${num(bestO[1])}</b> ${esc(bname(bestO[0]))} ${px(bestO[0], bestO[2])} · Best Under <b>${num(bestU[1])}</b> ${esc(bname(bestU[0]))} ${px(bestU[0], bestU[3])} · Consensus <b>${num(cons)}</b></div>
       <details><summary class="small">All ${x.rows.length} books</summary><table class="bk-t small"><thead><tr><th>Book</th><th>Line</th><th>Over</th><th>Under</th></tr></thead><tbody>
       ${rows.map((r) => `<tr><td>${esc(bname(r[0]))}</td><td>${num(r[1])}</td>${cell(r, "o")}${cell(r, "u")}</tr>`).join("")}</tbody></table></details></div>`;
   }
@@ -81,8 +86,8 @@
     return `<div class="rlrow arbrow"><div class="rlhead"><a class="pname" href="#/player/${esc(x.pid)}">${esc(name)}</a> <span class="rlstat">${esc(mk)}</span>
         <span class="arb-ev ${cents(x.ret) > 0 ? "pos" : "neg"}">${ev}</span></div>
       <div class="muted small">${esc(team)} · ${esc(gameLabel(x.gid))} · ${fmtTime(g.ko)} · lines ${ago(x.cap)}</div>
-      <div class="arb-legs small"><span>Over <b>${num(x.o[1])}</b> ${esc(bname(x.o[0]))} ${sg(x.o[2])} · bet <b>$${so.toFixed(2)}</b></span>
-        <span>Under <b>${num(x.u[1])}</b> ${esc(bname(x.u[0]))} ${sg(x.u[3])} · bet <b>$${su.toFixed(2)}</b></span></div>
+      <div class="arb-legs small"><span>Over <b>${num(x.o[1])}</b> ${esc(bname(x.o[0]))} ${px(x.o[0], x.o[2])} · bet <b>$${so.toFixed(2)}</b></span>
+        <span>Under <b>${num(x.u[1])}</b> ${esc(bname(x.u[0]))} ${px(x.u[0], x.u[3])} · bet <b>$${su.toFixed(2)}</b></span></div>
       <div class="small">If both bet ($100 total): <b>${usd(x.ret)}</b> whichever side wins${x.both != null ? ` · both win (<b>${usd(x.both)}</b>) if he lands between ${num(x.o[1])} and ${num(x.u[1])}` : ""}</div></div>`;
   }
   function view() {
