@@ -431,6 +431,7 @@
     return (lineWin || priceWin) ? { line: dk.point, odds: x.price, why: lineWin ? "line" : "odds" } : null;
   }
   const slipUrl = (legs) => "https://sportsbook.fanduel.com/addToBetslip?" + legs.map((l, j) => `marketId[${j}]=${l.m}&selectionId[${j}]=${l.sel}`).join("&");
+  // Both FD buttons save every checked bet to My picks (when the save switch is on), even ones left off the "best FD only" slip (Michael 2026-11-16); Cancel saves nothing.
   // Popup shown when a tapped slip link includes bets with a better DraftKings number. Both choices are real links
   // (so the phone doesn't block them); "best FD only" opens a slip without the flagged bets.
   function dkPopup(chunk, tId) {
@@ -447,7 +448,7 @@
       const b = ev.target.closest && ev.target.closest("[data-dkpick]");
       if (!b && ev.target !== el) return; // tap on the card itself does nothing
       if (b && b.dataset.dkpick !== "cancel" && window.STIX_PICKS && fdSave()) {
-        try { window.STIX_PICKS.recordBets(b.dataset.dkpick === "best" ? keep : chunk.legs); } catch (err) { console.error("picks from FanDuel slip failed", err); }
+        try { window.STIX_PICKS.recordBets(chunk.legs); } catch (err) { console.error("picks from FanDuel slip failed", err); }
       }
       el.remove(); // links still navigate; Cancel and the backdrop just close
     });
