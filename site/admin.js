@@ -257,7 +257,9 @@
     if (!TP.data && !TP.loading && !TP.err) setTimeout(loadTweets, 0);
     if (TP.err) return `<div class="ad">${tabsBar()}<div class="panel ac"><h3>Tweet plan</h3><div class="body"><p class="small pk-err">${esc(TP.err)}</p><button id="tp-reload">Try again</button></div></div></div>`;
     if (!TP.data) return `<div class="ad">${tabsBar()}<p class="muted pad">Loading tweet plan…</p></div>`;
-    const plan = TP.data.plan || [], reqs = TP.data.requests || [];
+    // Chronological: by saved date, then time; undated rows last, ties keep the database's slot order.
+    const plan = (TP.data.plan || []).slice().sort((x, y) => (x.post_date ? 0 : 1) - (y.post_date ? 0 : 1) || String(x.post_date || "").localeCompare(String(y.post_date || "")) || String(x.post_time || "").localeCompare(String(y.post_time || "")) || (x.sort_order || 0) - (y.sort_order || 0));
+    const reqs = TP.data.requests || [];
     const pending = {};
     const pendAdds = [];
     reqs.filter((q) => q.status === "pending").forEach((q) => (q.changes || []).forEach((c) => {
@@ -313,7 +315,7 @@
           ${redraftBlock(r)}
           <div class="tp-info muted small tp-wide">${info}</div></div>` : ""}</div>`;
     };
-    const dayBlocks = (list) => { let out = "", last = null; list.forEach((r) => { if (r.day_label !== last) { out += `<div class="tp-dayh">${esc(r.day_label || fmtD(r.post_date))}</div>`; last = r.day_label; } out += card(r); }); return out; };
+    const dayBlocks = (list) => { let out = "", last = null; list.forEach((r) => { const key = r.post_date || r.day_label || ""; if (key !== last) { out += `<div class="tp-dayh">${esc(r.day_label || fmtD(r.post_date))}</div>`; last = key; } out += card(r); }); return out; };
     const rows = dayBlocks(upcoming) + (earlier.length ? `<button class="tp-more" id="tp-past">${TP.showPast ? "Hide" : "Show"} earlier (${earlier.length})</button>${TP.showPast ? dayBlocks(earlier) : ""}` : "");
     const addRows = TP.adds.map((a, i) => `<div class="tp-card open tp-new"><div class="tp-sum tp-sumnew"><span class="tp-slot">New tweet</span><button class="tp-del" data-tpnew-del="${i}">Remove</button></div>
         <div class="tp-det">
