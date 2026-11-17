@@ -1,0 +1,30 @@
+name: probe-novig-pull
+# Throwaway (branch probe/novig-pull only; never merged).
+on:
+  push:
+    branches: [probe/novig-pull]
+    paths: ["probe/novig_pull.py", ".github/workflows/probe-novig-pull.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: probe-novig-pull
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: One-time real pull (merged code)
+        env:
+          ODDS_API_KEY_20K: ${{ secrets.ODDS_API_KEY_20K }}
+          PYTHONPATH: .
+        run: python probe/novig_pull.py
+      - name: Commit result to this branch
+        run: |
+          git config user.name "prop-tracker-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe/pull_rows.csv probe/pull_result.json
+          git commit -q -m "probe: novig one-time pull" && git push -q origin HEAD:probe/novig-pull
