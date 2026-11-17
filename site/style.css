@@ -657,3 +657,7 @@ textarea.tp-in { resize: vertical; }
 /* Admin funnels (2026-11-16) */
 .fn-bar { display: inline-block; width: 90px; height: 8px; background: var(--chip); border-radius: 4px; overflow: hidden; vertical-align: middle; } .fn-bar i { display: block; height: 100%; background: var(--accent); }
 .fn-zero td { color: var(--muted); } .fn-zero td:last-child { color: var(--under); font-weight: 600; }
+
+/* Run-chart back light: the signal's 95% ROI interval (Michael 2026-11-16) */
+.sg-spark .sg-band { fill: var(--accent); opacity: .16; stroke: none; }
+.sg-spark .sg-bl text { fill: var(--accent); font-size: 6.5px; font-weight: 600; opacity: .8; font-variant-numeric: tabular-nums; paint-order: stroke; stroke: var(--panel); stroke-width: 1.6px; stroke-linejoin: round; pointer-events: none; }
