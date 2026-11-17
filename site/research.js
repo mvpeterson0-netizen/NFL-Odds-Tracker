@@ -701,11 +701,13 @@
     return best;
   }
   const seasonTally = (t) => tally(sigRec(t).all);
+  // Toggles that keep their OPT0 default instead of auto-picking the best season setting (Michael 2026-11-16: QB-R4 opens on 25+, not 40+).
+  const PINNED_OPT = { qbr4: true };
   function initOpts(tabs) {
     RL.optInit = RL.optInit || {};
     if (RL.optInit[SGPAGE] || !laWeeks().length) return;
     RL.optInit[SGPAGE] = true; RL.optTouched = RL.optTouched || {};
-    for (const t of tabs) if (t.opts && !RL.optTouched[t.id]) RL.opt[t.id] = bestOpt(t, seasonTally);
+    for (const t of tabs) if (t.opts && !RL.optTouched[t.id] && !PINNED_OPT[t.id]) RL.opt[t.id] = bestOpt(t, seasonTally);
   }
   // Card order (Michael 2026-11-12): changes once a week, not as the toggles are tapped or games finish. Cards are ranked on ROI through
   // the last completed week (before the upcoming-lines week), using each toggle's better setting, so tapping a toggle never reorders them.
