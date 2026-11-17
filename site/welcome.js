@@ -1,5 +1,5 @@
 "use strict";
-// "Welcome to Stix" page (#/welcome; Michael, 2026-10-27): a short tour of the six main parts of the app, with real
+// "Welcome to Stix" page (#/welcome; Michael, 2026-10-27): a short tour (4 pages since 2026-11-16: Board, Player pages, Signal players, My picks), with real
 // screenshots of the built site (site/welcome/). Board and Player pages images retaken 11/11 from Week 10 data; Signals is two steps since 11/12 (signed-in tiles; a picked signal's players with the FanDuel slip button), real signed-in screenshots;
 // copy trimmed the same day (Michael: let the pictures carry it, make the tour fast).
 // Shown automatically only on a browser's first-ever visit: no Stix setting saved in this browser yet, nobody signed
@@ -46,14 +46,8 @@
       img: () => shot("board-w10.jpg", "The Board on a phone: Josh Allen and James Cook III with their Week 10 lines", "board") },
     { id: "player", r: .635, title: "Player pages", text: "Every week's line next to the actual result.",
       img: () => shot("player-w10.jpg", "Jaxon Smith-Njigba's player page: FanDuel odds and a chart of his receptions against the line, weeks 1 to 9", "player") },
-    { id: "script", r: .51, title: "Game script", text: "Tap an opponent in a game log to see how the game went.",
-      img: () => shot("script.jpg", "Game script pop-up for Seattle's Week 7 win over Kansas City", "", "wl-pop") },
-    { id: "signals", r: .629, title: "Signals", text: "Top signals by ROI. Sign in with Google to see them all.",
-      img: () => shot("signals-in.jpg", "Signals tab signed in: eight signal tiles with season ROI, record, players this week and a weekly ROI chart") },
     { id: "signals2", r: .528, title: "Signal players", text: "Tap a signal to see this week's players. Add them to your FanDuel slip in one tap.",
       img: () => shot("signals-pick.jpg", "A selected signal, SC1, with its three players this week checked and an Add 3 checked Unders to FanDuel slip button") },
-    { id: "results", r: .629, title: "Results", text: "How every graded line finished.",
-      img: () => shot("results.jpg", "Results tab: graded lines over and under by market") },
     { id: "picks", r: .70, title: "My picks", text: "Tap Over or Under to save a pick. It's graded for you. Free sign-in.",
       img: () => `<div class="wl-ex"><span class="wl-badge">Example</span>${shot("picks-record.jpg", "Example record: 16–9, 64% hit rate, +5.69 units")}${shot("picks-list.jpg", "Example graded picks with Hit and Miss labels")}</div>`,
       cap: '<p class="small muted wl-excap">Example picks to show how tracking works, not real results.</p>' },

@@ -120,3 +120,7 @@ main { padding: 10px 12px 32px; }
 /* NFL / CFB toggle sits on the logo row (replaces the removed All players switch) */
 .sport { order: 1; margin-left: auto; }
 #tabs-cfb { order: 3; width: 100%; }
+
+.mfilters .qw { display: flex; width: 100%; }
+.mfilters .qw input[type=search] { padding-right: 36px; }
+.mfilters .qx { width: 28px; height: 28px; line-height: 26px; right: 6px; }

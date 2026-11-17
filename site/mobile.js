@@ -105,7 +105,7 @@
     items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
     let h = (typeof introStrip === "function" ? introStrip() : "") + gameBar(wk) + `<div class="filters mfilters">
       <div class="flab">Week ${weekSlider(wk)}</div>
-      <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label></div>`;
+      <label>Player <span class="qw"><input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"><button type="button" class="qx" id="f-qx" aria-label="Clear search"${S.q ? "" : " hidden"}>×</button></span></label></div>`;
     if (!items.length) return h + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
     let lastGid = null;
     for (const { s, r } of items) {
