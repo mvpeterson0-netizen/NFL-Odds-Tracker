@@ -21,7 +21,26 @@
   // playerById is app.js's lookup (a top-level const, so shared by name between the page's scripts, not on window).
   const playerName = (id) => { try { const p = typeof playerById !== "undefined" ? playerById[id] : null; return p ? `${p.name} (${p.team} ${p.pos})` : id; } catch { return id; } };
   const SCREEN = { board: "Board", player: "Player page", search: "Research", leads: "Results", defense: "Defense", guide: "Guide", picks: "Picks", admin: "Admin", slots: "Guide (slots)", log: "Guide (log)", other: "Other" };
-  const TAP = { pick: "Pick Over/Under", pick_remove: "Remove pick", bet_fd: "Bet on FanDuel", share: "Share", updates: "Player updates", game_script: "Game script", research_lead: "Research lead", filter: "Research filter", board_filter: "Board filter", search_run: "Run search", all_players: "All players switch", alerts_on: "Alerts on", alerts_off: "Alerts off", signin_start: "Sign-in started", signin_done: "Signed in", signin_later: "Sign-in pop-up: Not now" };
+  const TAP = { pick: "Pick Over/Under", pick_remove: "Remove pick", bet_fd: "Bet on FanDuel", share: "Share", updates: "Player updates", game_script: "Game script", research_lead: "Research lead", filter: "Research filter", board_filter: "Board filter", search_run: "Run search", all_players: "All players switch", alerts_on: "Alerts on", alerts_off: "Alerts off", signin_start: "Sign-in started", signin_done: "Signed in", signin_later: "Sign-in pop-up: Not now",
+    tab_board: "Tab: Board", tab_search: "Tab: Signals", tab_leads: "Tab: Results", tab_defense: "Tab: Defense", tab_picks: "Tab: Picks", tab_arb: "Tab: Arbitrage", tab_guide: "Tab: Guide",
+    week_pick: "Week chip", game_chip: "Game chip", board_search: "Board name search used", search_clear: "Board search X", open_board: "Player opened from Board", open_signals: "Player opened from Signals", open_other: "Player opened elsewhere",
+    signal_tile: "Signal tile", signal_scope: "Signal time scope", signal_check: "Signal player checkbox", signal_checkall: "Signal check all/none", slip_tap: "FanDuel slip button (Signals)",
+    tour_open: "Tour opened by link", tour_start: "Tour: Get started", tour_skip_board: "Tour: Skip on Board", tour_skip_player: "Tour: Skip on Player pages", tour_skip_slip: "Tour: Skip on Signal players",
+    whatsnew_ok: "What's new: Got it", whatsnew_go: "What's new: button", whatsnew_closed: "What's new: closed (x/outside)", signin_closed: "Sign-in pop-up: closed (x/outside)",
+    tour_board: "Seen: tour Board", tour_player: "Seen: tour Player pages", tour_slip: "Seen: tour Signal players", tour_picks: "Seen: tour My picks",
+    signin_shown_pick: "Seen: sign-in (save pick)", signin_shown_signals: "Seen: sign-in (signals)", signin_shown_time: "Seen: sign-in (1 min)", whatsnew_shown: "Seen: What's new",
+    signals_shown: "Seen: signal tiles", slip_shown: "Seen: FanDuel slip button", pick_shown: "Seen: Over/Under box", bet_shown: "Seen: FanDuel bet buttons", script_shown: "Seen: game script links", share_shown: "Seen: Share", alerts_shown: "Seen: Alerts switch" };
+  // Funnels (Michael, 2026-11-16): each step is devices that did it, shown against the first step and the one before.
+  // s:"x" = opened screen x; t:"x" = tap/seen event x. A step far below the one before it is something people saw and skipped.
+  const FUNNELS = [
+    ["Welcome tour", [["Saw Board page", "t", "tour_board"], ["Saw Player pages", "t", "tour_player"], ["Saw Signal players", "t", "tour_slip"], ["Saw My picks", "t", "tour_picks"], ["Tapped Get started", "t", "tour_start"]], [["Skip on Board", "tour_skip_board"], ["Skip on Player pages", "tour_skip_player"], ["Skip on Signal players", "tour_skip_slip"], ["Opened tour by link", "tour_open"]]],
+    ["Board to player", [["Opened Board", "s", "board"], ["Used name search", "t", "board_search"], ["Opened a player from Board", "t", "open_board"], ["Opened Player page", "s", "player"]], [["Week chip", "week_pick"], ["Game chip", "game_chip"], ["Search X", "search_clear"]]],
+    ["Player page", [["Opened Player page", "s", "player"], ["Saw Over/Under box", "t", "pick_shown"], ["Saved a pick", "t", "pick"], ["Saw FanDuel bet buttons", "t", "bet_shown"], ["Tapped a FanDuel bet", "t", "bet_fd"]], [["Saw game script links", "script_shown"], ["Opened game script", "game_script"], ["Saw Share", "share_shown"], ["Tapped Share", "share"]]],
+    ["Signals to FanDuel slip", [["Opened Signals", "s", "search"], ["Saw signal tiles", "t", "signals_shown"], ["Tapped a signal tile", "t", "signal_tile"], ["Saw FanDuel slip button", "t", "slip_shown"], ["Tapped FanDuel slip button", "t", "slip_tap"]], [["Changed time scope", "signal_scope"], ["Checked a signal player", "signal_check"], ["Check all / none", "signal_checkall"], ["Opened a player from Signals", "open_signals"]]],
+    ["Sign-in pop-ups", [["Saw sign-in (save pick)", "t", "signin_shown_pick"], ["Saw sign-in (signals)", "t", "signin_shown_signals"], ["Saw sign-in (1 minute)", "t", "signin_shown_time"], ["Started sign-in", "t", "signin_start"], ["Signed in", "t", "signin_done"]], [["Not now", "signin_later"], ["Closed with x/outside", "signin_closed"]]],
+    ["What's new pop-up", [["Saw What's new", "t", "whatsnew_shown"], ["Tapped its button", "t", "whatsnew_go"], ["Tapped Got it", "t", "whatsnew_ok"]], [["Closed with x/outside", "whatsnew_closed"]]],
+  ];
+  const TABNAMES = ["tab_board", "tab_search", "tab_leads", "tab_defense", "tab_picks", "tab_arb", "tab_guide"];
   const detailText = (name, d) => {
     if (!d) return "";
     if (name === "player" || name === "share" || name === "updates" || name === "pick_remove") return playerName(d.split("|").pop());
@@ -90,6 +109,35 @@
   }
   const table = (head, rows) => `<div class="ad-tw"><table class="ad-t"><thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.join("") || `<tr><td colspan="${head.length}" class="muted">None yet</td></tr>`}</tbody></table></div>`;
 
+  function funnelsHtml(t) {
+    const tapDev = {}; (t.taps_by_name || []).forEach((s) => { tapDev[s.name] = s.devices; });
+    const scrDev = {}; (t.screens || []).forEach((s) => { scrDev[s.name] = s.devices; });
+    const dv = (kind, name) => (kind === "s" ? scrDev[name] : tapDev[name]) || 0;
+    const vis = t.devices || 0;
+    const pct = (n, d) => (d ? Math.round((n / d) * 100) + "%" : "—");
+    const bar = (n, d) => `<span class="fn-bar"><i style="width:${d ? Math.max(n ? 2 : 0, Math.round((n / d) * 100)) : 0}%"></i></span>`;
+    const cards = FUNNELS.map(([title, steps, extras]) => {
+      const first = dv(steps[0][1], steps[0][2]);
+      let prev = null;
+      const rows = steps.map(([label, kind, name]) => {
+        const n = dv(kind, name);
+        const row = `<tr><td>${esc(label)}</td><td class="num">${fmtN(n)}</td><td class="num">${pct(n, first)}</td><td class="num">${prev == null ? "" : pct(n, prev)}</td><td>${bar(n, first)}</td></tr>`;
+        prev = n; return row;
+      });
+      const ex = (extras || []).map(([label, name]) => `<tr><td class="muted">${esc(label)}</td><td class="num">${fmtN(tapDev[name] || 0)}</td><td class="num muted">${pct(tapDev[name] || 0, first)}</td><td></td><td></td></tr>`);
+      return `<div class="panel"><h3>${esc(title)}</h3><div class="body">${table(["Step (visitors)", "Devices", "of first", "of previous", ""], rows.concat(ex))}</div></div>`;
+    }).join("");
+    // Reach: every tracked button/tab against all visitors; zero = nobody tapped it in this period.
+    const reachNames = Object.keys(TAP).filter((k) => !/^(tour_(board|player|slip|picks)|signin_shown|whatsnew_shown|signals_shown|slip_shown|pick_shown|bet_shown|script_shown|share_shown|alerts_shown)/.test(k));
+    const reach = reachNames.map((k) => [k, tapDev[k] || 0]).sort((x, y) => x[1] - y[1] || x[0].localeCompare(y[0]))
+      .map(([k, n]) => `<tr${n ? "" : ' class="fn-zero"'}><td>${esc(TAP[k])}</td><td class="num">${fmtN(n)}</td><td class="num">${pct(n, vis)}</td><td>${n ? "" : "never tapped"}</td></tr>`);
+    const tabs = TABNAMES.map((k) => [k, tapDev[k] || 0]);
+    return `<h2 class="gsec">Funnels</h2>
+      <p class="muted small">Devices = distinct browsers. "Saw" steps are recorded the first time something appears on a screen; a big drop to the next step means people saw it and didn't tap it. Tracking of these started when this version shipped, so earlier days read 0.</p>
+      <div class="ad-grid">${cards}</div>
+      <div class="panel"><h3>Reach: every tracked tap vs. all visitors (least tapped first)</h3><div class="body">${table(["Button / tab", "Devices", "of visitors", ""], reach)}</div></div>`;
+  }
+
   function dashboard() {
     const t = AD.traffic, users = AD.users || [];
     const since = Date.now() - AD.days * 864e5;
@@ -131,6 +179,7 @@
         <div class="panel"><h3>Most-viewed players</h3><div class="body">${table(["Player", "Visitors", "Visits", "Time"], players)}<p class="muted small">Ranked by visitors (devices), then visits. A visit = a look at the player 30+ min after the last one on the same device, so switching apps and back isn't counted again.</p></div></div>
         <div class="panel"><h3>Devices</h3><div class="body">${table(["Device", "Visitors"], plats)}</div></div>
       </div>
+      ${funnelsHtml(t)}
       <div class="panel"><h3>Users (${fmtN(users.length)})</h3><div class="body">
         ${table(["Email", "Sign-in", "Joined", "Last active", "Picks", "Views", "Time", "Taps", "21+"], urows)}
         <p class="muted small">Tap a user to see their recent activity. Views, time and taps are all-time (kept 6 months).</p></div></div>

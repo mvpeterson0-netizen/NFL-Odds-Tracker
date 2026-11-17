@@ -653,3 +653,7 @@ textarea.tp-in { resize: vertical; }
 .qw input[type=search]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; display: none; }
 .qx { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; line-height: 22px; padding: 0; border: 0; border-radius: 50%; background: var(--line); color: var(--muted); font-size: 16px; cursor: pointer; }
 .qx[hidden] { display: none; }
+
+/* Admin funnels (2026-11-16) */
+.fn-bar { display: inline-block; width: 90px; height: 8px; background: var(--chip); border-radius: 4px; overflow: hidden; vertical-align: middle; } .fn-bar i { display: block; height: 100%; background: var(--accent); }
+.fn-zero td { color: var(--muted); } .fn-zero td:last-child { color: var(--under); font-weight: 600; }
