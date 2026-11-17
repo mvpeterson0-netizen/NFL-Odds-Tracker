@@ -307,6 +307,13 @@ function gameBar(wk) {
   return h + `</div>`;
 }
 
+// One-line "what is Stix" strip for visitors who are not signed in (Michael, 2026-11-16: the home page never says what Stix is).
+function introStrip() {
+  try { const A = window.STIX_ACCOUNT; if (A && A.signedIn()) return ""; } catch (e) { /* show it */ }
+  return `<div class="intro"><b>Free NFL prop research.</b> Every starter's DraftKings and FanDuel line next to what actually happened, all season.
+    <span class="intro-links"><a href="#/welcome">Take the tour</a> · <a href="https://x.com/StixNFL" target="_blank" rel="noopener">Follow @StixNFL</a></span></div>`;
+}
+
 function viewBoard() {
   const wk = S.wk;
   const q = S.q.trim().toLowerCase();
@@ -325,7 +332,7 @@ function viewBoard() {
   // Players with a line showing come first; then, within each group, finished games' players go to the bottom
   // (same order as the game chip row), then kickoff, game, team, slot.
   items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
-  let html = gameBar(wk) + `<div class="filters">
+  let html = introStrip() + gameBar(wk) + `<div class="filters">
     <div class="flab">Week ${weekSlider(wk)}</div>
     <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label>
   </div>`;
