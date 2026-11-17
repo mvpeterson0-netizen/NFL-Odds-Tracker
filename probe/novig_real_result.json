@@ -1,0 +1,69 @@
+{
+ "run_utc": "2026-11-17T16:14:23Z",
+ "books_requested": [
+  "draftkings",
+  "fanduel",
+  "betmgm",
+  "novig",
+  "fanatics",
+  "betrivers",
+  "espnbet",
+  "hardrockbet",
+  "ballybet",
+  "fliff"
+ ],
+ "events_call": {
+  "credits_last": "0",
+  "remaining": "12525"
+ },
+ "odds_call": {
+  "status": 200,
+  "credits_last": "7",
+  "remaining": "12518",
+  "markets_requested": [
+   "player_pass_yds",
+   "player_rush_attempts",
+   "player_rush_yds",
+   "player_receptions",
+   "player_reception_yds",
+   "player_pass_attempts",
+   "player_pass_completions"
+  ]
+ },
+ "rows_before_narrowing_by_book": {
+  "draftkings": 35,
+  "fanduel": 28,
+  "ballybet": 26,
+  "betrivers": 22,
+  "novig": 322,
+  "fliff": 37,
+  "fanatics": 7,
+  "espnbet": 14,
+  "betmgm": 26,
+  "hardrockbet": 35
+ },
+ "rows_after_narrowing_by_book": {
+  "draftkings": 35,
+  "fanduel": 28,
+  "ballybet": 26,
+  "betrivers": 22,
+  "fliff": 37,
+  "fanatics": 7,
+  "espnbet": 14,
+  "betmgm": 26,
+  "hardrockbet": 35,
+  "novig": 58
+ },
+ "books_returned": [
+  "ballybet",
+  "betmgm",
+  "betrivers",
+  "draftkings",
+  "espnbet",
+  "fanatics",
+  "fanduel",
+  "fliff",
+  "hardrockbet",
+  "novig"
+ ]
+}
