@@ -643,3 +643,6 @@ textarea.tp-in { resize: vertical; }
 .rl-dkcard { width: 100%; max-width: 460px; max-height: 85vh; overflow: auto; padding: 16px; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; }
 .rl-dkcard ul { margin: 10px 0; padding-left: 18px; } .rl-dkcard li { margin-bottom: 8px; }
 .rl-dkbtns { display: flex; flex-direction: column; gap: 8px; } .rl-dkbtns .betbtn { justify-content: center; white-space: normal; text-align: center; background: var(--panel); font: inherit; font-weight: 600; cursor: pointer; }
+
+.intro { margin: 0 0 12px; padding: 10px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; font-size: 14px; line-height: 1.4; }
+.intro .intro-links { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }

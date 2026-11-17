@@ -103,7 +103,7 @@
     // Players with a line showing come first (hasLineNow, app.js); then, within each group, finished games' players
     // go to the bottom (same order as the game chip row), then kickoff, game, team, slot.
     items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.r.ko.localeCompare(b.r.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
-    let h = gameBar(wk) + `<div class="filters mfilters">
+    let h = (typeof introStrip === "function" ? introStrip() : "") + gameBar(wk) + `<div class="filters mfilters">
       <div class="flab">Week ${weekSlider(wk)}</div>
       <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label></div>`;
     if (!items.length) return h + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
