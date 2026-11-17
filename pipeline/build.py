@@ -197,6 +197,7 @@ def bet_links(name_index, games_by_id, now):
     return out
 
 
+NOVIG_BOOK = "novig"  # exchange; rung choice differs from the sportsbooks (see book_lines)
 HIDDEN_BOOKS = {"fliff"}  # captured, but kept out of the app and arbitrage alerts (Michael 2026-10-30)
 
 
@@ -233,16 +234,42 @@ def book_lines(name_index, games_by_id, now):
         if not pid or not mid or line is None:
             continue
         pts[(r["game_id"], pid, mid, r["book"])].append((line, op, up))
-    out = {}
+    def balance(x):
+        nv = novig_over(x[1], x[2]) if x[1] is not None and x[2] is not None else None
+        return abs(nv - 0.5) if nv is not None else 1.0
+
+    def overround(x):  # combined implied probability of both sides; lower = tighter price
+        a, b = implied(x[1]), implied(x[2])
+        return a + b if a is not None and b is not None else 9.0
+
+    picked = {}
     for (gid, pid, mid, book), lst in pts.items():
+        if book == NOVIG_BOOK:
+            continue
         both = [x for x in lst if x[1] is not None and x[2] is not None]
-        pool = both or lst
-
-        def balance(x):
-            nv = novig_over(x[1], x[2]) if x[1] is not None and x[2] is not None else None
-            return abs(nv - 0.5) if nv is not None else 1.0
-
-        line, op, up = sorted(pool, key=balance)[0]
+        picked[(gid, pid, mid, book)] = sorted(both or lst, key=balance)[0]
+    # Novig (exchange, 2026-11-17) stores a few rungs per player: show the one at the DraftKings line, else the FanDuel
+    # line, else its tightest rung - "closest to even money" would pick a thin, wide-spread rung.
+    for (gid, pid, mid, book), lst in pts.items():
+        if book != NOVIG_BOOK:
+            continue
+        both = [x for x in lst if x[1] is not None and x[2] is not None]
+        if not both:
+            continue
+        pick = None
+        for ref in ("draftkings", "fanduel"):
+            r = picked.get((gid, pid, mid, ref))
+            if r is not None:
+                same = [x for x in both if x[0] == r[0]]
+                if same:
+                    pick = same[0]
+                    break
+        picked[(gid, pid, mid, book)] = pick or sorted(both, key=overround)[0]
+    out = {}
+    for (gid, pid, mid, book) in pts:
+        if (gid, pid, mid, book) not in picked:
+            continue
+        line, op, up = picked[(gid, pid, mid, book)]
         gout = out.setdefault(gid, {"cap": latest[gid], "p": {}})
         gout["p"].setdefault(pid, {}).setdefault(mid, []).append([book, line, op, up])
     return out
