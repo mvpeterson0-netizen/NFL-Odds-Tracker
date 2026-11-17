@@ -334,7 +334,7 @@ function viewBoard() {
   items.sort((a, b) => (hasLineNow(a.r) ? 0 : 1) - (hasLineNow(b.r) ? 0 : 1) || (a.r.final ? 1 : 0) - (b.r.final ? 1 : 0) || a.ko.localeCompare(b.ko) || a.r.gid.localeCompare(b.r.gid) || a.s.team.localeCompare(b.s.team) || slotRank(a.s.slot) - slotRank(b.s.slot));
   let html = introStrip() + gameBar(wk) + `<div class="filters">
     <div class="flab">Week ${weekSlider(wk)}</div>
-    <label>Player <input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"></label>
+    <label>Player <span class="qw"><input type="search" id="f-q" placeholder="Search name" value="${esc(S.q)}"><button type="button" class="qx" id="f-qx" aria-label="Clear search"${S.q ? "" : " hidden"}>×</button></span></label>
   </div>`;
   if (!items.length) return html + `<p class="muted">No slotted players match these filters for week ${wk}.</p>`;
   html += `<div class="panel scroll board"><table><thead><tr>
@@ -1049,7 +1049,8 @@ function bind(tab, arg) {
   document.querySelectorAll("[data-gid]").forEach((b) => b.addEventListener("click", () => { S.game = b.dataset.gid; render(); }));
   on("f-team", "change", (e) => { S.team = e.target.value; render(); });
   on("f-pos", "change", (e) => { S.pos = e.target.value; render(); });
-  on("f-q", "input", (e) => { S.q = e.target.value; clearTimeout(bind.t); bind.t = setTimeout(() => { render(); const el = document.getElementById("f-q"); el.focus(); el.setSelectionRange(el.value.length, el.value.length); }, 200); });
+  on("f-qx", "click", (e) => { e.preventDefault(); S.q = ""; clearTimeout(bind.t); render(); const el = document.getElementById("f-q"); if (el) el.focus(); });
+  on("f-q", "input", (e) => { const x = document.getElementById("f-qx"); if (x) x.hidden = !e.target.value; S.q = e.target.value; clearTimeout(bind.t); bind.t = setTimeout(() => { render(); const el = document.getElementById("f-q"); el.focus(); el.setSelectionRange(el.value.length, el.value.length); }, 200); });
   on("s-wk", "change", (e) => { S.slotWk = +e.target.value; render(); });
   on("s-team", "change", (e) => { S.slotTeam = e.target.value; render(); });
   on("an-toggle", "click", () => { S.showAn = !S.showAn; render(); });

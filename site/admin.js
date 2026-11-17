@@ -6,7 +6,7 @@
   const ACC = () => window.STIX_ACCOUNT;
   const inclKey = "stix_admin_include_me";
   const getIncl = () => { try { return localStorage.getItem(inclKey) === "1"; } catch { return false; } };
-  const AD = { incl: getIncl(), days: 30, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, loadedAt: 0, sel: null, activity: null, actErr: "", tab: (() => { try { return localStorage.getItem("stix_admin_tab") === "tweets" ? "tweets" : "traffic"; } catch { return "traffic"; } })() };
+  const AD = { incl: getIncl(), days: 7, traffic: null, users: null, err: "", denied: false, loading: false, loadedFor: null, loadedAt: 0, sel: null, activity: null, actErr: "", tab: (() => { try { return localStorage.getItem("stix_admin_tab") === "tweets" ? "tweets" : "traffic"; } catch { return "traffic"; } })() };
   // Read-only admin requests: give up on a hung connection after 12 s and retry once (safe to repeat). Writes never retry.
   const RD = { timeoutMs: 12000, retries: 1 };
   const STALE_MS = 120000; // coming back to the app within 2 minutes does not reload anything
