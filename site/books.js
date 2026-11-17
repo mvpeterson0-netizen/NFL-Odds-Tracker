@@ -5,12 +5,16 @@
 // Under, consensus) and the Arbitrage tab (#/arb).
 (function () {
   const BOOKS = { draftkings: "DraftKings", fanduel: "FanDuel", betmgm: "BetMGM", williamhill_us: "Caesars", fanatics: "Fanatics",
-    betrivers: "BetRivers", espnbet: "theScore Bet", hardrockbet: "Hard Rock", ballybet: "Bally Bet", fliff: "Fliff" };
+    betrivers: "BetRivers", espnbet: "theScore Bet", hardrockbet: "Hard Rock", ballybet: "Bally Bet", fliff: "Fliff", novig: "Novig" };
   const bname = (b) => BOOKS[b] || b;
   const LS_OFF = "stix_arb_off"; // books the viewer switched off on the Arbitrage tab (this browser only)
   const A = { mk: "", off: (() => { try { const v = JSON.parse(localStorage.getItem(LS_OFF) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } })() };
   const dec = (o) => (o == null ? null : o > 0 ? 1 + o / 100 : 1 + 100 / Math.abs(o));
   const sg = (v) => (v > 0 ? `+${v}` : String(v));
+  // Novig is an exchange: its American price is shown first, with the contract price in cents in parentheses, e.g. "-113 (53¢)"
+  // (the American price converted back: probability x 100; Novig's own quote, before any fee).
+  const ARB_SKIP = ["novig"]; // not used for arbitrage until its quote size and fee are known (same rule as the alerts)
+  const px = (book, v) => (book === "novig" ? `${sg(v)} (${Math.round(100 * (v > 0 ? 100 / (v + 100) : -v / (-v + 100)))}¢)` : sg(v));
   const median = (xs) => { const s = [...xs].sort((a, b) => a - b), n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
   const started = (gid) => { const g = D.games[gid]; return !g || new Date(g.ko) <= new Date(); };
   const ago = (iso) => { const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : `${Math.round(m / 1440)} d ago`; };
@@ -35,10 +39,10 @@
     const cell = (r, side) => {
       const p = r[side === "o" ? 2 : 3]; if (p == null) return `<td class="muted">—</td>`;
       const best = side === "o" ? r === bestO : r === bestU;
-      return `<td class="${best ? "bk-best" : ""}">${sg(p)}${best ? " ★" : ""}</td>`;
+      return `<td class="${best ? "bk-best" : ""}">${px(r[0], p)}${best ? " ★" : ""}</td>`;
     };
     return `<div class="bkbox"><div class="bk-h"><b>Lines at other books</b><span class="muted small">${x.rows.length} books · ${fmtTime(x.cap)}</span></div>
-      <div class="bk-sum small">Best Over <b>${num(bestO[1])}</b> ${esc(bname(bestO[0]))} ${sg(bestO[2])} · Best Under <b>${num(bestU[1])}</b> ${esc(bname(bestU[0]))} ${sg(bestU[3])} · Consensus <b>${num(cons)}</b></div>
+      <div class="bk-sum small">Best Over <b>${num(bestO[1])}</b> ${esc(bname(bestO[0]))} ${px(bestO[0], bestO[2])} · Best Under <b>${num(bestU[1])}</b> ${esc(bname(bestU[0]))} ${px(bestU[0], bestU[3])} · Consensus <b>${num(cons)}</b></div>
       <details><summary class="small">All ${x.rows.length} books</summary><table class="bk-t small"><thead><tr><th>Book</th><th>Line</th><th>Over</th><th>Under</th></tr></thead><tbody>
       ${rows.map((r) => `<tr><td>${esc(bname(r[0]))}</td><td>${num(r[1])}</td>${cell(r, "o")}${cell(r, "u")}</tr>`).join("")}</tbody></table></details></div>`;
   }
@@ -54,7 +58,7 @@
       for (const [pid, ms] of Object.entries(g.p || {})) {
         for (const [mid, rows] of Object.entries(ms)) {
           if (A.mk && mid !== A.mk) continue;
-          const rs = rows.filter((r) => !A.off.includes(r[0]));
+          const rs = rows.filter((r) => !A.off.includes(r[0]) && !ARB_SKIP.includes(r[0]));
           let best = null;
           for (const o of rs) for (const u of rs) {
             if (o[0] === u[0] || o[2] == null || u[3] == null || o[1] > u[1]) continue;
@@ -90,7 +94,7 @@
     let h = `<section class="pad arb"><h2 class="gsec">Arbitrage</h2>
       <p class="muted small">Best Over at one book and Under at another, from the same pull. "If both bet" splits $100 so either side pays the same. Lines move: check both books before betting.</p>`;
     if (!any) return h + `<p class="muted">No lines from other books for upcoming games yet. They arrive with each game's next line check.</p></section>`;
-    const seen = new Set(); for (const g of Object.values(bks)) for (const ms of Object.values(g.p || {})) for (const rows of Object.values(ms)) for (const r of rows) seen.add(r[0]);
+    const seen = new Set(); for (const g of Object.values(bks)) for (const ms of Object.values(g.p || {})) for (const rows of Object.values(ms)) for (const r of rows) if (!ARB_SKIP.includes(r[0])) seen.add(r[0]);
     h += `<div class="arb-books">${[...seen].sort((a, b) => bname(a).localeCompare(bname(b))).map((b) => `<button type="button" class="gchip ${A.off.includes(b) ? "" : "on"}" data-arbbook="${esc(b)}">${esc(bname(b))}</button>`).join("")}</div>
       <div class="filters"><label>Stat <select id="arb-mk"><option value="">All stats</option>${D.markets.map((m) => `<option value="${m.id}" ${m.id === A.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label></div>`;
     const list = compute(), arbs = list.filter((x) => cents(x.ret) > 0), near = list.filter((x) => cents(x.ret) <= 0).slice(0, 15);

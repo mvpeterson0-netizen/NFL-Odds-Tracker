@@ -49,6 +49,13 @@ BOOKS = ["draftkings", "fanduel"]  # stored in this order of preference
 # in data/other_books/week_NN.csv only; prop_captures.csv, grading and the pull rules stay DraftKings/FanDuel only.
 EXTRA_BOOKS = ["betmgm", "williamhill_us", "fanatics", "betrivers", "espnbet", "hardrockbet", "ballybet", "fliff"]
 assert len(BOOKS) + len(EXTRA_BOOKS) <= 10  # more than 10 books would count as a second region (double cost)
+# NFL pulls (Michael 2026-11-17): Novig, a peer-to-peer exchange, replaces Caesars (williamhill_us returned no player props
+# in the 2026-10-29 books probe). Kept as a separate list because EXTRA_BOOKS is also used by the CFB code and the 2025
+# history, which must not change. Still 10 books = 1 request group. Probe 2026-11-17: novig+draftkings+fanduel, 7 markets
+# = 7 credits (same as DK+FD alone); cost with the full 10 not yet observed.
+NOVIG = "novig"
+NFL_EXTRA_BOOKS = [NOVIG if b == "williamhill_us" else b for b in EXTRA_BOOKS]
+assert len(BOOKS) + len(NFL_EXTRA_BOOKS) <= 10
 OTHER_DIR = DATA / "other_books"
 # One-time catch-up: games that already had lines get one line check after this time, so other books show up
 # without waiting for the next scheduled check.
@@ -386,6 +393,44 @@ def _main_line_rows(event, game_id, pull_type, captured, ko, mins, in_window, na
     return rows
 
 
+def _implied(price):
+    """American odds -> implied probability (None if not a number)."""
+    try:
+        a = float(price)
+    except (TypeError, ValueError):
+        return None
+    if a == 0:
+        return None
+    return 100.0 / (a + 100.0) if a > 0 else -a / (-a + 100.0)
+
+
+def narrow_novig(rows):
+    """Novig quotes a ladder of lines per player (probe 2026-11-17: median 8 rungs, up to 22; thin rungs have both sides
+    at -150 to -220). Keep, per (market, player), only the two-sided rungs that match a DraftKings/FanDuel line from the
+    same pull, plus Novig's tightest two-sided rung (lowest combined implied probability). Prices stay American, exactly
+    as The Odds API returns them. Other books' rows pass through untouched."""
+    ref = defaultdict(set)    # (market, player) -> lines DraftKings/FanDuel offered
+    ladder = defaultdict(list)
+    out = []
+    key = lambda r: (r["market"], r.get("gsis_id") or norm_name(r.get("player_book_name", "")))
+    for r in rows:
+        if r["book"] == NOVIG:
+            if r.get("over_price") not in ("", None) and r.get("under_price") not in ("", None):
+                ladder[key(r)].append(r)
+        else:
+            out.append(r)
+            if r["book"] in BOOKS:
+                ref[key(r)].add(r["line"])
+    for k, rungs in ladder.items():
+        scored = [(((_implied(x["over_price"]) or 9) + (_implied(x["under_price"]) or 9)), x) for x in rungs]
+        tight = min(scored, key=lambda t: t[0])[1]
+        keep = [x for x in rungs if x["line"] in ref.get(k, ())]
+        if tight not in keep:
+            keep.append(tight)
+        out.extend(keep)
+    return out
+
+
 def _link_rows(event, game_id, pull_type, captured, ko, name_index):
     """One row per (book, market, player, side, point) outcome that came back with a link or source id."""
     rows = []
@@ -617,7 +662,7 @@ def run(keys, games, name_index_for_game, log):
                     left[ki] = None
                 if left[ki] is None or left[ki] - len(markets) < floor_for(keys[ki - 1]):
                     continue
-            params = {"apiKey": keys[ki - 1], "bookmakers": ",".join(BOOKS + EXTRA_BOOKS), "markets": ",".join(markets),
+            params = {"apiKey": keys[ki - 1], "bookmakers": ",".join(BOOKS + NFL_EXTRA_BOOKS), "markets": ",".join(markets),
                       "oddsFormat": "american", "dateFormat": "iso"}
             if LINKS_ENABLED:
                 params.update({"includeLinks": "true", "includeSids": "true"})
@@ -668,6 +713,7 @@ def run(keys, games, name_index_for_game, log):
         event = json.loads(body)
         all_caps = _main_line_rows(event, g["game_id"], pt, captured, ko, mins, in_window,
                                    name_index_for_game(g))
+        all_caps = narrow_novig(all_caps)  # Novig only: its ladder of lines cut to the useful rungs
         caps = [c for c in all_caps if c["book"] in BOOKS]  # DraftKings/FanDuel: unchanged destination and rules
         others = [c for c in all_caps if c["book"] not in BOOKS]
         other_note = ""

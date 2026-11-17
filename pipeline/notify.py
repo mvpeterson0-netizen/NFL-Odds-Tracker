@@ -218,12 +218,12 @@ def run(log: list[str]) -> bool:
 # Arbitrage of $3+ per $100 also sends Michael a separate ntfy ("draft a tweet"), once per opportunity (state key "tweeted").
 ARB_STATE = DATA / "arb_alert_state.json"
 ARB_URL = "https://www.sharpstix.com/#/arb"
-ARB_EXCLUDE_BOOKS: tuple[str, ...] = ()  # books never used for arbitrage alerts
+ARB_EXCLUDE_BOOKS: tuple[str, ...] = ("novig",)  # books never used for arbitrage alerts (Novig 2026-11-17: exchange quotes carry no size and may carry a fee; revisit once depth is known)
 ARB_WEB_PUSH = True  # also send to everyone who turned on Stix alerts (web push); ntfy always when NTFY_TOPIC is set
 ARB_MAX_LINES = 8
 BOOK_LABEL = {"draftkings": "DraftKings", "fanduel": "FanDuel", "betmgm": "BetMGM", "williamhill_us": "Caesars",
               "fanatics": "Fanatics", "betrivers": "BetRivers", "espnbet": "theScore Bet", "hardrockbet": "Hard Rock",
-              "ballybet": "Bally Bet", "fliff": "Fliff"}
+              "ballybet": "Bally Bet", "fliff": "Fliff", "novig": "Novig"}
 
 
 def _dec(o):
