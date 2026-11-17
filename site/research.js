@@ -581,6 +581,11 @@
     fhnl: { rec: "193–118", roi: 17.4, lo: 9.8, hi: 25.3, yr: [11.9, 26.0] }, bl200: { rec: "117–78", roi: 13.4, lo: 5.0, hi: 22.8, yr: [6.6, 22.3] },
     nlu20: { rec: "112–74", roi: 14.1, lo: 2.8, hi: 23.7, yr: [4.2, 25.6] },
   };
+  // Back light for the tile run charts (Michael 2026-11-16): each signal's 95% ROI interval from the audit/study tables above, or null if untested.
+  function roiBand(t) {
+    const x = STUDY[t.id] || (AUDIT[t.id] && (t.opts ? AUDIT[t.id][RL.opt[t.id]] : AUDIT[t.id]));
+    return x && x.lo != null && x.hi != null ? { lo: x.lo, hi: x.hi } : null;
+  }
   function auditLine(t) {
     const st = STUDY[t.id];
     if (st) return `<b>Late-yardage study replay</b> (2025 weeks 1–18 + 2026 weeks 1–10)<br>2025: <b>${pc(st.yr[0])}</b> ROI<br>2026: <b>${pc(st.yr[1])}</b> ROI<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.`;
@@ -659,14 +664,14 @@
   const byWeek = (bets) => laWeeks().slice().reverse().map((w) => ({ w, list: bets.filter((x) => x.r.wk === w) }));
   // Tile chart (Michael 2026-11-12): a dot for each week's ROI plus a line for the running (cumulative) ROI, with real axes:
   // weeks (W#) along the bottom, ROI % up the side. Weeks with no bets get no dot; the cumulative line carries through.
-  function spark(by) {
+  function spark(by, band) {
     let W = 0, L = 0, U = 0; const pts = by.map(({ w, list }) => {
       const s = tally(list); U += s.U; W += s.W + s.L;
       return { w, n: s.n, roi: s.n ? s.roi : null, cum: W ? (100 * U) / W : null };
     });
     if (!pts.some((q) => q.n)) return `<div class="sg-nospark muted small">no graded bets</div>`;
     const w = 170, h = 70, l = 30, r = 11, tp = 6, bt = 13, n = pts.length, base = h - bt;
-    const vals = pts.flatMap((q) => [q.roi, q.cum]).filter((v) => v != null).concat(0);
+    const vals = pts.flatMap((q) => [q.roi, q.cum]).filter((v) => v != null).concat(0, band ? [band.lo, band.hi] : []);
     let mn = Math.min(...vals), mx = Math.max(...vals); if (mx - mn < 20) { mx += 10; mn -= 10; }
     const rg = mx - mn, X = (i) => (n < 2 ? (l + w - r) / 2 : l + (i * (w - l - r)) / (n - 1)), Y = (v) => tp + ((mx - v) / rg) * (base - tp);
     const fmt = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(Math.round(v))}%`;
@@ -674,10 +679,11 @@
     for (const v of [...new Set([mx, 0, mn])].sort((a, b) => b - a)) { if (Y(v) - prevY >= 11) { ticks.push(v); prevY = Y(v); } }
     const every = n > 9 ? 2 : 1, cp = pts.map((q, i) => [i, q]).filter(([, q]) => q.cum != null);
     const last = cp.length ? cp[cp.length - 1][1].cum : 0, col = last >= 0 ? "--over" : "--under";
-    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Weekly ROI and running ROI by week, now ${fmt(last)}">
+    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Weekly ROI and running ROI by week, now ${fmt(last)}${band ? `. Shaded band: 95% ROI interval ${fmt(band.lo)} to ${fmt(band.hi)}` : ""}">
       <g class="sg-ax"><line x1="${l}" x2="${l}" y1="${tp}" y2="${base}"/><line x1="${l}" x2="${w - r}" y1="${base}" y2="${base}"/>
       ${ticks.map((v) => `<line class="sg-gl" x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${l - 3}" y="${(Y(v) + 2.8).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`).join("")}
       ${pts.map((q, i) => ((n - 1 - i) % every ? "" : `<text x="${X(i).toFixed(1)}" y="${h - 3}" text-anchor="middle">W${q.w}</text>`)).join("")}</g>
+      ${band ? `<rect class="sg-band" x="${l}" y="${Y(band.hi).toFixed(1)}" width="${w - r - l}" height="${Math.max(1, Y(band.lo) - Y(band.hi)).toFixed(1)}"><title>95% ROI interval ${fmt(band.lo)} to ${fmt(band.hi)}</title></rect>${(() => { const yh = Y(band.hi), yl = Y(band.lo), tall = yl - yh >= 17; return `<g class="sg-bl"><text x="${l + 2}" y="${Math.max(tp + 6, tall ? yh + 6.5 : yh - 1.5).toFixed(1)}">${fmt(band.hi)}</text><text x="${l + 2}" y="${Math.min(base - 1.5, tall ? yl - 1.5 : yl + 6.5).toFixed(1)}">${fmt(band.lo)}</text></g>`; })()}` : ""}
       <line x1="${l}" x2="${w - r}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" style="stroke:var(--line)" stroke-dasharray="3 3"/>
       <path d="${cp.map(([i, q], k) => `${k ? "L" : "M"}${X(i).toFixed(1)},${Y(q.cum).toFixed(1)}`).join(" ")}" fill="none" style="stroke:var(${col})" stroke-width="1.6" stroke-linejoin="round"/>
       ${pts.filter((q) => q.n).map((q) => `<circle cx="${X(pts.indexOf(q)).toFixed(1)}" cy="${Y(q.roi).toFixed(1)}" r="2.3" style="fill:var(${q.roi >= 0 ? "--over" : "--under"})"><title>Week ${q.w}: ${fmt(q.roi)} ROI (${q.n} bets) · running ${fmt(q.cum)}</title></circle>`).join("")}</svg>`;
@@ -689,7 +695,7 @@
     return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
       <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> ${sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this"} wk</span></div>
-      ${st.by ? spark(st.by) : ""}</button>${tg}</div>`;
+      ${st.by ? spark(st.by, roiBand(t)) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
   // Toggle default (Michael 2026-11-12): a signal with a toggle (QB-R2, QB-R4) opens on whichever setting has the larger ROI so far this season.
