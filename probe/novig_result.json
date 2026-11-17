@@ -1,9 +1,9 @@
 {
- "run_utc": "2026-11-17T16:02:31.908456+00:00",
+ "run_utc": "2026-11-17T16:04:08.491878+00:00",
  "events_call": {
   "status": 200,
   "credits_last": "0",
-  "remaining": "12539"
+  "remaining": "12532"
  },
  "event": {
   "id": "66f9e83cf025d58acee12bce18661fb3",
@@ -13,7 +13,7 @@
  "odds_call": {
   "status": 200,
   "credits_last": "7",
-  "remaining": "12532",
+  "remaining": "12525",
   "books_requested": [
    "novig",
    "draftkings",
@@ -34,425 +34,542 @@
    "player_pass_attempts": {
     "outcomes": 4,
     "players": 2,
-    "last_update": "2026-11-17T16:02:16Z"
+    "last_update": "2026-11-17T16:03:24Z"
    },
    "player_pass_completions": {
     "outcomes": 4,
     "players": 2,
-    "last_update": "2026-11-17T16:02:16Z"
+    "last_update": "2026-11-17T16:03:24Z"
    },
    "player_pass_yds": {
     "outcomes": 4,
     "players": 2,
-    "last_update": "2026-11-17T16:02:16Z"
+    "last_update": "2026-11-17T16:03:24Z"
    },
    "player_reception_yds": {
     "outcomes": 22,
     "players": 11,
-    "last_update": "2026-11-17T16:02:16Z"
+    "last_update": "2026-11-17T16:03:24Z"
    },
    "player_receptions": {
     "outcomes": 22,
     "players": 11,
-    "last_update": "2026-11-17T16:02:16Z"
+    "last_update": "2026-11-17T16:03:24Z"
    },
    "player_rush_attempts": {
     "outcomes": 6,
     "players": 3,
-    "last_update": "2026-11-17T16:02:16Z"
+    "last_update": "2026-11-17T16:03:24Z"
    },
    "player_rush_yds": {
     "outcomes": 8,
     "players": 4,
-    "last_update": "2026-11-17T16:02:16Z"
+    "last_update": "2026-11-17T16:03:24Z"
    }
   },
   "fanduel": {
    "player_pass_yds": {
     "outcomes": 4,
     "players": 2,
-    "last_update": "2026-11-17T16:02:13Z"
+    "last_update": "2026-11-17T16:03:27Z"
    },
    "player_reception_yds": {
     "outcomes": 22,
     "players": 11,
-    "last_update": "2026-11-17T16:02:13Z"
+    "last_update": "2026-11-17T16:03:27Z"
    },
    "player_receptions": {
     "outcomes": 22,
     "players": 11,
-    "last_update": "2026-11-17T16:02:13Z"
+    "last_update": "2026-11-17T16:03:27Z"
    },
    "player_rush_yds": {
     "outcomes": 8,
     "players": 4,
-    "last_update": "2026-11-17T16:02:13Z"
+    "last_update": "2026-11-17T16:03:27Z"
    }
   },
   "novig": {
    "player_pass_attempts": {
     "outcomes": 6,
     "players": 2,
-    "last_update": "2026-11-17T16:01:49Z"
+    "last_update": "2026-11-17T16:04:04Z"
    },
    "player_pass_completions": {
     "outcomes": 8,
     "players": 2,
-    "last_update": "2026-11-17T16:01:49Z"
+    "last_update": "2026-11-17T16:04:04Z"
    },
    "player_pass_yds": {
     "outcomes": 58,
     "players": 2,
-    "last_update": "2026-11-17T16:01:49Z"
+    "last_update": "2026-11-17T16:04:04Z"
    },
    "player_reception_yds": {
     "outcomes": 284,
     "players": 11,
-    "last_update": "2026-11-17T16:01:49Z"
+    "last_update": "2026-11-17T16:04:04Z"
    },
    "player_receptions": {
     "outcomes": 113,
     "players": 11,
-    "last_update": "2026-11-17T16:01:49Z"
+    "last_update": "2026-11-17T16:04:04Z"
    },
    "player_rush_attempts": {
     "outcomes": 10,
     "players": 3,
-    "last_update": "2026-11-17T16:01:49Z"
+    "last_update": "2026-11-17T16:04:04Z"
    },
    "player_rush_yds": {
     "outcomes": 84,
     "players": 5,
-    "last_update": "2026-11-17T16:01:49Z"
+    "last_update": "2026-11-17T16:04:04Z"
    }
   }
  },
  "novig_returned": true,
- "outcome_field_keys_seen": [
-  "description",
-  "name",
-  "point",
-  "price"
+ "novig_rungs_per_player_market": {
+  "median": 8,
+  "max": 22
+ },
+ "main_line_comparison": {
+  "player_markets_with_novig_main_line": 36,
+  "novig_vs_book_pairs_same_point": 40,
+  "novig_vs_book_pairs_different_point": 23,
+  "novig_over_price_better_than_book_same_point": 29,
+  "novig_under_price_better_than_book_same_point": 15
+ },
+ "novig_overround_main_lines": [
+  1.019,
+  1.02,
+  1.029,
+  1.034,
+  1.034,
+  1.035,
+  1.036,
+  1.036,
+  1.038,
+  1.039,
+  1.039,
+  1.04,
+  1.04,
+  1.05,
+  1.05,
+  1.054,
+  1.055,
+  1.061,
+  1.061,
+  1.065,
+  1.071,
+  1.08,
+  1.08,
+  1.08,
+  1.089,
+  1.091,
+  1.095,
+  1.106,
+  1.175,
+  1.189,
+  1.19,
+  1.195,
+  1.261,
+  1.364,
+  1.381,
+  1.414
  ],
- "players_with_novig_and_another_book": 35,
- "sample_compare": [
+ "sample_rows": [
   {
    "market": "player_pass_attempts",
    "player": "C.J. Stroud",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      32.5,
-      -123
-     ],
-     "Under": [
-      32.5,
-      -104
-     ]
-    },
-    "novig": {
-     "Over": [
-      32.5,
-      -108
-     ],
-     "Under": [
-      32.5,
-      -115
-     ]
-    }
-   }
+   "novig": [
+    32.5,
+    -108,
+    -115
+   ],
+   "draftkings": [
+    32.5,
+    -123,
+    -104
+   ]
   },
   {
    "market": "player_pass_attempts",
    "player": "Daniel Jones",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      32.5,
-      -105
-     ],
-     "Under": [
-      32.5,
-      -121
-     ]
-    },
-    "novig": {
-     "Over": [
-      31.5,
-      -270
-     ],
-     "Under": [
-      31.5,
-      -217
-     ]
-    }
-   }
+   "novig": [
+    31.5,
+    -270,
+    -217
+   ],
+   "draftkings": [
+    32.5,
+    -105,
+    -121
+   ]
   },
   {
    "market": "player_pass_completions",
    "player": "C.J. Stroud",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      21.5,
-      101
-     ],
-     "Under": [
-      21.5,
-      -128
-     ]
-    },
-    "novig": {
-     "Over": [
-      20.5,
-      -133
-     ],
-     "Under": [
-      20.5,
-      100
-     ]
-    }
-   }
+   "novig": [
+    20.5,
+    -133,
+    100
+   ],
+   "draftkings": [
+    21.5,
+    101,
+    -128
+   ]
   },
   {
    "market": "player_pass_completions",
    "player": "Daniel Jones",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      18.5,
-      -124
-     ],
-     "Under": [
-      18.5,
-      -103
-     ]
-    },
-    "novig": {
-     "Over": [
-      19.5,
-      108
-     ],
-     "Under": [
-      19.5,
-      -127
-     ]
-    }
-   }
+   "novig": [
+    18.5,
+    -138,
+    -156
+   ],
+   "draftkings": [
+    18.5,
+    -124,
+    -103
+   ]
   },
   {
    "market": "player_pass_yds",
    "player": "C.J. Stroud",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      261.5,
-      -113
-     ],
-     "Under": [
-      261.5,
-      -111
-     ]
-    },
-    "fanduel": {
-     "Over": [
-      261.5,
-      -114
-     ],
-     "Under": [
-      261.5,
-      -114
-     ]
-    },
-    "novig": {
-     "Over": [
-      261.5,
-      -113
-     ],
-     "Under": [
-      261.5,
-      -122
-     ]
-    }
-   }
+   "novig": [
+    259.5,
+    -141,
+    -144
+   ],
+   "draftkings": [
+    261.5,
+    -113,
+    -111
+   ],
+   "fanduel": [
+    261.5,
+    -114,
+    -114
+   ]
   },
   {
    "market": "player_pass_yds",
    "player": "Daniel Jones",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      181.5,
-      -111
-     ],
-     "Under": [
-      181.5,
-      -113
-     ]
-    },
-    "fanduel": {
-     "Over": [
-      181.5,
-      -114
-     ],
-     "Under": [
-      181.5,
-      -114
-     ]
-    },
-    "novig": {
-     "Over": [
-      181.5,
-      -113
-     ],
-     "Under": [
-      181.5,
-      -113
-     ]
-    }
-   }
+   "novig": [
+    181.5,
+    -113,
+    -113
+   ],
+   "draftkings": [
+    181.5,
+    -111,
+    -113
+   ],
+   "fanduel": [
+    181.5,
+    -114,
+    -114
+   ]
   },
   {
    "market": "player_reception_yds",
    "player": "Anthony Gould",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      22.5,
-      -114
-     ],
-     "Under": [
-      22.5,
-      -110
-     ]
-    },
-    "fanduel": {
-     "Over": [
-      23.5,
-      -114
-     ],
-     "Under": [
-      23.5,
-      -114
-     ]
-    },
-    "novig": {
-     "Over": [
-      9.5,
-      -355
-     ],
-     "Under": [
-      9.5,
-      239
-     ]
-    }
-   }
+   "novig": [
+    20.5,
+    -212,
+    -217
+   ],
+   "draftkings": [
+    22.5,
+    -114,
+    -110
+   ],
+   "fanduel": [
+    23.5,
+    -114,
+    -114
+   ]
   },
   {
    "market": "player_reception_yds",
    "player": "Ashton Dulin",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      15.5,
-      -116
-     ],
-     "Under": [
-      15.5,
-      -108
-     ]
-    },
-    "fanduel": {
-     "Over": [
-      14.5,
-      -114
-     ],
-     "Under": [
-      14.5,
-      -114
-     ]
-    },
-    "novig": {
-     "Over": [
-      15.5,
-      -122
-     ],
-     "Under": [
-      15.5,
-      -223
-     ]
-    }
-   }
+   "novig": [
+    14.5,
+    -113,
+    -113
+   ],
+   "draftkings": [
+    15.5,
+    -116,
+    -108
+   ],
+   "fanduel": [
+    14.5,
+    -114,
+    -114
+   ]
   },
   {
    "market": "player_reception_yds",
    "player": "Dalton Schultz",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      31.5,
-      -116
-     ],
-     "Under": [
-      31.5,
-      -109
-     ]
+   "novig": [
+    29.5,
+    -111,
+    -104
+   ],
+   "draftkings": [
+    31.5,
+    -116,
+    -109
+   ],
+   "fanduel": [
+    29.5,
+    -114,
+    -114
+   ]
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Deion Burks",
+   "novig": [
+    15.5,
+    -113,
+    -122
+   ],
+   "draftkings": [
+    15.5,
+    -114,
+    -110
+   ],
+   "fanduel": [
+    15.5,
+    -114,
+    -114
+   ]
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Jonathan Taylor",
+   "novig": [
+    19.5,
+    -106,
+    -106
+   ],
+   "draftkings": [
+    18.5,
+    -116,
+    -108
+   ],
+   "fanduel": [
+    19.5,
+    -114,
+    -114
+   ]
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Kayshon Boutte",
+   "novig": [
+    28.5,
+    -117,
+    -122
+   ],
+   "draftkings": [
+    27.5,
+    -113,
+    -111
+   ],
+   "fanduel": [
+    28.5,
+    -114,
+    -114
+   ]
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Laquon Treadwell",
+   "novig": [
+    29.5,
+    -108,
+    -108
+   ],
+   "draftkings": [
+    28.5,
+    -109,
+    -115
+   ],
+   "fanduel": [
+    29.5,
+    -114,
+    -114
+   ]
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Nico Collins",
+   "novig": [
+    66.5,
+    -153,
+    -141
+   ],
+   "draftkings": [
+    70.5,
+    -111,
+    -113
+   ],
+   "fanduel": [
+    70.5,
+    -114,
+    -114
+   ]
+  }
+ ],
+ "sample_novig_ladders": [
+  {
+   "market": "player_reception_yds",
+   "player": "Deion Burks",
+   "rungs": {
+    "9.5": {
+     "Over": -194,
+     "Under": 144
     },
-    "fanduel": {
-     "Over": [
-      29.5,
-      -114
-     ],
-     "Under": [
-      29.5,
-      -114
-     ]
+    "14.5": {
+     "Over": -120,
+     "Under": -108
     },
-    "novig": {
-     "Over": [
-      31.5,
-      -115
-     ],
-     "Under": [
-      31.5,
-      -190
-     ]
+    "15.5": {
+     "Over": -113,
+     "Under": -122
+    },
+    "16.5": {
+     "Over": -120,
+     "Under": -156
+    },
+    "17.5": {
+     "Over": -120,
+     "Under": -170
+    },
+    "18.5": {
+     "Over": -120,
+     "Under": -186
+    },
+    "19.5": {
+     "Over": 117,
+     "Under": -156
+    },
+    "24.5": {
+     "Over": 178,
+     "Under": -223
+    },
+    "29.5": {
+     "Over": 233,
+     "Under": -308
+    },
+    "39.5": {
+     "Over": 376,
+     "Under": -614
+    },
+    "49.5": {
+     "Over": 567
+    },
+    "59.5": {
+     "Over": 809
+    },
+    "69.5": {
+     "Over": 1233
+    },
+    "79.5": {
+     "Over": 1438
     }
    }
   },
   {
    "market": "player_reception_yds",
-   "player": "Deion Burks",
-   "by_book": {
-    "draftkings": {
-     "Over": [
-      15.5,
-      -114
-     ],
-     "Under": [
-      15.5,
-      -110
-     ]
+   "player": "Nico Collins",
+   "rungs": {
+    "24.5": {
+     "Under": 190
     },
-    "fanduel": {
-     "Over": [
-      15.5,
-      -114
-     ],
-     "Under": [
-      15.5,
-      -114
-     ]
+    "29.5": {
+     "Over": -733,
+     "Under": 488
     },
-    "novig": {
-     "Over": [
-      15.5,
-      -113
-     ],
-     "Under": [
-      15.5,
-      -122
-     ]
+    "39.5": {
+     "Over": -441,
+     "Under": 292
+    },
+    "49.5": {
+     "Over": -257,
+     "Under": 199
+    },
+    "59.5": {
+     "Over": -170,
+     "Under": 117
+    },
+    "60.5": {
+     "Over": -174,
+     "Under": -190
+    },
+    "62.5": {
+     "Over": -174,
+     "Under": -223
+    },
+    "63.5": {
+     "Over": -156,
+     "Under": -228
+    },
+    "64.5": {
+     "Over": -153,
+     "Under": -130
+    },
+    "65.5": {
+     "Over": -153,
+     "Under": -135
+    },
+    "66.5": {
+     "Over": -153,
+     "Under": -141
+    },
+    "67.5": {
+     "Over": -127,
+     "Under": -147
+    },
+    "69.5": {
+     "Over": -102,
+     "Under": -117
+    },
+    "70.5": {
+     "Over": -108,
+     "Under": -292
+    },
+    "79.5": {
+     "Over": 133,
+     "Under": -186
+    },
+    "89.5": {
+     "Over": 186,
+     "Under": -277
+    },
+    "99.5": {
+     "Over": 257,
+     "Under": -413
+    },
+    "109.5": {
+     "Over": 365,
+     "Under": -3126
+    },
+    "119.5": {
+     "Over": 506
+    },
+    "129.5": {
+     "Over": 669
+    },
+    "139.5": {
+     "Over": 900
+    },
+    "149.5": {
+     "Over": 1076
     }
    }
   }
