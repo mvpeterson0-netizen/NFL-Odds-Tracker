@@ -50,6 +50,30 @@
       chartRows: rows.filter((r) => r.final || r === up) };
   }
 
+  // ---------- headshot ----------
+  // Loaded with CORS so the canvas stays exportable. If NFL's image server is slow, refuses cross-origin use, or the player has
+  // no photo, this resolves null and the card is drawn without it (the export never fails because of the photo).
+  function loadHeadshot(url) {
+    return new Promise((resolve) => {
+      if (!url) return resolve(null);
+      const img = new Image();
+      const t = setTimeout(() => resolve(null), 2500);
+      img.onload = () => { clearTimeout(t); resolve(img.naturalWidth ? img : null); };
+      img.onerror = () => { clearTimeout(t); resolve(null); };
+      img.crossOrigin = "anonymous"; img.referrerPolicy = "no-referrer";
+      img.src = url;
+    });
+  }
+  function drawHeadshot(ctx, img, cx, cy, r) {
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.closePath(); ctx.fillStyle = C.chip; ctx.fill(); ctx.clip();
+    const k = Math.max((2 * r) / img.naturalWidth, (2 * r) / img.naturalHeight); // fill the circle, keep the top (face) in frame
+    const w = img.naturalWidth * k, h = img.naturalHeight * k;
+    ctx.drawImage(img, cx - w / 2, cy - r, w, h);
+    ctx.restore();
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.stroke();
+  }
+
   // ---------- drawing ----------
   function roundRect(ctx, X, Y, w, h, r, fill, stroke) {
     ctx.beginPath(); ctx.moveTo(X + r, Y); ctx.arcTo(X + w, Y, X + w, Y + h, r); ctx.arcTo(X + w, Y + h, X, Y + h, r);
@@ -110,16 +134,11 @@
       if (lowAct && ys(p.act) + fs + 16 > B - 2) text(ctx, n1(p.act), xs(i) + 16, ys(p.act) + 8, f(fs, 600), col, "left"); // near the axis: label beside the point
       else text(ctx, n1(p.act), xs(i), lowAct ? ys(p.act) + fs + 16 : ys(p.act) - 18, f(fs, 600), col, "center");
     });
-    // legend
-    let lx = X, ly = Y + h + 12;
-    const leg = (draw, label) => { draw(lx, ly); lx += 44; lx += text(ctx, label, lx, ly + 8, f(22), C.muted) + 30; };
-    leg((x, y) => { ctx.fillStyle = C.accent; ctx.beginPath(); ctx.arc(x + 16, y, 8, 0, Math.PI * 2); ctx.fill(); }, "Actual");
-    leg((x, y) => { ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 34, y); ctx.stroke(); }, "Pre-game line");
-    leg((x, y) => { ctx.strokeStyle = C.warnInk; ctx.lineWidth = 5; ctx.setLineDash([8, 6]); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 34, y); ctx.stroke(); ctx.setLineDash([]); }, "Current snapshot");
   }
 
-  function draw(d) {
-    const H = Math.max(1350, 1150 + d.past.length * 40); // taller card when the table lists every week
+  // shot: a loaded, CORS-clean headshot <img> (or null). The card is complete without it.
+  function draw(d, shot) {
+    const H = Math.max(1350, 1188 + d.past.length * 40); // taller card when the table lists every week
     const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
     const ctx = cv.getContext("2d");
     ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
@@ -127,41 +146,44 @@
     // header
     text(ctx, "STIX", PAD, 70, f(30, 800), C.accent);
     text(ctx, "NFL props · 2026", PAD + 92, 70, f(26), C.muted);
-    text(ctx, fit(ctx, d.p.name, f(66, 800), W - 2 * PAD), PAD, 150, f(66, 800), C.ink);
+    const SH = 150; // headshot diameter
+    if (shot) drawHeadshot(ctx, shot, W - PAD - SH / 2, 44 + SH / 2, SH / 2);
+    text(ctx, fit(ctx, d.p.name, f(66, 800), W - 2 * PAD - (shot ? SH + 24 : 0)), PAD, 150, f(66, 800), C.ink);
     text(ctx, `${d.p.team} · ${d.slot} · ${d.mk.label}`, PAD, 198, f(34, 500), C.muted);
 
-    // upcoming game box
+    // upcoming game box: three columns (line / opponent defense rank / weather) so the whole width is used
     let y = 230;
-    roundRect(ctx, PAD, y, W - 2 * PAD, 250, 20, "#f7f7f5", C.line);
+    roundRect(ctx, PAD, y, W - 2 * PAD, 200, 20, "#f7f7f5", C.line);
     const bx = PAD + 28;
     if (d.up) {
       text(ctx, `Week ${d.up.wk} ${d.up.ha === "home" ? "vs" : "@"} ${d.up.opp}`, bx, y + 54, f(36, 700), C.ink);
-      text(ctx, koText(d.up.ko), W - PAD - 28, y + 54, f(26), C.muted, "right");
       const ln = currentLine(d.upM);
       text(ctx, "LINE", bx, y + 104, f(22, 600), C.muted);
       if (ln) {
         const lw = text(ctx, n1(ln.line), bx, y + 152, f(52, 800), C.ink);
-        text(ctx, `${ln.src} · ${ln.book}`, bx + lw + 16, y + 134, f(22), ln.src === "Pre-game line" ? C.muted : C.warnInk);
-        text(ctx, `O ${oddsT(ln.op)} / U ${oddsT(ln.up)}`, bx + lw + 16, y + 160, f(22), C.muted);
+        text(ctx, `O ${oddsT(ln.op)} / U ${oddsT(ln.up)}`, bx + lw + 16, y + 152, f(24), C.muted);
       } else text(ctx, "Not posted yet", bx, y + 150, f(34, 600), C.muted);
       const m = d.upM || {};
-      const cx = PAD + 520;
+      const cx = PAD + 410;
       text(ctx, "OPP D RANK", cx, y + 104, f(22, 600), C.muted);
       if (m.drk != null) {
         const q = Math.round((m.dof || 32) / 4);
         const col = m.dn < 3 ? C.ink : m.drk <= q ? C.tough : m.drk > (m.dof || 32) - q ? C.easy : C.ink;
-        const rw = text(ctx, ordinal(m.drk), cx, y + 152, f(48, 800), col);
-        text(ctx, `${n1(m.dav)}/g allowed to ${d.p.pos}s`, cx + rw + 14, y + 134, f(22), C.muted);
-        text(ctx, `1 = toughest · ${m.dn} gm`, cx + rw + 14, y + 160, f(22), C.muted);
+        text(ctx, ordinal(m.drk), cx, y + 152, f(48, 800), col);
       } else text(ctx, "no data", cx, y + 150, f(32), C.muted);
-      const wx = wxText(d.up.gid);
-      if (wx) text(ctx, fit(ctx, `Weather: ${wx}`, f(24), W - 2 * PAD - 56), bx, y + 222, f(24), C.ink);
+      const wx = wxText(d.up.gid), wxx = PAD + 600, wxw = W - PAD - 28 - wxx;
+      text(ctx, "WEATHER", wxx, y + 104, f(22, 600), C.muted);
+      if (wx) {
+        const parts = wx.split(" · ");
+        text(ctx, fit(ctx, parts[0], f(40, 800), wxw), wxx, y + 148, f(40, 800), C.ink);
+        if (parts.length > 1) text(ctx, fit(ctx, parts.slice(1).join(" · "), f(22), wxw), wxx, y + 178, f(22), C.muted);
+      } else text(ctx, "no data", wxx, y + 150, f(32), C.muted);
     } else {
       text(ctx, "No upcoming game", bx, y + 70, f(36, 700), C.ink);
     }
 
     // averages strip
-    y = 520;
+    y = 470;
     const fm = d.fm || {};
     const trend = fm.trend == null ? "—" : fm.trend > 0 ? "↑ Rising" : fm.trend < 0 ? "↓ Falling" : "→ Steady";
     const stats = [
@@ -180,19 +202,20 @@
     });
 
     // chart
-    drawChart(ctx, d, PAD, 710, W - 2 * PAD, 240);
+    drawChart(ctx, d, PAD, 660, W - 2 * PAD, 360);
 
     // recent games table (newest first)
-    y = 1022;
+    y = 1060;
     const recent = d.past.slice().reverse(); // every finished week, newest first
-    const cols = [PAD, PAD + 110, PAD + 300, PAD + 480, PAD + 660];
-    ["WK", "OPP", "LINE", "ACTUAL", "RESULT"].forEach((h, i) => text(ctx, h, cols[i], y, f(20, 600), C.muted));
+    const cols = [PAD, PAD + 100, PAD + 350, PAD + 520, PAD + 690];
+    ["WK", "OPP (D RANK)", "LINE", "ACTUAL", "RESULT"].forEach((h, i) => text(ctx, h, cols[i], y, f(20, 600), C.muted));
     ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(PAD, y + 14); ctx.lineTo(W - PAD, y + 14); ctx.stroke();
     let anyNC = false;
     recent.forEach((r, i) => {
       const yy = y + 50 + i * 40, m = r.m[d.mid] || {};
       text(ctx, String(r.wk), cols[0], yy, f(26), C.ink);
-      text(ctx, `${r.ha === "home" ? "vs" : "@"} ${r.opp}`, cols[1], yy, f(26), C.ink);
+      const ow = text(ctx, `${r.ha === "home" ? "vs" : "@"} ${r.opp}`, cols[1], yy, f(26), C.ink);
+      if (m.drk != null) text(ctx, `(${ordinal(m.drk)})`, cols[1] + ow + 10, yy, f(22), C.muted);
       let lt = "—"; if (m.lstat === "ok") lt = n1(m.line); else if (m.lstat === "not_collected") { lt = "—"; anyNC = true; } else if (m.lstat) lt = "none";
       text(ctx, lt, cols[2], yy, f(26, m.lstat === "ok" ? 700 : 400), m.lstat === "ok" ? C.ink : C.muted);
       text(ctx, r.played === false ? "DNP" : m.act == null ? "—" : n1(m.act), cols[3], yy, f(26, 700), C.ink);
@@ -213,9 +236,10 @@
   // ---------- preview + share ----------
   let FILE = null, URLX = null;
   function close() { const o = document.getElementById("share-ov"); if (o) o.remove(); if (URLX) { URL.revokeObjectURL(URLX); URLX = null; } FILE = null; }
-  function open(pid, mid) {
+  async function open(pid, mid) {
     const d = cardData(pid, mid);
-    present(draw(d), { label: "Share player", alt: `Share image for ${d.p.name}, ${d.mk.label}`,
+    const shot = await loadHeadshot(d.p.img);
+    present(draw(d, shot), { label: "Share player", alt: `Share image for ${d.p.name}, ${d.mk.label}`,
       save: `stix-${d.p.name.replace(/\W+/g, "-").toLowerCase()}-${mid}.png`, file: `stix-${pid}-${mid}.png`,
       link: `${location.origin}${location.pathname}#/player/${pid}` });
   }
@@ -263,7 +287,7 @@
     const pid = b.dataset.share, p = playerById[pid]; if (!p) return;
     const ms = marketsFor(p.pos);
     const mid = S.market[pid] && ms.some((m) => m.id === S.market[pid]) ? S.market[pid] : ms[0].id;
-    try { open(pid, mid); } catch (err) { console.error("share failed", err); }
+    open(pid, mid).catch((err) => console.error("share failed", err));
   });
   // ---------- this week's picks card (Picks tab) ----------
   // picks: open + locked picks in the picks.js shape ({ name, pid, pos, gid, wk, mid, side, line, odds, book, src, ko, locked }).
