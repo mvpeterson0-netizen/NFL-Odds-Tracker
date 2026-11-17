@@ -1,0 +1,460 @@
+{
+ "run_utc": "2026-11-17T16:02:31.908456+00:00",
+ "events_call": {
+  "status": 200,
+  "credits_last": "0",
+  "remaining": "12539"
+ },
+ "event": {
+  "id": "66f9e83cf025d58acee12bce18661fb3",
+  "game": "Indianapolis Colts @ Houston Texans",
+  "commence_time": "2026-11-20T01:15:00Z"
+ },
+ "odds_call": {
+  "status": 200,
+  "credits_last": "7",
+  "remaining": "12532",
+  "books_requested": [
+   "novig",
+   "draftkings",
+   "fanduel"
+  ],
+  "markets_requested": [
+   "player_pass_yds",
+   "player_rush_attempts",
+   "player_rush_yds",
+   "player_receptions",
+   "player_reception_yds",
+   "player_pass_attempts",
+   "player_pass_completions"
+  ]
+ },
+ "by_book": {
+  "draftkings": {
+   "player_pass_attempts": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-11-17T16:02:16Z"
+   },
+   "player_pass_completions": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-11-17T16:02:16Z"
+   },
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-11-17T16:02:16Z"
+   },
+   "player_reception_yds": {
+    "outcomes": 22,
+    "players": 11,
+    "last_update": "2026-11-17T16:02:16Z"
+   },
+   "player_receptions": {
+    "outcomes": 22,
+    "players": 11,
+    "last_update": "2026-11-17T16:02:16Z"
+   },
+   "player_rush_attempts": {
+    "outcomes": 6,
+    "players": 3,
+    "last_update": "2026-11-17T16:02:16Z"
+   },
+   "player_rush_yds": {
+    "outcomes": 8,
+    "players": 4,
+    "last_update": "2026-11-17T16:02:16Z"
+   }
+  },
+  "fanduel": {
+   "player_pass_yds": {
+    "outcomes": 4,
+    "players": 2,
+    "last_update": "2026-11-17T16:02:13Z"
+   },
+   "player_reception_yds": {
+    "outcomes": 22,
+    "players": 11,
+    "last_update": "2026-11-17T16:02:13Z"
+   },
+   "player_receptions": {
+    "outcomes": 22,
+    "players": 11,
+    "last_update": "2026-11-17T16:02:13Z"
+   },
+   "player_rush_yds": {
+    "outcomes": 8,
+    "players": 4,
+    "last_update": "2026-11-17T16:02:13Z"
+   }
+  },
+  "novig": {
+   "player_pass_attempts": {
+    "outcomes": 6,
+    "players": 2,
+    "last_update": "2026-11-17T16:01:49Z"
+   },
+   "player_pass_completions": {
+    "outcomes": 8,
+    "players": 2,
+    "last_update": "2026-11-17T16:01:49Z"
+   },
+   "player_pass_yds": {
+    "outcomes": 58,
+    "players": 2,
+    "last_update": "2026-11-17T16:01:49Z"
+   },
+   "player_reception_yds": {
+    "outcomes": 284,
+    "players": 11,
+    "last_update": "2026-11-17T16:01:49Z"
+   },
+   "player_receptions": {
+    "outcomes": 113,
+    "players": 11,
+    "last_update": "2026-11-17T16:01:49Z"
+   },
+   "player_rush_attempts": {
+    "outcomes": 10,
+    "players": 3,
+    "last_update": "2026-11-17T16:01:49Z"
+   },
+   "player_rush_yds": {
+    "outcomes": 84,
+    "players": 5,
+    "last_update": "2026-11-17T16:01:49Z"
+   }
+  }
+ },
+ "novig_returned": true,
+ "outcome_field_keys_seen": [
+  "description",
+  "name",
+  "point",
+  "price"
+ ],
+ "players_with_novig_and_another_book": 35,
+ "sample_compare": [
+  {
+   "market": "player_pass_attempts",
+   "player": "C.J. Stroud",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      32.5,
+      -123
+     ],
+     "Under": [
+      32.5,
+      -104
+     ]
+    },
+    "novig": {
+     "Over": [
+      32.5,
+      -108
+     ],
+     "Under": [
+      32.5,
+      -115
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_pass_attempts",
+   "player": "Daniel Jones",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      32.5,
+      -105
+     ],
+     "Under": [
+      32.5,
+      -121
+     ]
+    },
+    "novig": {
+     "Over": [
+      31.5,
+      -270
+     ],
+     "Under": [
+      31.5,
+      -217
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_pass_completions",
+   "player": "C.J. Stroud",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      21.5,
+      101
+     ],
+     "Under": [
+      21.5,
+      -128
+     ]
+    },
+    "novig": {
+     "Over": [
+      20.5,
+      -133
+     ],
+     "Under": [
+      20.5,
+      100
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_pass_completions",
+   "player": "Daniel Jones",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      18.5,
+      -124
+     ],
+     "Under": [
+      18.5,
+      -103
+     ]
+    },
+    "novig": {
+     "Over": [
+      19.5,
+      108
+     ],
+     "Under": [
+      19.5,
+      -127
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_pass_yds",
+   "player": "C.J. Stroud",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      261.5,
+      -113
+     ],
+     "Under": [
+      261.5,
+      -111
+     ]
+    },
+    "fanduel": {
+     "Over": [
+      261.5,
+      -114
+     ],
+     "Under": [
+      261.5,
+      -114
+     ]
+    },
+    "novig": {
+     "Over": [
+      261.5,
+      -113
+     ],
+     "Under": [
+      261.5,
+      -122
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_pass_yds",
+   "player": "Daniel Jones",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      181.5,
+      -111
+     ],
+     "Under": [
+      181.5,
+      -113
+     ]
+    },
+    "fanduel": {
+     "Over": [
+      181.5,
+      -114
+     ],
+     "Under": [
+      181.5,
+      -114
+     ]
+    },
+    "novig": {
+     "Over": [
+      181.5,
+      -113
+     ],
+     "Under": [
+      181.5,
+      -113
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Anthony Gould",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      22.5,
+      -114
+     ],
+     "Under": [
+      22.5,
+      -110
+     ]
+    },
+    "fanduel": {
+     "Over": [
+      23.5,
+      -114
+     ],
+     "Under": [
+      23.5,
+      -114
+     ]
+    },
+    "novig": {
+     "Over": [
+      9.5,
+      -355
+     ],
+     "Under": [
+      9.5,
+      239
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Ashton Dulin",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      15.5,
+      -116
+     ],
+     "Under": [
+      15.5,
+      -108
+     ]
+    },
+    "fanduel": {
+     "Over": [
+      14.5,
+      -114
+     ],
+     "Under": [
+      14.5,
+      -114
+     ]
+    },
+    "novig": {
+     "Over": [
+      15.5,
+      -122
+     ],
+     "Under": [
+      15.5,
+      -223
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Dalton Schultz",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      31.5,
+      -116
+     ],
+     "Under": [
+      31.5,
+      -109
+     ]
+    },
+    "fanduel": {
+     "Over": [
+      29.5,
+      -114
+     ],
+     "Under": [
+      29.5,
+      -114
+     ]
+    },
+    "novig": {
+     "Over": [
+      31.5,
+      -115
+     ],
+     "Under": [
+      31.5,
+      -190
+     ]
+    }
+   }
+  },
+  {
+   "market": "player_reception_yds",
+   "player": "Deion Burks",
+   "by_book": {
+    "draftkings": {
+     "Over": [
+      15.5,
+      -114
+     ],
+     "Under": [
+      15.5,
+      -110
+     ]
+    },
+    "fanduel": {
+     "Over": [
+      15.5,
+      -114
+     ],
+     "Under": [
+      15.5,
+      -114
+     ]
+    },
+    "novig": {
+     "Over": [
+      15.5,
+      -113
+     ],
+     "Under": [
+      15.5,
+      -122
+     ]
+    }
+   }
+  }
+ ]
+}
