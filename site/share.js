@@ -207,8 +207,12 @@
     // recent games table (newest first)
     y = 1060;
     const recent = d.past.slice().reverse(); // every finished week, newest first
-    const cols = [PAD, PAD + 100, PAD + 350, PAD + 520, PAD + 690];
-    ["WK", "OPP (D RANK)", "LINE", "ACTUAL", "RESULT"].forEach((h, i) => text(ctx, h, cols[i], y, f(20, 600), C.muted));
+    // Same columns as the phone game log: targets (with team target share) only for WR / TE / RB on Receptions / Rec yds, snap % for everyone.
+    const showT = ["WR", "TE", "RB"].includes(d.p.pos) && TGT_MARKETS.includes(d.mid);
+    // columns: WK, OPP, LINE, ACTUAL, RESULT, TGT (share), SNAP
+    const cols = showT ? [PAD, PAD + 100, PAD + 340, PAD + 450, PAD + 580, PAD + 720, PAD + 870]
+                       : [PAD, PAD + 100, PAD + 350, PAD + 500, PAD + 650, null, PAD + 830];
+    ["WK", "OPP (D RANK)", "LINE", "ACTUAL", "RESULT", showT ? "TGT (SHARE)" : null, "SNAP"].forEach((h, i) => { if (h) text(ctx, h, cols[i], y, f(20, 600), C.muted); });
     ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(PAD, y + 14); ctx.lineTo(W - PAD, y + 14); ctx.stroke();
     let anyNC = false;
     recent.forEach((r, i) => {
@@ -219,6 +223,9 @@
       let lt = "—"; if (m.lstat === "ok") lt = n1(m.line); else if (m.lstat === "not_collected") { lt = "—"; anyNC = true; } else if (m.lstat) lt = "none";
       text(ctx, lt, cols[2], yy, f(26, m.lstat === "ok" ? 700 : 400), m.lstat === "ok" ? C.ink : C.muted);
       text(ctx, r.played === false ? "DNP" : m.act == null ? "—" : n1(m.act), cols[3], yy, f(26, 700), C.ink);
+      if (showT && r.tgt != null) text(ctx, `${Math.round(r.tgt)}${r.tshare == null ? "" : ` (${Math.round(r.tshare * 100)}%)`}`, cols[5], yy, f(26), C.ink);
+      const sn = r.snap != null ? `${Math.round(r.snap)}%` : !r.final || r.played === false ? "" : r.snaps_avail ? "0%" : "—";
+      text(ctx, sn, cols[6], yy, f(26), sn === "—" ? C.muted : C.ink);
       const res = m.res && m.res !== "pending" ? m.res.toUpperCase() : "";
       text(ctx, res, cols[4], yy, f(24, 700), res === "OVER" ? C.over : res === "UNDER" ? C.under : C.muted);
     });
