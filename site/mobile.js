@@ -60,6 +60,13 @@
     const tip = `Last ${TREND_RULES.lastN} starts avg ${num(f.lastAvg)} vs season ${num(f.avg)}` + (f.pctCh != null ? ` (${f.pctCh > 0 ? "+" : ""}${Math.round(f.pctCh)}%)` : "");
     return `<span class="mtrend ${t[2]}" title="${esc(tip)}">${t[0]}${big ? " " + t[1] : ""}</span>${f.usage ? `<span class="musage ${f.usage === "mixed" ? "mixed" : ""}">${esc(f.usage)}</span>` : ""}`;
   }
+  // Chip for a line in the player page's Line movement panel: the day and time it was posted, in the viewer's time zone (e.g. "Wed 8 AM"). Board tiles are unchanged (Michael 2026-11-18).
+  // Falls back to the stored label (Mon / Thu / Sun AM / Check) only if the time is missing. Full time stays in the hover text.
+  function snapChip(sn) {
+    const d = sn && sn.cap ? new Date(sn.cap) : null;
+    const t = d && !isNaN(d) ? d.toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" }).replace(":00", "").replace(",", "") : "";
+    return `<span class="chip snapchip" title="${esc(sn.label)} line · posted ${esc(fmtTime(sn.cap))}">${esc(t || sn.label)}</span>`;
+  }
   // noDay: leave out the Mon / Thu / Sun AM chip (player page shows the day only under Line movement).
   function lineHtml(m, noDay) {
     if (!m) return `<span class="na">—</span>`;
@@ -172,7 +179,7 @@
     // Line movement for this week's game
     if (m && (m.snaps || m.lstat === "ok")) {
       h += `<div class="panel"><h3>Line movement (W${cur.wk})</h3><div class="body mlist">`;
-      for (const x of m.snaps || []) h += `<div><span class="chip snapchip">${esc(x.label)}</span> <b>${num(x.line)}</b> <span class="muted">${odds(x.op)}/${odds(x.up)} · ${esc(x.book)} · ${fmtTime(x.cap)}</span></div>`;
+      for (const x of m.snaps || []) h += `<div>${snapChip(x)} <b>${num(x.line)}</b> <span class="muted">${odds(x.op)}/${odds(x.up)} · ${esc(x.book)} · ${fmtTime(x.cap)}</span></div>`;
       if (m.lstat === "ok") h += `<div><span class="chip">Pre-game</span> <b>${num(m.line)}</b> <span class="muted">${odds(m.op)}/${odds(m.up)} · ${esc(m.book)} · ${fmtTime(m.cap)}</span> <span class="muted small">(graded)</span></div>`;
       h += `</div></div>`;
     }
