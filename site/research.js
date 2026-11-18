@@ -692,13 +692,13 @@
     h += `<i class="sgp-wh" style="left:${P(d.lo)}%;width:${P(d.hi) - P(d.lo)}%;top:${tc - 1}px"></i><i class="sgp-cap" style="left:${P(d.lo)}%;top:${tc - 6}px"></i><i class="sgp-cap" style="left:${P(d.hi)}%;top:${tc - 6}px"></i>`;
     h += `<i class="sgp-dia" style="left:${P(d.roi)}%;top:${tc}px;background:${col(d.roi)}"></i><span class="sgp-lab" style="left:${cl(P(d.roi), 9, 91)}%;top:${tc - 28}px">${pc(d.roi)}</span>`;
     if (wide) {
-      h += `<span class="sgp-lab sgp-sm" style="left:${cl(P(d.lo), 7, 93)}%;top:${tc + 14}px">${pc(d.lo)}</span><span class="sgp-lab sgp-sm" style="left:${cl(P(d.hi), 7, 93)}%;top:${tc + 14}px">${pc(d.hi)}</span><span class="sgp-lab sgp-sm sgp-ci" style="left:${cl(P(d.roi), 9, 91)}%;top:${tc + 14}px">95% CI</span>`;
+      h += `<span class="sgp-lab sgp-sm" style="left:${cl(P(d.lo), 7, 93)}%;top:${tc + 14}px">${pc(d.lo)}</span><span class="sgp-lab sgp-sm" style="left:${cl(P(d.hi), 7, 93)}%;top:${tc + 14}px">${pc(d.hi)}</span>`;
     } else {
-      h += `<span class="sgp-lab sgp-sm" style="left:${cl(P(d.roi), 26, 74)}%;top:${tc + 14}px">${pc(d.lo)} to ${pc(d.hi)} · 95% CI</span>`;
+      h += `<span class="sgp-lab sgp-sm" style="left:${cl(P(d.roi), 22, 78)}%;top:${tc + 14}px">${pc(d.lo)} to ${pc(d.hi)}</span>`;
     }
     h += `</div>`;
     (d.yr ? ["2025", "2026"] : []).forEach((y, i) => { h += `<span class="sgp-row" style="top:${centers[i] - 8}px">${y}</span>`; });
-    h += `<span class="sgp-row sgp-tot" style="top:${tc - 8}px">Total</span>`;
+    h += `<span class="sgp-row sgp-tot" style="top:${tc - 8}px">Total</span><span class="sgp-row sgp-sm" style="top:${tc + 14}px">95% CI</span>`;
     h += `<div class="sgp-axis">${[-A, -A / 2, 0, A / 2, A].map((k) => `<span style="left:${P(k)}%">${k > 0 ? "+" : k < 0 ? "−" : ""}${Math.abs(k)}${k === -A || k === A ? "%" : ""}</span>`).join("")}</div></div>`;
     return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
   }
@@ -714,7 +714,7 @@
     const rows = gates.map((g, i) => `<div class="sgp-g"><div class="sgp-t ${g.c}"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sgi-${g.i}"/></svg>${g.t ? `<span class="sgp-tg sgp-${g.tp}">${esc(g.t)}</span>` : ""}${g.x ? `<span class="sgp-sd">${esc(g.x)}</span>` : ""}<span class="sgp-n">${i + 1}</span></div><div><div class="sgp-l">${esc(g.l)}</div><div class="small muted">${esc(g.s)}</div></div></div>`).join("");
     const bulb = `<svg class="sgp-bulb" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     ov.innerHTML = `<div class="share-box nw-box sgp" role="dialog" aria-label="${esc(t.label)} - ${esc(t.short ? t.short() : t.title)}">
-      <div class="sgp-h"><div><div class="sgp-code">${esc(t.label)}</div><div class="small muted">${esc(sg.bet)}</div></div><button class="nw-x" aria-label="Close">✕</button></div>
+      <div class="sgp-h"><div><div class="sgp-code">${esc(t.label)}</div><div class="small muted"><span class="chip rl-side ${sg.bet.startsWith("Over") ? "over" : "under"}" style="margin-left:0">${sg.bet.split(" ")[0]}</span> ${esc(sg.bet.slice(sg.bet.indexOf(" ") + 1))}</div></div><button class="nw-x" aria-label="Close">✕</button></div>
       <div class="small muted sgp-lead">${lead}</div>
       <div class="sgp-gs${gates.length > 1 ? " chain" : ""}">${rows}</div>
       ${id === "syypc" ? `<div class="small muted sgp-why">${bulb}<span>Fluke long catches tend not to repeat.</span></div>` : ""}

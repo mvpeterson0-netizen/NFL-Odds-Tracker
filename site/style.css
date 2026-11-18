@@ -680,7 +680,7 @@ textarea.tp-in { resize: vertical; }
 .sgp-sd{position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:10px;font-weight:600}
 .sgp-why{display:flex;gap:8px;align-items:center;margin-top:12px}.sgp-bulb{width:18px;height:18px;flex:none;color:#8a5a00}
 .sgp-res{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
-.sgp-hero{display:flex;align-items:baseline;gap:10px;margin:2px 0 8px}.sgp-hero b:first-child{font-size:28px;font-weight:600}.sgp-hero b+b{font-size:14px;color:var(--muted);font-weight:500}
+.sgp-hero{display:flex;align-items:baseline;gap:10px;margin:2px 0 8px}.sgp-hero b:first-child{font-size:28px;font-weight:600}.sgp-hero b+b{font-size:20px;color:var(--muted);font-weight:500;margin-left:14px}
 .sgp-plot{position:relative;margin:0 14px 0 54px}
 .sgp-area{position:relative}
 .sgp-grid,.sgp-zero{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}.sgp-zero{background:var(--muted);opacity:.7}
@@ -692,3 +692,4 @@ textarea.tp-in { resize: vertical; }
 .sgp-axis{position:absolute;left:0;right:0;bottom:0;height:16px;font-size:10px;color:var(--muted)}.sgp-axis span{position:absolute;transform:translateX(-50%)}
 .sgp-how{margin-top:12px}.sgp-how summary{cursor:pointer;font-size:13px;color:var(--muted)}
 @media (prefers-color-scheme: dark){.sgp-t.gr{background:#173324;color:#6fcf97}.sgp-t.bl{background:#162840;color:#7fb0f5}.sgp-t.pu{background:#2a2040;color:#b79af0}.sgp-t.am{background:#3a2c10;color:#f0b955}.sgp-bulb{color:#f0b955}}
+.sgp-row.sgp-sm{font-size:11px;font-weight:500;background:none;padding:0}
