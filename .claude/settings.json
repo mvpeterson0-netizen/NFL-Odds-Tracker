@@ -18,7 +18,9 @@
       "Bash(gh pr view:*)",
       "Bash(gh pr list:*)",
       "Bash(gh pr checks:*)",
-      "Bash(gh pr diff:*)"
+      "Bash(gh pr diff:*)",
+      "Bash(gh api repos/mvpeterson0-netizen/nfl-odds-tracker/pulls:*)",
+      "Bash(gh api repos/mvpeterson0-netizen/NFL-Odds-Tracker/pulls:*)"
     ],
     "deny": [
       "Bash(git push --force:*)",
