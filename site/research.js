@@ -595,17 +595,132 @@
     const seasons = yr ? `2025: <b>${pc(yr[0])}</b> ROI<br>2026: <b>${pc(yr[1])}</b> ROI<br>` : "";
     return `<b>Audit replay</b><br>${seasons}Both seasons: <b>${x.rec}</b>, <b>${pc(x.roi)}</b> ROI, 95% interval <b>${pc(x.lo)} to ${pc(x.hi)}</b>${x.note ? ` (${x.note})` : ""}.`;
   }
+  // ---------- Signal info popup (Michael 2026-11-17 redesign) ----------
+  // Display only: the same rules, wording taken from each tab's desc() above, shown as gate cards plus a results chart.
+  // No rule, threshold, list, score or number changes. Numbers come from the AUDIT / AUDIT_YR / STUDY tables above.
+  const SGI_SPRITE = `<svg id="sgi-sprite" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="sgi-form" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="22.5" x2="44" y2="22.5" stroke-width="1" stroke-dasharray="2.5 2.5" stroke-opacity=".45"/><g fill="currentColor" fill-opacity=".6" stroke="none"><circle cx="11" cy="27" r="2.7"/><circle cx="17.5" cy="27" r="2.7"/><circle cx="24" cy="27" r="2.7"/><circle cx="30.5" cy="27" r="2.7"/><circle cx="37" cy="27" r="2.7"/></g><circle cx="24" cy="34" r="3.2" fill="currentColor" stroke="none"/><circle cx="31.5" cy="40" r="3.2" fill="currentColor" stroke="none"/><path d="M34.5 40C42 40 44 33 44 25L44 9" stroke-width="2.6"/><path d="M44 5.5L40.2 10M44 5.5L47.8 10" stroke-width="2.6"/></g></symbol>
+<symbol id="sgi-streak" viewBox="0 0 48 48"><line x1="5" y1="26" x2="43" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="8" y="20" width="8" height="22" rx="2" fill="currentColor"/><rect x="20" y="22" width="8" height="20" rx="2" fill="currentColor"/><rect x="32" y="17" width="8" height="25" rx="2" fill="currentColor"/></symbol>
+<symbol id="sgi-up" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round"><line x1="7" y1="36" x2="21" y2="36" stroke-opacity=".4" stroke-width="3"/><line x1="27" y1="14" x2="41" y2="14" stroke-width="3.5"/><line x1="24" y1="33" x2="24" y2="19" stroke-width="2.5" stroke-dasharray="1 4"/><path d="M24 17l-4 4.5M24 17l4 4.5" stroke-width="2.5"/></g></symbol>
+<symbol id="sgi-upt" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round"><line x1="4" y1="40" x2="13" y2="40" stroke-opacity=".4" stroke-width="3"/><line x1="19" y1="13" x2="42" y2="13" stroke-width="3.5"/><line x1="16" y1="35" x2="16" y2="20" stroke-width="2.5" stroke-dasharray="1 4"/><path d="M16 16.5l-4 4.5M16 16.5l4 4.5" stroke-width="2.5"/></g></symbol>
+<symbol id="sgi-down" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round"><line x1="7" y1="12" x2="21" y2="12" stroke-opacity=".4" stroke-width="3"/><line x1="27" y1="36" x2="41" y2="36" stroke-width="3.5"/><line x1="24" y1="15" x2="24" y2="29" stroke-width="2.5" stroke-dasharray="1 4"/><path d="M24 31l-4-4.5M24 31l4-4.5" stroke-width="2.5"/></g></symbol>
+<symbol id="sgi-lag" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="12" x2="36" y2="38" stroke-width="3"/><line x1="8" y1="12" x2="36" y2="24" stroke-width="3" stroke-opacity=".45"/><circle cx="8" cy="12" r="3" fill="currentColor"/><path d="M42 25v12M39 28l3-3 3 3M39 34l3 3 3-3" stroke-width="1.8"/></g></symbol>
+<symbol id="sgi-swap" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="24" r="5" fill="currentColor" fill-opacity=".25"/><circle cx="36" cy="24" r="5" fill="currentColor"/><path d="M12 15C18 8 30 8 36 15M36 15l-5-1M36 15l1 5"/><path d="M36 33C30 40 18 40 12 33M12 33l5 1M12 33l-1-5"/></g></symbol>
+<symbol id="sgi-trail" viewBox="0 0 48 48"><path d="M6 18L16 24L24 30L32 28L42 36V18Z" fill="currentColor" fill-opacity=".25"/><path d="M6 18L16 24L24 30L32 28L42 36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="18" x2="42" y2="18" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/></symbol>
+<symbol id="sgi-lead" viewBox="0 0 48 48"><path d="M6 30L16 24L24 18L32 20L42 12V30Z" fill="currentColor" fill-opacity=".25"/><path d="M6 30L16 24L24 18L32 20L42 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="30" x2="42" y2="30" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/></symbol>
+<symbol id="sgi-cal" viewBox="0 0 48 48"><rect x="2" y="2" width="44" height="44" rx="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M2 8a6 6 0 0 1 6-6h32a6 6 0 0 1 6 6v3H2z" fill="currentColor" fill-opacity=".35"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5" stroke-opacity=".5" stroke-dasharray="0 5.333"><line x1="24" y1="18" x2="40.1" y2="18"/><line x1="8" y1="25.5" x2="40.1" y2="25.5"/><line x1="8" y1="33" x2="40.1" y2="33"/><line x1="8" y1="40.5" x2="40.1" y2="40.5"/></g><circle cx="8" cy="25.5" r="4" style="fill:var(--over)"/><path d="M8 27.9V23.1M5.8 25.3l2.2-2.2 2.2 2.2" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--panel)"/><circle cx="8" cy="33" r="3.1" fill="currentColor"/></symbol>
+<symbol id="sgi-rise" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="40" x2="43" y2="40" stroke-opacity=".4" stroke-width="1.5"/><polyline points="8,34 24,24 40,10" stroke-width="2.5"/><circle cx="8" cy="34" r="4" fill="currentColor"/><circle cx="24" cy="24" r="4" fill="currentColor"/><circle cx="40" cy="10" r="4" fill="currentColor"/></g></symbol>
+<symbol id="sgi-risef" viewBox="0 0 48 48"><rect x="5" y="5" width="38" height="38" rx="4" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.5"/><g stroke="currentColor" stroke-opacity=".3"><line x1="6" y1="14.5" x2="42" y2="14.5"/><line x1="6" y1="24" x2="42" y2="24"/><line x1="6" y1="33.5" x2="42" y2="33.5"/></g><rect x="8" y="33" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="17" y="27" width="7" height="13" rx="1.5" fill="currentColor"/><rect x="26" y="20" width="7" height="20" rx="1.5" fill="currentColor"/><rect x="35" y="13" width="7" height="27" rx="1.5" fill="currentColor"/></symbol>
+<symbol id="sgi-sfav" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="16" font-size="14" font-weight="500">−10</text><text x="24" y="28" font-size="11" opacity=".6">vs</text><text x="24" y="43" font-size="14" font-weight="500" opacity=".4">+10</text></g><ellipse cx="24" cy="11" rx="16" ry="8.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="sgi-sdog" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="16" font-size="14" font-weight="500" opacity=".4">−10</text><text x="24" y="28" font-size="11" opacity=".6">vs</text><text x="24" y="43" font-size="14" font-weight="500">+10</text></g><ellipse cx="24" cy="38" rx="16" ry="8.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="sgi-sband" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="17" font-size="14" font-weight="500">+3</text><text x="24" y="28" font-size="11" opacity=".6">to</text><text x="24" y="42" font-size="14" font-weight="500">+6.5</text></g><rect x="5" y="3" width="38" height="42" rx="10" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="sgi-field" viewBox="0 0 48 48"><rect x="5" y="10" width="38" height="28" rx="4" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.5"/><g stroke="currentColor" stroke-opacity=".35"><line x1="16" y1="11" x2="16" y2="37"/><line x1="27" y1="11" x2="27" y2="37"/><line x1="38" y1="11" x2="38" y2="37"/></g><line x1="11" y1="14" x2="11" y2="34" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="11" cy="24" r="3" fill="currentColor"/><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="14" y1="24" x2="23" y2="24"/><path d="M24 24l-4-3.5M24 24l-4 3.5"/><line x1="29" y1="24" x2="40" y2="24" stroke-opacity=".4" stroke-width="2" stroke-dasharray="2 3"/></g></symbol>
+<symbol id="sgi-fluke" viewBox="0 0 48 48"><line x1="6" y1="40" x2="42" y2="40" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/><rect x="10" y="30" width="11" height="10" rx="2" fill="currentColor" fill-opacity=".4"/><rect x="28" y="9" width="11" height="31" rx="2" fill="currentColor"/><line x1="6" y1="22" x2="42" y2="22" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2.5"/><path d="M33.5 15l-3 6h5l-3 6" fill="none" style="stroke:var(--sgi-bg)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+<symbol id="sgi-nolong" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round"><rect x="6" y="19" width="10" height="10" rx="2" fill="currentColor"/><rect x="18" y="19" width="8" height="10" rx="2" fill="currentColor"/><rect x="28" y="19" width="14" height="10" rx="2" stroke-width="1.8" stroke-dasharray="3 2" stroke-opacity=".6"/><line x1="30" y1="36" x2="40" y2="12" stroke-width="2.5"/></g></symbol>
+<symbol id="sgi-half" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="24" cy="24" r="15"/><path d="M24 24V9A15 15 0 0 0 24 39Z" fill="currentColor" fill-opacity=".35" stroke="none"/><path d="M24 15v9l6 4"/></g></symbol>
+<symbol id="sgi-beat" viewBox="0 0 48 48"><line x1="4" y1="34" x2="44" y2="34" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="25" y="8" width="17" height="32" rx="2.5" fill="currentColor"/><rect x="6" y="28" width="10" height="12" rx="2" fill="currentColor" fill-opacity=".4"/><path d="M20.5 10v22M17.5 13l3-3 3 3M17.5 29l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><text x="33.5" y="28" text-anchor="middle" font-size="12" font-weight="500" style="fill:var(--sgi-bg)">3x</text></symbol>
+<symbol id="sgi-u20" viewBox="0 0 48 48"><line x1="4" y1="38" x2="44" y2="38" stroke="currentColor" stroke-width="1.5" stroke-opacity=".5"/><line x1="35" y1="10" x2="35" y2="38" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="4" y="19" width="27" height="15" rx="2.5" fill="currentColor"/><text x="17.5" y="30" text-anchor="middle" font-size="11" font-weight="500" style="fill:var(--sgi-bg)">&lt;20</text></symbol>
+</defs></svg>`;
+  // Gate pieces shared by the late-yardage rules (wording follows LY_* above).
+  const GP = {
+    SHORT: { i: "field", c: "gr", l: "Short-catch type", s: "Under 10.6 yards per catch since 2024 · 20+ catches" },
+    PREV: { i: "cal", c: "bl", l: "Last Week Over, 40+", s: "Receiving yards in his previous game" },
+    UP: { i: "up", c: "pu", l: "Line raised", s: "Higher than that game's line" },
+    UPP: (n) => ({ i: "upt", c: "pu", x: `${n}%+`, l: `Line raised ${n}%+`, s: "vs that game's line" }),
+    NOLONG: { i: "nolong", c: "am", l: "Over without longest catch", s: "Still Over that line without it" },
+    FH: { i: "half", c: "bl", l: "First half beat the line", s: "First-half yards alone were above that game's line" },
+    YPC: { i: "fluke", c: "am", l: "Last game was a YPC fluke", s: "Yards per catch at least 1.5× his career average" },
+    BL: { i: "beat", c: "bl", l: "Beat his line by 200%+", s: "At least 3 times that game's line" },
+    U20: { i: "u20", c: "am", l: "Longest catch under 20 yds", s: "In that game" },
+  };
+  const RAISE = { i: "up", c: "pu", l: "Line raised", s: "Higher than that game's line" };
+  const SGP = {
+    qbr1: { bet: "Under · QB rush yds", g: () => [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds" }, { i: "streak", c: "bl", l: "Really runs", s: "Averaged 25+ rush yds over his last 3 games played" }] },
+    qbr2: { bet: "Under · QB rush yds", g: () => [{ i: "up", c: "pu", t: `${RL.opt.qbr2}+`, tp: "br", l: `Line up ${RL.opt.qbr2}+ yds`, s: "vs his previous game's line · toggle: 5 or 7" }] },
+    qbr4: { bet: "Under · QB rush yds", g: () => [{ i: "form", c: "bl", l: "High rushing line", s: `Line is ${RL.opt.qbr4}+ rush yds · toggle: 25 or 40` }] },
+    qbch: { bet: "Under · rec yds · WR TE", g: () => [{ i: "swap", c: "am", l: "New starting QB", s: "Not the QB who started his team's last game" }] },
+    sc1: { bet: "Under · rec yds · WR TE", g: () => [{ i: "trail", c: "gr", l: "Team was trailing", s: "Down 7+ on half or more of its plays, last game" }, { i: "cal", c: "bl", l: "Last Week Over", s: "Receiving yards" }, RAISE] },
+    sc2: { bet: "Under · rush yds · RB", g: () => [{ i: "lead", c: "gr", l: "Team was leading", s: "Up 7+ on half or more of its plays, last game" }, { i: "cal", c: "bl", l: "Last Week Over", s: "Rushing yards" }, RAISE] },
+    cm1te: { bet: "Under · rec yds · TE", g: () => [{ i: "down", c: "pu", t: "15+", tp: "tr", l: "QB pass line cut 15+", s: "vs last week" }, { i: "lag", c: "am", l: "Receiver lines lag 10+", s: "QB's line fell 10+ more than the receivers' lines combined" }] },
+    cm120: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "down", c: "pu", t: "20+", tp: "tr", l: "QB pass line cut 20+", s: "vs last week" }, { i: "lag", c: "am", l: "Receiver lines lag 10+", s: "QB's line fell 10+ more than the receivers' lines combined" }] },
+    l9: { bet: "Under · rec yds · WR", g: () => [{ i: "streak", c: "bl", l: "Three straight Overs", s: "His last 3 games played, receiving yards" }] },
+    l10: { bet: "Under · receptions · WR", g: () => [{ i: "rise", c: "bl", l: "Receptions rising", s: "Up in each of his last 3 games played" }] },
+    s03: { bet: "Under · rec yds · WR", g: () => [{ i: "risef", c: "bl", l: "Yards rising", s: "Strictly higher in each of his last 3 games played" }] },
+    sp1: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "sdog", c: "gr", l: "Team underdog by 10+", s: "Opponent favored by 10 or more" }] },
+    sp2: { bet: "Under · receptions · WR TE RB", g: () => [{ i: "sdog", c: "gr", l: "Team underdog by 10+", s: "Opponent favored by 10 or more" }] },
+    sp3: { bet: "Over · QB pass yds", g: () => [{ i: "sfav", c: "gr", l: "Team favored by 10+", s: "Spread of 10 or more in his team's favor" }] },
+    sp4: { bet: "Under · QB pass yds", g: () => [{ i: "sdog", c: "gr", l: "Team underdog by 10+", s: "Opponent favored by 10 or more" }] },
+    sp5: { bet: "Under · rushing · QB RB", g: () => [{ i: "sband", c: "gr", l: "Underdog by 3 to 6.5", s: "Opponent favored by 3 to 6.5" }] },
+    sy25: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT, GP.PREV, GP.UPP(25)] },
+    synl: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT, GP.PREV, GP.UP, GP.NOLONG] },
+    syypc: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT, GP.PREV, GP.UP, GP.YPC] },
+    fhr30: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.FH, GP.UPP(30)] },
+    fhnl: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.FH, GP.NOLONG] },
+    bl200: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.BL] },
+    nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
+  };
+  // Results numbers for a signal (null when the audit did not test this setting).
+  function sgpData(t) {
+    const st = STUDY[t.id];
+    if (st) return { win: "2025 wk 1–18 + 2026 wk 1–10", rec: st.rec, roi: st.roi, lo: st.lo, hi: st.hi, yr: st.yr };
+    const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
+    if (!x) return null;
+    const y = AUDIT_YR[t.id], yr = y && (t.opts ? y[RL.opt[t.id]] : y);
+    return { win: "2025 wk 1–18 + 2026 wk 1–9", rec: x.rec, roi: x.roi, lo: x.lo, hi: x.hi, yr: yr || null, note: x.note };
+  }
+  // Results chart: one shared, zero-centered axis (±40, widened in steps of 20 only if a value needs it).
+  function sgpResults(t) {
+    const d = sgpData(t);
+    if (!d) return `<div class="sgp-res"><p class="small muted">${esc(`The audit did not test this setting (${t.optFmt ? t.optFmt(RL.opt[t.id]) : ""}), so there is no interval for it.`)}</p></div>`;
+    const vals = [d.roi, d.lo, d.hi].concat(d.yr || []);
+    const A = Math.max(40, Math.ceil(Math.max(...vals.map((v) => Math.abs(v))) / 20) * 20);
+    const P = (v) => ((v + A) / (2 * A)) * 100;
+    const cl = (p, a, b) => Math.min(b, Math.max(a, p));
+    const col = (v) => (v >= 0 ? "var(--over)" : "var(--under)");
+    const centers = d.yr ? [28, 68, 112] : [28];
+    const tc = centers[centers.length - 1];
+    const plotH = tc + 36, boxH = plotH + 22;
+    const boxW = Math.min(460, Math.max(280, window.innerWidth - 32)) - 28, W = boxW - 54;
+    const wide = ((P(d.hi) - P(d.lo)) / 100) * W >= 116;
+    let h = `<div class="sgp-plot" style="height:${boxH}px"><div class="sgp-area" style="height:${plotH}px">`;
+    for (const k of [-A / 2, A / 2]) h += `<i class="sgp-grid" style="left:${P(k)}%"></i>`;
+    h += `<i class="sgp-zero" style="left:50%"></i>`;
+    (d.yr || []).forEach((v, i) => {
+      const c = centers[i];
+      h += `<i class="sgp-dot" style="left:${P(v)}%;top:${c}px;background:${col(v)}"></i><span class="sgp-lab" style="left:${cl(P(v), 9, 91)}%;top:${c - 26}px">${pc(v)}</span>`;
+    });
+    h += `<i class="sgp-wh" style="left:${P(d.lo)}%;width:${P(d.hi) - P(d.lo)}%;top:${tc - 1}px"></i><i class="sgp-cap" style="left:${P(d.lo)}%;top:${tc - 6}px"></i><i class="sgp-cap" style="left:${P(d.hi)}%;top:${tc - 6}px"></i>`;
+    h += `<i class="sgp-dia" style="left:${P(d.roi)}%;top:${tc}px;background:${col(d.roi)}"></i><span class="sgp-lab" style="left:${cl(P(d.roi), 9, 91)}%;top:${tc - 28}px">${pc(d.roi)}</span>`;
+    if (wide) {
+      h += `<span class="sgp-lab sgp-sm" style="left:${cl(P(d.lo), 7, 93)}%;top:${tc + 14}px">${pc(d.lo)}</span><span class="sgp-lab sgp-sm" style="left:${cl(P(d.hi), 7, 93)}%;top:${tc + 14}px">${pc(d.hi)}</span><span class="sgp-lab sgp-sm sgp-ci" style="left:${cl(P(d.roi), 9, 91)}%;top:${tc + 14}px">95% CI</span>`;
+    } else {
+      h += `<span class="sgp-lab sgp-sm" style="left:${cl(P(d.roi), 26, 74)}%;top:${tc + 14}px">${pc(d.lo)} to ${pc(d.hi)} · 95% CI</span>`;
+    }
+    h += `</div>`;
+    (d.yr ? ["2025", "2026"] : []).forEach((y, i) => { h += `<span class="sgp-row" style="top:${centers[i] - 8}px">${y}</span>`; });
+    h += `<span class="sgp-row sgp-tot" style="top:${tc - 8}px">Total</span>`;
+    h += `<div class="sgp-axis">${[-A, -A / 2, 0, A / 2, A].map((k) => `<span style="left:${P(k)}%">${k > 0 ? "+" : k < 0 ? "−" : ""}${Math.abs(k)}${k === -A || k === A ? "%" : ""}</span>`).join("")}</div></div>`;
+    return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
+  }
   function openInfo(id) {
     closePop();
     const t = TABS.find((x) => x.id === id); if (!t) return;
+    const sg = SGP[id];
     const ov = document.createElement("div");
     ov.id = "scr-ov"; ov.className = "share-ov";
-    ov.innerHTML = `<div class="share-box nw-box" role="dialog" aria-label="${esc(t.label)}">
-      <div class="nw-h"><b>${esc(t.label)} - ${esc(t.short ? t.short() : t.title)}</b><button class="nw-x" aria-label="Close">✕</button></div>
-      <div class="small sg-desc">${t.desc()}</div>
-      <p class="small"><b>Why it might work:</b> ${esc(t.why)}</p>
-      <p class="small">${auditLine(t)}</p>
-      <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck.${STUDY[t.id] ? "" : " It does not account for picking the best rules out of many tried, so it is likely optimistic."}</p></div>`;
+    if (!document.getElementById("sgi-sprite")) document.body.insertAdjacentHTML("beforeend", SGI_SPRITE);
+    const gates = sg.g();
+    const lead = gates.length === 1 ? "Must pass 1 gate" : gates.length === 2 ? "Must pass both gates" : `Must pass all ${gates.length} gates`;
+    const rows = gates.map((g, i) => `<div class="sgp-g"><div class="sgp-t ${g.c}"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sgi-${g.i}"/></svg>${g.t ? `<span class="sgp-tg sgp-${g.tp}">${esc(g.t)}</span>` : ""}${g.x ? `<span class="sgp-sd">${esc(g.x)}</span>` : ""}<span class="sgp-n">${i + 1}</span></div><div><div class="sgp-l">${esc(g.l)}</div><div class="small muted">${esc(g.s)}</div></div></div>`).join("");
+    const bulb = `<svg class="sgp-bulb" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    ov.innerHTML = `<div class="share-box nw-box sgp" role="dialog" aria-label="${esc(t.label)} - ${esc(t.short ? t.short() : t.title)}">
+      <div class="sgp-h"><div><div class="sgp-code">${esc(t.label)}</div><div class="small muted">${esc(sg.bet)}</div></div><button class="nw-x" aria-label="Close">✕</button></div>
+      <div class="small muted sgp-lead">${lead}</div>
+      <div class="sgp-gs${gates.length > 1 ? " chain" : ""}">${rows}</div>
+      ${id === "syypc" ? `<div class="small muted sgp-why">${bulb}<span>Fluke long catches tend not to repeat.</span></div>` : ""}
+      ${sgpResults(t)}
+      <details class="sgp-how"><summary>How we measured this</summary><p class="small">${auditLine(t)}</p>
+      <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck.${STUDY[t.id] ? "" : " It does not account for picking the best rules out of many tried, so it is likely optimistic."}</p></details></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
