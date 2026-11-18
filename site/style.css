@@ -661,3 +661,34 @@ textarea.tp-in { resize: vertical; }
 /* Run-chart back light: the signal's 95% ROI interval (Michael 2026-11-16) */
 .sg-spark .sg-band { fill: var(--accent); opacity: .16; stroke: none; }
 .sg-spark .sg-bl text { fill: var(--accent); font-size: 6.5px; font-weight: 600; opacity: .8; font-variant-numeric: tabular-nums; paint-order: stroke; stroke: var(--panel); stroke-width: 1.6px; stroke-linejoin: round; pointer-events: none; }
+
+/* Signal info popup redesign (NFL Signals "i" popup) */
+.sgp{--sgi-bg:var(--panel);max-width:460px}
+.sgp-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.sgp-code{font-size:17px;font-weight:500}
+.sgp-lead{margin:12px 0 8px}
+.sgp-gs{position:relative;display:flex;flex-direction:column;gap:14px}
+.sgp-gs.chain::before{content:"";position:absolute;left:27px;top:28px;bottom:28px;width:2px;background:var(--line)}
+.sgp-g{position:relative;display:flex;align-items:center;gap:14px}
+.sgp-l{font-size:14px;font-weight:600}
+.sgp-t{position:relative;flex:0 0 56px;width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.sgp-t svg{width:56px;height:56px;padding:6px;box-sizing:border-box}
+.sgp-t.gr{background:#e3f1e8;color:#1e7a46}.sgp-t.bl{background:#e4edfa;color:#1f5fbf}.sgp-t.pu{background:#eee8f8;color:#6a3fb0}.sgp-t.am{background:#fff0d2;color:#8a5a00}
+.sgp-n{position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;background:var(--ink);color:var(--panel);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.sgp-tg{position:absolute;font-size:11px;font-weight:600;line-height:1}
+.sgp-tg.sgp-br{right:4px;bottom:4px}.sgp-tg.sgp-tr{right:4px;top:5px}
+.sgp-sd{position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:10px;font-weight:600}
+.sgp-why{display:flex;gap:8px;align-items:center;margin-top:12px}.sgp-bulb{width:18px;height:18px;flex:none;color:#8a5a00}
+.sgp-res{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+.sgp-hero{display:flex;align-items:baseline;gap:10px;margin:2px 0 8px}.sgp-hero b:first-child{font-size:28px;font-weight:600}.sgp-hero b+b{font-size:14px;color:var(--muted);font-weight:500}
+.sgp-plot{position:relative;margin:0 14px 0 54px}
+.sgp-area{position:relative}
+.sgp-grid,.sgp-zero{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}.sgp-zero{background:var(--muted);opacity:.7}
+.sgp-dot{position:absolute;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%)}
+.sgp-dia{position:absolute;width:13px;height:13px;transform:translate(-50%,-50%) rotate(45deg)}
+.sgp-wh{position:absolute;height:2px;background:var(--muted)}.sgp-cap{position:absolute;width:2px;height:12px;background:var(--muted);transform:translateX(-1px)}
+.sgp-lab{position:absolute;background:var(--panel);padding:0 3px;transform:translateX(-50%);font-size:12px;font-weight:600;white-space:nowrap}.sgp-sm{font-size:11px;font-weight:500;color:var(--muted)}
+.sgp-row{position:absolute;left:-54px;font-size:12px;color:var(--muted)}.sgp-tot{color:var(--ink);font-weight:600}
+.sgp-axis{position:absolute;left:0;right:0;bottom:0;height:16px;font-size:10px;color:var(--muted)}.sgp-axis span{position:absolute;transform:translateX(-50%)}
+.sgp-how{margin-top:12px}.sgp-how summary{cursor:pointer;font-size:13px;color:var(--muted)}
+@media (prefers-color-scheme: dark){.sgp-t.gr{background:#173324;color:#6fcf97}.sgp-t.bl{background:#162840;color:#7fb0f5}.sgp-t.pu{background:#2a2040;color:#b79af0}.sgp-t.am{background:#3a2c10;color:#f0b955}.sgp-bulb{color:#f0b955}}
