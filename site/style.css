@@ -666,6 +666,7 @@ textarea.tp-in { resize: vertical; }
 .sgp{--sgi-bg:var(--panel);max-width:460px}
 .sgp-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .sgp-code{font-size:17px;font-weight:500}
+.sgp-pb{font-weight:700;color:var(--ink)}
 .sgp-lead{margin:12px 0 8px}
 .sgp-gs{position:relative;display:flex;flex-direction:column;gap:14px}
 .sgp-gs.chain::before{content:"";position:absolute;left:27px;top:28px;bottom:28px;width:2px;background:var(--line)}

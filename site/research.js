@@ -659,6 +659,20 @@
     bl200: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.BL] },
     nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
   };
+  // Positions in the popup header, best ROI first (Michael 2026-11-18). The last one is the position to drop first and is not bold.
+  // Order = each position's historical-replay ROI (2025 wk 2-18 + 2026 wk 2-10); see claude/late-yardage-by-position-2026-11-17.md
+  // and claude/signals-by-position-2026-11-18.md. Display only: no rule, list, score or number changes.
+  const POS_ORDER = {
+    sy25: ["TE", "RB", "WR"], synl: ["WR", "TE", "RB"], syypc: ["WR", "TE", "RB"], fhr30: ["RB", "TE", "WR"], fhnl: ["WR", "TE", "RB"],
+    bl200: ["TE", "WR", "RB"], nlu20: ["RB", "TE", "WR"],
+    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"],
+  };
+  function betText(id, sg) {
+    const rest = sg.bet.slice(sg.bet.indexOf(" ") + 1), po = POS_ORDER[id];
+    if (!po) return esc(rest);
+    const base = rest.replace(/(\s·\s)?(\s?\b(WR|TE|RB|QB)\b)+$/, "");
+    return `${esc(base)} · ${po.map((x, i) => (i < po.length - 1 ? `<b class="sgp-pb">${x}</b>` : x)).join(" ")}`;
+  }
   // Results numbers for a signal (null when the audit did not test this setting).
   function sgpData(t) {
     const st = STUDY[t.id];
@@ -714,7 +728,7 @@
     const rows = gates.map((g, i) => `<div class="sgp-g"><div class="sgp-t ${g.c}"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sgi-${g.i}"/></svg>${g.t ? `<span class="sgp-tg sgp-${g.tp}">${esc(g.t)}</span>` : ""}${g.x ? `<span class="sgp-sd">${esc(g.x)}</span>` : ""}<span class="sgp-n">${i + 1}</span></div><div><div class="sgp-l">${esc(g.l)}</div><div class="small muted">${esc(g.s)}</div></div></div>`).join("");
     const bulb = `<svg class="sgp-bulb" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     ov.innerHTML = `<div class="share-box nw-box sgp" role="dialog" aria-label="${esc(t.label)} - ${esc(t.short ? t.short() : t.title)}">
-      <div class="sgp-h"><div><div class="sgp-code">${esc(t.label)}</div><div class="small muted"><span class="chip rl-side ${sg.bet.startsWith("Over") ? "over" : "under"}" style="margin-left:0">${sg.bet.split(" ")[0]}</span> ${esc(sg.bet.slice(sg.bet.indexOf(" ") + 1))}</div></div><button class="nw-x" aria-label="Close">✕</button></div>
+      <div class="sgp-h"><div><div class="sgp-code">${esc(t.label)}</div><div class="small muted"><span class="chip rl-side ${sg.bet.startsWith("Over") ? "over" : "under"}" style="margin-left:0">${sg.bet.split(" ")[0]}</span> ${betText(id, sg)}</div></div><button class="nw-x" aria-label="Close">✕</button></div>
       <div class="small muted sgp-lead">${lead}</div>
       <div class="sgp-gs${gates.length > 1 ? " chain" : ""}">${rows}</div>
       ${id === "syypc" ? `<div class="small muted sgp-why">${bulb}<span>Fluke long catches tend not to repeat.</span></div>` : ""}
