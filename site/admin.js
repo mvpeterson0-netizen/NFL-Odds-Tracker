@@ -11,7 +11,7 @@
   const RD = { timeoutMs: 12000, retries: 1 };
   const STALE_MS = 120000; // coming back to the app within 2 minutes does not reload anything
   // Tweet plan tab (supabase/015_tweet_plan.sql): edits are held here until "Submit changes"; Claude acts on the request.
-  const TP = { data: null, err: "", loading: false, edits: {}, adds: [], dels: {}, msg: "", sending: false, open: {}, showPast: false, imgs: {}, copied: "", busy: "", rnote: {}, rmsg: {}, rerr: {}, rbusy: "", loadedAt: 0 };
+  const TP = { data: null, err: "", loading: false, edits: {}, adds: [], dels: {}, msg: "", sending: false, open: {}, showPast: false, imgs: {}, copied: "", busy: "", loadedAt: 0 };
   const TP_STATUS = ["Not drafted", "Drafted (chat only)", "Scheduled on X", "Posted", "Failed / skipped", "Manual"];
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtN = (n) => Number(n || 0).toLocaleString("en-US");
@@ -213,26 +213,6 @@
     if (r.ok) { TP.data = null; TP.msg = posted ? "Marked posted." : "Posted mark removed."; loadTweets(); }
     else { TP.msg = `Couldn't update: ${/404|42501|not allowed/i.test(`${r.error} ${r.status}`) ? "run supabase/016_tweet_drafts.sql first" : (r.error || "try again")}`; rerender(); }
   }
-  async function redraft(k) {
-    if (TP.rbusy) return;
-    TP.rbusy = k; TP.rmsg[k] = ""; TP.rerr[k] = false; rerender();
-    const r = await ACC().db("/rest/v1/rpc/admin_tweet_redraft", { method: "POST", body: { p_slot_key: k, p_note: TP.rnote[k] || "" } });
-    if (!r.ok) {
-      TP.rbusy = ""; TP.rerr[k] = true;
-      TP.rmsg[k] = `Couldn't send: ${/404/.test(String(r.status)) ? "run supabase/017_tweet_redraft.sql first" : (r.error || "try again")}`; rerender(); return;
-    }
-    let st = null;
-    for (let i = 0; i < 6 && !st; i++) {
-      await new Promise((res) => setTimeout(res, 2000));
-      const s = await ACC().db("/rest/v1/rpc/admin_tweet_redraft_status", { method: "POST", body: { p_log_id: r.data } });
-      if (s.ok && s.data && (s.data.http_status != null || s.data.error)) st = s.data;
-    }
-    TP.rbusy = "";
-    if (st && st.http_status >= 200 && st.http_status < 300) { TP.rnote[k] = ""; TP.rmsg[k] = "Sent. Claude is working on it; a new draft usually appears in a few minutes. Tap Refresh to check."; }
-    else if (st) { TP.rerr[k] = true; TP.rmsg[k] = `Claude did not accept the request (${st.http_status != null ? "HTTP " + st.http_status : st.error}). Nothing changed.`; }
-    else TP.rmsg[k] = "Sent, but no confirmation yet. Tap Refresh in a minute to check.";
-    TP.data = null; loadTweets();
-  }
   function tpImgFile(k, i) {
     const x = (TP.imgs[k] || [])[i]; if (!x) return null;
     const bin = atob(x.data), u8 = new Uint8Array(bin.length); for (let n = 0; n < bin.length; n++) u8[n] = bin.charCodeAt(n);
@@ -275,14 +255,6 @@
     const isPast = (r) => (r.post_date && r.post_date < today) || r.status === "Posted";
     const upcoming = plan.filter((r) => !isPast(r) || TP.open[r.slot_key] || TP.edits[r.slot_key]), earlier = plan.filter((r) => !upcoming.includes(r));
     const drafts = TP.data.drafts || {};
-    const redraftBlock = (r) => {
-      if (r.status === "Posted" || !TP.data.redraft_configured) return "";
-      const k = r.slot_key, unsaved = !!TP.edits[k] || !!TP.dels[k], msg = TP.rmsg[k];
-      return `<div class="tp-draft tp-wide"><div class="tp-dh">Redraft with Claude</div>
-        <textarea class="tp-in" data-tprnote="${esc(k)}" rows="2" aria-label="What to change for ${esc(r.slot)}" placeholder="What to change (optional). Claude also reads this tweet's Direction for Claude, so save that first.">${esc(TP.rnote[k] || "")}</textarea>
-        <div class="tp-acts"><button class="tp-markbtn" data-tpredraft="${esc(k)}" ${TP.rbusy || unsaved ? "disabled" : ""}>${TP.rbusy === k ? "Sending…" : "Redraft now"}</button>${unsaved ? `<span class="muted small">Submit your changes first so Claude sees them.</span>` : ""}</div>
-        ${msg ? `<div class="small ${TP.rerr[k] ? "pk-err" : "muted"}">${esc(msg)}</div>` : ""}</div>`;
-    };
     const draftBlock = (r) => {
       const d = drafts[r.slot_key], k = r.slot_key, posted = r.status === "Posted";
       if (!d) return `<div class="tp-draft tp-wide"><div class="tp-dh">Draft</div><div class="muted small">No draft saved yet. Claude saves the text and screenshots here when its task runs.</div>${markBtn(r, posted)}</div>`;
@@ -306,13 +278,11 @@
           <span class="tp-when">${esc(fmtT(val(r, "post_time")) || "—")}</span><span class="tp-slot">${esc(r.slot)}</span><span class="tp-topic">${esc(val(r, "topic"))}</span>${flag}<span class="tp-st ${stCls(st)}">${esc(st)}</span><span class="tp-chev">${open ? "▾" : "▸"}</span></button>
         ${open ? `<div class="tp-det">
           <label class="tp-f tp-wide"><span>Tweet about</span><input ${ctl(r, "topic", "Tweet about")} value="${esc(val(r, "topic"))}"></label>
-          <label class="tp-f tp-wide"><span>Direction for Claude</span><textarea ${ctl(r, "direction", "Direction for Claude", 'rows="3" placeholder="Notes / prompt direction for Claude"')}>${esc(val(r, "direction"))}</textarea></label>
           <label class="tp-f"><span>Date</span><input type="date" ${ctl(r, "post_date", "Post date")} value="${esc(val(r, "post_date"))}"></label>
           <label class="tp-f"><span>Time (Central)</span><input type="time" ${ctl(r, "post_time", "Post time")} value="${esc(val(r, "post_time"))}"></label>
           <label class="tp-f"><span>Status</span>${sel}</label>
           <div class="tp-f"><span>&nbsp;</span><button class="tp-del ${gone ? "on" : ""}" data-tpdel="${esc(r.slot_key)}" aria-label="Delete tweet ${esc(r.slot)}">${gone ? "Undo delete" : "Delete tweet"}</button></div>
           ${draftBlock(r)}
-          ${redraftBlock(r)}
           <div class="tp-info muted small tp-wide">${info}</div></div>` : ""}</div>`;
     };
     const dayBlocks = (list) => { let out = "", last = null; list.forEach((r) => { const key = r.post_date || r.day_label || ""; if (key !== last) { out += `<div class="tp-dayh">${esc(r.day_label || fmtD(r.post_date))}</div>`; last = key; } out += card(r); }); return out; };
@@ -320,22 +290,15 @@
     const addRows = TP.adds.map((a, i) => `<div class="tp-card open tp-new"><div class="tp-sum tp-sumnew"><span class="tp-slot">New tweet</span><button class="tp-del" data-tpnew-del="${i}">Remove</button></div>
         <div class="tp-det">
           <label class="tp-f tp-wide"><span>Tweet about</span><input class="tp-in dirty" data-tpnew="${i}" data-f="topic" aria-label="New tweet: tweet about" value="${esc(a.topic)}" placeholder="What is this tweet about?"></label>
-          <label class="tp-f tp-wide"><span>Direction for Claude</span><textarea class="tp-in dirty" data-tpnew="${i}" data-f="direction" rows="3" aria-label="New tweet: direction for Claude" placeholder="Notes / prompt direction for Claude">${esc(a.direction)}</textarea></label>
           <label class="tp-f"><span>Date</span><input type="date" class="tp-in dirty" data-tpnew="${i}" data-f="post_date" aria-label="New tweet: date" value="${esc(a.post_date)}"></label>
           <label class="tp-f"><span>Time (Central)</span><input type="time" class="tp-in dirty" data-tpnew="${i}" data-f="post_time" aria-label="New tweet: time" value="${esc(a.post_time)}"></label></div></div>`).join("");
     const pendAddRows = pendAdds.map((c) => `<div class="tp-card"><div class="tp-sum tp-sumnew"><span class="tp-when">${esc(fmtT((c.fields || {}).post_time) || "—")}</span><span class="tp-slot">New</span><span class="tp-topic">${esc((c.fields || {}).topic || "")}</span><span class="tp-flag">Claude adding</span></div></div>`).join("");
     const n = tpChangeCount();
-    const reqRows = reqs.slice(0, 8).map((q) => {
-      const what = (q.changes || []).map((c) => { const p = plan.find((x) => x.slot_key === c.slot_key); if (c.op === "delete") return `Delete ${esc(p ? p.slot + " – " + p.topic : c.slot_key)}`; if (c.op === "add") return `Add: ${esc((c.fields || {}).topic || "")}`; return `${esc(p ? p.slot : c.slot_key)}: ${Object.entries(c.fields).map(([k, v]) => `${esc(k.replace("_", " "))} → ${esc(String(v ?? "").slice(0, 60))}`).join(", ")}`; }).join("<br>");
-      return `<tr><td>${when(q.created_at)}</td><td>${what}</td><td>${esc(q.status === "needs_attention" ? "Needs attention" : q.status === "done" ? "Done" : "Waiting for Claude")}</td><td class="small">${esc(q.result || "")}</td></tr>`;
-    });
     return `<div class="ad">${tabsBar()}
       <div class="ad-head"><h2>Tweet plan</h2><div class="ad-chips"><button id="tp-reload">Refresh</button></div></div>
-      ${TP.data.agent_configured ? "" : `<p class="pk-err small">Claude's task isn't connected yet (no agent token set), so submitted changes will wait. See the end of supabase/015_tweet_plan.sql.</p>`}
-      <p class="muted small ad-note">Tap a tweet to open it, then edit what it is about, give Claude direction, or change its date, time (Central) or status. Press Submit changes to save; Claude's tasks read the plan before drafting. Once a draft is ready, open the tweet to copy the text and images, post on X, then tap Mark posted. If a tweet is already scheduled on X, Claude moves X to match your change.</p>
+      <p class="muted small ad-note">Tap a tweet to open it, then edit what it is about, its date, time (Central) or status. Press Submit changes to save. Once a draft is ready, open the tweet to copy the text and images, post on X, then tap Mark posted.</p>
       <div class="tp-bar"><button id="tp-submit" class="gchip on" ${n && !TP.sending ? "" : "disabled"}>${TP.sending ? "Sending…" : `Submit changes${n ? ` (${n})` : ""}`}</button><button id="tp-discard" ${n ? "" : "disabled"}>Discard edits</button><span id="tp-msg" class="small ${/^Couldn't|^Not/.test(TP.msg) ? "pk-err" : "muted"}">${esc(TP.msg)}</span></div>
       <div class="tp-list">${rows}${pendAddRows}${addRows}</div><p><button id="tp-add">+ Add a tweet</button></p>
-      <details class="panel tp-reqs"><summary><h3 style="display:inline">Requests to Claude${reqs.some((q) => q.status === "pending") ? " (waiting)" : ""}</h3></summary><div class="body">${table(["Sent", "What", "State", "Claude's result"], reqRows)}</div></details>
     </div>`;
   }
   function tpUpdateBar() {
@@ -359,8 +322,6 @@
     document.querySelectorAll("[data-tpnew-del]").forEach((b) => b.addEventListener("click", () => { TP.adds.splice(+b.dataset.tpnewDel, 1); rerender(); }));
     document.querySelectorAll("[data-tpdel]").forEach((b) => b.addEventListener("click", () => { const k = b.dataset.tpdel; if (TP.dels[k]) delete TP.dels[k]; else TP.dels[k] = true; rerender(); }));
     document.querySelectorAll("[data-tpopen]").forEach((b) => b.addEventListener("click", () => { const k = b.dataset.tpopen; if (TP.open[k]) delete TP.open[k]; else TP.open[k] = true; rerender(); }));
-    document.querySelectorAll("[data-tprnote]").forEach((el) => el.addEventListener("input", () => { TP.rnote[el.dataset.tprnote] = el.value; }));
-    document.querySelectorAll("[data-tpredraft]").forEach((b) => b.addEventListener("click", () => redraft(b.dataset.tpredraft)));
     document.querySelectorAll("[data-tpshare]").forEach((b) => b.addEventListener("click", () => tpImgAct("share", b.dataset.tpshare)));
     document.querySelectorAll("[data-tpcopyimg]").forEach((b) => b.addEventListener("click", () => tpImgAct("copy", b.dataset.tpcopyimg)));
     document.querySelectorAll("[data-tpmark]").forEach((b) => b.addEventListener("click", () => markPosted(b.dataset.tpmark, b.dataset.posted === "1")));
@@ -370,7 +331,7 @@
       TP.copied = k; b.textContent = "Copied"; setTimeout(() => { if (TP.copied === k) { TP.copied = ""; b.textContent = "Copy text"; } }, 2000);
     }));
     const pp = document.getElementById("tp-past"); if (pp) pp.addEventListener("click", () => { TP.showPast = !TP.showPast; rerender(); });
-    const ad = document.getElementById("tp-add"); if (ad) ad.addEventListener("click", () => { TP.adds.push({ topic: "", direction: "", post_date: "", post_time: "" }); rerender(); });
+    const ad = document.getElementById("tp-add"); if (ad) ad.addEventListener("click", () => { TP.adds.push({ topic: "", post_date: "", post_time: "" }); rerender(); });
     const rl = document.getElementById("tp-reload"); if (rl) rl.addEventListener("click", () => { TP.data = null; TP.err = ""; TP.msg = ""; loadTweets(); });
     const dc = document.getElementById("tp-discard"); if (dc) dc.addEventListener("click", () => { TP.edits = {}; TP.adds = []; TP.dels = {}; TP.msg = ""; rerender(); });
     const sb = document.getElementById("tp-submit");
@@ -379,7 +340,7 @@
       Object.keys(TP.dels).forEach((slot_key) => changes.push({ op: "delete", slot_key }));
       for (const a of TP.adds) {
         if (!a.topic.trim()) { TP.msg = "Not sent: every new tweet needs a \"Tweet about\"."; rerender(); return; }
-        const fields = { topic: a.topic.trim() }; ["direction", "post_date", "post_time"].forEach((f) => { if (a[f]) fields[f] = a[f]; });
+        const fields = { topic: a.topic.trim() }; ["post_date", "post_time"].forEach((f) => { if (a[f]) fields[f] = a[f]; });
         changes.push({ op: "add", slot_key: "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), fields });
       }
       if (!changes.length || TP.sending) return;
