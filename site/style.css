@@ -554,6 +554,9 @@ tr.gdetail:hover td { background: var(--hover); }
 /* Signals (Research tab), 2026-11-10 */
 .sg-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 6px 0 8px; } .sg-bar label { display: flex; flex-direction: column; flex: 1; font-size: 12px; color: var(--muted); gap: 3px; } .sg-bar input[type=search] { min-width: 0; width: 100%; }
 .sg-tag { margin: -6px 0 6px; }
+.sg-ttl { position: relative; } .sg-ttl .sg-tnf { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+.sg-tnf { border: 1px solid var(--line); background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 700; line-height: 1; padding: 4px 11px; border-radius: 999px; cursor: pointer; }
+.sg-tnf.on { background: var(--accent); border-color: var(--accent); color: #fff; }
 .sg-scope { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 6px; } .sg-scope .gchip { margin: 0; }
 .sg-filters, .sg-diag { margin: 0 0 10px; } .sg-filters > summary, .sg-diag > summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 4px 0; }
 .sg-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 8px 0; } .sg-cell { position: relative; min-width: 0; }
