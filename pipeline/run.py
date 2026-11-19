@@ -107,6 +107,10 @@ def main() -> int:
             notify.arb_run(log)
         except Exception as ex:
             log.append(f"arb: skipped ({type(ex).__name__}: {str(ex)[:80]})")
+        try:  # optional: Michael's "2-hour lines are live" alert, sent by the workflow after deploy (never fails the run)
+            notify.two_hour_run(log)
+        except Exception as ex:
+            log.append(f"two-hour alert: skipped ({type(ex).__name__}: {str(ex)[:80]})")
         # 2025 research download stopped at Michael's request; preserve the saved archive.
     except Exception as e:  # logged, then the run fails so the next schedule retries
         status = "error"
