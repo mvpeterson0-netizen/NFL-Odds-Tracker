@@ -959,8 +959,8 @@
   const tnfShow = () => { const d = ctDay(new Date()); return (d === "Wed" || d === "Thu") && tnfGids().size > 0; };
   const tnfOn = () => !!RL.tnf && tnfShow();
   const sgFilt = (list) => { const w = sgWk(); let l = w == null ? list : list.filter((x) => x.c.r.wk === w); if (tnfOn()) { const g = tnfGids(); l = l.filter((x) => g.has(x.c.r.gid)); } return l; };
-  const tnfBtn = () => (tnfShow() ? `<button type="button" class="sg-tnf ${tnfOn() ? "on" : ""}" data-sgtnf aria-pressed="${tnfOn()}">TNF</button>` : "");
-  const gsecRow = (t) => `<div class="sg-ttl"><h2 class="gsec">${t}</h2>${tnfBtn()}</div>`;
+  const tnfBtn = () => (tnfShow() ? `<button type="button" class="sg-tnf ${tnfOn() ? "on" : ""}" data-sgtnf aria-pressed="${tnfOn()}" style="position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0;padding:4px 11px;font-size:12px;font-weight:700;line-height:1;border-radius:999px">TNF</button>` : "");
+  const gsecRow = (t) => `<div class="sg-ttl" style="position:relative"><h2 class="gsec">${t}</h2>${tnfBtn()}</div>`;
   function sgToggleHtml() {
     const v = sgView(); if (v == null) return "";
     return `<div class="sgview" role="tablist" aria-label="Week"><button type="button" role="tab" aria-selected="${v === "last"}" class="${v === "last" ? "on" : ""}" data-sgview="last">Last week · W${curWk() - 1}</button><button type="button" role="tab" aria-selected="${v === "next"}" class="${v === "next" ? "on" : ""}" data-sgview="next">Upcoming · W${curWk()}</button></div>`;
