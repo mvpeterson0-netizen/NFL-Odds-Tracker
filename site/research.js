@@ -39,29 +39,50 @@
   const LY_NOLONG = `<li>He would <b>still have been Over</b> that line without his single longest catch.</li>`;
   const LY_FH = `<li>His <b>first-half yards alone</b> were already above that game's line.</li>`;
   const LY_IDS = new Set(["sy25", "synl", "syypc", "fhr30", "fhnl", "bl200", "nlu20"]);
+  // QBRu (Michael 2026-11-20): QB-R1, QB-R2 and QB-R4 combined into one tile with a 3-way toggle (same pattern as the old QB-R4 25+/40+).
+  // Modes are numbered so the toggle (data-sgopt) stays numeric: 1 = 25+ (old QB-R4 at 25), 2 = avg 25 (old QB-R1), 3 = +5 (old QB-R2 at +5).
+  const QBRU_LBL = { 1: "25+", 2: "avg 25", 3: "+5" };
   const TABS = [
-    { id: "qbr1", n: 1, side: "under", combo: true, label: "QB-R1", short: () => "L3 gm avg ≥25yd and line ≥25yd",
+    { id: "qbru", n: 1, side: "under", label: "QBRu", opts: [1, 2, 3], optFmt: (v) => QBRU_LBL[v], short: () => ({ 1: "QB rush yd under when line is 25+yd", 2: "QB rush yd under when L3 gm avg ≥25yd and line ≥25yd", 3: "QB rush yd under when line is 5+yd above his last-game line" })[RL.opt.qbru],
+      title: "QB rush Under (high line, really runs, or line jump)", why: "A QB's rushing line may be set too high after a few big games, a high-rushing stretch, or a sudden raise.",
+      desc: () => ({
+        1: `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>25 or higher</b>. The idea is that a few big games can inflate high QB rushing lines.`,
+        2: `Bet a QB's <b>rushing yards Under</b> when both are true:<ul class="sg-ul"><li>This week's rushing-yards line is <b>25 or more</b>.</li><li>In his <b>last 3 games played</b> he averaged <b>25 or more</b> rushing yards.</li></ul><div class="sg-sub">The idea is that a QB who runs a lot gets a high line, and that line may be set too high.</div>`,
+        3: `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>5 yards higher</b> than his line in his previous game. The idea is that a big raise may overshoot.`,
+      })[RL.opt.qbru] },
+    // Combined tiles (Michael 2026-11-20): each toggle position is one of the original signals, scored exactly as before (same rule, list,
+    // grading and audit numbers); the tile just shows whichever one is toggled. Info (i) opens that signal's own explanation.
+    ...[
+      ["cm1", 6, "CM1", ["cm1te", "cm120"], ["TE", "All"], "QB line drop, receivers' lines don't follow"],
+      ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script"],
+      ["sy", 29, "SY", ["sy25", "synl", "syypc"], ["+25%", "NL", "YPC"], "Short-yardage receiver after a big Over"],
+      ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "NL"], "First-half Over, line raised"],
+    ].map(([id, n, label, mem, lbl, what]) => ({
+      id, n, side: "under", label, opts: mem.map((_, i) => i + 1), optFmt: (v) => lbl[v - 1], members: Object.fromEntries(mem.map((m, i) => [i + 1, m])), cm: id === "cm1",
+      short: () => memTab(id).short(), title: `${what} (${lbl.join(" / ")})`, why: "", desc: () => memTab(id).desc(),
+    })),
+    { id: "qbr1", page: "old", n: 1, side: "under", combo: true, label: "QB-R1", short: () => "L3 gm avg ≥25yd and line ≥25yd",
       title: "QB rushing yards → Under (rushes a lot, high line)", why: "Books may price a rushing QB's recent output too high.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when both are true:<ul class="sg-ul"><li>This week's rushing-yards line is <b>25 or more</b>.</li><li>In his <b>last 3 games played</b> he averaged <b>25 or more</b> rushing yards.</li></ul><div class="sg-sub">The idea is that a QB who runs a lot gets a high line, and that line may be set too high.</div>` },
-    { id: "sc2", n: 2, side: "under", combo: true, label: "SC2", short: () => "RB rush yd under after leading big and hitting the over",
+    { id: "sc2", hid: true, n: 2, side: "under", combo: true, label: "SC2", short: () => "RB rush yd under after leading big and hitting the over",
       title: "RB rush Under after a game his team led big", why: "A rushing Over built in a game his team led may not repeat.",
       desc: () => `Bet an RB's <b>rushing yards Under</b> when all three are true:<ul class="sg-ul"><li>In his team's <b>previous game</b> it led by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play).</li><li>He finished <b>Over</b> his rushing line in that game.</li><li>This week's rushing line is <b>higher</b> than that game's line.</li></ul><div class="sg-sub">The idea is that a big rushing game in a game his team led may not repeat.</div>` },
-    { id: "sc1", n: 3, side: "under", combo: true, label: "SC1", short: () => "Rec yd under after trailing big and hitting the over",
+    { id: "sc1", hid: true, n: 3, side: "under", combo: true, label: "SC1", short: () => "Rec yd under after trailing big and hitting the over",
       title: "WR/TE rec yds Under after a game his team trailed big", why: "Catch-up volume may not repeat.",
       desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when all three are true:<ul class="sg-ul"><li>In his team's <b>previous game</b> it trailed by 7+ points on at least <b>half of its offensive plays</b> (from play-by-play).</li><li>He finished <b>Over</b> his receiving-yards line in that game.</li><li>This week's line is <b>higher</b> than that game's line.</li></ul><div class="sg-sub">The idea is that catch-up passing volume may not repeat.</div>` },
-    { id: "cm1te", n: 6, side: "under", combo: true, cm: true, label: "CM1-TE", short: () => "TE rec yd under when QB line drops 15+ and receivers' lines don't follow", minDrop: 15, only: "TE",
+    { id: "cm1te", hid: true, n: 6, side: "under", combo: true, cm: true, label: "CM1-TE", short: () => "TE rec yd under when QB line drops 15+ and receivers' lines don't follow", minDrop: 15, only: "TE",
       title: "TE rec yds Under when the QB line drops but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
       desc: () => `Bet the TE's <b>receiving yards Under</b> when both are true:<ul class="sg-ul"><li>The QB's passing-yards line is down <b>15+</b> vs last week.</li><li>The QB's line is down at least <b>10</b> yards more than all the receivers' line changes added up.</li></ul>${CM_READ}` },
-    { id: "cm120", n: 7, side: "under", combo: true, cm: true, label: "CM1-20", short: () => "Rec yd under when QB line drops 20+ and receivers' lines don't follow", minDrop: 20, only: null,
+    { id: "cm120", hid: true, n: 7, side: "under", combo: true, cm: true, label: "CM1-20", short: () => "Rec yd under when QB line drops 20+ and receivers' lines don't follow", minDrop: 20, only: null,
       title: "Receiving yards Under when the QB line drops 20+ but receivers' lines don't follow", why: "Books cut the QB but not his pass catchers.",
       desc: () => `Same as CM1-TE, with two differences:<ul class="sg-ul"><li>The QB line is down <b>20+</b>.</li><li>Every qualifying receiver (WR/TE/RB) is a bet.</li></ul>${CM_READ}` },
-    { id: "qbch", n: 8, side: "under", qbch: true, label: "QBCH", short: () => "WR/TE rec yd under when the starting QB changed",
+    { id: "qbch", n: 8, page: "ind", side: "under", qbch: true, label: "QBCH", short: () => "WR/TE rec yd under when the starting QB changed",
       title: "WR/TE rec yds Under when the starting QB changed", why: "A new starting QB may mean lower passing volume or a less proven connection, while the receivers' lines still reflect the old QB.",
       desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when his team's QB this game is <b>not the QB who played the 1st quarter of its previous game</b>.<div class="sg-sub"><b>How the QBs are picked:</b></div><ul class="sg-ul"><li>Previous game: the QB with the most 1st-quarter plays (play-by-play).</li><li>This game: the QB the book has posted a passing-yards line for, so players can be flagged before kickoff.</li></ul>` },
-    { id: "qbr2", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`, short: () => `QB rush yd under when line is ${RL.opt.qbr2}+yd above his last-game line`,
+    { id: "qbr2", page: "old", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`, short: () => `QB rush yd under when line is ${RL.opt.qbr2}+yd above his last-game line`,
       title: "QB rush Under when the line jumps", why: "A raised QB rushing line may overshoot.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>${RL.opt.qbr2} yards higher</b> than his line in his previous game. The toggle changes the size of the jump. The idea is that a big raise may overshoot.` },
-    { id: "qbr4", n: 5, side: "under", label: "QB-R4", opts: [25, 40], optFmt: (v) => `${v}+`, short: () => `QB rush yd under when line is ${RL.opt.qbr4}+yd`,
+    { id: "qbr4", page: "old", n: 5, side: "under", label: "QB-R4", opts: [25, 40], optFmt: (v) => `${v}+`, short: () => `QB rush yd under when line is ${RL.opt.qbr4}+yd`,
       title: "QB rush Under on high lines", why: "High QB rushing lines may be inflated by a few big games.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>${RL.opt.qbr4} or higher</b>. The toggle changes the minimum line. The idea is that a few big games can inflate high QB rushing lines.` },
     // ---- Indicator page (#/search/indicators, long-press the Signals tab): the audit's tracked indicator rules, same format ----
@@ -91,35 +112,38 @@
       desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when his team is a <b>3 to 6.5 point underdog</b>. ${SPREAD_NOTE}` },
     // ---- Late-yardage indicators (2026-11-16, Michael's picks from the 2026-11-15 late-yardage study; receiving yards, WR/TE/RB) ----
     // Historical replay picked after seeing results (see STUDY below); scored here on 2026 games, tracked forward from the day they were added.
-    { id: "sy25", n: 29, page: "ind", side: "under", label: "SY-R25", short: () => "Short-yardage receiver, line raised 25%+",
+    { id: "sy25", hid: true, n: 29, page: "ind", side: "under", label: "SY-R25", short: () => "Short-yardage receiver, line raised 25%+",
       title: "Short-yardage receiver, line raised 25%+ → rec yds Under", why: "A big raise for a receiver who gets his yards on short catches may overshoot.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP(25)}</ul>` },
-    { id: "synl", n: 30, page: "ind", side: "under", label: "SY-NL", short: () => "Short-yardage receiver, Over without his longest catch",
+    { id: "synl", hid: true, n: 30, page: "ind", side: "under", label: "SY-NL", short: () => "Short-yardage receiver, Over without his longest catch",
       title: "Short-yardage receiver who didn't need his longest catch → rec yds Under", why: "His Over came from several short catches, not one play, yet the line still went up.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP()}${LY_NOLONG}</ul>` },
-    { id: "syypc", n: 31, page: "ind", side: "under", label: "SY-YPC", short: () => "Short-yardage receiver with a long-catch game",
+    { id: "syypc", hid: true, n: 31, page: "ind", side: "under", label: "SY-YPC", short: () => "Short-yardage receiver with a long-catch game",
       title: "Short-yardage receiver whose yards per catch spiked → rec yds Under", why: "A game of unusually long catches for a short-catch receiver may not repeat.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP()}<li>In that game his yards per catch were at least <b>1.5 times</b> his own career average (since 2024).</li></ul>` },
-    { id: "fhr30", n: 32, page: "ind", side: "under", label: "FH-R30", short: () => "First half alone beat the line, line raised 30%+",
+    { id: "fhr30", hid: true, n: 32, page: "ind", side: "under", label: "FH-R30", short: () => "First half alone beat the line, line raised 30%+",
       title: "First-half Over, line raised 30%+ → rec yds Under", why: "A line that jumps after a game where he was already Over by halftime may overreact.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_FH}${LY_UP(30)}</ul>` },
-    { id: "fhnl", n: 33, page: "ind", side: "under", label: "FH-NL", short: () => "First half alone beat the line, Over without his longest catch",
+    { id: "fhnl", hid: true, n: 33, page: "ind", side: "under", label: "FH-NL", short: () => "First half alone beat the line, Over without his longest catch",
       title: "First-half Over without his longest catch → rec yds Under", why: "He was Over early and across several catches, yet the line still went up.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}${LY_FH}${LY_NOLONG}</ul>` },
-    { id: "bl200", n: 34, page: "ind", side: "under", label: "BL-200", short: () => "Beat his line by 200%+",
+    { id: "bl200", front: true, n: 34, page: "ind", side: "under", label: "BL-200", short: () => "Beat his line by 200%+",
       title: "Beat his line by 200%+ → rec yds Under", why: "A huge game may be priced as a new normal.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>He <b>beat that line by 200% or more</b> (at least 3 times the line).</li></ul>` },
     { id: "nlu20", n: 35, page: "ind", side: "under", label: "NL-U20", short: () => "Longest catch under 20 yards",
       title: "Over with no catch of 20+ yards → rec yds Under", why: "A game with no long catch means the Over came from steady volume the line may now overstate.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>His longest catch in that game was <b>under 20 yards</b>.</li></ul>` },
   ];
-  const OPT0 = { qbr2: 5, qbr4: 25 }; // default toggle values
+  const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 2, fh: 2 }; // QBRu avg 25; CM1 TE; GS RB; SY NL; 1H NL // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
   // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
   const FREE_RULES = 3;
   const signedIn = () => { try { return !!(window.STIX_ACCOUNT && window.STIX_ACCOUNT.signedIn()); } catch (e) { return false; } };
   let SGPAGE = "main"; // "main" = Signals, "ind" = the Indicator page (#/search/indicators)
-  const visibleTabs = () => TABS.filter((t) => (t.page || "main") === SGPAGE); // gating is by tile order on the page (first 3 free), see topSection
+  const visibleTabs = () => TABS.filter((t) => !t.hid && (t.front ? SGPAGE === "main" : (t.page || "main") === SGPAGE)); // front = scored like an Indicator, shown on Signals // gating is by tile order on the page (first 3 free), see topSection
+  // Combined tiles: the signal id currently toggled (a plain tile is its own id), and its tab.
+  const MEM = (id) => { const t = TABS.find((x) => x.id === id); return t && t.members ? t.members[RL.opt[id]] : id; };
+  const memTab = (id) => TABS.find((x) => x.id === MEM(id));
   const SPREAD_NOTE = "Spread = nflverse schedule spread_line (source book and time not stated by nflverse); it can move during the week, and the rule is scored on the value nflverse shows after the game.";
 
   // ---------- helpers ----------
@@ -323,6 +347,7 @@
   const koMs = (c) => new Date(c.r.ko).getTime();
 
   function compute(tab) {
+    tab = MEM(tab);
     if (TABS.find((t) => t.id === tab)?.cm) return computeCM(TABS.find((t) => t.id === tab));
     if (TABS.find((t) => t.id === tab)?.qbch) return computeQBCH();
     if (TABS.find((t) => t.id === tab)?.frozen) return frozenCandidates(tab);
@@ -345,8 +370,8 @@
         cells = [`<b>${num(line)}</b>`, fb != null && tab.startsWith("sp") ? esc(spreadTxt(fb)) : esc(last || "—")];
         note = tab.startsWith("sp") ? `Team ${spreadTxt(fb)}` : `Last 3: ${last}`;
       }
-      else if (tab === "qbr1" || tab === "qbr4") cells = [`<b>${num(line)}</b>`, l3t];
-      else if (tab === "qbr2") cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, l3t];
+      else if (tab === "qbr1" || tab === "qbr4" || (tab === "qbru" && RL.opt.qbru !== 3)) cells = [`<b>${num(line)}</b>`, l3t];
+      else if (tab === "qbr2" || tab === "qbru") cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, l3t];
       else cells = [`${num(pl)} → <b>${num(line)}</b>`, `${num(c.pm.act)} vs ${num(pl)} · ${Math.round(100 * (tab === "sc1" ? sh.trail : sh.lead))}% of plays ${tab === "sc1" ? "trailing" : "leading"} 7+`];
       out.push({ c, rank: -koMs(c), cells, note });
     }
@@ -354,7 +379,7 @@
     return out;
   }
   const HEADS = {
-    qbr1: ["Line", "Last 3"], qbr4: ["Line", "Last 3"], qbr2: ["Line (last game → now)", "Last 3"],
+    qbru: ["Line", "Last 3"], qbr1: ["Line", "Last 3"], qbr4: ["Line", "Last 3"], qbr2: ["Line (last game → now)", "Last 3"],
     cm1te: ["Line (last week → now)", "QB vs receivers"], cm120: ["Line (last week → now)", "QB vs receivers"],
     qbch: ["Line", "QB"],
     sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
@@ -573,7 +598,7 @@
     if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
     if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
-    const heads = HEADS[t.id];
+    const heads = t.id === "qbru" && RL.opt.qbru === 3 ? ["Line (last game → now)", "Last 3"] : HEADS[MEM(t.id)];
     // 10 players per page (Michael 2026-11-07). The FanDuel slip and Select all work on the whole list, not just the page shown.
     const pages = Math.ceil(list.length / PAGE), key = pageKey(t), pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
     (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
@@ -607,6 +632,8 @@
     qbr2: { 5: [32.5, 37.1] }, qbr4: { 25: [6.2, 21.2], 40: [13.2, 51.3] },
     l9: [20.0, 10.9], l10: [12.6, 3.7], s03: [7.5, 10.3], sp1: [17.8, 10.0], sp2: [16.6, 0.5], sp3: [9.0, 18.5], sp4: [22.2, -28.9], sp5: [7.5, 7.9],
   };
+  AUDIT.qbru = { 1: AUDIT.qbr4[25], 2: AUDIT.qbr1, 3: AUDIT.qbr2[5] }; // QBRu modes = the three old signals' audit rows
+  AUDIT_YR.qbru = { 1: AUDIT_YR.qbr4[25], 2: AUDIT_YR.qbr1, 3: AUDIT_YR.qbr2[5] };
   const pc = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
   // Late-yardage study (2026-11-15, 2025 wk1-18 + 2026 wk1-10, receiving yards, 1 unit at the saved price, week-cluster 95% intervals).
   // Picked after seeing results; yr = ROI by season [2025, 2026]. Historical, not live.
@@ -618,6 +645,7 @@
   };
   // Back light for the tile run charts (Michael 2026-11-16): each signal's 95% ROI interval from the audit/study tables above, or null if untested.
   function roiBand(t) {
+    t = memTab(t.id) || t;
     const x = STUDY[t.id] || (AUDIT[t.id] && (t.opts ? AUDIT[t.id][RL.opt[t.id]] : AUDIT[t.id]));
     return x && x.lo != null && x.hi != null ? { lo: x.lo, hi: x.hi } : null;
   }
@@ -670,6 +698,11 @@
   };
   const RAISE = { i: "up", c: "pu", l: "Line raised", s: "Higher than that game's line" };
   const SGP = {
+    qbru: { bet: "Under · QB rush yds", g: () => ({
+      1: [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds · toggle: 25+, avg 25 or +5" }],
+      2: [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds" }, { i: "streak", c: "bl", l: "Really runs", s: "Averaged 25+ rush yds over his last 3 games played" }],
+      3: [{ i: "up", c: "pu", t: "5+", tp: "br", l: "Line up 5+ yds", s: "vs his previous game's line" }],
+    })[RL.opt.qbru] },
     qbr1: { bet: "Under · QB rush yds", g: () => [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds" }, { i: "streak", c: "bl", l: "Really runs", s: "Averaged 25+ rush yds over his last 3 games played" }] },
     qbr2: { bet: "Under · QB rush yds", g: () => [{ i: "up", c: "pu", t: `${RL.opt.qbr2}+`, tp: "br", l: `Line up ${RL.opt.qbr2}+ yds`, s: "vs his previous game's line · toggle: 5 or 7" }] },
     qbr4: { bet: "Under · QB rush yds", g: () => [{ i: "form", c: "bl", l: "High rushing line", s: `Line is ${RL.opt.qbr4}+ rush yds · toggle: 25 or 40` }] },
@@ -753,6 +786,7 @@
   }
   function openInfo(id) {
     closePop();
+    id = MEM(id); // a combined tile explains whichever signal is toggled
     const t = TABS.find((x) => x.id === id); if (!t) return;
     const sg = SGP[id];
     const ov = document.createElement("div");
@@ -793,7 +827,7 @@
   const memo = { d: null, m: new Map() };
   function AN(tab, wk) {
     if (memo.d !== D) { memo.d = D; memo.m = new Map(); }
-    const k = tab + "|" + wk + "|" + RL.opt.qbr2 + "|" + RL.opt.qbr4;
+    const k = tab + "|" + wk + "|" + Object.values(RL.opt).join(",");
     if (!memo.m.has(k)) memo.m.set(k, analyze(tab, wk));
     return memo.m.get(k);
   }
@@ -855,10 +889,11 @@
   function tileHtml(t, st, locked) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
     const cnt = sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
+    const t3 = !!t.opts, roiSpan = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span>`; // 3-way toggle tiles: ROI sits in the title row, toggles go under it
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
-    return `<div class="sg-cell${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
-      <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span></div>
-      <div class="sg-r2"><span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><b>${cnt}</b> ${tnfOn() ? "TNF" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></div>
+    return `<div class="sg-cell${t.opts ? " sg-cell3" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
+      <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
+      <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "TNF" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
       ${st.by ? spark(st.by, roiBand(t)) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
@@ -872,7 +907,7 @@
   }
   const seasonTally = (t) => tally(sigRec(t).all);
   // Toggles that keep their OPT0 default instead of auto-picking the best season setting (Michael 2026-11-16: QB-R4 opens on 25+, not 40+).
-  const PINNED_OPT = { qbr4: true };
+  const PINNED_OPT = { qbr4: true, qbru: true, cm1: true, gs: true, sy: true, fh: true }; // QBRu opens on avg 25 (Michael 2026-11-20)
   function initOpts(tabs) {
     RL.optInit = RL.optInit || {};
     if (RL.optInit[SGPAGE] || !laWeeks().length) return;
@@ -1098,7 +1133,7 @@
     if (picked.length) inner += recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
-    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the late-yardage rules (SY-, FH-, BL-, NL-), covering every quoted player. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
+    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY, 1H and BL-200 now live on Signals. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
     return `<section id="rl" data-page="${SGPAGE}">${head}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
@@ -1167,6 +1202,9 @@
       if (line >= 25 && l3.length === 3 && l3.reduce((a, b) => a + b, 0) / 3 >= 25) hits.push("qbr1");
       if (pl != null && line - pl >= RL.opt.qbr2) hits.push("qbr2");
       if (line >= RL.opt.qbr4) hits.push("qbr4");
+      // QBRu: one of the three rules above, picked by the tile toggle (1 = 25+, 2 = avg 25, 3 = +5)
+      const qm = RL.opt.qbru;
+      if ((qm === 1 && line >= 25) || (qm === 2 && line >= 25 && l3.length === 3 && l3.reduce((a, b) => a + b, 0) / 3 >= 25) || (qm === 3 && pl != null && line - pl >= 5)) hits.push("qbru");
     }
     const raised = pm && pm.res === "over" && pl != null && line > pl, sh = raised ? sharesOf(prev) : null;
     if (sh && (p.pos === "WR" || p.pos === "TE") && mid === "rec_yds" && sh.trail >= 0.5) hits.push("sc1");
@@ -1335,6 +1373,7 @@
   }
   // Every graded bet one rule made in one week: [{p, r, mid, m, side, out: "hit"|"miss"|"push", u, pm, pl, f}]
   function analyze(tab, wk) {
+    tab = MEM(tab);
     const t = TABS.find((x) => x.id === tab), out = [];
     if (t && t.cm) return analyzeCM(t, wk);
     if (t && t.qbch) return analyzeQBCH(t, wk);
@@ -1382,6 +1421,7 @@
   function why(x) {
     const line = num(x.m.line);
     switch (x.rule.id) {
+      case "qbru": return RL.opt.qbru === 3 ? `Line ${num(x.pl)} → ${line}` : "";
       case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
       case "qbch": return esc(x.note);
       case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
