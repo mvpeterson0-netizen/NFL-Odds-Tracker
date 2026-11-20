@@ -329,3 +329,68 @@ def arb_run(log: list[str]) -> bool:
         out["tweeted"] = {k: v for k, v in tweeted.items() if v.get("ko", "9999") > cut}
     write_json(ARB_STATE, out)
     return True
+
+
+# ---------- "2-hour lines are live" alert (Michael 2026-11-19) ----------
+# After the line check 2:00 before kickoff (odds.TRACK_OFFSETS) succeeds, Michael gets one ntfy so he can open Stix and
+# send the best FanDuel lines to FanDuel and the better DraftKings lines to DraftKings while DK's links are fresh.
+# This function only decides and records; the workflow's "alert" job sends it after the new data is deployed, so the
+# site already shows the new lines when the alert arrives. Games pulled in the same run share one alert.
+# Which pull counts: any successful pull (any type) made between 2:00 and 1:01 before kickoff. Only Michael's ntfy
+# (NTFY_TOPIC); no web push to other users. State: data/two_hour_alert_state.json (pruned after kickoff).
+TWO_HR_STATE = DATA / "two_hour_alert_state.json"
+TWO_HR_URL = "https://www.sharpstix.com/#/search"
+TWO_HR_FROM, TWO_HR_TO = timedelta(minutes=61), timedelta(minutes=120)
+
+
+def two_hour_due(pull_rows: list[dict], games: dict, alerted: dict, now) -> list[dict]:
+    """Upcoming games with a successful pull 2:00-1:01 before kickoff that have not been alerted yet."""
+    out = {}
+    for r in pull_rows:
+        gid = r.get("game_id", "")
+        g = games.get(gid)
+        if not g or gid in alerted or r.get("status") != "ok":
+            continue
+        ko, at = parse_iso(g.get("ko", "")), parse_iso(r.get("attempted_utc", ""))
+        if not ko or not at or ko <= now or not (TWO_HR_FROM <= ko - at <= TWO_HR_TO):
+            continue
+        if gid not in out or at > out[gid]["at"]:
+            out[gid] = {"gid": gid, "ko": ko, "at": at, "away": g.get("away", ""), "home": g.get("home", "")}
+    return sorted(out.values(), key=lambda x: (x["ko"], x["gid"]))
+
+
+def two_hour_message(due: list[dict]) -> tuple[str, str]:
+    t = lambda x: x.astimezone(CT).strftime("%-I:%M %p")
+    games = ", ".join(f"{_abbr(x['away'])} @ {_abbr(x['home'])}" for x in due)
+    title = f"Stix: 2-hour lines in for {games}"
+    body = "; ".join(f"{_abbr(x['away'])} @ {_abbr(x['home'])} (kickoff {t(x['ko'])} CT): lines pulled {t(x['at'])} CT"
+                     for x in due)
+    return title, body + ". Open Signals to send the best lines to FanDuel and DraftKings."
+
+
+def two_hour_run(log: list[str]) -> bool:
+    """Returns True when the state file changed. Writes the alert for the workflow's alert job to GITHUB_OUTPUT."""
+    from .odds import PULL_LOG_PATH
+    from .common import read_csv
+    gh_out = os.environ.get("GITHUB_OUTPUT")
+    if not os.environ.get("NTFY_TOPIC", "").strip() or not gh_out:
+        return False  # nowhere to send it from: do nothing, record nothing
+    d = read_json(SITE / "data" / "data.json", None)
+    if not d:
+        return False
+    now = utcnow()
+    state = read_json(TWO_HR_STATE, {}) or {}
+    alerted = state.get("alerted", {})
+    due = two_hour_due(read_csv(PULL_LOG_PATH), d.get("games", {}), alerted, now)
+    if not due:
+        return False
+    title, body = two_hour_message(due)
+    clean = lambda s: re.sub(r"[^\x20-\x7e]", " ", s)  # one line, ASCII (ntfy header values must be ASCII)
+    with open(gh_out, "a") as f:
+        f.write(f"two_hr_title={clean(title)}\ntwo_hr_body={clean(body)}\n")
+    stamp = iso(now)
+    for x in due:
+        alerted[x["gid"]] = {"utc": stamp, "ko": iso(x["ko"]), "pulled": iso(x["at"])}
+    write_json(TWO_HR_STATE, {"alerted": {k: v for k, v in alerted.items() if v.get("ko", "9999") > stamp}})
+    log.append(f"two-hour alert: queued for {', '.join(x['gid'] for x in due)} (sent after deploy)")
+    return True
