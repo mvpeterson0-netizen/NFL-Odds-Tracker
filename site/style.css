@@ -697,3 +697,6 @@ textarea.tp-in { resize: vertical; }
 .sgp-how{margin-top:12px}.sgp-how summary{cursor:pointer;font-size:13px;color:var(--muted)}
 @media (prefers-color-scheme: dark){.sgp-t.gr{background:#173324;color:#6fcf97}.sgp-t.bl{background:#162840;color:#7fb0f5}.sgp-t.pu{background:#2a2040;color:#b79af0}.sgp-t.am{background:#3a2c10;color:#f0b955}.sgp-bulb{color:#f0b955}}
 .sgp-row.sgp-sm{font-size:11px;font-weight:500;background:none;padding:0}
+/* Player page better-book buttons (2026-11-19): keep Over and Under side by side, like the FanDuel-only row */
+.bk-tag { font-size: 11px; font-weight: 700; padding: 0 4px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.betbox.bk2 .betbtn { gap: 4px; padding: 4px 8px; min-width: 0; }
