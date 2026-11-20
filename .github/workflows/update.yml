@@ -43,6 +43,8 @@ jobs:
     timeout-minutes: 20
     outputs:
       site_changed: ${{ steps.run.outputs.site_changed }}
+      two_hr_title: ${{ steps.run.outputs.two_hr_title }}
+      two_hr_body: ${{ steps.run.outputs.two_hr_body }}
     steps:
       - uses: actions/checkout@v4
 
@@ -128,3 +130,20 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Michael's "2-hour lines are live" ntfy (2026-11-19; decided in pipeline/notify.py two_hour_run). Sent only after the
+  # new data is deployed (or when no deploy was needed), so the site already shows the new lines when it arrives.
+  alert:
+    needs: [update, deploy]
+    if: always() && needs.update.outputs.two_hr_title != '' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send the alert to Michael's ntfy
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TITLE: ${{ needs.update.outputs.two_hr_title }}
+          BODY: ${{ needs.update.outputs.two_hr_body }}
+        run: |
+          sleep 30  # give the Pages cache a moment to serve the new data
+          curl -fsS -X POST -H "Title: $TITLE" -H "Tags: football" -H "Click: https://www.sharpstix.com/#/search" \
+            --data-binary "$BODY" "https://ntfy.sh/$NTFY_TOPIC" > /dev/null && echo "two-hour alert sent"

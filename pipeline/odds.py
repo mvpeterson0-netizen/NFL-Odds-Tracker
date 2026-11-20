@@ -25,7 +25,8 @@ Since 2026-10-29 (Michael) the Monday pull retries every 15 minutes instead of h
 
 Line checks (pull type "track", Michael 2026-10-29): once a game has lines from any pull, it is pulled again
   - 3 times a day (8:00 AM, 2:00 PM, 8:00 PM Central) until 4 hours before kickoff,
-  - then at 4:00 and 2:30 before kickoff (every 90 min), and 1:00, 0:30 and 0:15 before kickoff.
+  - then at 4:00 and 2:30 before kickoff (every 90 min), 2:00 (Michael 2026-11-19: the pull his "2-hour lines are
+    live" alert is sent for, see notify.two_hour_run), and 1:00, 0:30 and 0:15 before kickoff.
 A check is skipped when the game was already pulled (any type) since that time, so the Mon/Thu/Sun snapshots,
 the graded ~3 h pre-game pull and the sweeps count toward it. Line checks are never graded; their lines go to
 data/line_checks/week_NN.csv (one file per NFL week), not prop_captures.csv. Same credit guard as snapshots.
@@ -94,7 +95,7 @@ CAPTURES_PATH = DATA / "prop_captures.csv"
 # Line checks (see module docstring): Central-time daily slots, the cut-over to kickoff-relative checks, and those checks.
 TRACK_DAILY_CT = [(8, 0), (14, 0), (20, 0)]
 TRACK_DAILY_UNTIL = timedelta(hours=4)
-TRACK_OFFSETS = [timedelta(minutes=m) for m in (240, 150, 60, 30, 15)]  # before kickoff, largest first
+TRACK_OFFSETS = [timedelta(minutes=m) for m in (240, 150, 120, 60, 30, 15)]  # before kickoff, largest first (120 added 2026-11-19)
 TRACK_DIR = DATA / "line_checks"
 
 
