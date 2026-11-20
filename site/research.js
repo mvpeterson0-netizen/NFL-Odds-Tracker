@@ -428,30 +428,65 @@
     if (!x || x.price == null || dk.point == null || fp == null || !fx || fx.price == null) return null;
     const lineWin = side === "o" ? dk.point < fp : dk.point > fp;
     const priceWin = dk.point === fp && x.price > fx.price;
-    return (lineWin || priceWin) ? { line: dk.point, odds: x.price, why: lineWin ? "line" : "odds" } : null;
+    // oc: DraftKings' outcome id from its slip link (kept URL-encoded), for the "to DK" button. Missing if no usable link.
+    const m = DK_SLIP.exec(x.url || "");
+    return (lineWin || priceWin) ? { line: dk.point, odds: x.price, why: lineWin ? "line" : "odds", cap: dk.cap, oc: m ? m[1] : null } : null;
   }
+  // DraftKings slip links (Michael 2026-11-19). One link holds several bets as ?outcomes=<id>+<id> (his iPhone test that day:
+  // "+", "%2B" and repeated outcomes= all put both bets on; comma, outcomes[0]= and the /event/ page did not). A DK outcome id
+  // names one exact line, so the link works only while DK still shows the line from Stix's latest pull (every DK line move
+  // in 3 days of history changed the id); the button shows when those lines were pulled.
+  const DK_SLIP = /^https:\/\/sportsbook\.draftkings\.com\/\?outcomes=([^&#]+)$/;
+  const dkSlipUrl = (legs) => "https://sportsbook.draftkings.com/?outcomes=" + legs.map((l) => l.dk.oc).join("+");
+  const dkLeg = (l) => Object.assign({}, l, { bet: { line: l.dk.line, odds: l.dk.odds, cap: l.dk.cap, gid: l.bet.gid, book: "DraftKings", src: "Bet on DK" } });
   const slipUrl = (legs) => "https://sportsbook.fanduel.com/addToBetslip?" + legs.map((l, j) => `marketId[${j}]=${l.m}&selectionId[${j}]=${l.sel}`).join("&");
   // Both FD buttons save every checked bet to My picks (when the save switch is on), even ones left off the "best FD only" slip (Michael 2026-11-16); Cancel saves nothing.
-  // Popup shown when a tapped slip link includes bets with a better DraftKings number. Both choices are real links
-  // (so the phone doesn't block them); "best FD only" opens a slip without the flagged bets.
+  // Popup shown when a tapped slip link includes bets with a better DraftKings number. Every choice is a real link
+  // (so the phone doesn't block it); "best FD only" opens a slip without the flagged bets.
+  // 2026-11-19 (Michael): "Better DK lines to DK" opens DraftKings with the flagged bets (saved as DraftKings picks when the
+  // switch is on), and "Do both" opens the best-FD slip, then the popup stays up with "Next: open DraftKings" for a second
+  // tap (a phone opens only one app per tap). The popup now stays open after any link until Close or a tap outside it.
   function dkPopup(chunk, tId) {
     document.querySelector(".rl-dkpop")?.remove();
     const flagged = chunk.legs.filter((l) => l.dk), keep = chunk.legs.filter((l) => !l.dk);
+    const toDk = flagged.filter((l) => l.dk.oc), noDk = flagged.filter((l) => !l.dk.oc);
+    const caps = toDk.map((l) => l.dk.cap).filter(Boolean).sort(), asOf = caps.length ? fmtTime(caps[0]) : "";
     const rows = flagged.map((l) => `<li><b>${esc(l.name)}</b> ${esc(l.label)} ${l.side === "o" ? "Over" : "Under"}<br><span class="muted small">FD ${num(l.bet.line)} ${odds(l.bet.odds)} · DK ${num(l.dk.line)} ${odds(l.dk.odds)} (better ${l.dk.why})</span></li>`).join("");
-    const only = keep.length
-      ? `<a class="betbtn" data-dkpick="best" href="${esc(slipUrl(keep))}" target="_blank" rel="noopener">Only take best FD lines to FD (${keep.length}) ↗</a>`
-      : `<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">No bets have the best line on FD</span>`;
+    const fdUrl = keep.length ? slipUrl(keep) : "", dkUrl = toDk.length ? dkSlipUrl(toDk) : "";
+    const dkBtn = (label) => `<a class="betbtn" data-dkpick="dk" href="${esc(dkUrl)}" target="_blank" rel="noopener">${label} ↗<span class="muted small rl-dkasof">DK lines as of ${esc(asOf)}. If DK moved a line since, that bet won't load.</span></a>`;
+    const close = `<button type="button" class="betbtn" data-dkpick="cancel">Close</button>`;
     const el = document.createElement("div"); el.className = "rl-dkpop"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
-    el.innerHTML = `<div class="rl-dkcard"><b>${flagged.length} of ${chunk.legs.length} bets ${flagged.length === 1 ? "has" : "have"} a better line on DraftKings</b><ul>${rows}</ul>
-      <div class="rl-dkbtns">${only}<a class="betbtn" data-dkpick="all" href="${esc(chunk.url)}" target="_blank" rel="noopener">Take all ${chunk.legs.length} to FD ↗</a><button type="button" class="betbtn" data-dkpick="cancel">Cancel</button></div></div>`;
+    const step1 = () => {
+      const both = keep.length && toDk.length
+        ? `<a class="betbtn rl-both" data-dkpick="both" href="${esc(fdUrl)}" target="_blank" rel="noopener">Do both: ${keep.length} to FD, then ${toDk.length} to DK ↗</a>` : "";
+      const only = keep.length
+        ? `<a class="betbtn" data-dkpick="best" href="${esc(fdUrl)}" target="_blank" rel="noopener">Only take best FD lines to FD (${keep.length}) ↗</a>`
+        : `<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">No bets have the best line on FD</span>`;
+      const dk = toDk.length ? dkBtn(`Take better DK lines to DK (${toDk.length})`) : "";
+      el.innerHTML = `<div class="rl-dkcard"><b>${flagged.length} of ${chunk.legs.length} bets ${flagged.length === 1 ? "has" : "have"} a better line on DraftKings</b><ul>${rows}</ul>
+        ${noDk.length ? `<p class="muted small">No DraftKings link for: ${esc(noDk.map((l) => l.name).join(", "))}</p>` : ""}
+        <div class="rl-dkbtns">${both}${only}${dk}<a class="betbtn" data-dkpick="all" href="${esc(chunk.url)}" target="_blank" rel="noopener">Take all ${chunk.legs.length} to FD ↗</a>${close}</div></div>`;
+    };
+    const step2 = () => {
+      el.innerHTML = `<div class="rl-dkcard"><b>Step 2 of 2</b><p class="small">Sent ${keep.length} bet${keep.length === 1 ? "" : "s"} to FanDuel. Now the ${toDk.length} better on DraftKings:</p>
+        <div class="rl-dkbtns">${dkBtn(`Next: open DraftKings (${toDk.length})`)}${close}</div></div>`;
+    };
+    const save = (legs) => {
+      if (!window.STIX_PICKS || !fdSave() || !legs.length) return;
+      try { window.STIX_PICKS.recordBets(legs); } catch (err) { console.error("picks from slip popup failed", err); }
+    };
     el.addEventListener("click", (ev) => {
       const b = ev.target.closest && ev.target.closest("[data-dkpick]");
-      if (!b && ev.target !== el) return; // tap on the card itself does nothing
-      if (b && b.dataset.dkpick !== "cancel" && window.STIX_PICKS && fdSave()) {
-        try { window.STIX_PICKS.recordBets(chunk.legs); } catch (err) { console.error("picks from FanDuel slip failed", err); }
-      }
-      el.remove(); // links still navigate; Cancel and the backdrop just close
+      if (!b) { if (ev.target === el) el.remove(); return; } // tap outside the card closes; on the card does nothing
+      const pick = b.dataset.dkpick;
+      if (pick === "cancel") { el.remove(); return; }
+      // The link opens as usual; the popup stays so the next choice is one tap away.
+      if (pick === "dk") save(toDk.map(dkLeg));
+      else save(chunk.legs); // best, all, both: every checked bet as FanDuel (Michael 2026-11-16), as before
+      if (pick === "both") { setTimeout(step2, 0); return; }
+      if (!b.querySelector(".rl-done")) b.insertAdjacentHTML("beforeend", ` <span class="rl-done">✓ opened</span>`);
     });
+    step1();
     document.body.appendChild(el);
   }
   function fdSlip(t, rows) {
