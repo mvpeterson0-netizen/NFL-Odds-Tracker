@@ -702,3 +702,6 @@ textarea.tp-in { resize: vertical; }
 /* Player page better-book buttons (2026-11-19): keep Over and Under side by side, like the FanDuel-only row */
 .bk-tag { font-size: 11px; font-weight: 700; padding: 0 4px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
 .betbox.bk2 .betbtn { gap: 4px; padding: 4px 8px; min-width: 0; }
+/* QBRu (3-way toggle): title, (i) and ROI share the top row; the chips get their own row under it, above the record and chart. */
+.sg-cell3 .sg-hd .sg-roi { margin-left: auto; } .sg-cell3 .sg-r2 { margin-top: 24px; justify-content: flex-start; } .sg-cell3 .sg-r2 { display: block; } .sg-cell3 .sg-st { display: flex; justify-content: space-between; align-items: baseline; width: 100%; } .sg-cell3 .sg-st br { display: none; } .sg-cell3 .sg-tg { top: 34px; left: 10px; right: 10px; gap: 4px; } .sg-cell3 .sg-tg button { flex: 1 1 0; text-align: center; padding: 1px 0; }
+.sg-grid:has(.sg-cell3) .sg-cell { display: flex; flex-direction: column; } .sg-grid:has(.sg-cell3) .sg-cell > .sg-tile { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-start; }
