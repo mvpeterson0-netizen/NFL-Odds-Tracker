@@ -642,30 +642,47 @@ function viewPlayer(pid) {
 // line (one test, not a guarantee). DraftKings slip links fail once DK changes the market, and DK's app ignores tab links,
 // so Michael chose FanDuel only.
 const FD_SLIP = /^https:\/\/sportsbook\.fanduel\.com\/addToBetslip\?/;
+// Better book (Michael 2026-11-19): for 4 hours after DraftKings' line was pulled, each of the Over / Under buttons goes to
+// whichever book has the better number for that side (Over: lower line; Under: higher line; same line: better odds; same
+// rule as the Signals popup) and says FD or DK. Same row, so the page is no taller. After 4 hours: FanDuel only, as before.
+// A DK slip link names one exact line, so it only works while DK still shows the pulled line; FanDuel's links follow moves.
+const DK_SLIP = /^https:\/\/sportsbook\.draftkings\.com\/\?outcomes=[^&#]+$/;
+const DK_FRESH_MS = 4 * 3600 * 1000;
 function betBox(pid, mid) {
-  const e = ((((D.links || {})[pid] || {})[mid]) || {}).fanduel;
-  if (!e) return "";
-  const o = e.o && FD_SLIP.test(e.o.url || "") ? e.o : null, u = e.u && FD_SLIP.test(e.u.url || "") ? e.u : null;
-  if (!o && !u) return "";
-  const g = D.games[e.gid];
+  const L = (((D.links || {})[pid] || {})[mid]) || {}, e = L.fanduel, k = L.draftkings;
+  const gid = (e && e.gid) || (k && k.gid), g = gid && D.games[gid];
   if (!g || new Date(g.ko) <= new Date()) return "";
-  const a = (side, x) => x ? `<a class="betbtn" href="${esc(x.url)}" target="_blank" rel="noopener" title="Opens FanDuel with this bet on the slip"
-    data-bet="${side === "Over" ? "o" : "u"}" data-pid="${esc(pid)}" data-bmid="${esc(mid)}">${side} ${num(e.point)} <span class="muted">${x.price == null ? "" : odds(x.price)}</span> ↗</a>` : "";
+  const dkOk = k && k.gid === gid && k.cap && Date.now() - new Date(k.cap).getTime() <= DK_FRESH_MS;
+  const pickSide = (side) => {
+    const f = e && e[side] && FD_SLIP.test(e[side].url || "") ? { book: "fanduel", ent: e, x: e[side] } : null;
+    const d = dkOk && k[side] && DK_SLIP.test(k[side].url || "") && k.point != null ? { book: "draftkings", ent: k, x: k[side] } : null;
+    if (!d) return f;
+    if (!f || f.ent.point == null) return d;
+    const lineWin = side === "o" ? k.point < e.point : k.point > e.point;
+    const priceWin = k.point === e.point && d.x.price != null && f.x.price != null && d.x.price > f.x.price;
+    return lineWin || priceWin ? d : f;
+  };
+  const o = pickSide("o"), u = pickSide("u");
+  if (!o && !u) return "";
+  const anyDk = (o && o.book === "draftkings") || (u && u.book === "draftkings");
+  const a = (side, c) => c ? `<a class="betbtn" href="${esc(c.x.url)}" target="_blank" rel="noopener" title="Opens ${c.book === "draftkings" ? "DraftKings" : "FanDuel"} with this bet on the slip"
+    data-bet="${side === "Over" ? "o" : "u"}" data-book="${c.book}" data-pid="${esc(pid)}" data-bmid="${esc(mid)}">${side} ${num(c.ent.point)} <span class="muted">${c.x.price == null ? "" : odds(c.x.price)}</span>${anyDk ? ` <span class="bk-tag">${c.book === "draftkings" ? "DK" : "FD"} ↗</span>` : " ↗"}</a>` : "";
   // Signed-in / set-up devices get a "Save to My picks" checkbox (on by default) that replaces the separate pick box.
   const opt = window.STIX_PICKS && window.STIX_PICKS.fdOptions ? window.STIX_PICKS.fdOptions(pid, mid) : "";
-  return `<div class="betbox"><span class="betlbl">Bet on FanDuel</span>${a("Over", o)}${a("Under", u)}${opt}</div>`;
+  return `<div class="betbox${anyDk ? " bk2" : ""}"><span class="betlbl">${anyDk ? "Bet at the better book" : "Bet on FanDuel"}</span>${a("Over", o)}${a("Under", u)}${opt}</div>`;
 }
-// Tapping a FanDuel Over/Under button also records the pick in My picks (picks.js) at the line and odds shown here
-// (Michael's choice), then the link opens FanDuel as usual.
+// Tapping an Over/Under button also records the pick in My picks (picks.js) at the line and odds shown here
+// (Michael's choice), then the link opens FanDuel or DraftKings as usual. DraftKings taps save as DraftKings / "Bet on DK".
 document.addEventListener("click", (ev) => {
   const b = ev.target.closest && ev.target.closest("[data-bet]");
   if (!b || !window.STIX_PICKS) return;
   const cb = b.closest(".betbox") && b.closest(".betbox").querySelector("#fd-save");
-  if (cb && !cb.checked) return; // box unticked: just open FanDuel, save nothing
+  if (cb && !cb.checked) return; // box unticked: just open the book, save nothing
   try {
-    const e = D.links[b.dataset.pid][b.dataset.bmid].fanduel, x = b.dataset.bet === "o" ? e.o : e.u;
+    const dk = b.dataset.book === "draftkings", e = D.links[b.dataset.pid][b.dataset.bmid][dk ? "draftkings" : "fanduel"];
+    const x = b.dataset.bet === "o" ? e.o : e.u;
     window.STIX_PICKS.recordBet(b.dataset.pid, b.dataset.bmid, b.dataset.bet,
-      { line: e.point, odds: x.price, cap: e.cap, gid: e.gid, book: "FanDuel", src: "Bet on FD" });
+      { line: e.point, odds: x.price, cap: e.cap, gid: e.gid, book: dk ? "DraftKings" : "FanDuel", src: dk ? "Bet on DK" : "Bet on FD" });
   } catch (err) { console.error("pick from bet link failed", err); }
 });
 
