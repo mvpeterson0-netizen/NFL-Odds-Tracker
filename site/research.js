@@ -57,7 +57,7 @@
       desc: () => `Same as CM1-TE, with two differences:<ul class="sg-ul"><li>The QB line is down <b>20+</b>.</li><li>Every qualifying receiver (WR/TE/RB) is a bet.</li></ul>${CM_READ}` },
     { id: "qbch", n: 8, side: "under", qbch: true, label: "QBCH", short: () => "WR/TE rec yd under when the starting QB changed",
       title: "WR/TE rec yds Under when the starting QB changed", why: "A new starting QB may mean lower passing volume or a less proven connection, while the receivers' lines still reflect the old QB.",
-      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when his team's starting QB is <b>not the QB who started its previous game</b>.<div class="sg-sub"><b>How the starter is picked:</b></div><ul class="sg-ul"><li>Past games: the QB with the most snaps.</li><li>This week's games: the QB the book has posted a passing-yards line for, so players can be flagged before kickoff.</li></ul>` },
+      desc: () => `Bet a WR's or TE's <b>receiving yards Under</b> when his team's QB this game is <b>not the QB who played the 1st quarter of its previous game</b>.<div class="sg-sub"><b>How the QBs are picked:</b></div><ul class="sg-ul"><li>Previous game: the QB with the most 1st-quarter plays (play-by-play).</li><li>This game: the QB the book has posted a passing-yards line for, so players can be flagged before kickoff.</li></ul>` },
     { id: "qbr2", n: 4, side: "under", label: "QB-R2", opts: [5, 7], optFmt: (v) => `+${v}`, short: () => `QB rush yd under when line is ${RL.opt.qbr2}+yd above his last-game line`,
       title: "QB rush Under when the line jumps", why: "A raised QB rushing line may overshoot.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is at least <b>${RL.opt.qbr2} yards higher</b> than his line in his previous game. The toggle changes the size of the jump. The idea is that a big raise may overshoot.` },
@@ -594,7 +594,7 @@
   const AUDIT = {
     qbr1: { rec: "62–28", roi: 30.2, lo: 11.3, hi: 48.2 }, sc1: { rec: "187–132", roi: 10.9, lo: 1.9, hi: 19.6 },
     sc2: { rec: "50–26", roi: 24.2, lo: -0.2, hi: 44.3 }, cm1te: { rec: "32–14", roi: 31.4, lo: 8.8, hi: 53.6 },
-    cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 }, qbch: { rec: "182–126", roi: 11.5, lo: 2.8, hi: 19.3 },
+    cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 }, qbch: { rec: "173–128", roi: 8.4, lo: -0.9, hi: 16.9 }, // QBCH: replay of the 2026-11-20 rule (1st-quarter QB); old rule was 182–126, +11.5%
     l9: { rec: "91–56", roi: 17.1, lo: 2.9, hi: 31.4 }, l10: { rec: "106–72", roi: 10.1, lo: -2.8, hi: 22.8 }, s03: { rec: "159–119", roi: 8.3, lo: -1.1, hi: 18.6 },
     sp1: { rec: "126–80", roi: 15.9, lo: -1.5, hi: 31.3 }, sp2: { rec: "121–81", roi: 12.7, lo: -1.8, hi: 28.8 }, sp3: { rec: "24–17", roi: 10.9, lo: -23.2, hi: 44.4 },
     sp4: { rec: "23–16", roi: 11.7, lo: -20.3, hi: 40.9 }, sp5: { rec: "297–224", roi: 7.6, lo: 1.2, hi: 13.9 },
@@ -603,7 +603,7 @@
   };
   // ROI by season from the same audit (2025 weeks 1-18, 2026 weeks 1-9). The audit report gives each season's ROI but not each season's W-L.
   const AUDIT_YR = {
-    qbr1: [23.2, 46.6], sc1: [5.0, 20.3], sc2: [20.9, 30.7], cm1te: [29.8, 35.1], cm120: [24.7, 19.6], qbch: [8.4, 16.5],
+    qbr1: [23.2, 46.6], sc1: [5.0, 20.3], sc2: [20.9, 30.7], cm1te: [29.8, 35.1], cm120: [24.7, 19.6], qbch: [11.5, 2.6],
     qbr2: { 5: [32.5, 37.1] }, qbr4: { 25: [6.2, 21.2], 40: [13.2, 51.3] },
     l9: [20.0, 10.9], l10: [12.6, 3.7], s03: [7.5, 10.3], sp1: [17.8, 10.0], sp2: [16.6, 0.5], sp3: [9.0, 18.5], sp4: [22.2, -28.9], sp5: [7.5, 7.9],
   };
@@ -673,7 +673,7 @@
     qbr1: { bet: "Under · QB rush yds", g: () => [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds" }, { i: "streak", c: "bl", l: "Really runs", s: "Averaged 25+ rush yds over his last 3 games played" }] },
     qbr2: { bet: "Under · QB rush yds", g: () => [{ i: "up", c: "pu", t: `${RL.opt.qbr2}+`, tp: "br", l: `Line up ${RL.opt.qbr2}+ yds`, s: "vs his previous game's line · toggle: 5 or 7" }] },
     qbr4: { bet: "Under · QB rush yds", g: () => [{ i: "form", c: "bl", l: "High rushing line", s: `Line is ${RL.opt.qbr4}+ rush yds · toggle: 25 or 40` }] },
-    qbch: { bet: "Under · rec yds · WR TE", g: () => [{ i: "swap", c: "am", l: "New starting QB", s: "Not the QB who started his team's last game" }] },
+    qbch: { bet: "Under · rec yds · WR TE", g: () => [{ i: "swap", c: "am", l: "New starting QB", s: "Not the QB who played the 1st quarter of his team's last game" }] },
     sc1: { bet: "Under · rec yds · WR TE", g: () => [{ i: "trail", c: "gr", l: "Team was trailing", s: "Down 7+ on half or more of its plays, last game" }, { i: "cal", c: "bl", l: "Last Week Over", s: "Receiving yards" }, RAISE] },
     sc2: { bet: "Under · rush yds · RB", g: () => [{ i: "lead", c: "gr", l: "Team was leading", s: "Up 7+ on half or more of its plays, last game" }, { i: "cal", c: "bl", l: "Last Week Over", s: "Rushing yards" }, RAISE] },
     cm1te: { bet: "Under · rec yds · TE", g: () => [{ i: "down", c: "pu", t: "15+", tp: "tr", l: "QB pass line cut 15+", s: "vs last week" }, { i: "lag", c: "am", l: "Receiver lines lag 10+", s: "QB's line fell 10+ more than the receivers' lines combined" }] },
@@ -1264,10 +1264,13 @@
     }
     return out;
   }
-  // QBCH (starting QB changed): bet WR/TE receiving yards Under for a team whose starting QB is not the one who started its previous game.
-  // Past games (scoring): the starter is the one in nflverse's game file (a post-game record, g.hq / g.aq); if a game has none yet, the QB with the
-  // most snaps. This week's games (flags): the QB the book has posted a passing-yards line for, so a player can be flagged before kickoff; if lines
-  // move to another QB the flag can change until the line is captured. "Previous game" = the team's most recent earlier final game.
+  // QBCH (starting QB changed): bet WR/TE receiving yards Under for a team whose QB this game is not the QB of its previous game.
+  // Rule changed 2026-11-20 (Michael; same signal, same freeze date, record not restarted): "last game's QB" = the QB with the most
+  // 1st-quarter plays in that game (nflverse play-by-play, g.hq1 / g.aq1; the old rule used the game file's starter, which was wrong
+  // for some games, e.g. BAL wk 10). If the play-by-play doesn't have that game yet: the game file's starter (g.hq / g.aq), then the
+  // QB with the most snaps. "This game's QB" = the QB the book posted a passing-yards line for (QB1 slot first, else the biggest
+  // line): the captured pre-game line for past games, the current line for this week's games (a flag can change until the line is
+  // captured). No passing-yards line, no flag. "Previous game" = the team's most recent earlier final game.
   function qbchTeams(final) {
     const now = Date.now(), starters = new Map(), snapQB = new Map(); // team -> [{wk, gid, id, name}]
     const teamList = (t) => { if (!starters.has(t)) starters.set(t, []); return starters.get(t); };
@@ -1277,27 +1280,26 @@
       if (!cur || (r.snap ?? 0) > (cur.snap ?? 0)) snapQB.set(k, { id: p.id, name: p.name, snap: r.snap, wk: r.wk, gid: r.gid, team: r.team });
     }
     const startOf = (gid, team) => {
-      const g = D.games[gid], f = g && (g.home === team ? g.hq : g.away === team ? g.aq : null);
-      return f && f.id ? { id: f.id, name: f.n } : (snapQB.get(gid + "|" + team) || null);
+      const g = D.games[gid], side = g && (g.home === team ? "h" : g.away === team ? "a" : null);
+      if (!side) return null;
+      const q = g[side + "q1"]; if (q && q.id) return { id: q.id, name: q.n };
+      const f = g[side + "q"]; return f && f.id ? { id: f.id, name: f.n } : (snapQB.get(gid + "|" + team) || null);
     };
     for (const [gid, g] of Object.entries(D.games)) {
       if (!g.final) continue;
       for (const team of [g.home, g.away]) { const s = startOf(gid, team); if (s) teamList(team).push({ wk: g.wk, gid, id: s.id, name: s.name }); }
     }
     const prevOf = (team, wk) => (starters.get(team) || []).filter((x) => x.wk < wk).sort((a, b) => a.wk - b.wk).pop();
+    const lineOf = (m) => (final ? (m && m.lstat === "ok" && m.line != null ? m.line : null) : (curLine(m) || {}).line ?? null);
     const out = [];
     for (const [gid, g] of Object.entries(D.games)) {
+      if (final ? !g.final : !gameScope(g.final, g.ko, now)) continue;
       for (const team of [g.home, g.away]) {
-        let starter = null;
-        if (final) { if (!g.final) continue; starter = startOf(gid, team); }
-        else {
-          if (!gameScope(g.final, g.ko, now)) continue;
-          const lined = D.players.filter((p) => p.pos === "QB").map((p) => ({ p, r: (D.rows[p.id] || []).find((x) => x.gid === gid && x.team === team) }))
-            .filter((x) => x.r && curLine(x.r.m && x.r.m.pass_yds));
-          const pick = lined.find((x) => x.r.slot === "QB1") || lined[0]; starter = pick && { id: pick.p.id, name: pick.p.name };
-        }
-        if (!starter) continue;
-        const prev = prevOf(team, g.wk);
+        const lined = D.players.filter((p) => p.pos === "QB").map((p) => ({ p, r: (D.rows[p.id] || []).find((x) => x.gid === gid && x.team === team) }))
+          .map((x) => ({ ...x, l: x.r ? lineOf(x.r.m && x.r.m.pass_yds) : null })).filter((x) => x.l != null);
+        const pick = lined.find((x) => x.r.slot === "QB1") || lined.sort((a, b) => b.l - a.l)[0];
+        if (!pick) continue;
+        const starter = { id: pick.p.id, name: pick.p.name }, prev = prevOf(team, g.wk);
         if (!prev || prev.id === starter.id) continue;
         out.push({ gid, team, wk: g.wk, starter, prev });
       }

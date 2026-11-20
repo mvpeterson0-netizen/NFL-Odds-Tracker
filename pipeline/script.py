@@ -19,7 +19,7 @@ PATH = DATA / "game_script.json"
 TAG = "pbp"
 FILE = f"play_by_play_{SEASON}.csv.gz"
 MARGINS = (7, 10, 13, 14, 17, 21)  # points; the app lets the user pick which margin counts as "big" (Guide tab)
-VERSION = 4  # v3 added the designed-run denominator; v4 adds s7 (plays while trailing / leading by 7+) for SC1/SC2
+VERSION = 5  # v3 added the designed-run denominator; v4 adds s7 (plays while trailing / leading by 7+) for SC1/SC2; v5 adds q (1st-quarter passers/rushers) for QBCH
 # Definitions (shown in the app next to each number):
 NEUTRAL_MARGIN = 7       # neutral pass rate: plays with the score within 7, quarters 1-3
 STATE_MARGIN = 13        # pass rate by score: up 13+ / within 6 / down 13+
@@ -71,8 +71,28 @@ def compute(rows) -> dict:
                     secs[f"t{m}"] += dt
         home = plays[0].get("home_team")
         out[gid] = {"h": {k: round(v / 60, 1) for k, v in secs.items()}, "min": round(total / 60, 1),
-                    "flow": _flow(plays), "t": {"h": _team(plays, home), "a": _team(plays, plays[0].get("away_team"))}}
+                    "flow": _flow(plays), "t": {"h": _team(plays, home), "a": _team(plays, plays[0].get("away_team"))},
+                    "q": {"h": _q1(plays, home), "a": _q1(plays, plays[0].get("away_team"))}}
     return out
+
+
+def _q1(plays, team) -> list:
+    """Who passed or ran the ball for one team: [[gsis id, name, plays in quarter 1, order of first play], ...].
+    Counts every play (no "no_play") where the player was the passer (incl. sacks and scrambles) or the rusher.
+    build.py keeps only QBs and picks the one with the most 1st-quarter plays as the team's QB for the QBCH signal."""
+    seen = {}
+    for p in plays:
+        if p.get("posteam") != team or p.get("play_type") == "no_play":
+            continue
+        for k, n in (("passer_player_id", "passer_player_name"), ("rusher_player_id", "rusher_player_name")):
+            pid = p.get(k)
+            if not pid:
+                continue
+            if pid not in seen:
+                seen[pid] = [pid, p.get(n) or "", 0, len(seen)]
+            if p.get("qtr") == "1":
+                seen[pid][2] += 1
+    return list(seen.values())
 
 
 def _elapsed(p):

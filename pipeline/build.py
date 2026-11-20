@@ -763,6 +763,16 @@ def build(log):
                 # game-flow chart (home margin at each score) and per-team pass counts (neutral / by score);
                 # see pipeline/script.py for definitions
                 "flow": x.get("flow"), "t": x.get("t")}
+    def q1_qb(gid, side):
+        """QBCH (Michael 2026-11-20): the team's QB for a finished game = the QB with the most 1st-quarter plays (passes,
+        sacks, scrambles, runs) in nflverse play-by-play; ties and games with no QB play in Q1 go to the QB who played
+        first. Position from nflverse rosters / stats. None until the play-by-play has the game."""
+        x = gs_games.get(gid) or {}
+        qbs = [e for e in (x.get("q") or {}).get(side) or [] if (d.player_info.get(e[0]) or {}).get("position") == "QB"]
+        if not qbs:
+            return None
+        e = max(qbs, key=lambda e: (e[2], -e[3]))
+        return {"id": e[0], "n": (d.player_info.get(e[0]) or {}).get("name") or e[1]}
     wx = load_weather()
 
     def wx_out(gid):
@@ -852,7 +862,10 @@ def build(log):
                                  # starting QBs from the nflverse game file (a post-game record, so only for final games):
                                  # {"id": gsis id, "n": name} for the home ("hq") and away ("aq") team; used by the QBCH signal
                                  "hq": _starter(g, "home") if g.get("result", "") != "" else None,
-                                 "aq": _starter(g, "away") if g.get("result", "") != "" else None} for g in games},
+                                 "aq": _starter(g, "away") if g.get("result", "") != "" else None,
+                                 # QB with the most 1st-quarter plays (play-by-play; see q1_qb); what QBCH uses for "last game's QB"
+                                 "hq1": q1_qb(g["game_id"], "h") if g.get("result", "") != "" else None,
+                                 "aq1": q1_qb(g["game_id"], "a") if g.get("result", "") != "" else None} for g in games},
         "defrank": {pos: {mid: {t: list(v) for t, v in cur.get((pos, col), {}).items()}
                           for mid, _ok, col, _l, poss in MARKETS if pos in poss}
                     for pos in ("QB", "RB", "WR", "TE") for cur in [dranks.current()]},
