@@ -1019,6 +1019,7 @@
           if (side !== "over" && side !== "under") continue;
           const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
           if (!map.has(k)) map.set(k, { ...x, side, bp: true, sigs: [] });
+          if (t.qbch && x.note) map.get(k).qbNote = x.note; // QBCH's "new QB (last game: old QB)" line shows even when another signal got the row first
           map.get(k).sigs.push(t);
         }
       }
@@ -1081,7 +1082,8 @@
       h += `<div class="rlrow sg-pr"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
         ${(() => { const chips = `<span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span>`, meta = `<span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span>`;
-          return x.note ? `<div class="sg-m"><span class="small sg-gap">${esc(x.note)}</span>${chips}</div><div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${chips}</div>`; })()}</div>`;
+          const notes = [...new Set([x.note, x.qbNote].filter(Boolean))];
+          return notes.length ? `<div class="sg-m"><span class="small sg-gap">${esc(notes[0])}</span>${chips}</div>${notes.slice(1).map((n) => `<div class="sg-m"><span class="small sg-gap">${esc(n)}</span></div>`).join("")}<div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${chips}</div>`; })()}</div>`;
     }
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
     return h + `</div>${pager}` + live;
