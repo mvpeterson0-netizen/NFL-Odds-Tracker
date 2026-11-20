@@ -705,3 +705,6 @@ textarea.tp-in { resize: vertical; }
 /* QBRu (3-way toggle): title, (i) and ROI share the top row; the chips get their own row under it, above the record and chart. */
 .sg-cell3 .sg-hd .sg-roi { margin-left: auto; } .sg-cell3 .sg-r2 { margin-top: 24px; justify-content: flex-start; } .sg-cell3 .sg-r2 { display: block; } .sg-cell3 .sg-st { display: flex; justify-content: space-between; align-items: baseline; width: 100%; } .sg-cell3 .sg-st br { display: none; } .sg-cell3 .sg-tg { top: 34px; left: 10px; right: 10px; gap: 4px; } .sg-cell3 .sg-tg button { flex: 1 1 0; text-align: center; padding: 1px 0; }
 .sg-grid:has(.sg-cell3) .sg-cell { display: flex; flex-direction: column; } .sg-grid:has(.sg-cell3) .sg-cell > .sg-tile { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-start; }
+.sg-tg button .sg-n { font-size: 9px; opacity: .75; margin-left: 2px; }
+/* Props list: chips that name toggles can be long, so they wrap under the game info instead of squeezing it. */
+.sg-pr .sg-m { flex-wrap: wrap; } .sg-pr .sg-m .sg-chips { margin-left: auto; justify-content: flex-end; flex: 0 1 auto; max-width: 100%; }
