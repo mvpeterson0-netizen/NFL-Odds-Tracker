@@ -784,8 +784,10 @@
     h += `<div class="sgp-axis">${[-A, -A / 2, 0, A / 2, A].map((k) => `<span style="left:${P(k)}%">${k > 0 ? "+" : k < 0 ? "−" : ""}${Math.abs(k)}${k === -A || k === A ? "%" : ""}</span>`).join("")}</div></div>`;
     return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
   }
+  const togLabel = (t) => (t.opts ? `${t.label} · ${t.optFmt(RL.opt[t.id])}` : t.label);
   function openInfo(id) {
     closePop();
+    const tile = TABS.find((x) => x.id === id), disp = tile && tile.opts ? togLabel(tile) : null; // "SY · NL": tile name · toggle, as on the tiles
     id = MEM(id); // a combined tile explains whichever signal is toggled
     const t = TABS.find((x) => x.id === id); if (!t) return;
     const sg = SGP[id];
@@ -796,8 +798,8 @@
     const lead = gates.length === 1 ? "Must pass 1 gate" : gates.length === 2 ? "Must pass both gates" : `Must pass all ${gates.length} gates`;
     const rows = gates.map((g, i) => `<div class="sgp-g"><div class="sgp-t ${g.c}"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#sgi-${g.i}"/></svg>${g.t ? `<span class="sgp-tg sgp-${g.tp}">${esc(g.t)}</span>` : ""}${g.x ? `<span class="sgp-sd">${esc(g.x)}</span>` : ""}<span class="sgp-n">${i + 1}</span></div><div><div class="sgp-l">${esc(g.l)}</div><div class="small muted">${esc(g.s)}</div></div></div>`).join("");
     const bulb = `<svg class="sgp-bulb" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    ov.innerHTML = `<div class="share-box nw-box sgp" role="dialog" aria-label="${esc(t.label)} - ${esc(t.short ? t.short() : t.title)}">
-      <div class="sgp-h"><div><div class="sgp-code">${esc(t.label)}</div><div class="small muted"><span class="chip rl-side ${sg.bet.startsWith("Over") ? "over" : "under"}" style="margin-left:0">${sg.bet.split(" ")[0]}</span> ${betText(id, sg)}</div></div><button class="nw-x" aria-label="Close">✕</button></div>
+    ov.innerHTML = `<div class="share-box nw-box sgp" role="dialog" aria-label="${esc(disp || t.label)} - ${esc(t.short ? t.short() : t.title)}">
+      <div class="sgp-h"><div><div class="sgp-code">${esc(disp || t.label)}</div><div class="small muted"><span class="chip rl-side ${sg.bet.startsWith("Over") ? "over" : "under"}" style="margin-left:0">${sg.bet.split(" ")[0]}</span> ${betText(id, sg)}</div></div><button class="nw-x" aria-label="Close">✕</button></div>
       <div class="small muted sgp-lead">${lead}</div>
       <div class="sgp-gs${gates.length > 1 ? " chain" : ""}">${rows}</div>
       ${id === "syypc" ? `<div class="small muted sgp-why">${bulb}<span>Fluke long catches tend not to repeat.</span></div>` : ""}
@@ -978,7 +980,7 @@
   // Record panel for the picked signal(s): summary, running hit rate, week by week (week = smallest level)
   function recordPanel(ts) {
     const bets = betsFor(ts), by = byWeek(bets), key0 = ts.map((t) => t.id).join("+");
-    const many = ts.length > 1, title = ts.map((t) => esc(t.label)).join(" + ");
+    const many = ts.length > 1, title = ts.map((t) => esc(togLabel(t))).join(" + ");
     let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${many ? `Fits all of: ${title}` : title}</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>`;
     if (!bets.length) return h + `<p class="muted small">${many ? "No graded bets fit all of these signals (or they point opposite ways)." : "No graded bets yet."}</p></div></div>`;
     const s = tally(bets), cls = s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "";
