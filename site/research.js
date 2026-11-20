@@ -890,7 +890,8 @@
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
     const cnt = sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
     const t3 = !!t.opts, roiSpan = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span>`; // 3-way toggle tiles: ROI sits in the title row, toggles go under it
-    const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)}</button>`).join("")}</span>` : "";
+    const optN = (v) => withOpt(t, v, () => sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length); // this week's props for that toggle
+    const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)} <span class="sg-n">${optN(v)}</span></button>`).join("")}</span>` : "";
     return `<div class="sg-cell${t.opts ? " sg-cell3" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b>${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
       <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "TNF" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
@@ -1043,19 +1044,31 @@
     LIVE_PASS = true;
     try { return sgFilt(compute(tab)).length; } finally { LIVE_PASS = false; }
   }
+  // Option A (Michael 2026-11-20): below the tiles, a tile that isn't picked lists the props that fit ANY of its toggles; each row's chip names
+  // the toggle(s) that hit. Picking a tile narrows the list to the toggle it is set to. Display only: no rule, score or number changes.
+  const togsOf = (t, picked) => (!t.opts ? [null] : picked.some((q) => q.id === t.id) ? [RL.opt[t.id]] : t.opts);
+  const chipTxt = (t) => esc(t.label) + (t.tog && t.tog.length ? ` · ${t.tog.map(esc).join(", ")}` : "");
+  const atToggle = (t, v, fn) => (v == null ? fn() : withOpt(t, v, fn));
+  function addSig(entry, t, v) {
+    let g = entry.sigs.find((y) => y.id === t.id);
+    if (!g) { g = { ...t, tog: [] }; entry.sigs.push(g); }
+    if (v != null && !g.tog.includes(t.optFmt(v))) g.tog.push(t.optFmt(v));
+  }
   function playerRows(tabs, picked, live) {
     const map = new Map();
     LIVE_PASS = !!live;
     try {
       for (const t of tabs.filter((x) => !RL.unlocked || RL.unlocked.has(x.id))) {
         if (t.challenger) continue;
-        for (const x of sgFilt(compute(t.id)).filter(nm)) {
-          const side = x.side || t.side;
-          if (side !== "over" && side !== "under") continue;
-          const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
-          if (!map.has(k)) map.set(k, { ...x, side, bp: true, sigs: [] });
-          if (t.qbch && x.note) map.get(k).qbNote = x.note; // QBCH's "new QB (last game: old QB)" line shows even when another signal got the row first
-          map.get(k).sigs.push(t);
+        for (const v of togsOf(t, picked)) {
+          for (const x of atToggle(t, v, () => sgFilt(compute(t.id)).filter(nm))) {
+            const side = x.side || t.side;
+            if (side !== "over" && side !== "under") continue;
+            const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
+            if (!map.has(k)) map.set(k, { ...x, side, bp: true, sigs: [] });
+            if (t.qbch && x.note) map.get(k).qbNote = x.note; // QBCH's "new QB (last game: old QB)" line shows even when another signal got the row first
+            addSig(map.get(k), t, v);
+          }
         }
       }
     } finally { LIVE_PASS = false; }
@@ -1074,7 +1087,7 @@
       const { p, r, mid, cur } = x.c;
       h += `<div class="rlrow sg-pr"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
-        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span></div></div>`;
+        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipTxt(t)}</span>`).join("")}</span></div></div>`;
     }
     return h + `</div>`;
   }
@@ -1083,10 +1096,12 @@
     const map = new Map();
     for (const t of tabs.filter((x) => !RL.unlocked || RL.unlocked.has(x.id))) {
       if (t.challenger) continue;
-      for (const x of doneBets(t.id)) {
-        const k = `${x.p.id}|${x.mid}|${x.r.gid}|${x.side}`;
-        if (!map.has(k)) map.set(k, { ...x, sigs: [] });
-        map.get(k).sigs.push(t);
+      for (const v of togsOf(t, picked)) {
+        for (const x of atToggle(t, v, () => doneBets(t.id))) {
+          const k = `${x.p.id}|${x.mid}|${x.r.gid}|${x.side}`;
+          if (!map.has(k)) map.set(k, { ...x, sigs: [] });
+          addSig(map.get(k), t, v);
+        }
       }
     }
     let rows = [...map.values()];
@@ -1100,7 +1115,7 @@
       const { p, r, mid } = x, line = x.m.line, act = x.m.act;
       h += `<div class="rlrow sg-pr"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(line)}</span><span class="pk-res ${x.out}">${x.out === "hit" ? "Hit" : x.out === "miss" ? "Miss" : "Push"}${act != null ? ` · ${num(act)}` : ""}</span></div>
-        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span></div></div>`;
+        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipTxt(t)}</span>`).join("")}</span></div></div>`;
     }
     return h + `</div>`;
   }
@@ -1116,7 +1131,7 @@
       const { p, r, mid, cur } = x.c;
       h += `<div class="rlrow sg-pr"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
-        ${(() => { const chips = `<span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${esc(t.label)}</span>`).join("")}</span>`, meta = `<span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span>`;
+        ${(() => { const chips = `<span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipTxt(t)}</span>`).join("")}</span>`, meta = `<span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span>`;
           const notes = [...new Set([x.note, x.qbNote].filter(Boolean))];
           return notes.length ? `<div class="sg-m"><span class="small sg-gap">${esc(notes[0])}</span>${chips}</div>${notes.slice(1).map((n) => `<div class="sg-m"><span class="small sg-gap">${esc(n)}</span></div>`).join("")}<div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${chips}</div>`; })()}</div>`;
     }
