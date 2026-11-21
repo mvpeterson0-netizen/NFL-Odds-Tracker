@@ -43,7 +43,7 @@
   // Modes are numbered so the toggle (data-sgopt) stays numeric: 1 = 25+ (old QB-R4 at 25), 2 = avg 25 (old QB-R1), 3 = +5 (old QB-R2 at +5).
   const QBRU_LBL = { 1: "25+", 2: "avg 25", 3: "+5" };
   const TABS = [
-    { id: "qbru", n: 1, side: "under", label: "QBRu", opts: [1, 2, 3], optFmt: (v) => QBRU_LBL[v], short: () => ({ 1: "QB rush yd under when line is 25+yd", 2: "QB rush yd under when L3 gm avg ≥25yd and line ≥25yd", 3: "QB rush yd under when line is 5+yd above his last-game line" })[RL.opt.qbru],
+    { id: "qbru", n: 1, side: "under", label: "QBRu", tile: "QB Rush", optTile: (v) => ({ 1: "Line 25", 2: "avg 25", 3: "Line +5" })[v], opts: [1, 2, 3], optFmt: (v) => QBRU_LBL[v], short: () => ({ 1: "QB rush yd under when line is 25+yd", 2: "QB rush yd under when L3 gm avg ≥25yd and line ≥25yd", 3: "QB rush yd under when line is 5+yd above his last-game line" })[RL.opt.qbru],
       title: "QB rush Under (high line, really runs, or line jump)", why: "A QB's rushing line may be set too high after a few big games, a high-rushing stretch, or a sudden raise.",
       desc: () => ({
         1: `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>25 or higher</b>. The idea is that a few big games can inflate high QB rushing lines.`,
@@ -53,12 +53,12 @@
     // Combined tiles (Michael 2026-11-20): each toggle position is one of the original signals, scored exactly as before (same rule, list,
     // grading and audit numbers); the tile just shows whichever one is toggled. Info (i) opens that signal's own explanation.
     ...[
-      ["cm1", 6, "CM1", ["cm1te", "cm120"], ["TE", "All"], "QB line drop, receivers' lines don't follow"],
-      ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script"],
-      ["sy", 29, "SY", ["sy25", "synl", "syypc"], ["+25%", "NL", "YPC"], "Short-yardage receiver after a big Over"],
-      ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "NL"], "First-half Over, line raised"],
-    ].map(([id, n, label, mem, lbl, what]) => ({
-      id, n, side: "under", label, opts: mem.map((_, i) => i + 1), optFmt: (v) => lbl[v - 1], members: Object.fromEntries(mem.map((m, i) => [i + 1, m])), cm: id === "cm1",
+      ["cm1", 6, "CM1", ["cm1te", "cm120"], ["TE", "All"], "QB line drop, receivers' lines don't follow", "Line Lag"],
+      ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script", "Prev Scr"],
+      ["sy", 29, "SY", ["sy25", "synl", "syypc"], ["+25%", "NL", "YPC"], "Short-yardage receiver after a big Over", "Short yd", ["+25%", "No Long", "Fluke"]],
+      ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "NL"], "First-half Over, line raised", "1st Half", ["+30%", "No Long"]],
+    ].map(([id, n, label, mem, lbl, what, tile, lblT]) => ({
+      id, n, side: "under", label, tile, optTile: (v) => (lblT || lbl)[v - 1], opts: mem.map((_, i) => i + 1), optFmt: (v) => lbl[v - 1], members: Object.fromEntries(mem.map((m, i) => [i + 1, m])), cm: id === "cm1",
       short: () => memTab(id).short(), title: `${what} (${lbl.join(" / ")})`, why: "", desc: () => memTab(id).desc(),
     })),
     { id: "qbr1", page: "old", n: 1, side: "under", combo: true, label: "QB-R1", short: () => "L3 gm avg ≥25yd and line ≥25yd",
@@ -127,7 +127,7 @@
     { id: "fhnl", hid: true, n: 33, page: "ind", side: "under", label: "FH-NL", short: () => "First half alone beat the line, Over without his longest catch",
       title: "First-half Over without his longest catch → rec yds Under", why: "He was Over early and across several catches, yet the line still went up.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}${LY_FH}${LY_NOLONG}</ul>` },
-    { id: "bl200", front: true, n: 34, page: "ind", side: "under", label: "BL-200", short: () => "Beat his line by 200%+",
+    { id: "bl200", front: true, n: 34, page: "ind", side: "under", label: "BL-200", tile: "Big Beat", short: () => "Beat his line by 200%+",
       title: "Beat his line by 200%+ → rec yds Under", why: "A huge game may be priced as a new normal.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>He <b>beat that line by 200% or more</b> (at least 3 times the line).</li></ul>` },
     { id: "nlu20", n: 35, page: "ind", side: "under", label: "NL-U20", short: () => "Longest catch under 20 yards",
@@ -864,13 +864,13 @@
   const byWeek = (bets) => laWeeks().slice().reverse().map((w) => ({ w, list: bets.filter((x) => x.r.wk === w) }));
   // Tile chart (Michael 2026-11-12): a dot for each week's ROI plus a line for the running (cumulative) ROI, with real axes:
   // weeks (W#) along the bottom, ROI % up the side. Weeks with no bets get no dot; the cumulative line carries through.
-  function spark(by, band) {
+  function spark(by, band, hOverride) {
     let W = 0, L = 0, U = 0; const pts = by.map(({ w, list }) => {
       const s = tally(list); U += s.U; W += s.W + s.L;
       return { w, n: s.n, roi: s.n ? s.roi : null, cum: W ? (100 * U) / W : null };
     });
     if (!pts.some((q) => q.n)) return `<div class="sg-nospark muted small">no graded bets</div>`;
-    const w = 170, h = 70, l = 30, r = 11, tp = 6, bt = 13, n = pts.length, base = h - bt;
+    const w = 170, h = hOverride || 70, l = 30, r = 11, tp = 6, bt = 13, n = pts.length, base = h - bt;
     const vals = pts.flatMap((q) => [q.roi, q.cum]).filter((v) => v != null).concat(0, band ? [band.lo, band.hi] : []);
     let mn = Math.min(...vals), mx = Math.max(...vals); if (mx - mn < 20) { mx += 10; mn -= 10; }
     const rg = mx - mn, X = (i) => (n < 2 ? (l + w - r) / 2 : l + (i * (w - l - r)) / (n - 1)), Y = (v) => tp + ((mx - v) / rg) * (base - tp);
@@ -891,13 +891,13 @@
   function tileHtml(t, st, locked) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
     const cnt = sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
-    const t3 = !!t.opts, roiSpan = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span>`; // 3-way toggle tiles: ROI sits in the title row, toggles go under it
+    const t3 = !!t.opts || !!t.front, ttl = t.tile || t.label, roiSpan = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span>`; // 3-way toggle tiles: ROI sits in the title row, toggles go under it
     const optN = (v) => withOpt(t, v, () => sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length); // this week's props for that toggle
-    const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(t.label)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${t.optFmt(v)} <span class="sg-n">${optN(v)}</span></button>`).join("")}</span>` : "";
-    return `<div class="sg-cell${t.opts ? " sg-cell3" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
-      <div class="sg-hd"><b class="sg-ttl2" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}">${esc(t.label)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.label)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
+    const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(ttl)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${(t.optTile || t.optFmt)(v)} <span class="sg-n">${optN(v)}</span></button>`).join("")}</span>` : "";
+    return `<div class="sg-cell${t.opts ? " sg-cell3" : t.front ? " sg-cell3 sg-ntg" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
+      <div class="sg-hd"><b class="sg-ttl2" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}">${esc(ttl)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
       <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "TNF" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
-      ${st.by ? spark(st.by, roiBand(t)) : ""}</button>${tg}</div>`;
+      ${st.by ? spark(st.by, roiBand(t), t.front && !t.opts ? 86 : 0) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
   // Toggle default (Michael 2026-11-12): a signal with a toggle (QB-R2, QB-R4) opens on whichever setting has the larger ROI so far this season.
