@@ -692,14 +692,14 @@
     UPP: (n) => ({ i: "upt", c: "pu", x: `${n}%+`, l: `Line raised ${n}%+`, s: "vs that game's line" }),
     NOLONG: { i: "nolong", c: "am", l: "Over without longest catch", s: "Still Over that line without it" },
     FH: { i: "half", c: "bl", l: "First half beat the line", s: "First-half yards alone were above that game's line" },
-    YPC: { i: "fluke", c: "am", l: "Last game was a YPC fluke", s: "Yards per catch at least 1.5× his career average" },
+    YPC: { i: "fluke", c: "am", l: "Last game was a yards-per-catch fluke", s: "Yards per catch at least 1.5× his career average" },
     BL: { i: "beat", c: "bl", l: "Beat his line by 200%+", s: "At least 3 times that game's line" },
     U20: { i: "u20", c: "am", l: "Longest catch under 20 yds", s: "In that game" },
   };
   const RAISE = { i: "up", c: "pu", l: "Line raised", s: "Higher than that game's line" };
   const SGP = {
     qbru: { bet: "Under · QB rush yds", g: () => ({
-      1: [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds · toggle: 25+, avg 25 or +5" }],
+      1: [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds · toggle: Line 25+, Average 25 or Line up 5+" }],
       2: [{ i: "form", c: "bl", l: "High rushing line", s: "Line is 25+ rush yds" }, { i: "streak", c: "bl", l: "Really runs", s: "Averaged 25+ rush yds over his last 3 games played" }],
       3: [{ i: "up", c: "pu", t: "5+", tp: "br", l: "Line up 5+ yds", s: "vs his previous game's line" }],
     })[RL.opt.qbru] },
@@ -784,10 +784,13 @@
     h += `<div class="sgp-axis">${[-A, -A / 2, 0, A / 2, A].map((k) => `<span style="left:${P(k)}%">${k > 0 ? "+" : k < 0 ? "−" : ""}${Math.abs(k)}${k === -A || k === A ? "%" : ""}</span>`).join("")}</div></div>`;
     return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
   }
+  // Info popup header (Michael 2026-11-21): the tile name and toggle spelled out in full words; tiles keep their short names.
+  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["Line +25%", "No longest catch", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null] };
+  const popLabel = (t) => { const e = t && POPN[t.id]; if (!e) return null; const v = RL.opt[t.id], o = e[1] ? (Array.isArray(e[1]) ? e[1][v - 1] : e[1][v]) : null; return o ? `${e[0]} · ${o}` : e[0]; };
   const togLabel = (t) => (t.opts ? `${t.label} · ${t.optFmt(RL.opt[t.id])}` : t.label);
   function openInfo(id) {
     closePop();
-    const tile = TABS.find((x) => x.id === id), disp = tile && tile.opts ? togLabel(tile) : null; // "SY · NL": tile name · toggle, as on the tiles
+    const tile = TABS.find((x) => x.id === id), disp = popLabel(tile) || (tile && tile.opts ? togLabel(tile) : null); // "SY · NL": tile name · toggle, as on the tiles
     id = MEM(id); // a combined tile explains whichever signal is toggled
     const t = TABS.find((x) => x.id === id); if (!t) return;
     const sg = SGP[id];
