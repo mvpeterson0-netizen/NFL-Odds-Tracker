@@ -1,0 +1,473 @@
+{
+ "started": "2026-11-22T19:49:17.196792+00:00",
+ "events": [
+  {
+   "id": "401873070",
+   "name": "MIA @ BUF",
+   "state": "in",
+   "clock": "0:00",
+   "period": 2,
+   "scores": {
+    "home": "20",
+    "away": "6"
+   }
+  },
+  {
+   "id": "401873071",
+   "name": "NO @ CHI",
+   "state": "in",
+   "clock": "12:48",
+   "period": 3,
+   "scores": {
+    "home": "16",
+    "away": "10"
+   }
+  },
+  {
+   "id": "401873073",
+   "name": "TEN @ DAL",
+   "state": "in",
+   "clock": "13:03",
+   "period": 3,
+   "scores": {
+    "home": "27",
+    "away": "16"
+   }
+  },
+  {
+   "id": "401873072",
+   "name": "TB @ DET",
+   "state": "in",
+   "clock": "11:12",
+   "period": 3,
+   "scores": {
+    "home": "10",
+    "away": "7"
+   }
+  },
+  {
+   "id": "401873067",
+   "name": "ARI @ KC",
+   "state": "in",
+   "clock": "8:56",
+   "period": 3,
+   "scores": {
+    "home": "27",
+    "away": "7"
+   }
+  },
+  {
+   "id": "401873076",
+   "name": "PIT @ PHI",
+   "state": "in",
+   "clock": "12:52",
+   "period": 3,
+   "scores": {
+    "home": "13",
+    "away": "6"
+   }
+  },
+  {
+   "id": "401873068",
+   "name": "BAL @ CAR",
+   "state": "in",
+   "clock": "0:00",
+   "period": 2,
+   "scores": {
+    "home": "22",
+    "away": "26"
+   }
+  },
+  {
+   "id": "401873074",
+   "name": "NYJ @ LAC",
+   "state": "pre",
+   "clock": "0:00",
+   "period": 0,
+   "scores": {
+    "home": "0",
+    "away": "0"
+   }
+  },
+  {
+   "id": "401873075",
+   "name": "LV @ DEN",
+   "state": "pre",
+   "clock": "0:00",
+   "period": 0,
+   "scores": {
+    "home": "0",
+    "away": "0"
+   }
+  },
+  {
+   "id": "401873069",
+   "name": "JAX @ NYG",
+   "state": "pre",
+   "clock": "0:00",
+   "period": 0,
+   "scores": {
+    "home": "0",
+    "away": "0"
+   }
+  },
+  {
+   "id": "401873077",
+   "name": "MIN VS SF",
+   "state": "pre",
+   "clock": "0:00",
+   "period": 0,
+   "scores": {
+    "home": "0",
+    "away": "0"
+   }
+  },
+  {
+   "id": "401873066",
+   "name": "IND @ HOU",
+   "state": "post",
+   "clock": "0:00",
+   "period": 4,
+   "scores": {
+    "home": "26",
+    "away": "3"
+   }
+  },
+  {
+   "id": "401873078",
+   "name": "CIN @ WSH",
+   "state": "pre",
+   "clock": "0:00",
+   "period": 0,
+   "scores": {
+    "home": "0",
+    "away": "0"
+   }
+  }
+ ],
+ "samples": [
+  {
+   "game": "NO @ CHI",
+   "once": true,
+   "players_with_stats": 20,
+   "plays": 104,
+   "bytes": 424224,
+   "has_boxscore_players": true
+  },
+  {
+   "game": "TEN @ DAL",
+   "once": true,
+   "players_with_stats": 17,
+   "plays": 100,
+   "bytes": 407826,
+   "has_boxscore_players": true
+  },
+  {
+   "game": "TB @ DET",
+   "once": true,
+   "players_with_stats": 17,
+   "plays": 102,
+   "bytes": 407293,
+   "has_boxscore_players": true
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 0,
+   "utc": "2026-11-22T19:49:18+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:49:18 GMT",
+   "age": null,
+   "seconds": 0.19,
+   "bytes": 417059,
+   "clock": "0:00",
+   "period": 2,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 103,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 1,
+   "utc": "2026-11-22T19:49:48+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:49:48 GMT",
+   "age": null,
+   "seconds": 0.27,
+   "bytes": 423000,
+   "clock": "15:00",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 102,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 2,
+   "utc": "2026-11-22T19:50:18+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:50:18 GMT",
+   "age": null,
+   "seconds": 0.26,
+   "bytes": 423000,
+   "clock": "14:52",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 102,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 3,
+   "utc": "2026-11-22T19:50:48+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:50:48 GMT",
+   "age": null,
+   "seconds": 0.34,
+   "bytes": 427415,
+   "clock": "14:52",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 104,
+   "changed_ids": [
+    "4433971",
+    "4869645"
+   ]
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 4,
+   "utc": "2026-11-22T19:51:19+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:51:19 GMT",
+   "age": null,
+   "seconds": 0.13,
+   "bytes": 430335,
+   "clock": "14:11",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 106,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 5,
+   "utc": "2026-11-22T19:51:49+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:51:49 GMT",
+   "age": null,
+   "seconds": 0.16,
+   "bytes": 434288,
+   "clock": "14:11",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 108,
+   "changed_ids": [
+    "4711533"
+   ]
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 6,
+   "utc": "2026-11-22T19:52:19+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:52:19 GMT",
+   "age": null,
+   "seconds": 0.44,
+   "bytes": 434282,
+   "clock": "13:32",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 108,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 7,
+   "utc": "2026-11-22T19:52:49+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:52:49 GMT",
+   "age": null,
+   "seconds": 0.19,
+   "bytes": 440273,
+   "clock": "12:48",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 110,
+   "changed_ids": [
+    "4433971",
+    "4569603"
+   ]
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 8,
+   "utc": "2026-11-22T19:53:20+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:53:20 GMT",
+   "age": null,
+   "seconds": 0.19,
+   "bytes": 442266,
+   "clock": "12:02",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 112,
+   "changed_ids": [
+    "4869645"
+   ]
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 9,
+   "utc": "2026-11-22T19:53:50+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:53:50 GMT",
+   "age": null,
+   "seconds": 0.25,
+   "bytes": 442353,
+   "clock": "11:58",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 112,
+   "changed_ids": [
+    "4869645"
+   ]
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 10,
+   "utc": "2026-11-22T19:54:20+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:54:20 GMT",
+   "age": null,
+   "seconds": 0.13,
+   "bytes": 445389,
+   "clock": "11:58",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 114,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 11,
+   "utc": "2026-11-22T19:54:50+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:54:50 GMT",
+   "age": null,
+   "seconds": 0.14,
+   "bytes": 450247,
+   "clock": "11:55",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 116,
+   "changed_ids": [
+    "4869645"
+   ]
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 12,
+   "utc": "2026-11-22T19:55:20+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:55:20 GMT",
+   "age": null,
+   "seconds": 0.24,
+   "bytes": 453636,
+   "clock": "11:42",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 120,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 13,
+   "utc": "2026-11-22T19:55:51+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:55:51 GMT",
+   "age": null,
+   "seconds": 0.2,
+   "bytes": 453634,
+   "clock": "11:42",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 120,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 14,
+   "utc": "2026-11-22T19:56:21+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:56:21 GMT",
+   "age": null,
+   "seconds": 0.15,
+   "bytes": 453634,
+   "clock": "11:42",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 120,
+   "changed_ids": []
+  },
+  {
+   "game": "MIA @ BUF",
+   "i": 15,
+   "utc": "2026-11-22T19:56:51+00:00",
+   "resp_date": "Sun, 22 Nov 2026 19:56:51 GMT",
+   "age": null,
+   "seconds": 0.13,
+   "bytes": 453634,
+   "clock": "11:42",
+   "period": 3,
+   "state": "in",
+   "players_with_stats": 19,
+   "plays": 120,
+   "changed_ids": []
+  }
+ ],
+ "cors": {
+  "scoreboard": {
+   "access-control-allow-origin": "*",
+   "access-control-allow-credentials": null,
+   "cache-control": "max-age=5",
+   "age": null,
+   "date": "Sun, 22 Nov 2026 19:49:17 GMT",
+   "last-modified": null,
+   "vary": "Accept-Encoding",
+   "content-type": "application/json;charset=UTF-8"
+  },
+  "summary": {
+   "access-control-allow-origin": "*",
+   "access-control-allow-credentials": null,
+   "cache-control": "max-age=8",
+   "age": null,
+   "date": "Sun, 22 Nov 2026 19:49:18 GMT",
+   "last-modified": null,
+   "vary": "Accept-Encoding",
+   "content-type": "application/json;charset=UTF-8"
+  }
+ },
+ "notes": [],
+ "scoreboard_bytes": 167883,
+ "live_count": 7,
+ "example_player_stats": {
+  "4433971": {
+   "passingYards": "23",
+   "rushingYards": "6"
+  },
+  "4569603": {
+   "rushingYards": "11",
+   "receivingYards": "0",
+   "receivingTargets": "2"
+  },
+  "4711533": {
+   "rushingYards": "10",
+   "receivingYards": "-3",
+   "receivingTargets": "1"
+  },
+  "4682745": {
+   "rushingYards": "4"
+  }
+ },
+ "finished": "2026-11-22T19:56:51.335028+00:00"
+}
