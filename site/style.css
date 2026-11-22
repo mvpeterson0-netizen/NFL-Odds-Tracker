@@ -713,3 +713,8 @@ textarea.tp-in { resize: vertical; }
 .sg-hd .rinfo { flex: none; } @media (max-width: 380px) { .sg-hd b.sg-ttl2 { font-size: 14px; } .sg-cell3 .sg-hd .sg-roi { font-size: 17px; } }
 /* Signals tile without a toggle (Big Beat): ROI in the title row like the toggle tiles, record row right under the title (no toggle row to clear) */
 .sg-cell3.sg-ntg .sg-r2 { margin-top: 6px; }
+
+/* Signal tile toggles: larger tap area, same look (Michael 2026-11-22). Each button gets an invisible extension (4px up, 12px down into the record row, 2px sideways into the gaps), and the toggle row sits above the title/(i) tap zones that reach down over it. */
+.sg-cell3 .sg-tg { z-index: 2; }
+.sg-cell3 .sg-tg button { position: relative; touch-action: manipulation; }
+.sg-cell3 .sg-tg button::after { content: ""; position: absolute; top: -4px; bottom: -12px; left: -2px; right: -2px; }
