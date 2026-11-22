@@ -90,10 +90,10 @@
     if (P && P.enabled && P.enabled() && P.list) {
       for (const p of P.list()) {
         const g = D.games[p.gid];
-        if (!g || g.final || !koPast(g.ko)) continue;
+        if (!g || !koPast(g.ko) || (g.final && !(P.held && P.held(p)))) continue; // finished games only while the pick is held (this week, until Tuesday)
         const r = (D.rows[p.pid] || []).find((x) => x.gid === p.gid) || {};
         out.set(key(p), { pid: p.pid, name: p.name, pos: p.pos, team: r.team || (playerById[p.pid] || {}).team, opp: r.opp, ha: r.ha, gid: p.gid, mid: p.mid, side: p.side,
-          line: p.line, odds: p.odds == null ? null : Number(p.odds), pickId: p.id, codes: [] });
+          line: p.line, odds: p.odds == null ? null : Number(p.odds), pickId: p.id, codes: [], gr: P.grade ? P.grade(p) : null });
       }
     }
     const acc = window.STIX_ACCOUNT;
@@ -138,6 +138,19 @@
     const ev = FEED.ev[x.gid], bx = FEED.box[x.gid], f = frac(ev);
     const over = x.side === "o", line = x.line, stat = D.markets.find((m) => m.id === x.mid).stat;
     const base = { x, ev, f, clock: clockTxt(ev), word: UNIT[x.mid] || "", cur: null, status: "wait", chip: "No stats yet", room: "", units: null, unitsTxt: "", locked: false, tgt: null, tgtShare: null, pct: 0, pace: null };
+    // Official grade (nflverse stats) wins once it exists: settled this-week picks held out of Graded until Tuesday
+    const gr = x.gr;
+    if (gr && (gr.st === "hit" || gr.st === "miss" || gr.st === "push" || gr.st === "void")) {
+      const win_ = gr.st === "hit", st = gr.st === "miss" ? "dead" : gr.st === "hit" ? "hit" : gr.st, cur = gr.act == null ? null : gr.act, odds = x.odds;
+      const units = st === "push" || st === "void" ? 0 : odds != null && isFinite(odds) && odds !== 0 ? (win_ ? win(odds) : -1) : null;
+      const room = st === "void" ? "Did not play" : st === "push" ? "Exactly on the line" : over ? (win_ ? `Cleared by ${fmt(cur - line)}` : `Short by ${fmt(line - cur)}`) : (win_ ? `Under by ${fmt(line - cur)}` : `Over by ${fmt(cur - line)}`);
+      const pl0 = bx && bx.idx[`${x.team}|${normName(x.name)}`], pl1 = pl0 ? bx.players[pl0] : null;
+      let tg = null, share = null;
+      if (pl1 && (stat === "receptions" || stat === "receiving_yards") && pl1.s.targets != null) { tg = pl1.s.targets; share = bx.tt[x.team] ? Math.round((100 * tg) / bx.tt[x.team]) : null; }
+      return { ...base, cur, status: st, chip: { hit: "Hit", dead: over ? "Miss" : "Dead", push: "Push", void: "Void" }[st], room, units, locked: true, p: win_ ? 1 : 0,
+        pct: cur == null ? 0 : Math.max(Math.min((cur / line) * 0.8, 1), 0) * 100, pace: null, tgt: tg, tgtShare: share, clock: "Final",
+        unitsTxt: units == null ? "no odds saved" : uTxt(units) + " locked" };
+    }
     if (!bx) return base;
     const id = bx.idx[`${x.team}|${normName(x.name)}`], pl = id ? bx.players[id] : null;
     if (!pl) return base;
@@ -234,7 +247,8 @@
       if (gids.some((g) => !FEED.ev[g]) && Date.now() - FEED.mapAt > MAP_MS) { try { await loadMap(); } catch (e) { FEED.err = "ESPN unreachable"; } }
       // Games holding one of the user's own picks refresh every 30 s; games with only signal plays every 60 s (each summary is ~45 KB compressed).
       const mine = new Set(ps.filter((p) => p.pickId).map((p) => p.gid)), now = Date.now();
-      const want = gids.filter((g) => FEED.ev[g] && FEED.ev[g].state !== "pre" && !(FEED.box[g] && FEED.box[g].final)
+      const offi = (g) => ps.filter((p) => p.gid === g).every((p) => p.gr && ["hit", "miss", "push", "void"].includes(p.gr.st));
+      const want = gids.filter((g) => !offi(g) && FEED.ev[g] && FEED.ev[g].state !== "pre" && !(FEED.box[g] && FEED.box[g].final)
         && (!FEED.box[g] || now - FEED.box[g].at >= (mine.has(g) ? POLL_MS : 2 * POLL_MS) - 2000));
       let bad = 0;
       await Promise.all(want.map(async (g) => {
