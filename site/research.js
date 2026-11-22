@@ -827,7 +827,10 @@
   // Week is the smallest level shown (no per-game split). Scoring is unchanged: same analyze() as before.
   // Multi-select (Michael 2026-11-12): off on the Signals page, since those signals are already combinations; still on for the Indicators page.
   const multiSelect = () => SGPAGE === "ind";
-  Object.assign(RL, { sigs: [], scope: "season", q: "", opt: { ...OPT0 } });
+  Object.assign(RL, { sigs: [], scope: "season", q: "", opt: { ...OPT0 }, any: {} });
+  // Long press a tile (Michael 2026-11-22): the list below shows players matching ANY of that tile's toggles (sub filters / sub signals), not just the one it is set to.
+  // Display filter only: RL.any[id] is read by togsOf(); no rule, score, ROI or tile number changes. A tap on the tile, a toggle or a chip returns to the normal one-toggle pick.
+  const anyTog = (id) => !!(RL.any && RL.any[id] && RL.sigs.includes(id));
   const BE = 52.38; // break-even hit rate (%) at -110
   const memo = { d: null, m: new Map() };
   function AN(tab, wk) {
@@ -896,8 +899,8 @@
     const cnt = sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
     const t3 = !!t.opts || !!t.front, ttl = t.tile || t.label, roiSpan = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span>`; // 3-way toggle tiles: ROI sits in the title row, toggles go under it
     const optN = (v) => withOpt(t, v, () => sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length); // this week's props for that toggle
-    const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(ttl)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${(t.optTile || t.optFmt)(v)} <span class="sg-n">${optN(v)}</span></button>`).join("")}</span>` : "";
-    return `<div class="sg-cell${t.opts ? " sg-cell3" : t.front ? " sg-cell3 sg-ntg" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
+    const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(ttl)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v || anyTog(t.id) ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${(t.optTile || t.optFmt)(v)} <span class="sg-n">${optN(v)}</span></button>`).join("")}</span>` : "";
+    return `<div class="sg-cell${t.opts ? " sg-cell3" : t.front ? " sg-cell3 sg-ntg" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}${anyTog(t.id) ? " any" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b class="sg-ttl2" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}">${esc(ttl)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
       <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "TNF" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
       ${st.by ? spark(st.by, roiBand(t), t.front && !t.opts ? 86 : 0) : ""}</button>${tg}</div>`;
@@ -998,6 +1001,8 @@
     return h + `${many ? `<div class="la-sum"><div><span class="muted small">Season</span><b>${recTxt(s)}</b></div><div><span class="muted small">Hit rate</span><b>${s.hit == null ? "—" : s.hit.toFixed(1) + "%"}</b></div><div><span class="muted small">Units</span><b class="${cls}">${s.n ? unitsTxt(s.U) : "—"}</b></div><div><span class="muted small">ROI</span><b>${s.roi == null ? "—" : `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%`}</b></div></div>` : ""}
       <details class="sg-weeks" data-wopen ${RL.wopen ? "open" : ""}><summary>Week by week (${by.filter((x) => x.list.length).length} weeks)</summary>${weeks}</details></div></div>`;
   }
+  // Long-press view: the record panel is per toggle, so while a tile shows all its toggles this slim header stands in for it.
+  const anyPanel = (t) => `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${esc(t.label)} · ${t.opts.map((v) => esc(t.optFmt(v))).join(" / ")} (any)</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div><p class="muted small">Players below fit any of this tile's toggles. Tap a toggle to see one setting's record.</p></div></div>`;
   const BP = { id: "bp", n: 0, side: "mixed", title: "Players" };
   // Players who fit the picked signals. live=false: games not started yet (the main list). live=true: games that have started but
   // are not final (the "Game in progress" list). Same rules and sorting either way; only the games looked at differ.
@@ -1051,7 +1056,7 @@
   }
   // Option A (Michael 2026-11-20): below the tiles, a tile that isn't picked lists the props that fit ANY of its toggles; each row's chip names
   // the toggle(s) that hit. Picking a tile narrows the list to the toggle it is set to. Display only: no rule, score or number changes.
-  const togsOf = (t, picked) => (!t.opts ? [null] : picked.some((q) => q.id === t.id) ? [RL.opt[t.id]] : t.opts);
+  const togsOf = (t, picked) => (!t.opts ? [null] : picked.some((q) => q.id === t.id) ? (anyTog(t.id) ? t.opts : [RL.opt[t.id]]) : t.opts);
   const chipTxt = (t) => esc(t.label) + (t.tog && t.tog.length ? ` · ${t.tog.map(esc).join(", ")}` : "");
   const atToggle = (t, v, fn) => (v == null ? fn() : withOpt(t, v, fn));
   function addSig(entry, t, v) {
@@ -1150,7 +1155,7 @@
     let inner = topSection(tabs); // also sets RL.unlocked
     RL.sigs = RL.sigs.filter((id) => RL.unlocked.has(id));
     const picked = RL.sigs.map((id) => tabs.find((t) => t.id === id));
-    if (picked.length) inner += recordPanel(picked);
+    if (picked.length) inner += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
     const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY, 1H and BL-200 now live on Signals. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
@@ -1162,14 +1167,39 @@
   }
   document.addEventListener("click", (e) => {
     const o = e.target.closest && e.target.closest("[data-sgopt]");
-    if (o) { const [k, v] = o.dataset.sgopt.split(":"); RL.opt[k] = +v; (RL.optTouched = RL.optTouched || {})[k] = true; redraw(); return; }
+    if (o) { const [k, v] = o.dataset.sgopt.split(":"); delete RL.any[k]; RL.opt[k] = +v; (RL.optTouched = RL.optTouched || {})[k] = true; redraw(); return; }
     const c = e.target.closest && e.target.closest("[data-sig]");
-    if (c) { const id = c.dataset.sig; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : multiSelect() ? [...RL.sigs, id] : [id]; redraw(); return; }
-    if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; redraw(); return; }
+    if (c) { const id = c.dataset.sig; delete RL.any[id]; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : multiSelect() ? [...RL.sigs, id] : [id]; redraw(); return; }
+    if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; RL.any = {}; redraw(); return; }
     if (e.target.closest && e.target.closest("[data-sgtnf]")) { RL.tnf = !tnfOn(); if (RL.tnf && sgToggleOn()) RL.sgView = "next"; redraw(); return; }
     const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; if (RL.sgView === "last") RL.tnf = false; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
   });
+  // Long press on a Signals tile (Michael 2026-11-22): pick it with ALL its toggles on (list = players matching any of them); long press again to unpick.
+  // A tile with no toggles just gets picked. The click that follows the press is swallowed so it doesn't undo the pick.
+  (function longPress() {
+    let timer = 0, sx = 0, sy = 0, swallowUntil = 0, fired = false;
+    const stop = () => { clearTimeout(timer); timer = 0; };
+    document.addEventListener("pointerdown", (e) => {
+      const c = e.target.closest && e.target.closest(".sg-tile[data-sig]");
+      if (!c || (e.pointerType === "mouse" && e.button !== 0) || e.target.closest(".rinfo")) return;
+      stop(); sx = e.clientX; sy = e.clientY;
+      timer = setTimeout(() => {
+        timer = 0;
+        const id = c.dataset.sig, t = TABS.find((x) => x.id === id); if (!t) return;
+        fired = true; // the click that ends this press is swallowed (see pointerup below)
+        if (anyTog(id)) { RL.sigs = RL.sigs.filter((x) => x !== id); delete RL.any[id]; }
+        else { RL.sigs = multiSelect() ? [...new Set([...RL.sigs, id])] : [id]; if (t.opts) RL.any[id] = true; else delete RL.any[id]; }
+        try { if (navigator.vibrate) navigator.vibrate(15); } catch (err) { /* not supported */ }
+        redraw();
+      }, 500);
+    });
+    document.addEventListener("pointermove", (e) => { if (timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) stop(); });
+    for (const ev of ["pointerup", "pointercancel", "scroll"]) document.addEventListener(ev, stop, true);
+    for (const ev of ["pointerup", "pointercancel"]) document.addEventListener(ev, () => { if (fired) { fired = false; swallowUntil = Date.now() + 80; } }, true);
+    document.addEventListener("click", (e) => { if (Date.now() < swallowUntil && e.target.closest && e.target.closest(".sg-tile[data-sig]")) { e.stopImmediatePropagation(); e.preventDefault(); swallowUntil = 0; } }, true);
+    document.addEventListener("contextmenu", (e) => { if (e.target.closest && e.target.closest(".sg-tile[data-sig]") && (fired || Date.now() < swallowUntil || timer || (window.matchMedia && matchMedia("(pointer: coarse)").matches))) e.preventDefault(); });
+  })();
   document.addEventListener("toggle", (e) => { if (e.target && e.target.matches && e.target.matches("[data-fopen]")) RL.fopen = e.target.open; if (e.target && e.target.matches && e.target.matches("[data-wopen]")) RL.wopen = e.target.open; }, true);
   let qT = 0;
   document.addEventListener("input", (e) => {
