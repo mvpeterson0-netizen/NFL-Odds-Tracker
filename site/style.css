@@ -357,6 +357,21 @@ body.wn-lock { overflow: hidden; }
 .wn-fd-a { flex: 0 0 62px; text-align: center; font-size: 12px; line-height: 1.2; }
 .wn-fd-a span { display: block; font-size: 22px; }
 .wn-fd-b { flex: 1; text-align: center; padding: 9px 6px; border-radius: 8px; background: var(--accent); color: var(--panel); font-weight: 600; font-size: 13px; }
+/* ROI by signal (2026-11-22): plain list, thin bars */
+.wn-plain h3 { padding: 0; background: none; border: 0; border-radius: 0; color: var(--ink); font-size: 18px; }
+.wn-res { margin: 0 0 12px; }
+.wn-grp { padding: 8px 0 6px; border-top: 1px solid var(--line); }
+.wn-grp:first-child { border-top: 0; padding-top: 0; }
+.wn-gh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; margin: 0 0 4px; }
+.wn-gh b { font-size: 15px; }
+.wn-gh span { font-size: 12px; color: var(--muted); }
+.wn-row { display: flex; align-items: center; gap: 8px; min-height: 24px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.wn-sub { flex: 0 0 58px; color: var(--muted); }
+.wn-row .wn-trk { flex: 1; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.wn-row .wn-fill { display: block; height: 100%; padding: 0; border-radius: 3px; background: var(--over); }
+.wn-roi { flex: 0 0 52px; text-align: right; font-weight: 600; }
+.wn-rec { flex: 0 0 48px; text-align: right; color: var(--muted); }
+.wn-note { margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
 .wn-go-btn { display: block; text-align: center; padding: 11px 12px; border-radius: 10px; background: var(--accent); color: var(--panel); text-decoration: none; }
 /* First-open sign-in pop-up (whatsnew.js) */
 .su-box { max-width: 420px; }
