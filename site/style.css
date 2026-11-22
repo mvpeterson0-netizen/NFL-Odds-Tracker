@@ -733,3 +733,7 @@ textarea.tp-in { resize: vertical; }
 .sg-cell3 .sg-tg { z-index: 2; }
 .sg-cell3 .sg-tg button { position: relative; touch-action: manipulation; }
 .sg-cell3 .sg-tg button::after { content: ""; position: absolute; top: -4px; bottom: -12px; left: -2px; right: -2px; }
+
+/* Long press on a Signals tile (2026-11-22): all toggles on, list shows any of them. */
+.sg-tile { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.sg-tile.on.any { border-style: dashed; }
