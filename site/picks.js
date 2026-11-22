@@ -59,6 +59,10 @@
     const rows = (D.rows[pid] || []).filter((r) => r.ko && !started(r.ko)).sort((a, b) => a.ko.localeCompare(b.ko));
     return rows[0] || null;
   }
+  // This week's picks stay out of Graded until Tuesday (device time) after their game; the Live panel shows them as Settled meanwhile.
+  // Only in account mode, where the Live panel exists to show them.
+  const releaseAt = (ko) => { const d = new Date(ko), add = ((2 - d.getDay() + 7) % 7) || 7; return new Date(d.getFullYear(), d.getMonth(), d.getDate() + add).getTime(); };
+  const held = (p) => mode() === "acct" && !!window.STIX_LIVE && !!p.ko && started(p.ko) && releaseAt(p.ko) > now();
   function grade(p) {
     if (!started(p.ko)) return { st: "open" };
     const r = (D.rows[p.pid] || []).find((x) => x.gid === p.gid);
@@ -416,8 +420,9 @@
     const all = list.map((p) => ({ p, g: grade(p) })).sort((a, b) => (a.p.ko || "").localeCompare(b.p.ko || "") || a.p.name.localeCompare(b.p.name));
     const open = all.filter((x) => x.g.st === "open");
     const inLive = window.STIX_LIVE ? window.STIX_LIVE.pickIds() : new Set(); // in-progress picks are shown in the Live panel instead
-    const locked = all.filter((x) => x.g.st === "locked" && !inLive.has(x.p.id));
-    const graded = all.filter((x) => ["hit", "miss", "push", "void"].includes(x.g.st)).reverse();
+    const locked = all.filter((x) => x.g.st === "locked" && !inLive.has(x.p.id) && !held(x.p));
+    const nHeld = all.filter((x) => held(x.p) && x.g.st !== "open").length; // this week's picks: shown in the Live panel until Tuesday
+    const graded = all.filter((x) => ["hit", "miss", "push", "void"].includes(x.g.st) && !held(x.p)).reverse();
     const R = rec(graded), O = rec(graded.filter((x) => x.p.side === "o")), U = rec(graded.filter((x) => x.p.side === "u"));
     const byMk = D.markets.map((m) => ({ m, r: rec(graded.filter((x) => x.p.mid === m.id)) })).filter((x) => x.r.n);
     let h = `<div class="pk-stats"><div class="pk-stat"><span>Record (W–L–P)</span><b>${R.txt}</b></div><div class="pk-stat"><span>Hit rate</span><b>${R.pct}</b></div>
@@ -432,7 +437,7 @@
     if (nShare && window.STIX_SHARE && window.STIX_SHARE.openPicks) h += `<p class="pk-sharerow"><button id="pk-share" class="sh-main" type="button">Share this week's picks (${nShare})</button></p>`;
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
     h += sec("Locked · game started", locked, "Picks move here at kickoff. They can't be changed or removed after that.");
-    h += `<details class="panel pk-graded" ${ST.gradedOpen ? "open" : ""}><summary><b>Graded (${graded.length})</b> <span class="muted small">· tap to show</span></summary><div class="body">${graded.length ? graded.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">Graded picks appear here once the game's stats are published.</p>`}</div></details>`;
+    h += `<details class="panel pk-graded" ${ST.gradedOpen ? "open" : ""}><summary><b>Graded (${graded.length})</b> <span class="muted small">· tap to show${nHeld ? ` · ${nHeld} from this week move here Tuesday` : ""}</span></summary><div class="body">${graded.length ? graded.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">Graded picks appear here once the game's stats are published.</p>`}</div></details>`;
     h += `<p class="muted small">Picks are graded against the line saved when you made the pick (a Mon / Thu / Sun AM snapshot, a line check, or the pre-game line), not the app's graded line.
       Over hits when the actual stat is above that line; equal = push; a player who doesn't play = void. ${lockNote}</p>`;
     return h;
@@ -526,7 +531,7 @@
   }
   const pickFor = (key) => (mode() === "acct" ? AC.picks.find((p) => p.id === key) || null : null);
   const acctReady = () => mode() === "acct" && AC.loaded;
-  window.STIX_PICKS = { list: live, enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, fdOptions, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
+  window.STIX_PICKS = { list: live, held, grade, enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, fdOptions, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
   // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
   if (ACC()) ACC().onChange(() => {
     if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }
