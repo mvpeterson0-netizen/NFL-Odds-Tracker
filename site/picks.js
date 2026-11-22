@@ -415,7 +415,8 @@
   function picksView(list, statusTxt, lockNote) {
     const all = list.map((p) => ({ p, g: grade(p) })).sort((a, b) => (a.p.ko || "").localeCompare(b.p.ko || "") || a.p.name.localeCompare(b.p.name));
     const open = all.filter((x) => x.g.st === "open");
-    const locked = all.filter((x) => x.g.st === "locked");
+    const inLive = window.STIX_LIVE ? window.STIX_LIVE.pickIds() : new Set(); // in-progress picks are shown in the Live panel instead
+    const locked = all.filter((x) => x.g.st === "locked" && !inLive.has(x.p.id));
     const graded = all.filter((x) => ["hit", "miss", "push", "void"].includes(x.g.st)).reverse();
     const R = rec(graded), O = rec(graded.filter((x) => x.p.side === "o")), U = rec(graded.filter((x) => x.p.side === "u"));
     const byMk = D.markets.map((m) => ({ m, r: rec(graded.filter((x) => x.p.mid === m.id)) })).filter((x) => x.r.n);
@@ -426,7 +427,8 @@
       · Hit rate leaves out pushes and voids · ${statusTxt}</p>`;
     const sec = (title, l, empty) => `<div class="panel"><h3>${title} (${l.length})</h3><div class="body">${l.length ? l.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">${empty}</p>`}</div></div>`;
     if (mode() === "acct" && window.STIX_REVIEW) { try { h += window.STIX_REVIEW.entry(); } catch (e) { console.error("review entry failed", e); } }
-    const nShare = open.length + locked.length;
+    if (mode() === "acct" && window.STIX_LIVE) { try { h += window.STIX_LIVE.panel(); } catch (e) { console.error("live panel failed", e); } }
+    const nShare = open.length + locked.length + inLive.size;
     if (nShare && window.STIX_SHARE && window.STIX_SHARE.openPicks) h += `<p class="pk-sharerow"><button id="pk-share" class="sh-main" type="button">Share this week's picks (${nShare})</button></p>`;
     h += sec("Open · you can change these until kickoff", open, "No open picks. Open a player page and tap Over or Under.");
     h += sec("Locked · game started", locked, "Picks move here at kickoff. They can't be changed or removed after that.");
@@ -466,6 +468,7 @@
     // Opening the Picks tab refreshes from the account (at most every 15 s), so picks made on another device show up.
     if (tab === "picks" && mode() === "acct" && AC.loaded && !AC.saving && Date.now() - AC.at > 15000) acLoad();
     if (ACC()) ACC().bind();
+    if (window.STIX_LIVE) { try { window.STIX_LIVE.bind(tab); } catch (e) { console.error("live bind failed", e); } }
     document.querySelectorAll(".pk-graded").forEach((d) => d.addEventListener("toggle", () => { ST.gradedOpen = d.open; }));
     document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => {
       const a = [b.dataset.pid, b.dataset.pmid, b.dataset.pick];
@@ -523,7 +526,7 @@
   }
   const pickFor = (key) => (mode() === "acct" ? AC.picks.find((p) => p.id === key) || null : null);
   const acctReady = () => mode() === "acct" && AC.loaded;
-  window.STIX_PICKS = { enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, fdOptions, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
+  window.STIX_PICKS = { list: live, enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, fdOptions, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
   // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
   if (ACC()) ACC().onChange(() => {
     if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }

@@ -1101,6 +1101,29 @@
     }
     return h + `</div>`;
   }
+  // For the live tracker on the Picks tab (live.js): the same in-progress signal bets as the "Game in progress" list, without the Signals page's
+  // week / name / game / market filters. Read-only; the filters are put back as they were.
+  function livePlays() {
+    const keep = { q: RL.q, gid: RL.gid, mk: RL.mk };
+    RL.q = ""; RL.gid = ""; RL.mk = "";
+    LIVE_PASS = true;
+    try {
+      const map = new Map();
+      for (const t of TABS.filter((x) => !x.hid && !x.challenger && (x.front || (x.page || "main") === "main"))) {
+        for (const v of togsOf(t, [])) {
+          for (const x of atToggle(t, v, () => compute(t.id))) {
+            const side = x.side || t.side;
+            if (side !== "over" && side !== "under") continue;
+            const k = `${x.c.p.id}|${x.c.mid}|${x.c.r.gid}|${side}`;
+            if (!map.has(k)) map.set(k, { ...x, side, sigs: [] });
+            addSig(map.get(k), t, v);
+          }
+        }
+      }
+      return [...map.values()].map((x) => { const { p, r, mid, cur } = x.c;
+        return { pid: p.id, name: p.name, pos: p.pos, team: r.team, opp: r.opp, ha: r.ha, gid: r.gid, mid, side: x.side === "over" ? "o" : "u", line: cur.line, op: cur.op, up: cur.up, codes: x.sigs.map((t) => t.label) }; });
+    } catch (e) { console.error("live signals failed", e); return []; } finally { LIVE_PASS = false; RL.q = keep.q; RL.gid = keep.gid; RL.mk = keep.mk; }
+  }
   // "Completed this week" list: same players as the cards count, graded hit / miss / push against the line the signal used.
   function doneHtml(tabs, picked) {
     const map = new Map();
@@ -1664,5 +1687,5 @@
   document.addEventListener("click", (e) => { if (e.target && e.target.id === "gs-reset") { Object.assign(SCRIPT, SCRIPT_DEFAULT); saveScript(); } });
 
   function safeSettings() { try { return settingsHtml(); } catch (e) { console.error("game script setting failed", e); return ""; } }
-  window.STIX_RESEARCH = { html: safeHtml, htmlFor: (pg) => { try { return html(pg); } catch (e) { console.error("research page failed", e); return ""; } }, analysis: safeAnalysis, analyze, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
+  window.STIX_RESEARCH = { livePlays, html: safeHtml, htmlFor: (pg) => { try { return html(pg); } catch (e) { console.error("research page failed", e); return ""; } }, analysis: safeAnalysis, analyze, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
 })();
