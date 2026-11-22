@@ -70059,6 +70059,74 @@
    },
    "wk": 11
   },
+  "2026_11_NYJ_LAC|00-0033885|rec": {
+   "decisions": {},
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4718423169750603,
+    "mean3_ratio": 1.3333333333333333,
+    "mean5_ratio": 1.3333333333333333,
+    "nprior": 3,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 0.0
+   },
+   "gid": "2026_11_NYJ_LAC",
+   "ko": "2026-11-22T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-22T20:00:36Z",
+   "pid": "00-0033885",
+   "quote": {
+    "book": "FanDuel",
+    "cap": "2026-11-22T20:00:29Z",
+    "line": 1.5,
+    "op": -102.0,
+    "up": -130.0
+   },
+   "wk": 11
+  },
+  "2026_11_NYJ_LAC|00-0033885|rec_yds": {
+   "decisions": {},
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0,
+    "line": 13.5,
+    "line_delta_ratio": 0.17391304347826086,
+    "market_p": 0.5,
+    "mean3_ratio": 1.654320987654321,
+    "mean5_ratio": 1.654320987654321,
+    "nprior": 3,
+    "rise3": 0.0,
+    "share": 0.0,
+    "share_change": null,
+    "snap_change": null,
+    "surprise": null,
+    "usage_delta": null,
+    "usage_last": 0.0
+   },
+   "gid": "2026_11_NYJ_LAC",
+   "ko": "2026-11-22T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-22T20:00:36Z",
+   "pid": "00-0033885",
+   "quote": {
+    "book": "FanDuel",
+    "cap": "2026-11-22T20:00:29Z",
+    "line": 13.5,
+    "op": -113.0,
+    "up": -113.0
+   },
+   "wk": 11
+  },
   "2026_11_NYJ_LAC|00-0036355|pass_yds": {
    "decisions": {},
    "feature_snapshot": {
@@ -70880,6 +70948,74 @@
     "line": 39.5,
     "op": -114.0,
     "up": -110.0
+   },
+   "wk": 11
+  },
+  "2026_11_NYJ_LAC|00-0040189|rec": {
+   "decisions": {},
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 1.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.4090261500988097,
+    "mean3_ratio": 1.7777777777777777,
+    "mean5_ratio": 1.4666666666666668,
+    "nprior": 9,
+    "rise3": 0.0,
+    "share": 0.0625,
+    "share_change": -0.07268518518518519,
+    "snap_change": -0.2666666666666667,
+    "surprise": -0.7,
+    "usage_delta": -4.062790874426819,
+    "usage_last": 6.25
+   },
+   "gid": "2026_11_NYJ_LAC",
+   "ko": "2026-11-22T21:05:00Z",
+   "mid": "rec",
+   "observed_at": "2026-11-22T20:00:36Z",
+   "pid": "00-0040189",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-22T20:00:29Z",
+    "line": 1.5,
+    "op": 131.0,
+    "up": -167.0
+   },
+   "wk": 11
+  },
+  "2026_11_NYJ_LAC|00-0040189|rec_yds": {
+   "decisions": {},
+   "feature_snapshot": {
+    "away": 0.0,
+    "fall3": 1.0,
+    "last_ratio": 0.6666666666666666,
+    "line": 10.5,
+    "line_delta_ratio": 0.0,
+    "market_p": 0.5,
+    "mean3_ratio": 2.4126984126984126,
+    "mean5_ratio": 1.7714285714285716,
+    "nprior": 9,
+    "rise3": 0.0,
+    "share": 0.0625,
+    "share_change": -0.07268518518518519,
+    "snap_change": -0.2666666666666667,
+    "surprise": -0.7558139534883721,
+    "usage_delta": -4.062790874426819,
+    "usage_last": 6.25
+   },
+   "gid": "2026_11_NYJ_LAC",
+   "ko": "2026-11-22T21:05:00Z",
+   "mid": "rec_yds",
+   "observed_at": "2026-11-22T20:00:36Z",
+   "pid": "00-0040189",
+   "quote": {
+    "book": "DraftKings",
+    "cap": "2026-11-22T20:00:29Z",
+    "line": 10.5,
+    "op": -112.0,
+    "up": -112.0
    },
    "wk": 11
   },
