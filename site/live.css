@@ -1,0 +1,28 @@
+/* Live tracker panel on the Picks tab (live.js). Uses the app's colour variables, so light and dark both work. */
+.lv h3 { display: flex; align-items: center; gap: 8px; }
+.lv-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--over); flex: none; }
+.lv-dot.stale { background: var(--push); }
+.lv-sum { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.lv-sum b { font-size: 15px; color: var(--ink); }
+.lv-h { margin: 14px 0 2px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.lv-row { padding: 10px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 7px; }
+.lv-h + .lv-row { border-top: 0; }
+.lv-top, .lv-l2 { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.lv-l2 span:first-child { min-width: 0; }
+.lv-who { min-width: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; font-weight: 600; }
+.lv-tag { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 8px; background: var(--chip); }
+.lv-tag.pick { color: var(--accent); }
+.lv-chip { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 10px; flex: none; background: var(--chip); color: var(--muted); }
+.lv-chip.lv-ok, .lv-chip.lv-hit { color: var(--over); background: color-mix(in srgb, var(--over) 16%, transparent); }
+.lv-chip.lv-risk { color: var(--push); background: color-mix(in srgb, var(--push) 18%, transparent); }
+.lv-chip.lv-dead { color: var(--under); background: color-mix(in srgb, var(--under) 16%, transparent); }
+.lv-room { font-weight: 600; flex: none; }
+.lv-t-ok, .lv-t-hit { color: var(--over); } .lv-t-risk { color: var(--push); } .lv-t-dead { color: var(--under); }
+.lv-bar { position: relative; height: 8px; border-radius: 4px; background: var(--line); }
+.lv-fill { height: 8px; border-radius: 4px; background: var(--muted); }
+.lv-f-ok, .lv-f-hit { background: var(--over); } .lv-f-risk { background: var(--push); } .lv-f-dead { background: var(--under); }
+.lv-line { position: absolute; left: 80%; top: -3px; width: 2px; height: 14px; background: var(--ink); }
+.lv-pace { position: absolute; top: -2px; width: 2px; height: 12px; background: var(--muted); }
+.lv-units { font-weight: 600; flex: none; }
+.lv-pos { color: var(--over); } .lv-neg { color: var(--under); }
+.lv-how { margin-top: 12px; } .lv-how summary { cursor: pointer; }
