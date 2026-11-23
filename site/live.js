@@ -244,7 +244,8 @@
       const ps = plays();
       if (!ps.length) return;
       const gids = [...new Set(ps.map((p) => p.gid))];
-      if (gids.some((g) => !FEED.ev[g]) && Date.now() - FEED.mapAt > MAP_MS) { try { await loadMap(); } catch (e) { FEED.err = "ESPN unreachable"; } }
+      if (gids.some((g) => !FEED.ev[g] || FEED.ev[g].state === "pre") && Date.now() - FEED.mapAt > MAP_MS) { try { await loadMap(); } catch (e) { FEED.err = "ESPN unreachable"; } }
+      // A game still marked pre-game (page opened before kickoff) re-reads the scoreboard at most once per MAP_MS so it flips to live on its own.
       // Games holding one of the user's own picks refresh every 30 s; games with only signal plays every 60 s (each summary is ~45 KB compressed).
       const mine = new Set(ps.filter((p) => p.pickId).map((p) => p.gid)), now = Date.now();
       const offi = (g) => ps.filter((p) => p.gid === g).every((p) => p.gr && ["hit", "miss", "push", "void"].includes(p.gr.st));
