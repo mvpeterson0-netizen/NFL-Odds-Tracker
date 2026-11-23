@@ -1,0 +1,25 @@
+name: probe2024
+on:
+  push:
+    branches: [probe/2024-history]
+permissions:
+  contents: write
+concurrency:
+  group: probe2024
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python probe2024/probe.py
+        env:
+          ODDS_API_KEY_20K: ${{ secrets.ODDS_API_KEY_20K }}
+      - if: always()
+        run: |
+          git config user.name probe; git config user.email probe@example.com
+          git add probe2024/result.json probe2024/raw.json || true
+          git commit -m "probe result" || true
+          git push || true
