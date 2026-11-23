@@ -1,0 +1,3881 @@
+{
+ "downloaded_utc": "2026-11-23T02:00:28Z",
+ "event_id": "a6383a73f7e6937fcdc376b50d4dc510",
+ "game_id": "2024_10_ATL_NO",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2024-11-10T15:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Atlanta Falcons",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2024-11-10T14:55:16Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:43Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:43Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 125
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -165
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2024-11-10T14:52:23Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:52:30Z",
+       "outcomes": [
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -127
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -108
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 27.5,
+         "price": -121
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 27.5,
+         "price": -113
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 42.5,
+         "price": -109
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 62.5,
+         "price": -109
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 56.5,
+         "price": -108
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 56.5,
+         "price": -127
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 18.5,
+         "price": -129
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 18.5,
+         "price": -106
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 31.5,
+         "price": -119
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 40.5,
+         "price": -135
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 40.5,
+         "price": -101
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 16.5,
+         "price": -131
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 16.5,
+         "price": -104
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -142
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 27.5,
+         "price": 104
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 26.5,
+         "price": -106
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 26.5,
+         "price": -129
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:52:30Z",
+       "outcomes": [
+        {
+         "description": "Derek Carr",
+         "name": "Over",
+         "point": 2.5,
+         "price": -106
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Under",
+         "point": 2.5,
+         "price": -129
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 27.5,
+         "price": -104
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 27.5,
+         "price": -131
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 70.5,
+         "price": -125
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 70.5,
+         "price": -109
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 35.5,
+         "price": -119
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 70.5,
+         "price": -119
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2024-11-10T14:55:18Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:13Z",
+       "outcomes": [
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 30.5,
+         "price": -105
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:13Z",
+       "outcomes": [
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 73.5,
+         "price": -110
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 73.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2024-11-10T14:55:17Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:37Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 39.5,
+         "price": -113
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 49.5,
+         "price": -155
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 49.5,
+         "price": 117
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 55.5,
+         "price": -113
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 28.5,
+         "price": -118
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 60.5,
+         "price": -113
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 42.5,
+         "price": -117
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 44.5,
+         "price": -205
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 44.5,
+         "price": 150
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 44.5,
+         "price": 210
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 39.5,
+         "price": 163
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -225
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 34.5,
+         "price": -167
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 34.5,
+         "price": 125
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -295
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 205
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 39.5,
+         "price": -278
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 39.5,
+         "price": 195
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 89.5,
+         "price": 290
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 89.5,
+         "price": -455
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 54.5,
+         "price": -109
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -175
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 130
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 54.5,
+         "price": 170
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 54.5,
+         "price": -240
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -245
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 175
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 34.5,
+         "price": -400
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 34.5,
+         "price": 260
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 24.5,
+         "price": -400
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 24.5,
+         "price": 265
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 44.5,
+         "price": 240
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 44.5,
+         "price": -360
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 49.5,
+         "price": 275
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 49.5,
+         "price": -435
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 59.5,
+         "price": 108
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 59.5,
+         "price": -141
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 49.5,
+         "price": 133
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 49.5,
+         "price": -180
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -165
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 123
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 64.5,
+         "price": 135
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 64.5,
+         "price": -182
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 29.5,
+         "price": -250
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 29.5,
+         "price": 175
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 270
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -420
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 69.5,
+         "price": 130
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 69.5,
+         "price": -175
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 59.5,
+         "price": 280
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 59.5,
+         "price": -435
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 74.5,
+         "price": 160
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 74.5,
+         "price": -220
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 54.5,
+         "price": 215
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 54.5,
+         "price": -315
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 190
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -278
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 275
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -435
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 215
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 44.5,
+         "price": 120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 44.5,
+         "price": -159
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 34.5,
+         "price": 135
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -182
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 84.5,
+         "price": 235
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 84.5,
+         "price": -360
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 59.5,
+         "price": 220
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 59.5,
+         "price": -315
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 49.5,
+         "price": 160
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 49.5,
+         "price": -225
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -109
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 163
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -225
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 79.5,
+         "price": 195
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 79.5,
+         "price": -278
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 64.5,
+         "price": 280
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 64.5,
+         "price": -435
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 44.5,
+         "price": -275
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 44.5,
+         "price": 190
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 24.5,
+         "price": -400
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 24.5,
+         "price": 265
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 39.5,
+         "price": -375
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 39.5,
+         "price": 250
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 54.5,
+         "price": -157
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 54.5,
+         "price": 118
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 59.5,
+         "price": -121
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 59.5,
+         "price": -107
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 24.5,
+         "price": -159
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 24.5,
+         "price": 120
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 19.5,
+         "price": -250
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 19.5,
+         "price": 175
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 64.5,
+         "price": 105
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 64.5,
+         "price": -136
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 19.5,
+         "price": -245
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 19.5,
+         "price": 170
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 34.5,
+         "price": 130
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 34.5,
+         "price": -175
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 69.5,
+         "price": 170
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 69.5,
+         "price": -235
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 44.5,
+         "price": 102
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 44.5,
+         "price": -132
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 74.5,
+         "price": 210
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 74.5,
+         "price": -305
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 39.5,
+         "price": 175
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 39.5,
+         "price": -250
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 39.5,
+         "price": -134
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 39.5,
+         "price": 102
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 24.5,
+         "price": -162
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 24.5,
+         "price": 123
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 29.5,
+         "price": -265
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 29.5,
+         "price": 188
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -108
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 34.5,
+         "price": -186
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 34.5,
+         "price": 138
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 49.5,
+         "price": -205
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 49.5,
+         "price": 150
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 79.5,
+         "price": 260
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 79.5,
+         "price": -400
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 28.5,
+         "price": -117
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 34.5,
+         "price": 250
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 34.5,
+         "price": -385
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 44.5,
+         "price": 300
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 44.5,
+         "price": -480
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:37Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 37.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 74.5,
+         "price": 112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 74.5,
+         "price": -148
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 25.5,
+         "price": -117
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 84.5,
+         "price": 175
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 84.5,
+         "price": -250
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 94.5,
+         "price": 300
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 94.5,
+         "price": -500
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 54.5,
+         "price": -286
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 54.5,
+         "price": 195
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 89.5,
+         "price": 240
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 89.5,
+         "price": -375
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 59.5,
+         "price": -205
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 59.5,
+         "price": 148
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 89.5,
+         "price": 225
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 89.5,
+         "price": -335
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 84.5,
+         "price": 188
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 84.5,
+         "price": -275
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 94.5,
+         "price": 280
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 94.5,
+         "price": -455
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 69.5,
+         "price": -118
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 79.5,
+         "price": 150
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 79.5,
+         "price": -205
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 49.5,
+         "price": -420
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 49.5,
+         "price": 270
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 74.5,
+         "price": 118
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 74.5,
+         "price": -157
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 64.5,
+         "price": -157
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 64.5,
+         "price": 118
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 59.5,
+         "price": -210
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 59.5,
+         "price": 150
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 64.5,
+         "price": -148
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 64.5,
+         "price": 114
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 79.5,
+         "price": 140
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 79.5,
+         "price": -190
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 54.5,
+         "price": -295
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 54.5,
+         "price": 200
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 49.5,
+         "price": -420
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 49.5,
+         "price": 265
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 70.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2024-11-10T14:55:17Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:15Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 39.5,
+         "price": -113
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 49.5,
+         "price": -155
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 49.5,
+         "price": 117
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 55.5,
+         "price": -113
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 28.5,
+         "price": -118
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 60.5,
+         "price": -113
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 42.5,
+         "price": -112
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 42.5,
+         "price": -117
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 44.5,
+         "price": -205
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 44.5,
+         "price": 150
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 44.5,
+         "price": 210
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 39.5,
+         "price": 163
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -225
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 34.5,
+         "price": -167
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 34.5,
+         "price": 125
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -295
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 205
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 39.5,
+         "price": -278
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 39.5,
+         "price": 195
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 89.5,
+         "price": 290
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 89.5,
+         "price": -455
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 54.5,
+         "price": -109
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -175
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 130
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 54.5,
+         "price": 170
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 54.5,
+         "price": -240
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -245
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 175
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 34.5,
+         "price": -400
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 34.5,
+         "price": 260
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 24.5,
+         "price": -400
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 24.5,
+         "price": 265
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 44.5,
+         "price": 240
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 44.5,
+         "price": -360
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 49.5,
+         "price": 275
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 49.5,
+         "price": -435
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 59.5,
+         "price": 108
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 59.5,
+         "price": -141
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 49.5,
+         "price": 133
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 49.5,
+         "price": -180
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -165
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 123
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 64.5,
+         "price": 135
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 64.5,
+         "price": -182
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 29.5,
+         "price": -250
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 29.5,
+         "price": 175
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 270
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -420
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 69.5,
+         "price": 130
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 69.5,
+         "price": -175
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 59.5,
+         "price": 280
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 59.5,
+         "price": -435
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 74.5,
+         "price": 160
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 74.5,
+         "price": -220
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 54.5,
+         "price": 215
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 54.5,
+         "price": -315
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 190
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -278
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 275
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -435
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 215
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 44.5,
+         "price": 120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 44.5,
+         "price": -159
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 34.5,
+         "price": 135
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -182
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 84.5,
+         "price": 235
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 84.5,
+         "price": -360
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 59.5,
+         "price": 220
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 59.5,
+         "price": -315
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 49.5,
+         "price": 160
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 49.5,
+         "price": -225
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -109
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 163
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -225
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 79.5,
+         "price": 195
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 79.5,
+         "price": -278
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 64.5,
+         "price": 280
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 64.5,
+         "price": -435
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 44.5,
+         "price": -275
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 44.5,
+         "price": 190
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 24.5,
+         "price": -400
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 24.5,
+         "price": 265
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 39.5,
+         "price": -375
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 39.5,
+         "price": 250
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 54.5,
+         "price": -157
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 54.5,
+         "price": 118
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 59.5,
+         "price": -121
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 59.5,
+         "price": -107
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 24.5,
+         "price": -159
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 24.5,
+         "price": 120
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 19.5,
+         "price": -250
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 19.5,
+         "price": 175
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 64.5,
+         "price": 105
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 64.5,
+         "price": -136
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 19.5,
+         "price": -245
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 19.5,
+         "price": 170
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 34.5,
+         "price": 130
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 34.5,
+         "price": -175
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 69.5,
+         "price": 170
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 69.5,
+         "price": -235
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 44.5,
+         "price": 102
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 44.5,
+         "price": -132
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 74.5,
+         "price": 210
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 74.5,
+         "price": -305
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 39.5,
+         "price": 175
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 39.5,
+         "price": -250
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 39.5,
+         "price": -134
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 39.5,
+         "price": 102
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 24.5,
+         "price": -162
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 24.5,
+         "price": 123
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 29.5,
+         "price": -265
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 29.5,
+         "price": 188
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -108
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 34.5,
+         "price": -186
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 34.5,
+         "price": 138
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 49.5,
+         "price": -205
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 49.5,
+         "price": 150
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 79.5,
+         "price": 260
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 79.5,
+         "price": -400
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 28.5,
+         "price": -117
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 34.5,
+         "price": 250
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 34.5,
+         "price": -385
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 44.5,
+         "price": 300
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 44.5,
+         "price": -480
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:15Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 37.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 37.5,
+         "price": -112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 74.5,
+         "price": 112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 74.5,
+         "price": -148
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 25.5,
+         "price": -117
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 25.5,
+         "price": -112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 84.5,
+         "price": 175
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 84.5,
+         "price": -250
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 94.5,
+         "price": 300
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 94.5,
+         "price": -500
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 54.5,
+         "price": -286
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 54.5,
+         "price": 195
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 89.5,
+         "price": 240
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 89.5,
+         "price": -375
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 59.5,
+         "price": -205
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 59.5,
+         "price": 148
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 89.5,
+         "price": 225
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 89.5,
+         "price": -335
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 84.5,
+         "price": 188
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 84.5,
+         "price": -275
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 94.5,
+         "price": 280
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 94.5,
+         "price": -455
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 69.5,
+         "price": -118
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 79.5,
+         "price": 150
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 79.5,
+         "price": -205
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 49.5,
+         "price": -420
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 49.5,
+         "price": 270
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 74.5,
+         "price": 118
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 74.5,
+         "price": -157
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 64.5,
+         "price": -157
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 64.5,
+         "price": 118
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 59.5,
+         "price": -210
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 59.5,
+         "price": 150
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 64.5,
+         "price": -148
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 64.5,
+         "price": 114
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 79.5,
+         "price": 140
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 79.5,
+         "price": -190
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 54.5,
+         "price": -295
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 54.5,
+         "price": 200
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 49.5,
+         "price": -420
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 49.5,
+         "price": 265
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 70.5,
+         "price": -112
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 70.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2024-11-10T14:55:16Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:12Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 39.5,
+         "price": -125
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 16.5,
+         "price": -125
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 26.5,
+         "price": -125
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 31.5,
+         "price": -125
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 3.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:12Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -125
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Under",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Over",
+         "point": 1.5,
+         "price": -110
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -130
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 35.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2024-11-10T14:55:17Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 49.5,
+         "price": -135
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 49.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:49Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 130
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -175
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2024-11-10T14:55:17Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:10Z",
+       "outcomes": [
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 59.5,
+         "price": 105
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 59.5,
+         "price": -135
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 44.5,
+         "price": 100
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 44.5,
+         "price": -130
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 39.5,
+         "price": 100
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 29.5,
+         "price": -105
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -105
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:10Z",
+       "outcomes": [
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 34.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 34.5,
+         "price": -105
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2024-11-10T14:54:53Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-11-10T14:55:33Z",
+       "outcomes": [
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Drake London",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Drake London",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 3.5,
+         "price": -115
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Marquez Valdes-Scantling",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Ray-Ray McCloud III",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Over",
+         "point": 49.5,
+         "price": -135
+        },
+        {
+         "description": "Darnell Mooney",
+         "name": "Under",
+         "point": 49.5,
+         "price": 105
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 39.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Over",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Kyle Pitts",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-11-10T14:55:33Z",
+       "outcomes": [
+        {
+         "description": "Taysom Hill",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Taysom Hill",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Allgeier",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Bijan Robinson",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Over",
+         "point": 2.5,
+         "price": -105
+        },
+        {
+         "description": "Derek Carr",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Over",
+         "point": 1.5,
+         "price": 115
+        },
+        {
+         "description": "Kirk Cousins",
+         "name": "Under",
+         "point": 1.5,
+         "price": -155
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2024-11-10T18:00:00Z",
+   "home_team": "New Orleans Saints",
+   "id": "a6383a73f7e6937fcdc376b50d4dc510",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2024-11-10T15:00:37Z",
+  "previous_timestamp": "2024-11-10T14:50:38Z",
+  "timestamp": "2024-11-10T14:55:37Z"
+ }
+}

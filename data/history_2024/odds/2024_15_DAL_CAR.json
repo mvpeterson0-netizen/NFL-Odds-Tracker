@@ -1,0 +1,2866 @@
+{
+ "downloaded_utc": "2026-11-23T02:01:14Z",
+ "event_id": "5e028b3e2019613c56d3431d4e04e46d",
+ "game_id": "2024_15_DAL_CAR",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2024-12-15T15:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Dallas Cowboys",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2024-12-15T14:55:29Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:55:15Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 64.5,
+         "price": -110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 64.5,
+         "price": -120
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 12.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:55:15Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 85.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 85.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 2.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2024-12-15T14:54:53Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:52:48Z",
+       "outcomes": [
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 37.5,
+         "price": -117
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 37.5,
+         "price": -117
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 13.5,
+         "price": -109
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 13.5,
+         "price": -125
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 26.5,
+         "price": -117
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 26.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -121
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 54.5,
+         "price": -117
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -117
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 63.5,
+         "price": -117
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 63.5,
+         "price": -117
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 37.5,
+         "price": -117
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 37.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:52:48Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 81.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 81.5,
+         "price": -121
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 16.5,
+         "price": -121
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 16.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 85.5,
+         "price": -125
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 85.5,
+         "price": -109
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2024-12-15T14:55:16Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:55:27Z",
+       "outcomes": [
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 52.5,
+         "price": -110
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 52.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 36.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 36.5,
+         "price": -110
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:55:27Z",
+       "outcomes": [
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 81.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 81.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 85.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 85.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2024-12-15T14:54:54Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:55:54Z",
+       "outcomes": [
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 49.5,
+         "price": -127
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 49.5,
+         "price": -103
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -137
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 34.5,
+         "price": 106
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 39.5,
+         "price": 107
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 39.5,
+         "price": -139
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 37.5,
+         "price": -113
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 36.5,
+         "price": -113
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 12.5,
+         "price": -109
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 64.5,
+         "price": -117
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 64.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 102
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -132
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 24.5,
+         "price": -137
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 24.5,
+         "price": 106
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 24.5,
+         "price": -265
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 24.5,
+         "price": 185
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 79.5,
+         "price": 160
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 79.5,
+         "price": -225
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 74.5,
+         "price": 250
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 74.5,
+         "price": -385
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 19.5,
+         "price": -205
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 19.5,
+         "price": 148
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 29.5,
+         "price": -480
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 29.5,
+         "price": 295
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 74.5,
+         "price": 132
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 74.5,
+         "price": -177
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 64.5,
+         "price": 160
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 64.5,
+         "price": -225
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 29.5,
+         "price": 105
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 29.5,
+         "price": -136
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 19.5,
+         "price": 180
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 19.5,
+         "price": -250
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -200
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 29.5,
+         "price": 145
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -180
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": 135
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 34.5,
+         "price": -129
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 34.5,
+         "price": -103
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 59.5,
+         "price": 130
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 59.5,
+         "price": -175
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -480
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 300
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 89.5,
+         "price": 235
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 89.5,
+         "price": -345
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -295
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 205
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 175
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -250
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 49.5,
+         "price": -250
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 49.5,
+         "price": 180
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 54.5,
+         "price": 102
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -132
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 54.5,
+         "price": -195
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 54.5,
+         "price": 143
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 84.5,
+         "price": 195
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 84.5,
+         "price": -278
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 49.5,
+         "price": 180
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 49.5,
+         "price": -250
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 54.5,
+         "price": 230
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 54.5,
+         "price": -345
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 44.5,
+         "price": 250
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 44.5,
+         "price": -375
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 59.5,
+         "price": -150
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 59.5,
+         "price": 115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 94.5,
+         "price": 285
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 94.5,
+         "price": -455
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 44.5,
+         "price": -167
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 44.5,
+         "price": 128
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 59.5,
+         "price": 300
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 59.5,
+         "price": -480
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 44.5,
+         "price": 140
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 44.5,
+         "price": -190
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 135
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -182
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 44.5,
+         "price": -335
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 44.5,
+         "price": 230
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 59.5,
+         "price": 300
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 59.5,
+         "price": -480
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 34.5,
+         "price": -315
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 34.5,
+         "price": 220
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 34.5,
+         "price": 140
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 34.5,
+         "price": -190
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 39.5,
+         "price": -230
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 39.5,
+         "price": 165
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 39.5,
+         "price": -480
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 39.5,
+         "price": 300
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 19.5,
+         "price": -420
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 19.5,
+         "price": 265
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 54.5,
+         "price": 235
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 54.5,
+         "price": -360
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 39.5,
+         "price": 185
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 39.5,
+         "price": -265
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 69.5,
+         "price": 200
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 69.5,
+         "price": -286
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 69.5,
+         "price": 108
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 69.5,
+         "price": -139
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 14.5,
+         "price": -107
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 14.5,
+         "price": -122
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 27.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:55:54Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 83.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 84.5,
+         "price": -127
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 84.5,
+         "price": -103
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 84.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 84.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 104.5,
+         "price": 190
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 104.5,
+         "price": -275
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 89.5,
+         "price": 114
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 89.5,
+         "price": -148
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 64.5,
+         "price": -315
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 64.5,
+         "price": 215
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 24.5,
+         "price": 205
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 24.5,
+         "price": -305
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 79.5,
+         "price": -162
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 79.5,
+         "price": 123
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 109.5,
+         "price": 255
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 109.5,
+         "price": -385
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 19.5,
+         "price": 133
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 19.5,
+         "price": -180
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 69.5,
+         "price": -240
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 69.5,
+         "price": 170
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 99.5,
+         "price": 155
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 99.5,
+         "price": -215
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 59.5,
+         "price": -435
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 59.5,
+         "price": 280
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 104.5,
+         "price": 210
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 104.5,
+         "price": -305
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 74.5,
+         "price": -180
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 74.5,
+         "price": 135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 69.5,
+         "price": -286
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 69.5,
+         "price": 195
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 99.5,
+         "price": 170
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 99.5,
+         "price": -240
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 94.5,
+         "price": 125
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 94.5,
+         "price": -167
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 89.5,
+         "price": 102
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 89.5,
+         "price": -132
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 94.5,
+         "price": 138
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 94.5,
+         "price": -186
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 74.5,
+         "price": -215
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 74.5,
+         "price": 155
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 64.5,
+         "price": -385
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 64.5,
+         "price": 255
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 79.5,
+         "price": -139
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 79.5,
+         "price": 108
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 109.5,
+         "price": 235
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 109.5,
+         "price": -360
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 86.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 86.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 114.5,
+         "price": 290
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 114.5,
+         "price": -455
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2024-12-15T14:55:17Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:55:21Z",
+       "outcomes": [
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 49.5,
+         "price": -127
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 49.5,
+         "price": -103
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -137
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 34.5,
+         "price": 106
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 39.5,
+         "price": 107
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 39.5,
+         "price": -139
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 37.5,
+         "price": -113
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 36.5,
+         "price": -113
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 12.5,
+         "price": -109
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 64.5,
+         "price": -117
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 64.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 102
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -132
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 24.5,
+         "price": -137
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 24.5,
+         "price": 106
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 24.5,
+         "price": -265
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 24.5,
+         "price": 185
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 79.5,
+         "price": 160
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 79.5,
+         "price": -225
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 74.5,
+         "price": 250
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 74.5,
+         "price": -385
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 19.5,
+         "price": -205
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 19.5,
+         "price": 148
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 29.5,
+         "price": -480
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 29.5,
+         "price": 295
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 74.5,
+         "price": 132
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 74.5,
+         "price": -177
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 64.5,
+         "price": 160
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 64.5,
+         "price": -225
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 29.5,
+         "price": 105
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 29.5,
+         "price": -136
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 19.5,
+         "price": 180
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 19.5,
+         "price": -250
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -200
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 29.5,
+         "price": 145
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -180
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": 135
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 34.5,
+         "price": -129
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 34.5,
+         "price": -103
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 59.5,
+         "price": 130
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 59.5,
+         "price": -175
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -480
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 300
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 89.5,
+         "price": 235
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 89.5,
+         "price": -345
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -295
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 205
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 175
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -250
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 49.5,
+         "price": -250
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 49.5,
+         "price": 180
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 54.5,
+         "price": 102
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 54.5,
+         "price": -132
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 54.5,
+         "price": -195
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 54.5,
+         "price": 143
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 84.5,
+         "price": 195
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 84.5,
+         "price": -278
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 49.5,
+         "price": 180
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 49.5,
+         "price": -250
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 54.5,
+         "price": 230
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 54.5,
+         "price": -345
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 44.5,
+         "price": 250
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 44.5,
+         "price": -375
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 59.5,
+         "price": -150
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 59.5,
+         "price": 115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 94.5,
+         "price": 285
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 94.5,
+         "price": -455
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 44.5,
+         "price": -167
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 44.5,
+         "price": 128
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 59.5,
+         "price": 300
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 59.5,
+         "price": -480
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 44.5,
+         "price": 140
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 44.5,
+         "price": -190
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 135
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -182
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 44.5,
+         "price": -335
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 44.5,
+         "price": 230
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 59.5,
+         "price": 300
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 59.5,
+         "price": -480
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 34.5,
+         "price": -315
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 34.5,
+         "price": 220
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 34.5,
+         "price": 140
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 34.5,
+         "price": -190
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 39.5,
+         "price": -230
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 39.5,
+         "price": 165
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 39.5,
+         "price": -480
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 39.5,
+         "price": 300
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 19.5,
+         "price": -420
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 19.5,
+         "price": 265
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 54.5,
+         "price": 235
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 54.5,
+         "price": -360
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 39.5,
+         "price": 185
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 39.5,
+         "price": -265
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 69.5,
+         "price": 200
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 69.5,
+         "price": -286
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 69.5,
+         "price": 108
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 69.5,
+         "price": -139
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 14.5,
+         "price": -107
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 14.5,
+         "price": -122
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 27.5,
+         "price": -118
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:55:21Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 83.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 84.5,
+         "price": -127
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 84.5,
+         "price": -103
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 2.5,
+         "price": -117
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 2.5,
+         "price": -112
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 84.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 84.5,
+         "price": -118
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 104.5,
+         "price": 190
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 104.5,
+         "price": -275
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 89.5,
+         "price": 114
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 89.5,
+         "price": -148
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 64.5,
+         "price": -315
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 64.5,
+         "price": 215
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 24.5,
+         "price": 205
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 24.5,
+         "price": -305
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 79.5,
+         "price": -162
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 79.5,
+         "price": 123
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 109.5,
+         "price": 255
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 109.5,
+         "price": -385
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 19.5,
+         "price": 133
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 19.5,
+         "price": -180
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 69.5,
+         "price": -240
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 69.5,
+         "price": 170
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 99.5,
+         "price": 155
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 99.5,
+         "price": -215
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 59.5,
+         "price": -435
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 59.5,
+         "price": 280
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 104.5,
+         "price": 210
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 104.5,
+         "price": -305
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 74.5,
+         "price": -180
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 74.5,
+         "price": 135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 69.5,
+         "price": -286
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 69.5,
+         "price": 195
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 99.5,
+         "price": 170
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 99.5,
+         "price": -240
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 94.5,
+         "price": 125
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 94.5,
+         "price": -167
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 89.5,
+         "price": 102
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 89.5,
+         "price": -132
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 94.5,
+         "price": 138
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 94.5,
+         "price": -186
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 74.5,
+         "price": -215
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 74.5,
+         "price": 155
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 64.5,
+         "price": -385
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 64.5,
+         "price": 255
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 79.5,
+         "price": -139
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 79.5,
+         "price": 108
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 109.5,
+         "price": 235
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 109.5,
+         "price": -360
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 86.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 86.5,
+         "price": -113
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 114.5,
+         "price": 290
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 114.5,
+         "price": -455
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2024-12-15T14:55:16Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:55:09Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 64.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 28.5,
+         "price": -110
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 37.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 37.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:55:09Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 84.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 84.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 84.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 84.5,
+         "price": -115
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 2.5,
+         "price": -130
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 2.5,
+         "price": 100
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2024-12-15T14:55:15Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 69.5,
+         "price": 105
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 69.5,
+         "price": -135
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 49.5,
+         "price": -135
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 49.5,
+         "price": 105
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 39.5,
+         "price": 100
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 105
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -135
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 24.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 79.5,
+         "price": -130
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 79.5,
+         "price": 100
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 79.5,
+         "price": -145
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 79.5,
+         "price": 115
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2024-12-15T14:55:29Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-15T14:55:05Z",
+       "outcomes": [
+        {
+         "description": "CeeDee Lamb",
+         "name": "Over",
+         "point": 64.5,
+         "price": -120
+        },
+        {
+         "description": "CeeDee Lamb",
+         "name": "Under",
+         "point": 64.5,
+         "price": -120
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Over",
+         "point": 50.5,
+         "price": -125
+        },
+        {
+         "description": "Adam Thielen",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 37.5,
+         "price": -125
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 37.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 37.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 37.5,
+         "price": -125
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 28.5,
+         "price": -125
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-15T14:55:05Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 84.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 84.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 84.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 84.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 14.5,
+         "price": -125
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Over",
+         "point": 2.5,
+         "price": -140
+        },
+        {
+         "description": "Cooper Rush",
+         "name": "Under",
+         "point": 2.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    }
+   ],
+   "commence_time": "2024-12-15T18:00:00Z",
+   "home_team": "Carolina Panthers",
+   "id": "5e028b3e2019613c56d3431d4e04e46d",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2024-12-15T15:00:37Z",
+  "previous_timestamp": "2024-12-15T14:50:37Z",
+  "timestamp": "2024-12-15T14:55:37Z"
+ }
+}

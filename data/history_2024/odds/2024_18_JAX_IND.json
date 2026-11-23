@@ -1,0 +1,754 @@
+{
+ "downloaded_utc": "2026-11-23T02:01:48Z",
+ "event_id": "ec3a43f544c27aba390eea6b4f1bb55a",
+ "game_id": "2024_18_JAX_IND",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-01-05T15:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Jacksonville Jaguars",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-01-05T14:55:36Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:55:19Z",
+       "outcomes": [
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 82.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 82.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 53.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 53.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:55:19Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 84.5,
+         "price": -105
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 84.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-01-05T14:53:15Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:53:16Z",
+       "outcomes": [
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 81.5,
+         "price": -113
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 81.5,
+         "price": -121
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 53.5,
+         "price": -133
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 53.5,
+         "price": -103
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 51.5,
+         "price": -121
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 51.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:53:16Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 84.5,
+         "price": -113
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 84.5,
+         "price": -121
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-01-05T14:54:29Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:55:56Z",
+       "outcomes": [
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 79.5,
+         "price": -125
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 79.5,
+         "price": -105
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 49.5,
+         "price": -130
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 49.5,
+         "price": 100
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -155
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": 120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:55:56Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 79.5,
+         "price": -140
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 79.5,
+         "price": 110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-01-05T14:54:28Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:55:03Z",
+       "outcomes": [
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 80.5,
+         "price": -125
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 80.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 52.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 52.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 51.5,
+         "price": -125
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 51.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:55:03Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 84.5,
+         "price": -125
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 84.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-01-05T14:54:28Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:54:57Z",
+       "outcomes": [
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 52.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 52.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 52.5,
+         "price": -117
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 81.5,
+         "price": -114
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 81.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 74.5,
+         "price": 240
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 74.5,
+         "price": -360
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 74.5,
+         "price": -155
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 74.5,
+         "price": 117
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 99.5,
+         "price": 170
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 99.5,
+         "price": -240
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 74.5,
+         "price": 235
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 74.5,
+         "price": -345
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 49.5,
+         "price": -130
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 49.5,
+         "price": 100
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -134
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": 104
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:54:57Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 83.5,
+         "price": -113
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 74.5,
+         "price": -182
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 74.5,
+         "price": 135
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 99.5,
+         "price": 175
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 99.5,
+         "price": -245
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-01-05T14:54:28Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:55:40Z",
+       "outcomes": [
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 52.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 52.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 52.5,
+         "price": -112
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 52.5,
+         "price": -117
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 81.5,
+         "price": -114
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 81.5,
+         "price": -114
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 74.5,
+         "price": 240
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 74.5,
+         "price": -360
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 74.5,
+         "price": -155
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 74.5,
+         "price": 117
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 99.5,
+         "price": 170
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 99.5,
+         "price": -240
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 74.5,
+         "price": 235
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 74.5,
+         "price": -345
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 49.5,
+         "price": -130
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 49.5,
+         "price": 100
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -134
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": 104
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:55:40Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 83.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 83.5,
+         "price": -113
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 74.5,
+         "price": -182
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 74.5,
+         "price": 135
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 99.5,
+         "price": 175
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 99.5,
+         "price": -245
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-01-05T14:54:28Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:55:15Z",
+       "outcomes": [
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 80.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 80.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:55:15Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 84.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 84.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-01-05T14:54:29Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T14:55:14Z",
+       "outcomes": [
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Over",
+         "point": 80.5,
+         "price": -115
+        },
+        {
+         "description": "Brian Thomas Jr",
+         "name": "Under",
+         "point": 80.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 52.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 52.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T14:55:14Z",
+       "outcomes": [
+        {
+         "description": "Jonathan Taylor",
+         "name": "Over",
+         "point": 84.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Taylor",
+         "name": "Under",
+         "point": 84.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-01-05T18:00:00Z",
+   "home_team": "Indianapolis Colts",
+   "id": "ec3a43f544c27aba390eea6b4f1bb55a",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-01-05T15:00:38Z",
+  "previous_timestamp": "2025-01-05T14:50:38Z",
+  "timestamp": "2025-01-05T14:55:37Z"
+ }
+}

@@ -1,0 +1,1433 @@
+{
+ "downloaded_utc": "2026-11-23T02:01:51Z",
+ "event_id": "2cf5abcfe39f3ac0d82ffb5a90b49e93",
+ "game_id": "2024_18_SEA_LA",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-01-05T18:25:00Z",
+ "response": {
+  "data": {
+   "away_team": "Seattle Seahawks",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-01-05T18:20:26Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:19:57Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 65.5,
+         "price": -115
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:19:57Z",
+       "outcomes": [
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 62.5,
+         "price": -105
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 54.5,
+         "price": -105
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 54.5,
+         "price": -125
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Over",
+         "point": 3.5,
+         "price": -105
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-01-05T18:20:26Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:20:53Z",
+       "outcomes": [
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:20:53Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 63.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-01-05T18:18:00Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:17:56Z",
+       "outcomes": [
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -117
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -117
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 15.5,
+         "price": -121
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 65.5,
+         "price": -117
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 65.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 21.5,
+         "price": -109
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 62.5,
+         "price": -109
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:17:56Z",
+       "outcomes": [
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 62.5,
+         "price": -133
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 62.5,
+         "price": -103
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 7.5,
+         "price": -117
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 7.5,
+         "price": -117
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 55.5,
+         "price": -109
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 55.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-01-05T18:20:27Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:20:31Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 59.5,
+         "price": -135
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 59.5,
+         "price": 105
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 69.5,
+         "price": 100
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 69.5,
+         "price": -130
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 19.5,
+         "price": -135
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 19.5,
+         "price": 105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:20:31Z",
+       "outcomes": [
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 59.5,
+         "price": -140
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 59.5,
+         "price": 110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 59.5,
+         "price": 110
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 59.5,
+         "price": -140
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-01-05T18:20:26Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:20:00Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 63.5,
+         "price": -125
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 60.5,
+         "price": -125
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 60.5,
+         "price": -125
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 15.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:20:00Z",
+       "outcomes": [
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 54.5,
+         "price": -125
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 6.5,
+         "price": -130
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 6.5,
+         "price": -115
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Over",
+         "point": 2.5,
+         "price": -125
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Under",
+         "point": 2.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-01-05T18:19:19Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:19:22Z",
+       "outcomes": [
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 60.5,
+         "price": -135
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 60.5,
+         "price": 100
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:19:22Z",
+       "outcomes": [
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 6.5,
+         "price": -125
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 6.5,
+         "price": -105
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Under",
+         "point": 2.5,
+         "price": -120
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-01-05T18:20:27Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:20:19Z",
+       "outcomes": [
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 60.5,
+         "price": -130
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 60.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:20:19Z",
+       "outcomes": [
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Over",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Under",
+         "point": 2.5,
+         "price": -115
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 6.5,
+         "price": -125
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 6.5,
+         "price": -105
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-01-05T18:20:26Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:20:23Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 62.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 66.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 66.5,
+         "price": -113
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 74.5,
+         "price": 155
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 74.5,
+         "price": -215
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 49.5,
+         "price": -265
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 49.5,
+         "price": 185
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 49.5,
+         "price": -225
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 49.5,
+         "price": 163
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 24.5,
+         "price": 135
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 24.5,
+         "price": -182
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 24.5,
+         "price": -167
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 24.5,
+         "price": 128
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 74.5,
+         "price": 123
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 74.5,
+         "price": -162
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 49.5,
+         "price": 290
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 49.5,
+         "price": -455
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 24.5,
+         "price": 118
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 24.5,
+         "price": -157
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:20:23Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 53.5,
+         "price": -117
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 8.5,
+         "price": -109
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 49.5,
+         "price": -152
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 49.5,
+         "price": 116
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 74.5,
+         "price": 280
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 74.5,
+         "price": -435
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Over",
+         "point": 3.5,
+         "price": -114
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -114
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 74.5,
+         "price": 180
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 49.5,
+         "price": -225
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 49.5,
+         "price": 160
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 60.5,
+         "price": -113
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 60.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-01-05T18:20:26Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-05T18:20:47Z",
+       "outcomes": [
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 62.5,
+         "price": -112
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 62.5,
+         "price": -117
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 20.5,
+         "price": -114
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 66.5,
+         "price": -115
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 66.5,
+         "price": -113
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 74.5,
+         "price": 155
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 74.5,
+         "price": -215
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 49.5,
+         "price": -265
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 49.5,
+         "price": 185
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Over",
+         "point": 49.5,
+         "price": -225
+        },
+        {
+         "description": "Jaxon Smith-Njigba",
+         "name": "Under",
+         "point": 49.5,
+         "price": 163
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 24.5,
+         "price": 135
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 24.5,
+         "price": -182
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 24.5,
+         "price": -167
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 24.5,
+         "price": 128
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Over",
+         "point": 74.5,
+         "price": 123
+        },
+        {
+         "description": "DK Metcalf",
+         "name": "Under",
+         "point": 74.5,
+         "price": -162
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Over",
+         "point": 49.5,
+         "price": 290
+        },
+        {
+         "description": "Noah Fant",
+         "name": "Under",
+         "point": 49.5,
+         "price": -455
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Over",
+         "point": 24.5,
+         "price": 118
+        },
+        {
+         "description": "Tyler Lockett",
+         "name": "Under",
+         "point": 24.5,
+         "price": -157
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-05T18:20:47Z",
+       "outcomes": [
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 53.5,
+         "price": -117
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 53.5,
+         "price": -112
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Over",
+         "point": 8.5,
+         "price": -109
+        },
+        {
+         "description": "Geno Smith",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 49.5,
+         "price": -152
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 49.5,
+         "price": 116
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Over",
+         "point": 74.5,
+         "price": 280
+        },
+        {
+         "description": "Zach Charbonnet",
+         "name": "Under",
+         "point": 74.5,
+         "price": -435
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Over",
+         "point": 3.5,
+         "price": -114
+        },
+        {
+         "description": "Jimmy Garoppolo",
+         "name": "Under",
+         "point": 3.5,
+         "price": -114
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 74.5,
+         "price": 180
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 49.5,
+         "price": -225
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 49.5,
+         "price": 160
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Over",
+         "point": 60.5,
+         "price": -113
+        },
+        {
+         "description": "Blake Corum",
+         "name": "Under",
+         "point": 60.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    }
+   ],
+   "commence_time": "2025-01-05T21:25:00Z",
+   "home_team": "Los Angeles Rams",
+   "id": "2cf5abcfe39f3ac0d82ffb5a90b49e93",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-01-05T18:25:37Z",
+  "previous_timestamp": "2025-01-05T18:15:38Z",
+  "timestamp": "2025-01-05T18:20:37Z"
+ }
+}
