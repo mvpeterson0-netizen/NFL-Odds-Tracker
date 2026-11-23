@@ -1,0 +1,29 @@
+name: history2024
+# One-off 2024 rush/rec yds archive (Michael's OK 2026-11-22). Lives only on the history-2024 branch.
+on:
+  push:
+    branches: [history-2024]
+    paths: ["research/history_2024/**", ".github/workflows/history2024.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: history2024
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python research/history_2024/fetch.py
+        env:
+          ODDS_API_KEY_20K: ${{ secrets.ODDS_API_KEY_20K }}
+      - if: always()
+        run: |
+          git config user.name "stix-bot"; git config user.email "stix-bot@users.noreply.github.com"
+          git add data/history_2024 || true
+          git commit -m "history 2024: archive progress" || true
+          git push || true
