@@ -10,7 +10,7 @@ out = {}
 _, h = get(f"{API}/sports")
 out["balance_before"] = h.get("x-requests-remaining")
 print("balance before", out["balance_before"])
-if int(out["balance_before"]) < 12000:
+if int(out["balance_before"]) < 500:
     sys.exit("below floor")
 # Week 1 2024, 1 PM ET Sunday kickoffs = 2024-09-08T17:00Z; snapshot kickoff - 3 h
 snap = "2024-09-08T14:00:00Z"
