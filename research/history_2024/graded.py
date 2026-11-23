@@ -22,15 +22,19 @@ from research.signal_stacks.dataset import FIELDS, KEY2MID, MARKETS, BOOK_ORDER,
 
 ROOT = Path(__file__).resolve().parents[2]
 NFLVERSE = "https://github.com/nflverse/nflverse-data/releases/download"
-FILES = {"stats_2024.csv": "stats_player/stats_player_week_2024.csv",
-         "snaps_2024.csv": "snap_counts/snap_counts_2024.csv",
-         "roster_2024.csv": "weekly_rosters/roster_weekly_2024.csv"}
+SEASON = "2024"
+
+
+def files(season):
+    return {f"stats_{season}.csv": f"stats_player/stats_player_week_{season}.csv",
+            f"snaps_{season}.csv": f"snap_counts/snap_counts_{season}.csv",
+            f"roster_{season}.csv": f"weekly_rosters/roster_weekly_{season}.csv"}
 POS = ("QB", "RB", "WR", "TE", "FB")
 
 
 def fetch(cache: Path):
     cache.mkdir(parents=True, exist_ok=True)
-    for name, rel in FILES.items():
+    for name, rel in files(SEASON).items():
         p = cache / name
         if not p.exists():
             req = urllib.request.Request(f"{NFLVERSE}/{rel}", headers={"User-Agent": "stix-research"})
@@ -38,10 +42,11 @@ def fetch(cache: Path):
 
 
 def build(cache: Path, out: Path):
-    sched = {g["game_id"]: g for g in json.load(open(ROOT / "data/history_2024/schedule.json"))}
-    stats = [r for r in rd(cache / "stats_2024.csv") if r["season_type"] in ("REG", "POST")]
-    snaps = rd(cache / "snaps_2024.csv")
-    roster = rd(cache / "roster_2024.csv")
+    S = SEASON
+    sched = {g["game_id"]: g for g in json.load(open(ROOT / f"data/history_{S}/schedule.json"))}
+    stats = [r for r in rd(cache / f"stats_{S}.csv") if r["season_type"] in ("REG", "POST")]
+    snaps = rd(cache / f"snaps_{S}.csv")
+    roster = rd(cache / f"roster_{S}.csv")
     idx, info = defaultdict(dict), {}
     for r in stats:
         if r["position"] not in POS:
@@ -82,7 +87,7 @@ def build(cache: Path, out: Path):
         return None
 
     rows, unmatched = [], []
-    for f in sorted(glob.glob(str(ROOT / "data/history_2024/odds/*.json"))):
+    for f in sorted(glob.glob(str(ROOT / f"data/history_{S}/odds/*.json"))):
         a = json.load(open(f))
         gid = a["game_id"]
         g = sched[gid]
@@ -127,7 +132,7 @@ def build(cache: Path, out: Path):
                 "over" if actual > ln else "under" if actual < ln else "push")
             sp_home, _ = team_spread(g, g["home_team"])
             _, ts = team_spread(g, team)
-            rows.append(dict(season=2024, week=week, gid=gid, pid=pid, name=nm, pos=pos, team=team,
+            rows.append(dict(season=int(S), week=week, gid=gid, pid=pid, name=nm, pos=pos, team=team,
                              ha="home" if team == g["home_team"] else "away", market=mid, line=ln,
                              over_price=op, under_price=up, book=book, cap_utc=snap_ts, mins_before_ko="180",
                              actual=actual, result=res, played=played, kickoff_utc=g["kickoff_utc"],
@@ -135,13 +140,13 @@ def build(cache: Path, out: Path):
                              spread_src="nflverse schedule spread_line (post-hoc/closing-type; not capture-time)",
                              total_line=g.get("total_line"), roof=g.get("roof", ""), temp_f=fl(g.get("temp")),
                              wind_mph=fl(g.get("wind")), weather_src="nflverse schedule (post-game record)",
-                             game_type=g["game_type"]))
+                             game_type=g.get("game_type", "REG")))
     out.mkdir(parents=True, exist_ok=True)
-    with open(out / "props_2024.csv", "w", newline="") as fh:
+    with open(out / f"props_{S}.csv", "w", newline="") as fh:
         w = csv.DictWriter(fh, FIELDS + ["game_type"])
         w.writeheader()
         w.writerows(rows)
-    with open(out / "unmatched_2024.csv", "w", newline="") as fh:
+    with open(out / f"unmatched_{S}.csv", "w", newline="") as fh:
         w = csv.DictWriter(fh, ["gid", "name", "market", "reason"])
         w.writeheader()
         w.writerows(unmatched)
@@ -152,7 +157,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--cache", default="/tmp/nflverse_2024")
     ap.add_argument("--out", default="/tmp/history_2024_out")
+    ap.add_argument("--season", default="2024")
     a = ap.parse_args()
+    SEASON = a.season
     fetch(Path(a.cache))
     rows, un = build(Path(a.cache), Path(a.out))
     print(len(rows), "graded rows;", len(un), "unmatched")
