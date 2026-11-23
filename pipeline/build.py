@@ -470,6 +470,13 @@ def build(log):
         if w >= info.get("_w", -1):
             info.update({"_w": w, "team": s["team"], "pos": s["slot"][:2]})
 
+    # A traded player stops appearing in slots (the old team's slots exclude him), so the slot team goes stale.
+    # If the weekly roster is newer than the player's last slot week, the roster team is where he is now.
+    for g, info in players.items():
+        pi = d.player_info.get(g)
+        if pi and pi.get("team") and pi["team"] != info.get("team") and pi["_w"] > info.get("_w", -1):
+            info["team"] = pi["team"]
+
     # Extra players, shown in the app only when its "All players" switch is on: QB/RB/WR/TE who had a
     # DraftKings/FanDuel line captured this season (pre-game or snapshot) but were never in a slot.
     # Display only: slots.csv and the odds pull triggers (fill-ins, sweeps) are not touched, so this adds no API calls.
