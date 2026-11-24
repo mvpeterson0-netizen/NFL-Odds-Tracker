@@ -169,10 +169,9 @@
     const seen = new Set(); for (const g of Object.values(bks)) for (const ms of Object.values(g.p || {})) for (const rows of Object.values(ms)) for (const r of rows) seen.add(r[0]);
     h += `<div class="arb-books">${[...seen].sort((a, b) => bname(a).localeCompare(bname(b))).map((b) => `<button type="button" class="gchip ${A.off.includes(b) ? "" : "on"}" data-arbbook="${esc(b)}">${esc(bname(b))}</button>`).join("")}</div>
       <div class="filters"><label>Stat <select id="arb-mk"><option value="">All stats</option>${D.markets.map((m) => `<option value="${m.id}" ${m.id === A.mk ? "selected" : ""}>${esc(m.label)}</option>`).join("")}</select></label></div>`;
-    const list = compute(), arbs = list.filter((x) => cents(x.ret) > 0), near = list.filter((x) => cents(x.ret) <= 0).slice(0, 15);
+    const arbs = compute().filter((x) => cents(x.ret) > 0); // arbs at 0% or lower are hidden (Michael 2026-11-23)
     h += `<h3 class="small">Guaranteed profit (${arbs.length})</h3>`;
     h += arbs.length ? `<div class="panel rlist">${arbs.slice(0, 40).map(row).join("")}</div>` : `<p class="muted small">None right now with these books.</p>`;
-    if (near.length) h += `<h3 class="small">Closest (break-even or a small loss)</h3><div class="panel rlist">${near.map(row).join("")}</div>`;
     const mids = middles();
     h += `<h3 class="small">Middles (${mids.length})</h3>
       <div class="filters"><label><input type="checkbox" id="arb-edge" ${A.edge ? "checked" : ""}> Only if estimated hit chance beats break-even</label></div>
