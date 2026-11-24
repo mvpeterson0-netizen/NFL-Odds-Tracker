@@ -902,7 +902,7 @@
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(ttl)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v || anyTog(t.id) ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${(t.optTile || t.optFmt)(v)} <span class="sg-n">${optN(v)}</span></button>`).join("")}</span>` : "";
     return `<div class="sg-cell${t.opts ? " sg-cell3" : t.front ? " sg-cell3 sg-ntg" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}${anyTog(t.id) ? " any" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b class="sg-ttl2" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}">${esc(ttl)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
-      <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "TNF" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
+      <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "today" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
       ${st.by ? spark(st.by, roiBand(t), t.front && !t.opts ? 86 : 0) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
@@ -1027,20 +1027,21 @@
     return laGames(curWk() - 1).some(([, g]) => !g.final) ? "last" : "next";
   }
   const sgWk = () => { const v = sgView(); return v == null ? null : v === "next" ? curWk() : curWk() - 1; };
-  // TNF filter (Michael 2026-11-19): Wednesday and Thursday (Central) only, a button beside the page title narrows every signal card's
-  // count and the player lists to the upcoming week's Thursday-night game(s) (by Central kickoff day). Gone Friday through Tuesday, and
-  // when the upcoming week has no Thursday game. Display only: no rule, score, list order or stored number changes.
+  // Today filter (Michael 2026-11-24, replaces the TNF-only button of 2026-11-19): on any day (Central) that has at least one game kicking
+  // off that day, a "Today" button beside the page title narrows every signal card's count and the player lists to today's games.
+  // No games today = no button. Display only: no rule, score, list order or stored number changes. (Internal names still say "tnf".)
   const ctDay = (d) => d.toLocaleDateString("en-US", { timeZone: "America/Chicago", weekday: "short" });
-  const tnfMemo = { d: null, w: null, s: null };
+  const tnfMemo = { d: null, t: null, s: null };
   function tnfGids() {
-    const w = curWk();
-    if (tnfMemo.d !== D || tnfMemo.w !== w) tnfMemo.d = D, tnfMemo.w = w, tnfMemo.s = new Set(Object.entries(D.games).filter(([, g]) => g.wk === w && g.ko && ctDay(new Date(g.ko)) === "Thu").map(([id]) => id));
+    const t = ctDate(new Date());
+    if (tnfMemo.d !== D || tnfMemo.t !== t) tnfMemo.d = D, tnfMemo.t = t, tnfMemo.s = new Set(Object.entries(D.games).filter(([, g]) => g.ko && ctDate(new Date(g.ko)) === t).map(([id]) => id));
     return tnfMemo.s;
   }
-  const tnfShow = () => { const d = ctDay(new Date()); return (d === "Wed" || d === "Thu") && tnfGids().size > 0; };
+  const todayWk = () => { const w = [...tnfGids()].map((id) => D.games[id].wk); return w.length ? Math.min(...w) : null; }; // week the day's games belong to
+  const tnfShow = () => tnfGids().size > 0;
   const tnfOn = () => !!RL.tnf && tnfShow();
-  const sgFilt = (list) => { const w = sgWk(); let l = w == null ? list : list.filter((x) => x.c.r.wk === w); if (tnfOn()) { const g = tnfGids(); l = l.filter((x) => g.has(x.c.r.gid)); } return l; };
-  const tnfBtn = () => (tnfShow() ? `<button type="button" class="sg-tnf ${tnfOn() ? "on" : ""}" data-sgtnf aria-pressed="${tnfOn()}" style="position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0;padding:4px 11px;font-size:12px;font-weight:700;line-height:1;border-radius:999px">TNF</button>` : "");
+  const sgFilt = (list) => { if (tnfOn()) { const g = tnfGids(); return list.filter((x) => g.has(x.c.r.gid)); } const w = sgWk(); return w == null ? list : list.filter((x) => x.c.r.wk === w); };
+  const tnfBtn = () => (tnfShow() ? `<button type="button" class="sg-tnf ${tnfOn() ? "on" : ""}" data-sgtnf aria-pressed="${tnfOn()}" style="position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0;padding:4px 11px;font-size:12px;font-weight:700;line-height:1;border-radius:999px">Today</button>` : "");
   const gsecRow = (t) => `<div class="sg-ttl" style="position:relative"><h2 class="gsec">${t}</h2>${tnfBtn()}</div>`;
   function sgToggleHtml() {
     const v = sgView(); if (v == null) return "";
@@ -1048,7 +1049,7 @@
   }
   // Graded bets for one rule in the week in play (final games only), honoring the game and market filters like compute() does.
   function doneBets(tab) {
-    return analyze(tab, sgWk() ?? sigWeek()).filter((x) => (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk) && (!tnfOn() || tnfGids().has(x.r.gid)));
+    return analyze(tab, tnfOn() ? todayWk() : (sgWk() ?? sigWeek())).filter((x) => (!RL.gid || x.r.gid === RL.gid) && (!RL.mk || x.mid === RL.mk) && (!tnfOn() || tnfGids().has(x.r.gid)));
   }
   function computeLiveCount(tab) {
     LIVE_PASS = true;
@@ -1157,7 +1158,7 @@
     const lastV = sgView() === "last";
     const head = `<h3 class="sg-sec">${lastV ? `Still to play, week ${sgWk()}${picked.length ? ` · ${picked.length > 1 ? "fit all " + picked.length + " picked signals" : "fit this signal"}` : ""} (${rows.length})` : picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
     if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
-    const pages = Math.ceil(rows.length / PAGE), key = `bp|${sgWk() ?? ""}|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}|${tnfOn() ? "tnf" : ""}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
+    const pages = Math.ceil(rows.length / PAGE), key = `bp|${sgWk() ?? ""}|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}|${tnfOn() ? "today" : ""}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
     (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
     let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
     for (const x of rows.slice(pg * PAGE, pg * PAGE + PAGE)) {
@@ -1194,8 +1195,8 @@
     const c = e.target.closest && e.target.closest("[data-sig]");
     if (c) { const id = c.dataset.sig; delete RL.any[id]; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : multiSelect() ? [...RL.sigs, id] : [id]; redraw(); return; }
     if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; RL.any = {}; redraw(); return; }
-    if (e.target.closest && e.target.closest("[data-sgtnf]")) { RL.tnf = !tnfOn(); if (RL.tnf && sgToggleOn()) RL.sgView = "next"; redraw(); return; }
-    const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; if (RL.sgView === "last") RL.tnf = false; redraw(); return; }
+    if (e.target.closest && e.target.closest("[data-sgtnf]")) { RL.tnf = !tnfOn(); if (RL.tnf && sgToggleOn()) RL.sgView = todayWk() === curWk() ? "next" : "last"; redraw(); return; }
+    const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; if (RL.tnf && todayWk() !== (RL.sgView === "last" ? curWk() - 1 : curWk())) RL.tnf = false; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
   });
   // Long press on a Signals tile (Michael 2026-11-22): pick it with ALL its toggles on (list = players matching any of them); long press again to unpick.
