@@ -902,12 +902,19 @@ function weekLinesPanel() {
   </div></div>`;
 }
 
-function viewGuide() {
-  // Account info (signed-in users only) sits at the top of the Guide page; it used to be at the bottom of Picks.
+// The old single Guide page is split in three (reached from the header's More+ menu):
+// Account & Alerts (#/account), Slots & Week lines (#/slots), Guide & Log (#/guide, also #/log).
+function viewAccount() {
+  // Account info (signed-in users only); it used to sit at the top of the Guide page.
   let acct = "";
   try { const A = window.STIX_ACCOUNT; if (A && A.signedIn()) acct = A.accountBox(); } catch (e) { console.error("account box failed", e); }
-  return `${acct}${window.alertsPanel ? window.alertsPanel() : ""}${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>
-    <section id="g-guide"><h2 class="gsec">Guide</h2>${guideBody()}</section>
+  return `${acct}${window.alertsPanel ? window.alertsPanel() : ""}`;
+}
+function viewSlotsPage() {
+  return `${weekLinesPanel()}<section id="g-slots"><h2 class="gsec">Slots</h2>${viewSlots()}</section>`;
+}
+function viewGuide() {
+  return `<section id="g-guide"><h2 class="gsec">Guide</h2>${guideBody()}</section>
     <section id="g-log"><h2 class="gsec">Log &amp; sources</h2>${viewLog(LIVE)}</section>`;
 }
 function guideBody() {
@@ -1007,7 +1014,12 @@ function render() {
   document.querySelectorAll(".sport a").forEach((a) => a.classList.toggle("on", (a.dataset.sport === "cfb") === isCfb));
   document.querySelectorAll("#tabs-cfb a").forEach((a) => a.classList.toggle("on", a.dataset.ctab === (arg === "results" ? "results" : "board")));
   document.body.classList.toggle("rv-on", tab === "review"); // review queue: site footer shrinks to one line (review.js)
-  document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "slots" || tab === "log" ? "guide" : tab === "review" ? "picks" : tab)));
+  document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "review" ? "picks" : tab)));
+  // More+ menu (Results, Defense and the three Guide pages): the button is lit while one of those pages is open.
+  const moreTab = ({ leads: "leads", defense: "defense", guide: "guide", log: "guide", slots: "slots", account: "account" })[tab];
+  document.querySelectorAll("#more-menu a").forEach((a) => a.classList.toggle("on", a.dataset.tab === moreTab));
+  const mb = document.getElementById("more-btn"); if (mb) mb.classList.toggle("on", !!moreTab);
+  closeMore();
   // Phone layout (mobile.js) may take over the Board and player pages on narrow screens.
   // If it is missing or throws, the normal desktop view renders instead.
   let mobileHtml = null;
@@ -1021,7 +1033,9 @@ function render() {
   }
   else if (tab === "player") app.innerHTML = viewPlayer(arg);
   else if (tab === "leads") app.innerHTML = viewLeads();
-  else if (tab === "guide" || tab === "slots" || tab === "log") app.innerHTML = viewGuide();
+  else if (tab === "account") app.innerHTML = viewAccount();
+  else if (tab === "slots") app.innerHTML = viewSlotsPage();
+  else if (tab === "guide" || tab === "log") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
   else if (tab === "arb") {
     try { app.innerHTML = window.STIX_BOOKS ? window.STIX_BOOKS.view() : `<p class="pad">Arbitrage didn't load. Try refreshing.</p>`; }
@@ -1052,8 +1066,8 @@ function render() {
   bind(tab, arg);
   if (isCfb && window.STIX_CFB) { try { window.STIX_CFB.bind(arg); } catch (e) { console.error(e); } }
   try { initWeekSliders(); } catch (e) { console.error(e); }
-  // Old Slots / Log links now open the Guide page at that section.
-  if (tab === "slots" || tab === "log") setTimeout(() => { const el = document.getElementById(tab === "log" ? "g-log" : "g-slots"); if (el) el.scrollIntoView(); }, 0);
+  // Old #/log links open the Guide & Log page at the Log section.
+  if (tab === "log") setTimeout(() => { const el = document.getElementById("g-log"); if (el) el.scrollIntoView(); }, 0);
   if (tab === "search" && window.STIX_SEARCH) { try { window.STIX_SEARCH.bind(); } catch (e) { console.error(e); } }
   if (mobileHtml != null) { try { window.STIX_MOBILE.bind(tab, arg); } catch (e) { console.error(e); } }
   if (window.STIX_PICKS) { try { window.STIX_PICKS.bind(tab, arg); } catch (e) { console.error(e); } }
@@ -1109,7 +1123,7 @@ async function status() {
     if (Date.now() - new Date(D.generated_utc).getTime() > 30 * 3600000) warn.push(`Data may be stale: last data build was ${ago(D.generated_utc)}.`);
   }
   if (warn.length) { stale.hidden = false; stale.textContent = "⚠ " + warn.join(" "); st.classList.add("bad"); }
-  if (/^#\/(guide|log|slots)/.test(location.hash || "")) render();
+  if (/^#\/(guide|log|slots|account)/.test(location.hash || "")) render();
 }
 
 (async function init() {
@@ -1186,4 +1200,31 @@ function index() {
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindTab); else bindTab();
+})();
+
+// More+ dropdown in the header. The menu sits outside #tabs (which scrolls sideways on phones) and is positioned
+// under the button with fixed coordinates, so it is never clipped. Closes on outside tap, Escape, scroll, resize or page change.
+function closeMore() {
+  const m = document.getElementById("more-menu"), b = document.getElementById("more-btn");
+  if (m) m.hidden = true; if (b) b.setAttribute("aria-expanded", "false");
+}
+(function () {
+  function openMore() {
+    const m = document.getElementById("more-menu"), b = document.getElementById("more-btn"); if (!m || !b) return;
+    m.hidden = false; b.setAttribute("aria-expanded", "true");
+    const r = b.getBoundingClientRect(), w = m.offsetWidth;
+    m.style.top = Math.round(r.bottom + 6) + "px";
+    m.style.left = Math.max(8, Math.min(Math.round(r.right - w), window.innerWidth - w - 8)) + "px";
+  }
+  function init() {
+    const b = document.getElementById("more-btn"), m = document.getElementById("more-menu"); if (!b || !m || b.dataset.mm) return;
+    b.dataset.mm = "1";
+    b.addEventListener("click", (e) => { e.stopPropagation(); m.hidden ? openMore() : closeMore(); });
+    m.addEventListener("click", (e) => { if (e.target.closest("a")) closeMore(); });
+    document.addEventListener("click", (e) => { if (!m.hidden && !m.contains(e.target)) closeMore(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !m.hidden) { closeMore(); b.focus(); } });
+    window.addEventListener("resize", closeMore);
+    window.addEventListener("scroll", closeMore, { passive: true });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

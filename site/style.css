@@ -25,6 +25,17 @@ a:hover { text-decoration: underline; }
 #tabs a { padding: 6px 12px; border-radius: 6px; color: var(--ink); }
 #tabs a.on { background: var(--chip); font-weight: 600; }
 #tabs a:hover { text-decoration: none; background: var(--hover); }
+#tabs .tabbtn { font: inherit; padding: 6px 12px; border: 0; border-radius: 6px; background: none; color: var(--ink); cursor: pointer; white-space: nowrap; }
+#tabs .tabbtn:hover { background: var(--hover); }
+#tabs .tabbtn.on { background: var(--chip); font-weight: 600; }
+#more-menu { position: fixed; z-index: 20; min-width: 200px; padding: 6px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .18); }
+#more-menu[hidden] { display: none; }
+#more-menu a { display: block; padding: 10px 12px; border-radius: 6px; color: var(--ink); }
+#more-menu a:hover { text-decoration: none; background: var(--hover); }
+#more-menu a.on { background: var(--chip); font-weight: 600; }
+#more-menu .mm-sep { margin: 4px 12px 0; padding-top: 8px; border-top: 1px solid var(--line); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+body.cfb-on #more-menu { display: none; }
 .status { margin-left: auto; font-size: 13px; color: var(--muted); }
 .status.bad { color: var(--under); font-weight: 600; }
 .stale { background: var(--warn-bg); color: var(--warn-ink); padding: 8px 20px; font-weight: 600; }

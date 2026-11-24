@@ -31,12 +31,18 @@
   <nav id="tabs">
     <a href="#/board" data-tab="board">Board</a>
     <a href="#/search" data-tab="search">Signals</a>
-    <a href="#/leads" data-tab="leads">Results</a>
-    <a href="#/defense" data-tab="defense">Defense</a>
     <a href="#/picks" data-tab="picks" id="tab-picks" hidden>Picks</a>
     <a href="#/arb" data-tab="arb">Arbitrage</a>
-    <a href="#/guide" data-tab="guide">Guide</a>
+    <button type="button" id="more-btn" class="tabbtn" aria-haspopup="true" aria-expanded="false" aria-controls="more-menu">More+</button>
   </nav>
+  <div id="more-menu" role="menu" aria-label="More pages" hidden>
+    <a href="#/leads" data-tab="leads" role="menuitem">Results</a>
+    <a href="#/defense" data-tab="defense" role="menuitem">Defense</a>
+    <div class="mm-sep" role="presentation">Guide</div>
+    <a href="#/account" data-tab="account" role="menuitem">Account &amp; Alerts</a>
+    <a href="#/slots" data-tab="slots" role="menuitem">Slots &amp; Week lines</a>
+    <a href="#/guide" data-tab="guide" role="menuitem">Guide &amp; Log</a>
+  </div>
   <nav id="tabs-cfb" hidden>
     <a href="#/cfb/board" data-ctab="board">Board</a>
     <a href="#/cfb/results" data-ctab="results">Results</a>

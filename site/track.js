@@ -136,7 +136,7 @@
     if (!t) return;
     const m = (sel) => t.closest(sel);
     let b;
-    if ((b = m("#tabs a[data-tab]"))) push("tap", "tab_" + String(b.dataset.tab).replace(/[^a-z]/g, "").slice(0, 18));
+    if ((b = m("#tabs a[data-tab], #more-menu a[data-tab]"))) push("tap", "tab_" + String(b.dataset.tab).replace(/[^a-z]/g, "").slice(0, 18));
     else if ((b = m("[data-wkpick]"))) push("tap", "week_pick", b.dataset.wkpick);
     else if (m("[data-gid]")) push("tap", "game_chip");
     else if (m("#f-qx")) push("tap", "search_clear");

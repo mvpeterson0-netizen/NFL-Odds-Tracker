@@ -79,7 +79,7 @@
   }
   function rerender() {
     const t = (location.hash || "").split("/")[1];
-    if ((t === "picks" || t === "player" || t === "guide" || t === "slots" || t === "log") && typeof render === "function" && D) {
+    if ((t === "picks" || t === "player" || t === "guide" || t === "slots" || t === "log" || t === "account") && typeof render === "function" && D) {
       const y = window.scrollY; render(); window.scrollTo(0, y);
     }
     showTab();
