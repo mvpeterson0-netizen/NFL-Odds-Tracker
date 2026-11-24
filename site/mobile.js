@@ -178,17 +178,25 @@
         <div class="legend"><span><i style="border-color:var(--accent)"></i>Actual</span><span><i style="border-color:var(--ink);border-top-width:3px"></i>Pre-game line</span><span><i style="border-color:var(--warn-ink);border-top-width:3px;border-top-style:dashed"></i>Snapshot</span></div></div>`;
     // Line movement for this week's game
     if (m && (m.snaps || m.lstat === "ok")) {
-      // One row per line with DraftKings and FanDuel side by side, newest on top with a box around the current line, oldest at the
-      // bottom (Michael 2026-11-24). Snapshots carry the second book in x.alt. Lines only, no odds; hover a cell for the time.
-      const cell = (x, bk) => {
-        const c = [x].concat(x.alt || []).find((y) => y.book === bk);
-        return c ? `<span title="${esc(bk)} · ${esc(fmtTime(c.cap || x.cap))}"><b>${num(c.line)}</b></span>` : `<span class="muted">—</span>`;
+      // One row per line: the best Over number (lowest line) and the best Under number (highest line) across DraftKings and FanDuel, newest
+      // on top with a box around the current line, oldest at the bottom (Michael 2026-11-24). Ties go to the better price. Lines only;
+      // hover a cell for the time. Snapshots carry the second book in x.alt.
+      const dc = (v) => (v > 0 ? 1 + v / 100 : 1 + 100 / Math.abs(v));
+      const best = (x, side) => {
+        const bs = [x].concat(x.alt || []).filter((y) => y.line != null && y[side] != null);
+        if (!bs.length) return null;
+        const sgn = side === "op" ? 1 : -1; // Over wants the lowest line, Under the highest
+        return bs.sort((p, q) => sgn * (p.line - q.line) || dc(q[side]) - dc(p[side]))[0];
+      };
+      const cell = (x, side) => {
+        const c = best(x, side);
+        return c ? `<span title="${esc(c.book)} · ${esc(fmtTime(c.cap || x.cap))}"><b>${num(c.line)}</b> <span class="muted">${esc(c.book)}</span></span>` : `<span class="muted">—</span>`;
       };
       const lines = [];
       if (m.lstat === "ok") lines.push({ chip: `<span class="chip" title="Graded pre-game line (${esc(m.book)}) · ${esc(fmtTime(m.cap))}">Pre-game</span>`, x: m });
       for (const x of (m.snaps || []).slice().reverse()) lines.push({ chip: snapChip(x), x });
-      h += `<div class="panel"><h3>Line movement (W${cur.wk})</h3><div class="body mlist lmgrid"><div class="lmrow lmh"><span></span><span>DraftKings</span><span>FanDuel</span></div>`;
-      lines.forEach((l, i) => { h += `<div class="lmrow${i === 0 ? " cur" : ""}"${i === 0 ? ` title="Current line"` : ""}>${l.chip}${cell(l.x, "DraftKings")}${cell(l.x, "FanDuel")}</div>`; });
+      h += `<div class="panel"><h3>Line movement (W${cur.wk})</h3><div class="body mlist lmgrid"><div class="lmrow lmh"><span></span><span><b class="legtag over">OVER</b></span><span><b class="legtag under">UNDER</b></span></div>`;
+      lines.forEach((l, i) => { h += `<div class="lmrow${i === 0 ? " cur" : ""}"${i === 0 ? ` title="Current line"` : ""}>${l.chip}${cell(l.x, "op")}${cell(l.x, "up")}</div>`; });
       h += `</div></div>`;
     }
     // Game log
