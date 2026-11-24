@@ -154,6 +154,14 @@ def choose_main(caps):
     return main, alts
 
 
+def snap_alt(snap, alts):
+    """Add the other book's line to a line-movement snapshot (Michael 2026-11-24) so the player page can show DraftKings and
+    FanDuel side by side. Same shape as a pre-game line's "alt"; the snapshot's own line/book fields are unchanged."""
+    if alts:
+        snap["alt"] = [{"book": BOOK_NAMES.get(a["book"], a["book"]), "line": to_float(a["line"]),
+                        "op": to_float(a["over_price"]), "up": to_float(a["under_price"])} for a in alts]
+
+
 def bet_links(name_index, games_by_id, now):
     """Bet-slip links for games that haven't kicked off: {player: {market id: {book: {o, u, point, cap, gid}}}}.
     One point per player/market/book (the one with both sides and prices closest to even money).
@@ -645,6 +653,7 @@ def build(log):
                         snaps.append({"t": t, "label": label, "line": to_float(sm["line"]),
                                       "op": to_float(sm["over_price"]), "up": to_float(sm["under_price"]),
                                       "book": BOOK_NAMES.get(sm["book"], sm["book"]), "cap": sm["captured_utc"]})
+                        snap_alt(snaps[-1], _alts)
                 if m.get("lstat") == "pending":
                     cc = chk_by.get((gid, pid, okey))
                     if cc and (not snaps or cc[0] > snaps[-1]["cap"]):
@@ -652,6 +661,7 @@ def build(log):
                         snaps.append({"t": "track", "label": "Check", "line": to_float(cm["line"]),
                                       "op": to_float(cm["over_price"]), "up": to_float(cm["under_price"]),
                                       "book": BOOK_NAMES.get(cm["book"], cm["book"]), "cap": cm["captured_utc"]})
+                        snap_alt(snaps[-1], _alts)
                 if snaps:
                     m["snaps"] = snaps
                 if m.get("lstat") == "ok":
