@@ -423,15 +423,10 @@
     const locked = all.filter((x) => x.g.st === "locked" && !inLive.has(x.p.id) && !held(x.p));
     const nHeld = all.filter((x) => held(x.p) && x.g.st !== "open").length; // this week's picks: shown in the Live panel until Tuesday
     const graded = all.filter((x) => ["hit", "miss", "push", "void"].includes(x.g.st) && !held(x.p)).reverse();
-    const R = rec(graded), O = rec(graded.filter((x) => x.p.side === "o")), U = rec(graded.filter((x) => x.p.side === "u"));
-    const byMk = D.markets.map((m) => ({ m, r: rec(graded.filter((x) => x.p.mid === m.id)) })).filter((x) => x.r.n);
+    const R = rec(graded);
     let h = `<div class="pk-stats"><div class="pk-stat"><span>Record (W–L–P)</span><b>${R.txt}</b></div><div class="pk-stat"><span>Hit rate</span><b>${R.pct}</b></div>
-      <div class="pk-stat"><span>Profit / loss</span><b class="${R.bets && R.pl > 0 ? "pk-up" : R.bets && R.pl < 0 ? "pk-down" : ""}">${R.bets ? units(R.pl) : "—"}</b>${R.bets ? `<span>${money(R.pl)} at $${unit().toFixed(2)}/unit</span>` : ""}</div></div>
-      <p class="small muted">Overs ${O.txt} (${units(O.pl)}) · Unders ${U.txt} (${units(U.pl)})${byMk.length ? " · " + byMk.map((x) => `${esc(x.m.label)} ${x.r.txt} (${units(x.r.pl)})`).join(" · ") : ""}
-      · Every pick is 1 unit at the odds saved with it; pushes and voids are 0; picks still in progress aren't counted until graded${R.noOdds ? ` · ${R.noOdds} winning pick${R.noOdds === 1 ? "" : "s"} had no saved odds and ${R.noOdds === 1 ? "isn't" : "aren't"} counted` : ""}
-      · Hit rate leaves out pushes and voids · ${statusTxt}</p>`;
+      <div class="pk-stat"><span>Profit / loss</span><b class="${R.bets && R.pl > 0 ? "pk-up" : R.bets && R.pl < 0 ? "pk-down" : ""}">${R.bets ? units(R.pl) : "—"}</b>${R.bets ? `<span>${money(R.pl)} at $${unit().toFixed(2)}/unit</span>` : ""}</div></div>`;
     const sec = (title, l, empty) => `<div class="panel"><h3>${title} (${l.length})</h3><div class="body">${l.length ? l.map((x) => row(x.p, x.g)).join("") : `<p class="muted small">${empty}</p>`}</div></div>`;
-    if (mode() === "acct" && window.STIX_REVIEW) { try { h += window.STIX_REVIEW.entry(); } catch (e) { console.error("review entry failed", e); } }
     if (mode() === "acct" && window.STIX_LIVE) { try { h += window.STIX_LIVE.panel(); } catch (e) { console.error("live panel failed", e); } }
     const nShare = open.length + locked.length + inLive.size;
     if (nShare && window.STIX_SHARE && window.STIX_SHARE.openPicks) h += `<p class="pk-sharerow"><button id="pk-share" class="sh-main" type="button">Share this week's picks (${nShare})</button></p>`;
