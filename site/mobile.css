@@ -7,7 +7,7 @@ body { font-size: 15px; -webkit-text-size-adjust: 100%; }
 .status { order: 2; margin-left: auto; font-size: 11px; max-width: 55%; text-align: right; }
 #tabs { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 #tabs::-webkit-scrollbar { display: none; }
-#tabs a { white-space: nowrap; padding: 6px 10px; }
+#tabs a, #tabs .tabbtn { white-space: nowrap; padding: 6px 4px; flex: 1 1 0; min-width: 0; text-align: center; }
 .stale { padding: 8px 12px; font-size: 13px; }
 main { padding: 10px 12px 32px; }
 .foot { padding: 0 12px 24px; }
