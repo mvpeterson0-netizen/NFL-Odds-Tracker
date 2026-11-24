@@ -140,8 +140,8 @@
     return `<div class="rlrow arbrow"><div class="rlhead"><a class="pname" href="#/player/${esc(x.pid)}">${esc(name)}</a> <span class="rlstat">${esc(mk)}</span>
         <span class="arb-ev pos">${x.gp.toFixed(1)}% gap</span></div>
       <div class="muted small">${esc(team)} · ${esc(gameLabel(x.gid))} · ${fmtTime(g.ko)} · lines ${ago(x.cap)}</div>
-      <div class="arb-legs small"><span>Over <b>${num(x.o[1])}</b> ${esc(bname(x.o[0]))} ${px(x.o[0], x.o[2])} · bet <b>$${so.toFixed(2)}</b></span>
-        <span>Under <b>${num(x.u[1])}</b> ${esc(bname(x.u[0]))} ${px(x.u[0], x.u[3])} · bet <b>$${su.toFixed(2)}</b></span></div>
+      <div class="arb-legs small"><span><b class="legtag over">OVER</b> <b>${num(x.o[1])}</b> ${esc(bname(x.o[0]))} ${px(x.o[0], x.o[2])} · bet <b>$${so.toFixed(2)}</b></span>
+        <span><b class="legtag under">UNDER</b> <b>${num(x.u[1])}</b> ${esc(bname(x.u[0]))} ${px(x.u[0], x.u[3])} · bet <b>$${su.toFixed(2)}</b></span></div>
       <div class="small">Both win (<b>${usd(x.both)}</b> on $100) if he lands on ${span} (${x.n} result${x.n === 1 ? "" : "s"}). Otherwise one side wins: <b>${usd(x.ret)}</b>. Needs the middle to hit about <b>${(x.need * 100).toFixed(1)}%</b> of the time to break even; estimated chance <b>${x.pHit == null ? "n/a" : (x.pHit * 100).toFixed(1) + "%"}</b>.</div></div>`;
   }
   // Profit on $100 total, rounded to cents (so 0.00% from rounding never counts as a guaranteed profit).
@@ -157,8 +157,8 @@
     return `<div class="rlrow arbrow"><div class="rlhead"><a class="pname" href="#/player/${esc(x.pid)}">${esc(name)}</a> <span class="rlstat">${esc(mk)}</span>
         <span class="arb-ev ${cents(x.ret) > 0 ? "pos" : "neg"}">${ev}</span></div>
       <div class="muted small">${esc(team)} · ${esc(gameLabel(x.gid))} · ${fmtTime(g.ko)} · lines ${ago(x.cap)}</div>
-      <div class="arb-legs small"><span>Over <b>${num(x.o[1])}</b> ${esc(bname(x.o[0]))} ${px(x.o[0], x.o[2])} · bet <b>$${so.toFixed(2)}</b></span>
-        <span>Under <b>${num(x.u[1])}</b> ${esc(bname(x.u[0]))} ${px(x.u[0], x.u[3])} · bet <b>$${su.toFixed(2)}</b></span></div>
+      <div class="arb-legs small"><span><b class="legtag over">OVER</b> <b>${num(x.o[1])}</b> ${esc(bname(x.o[0]))} ${px(x.o[0], x.o[2])} · bet <b>$${so.toFixed(2)}</b></span>
+        <span><b class="legtag under">UNDER</b> <b>${num(x.u[1])}</b> ${esc(bname(x.u[0]))} ${px(x.u[0], x.u[3])} · bet <b>$${su.toFixed(2)}</b></span></div>
       <div class="small">If both bet ($100 total): <b>${usd(x.ret)}</b> whichever side wins${x.both != null ? ` · both win (<b>${usd(x.both)}</b>) if he lands between ${num(x.o[1])} and ${num(x.u[1])}` : ""}</div></div>`;
   }
   function view() {

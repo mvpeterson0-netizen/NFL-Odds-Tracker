@@ -532,6 +532,9 @@ body.rv-on footer.foot { display: none; }
 .bk-best { font-weight: 700; }
 .arb-books { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
 .arb-legs { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 4px 0; }
+.legtag { display: inline-block; min-width: 4.4em; padding: 0 6px; border-radius: 6px; font-size: 11px; letter-spacing: .05em; text-align: center; color: #fff; }
+.legtag.over { background: var(--over); color: #fff; }
+.legtag.under { background: var(--under); color: #fff; }
 .arb-ev { margin-left: auto; font-weight: 700; } .arb-ev.pos { color: var(--over); } .arb-ev.neg { color: var(--muted); }
 
 /* NFL / CFB toggle (header) and college football screens */
