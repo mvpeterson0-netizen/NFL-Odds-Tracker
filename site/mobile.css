@@ -126,9 +126,10 @@ main { padding: 10px 12px 32px; }
 .mfilters .qx { width: 28px; height: 28px; line-height: 26px; right: 6px; }
 
 /* Line movement panel: chip | DraftKings | FanDuel, newest line on top with a box around it (Michael 2026-11-24) */
-.lmgrid > .lmrow { display: grid; grid-template-columns: 7em 1fr 1fr; gap: 8px; align-items: center; padding: 3px 6px; margin: 1px 0;
+.lmgrid > .lmrow { display: grid; grid-template-columns: 6.6em 1fr 1fr; gap: 6px; align-items: center; padding: 3px 6px; margin: 1px 0;
   border: 1.5px solid transparent; border-radius: 10px; font-variant-numeric: tabular-nums; }
 .lmgrid > .lmrow.cur { border-color: var(--accent); }
 .lmgrid .lmh { padding-top: 0; padding-bottom: 0; }
 .lmgrid .lmh > span { font-size: 11px; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
 .lmgrid .lmrow .chip { justify-self: start; }
+.lmgrid .lmrow .muted { font-size: 11px; white-space: nowrap; }
