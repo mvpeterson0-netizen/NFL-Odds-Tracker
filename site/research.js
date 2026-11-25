@@ -2017,7 +2017,7 @@
       return `<div class="rlrow sg-pr ps-row ${fire ? "ps-fire" : "ps-off"}"><div class="rlhead">${fire ? `<input type="checkbox" class="rl-ck" data-psck="${esc(key)}" aria-label="Select ${esc(s[2])} ${esc(label)} ${s[6] === "o" ? "Over" : "Under"}" ${sel.has(key) ? "checked" : ""} ${bk ? "" : "disabled"}>` : ""}${link}
         <span class="rlstat">${esc(label)}</span><span class="chip rl-side ${side}">${s[6] === "o" ? "Over" : "Under"}${x.cur ? " " + num(x.cur.line) : ""}</span></div>
         <div class="sg-m"><span class="small"><b>${esc(PS_COND[s[5]])}</b></span><span class="muted small">${esc(s[0])} · p ${s[11]}</span></div>
-        <div class="sg-m"><span class="muted small">Found: ${s[7]} of ${s[8]} went ${s[6] === "o" ? "Over" : "Under"} in this situation vs ${s[9]}% (${s[12]}–${s[10] - s[12]}) in his other ${s[10]} games</span></div>
+        <div class="sg-m"><span class="muted small">Found: ${s[6] === "o" ? "Over" : "Under"} ${s[7]}–${s[8] - s[7]} in this situation vs ${s[9]}% (${s[12]}–${s[10] - s[12]}) in his other ${s[10]} games</span></div>
         <div class="sg-m">${status}<span class="muted small">Since week ${PS_FIRST_WK}: ${rec.n ? `${rec.W}–${rec.L} · ${rec.U >= 0 ? "+" : "−"}${Math.abs(100 * rec.U / rec.n).toFixed(1)}% ROI` : "no games yet"}</span></div></div>`;
     };
     const tabs = "";
