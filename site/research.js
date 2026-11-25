@@ -663,34 +663,57 @@
   AUDIT.qbru = { 1: AUDIT.qbr4[25], 2: AUDIT.qbr1, 3: AUDIT.qbr2[5] }; // QBRu modes = the three old signals' audit rows
   AUDIT_YR.qbru = { 1: AUDIT_YR.qbr4[25], 2: AUDIT_YR.qbr1, 3: AUDIT_YR.qbr2[5] };
   const pc = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(1)}%`;
-  // Late-yardage study (2026-11-15, 2025 wk1-18 + 2026 wk1-10, receiving yards, 1 unit at the saved price, week-cluster 95% intervals).
-  // Picked after seeing results; yr = ROI by season [2025, 2026]. Historical, not live.
+  // Late-yardage study (2026-11-15), now shown as the three-season replay (Michael 2026-11-24, claude/three-season-rerun-2026-11-22.md):
+  // 2024 + 2025 + 2026 wk 1-11, receiving yards, 1 unit at the saved price, week-cluster 95% intervals. Picked after seeing results;
+  // yr = ROI by season [2024, 2025, 2026]. Historical, not live.
+  const Y3 = ["2024", "2025", "2026"], W3 = "2024 + 2025 + 2026 wk 1–11";
   const STUDY = {
-    sy25: { rec: "58–24", roi: 33.7, lo: 15.8, hi: 51.1, yr: [24.0, 53.6] }, synl: { rec: "105–57", roi: 22.5, lo: 6.7, hi: 36.7, yr: [14.5, 37.0] },
+    sy25: { rec: "71–38", roi: 22.9, lo: 5.3, hi: 39.2, yr: [-15.5, 24.0, 47.4], yrl: Y3, win: W3 }, synl: { rec: "149–102", roi: 12.1, lo: -3.1, hi: 25.3, yr: [-11.8, 14.5, 37.6], yrl: Y3, win: W3 },
     // SY toggle (Michael 2026-11-24): three-season replay (2024, 2025 and 2026 weeks 1–11; claude/three-season-rerun-2026-11-22.md). 2024 is the only season not used to find them.
     syc40: { rec: "156–85", roi: 22.3, lo: 11.9, hi: 32.2, yr: [14.9, 19.1, 29.9], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11" },
     syl45: { rec: "56–28", roi: 26.0, lo: 3.6, hi: 48.6, yr: [19.7, 36.8, 21.8], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11" },
-    syypc: { rec: "80–50", roi: 16.1, lo: 0.1, hi: 31.0, yr: [3.3, 19.2, 28.5], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11" }, fhr30: { rec: "95–53", roi: 21.2, lo: 10.3, hi: 32.0, yr: [16.9, 29.3] },
-    fhnl: { rec: "193–118", roi: 17.4, lo: 9.8, hi: 25.3, yr: [11.9, 26.0] }, bl200: { rec: "117–78", roi: 13.4, lo: 5.0, hi: 22.8, yr: [6.6, 22.3] },
-    nlu20: { rec: "112–74", roi: 14.1, lo: 2.8, hi: 23.7, yr: [4.2, 25.6] },
+    syypc: { rec: "80–50", roi: 16.1, lo: 0.1, hi: 31.0, yr: [3.3, 19.2, 28.5], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11" }, fhr30: { rec: "137–98", roi: 10.1, lo: -2.3, hi: 22.1, yr: [-11.3, 16.9, 27.8], yrl: Y3, win: W3 },
+    fhnl: { rec: "305–233", roi: 7.1, lo: -1.1, hi: 14.8, yr: [-7.6, 11.9, 23.3], yrl: Y3, win: W3 }, bl200: { rec: "176–149", roi: 2.4, lo: -8.6, hi: 12.4, yr: [-20.6, 6.6, 26.0], yrl: Y3, win: W3 },
+    nlu20: { rec: "158–147", roi: -2.2, lo: -14.3, hi: 8.7, yr: [-28.5, 4.2, 26.3], yrl: Y3, win: W3 },
   };
   // WX1 replay (2026-11-24, research/signal_stacks props: 2025 weeks 1-18, nflverse post-game wind): Under on QB pass yds and WR/TE/RB rec and rec yds,
   // open-air games with wind of 15+ mph, 1 unit at the saved price (kickoff-3h archive snapshot), pushes refunded, 19 games over 9 weeks, week-cluster
   // 95% interval (20,000 resamples of weeks). The wind is the one measured AFTER the game, so this is a replay, not a bet that could be placed.
-  // The tile's own record uses only the stored ~20-minute pre-kickoff reading and starts empty. 2024 is not loaded yet.
-  STUDY.wx1 = { rec: "270–170", roi: 15.5, lo: 5.0, hi: 23.4, yr: [15.5], yrl: ["2025"], win: "2025 wk 1–18 · wind measured after the game (replay)" };
+  // The tile's own record uses only the stored ~20-minute pre-kickoff reading and starts empty.
+  // 2024 added 2026-11-24 (three-season rerun): the 2024 pull had rushing and receiving yards only, so 2024 is receiving yards props only; no 2026 wind is published yet.
+  STUDY.wx1 = { rec: "361–245", roi: 12.1, lo: 2.3, hi: 19.9, yr: [3.0, 15.5], yrl: ["2024", "2025"], win: "2024 + 2025 wk 1–18 · wind measured after the game (replay)" };
+  // Three-season replay for the audit and indicator tiles (Michael 2026-11-24), same source as the SY tiles above: claude/three-season-rerun-2026-11-22.md and its ledger
+  // CSV (2024 + 2025 + 2026 wk 1-11, DraftKings main line, 1 unit at the saved price, week-cluster 95% intervals). Shown in each tile's info popup in place of the
+  // 2025 + 2026 wk 1-9 audit figures; the tile's rule, list and live record are untouched. Not here, because the 2024 pull had no passing or receptions lines and
+  // there is nothing to show for 2024: CM1 (TE, All), L10, SP2, SP3, SP4. Those keep their audit figures.
+  const F_AUD = "Found on 2025 and 2026 weeks 1–9 (the 2026-11-11 audit), so 2024 is the only full season not used to find it.";
+  const F_LEAD = "Found on 2026 weeks 1–7, so 2024 and 2025 were both not used to find it.";
+  const A_SLOT = " The 2024 depth slots are rebuilt from snap share, so they approximate the app's slots.";
+  const A_SPREAD = " The point spread is a closing-type number from nflverse.";
+  const mk3 = (rec, roi, lo, hi, yr, found, approx) => ({ rec, roi, lo, hi, yr, yrl: Y3, win: W3, found, approx });
+  const R3 = {
+    qbru: { 1: mk3("178–129", 9.5, -0.9, 20.0, [2.6, 7.5, 27.9], F_AUD, A_SLOT), 2: mk3("110–65", 18.7, 4.0, 33.3, [6.6, 23.2, 46.6], F_AUD, A_SLOT), 3: mk3("47–26", 21.3, 4.7, 38.5, [-3.4, 34.3, 45.0], F_AUD, A_SLOT) },
+    qbr1: mk3("110–65", 18.7, 4.0, 33.3, [6.6, 23.2, 46.6], F_AUD, A_SLOT),
+    qbr2: { 5: mk3("47–26", 21.3, 4.7, 38.5, [-3.4, 34.3, 45.0], F_AUD, A_SLOT), 7: mk3("21–10", 27.8, -3.5, 59.2, [-13.1, 70.2, 41.4], F_AUD, A_SLOT) },
+    qbr4: { 25: mk3("135–100", 8.5, -2.6, 20.1, [-0.4, 6.2, 25.9], F_AUD, " Tested as lines of 25 to 39.5."), 40: mk3("43–29", 12.5, -15.3, 38.7, [8.0, 13.2, 51.3], F_AUD) },
+    sc1: mk3("223–173", 6.5, -4.1, 17.5, [-7.4, 4.7, 30.7], F_AUD, A_SLOT), sc2: mk3("72–48", 13.3, -6.4, 31.9, [-5.9, 20.3, 35.1], F_AUD, A_SLOT),
+    qbch: mk3("290–238", 3.5, -3.5, 9.8, [-0.6, 7.3, 2.7], F_AUD, " For 2024, this game's QB is the one with a posted rushing-yards line (there are no 2024 passing lines), so it is an approximation."),
+    l9: mk3("167–126", 7.7, -2.7, 18.3, [-4.4, 20.0, 13.6], F_LEAD), s03: mk3("281–252", -0.3, -8.9, 8.4, [-12.1, 7.1, 10.0], F_LEAD),
+    sp1: mk3("207–135", 14.3, 2.2, 25.5, [3.0, 17.8, 19.5], F_AUD, A_SPREAD), sp5: mk3("528–410", 5.7, 0.3, 10.9, [2.2, 8.4, 7.7], F_AUD, A_SPREAD),
+  };
+  const r3 = (t) => { const e = R3[t.id]; return (e && (e.rec ? e : e[RL.opt[t.id]])) || null; };
   // Back light for the tile run charts (Michael 2026-11-16): each signal's 95% ROI interval from the audit/study tables above, or null if untested.
   function roiBand(t) {
     t = memTab(t.id) || t;
     if (t.id === "wx1") return null; // replay used a different wind (measured after the game): no back light on the live tile chart
-    const x = STUDY[t.id] || (AUDIT[t.id] && (t.opts ? AUDIT[t.id][RL.opt[t.id]] : AUDIT[t.id]));
+    const x = STUDY[t.id] || r3(t) || (AUDIT[t.id] && (t.opts ? AUDIT[t.id][RL.opt[t.id]] : AUDIT[t.id]));
     return x && x.lo != null && x.hi != null ? { lo: x.lo, hi: x.hi } : null;
   }
   const NO_REPLAY = "No historical replay is loaded for this signal yet. The tile scores finished games on the wind reading taken about 20 minutes before kickoff, and starts with no record.";
   function auditLine(t) {
-    const st = STUDY[t.id];
-    if (st && t.id === "wx1") return `<b>Replay on wind measured after the game</b><br>2025 weeks 1–18: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>This is not a test of the 20-minute reading, which has no record yet. Picked after seeing results.`;
-    if (st && st.yrl) return `<b>Three-season replay</b> (${st.win})<br>${st.yrl.map((y, i) => `${y}: <b>${pc(st.yr[i])}</b> ROI`).join("<br>")}<br>All seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>Found on 2025 and 2026 weeks 1–10, so 2024 is the only season not used to find it. Picked after seeing results; the interval does not account for the many versions tried.`;
+    const st = STUDY[t.id] || r3(t);
+    if (st && t.id === "wx1") return `<b>Replay on wind measured after the game</b> (2024 + 2025 weeks 1–18)<br>${st.yrl.map((y, i) => `${y}: <b>${pc(st.yr[i])}</b> ROI`).join("<br>")}<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>Found on 2025, so 2024 was not used to find it. The 2024 pull had rushing and receiving yards only, so 2024 is receiving-yards props; no 2026 wind is published yet. This is not a test of the 20-minute reading, which has no record yet. Picked after seeing results.`;
+    if (st && st.yrl) return `<b>Three-season replay</b> (${st.win})<br>${st.yrl.map((y, i) => `${y}: <b>${pc(st.yr[i])}</b> ROI`).join("<br>")}<br>All seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>${st.found || "Found on 2025 and 2026 weeks 1–10, so 2024 is the only season not used to find it."}${st.approx || ""} Picked after seeing results; the interval does not account for the many versions tried.`;
     if (st) return `<b>Late-yardage study replay</b> (2025 weeks 1–18 + 2026 weeks 1–10)<br>2025: <b>${pc(st.yr[0])}</b> ROI<br>2026: <b>${pc(st.yr[1])}</b> ROI<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.`;
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
     if (!x && t.id === "wx1") return NO_REPLAY;
@@ -791,7 +814,7 @@
   }
   // Results numbers for a signal (null when the audit did not test this setting).
   function sgpData(t) {
-    const st = STUDY[t.id];
+    const st = STUDY[t.id] || r3(t);
     if (st) return { win: st.win || "2025 wk 1–18 + 2026 wk 1–10", rec: st.rec, roi: st.roi, lo: st.lo, hi: st.hi, yr: st.yr, yrl: st.yrl };
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
     if (!x) return null;
@@ -860,7 +883,7 @@
       ${id === "syc40" || id === "syl45" || id === "syypc" ? `<div class="small muted">These three signals overlap: in the replay, about 70% of Fluke and Line 45+ bets were also 40+ catches bets.</div>` : ""}
       ${sgpResults(t)}
       <details class="sgp-how"><summary>How we measured this</summary><p class="small">${auditLine(t)}</p>
-      <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck.${STUDY[t.id] ? "" : " It does not account for picking the best rules out of many tried, so it is likely optimistic."}</p></details></div>`;
+      <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck.${STUDY[t.id] || r3(t) ? "" : " It does not account for picking the best rules out of many tried, so it is likely optimistic."}</p></details></div>`;
     document.body.appendChild(ov);
     ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".nw-x") || e.target.closest("a")) closePop(); });
   }
