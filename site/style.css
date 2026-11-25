@@ -751,3 +751,8 @@ textarea.tp-in { resize: vertical; }
 /* Long press on a Signals tile (2026-11-22): all toggles on, list shows any of them. */
 .sg-tile { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 .sg-tile.on.any { border-style: dashed; }
+
+/* Player signals page (2026-11-24) */
+.ps-tabs { margin: 8px 0 10px; } .ps-tabs .gchip { text-decoration: none; color: inherit; }
+.ps-row.ps-fire { border-left: 3px solid var(--accent); background: var(--chip); padding-left: 8px; } .ps-row.ps-off { opacity: .6; }
+.ps-ok { color: var(--accent); font-weight: 600; } .ps-det { flex: 1 1 100%; } .ps-det ul { margin: 6px 0 0; padding-left: 18px; }
