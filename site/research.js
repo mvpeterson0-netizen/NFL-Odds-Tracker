@@ -34,11 +34,13 @@
   // Late-yardage indicator wording (shared by SY-*, FH-*, BL-200, NL-U20).
   const LY_WHO = `Bet a WR's, TE's or RB's <b>receiving yards Under</b> when all of these are true:`;
   const LY_SHORT = `<li>He is a <b>short-yardage receiver</b>: before that game he averaged <b>under 10.6 yards per catch</b> over his career since 2024 (at least 20 catches).</li>`;
+  const LY_SHORT40 = `<li>He is a <b>short-yardage receiver</b>: before that game he averaged <b>under 10.6 yards per catch</b> over his career since 2024, with <b>at least 40 catches</b> behind that average.</li>`;
+  const LY_L45 = `<li>This week's receiving-yards line is <b>45 or higher</b>.</li>`;
   const LY_PREV = `<li>In his <b>previous game</b> he finished <b>Over</b> his receiving-yards line with <b>40 or more</b> receiving yards.</li>`;
   const LY_UP = (pct) => pct ? `<li>This week's receiving-yards line is <b>${pct}% or more higher</b> than that game's line.</li>` : `<li>This week's receiving-yards line is <b>higher</b> than that game's line.</li>`;
   const LY_NOLONG = `<li>He would <b>still have been Over</b> that line without his single longest catch.</li>`;
   const LY_FH = `<li>His <b>first-half yards alone</b> were already above that game's line.</li>`;
-  const LY_IDS = new Set(["sy25", "synl", "syypc", "fhr30", "fhnl", "bl200", "nlu20"]);
+  const LY_IDS = new Set(["sy25", "synl", "syc40", "syl45", "syypc", "fhr30", "fhnl", "bl200", "nlu20"]);
   // QBRu (Michael 2026-11-20): QB-R1, QB-R2 and QB-R4 combined into one tile with a 3-way toggle (same pattern as the old QB-R4 25+/40+).
   // Modes are numbered so the toggle (data-sgopt) stays numeric: 1 = 25+ (old QB-R4 at 25), 2 = avg 25 (old QB-R1), 3 = +5 (old QB-R2 at +5).
   const QBRU_LBL = { 1: "25+", 2: "avg 25", 3: "+5" };
@@ -55,7 +57,7 @@
     ...[
       ["cm1", 6, "CM1", ["cm1te", "cm120"], ["TE", "All"], "QB line drop, receivers' lines don't follow", "Line Lag"],
       ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script", "Prev Scr"],
-      ["sy", 29, "SY", ["sy25", "synl", "syypc"], ["+25%", "NL", "YPC"], "Short-yardage receiver after a big Over", "Short yd", ["+25%", "No Long", "Fluke"]],
+      ["sy", 29, "SY", ["syc40", "syl45", "syypc"], ["40+", "L45+", "YPC"], "Short-yardage receiver after a big Over", "Short yd", ["40+ ct", "Line 45", "Fluke"]],
       ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "NL"], "First-half Over, line raised", "1st Half", ["+30%", "No Long"]],
     ].map(([id, n, label, mem, lbl, what, tile, lblT]) => ({
       id, n, side: "under", label, tile, optTile: (v) => (lblT || lbl)[v - 1], opts: mem.map((_, i) => i + 1), optFmt: (v) => lbl[v - 1], members: Object.fromEntries(mem.map((m, i) => [i + 1, m])), cm: id === "cm1",
@@ -112,10 +114,16 @@
       desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when his team is a <b>3 to 6.5 point underdog</b>. ${SPREAD_NOTE}` },
     // ---- Late-yardage indicators (2026-11-16, Michael's picks from the 2026-11-15 late-yardage study; receiving yards, WR/TE/RB) ----
     // Historical replay picked after seeing results (see STUDY below); scored here on 2026 games, tracked forward from the day they were added.
-    { id: "sy25", hid: true, n: 29, page: "ind", side: "under", label: "SY-R25", short: () => "Short-yardage receiver, line raised 25%+",
+    { id: "syc40", hid: true, n: 37, page: "ind", side: "under", label: "SY-c40", short: () => "Short-yardage receiver (40+ catches) after a big Over",
+      title: "Short-yardage receiver with 40+ catches behind his average → rec yds Under", why: "A receiver with a long record of short catches who just had a big game may be priced for a repeat.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT40}${LY_PREV}${LY_UP()}</ul>` },
+    { id: "syl45", hid: true, n: 38, page: "ind", side: "under", label: "SY-L45+", short: () => "Short-yardage receiver, line 45+",
+      title: "Short-yardage receiver, line 45+ → rec yds Under", why: "A big line after a big game for a short-catch receiver may overshoot.",
+      desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP()}${LY_L45}</ul>` },
+    { id: "sy25", n: 29, page: "ind", side: "under", label: "SY-R25", short: () => "Short-yardage receiver, line raised 25%+",
       title: "Short-yardage receiver, line raised 25%+ → rec yds Under", why: "A big raise for a receiver who gets his yards on short catches may overshoot.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP(25)}</ul>` },
-    { id: "synl", hid: true, n: 30, page: "ind", side: "under", label: "SY-NL", short: () => "Short-yardage receiver, Over without his longest catch",
+    { id: "synl", n: 30, page: "ind", side: "under", label: "SY-NL", short: () => "Short-yardage receiver, Over without his longest catch",
       title: "Short-yardage receiver who didn't need his longest catch → rec yds Under", why: "His Over came from several short catches, not one play, yet the line still went up.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_SHORT}${LY_PREV}${LY_UP()}${LY_NOLONG}</ul>` },
     { id: "syypc", hid: true, n: 31, page: "ind", side: "under", label: "SY-YPC", short: () => "Short-yardage receiver with a long-catch game",
@@ -139,7 +147,7 @@
       title: "Outdoor game, wind 15+ mph → pass yds, receptions or rec yds Under", why: "Strong wind may hold down the passing game, and the line may not price it in.",
       desc: () => `Bet a QB's <b>passing yards Under</b>, or a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b>, when both are true:<ul class="sg-ul"><li>The game is <b>outdoors</b> (an open-air stadium; domes and retractable roofs are left out).</li><li>The <b>forecast wind</b> at kickoff is <b>15 mph or more</b>.</li></ul><div class="sg-sub"><b>Which wind:</b> the stadium's <b>forecast wind</b>, refreshed about every 3 hours until kickoff and then frozen, so on game day it is the reading from about 3 hours before. The same forecast is used to list players and to score the record. Observed wind is not used. This has <b>not been backtested</b>.</div>` },
   ];
-  const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 2, fh: 2 }; // QBRu avg 25; CM1 TE; GS RB; SY NL; 1H NL // default toggle values
+  const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 1, fh: 2 }; // QBRu avg 25; CM1 TE; GS RB; SY 40+ catches; 1H NL // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
   // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
   const FREE_RULES = 3;
@@ -405,7 +413,7 @@
     sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
     l9: ["Line", "Last 3"], l10: ["Line", "Last 3"], s03: ["Line", "Last 3"],
     sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
-    sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
+    sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syc40: ["Line (last game → now)", "Last game"], syl45: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
     fhr30: ["Line (last game → now)", "Last game"], fhnl: ["Line (last game → now)", "Last game"], bl200: ["Line (last game → now)", "Last game"], nlu20: ["Line (last game → now)", "Last game"],
     wx1: ["Line", "Wind"],
   };
@@ -660,7 +668,10 @@
   // Picked after seeing results; yr = ROI by season [2025, 2026]. Historical, not live.
   const STUDY = {
     sy25: { rec: "58–24", roi: 33.7, lo: 15.8, hi: 51.1, yr: [24.0, 53.6] }, synl: { rec: "105–57", roi: 22.5, lo: 6.7, hi: 36.7, yr: [14.5, 37.0] },
-    syypc: { rec: "54–30", roi: 21.5, lo: 4.8, hi: 37.5, yr: [19.2, 29.3] }, fhr30: { rec: "95–53", roi: 21.2, lo: 10.3, hi: 32.0, yr: [16.9, 29.3] },
+    // SY toggle (Michael 2026-11-24): three-season replay (2024, 2025 and 2026 weeks 1–11; claude/three-season-rerun-2026-11-22.md). 2024 is the only season not used to find them.
+    syc40: { rec: "156–85", roi: 22.3, lo: 11.9, hi: 32.2, yr: [14.9, 19.1, 29.9], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11" },
+    syl45: { rec: "56–28", roi: 26.0, lo: 3.6, hi: 48.6, yr: [19.7, 36.8, 21.8], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11" },
+    syypc: { rec: "80–50", roi: 16.1, lo: 0.1, hi: 31.0, yr: [3.3, 19.2, 28.5], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11" }, fhr30: { rec: "95–53", roi: 21.2, lo: 10.3, hi: 32.0, yr: [16.9, 29.3] },
     fhnl: { rec: "193–118", roi: 17.4, lo: 9.8, hi: 25.3, yr: [11.9, 26.0] }, bl200: { rec: "117–78", roi: 13.4, lo: 5.0, hi: 22.8, yr: [6.6, 22.3] },
     nlu20: { rec: "112–74", roi: 14.1, lo: 2.8, hi: 23.7, yr: [4.2, 25.6] },
   };
@@ -673,6 +684,7 @@
   const NO_REPLAY = "No historical replay is loaded for this signal yet. The tile scores finished 2026 games on the forecast wind (last reading before kickoff). It has not been backtested.";
   function auditLine(t) {
     const st = STUDY[t.id];
+    if (st && st.yrl) return `<b>Three-season replay</b> (${st.win})<br>${st.yrl.map((y, i) => `${y}: <b>${pc(st.yr[i])}</b> ROI`).join("<br>")}<br>All seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>Found on 2025 and 2026 weeks 1–10, so 2024 is the only season not used to find it. Picked after seeing results; the interval does not account for the many versions tried.`;
     if (st) return `<b>Late-yardage study replay</b> (2025 weeks 1–18 + 2026 weeks 1–10)<br>2025: <b>${pc(st.yr[0])}</b> ROI<br>2026: <b>${pc(st.yr[1])}</b> ROI<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.`;
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
     if (!x && t.id === "wx1") return NO_REPLAY;
@@ -712,6 +724,8 @@
   // Gate pieces shared by the late-yardage rules (wording follows LY_* above).
   const GP = {
     SHORT: { i: "field", c: "gr", l: "Short-catch type", s: "Under 10.6 yards per catch since 2024 · 20+ catches" },
+    SHORT40: { i: "field", c: "gr", t: "40+", tp: "br", l: "Short-catch type · 40+ catches", s: "Under 10.6 yards per catch since 2024" },
+    L45: { i: "form", c: "bl", t: "45+", tp: "br", l: "High line", s: "This week's receiving-yards line is 45 or more" },
     PREV: { i: "cal", c: "bl", l: "Last Week Over, 40+", s: "Receiving yards in his previous game" },
     UP: { i: "up", c: "pu", l: "Line raised", s: "Higher than that game's line" },
     UPP: (n) => ({ i: "upt", c: "pu", x: `${n}%+`, l: `Line raised ${n}%+`, s: "vs that game's line" }),
@@ -746,6 +760,8 @@
     sp5: { bet: "Under · rushing · QB RB", g: () => [{ i: "sband", c: "gr", l: "Underdog by 3 to 6.5", s: "Opponent favored by 3 to 6.5" }] },
     sy25: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT, GP.PREV, GP.UPP(25)] },
     synl: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT, GP.PREV, GP.UP, GP.NOLONG] },
+    syc40: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT40, GP.PREV, GP.UP] },
+    syl45: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT, GP.PREV, GP.UP, GP.L45] },
     syypc: { bet: "Under · rec yds · WR TE RB", g: () => [GP.SHORT, GP.PREV, GP.UP, GP.YPC] },
     fhr30: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.FH, GP.UPP(30)] },
     fhnl: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.FH, GP.NOLONG] },
@@ -757,7 +773,7 @@
   // Order = each position's historical-replay ROI (2025 wk 2-18 + 2026 wk 2-10); see claude/late-yardage-by-position-2026-11-17.md
   // and claude/signals-by-position-2026-11-18.md. Display only: no rule, list, score or number changes.
   const POS_ORDER = {
-    sy25: ["TE", "RB", "WR"], synl: ["WR", "TE", "RB"], syypc: ["WR", "TE", "RB"], fhr30: ["RB", "TE", "WR"], fhnl: ["WR", "TE", "RB"],
+    sy25: ["TE", "RB", "WR"], synl: ["WR", "TE", "RB"], syc40: ["TE", "RB", "WR"], syl45: ["TE", "WR", "RB"], syypc: ["WR", "TE", "RB"], fhr30: ["RB", "TE", "WR"], fhnl: ["WR", "TE", "RB"],
     bl200: ["TE", "WR", "RB"], nlu20: ["RB", "TE", "WR"],
     sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"],
   };
@@ -770,7 +786,7 @@
   // Results numbers for a signal (null when the audit did not test this setting).
   function sgpData(t) {
     const st = STUDY[t.id];
-    if (st) return { win: "2025 wk 1–18 + 2026 wk 1–10", rec: st.rec, roi: st.roi, lo: st.lo, hi: st.hi, yr: st.yr };
+    if (st) return { win: st.win || "2025 wk 1–18 + 2026 wk 1–10", rec: st.rec, roi: st.roi, lo: st.lo, hi: st.hi, yr: st.yr, yrl: st.yrl };
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
     if (!x) return null;
     const y = AUDIT_YR[t.id], yr = y && (t.opts ? y[RL.opt[t.id]] : y);
@@ -786,7 +802,7 @@
     const P = (v) => ((v + A) / (2 * A)) * 100;
     const cl = (p, a, b) => Math.min(b, Math.max(a, p));
     const col = (v) => (v >= 0 ? "var(--over)" : "var(--under)");
-    const centers = d.yr ? [28, 68, 112] : [28];
+    const centers = d.yr ? [...d.yr.map((_, i) => 28 + 40 * i), 28 + 40 * d.yr.length + 4] : [28]; // 2 seasons: 28, 68, 112 (unchanged); 3 seasons: 28, 68, 108, 152
     const tc = centers[centers.length - 1];
     const plotH = tc + 36, boxH = plotH + 22;
     const boxW = Math.min(460, Math.max(280, window.innerWidth - 32)) - 28, W = boxW - 54;
@@ -806,13 +822,13 @@
       h += `<span class="sgp-lab sgp-sm" style="left:${cl(P(d.roi), 22, 78)}%;top:${tc + 14}px">${pc(d.lo)} to ${pc(d.hi)}</span>`;
     }
     h += `</div>`;
-    (d.yr ? ["2025", "2026"] : []).forEach((y, i) => { h += `<span class="sgp-row" style="top:${centers[i] - 8}px">${y}</span>`; });
+    (d.yr ? d.yrl || ["2025", "2026"] : []).forEach((y, i) => { h += `<span class="sgp-row" style="top:${centers[i] - 8}px">${y}</span>`; });
     h += `<span class="sgp-row sgp-tot" style="top:${tc - 8}px">Total</span><span class="sgp-row sgp-sm" style="top:${tc + 14}px">95% CI</span>`;
     h += `<div class="sgp-axis">${[-A, -A / 2, 0, A / 2, A].map((k) => `<span style="left:${P(k)}%">${k > 0 ? "+" : k < 0 ? "−" : ""}${Math.abs(k)}${k === -A || k === A ? "%" : ""}</span>`).join("")}</div></div>`;
     return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
   }
   // Info popup header (Michael 2026-11-21): the tile name and toggle spelled out in full words; tiles keep their short names.
-  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["Line +25%", "No longest catch", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null] };
+  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["40+ catches", "Line 45+", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null] };
   const popLabel = (t) => { const e = t && POPN[t.id]; if (!e) return null; const v = RL.opt[t.id], o = e[1] ? (Array.isArray(e[1]) ? e[1][v - 1] : e[1][v]) : null; return o ? `${e[0]} · ${o}` : e[0]; };
   const togLabel = (t) => (t.opts ? `${t.label} · ${t.optFmt(RL.opt[t.id])}` : t.label);
   function openInfo(id) {
@@ -833,6 +849,9 @@
       <div class="small muted sgp-lead">${lead}</div>
       <div class="sgp-gs${gates.length > 1 ? " chain" : ""}">${rows}</div>
       ${id === "syypc" ? `<div class="small muted sgp-why">${bulb}<span>Fluke long catches tend not to repeat.</span></div>` : ""}
+      ${id === "syc40" ? `<div class="small muted sgp-why">${bulb}<span>A receiver with a long record of short catches who just had a big game may be priced for a repeat.</span></div>` : ""}
+      ${id === "syl45" ? `<div class="small muted sgp-why">${bulb}<span>A big line after a big game for a short-catch receiver may overshoot.</span></div>` : ""}
+      ${id === "syc40" || id === "syl45" || id === "syypc" ? `<div class="small muted">These three signals overlap: in the replay, about 70% of Fluke and Line 45+ bets were also 40+ catches bets.</div>` : ""}
       ${sgpResults(t)}
       <details class="sgp-how"><summary>How we measured this</summary><p class="small">${auditLine(t)}</p>
       <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck.${STUDY[t.id] ? "" : " It does not account for picking the best rules out of many tried, so it is likely optimistic."}</p></details></div>`;
@@ -964,7 +983,7 @@
       return { t, by, s: tally(sc) };
     });
     const rk = new Map(tabs.map((t) => [t.id, rankStat(t)]));
-    rows.sort((a, b) => { const x = rk.get(a.t.id), y = rk.get(b.t.id); return (y.n ? 1 : 0) - (x.n ? 1 : 0) || (y.roi ?? -1e9) - (x.roi ?? -1e9) || a.t.n - b.t.n; });
+    rows.sort((a, b) => { const x = rk.get(a.t.id), y = rk.get(b.t.id); return (b.t.id === "sy" ? 1 : 0) - (a.t.id === "sy" ? 1 : 0) || (y.n ? 1 : 0) - (x.n ? 1 : 0) || (y.roi ?? -1e9) - (x.roi ?? -1e9) || a.t.n - b.t.n; });
     // Michael 2026-11-13: every Signals tile is open to everyone; no sign-in gate. (FREE_TILES / placeGate / the sign-in box stay in the file, unused.)
     const gate = false;
     RL.unlocked = new Set(rows.filter((x, i) => !gate || i < FREE_TILES).map((x) => x.t.id));
@@ -1209,7 +1228,7 @@
     if (picked.length) inner += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
-    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY, 1H and BL-200 now live on Signals. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
+    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY (40+ catches, Line 45+, Fluke), 1H and BL-200 now live on Signals; SY-R25 and SY-NL stay here. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
     return `<section id="rl" data-page="${SGPAGE}">${head}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
@@ -1339,6 +1358,8 @@
       const ypc = d.hc >= 20 ? d.hy / d.hc : null, short = ypc != null && ypc < 10.6;
       if (short && up >= 0.25) hits.push("sy25");
       if (short && !needLong) hits.push("synl");
+      if (d.hc >= 40 && d.hy / d.hc < 10.6) hits.push("syc40");
+      if (short && line >= 45) hits.push("syl45");
       if (short && d.rc > 0 && d.tot / d.rc >= 1.5 * ypc) hits.push("syypc");
       if (d.h1 > pl && up >= 0.30) hits.push("fhr30");
       if (d.h1 > pl && !needLong) hits.push("fhnl");
@@ -1526,7 +1547,7 @@
     const line = num(x.m.line);
     switch (x.rule.id) {
       case "qbru": return RL.opt.qbru === 3 ? `Line ${num(x.pl)} → ${line}` : "";
-      case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
+      case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syc40": case "syl45": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
       case "wx1": { const wd = obsWind(x.r.gid); return wd == null ? "" : `Wind ${num(wd, 0)} mph`; }
       case "qbch": return esc(x.note);
       case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
