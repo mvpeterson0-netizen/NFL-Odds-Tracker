@@ -1276,6 +1276,8 @@
     return h + `</div>${pager}` + live;
   }
   function html(page) {
+    if (page === "ps") { SGPAGE = "ps"; return psHtml(); }
+    if (page === undefined && SGPAGE === "ps") return psHtml();
     if (page !== undefined && page !== SGPAGE) { SGPAGE = page === "ind" ? "ind" : "main"; RL.sigs = []; }
     const tabs = visibleTabs();
     initOpts(tabs);
@@ -1285,7 +1287,7 @@
     if (picked.length) inner += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
-    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY (40+ catches, Line 45+, Fluke), 1H and BL-200 now live on Signals; SY-R25 and SY-NL stay here. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p>`;
+    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY (40+ catches, Line 45+, Fluke), 1H and BL-200 now live on Signals; SY-R25 and SY-NL stay here. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
     return `<section id="rl" data-page="${SGPAGE}">${head}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
@@ -1801,5 +1803,251 @@
   document.addEventListener("click", (e) => { if (e.target && e.target.id === "gs-reset") { Object.assign(SCRIPT, SCRIPT_DEFAULT); saveScript(); } });
 
   function safeSettings() { try { return settingsHtml(); } catch (e) { console.error("game script setting failed", e); return ""; } }
+
+  // ================= Player signals page (#/search/players, Michael 2026-11-24) =================
+  // 63 player-by-situation splits found in the 2026-11-24 situational-splits study (rushing and receiving yards, 2024 + 2025 + 2026 wk 1-11, every player with
+  // 20+ props in a market and 6+ games on each side of the split), kept if p < 0.05 on Fisher's exact test of Over/Under rate in vs out of the situation.
+  // FROZEN on 2026-11-24: the list, each definition and its side never change. By a label-shuffling test about 100 splits would clear p < 0.05 by chance on this
+  // many tests, so this is a watch list, not a set of proven edges. Each signal's own forward record counts games from week 12 on (none were in the study).
+  // Row: [id, player id, name, pos, market, situation, side (o/u), hits in situation, games in situation, % same side in his other games, those other games, p, same-side hits in those other games]
+  const PS_FIRST_WK = 12, PS_TOP = 20, PS_FROZEN = "2026-11-24";
+  const PS_COND = { home: "Home game", turf: "Turf field", dome: "Dome or roof (closed or retractable)", early: "Sunday 1 pm ET game", late: "Sunday 4 pm ET game", prime: "Prime time (night game)",
+    thursday: "Thursday night", monday: "Monday night", division: "Division game", favorite: "Team favored", big_dog: "Team a 6.5+ point underdog", short_rest: "Short rest (5 days or less)",
+    off_bye: "Off a bye", high_total: "Game total 47+", cold: "Cold (40°F or lower, outdoors)", windy: "Wind 15+ mph (outdoors)", west_early_away: "West Coast team, 1 pm ET road game" };
+  const PS = [
+    ["PS01", "00-0039880", "Malik Washington", "WR", "rec_yds", "division", "u", 10, 10, 36, 22, 0.0013, 8],
+    ["PS02", "00-0034827", "DJ Moore", "WR", "rec_yds", "early", "o", 16, 23, 21, 19, 0.0023, 4],
+    ["PS03", "00-0030279", "Keenan Allen", "WR", "rec_yds", "high_total", "o", 6, 6, 29, 24, 0.0029, 7],
+    ["PS04", "00-0033293", "Aaron Jones Sr.", "RB", "rush_yds", "prime", "u", 9, 10, 34, 29, 0.0033, 10],
+    ["PS05", "00-0039064", "Zay Flowers", "WR", "rec_yds", "prime", "u", 11, 15, 25, 28, 0.0035, 7],
+    ["PS06", "00-0039067", "Rashee Rice", "WR", "rec_yds", "division", "u", 6, 7, 15, 13, 0.0044, 2],
+    ["PS07", "00-0036554", "Nico Collins", "WR", "rec_yds", "early", "o", 15, 20, 21, 14, 0.0045, 3],
+    ["PS08", "00-0030564", "DeAndre Hopkins", "WR", "rec_yds", "home", "o", 11, 17, 13, 15, 0.0046, 2],
+    ["PS09", "00-0039064", "Zay Flowers", "WR", "rec_yds", "early", "o", 17, 21, 36, 22, 0.0051, 8],
+    ["PS10", "00-0030279", "Keenan Allen", "WR", "rec_yds", "division", "o", 11, 13, 33, 27, 0.0057, 9],
+    ["PS11", "00-0034827", "DJ Moore", "WR", "rec_yds", "late", "u", 7, 7, 43, 35, 0.0092, 15],
+    ["PS12", "00-0037838", "Isaiah Likely", "TE", "rec_yds", "division", "o", 10, 14, 27, 26, 0.0093, 7],
+    ["PS13", "00-0035228", "Kyler Murray", "QB", "rush_yds", "late", "u", 11, 16, 17, 12, 0.0093, 2],
+    ["PS14", "00-0038129", "Cade Otton", "TE", "rec_yds", "turf", "u", 15, 18, 41, 22, 0.0097, 9],
+    ["PS15", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "prime", "u", 5, 6, 20, 20, 0.0097, 4],
+    ["PS16", "00-0033293", "Aaron Jones Sr.", "RB", "rush_yds", "early", "o", 15, 21, 28, 18, 0.0104, 5],
+    ["PS17", "00-0039738", "Blake Corum", "RB", "rush_yds", "prime", "u", 10, 13, 26, 19, 0.0105, 5],
+    ["PS18", "00-0037248", "James Cook III", "RB", "rush_yds", "home", "u", 13, 21, 20, 20, 0.0109, 4],
+    ["PS19", "00-0039910", "Jayden Daniels", "QB", "rush_yds", "home", "o", 10, 15, 19, 16, 0.0113, 3],
+    ["PS20", "00-0038558", "Darnell Washington", "TE", "rec_yds", "home", "o", 11, 14, 29, 17, 0.0113, 5],
+    ["PS21", "00-0036407", "Jerry Jeudy", "WR", "rec_yds", "big_dog", "u", 12, 15, 38, 29, 0.0114, 11],
+    ["PS22", "00-0037261", "Khalil Shakir", "WR", "rec_yds", "cold", "u", 7, 8, 32, 22, 0.0121, 7],
+    ["PS23", "00-0033106", "Jared Goff", "QB", "rush_yds", "division", "u", 9, 11, 35, 26, 0.0128, 9],
+    ["PS24", "00-0036554", "Nico Collins", "WR", "rec_yds", "division", "o", 10, 12, 36, 22, 0.0129, 8],
+    ["PS25", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "favorite", "o", 13, 15, 36, 11, 0.0135, 4],
+    ["PS26", "00-0033090", "Hunter Henry", "TE", "rec_yds", "home", "o", 15, 20, 35, 23, 0.0139, 8],
+    ["PS27", "00-0037291", "Jalen Nailor", "WR", "rec_yds", "late", "u", 11, 12, 52, 31, 0.0171, 16],
+    ["PS28", "00-0037291", "Jalen Nailor", "WR", "rec_yds", "big_dog", "u", 8, 8, 54, 35, 0.0175, 19],
+    ["PS29", "00-0038979", "Cedric Tillman", "WR", "rec_yds", "division", "o", 6, 8, 17, 12, 0.0194, 2],
+    ["PS30", "00-0038544", "Quentin Johnston", "WR", "rec_yds", "home", "u", 13, 20, 24, 17, 0.0202, 4],
+    ["PS31", "00-0033857", "JuJu Smith-Schuster", "WR", "rec_yds", "prime", "o", 6, 9, 13, 15, 0.0215, 2],
+    ["PS32", "00-0039338", "Brock Bowers", "TE", "rec_yds", "home", "u", 13, 18, 32, 19, 0.0217, 6],
+    ["PS33", "00-0036223", "Jonathan Taylor", "RB", "rush_yds", "high_total", "u", 8, 11, 26, 19, 0.0227, 5],
+    ["PS34", "00-0035676", "A.J. Brown", "WR", "rec_yds", "turf", "o", 9, 11, 33, 21, 0.0233, 7],
+    ["PS35", "00-0038606", "Parker Washington", "WR", "rec_yds", "late", "o", 7, 7, 48, 23, 0.0242, 11],
+    ["PS36", "00-0030061", "Zach Ertz", "TE", "rec_yds", "dome", "u", 6, 7, 32, 25, 0.0265, 8],
+    ["PS37", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "dome", "o", 14, 17, 33, 9, 0.0277, 3],
+    ["PS38", "00-0036322", "Justin Jefferson", "WR", "rec_yds", "favorite", "o", 14, 24, 21, 19, 0.0281, 4],
+    ["PS39", "00-0032211", "Tyler Lockett", "WR", "rec_yds", "favorite", "o", 6, 7, 33, 21, 0.0286, 7],
+    ["PS40", "00-0040583", "Woody Marks", "RB", "rush_yds", "favorite", "u", 9, 14, 11, 9, 0.0288, 1],
+    ["PS41", "00-0039338", "Brock Bowers", "TE", "rec_yds", "turf", "o", 8, 10, 37, 27, 0.0293, 10],
+    ["PS42", "00-0037838", "Isaiah Likely", "TE", "rec_yds", "dome", "u", 6, 6, 50, 34, 0.0295, 17],
+    ["PS43", "00-0035228", "Kyler Murray", "QB", "rush_yds", "favorite", "u", 10, 15, 23, 13, 0.0296, 3],
+    ["PS44", "00-0037247", "George Pickens", "WR", "rec_yds", "division", "u", 8, 12, 25, 28, 0.0297, 7],
+    ["PS45", "00-0037741", "Jahan Dotson", "WR", "rec_yds", "division", "o", 8, 11, 31, 29, 0.0305, 9],
+    ["PS46", "00-0036358", "CeeDee Lamb", "WR", "rec_yds", "turf", "o", 18, 27, 25, 12, 0.0346, 3],
+    ["PS47", "00-0032764", "Derrick Henry", "RB", "rush_yds", "turf", "o", 9, 11, 41, 34, 0.0351, 14],
+    ["PS48", "00-0036139", "Rico Dowdle", "RB", "rec_yds", "division", "u", 9, 12, 35, 23, 0.0354, 8],
+    ["PS49", "00-0039150", "Bryce Young", "QB", "rush_yds", "big_dog", "o", 8, 12, 28, 25, 0.036, 7],
+    ["PS50", "00-0038559", "Michael Wilson", "WR", "rec_yds", "high_total", "o", 10, 14, 32, 19, 0.0366, 6],
+    ["PS51", "00-0040122", "Ashton Jeanty", "RB", "rec_yds", "dome", "o", 13, 18, 25, 8, 0.0384, 2],
+    ["PS52", "00-0037525", "Jordan Mason", "RB", "rush_yds", "prime", "u", 7, 8, 41, 22, 0.0395, 9],
+    ["PS53", "00-0039040", "De'Von Achane", "RB", "rec_yds", "turf", "u", 10, 12, 46, 24, 0.0399, 11],
+    ["PS54", "00-0026498", "Matthew Stafford", "QB", "rush_yds", "dome", "u", 15, 16, 56, 9, 0.0403, 5],
+    ["PS55", "00-0038621", "DeMario Douglas", "WR", "rec_yds", "favorite", "o", 10, 13, 38, 26, 0.0407, 10],
+    ["PS56", "00-0033923", "Kareem Hunt", "RB", "rec_yds", "late", "u", 6, 6, 43, 14, 0.0419, 6],
+    ["PS57", "00-0036875", "Rhamondre Stevenson", "RB", "rush_yds", "cold", "o", 7, 8, 41, 29, 0.0422, 12],
+    ["PS58", "00-0039165", "Zach Charbonnet", "RB", "rush_yds", "division", "o", 9, 13, 32, 22, 0.0425, 7],
+    ["PS59", "00-0036309", "Darnell Mooney", "WR", "rec_yds", "division", "o", 9, 13, 33, 27, 0.0458, 9],
+    ["PS60", "00-0031236", "Brandin Cooks", "WR", "rec_yds", "favorite", "u", 5, 6, 27, 15, 0.0464, 4],
+    ["PS61", "00-0034829", "Mike Gesicki", "TE", "rec_yds", "home", "o", 11, 16, 32, 22, 0.0472, 7],
+    ["PS62", "00-0039424", "Devaughn Vele", "WR", "rec_yds", "turf", "u", 9, 13, 23, 13, 0.0472, 3],
+    ["PS63", "00-0039851", "Drake Maye", "QB", "rush_yds", "cold", "o", 7, 9, 33, 27, 0.0491, 9]
+  ];
+  const PS_DIV = { BUF: "AE", MIA: "AE", NE: "AE", NYJ: "AE", BAL: "AN", CIN: "AN", CLE: "AN", PIT: "AN", HOU: "AS", IND: "AS", JAX: "AS", TEN: "AS", DEN: "AW", KC: "AW", LV: "AW", LAC: "AW",
+    DAL: "NE", NYG: "NE", PHI: "NE", WAS: "NE", CHI: "NN", DET: "NN", GB: "NN", MIN: "NN", ATL: "NS", CAR: "NS", NO: "NS", TB: "NS", ARI: "NW", LA: "NW", LAR: "NW", SF: "NW", SEA: "NW" };
+  const PS_PACIFIC = new Set(["SEA", "SF", "LA", "LAR", "LAC", "LV"]);
+  const psEt = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", weekday: "long", hour: "numeric", minute: "numeric", hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit" });
+  function psEtParts(iso) { const o = {}; for (const x of psEt.formatToParts(new Date(iso))) o[x.type] = x.value; return { wd: o.weekday, h: +o.hour + +o.minute / 60, date: `${o.year}-${o.month}-${o.day}` }; }
+  const psKick = (iso) => { const e = psEtParts(iso); return e.h >= 19 ? "prime" : e.h < 11 ? "intl" : e.wd === "Sunday" ? (e.h < 15 ? "early" : "late") : "other"; };
+  // Days since the team's previous game (by Eastern calendar date); null before its first game.
+  function psRest(team, gid) {
+    const g = D.games[gid]; if (!g || !g.ko) return null;
+    const t0 = new Date(g.ko).getTime(); let best = null;
+    for (const [k, x] of Object.entries(D.games)) { if (k === gid || !x.ko || (x.home !== team && x.away !== team)) continue; const t = new Date(x.ko).getTime(); if (t < t0 && (best == null || t > best.t)) best = { t, ko: x.ko }; }
+    if (!best) return null;
+    return Math.round((Date.UTC(...psEtParts(g.ko).date.split("-").map((v, i) => (i === 1 ? +v - 1 : +v))) - Date.UTC(...psEtParts(best.ko).date.split("-").map((v, i) => (i === 1 ? +v - 1 : +v)))) / 864e5);
+  }
+  // Weather for the cold / wind situations: the ~20-minute pre-kickoff reading if the pipeline has it, else the forecast, else the observed value. Open-air stadiums only.
+  function psWx(g, k) { const w = g.wx || {}; if (w.roof !== "open") return null; for (const f of ["pre_", "fc_", "obs_"]) { const v = w[f + k]; if (v != null && v !== "" && Number.isFinite(+v)) return +v; } return null; }
+  // True / false for one situation in one game for this player's row; null when it can't be checked (the app has no game total, or no weather reading yet).
+  function psCond(c, r) {
+    const g = D.games[r.gid]; if (!g) return null;
+    const kick = g.ko ? psKick(g.ko) : null, wd = g.ko ? psEtParts(g.ko).wd : null, fb = favBy(r);
+    switch (c) {
+      case "home": return r.ha === "home";
+      case "turf": return surfaceOf(r.gid) === "turf";
+      case "dome": return !!g.wx && (g.wx.roof === "dome" || g.wx.roof === "retractable");
+      case "early": return kick === "early";
+      case "late": return kick === "late";
+      case "prime": return kick === "prime";
+      case "thursday": return wd === "Thursday" && kick === "prime";
+      case "monday": return wd === "Monday";
+      case "division": return PS_DIV[g.home] != null && PS_DIV[g.home] === PS_DIV[g.away];
+      case "favorite": return fb == null ? null : fb > 0;
+      case "big_dog": return fb == null ? null : fb <= -6.5;
+      case "short_rest": { const d = psRest(r.team, r.gid); return d == null ? false : d <= 5; }
+      case "off_bye": { const d = psRest(r.team, r.gid); return d == null ? false : d >= 13; }
+      case "cold": { if ((g.wx || {}).roof !== "open") return false; const v = psWx(g, "temp_f"); return v == null ? null : v <= 40; }
+      case "windy": { if ((g.wx || {}).roof !== "open") return false; const v = psWx(g, "wind_mph"); return v == null ? null : v >= 15; }
+      case "west_early_away": return PS_PACIFIC.has(r.team) && r.ha === "away" && kick === "early";
+      default: return null; // high_total: Stix has no game totals for 2026
+    }
+  }
+  const psPlayer = (id) => D.players.find((p) => p.id === id) || null;
+  function psUpWeek() { const now = Date.now(); let w = null; for (const g of Object.values(D.games)) { if (g.final || !g.ko || new Date(g.ko).getTime() <= now) continue; if (w == null || g.wk < w) w = g.wk; } return w; }
+  // Status of one signal for the upcoming week: { st: "fire" | "nofire" | "nodata" | "none" | "gone", r, mid, cur }
+  function psStatus(s, upWk) {
+    const p = psPlayer(s[1]); if (!p) return { st: "gone" };
+    const now = Date.now(), mid = s[4];
+    const r = (D.rows[s[1]] || []).find((x) => x.wk === upWk && !x.final && x.ko && new Date(x.ko).getTime() > now);
+    if (!r) return { st: "none", p };
+    if (s[5] === "high_total") return { st: "nodata", p, r };
+    const c = psCond(s[5], r);
+    if (c == null) return { st: "nodata", p, r };
+    if (!c) return { st: "nofire", p, r };
+    const cur = curLine(r.m && r.m[mid]);
+    return { st: "fire", p, r, mid, cur };
+  }
+  // Forward record since PS_FIRST_WK: finished games where the situation held and the player played, 1 unit at the saved price, pushes refunded.
+  function psRecord(s) {
+    let W = 0, L = 0, P = 0, U = 0; const side = s[6] === "o" ? "over" : "under";
+    for (const r of D.rows[s[1]] || []) {
+      if (!r.final || r.wk < PS_FIRST_WK || r.played !== true) continue;
+      const m = r.m && r.m[s[4]]; if (!m || m.lstat !== "ok" || m.line == null || m.act == null) continue;
+      if (s[5] === "high_total" || psCond(s[5], r) !== true) continue;
+      const res = m.act > m.line ? "over" : m.act < m.line ? "under" : "push";
+      if (res === "push") { P++; continue; }
+      const px = side === "over" ? m.op : m.up, pay = px == null ? 100 / 110 : px > 0 ? px / 100 : 100 / -px;
+      if (res === side) { W++; U += pay; } else { L++; U -= 1; }
+    }
+    return { W, L, P, U, n: W + L };
+  }
+  // Best book for one bet: FanDuel or DraftKings, whichever shows the better number on the same side (lower line for an Over, higher for an Under; same line: better odds; tie: FanDuel).
+  // Needs a usable slip link for that book from the latest pull, same game, not started.
+  function psBook(pid, mid, side, gid, name) {
+    const L = (((D.links || {})[pid] || {})[mid]) || {}, s = side === "over" ? "o" : "u", g = D.games[gid];
+    if (!g || new Date(g.ko).getTime() <= Date.now()) return null;
+    let f = null, d = null;
+    const fd = L.fanduel, fo = fd && fd.gid === gid && fd[s];
+    if (fo && FD_SLIP.test(fo.url || "") && fd.point != null) {
+      try { const u = new URL(fo.url), m = u.searchParams.get("marketId"), sel = u.searchParams.get("selectionId"); if (/^[\d.]+$/.test(m || "") && /^\d+$/.test(sel || "")) f = { m, sel, line: fd.point, odds: fo.price, cap: fd.cap }; } catch (err) { f = null; }
+    }
+    const dk = L.draftkings, dko = dk && dk.gid === gid && dk[s], mm = dko && DK_SLIP.exec(dko.url || "");
+    if (mm && dk.point != null) d = { oc: mm[1], line: dk.point, odds: dko.price, cap: dk.cap };
+    if (!f && !d) return null;
+    let pick = f ? "fd" : "dk";
+    if (f && d) { const better = s === "o" ? d.line < f.line : d.line > f.line, tie = d.line === f.line && d.odds != null && f.odds != null && d.odds > f.odds; if (better || tie) pick = "dk"; }
+    const base = { pid, mid, side: s, name, label: mkt[mid].label };
+    const legF = f && Object.assign({}, base, { m: f.m, sel: f.sel, bet: { line: f.line, odds: f.odds, cap: f.cap, gid, book: "FanDuel", src: "Bet on FD" } });
+    const legD = d && Object.assign({}, base, { dk: { oc: d.oc, line: d.line, odds: d.odds, cap: d.cap }, bet: { line: d.line, odds: d.odds, cap: d.cap, gid, book: "DraftKings", src: "Bet on DK" } });
+    return { pick, f, d, leg: pick === "fd" ? legF : legD };
+  }
+  const psKey = (s, r) => `${s[0]}|${r.gid}`;
+  const psSel = () => (RL.psSel = RL.psSel || new Set());
+  // Selected signals -> bets (one per player/market/game; two selected signals on opposite sides of the same prop are both left out), split by best book.
+  function psSlip(fires) {
+    const sel = psSel(), by = new Map(), left = [];
+    for (const x of fires) { if (!sel.has(psKey(x.s, x.r))) continue; const k = `${x.s[1]}|${x.s[4]}|${x.r.gid}`; (by.get(k) || by.set(k, []).get(k)).push(x); }
+    const fd = [], dk = [], lines = [];
+    for (const xs of by.values()) {
+      const x = xs[0], sides = new Set(xs.map((y) => y.s[6]));
+      if (sides.size > 1) { left.push(`${x.p.name} (${mkt[x.s[4]].label}): selected signals point both ways`); continue; }
+      const b = psBook(x.s[1], x.s[4], x.s[6] === "o" ? "over" : "under", x.r.gid, x.p.name);
+      if (!b) { left.push(`${x.p.name} (${mkt[x.s[4]].label}): no FanDuel or DraftKings link yet`); continue; }
+      (b.pick === "fd" ? fd : dk).push(b.leg);
+      lines.push({ x, b });
+    }
+    const chunks = [];
+    for (let i = 0; i < fd.length; i += FD_SLIP_MAX) { const part = fd.slice(i, i + FD_SLIP_MAX); chunks.push({ book: "FanDuel", legs: part, url: slipUrl(part) }); }
+    if (dk.length) chunks.push({ book: "DraftKings", legs: dk, url: dkSlipUrl(dk) });
+    return { chunks, left, lines, n: fd.length + dk.length };
+  }
+  const psNums = (b) => `${b.f ? `FD ${num(b.f.line)} ${odds(b.f.odds)}` : "FD n/a"} · ${b.d ? `DK ${num(b.d.line)} ${odds(b.d.odds)}` : "DK n/a"}`;
+  function psSlipBox(fires) {
+    const sl = psSlip(fires); RL.psChunks = sl.chunks;
+    const pick = `<span class="small rl-pick"><button type="button" class="linkbtn" data-psall="1">Select all firing</button> · <button type="button" class="linkbtn" data-psall="0">Clear</button> <span class="muted">${psSel().size} selected</span></span>`;
+    if (!sl.chunks.length && !sl.left.length) return `<div class="betbox rl-fd" id="ps-box">${pick}<span class="betbtn rl-off" aria-disabled="true" style="opacity:.5">Check firing players to bet them at the better of FanDuel and DraftKings</span></div>`;
+    const btns = sl.chunks.map((c, i) => `<a class="betbtn" href="${esc(c.url)}" target="_blank" rel="noopener" data-psbet="${i}">Bet ${c.legs.length} on ${c.book} ↗</a>`).join("");
+    const caps = sl.lines.map((l) => (l.b.pick === "fd" ? l.b.f : l.b.d).cap).filter(Boolean).sort();
+    const det = `<details class="small ps-det"><summary>Which book for each bet</summary><ul>${sl.lines.map((l) => `<li><b>${esc(l.x.p.name)}</b> ${esc(mkt[l.x.s[4]].label)} ${l.x.s[6] === "o" ? "Over" : "Under"} → <b>${l.b.pick === "fd" ? "FanDuel" : "DraftKings"}</b><br><span class="muted">${esc(psNums(l.b))}</span></li>`).join("")}</ul>${caps.length ? `<span class="muted">Lines as of ${esc(fmtTime(caps[0]))}. If a book moved a line since, that bet won't load.</span>` : ""}</details>`;
+    const left = sl.left.length ? `<p class="muted small">Left out: ${esc(sl.left.join("; "))}</p>` : "";
+    return `<div class="betbox rl-fd" id="ps-box">${pick}${btns}${saveSwitch()}${det}${left}</div>`;
+  }
+  function psHtml() {
+    const upWk = psUpWeek(), all = !!RL.psAll, onlyFire = !!RL.psFire;
+    const stats = PS.map((s) => Object.assign({ s }, psStatus(s, upWk)));
+    const fires = stats.filter((x) => x.st === "fire");
+    const top = stats.slice(0, PS_TOP), nTop = top.filter((x) => x.st === "fire").length;
+    let list = all ? stats : top; if (onlyFire) list = list.filter((x) => x.st === "fire");
+    const sel = psSel();
+    for (const k of [...sel]) if (!fires.some((x) => psKey(x.s, x.r) === k)) sel.delete(k); // a signal that no longer fires (game started, line gone) drops out
+    const rowH = (x) => {
+      const s = x.s, side = s[6] === "o" ? "over" : "under", fire = x.st === "fire", key = fire ? psKey(s, x.r) : "";
+      const bk = fire ? psBook(s[1], s[4], side, x.r.gid, s[2]) : null, rec = psRecord(s);
+      const status = fire ? `<span class="small ps-ok">✓ Fires week ${upWk}: ${esc(x.r.team)} ${x.r.ha === "home" ? "vs" : "@"} ${esc(x.r.opp)} · ${esc(fmtTime(x.r.ko))}${x.cur ? "" : " · line not posted yet"}${fire && !bk && x.cur ? " · no FD/DK link yet" : ""}</span>`
+        : `<span class="muted small">${{ gone: "Not in the app's player list this season", none: `No game left in week ${upWk}`, nodata: "Can't check this week: " + (s[5] === "high_total" ? "Stix has no game totals for 2026" : "no weather reading yet"), nofire: `Not in this situation in week ${upWk}` }[x.st]}</span>`;
+      const label = mkt[s[4]] ? mkt[s[4]].label : s[4];
+      const link = x.p ? `<a class="pname" href="#/player/${esc(s[1])}">${esc(s[2])}</a>` : `<span class="pname">${esc(s[2])}</span>`;
+      return `<div class="rlrow sg-pr ps-row ${fire ? "ps-fire" : "ps-off"}"><div class="rlhead">${fire ? `<input type="checkbox" class="rl-ck" data-psck="${esc(key)}" aria-label="Select ${esc(s[2])} ${esc(label)} ${s[6] === "o" ? "Over" : "Under"}" ${sel.has(key) ? "checked" : ""} ${bk ? "" : "disabled"}>` : ""}${link}
+        <span class="rlstat">${esc(label)}</span><span class="chip rl-side ${side}">${s[6] === "o" ? "Over" : "Under"}${x.cur ? " " + num(x.cur.line) : ""}</span></div>
+        <div class="sg-m"><span class="small"><b>${esc(PS_COND[s[5]])}</b></span><span class="muted small">${esc(s[0])} · p ${s[11]}</span></div>
+        <div class="sg-m"><span class="muted small">Found: ${s[7]} of ${s[8]} went ${s[6] === "o" ? "Over" : "Under"} in this situation vs ${s[9]}% (${s[12]}–${s[10] - s[12]}) in his other ${s[10]} games</span></div>
+        <div class="sg-m">${status}<span class="muted small">Since week ${PS_FIRST_WK}: ${rec.n ? `${rec.W}–${rec.L} · ${rec.U >= 0 ? "+" : "−"}${Math.abs(100 * rec.U / rec.n).toFixed(1)}% ROI` : "no games yet"}</span></div></div>`;
+    };
+    const tabs = "";
+    const intro = `<p class="small"><a href="#/search">← Signals</a> · ${PS.length} player-specific splits found in the 2026-11-24 study of rushing and receiving yards, 2024 to 2026 week 11. They are frozen: the list and each definition never change, and each one's record below counts only games from week ${PS_FIRST_WK} on. <b>Treat this as a watch list.</b> A label-shuffling test says about 100 splits this strong would show up by pure chance, so most of these are probably noise. The top ${PS_TOP} by strength are shown; the rest are under "Show all ${PS.length}".</p>`;
+    const ctl = `<div class="sg-scope"><button type="button" class="gchip ${onlyFire ? "on" : ""}" data-psfire="1">Firing in week ${upWk} only (${all ? fires.length : nTop})</button><button type="button" class="gchip ${all ? "on" : ""}" data-psmore="1">${all ? `Showing all ${PS.length}` : `Show all ${PS.length}`}</button></div>`;
+    const head = `<h3 class="sg-sec">${all ? `All ${PS.length} signals` : `Top ${PS_TOP} signals`} · ${all ? fires.length : nTop} firing in week ${upWk}${all ? "" : ` (${fires.length} of all ${PS.length})`}</h3>`;
+    const rows = list.length ? list.map(rowH).join("") : `<p class="muted">None of these fire in week ${upWk}.</p>`;
+    return `<section id="rl" data-page="ps">${gsecRow("Signals · Player signals")}${tabs}${intro}${ctl}${head}${psSlipBox(fires)}<div class="panel rlist">${rows}</div></section>`;
+  }
+  document.addEventListener("click", (e) => {
+    const t = e.target; if (!t || !t.closest) return;
+    if (t.closest("[data-psmore]")) { RL.psAll = !RL.psAll; psSel().clear(); redraw(); return; } // switching the list clears the selection so nothing hidden is bet
+    if (t.closest("[data-psfire]")) { RL.psFire = !RL.psFire; redraw(); return; }
+    const a = t.closest("[data-psall]");
+    if (a) {
+      const s = psSel(); s.clear();
+      if (a.dataset.psall === "1") { const up = psUpWeek(); for (const q of (RL.psAll ? PS : PS.slice(0, PS_TOP))) { const x = psStatus(q, up); if (x.st === "fire" && psBook(q[1], q[4], q[6] === "o" ? "over" : "under", x.r.gid, q[2])) s.add(psKey(q, x.r)); } }
+      redraw(); return;
+    }
+    const b = t.closest("[data-psbet]");
+    if (b) { // the link opens as usual; save the bets as picks only when the save switch is on (same switch as the FanDuel slip)
+      const c = (RL.psChunks || [])[+b.dataset.psbet];
+      if (c && window.STIX_PICKS && fdSave()) { try { window.STIX_PICKS.recordBets(c.legs); } catch (err) { console.error("picks from player-signals slip failed", err); } }
+    }
+  });
+  document.addEventListener("change", (e) => {
+    const k = e.target && e.target.matches && e.target.matches("[data-psck]") ? e.target : null; if (!k) return;
+    const s = psSel(); if (k.checked) s.add(k.dataset.psck); else s.delete(k.dataset.psck);
+    const box = document.getElementById("ps-box"); if (box) { const up = psUpWeek(); box.outerHTML = psSlipBox(PS.map((q) => Object.assign({ s: q }, psStatus(q, up))).filter((x) => x.st === "fire")); }
+  });
+
   window.STIX_RESEARCH = { livePlays, html: safeHtml, htmlFor: (pg) => { try { return html(pg); } catch (e) { console.error("research page failed", e); return ""; } }, analysis: safeAnalysis, analyze, compute, TABS, badge, oppLink, settingsHtml: safeSettings };
 })();
