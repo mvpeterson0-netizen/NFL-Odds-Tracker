@@ -1,0 +1,1469 @@
+{
+ "downloaded_utc": "2026-11-23T02:01:44Z",
+ "event_id": "15a56f0e44d8fdb660a6a0aed2449e4b",
+ "game_id": "2024_18_CLE_BAL",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2025-01-04T18:30:00Z",
+ "response": {
+  "data": {
+   "away_team": "Cleveland Browns",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2025-01-04T18:25:31Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:25:21Z",
+       "outcomes": [
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 62.5,
+         "price": -105
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 57.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 57.5,
+         "price": -110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:25:21Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 98.5,
+         "price": -130
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 98.5,
+         "price": 100
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -105
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2025-01-04T18:25:33Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:25:51Z",
+       "outcomes": [
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 59.5,
+         "price": -110
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 58.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:25:51Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 92.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 92.5,
+         "price": -110
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2025-01-04T18:19:37Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:17:17Z",
+       "outcomes": [
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 25.5,
+         "price": -129
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 25.5,
+         "price": -106
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 20.5,
+         "price": -113
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 20.5,
+         "price": -121
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 30.5,
+         "price": -117
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 30.5,
+         "price": -117
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 33.5,
+         "price": -117
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 33.5,
+         "price": -117
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 15.5,
+         "price": -121
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 57.5,
+         "price": -121
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 57.5,
+         "price": -113
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 61.5,
+         "price": -121
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 61.5,
+         "price": -113
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Over",
+         "point": 27.5,
+         "price": -117
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Under",
+         "point": 27.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:17:17Z",
+       "outcomes": [
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -103
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -133
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 95.5,
+         "price": -113
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 95.5,
+         "price": -121
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 40.5,
+         "price": -117
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 40.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2025-01-04T18:25:33Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:26:05Z",
+       "outcomes": [
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 59.5,
+         "price": -125
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 59.5,
+         "price": -105
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 34.5,
+         "price": -105
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 34.5,
+         "price": -125
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:26:05Z",
+       "outcomes": [
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 39.5,
+         "price": 100
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2025-01-04T18:25:32Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:24:45Z",
+       "outcomes": [
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 61.5,
+         "price": -125
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 55.5,
+         "price": -125
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 55.5,
+         "price": -125
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 30.5,
+         "price": -125
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Under",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 15.5,
+         "price": -130
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 9.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:24:45Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 96.5,
+         "price": -125
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 96.5,
+         "price": -125
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 39.5,
+         "price": -125
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 39.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2025-01-04T18:25:35Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:25:26Z",
+       "outcomes": [
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 49.5,
+         "price": -167
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 49.5,
+         "price": 125
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 59.5,
+         "price": -114
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 59.5,
+         "price": -114
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 33.5,
+         "price": -117
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 24.5,
+         "price": -117
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 49.5,
+         "price": 215
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 49.5,
+         "price": -315
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 49.5,
+         "price": 260
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 49.5,
+         "price": -400
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 74.5,
+         "price": 163
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 74.5,
+         "price": -230
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 24.5,
+         "price": -167
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 24.5,
+         "price": 128
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 24.5,
+         "price": -210
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 24.5,
+         "price": 155
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 74.5,
+         "price": 180
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 49.5,
+         "price": -186
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 49.5,
+         "price": 138
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 57.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:25:26Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 90.5,
+         "price": -114
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 90.5,
+         "price": -114
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 43.5,
+         "price": -117
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 74.5,
+         "price": -305
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 74.5,
+         "price": 210
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 99.5,
+         "price": 140
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 99.5,
+         "price": -190
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 130
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -177
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2025-01-04T18:25:32Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:25:42Z",
+       "outcomes": [
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 49.5,
+         "price": -167
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 49.5,
+         "price": 125
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 59.5,
+         "price": -114
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 59.5,
+         "price": -114
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 33.5,
+         "price": -112
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 33.5,
+         "price": -117
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 24.5,
+         "price": -117
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 49.5,
+         "price": 215
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 49.5,
+         "price": -315
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 49.5,
+         "price": 260
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 49.5,
+         "price": -400
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 74.5,
+         "price": 163
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 74.5,
+         "price": -230
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 24.5,
+         "price": -167
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 24.5,
+         "price": 128
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 24.5,
+         "price": -210
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 24.5,
+         "price": 155
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 74.5,
+         "price": 180
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 49.5,
+         "price": -186
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 49.5,
+         "price": 138
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 57.5,
+         "price": -112
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 57.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:25:42Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 90.5,
+         "price": -114
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 90.5,
+         "price": -114
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 43.5,
+         "price": -112
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 43.5,
+         "price": -117
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 74.5,
+         "price": -305
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 74.5,
+         "price": 210
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 99.5,
+         "price": 140
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 99.5,
+         "price": -190
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 130
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -177
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2025-01-04T18:25:32Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:25:47Z",
+       "outcomes": [
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:25:47Z",
+       "outcomes": [
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 96.5,
+         "price": -120
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 96.5,
+         "price": -115
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2025-01-04T18:25:33Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2025-01-04T18:25:33Z",
+       "outcomes": [
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Mark Andrews",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Jerry Jeudy",
+         "name": "Under",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Zay Flowers",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Rashod Bateman",
+         "name": "Under",
+         "point": 30.5,
+         "price": -120
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Over",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Isaiah Likely",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Over",
+         "point": 27.5,
+         "price": -110
+        },
+        {
+         "description": "Jordan Akins",
+         "name": "Under",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Elijah Moore",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2025-01-04T18:25:33Z",
+       "outcomes": [
+        {
+         "description": "Lamar Jackson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Lamar Jackson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Over",
+         "point": 96.5,
+         "price": -115
+        },
+        {
+         "description": "Derrick Henry",
+         "name": "Under",
+         "point": 96.5,
+         "price": -115
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "D'Onta Foreman",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2025-01-04T21:30:00Z",
+   "home_team": "Baltimore Ravens",
+   "id": "15a56f0e44d8fdb660a6a0aed2449e4b",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2025-01-04T18:30:38Z",
+  "previous_timestamp": "2025-01-04T18:20:38Z",
+  "timestamp": "2025-01-04T18:25:38Z"
+ }
+}

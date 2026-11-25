@@ -1,0 +1,3845 @@
+{
+ "downloaded_utc": "2026-11-23T01:59:55Z",
+ "event_id": "3d634649562df7c3b2b22d626162a9c9",
+ "game_id": "2024_07_MIA_IND",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2024-10-20T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Miami Dolphins",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2024-10-20T13:54:23Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:55:40Z",
+       "outcomes": [
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -105
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 45.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 58.5,
+         "price": -125
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 58.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:55:40Z",
+       "outcomes": [
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Under",
+         "point": 13.5,
+         "price": -125
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 38.5,
+         "price": -110
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 38.5,
+         "price": -120
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 51.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 51.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -105
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 0.5,
+         "price": 105
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 0.5,
+         "price": -135
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2024-10-20T13:51:13Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:52:09Z",
+       "outcomes": [
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -111
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -123
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 45.5,
+         "price": -104
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 45.5,
+         "price": -131
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -135
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -101
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 20.5,
+         "price": -121
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 20.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 40.5,
+         "price": -127
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 40.5,
+         "price": -108
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 55.5,
+         "price": -131
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 55.5,
+         "price": -104
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -109
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:52:09Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Wright",
+         "name": "Over",
+         "point": 13.5,
+         "price": -111
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Under",
+         "point": 13.5,
+         "price": -123
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 37.5,
+         "price": -125
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 37.5,
+         "price": -109
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 0.5,
+         "price": 100
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 0.5,
+         "price": -137
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 27.5,
+         "price": -111
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 27.5,
+         "price": -123
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 47.5,
+         "price": -121
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 47.5,
+         "price": -113
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 32.5,
+         "price": -109
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -113
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 51.5,
+         "price": -117
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 51.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2024-10-20T13:54:24Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:55:03Z",
+       "outcomes": [
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 57.5,
+         "price": -110
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 57.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:55:03Z",
+       "outcomes": [
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 46.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 46.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 37.5,
+         "price": -110
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 37.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2024-10-20T13:54:24Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 44.5,
+         "price": 105
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 44.5,
+         "price": -136
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 49.5,
+         "price": 118
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 49.5,
+         "price": -157
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 50.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 39.5,
+         "price": -129
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 39.5,
+         "price": -103
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -121
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -108
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 21.5,
+         "price": -113
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -114
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -114
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 7.5,
+         "price": -109
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -118
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 10.5,
+         "price": -118
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 43.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 44.5,
+         "price": -118
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 41.5,
+         "price": -114
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 41.5,
+         "price": -114
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 64.5,
+         "price": 118
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 64.5,
+         "price": -155
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 54.5,
+         "price": 107
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 54.5,
+         "price": -139
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 29.5,
+         "price": -305
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 29.5,
+         "price": 205
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 34.5,
+         "price": -210
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 34.5,
+         "price": 150
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 69.5,
+         "price": 143
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 69.5,
+         "price": -195
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 59.5,
+         "price": 135
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 59.5,
+         "price": -180
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 59.5,
+         "price": -107
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 59.5,
+         "price": -122
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 24.5,
+         "price": 114
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 24.5,
+         "price": -148
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 44.5,
+         "price": -159
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 44.5,
+         "price": 120
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 19.5,
+         "price": -139
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 19.5,
+         "price": 108
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 39.5,
+         "price": -150
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 39.5,
+         "price": 114
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 34.5,
+         "price": 235
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 34.5,
+         "price": -360
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 74.5,
+         "price": 255
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 74.5,
+         "price": -385
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 59.5,
+         "price": 190
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 59.5,
+         "price": -278
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 84.5,
+         "price": 260
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 84.5,
+         "price": -400
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 24.5,
+         "price": -385
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 24.5,
+         "price": 250
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 69.5,
+         "price": 205
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 69.5,
+         "price": -305
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 29.5,
+         "price": -250
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 29.5,
+         "price": 180
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 64.5,
+         "price": 245
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 64.5,
+         "price": -375
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 19.5,
+         "price": -155
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 19.5,
+         "price": 118
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 29.5,
+         "price": 165
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 29.5,
+         "price": -230
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 64.5,
+         "price": 165
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 64.5,
+         "price": -235
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 29.5,
+         "price": 128
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 29.5,
+         "price": -167
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 74.5,
+         "price": 175
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 79.5,
+         "price": 215
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 79.5,
+         "price": -315
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 34.5,
+         "price": -177
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 34.5,
+         "price": 132
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 54.5,
+         "price": 150
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 54.5,
+         "price": -210
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 39.5,
+         "price": 225
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 39.5,
+         "price": -335
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 49.5,
+         "price": 135
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 49.5,
+         "price": -182
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 34.5,
+         "price": 170
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 34.5,
+         "price": -240
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 59.5,
+         "price": 225
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 59.5,
+         "price": -335
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 34.5,
+         "price": -435
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 34.5,
+         "price": 280
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 54.5,
+         "price": 175
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 54.5,
+         "price": -245
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 39.5,
+         "price": -315
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 39.5,
+         "price": 210
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 44.5,
+         "price": -230
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 44.5,
+         "price": 165
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 29.5,
+         "price": -435
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 29.5,
+         "price": 275
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 19.5,
+         "price": 190
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 19.5,
+         "price": -275
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 24.5,
+         "price": 280
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 24.5,
+         "price": -435
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 39.5,
+         "price": -215
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 39.5,
+         "price": 155
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 64.5,
+         "price": 285
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 64.5,
+         "price": -455
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 54.5,
+         "price": -136
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 54.5,
+         "price": 104
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 34.5,
+         "price": -295
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 34.5,
+         "price": 205
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 24.5,
+         "price": -455
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 24.5,
+         "price": 290
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 49.5,
+         "price": -175
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 49.5,
+         "price": 130
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 44.5,
+         "price": 300
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 44.5,
+         "price": -480
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 57.5,
+         "price": -117
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 57.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:55:44Z",
+       "outcomes": [
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 44.5,
+         "price": -148
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 44.5,
+         "price": 112
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 34.5,
+         "price": 112
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -148
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 29.5,
+         "price": -103
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 29.5,
+         "price": -127
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 34.5,
+         "price": -132
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 34.5,
+         "price": 102
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 48.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 48.5,
+         "price": -118
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -113
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 59.5,
+         "price": 165
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 59.5,
+         "price": -240
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 54.5,
+         "price": 120
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 54.5,
+         "price": -159
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 295
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -480
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 34.5,
+         "price": -335
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 34.5,
+         "price": 220
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 64.5,
+         "price": 230
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 64.5,
+         "price": -345
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -205
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 150
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 69.5,
+         "price": 300
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 69.5,
+         "price": -500
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 64.5,
+         "price": 230
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 64.5,
+         "price": -360
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 39.5,
+         "price": -215
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 39.5,
+         "price": 155
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 49.5,
+         "price": -104
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -132
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 29.5,
+         "price": 102
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 24.5,
+         "price": -159
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 24.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 34.5,
+         "price": 140
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 34.5,
+         "price": -195
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 19.5,
+         "price": -265
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 19.5,
+         "price": 180
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -345
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 230
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 39.5,
+         "price": 195
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 39.5,
+         "price": -286
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 59.5,
+         "price": 175
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 59.5,
+         "price": -250
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 44.5,
+         "price": -182
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 44.5,
+         "price": 135
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 155
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -220
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 44.5,
+         "price": 270
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 44.5,
+         "price": -435
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 54.5,
+         "price": 130
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 54.5,
+         "price": -177
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 215
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 49.5,
+         "price": -121
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 49.5,
+         "price": -108
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 36.5,
+         "price": -113
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 54.5,
+         "price": 285
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 54.5,
+         "price": -480
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 28.5,
+         "price": -117
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 50.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2024-10-20T13:54:24Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:55:19Z",
+       "outcomes": [
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 44.5,
+         "price": 105
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 44.5,
+         "price": -136
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 49.5,
+         "price": 118
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 49.5,
+         "price": -157
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 50.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 39.5,
+         "price": -129
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 39.5,
+         "price": -103
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -121
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -108
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 21.5,
+         "price": -113
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -114
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -114
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 7.5,
+         "price": -109
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 7.5,
+         "price": -118
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -118
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 10.5,
+         "price": -118
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 43.5,
+         "price": -118
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 44.5,
+         "price": -118
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 41.5,
+         "price": -114
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 41.5,
+         "price": -114
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 64.5,
+         "price": 118
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 64.5,
+         "price": -155
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 54.5,
+         "price": 107
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 54.5,
+         "price": -139
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 29.5,
+         "price": -305
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 29.5,
+         "price": 205
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 34.5,
+         "price": -210
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 34.5,
+         "price": 150
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 69.5,
+         "price": 143
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 69.5,
+         "price": -195
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 59.5,
+         "price": 135
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 59.5,
+         "price": -180
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 59.5,
+         "price": -107
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 59.5,
+         "price": -122
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 24.5,
+         "price": 114
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 24.5,
+         "price": -148
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 44.5,
+         "price": -159
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 44.5,
+         "price": 120
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 19.5,
+         "price": -139
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 19.5,
+         "price": 108
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 39.5,
+         "price": -150
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 39.5,
+         "price": 114
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 34.5,
+         "price": 235
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 34.5,
+         "price": -360
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 74.5,
+         "price": 255
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 74.5,
+         "price": -385
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 59.5,
+         "price": 190
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 59.5,
+         "price": -278
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 84.5,
+         "price": 260
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 84.5,
+         "price": -400
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 24.5,
+         "price": -385
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 24.5,
+         "price": 250
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 69.5,
+         "price": 205
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 69.5,
+         "price": -305
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 29.5,
+         "price": -250
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 29.5,
+         "price": 180
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 64.5,
+         "price": 245
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 64.5,
+         "price": -375
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 19.5,
+         "price": -155
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 19.5,
+         "price": 118
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 29.5,
+         "price": 165
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 29.5,
+         "price": -230
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 64.5,
+         "price": 165
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 64.5,
+         "price": -235
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 29.5,
+         "price": 128
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 29.5,
+         "price": -167
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 74.5,
+         "price": 175
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 79.5,
+         "price": 215
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 79.5,
+         "price": -315
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 34.5,
+         "price": -177
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 34.5,
+         "price": 132
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 54.5,
+         "price": 150
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 54.5,
+         "price": -210
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 39.5,
+         "price": 225
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 39.5,
+         "price": -335
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 49.5,
+         "price": 135
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 49.5,
+         "price": -182
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 34.5,
+         "price": 170
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 34.5,
+         "price": -240
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 59.5,
+         "price": 225
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 59.5,
+         "price": -335
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 34.5,
+         "price": -435
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 34.5,
+         "price": 280
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 54.5,
+         "price": 175
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 54.5,
+         "price": -245
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 39.5,
+         "price": -315
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 39.5,
+         "price": 210
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 44.5,
+         "price": -230
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 44.5,
+         "price": 165
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 29.5,
+         "price": -435
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 29.5,
+         "price": 275
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 19.5,
+         "price": 190
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 19.5,
+         "price": -275
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 24.5,
+         "price": 280
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 24.5,
+         "price": -435
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 39.5,
+         "price": -215
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 39.5,
+         "price": 155
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 64.5,
+         "price": 285
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 64.5,
+         "price": -455
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 54.5,
+         "price": -136
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 54.5,
+         "price": 104
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 34.5,
+         "price": -295
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 34.5,
+         "price": 205
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 24.5,
+         "price": -455
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 24.5,
+         "price": 290
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 49.5,
+         "price": -175
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 49.5,
+         "price": 130
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 44.5,
+         "price": 300
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 44.5,
+         "price": -480
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 57.5,
+         "price": -117
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 57.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:55:19Z",
+       "outcomes": [
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 44.5,
+         "price": -148
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 44.5,
+         "price": 112
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 34.5,
+         "price": 112
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -148
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 29.5,
+         "price": -103
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 29.5,
+         "price": -127
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 34.5,
+         "price": -132
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 34.5,
+         "price": 102
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 48.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 48.5,
+         "price": -118
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 31.5,
+         "price": -113
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 31.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 59.5,
+         "price": 165
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 59.5,
+         "price": -240
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 54.5,
+         "price": 120
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 54.5,
+         "price": -159
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 295
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -480
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 34.5,
+         "price": -335
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 34.5,
+         "price": 220
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 64.5,
+         "price": 230
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 64.5,
+         "price": -345
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -205
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 150
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 69.5,
+         "price": 300
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 69.5,
+         "price": -500
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 64.5,
+         "price": 230
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 64.5,
+         "price": -360
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 39.5,
+         "price": -215
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 39.5,
+         "price": 155
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 49.5,
+         "price": -104
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -132
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 29.5,
+         "price": 102
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 24.5,
+         "price": -159
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 24.5,
+         "price": 120
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 34.5,
+         "price": 140
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 34.5,
+         "price": -195
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 19.5,
+         "price": -265
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 19.5,
+         "price": 180
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -345
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 230
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 39.5,
+         "price": 195
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 39.5,
+         "price": -286
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 59.5,
+         "price": 175
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 59.5,
+         "price": -250
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 44.5,
+         "price": -182
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 44.5,
+         "price": 135
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 155
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -220
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 44.5,
+         "price": 270
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 44.5,
+         "price": -435
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 54.5,
+         "price": 130
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 54.5,
+         "price": -177
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 44.5,
+         "price": 215
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 49.5,
+         "price": -121
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 49.5,
+         "price": -108
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 36.5,
+         "price": -113
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 36.5,
+         "price": -115
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 54.5,
+         "price": 285
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 54.5,
+         "price": -480
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 28.5,
+         "price": -112
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 28.5,
+         "price": -117
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 50.5,
+         "price": -117
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2024-10-20T13:54:24Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:55:29Z",
+       "outcomes": [
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 55.5,
+         "price": -145
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 55.5,
+         "price": 110
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:55:29Z",
+       "outcomes": [
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 47.5,
+         "price": -120
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 0.5,
+         "price": 105
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 0.5,
+         "price": -140
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2024-10-20T13:53:14Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:53:52Z",
+       "outcomes": [
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 45.5,
+         "price": -115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 4.5,
+         "price": -115
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:53:52Z",
+       "outcomes": [
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 51.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 47.5,
+         "price": -120
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 35.5,
+         "price": -110
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 35.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 0.5,
+         "price": 105
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 0.5,
+         "price": -135
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2024-10-20T13:54:25Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:55:24Z",
+       "outcomes": [
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 59.5,
+         "price": -105
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 59.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 44.5,
+         "price": -110
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 44.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 44.5,
+         "price": 100
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 44.5,
+         "price": -130
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 19.5,
+         "price": -135
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 19.5,
+         "price": 105
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:55:24Z",
+       "outcomes": [
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 49.5,
+         "price": 105
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 49.5,
+         "price": -135
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 39.5,
+         "price": 100
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 39.5,
+         "price": -130
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 29.5,
+         "price": -105
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -135
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 29.5,
+         "price": 105
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2024-10-20T13:54:24Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-20T13:55:40Z",
+       "outcomes": [
+        {
+         "description": "Alec Pierce",
+         "name": "Over",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Alec Pierce",
+         "name": "Under",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 20.5,
+         "price": -125
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Over",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Waddle",
+         "name": "Under",
+         "point": 40.5,
+         "price": -120
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Over",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Jonnu Smith",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Downs",
+         "name": "Under",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Over",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Michael Pittman Jr.",
+         "name": "Under",
+         "point": 45.5,
+         "price": -120
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Mo Alie-Cox",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 8.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 9.5,
+         "price": -130
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 55.5,
+         "price": -115
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 55.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-20T13:55:40Z",
+       "outcomes": [
+        {
+         "description": "Anthony Richardson",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Anthony Richardson",
+         "name": "Under",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Over",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "De'Von Achane",
+         "name": "Under",
+         "point": 47.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Over",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Wright",
+         "name": "Under",
+         "point": 13.5,
+         "price": -130
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Over",
+         "point": 35.5,
+         "price": -115
+        },
+        {
+         "description": "Raheem Mostert",
+         "name": "Under",
+         "point": 35.5,
+         "price": -125
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Over",
+         "point": 51.5,
+         "price": -120
+        },
+        {
+         "description": "Trey Sermon",
+         "name": "Under",
+         "point": 51.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Tyler Goodson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Tyler Huntley",
+         "name": "Under",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Over",
+         "point": 0.5,
+         "price": -105
+        },
+        {
+         "description": "Tyreek Hill",
+         "name": "Under",
+         "point": 0.5,
+         "price": -145
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    }
+   ],
+   "commence_time": "2024-10-20T17:00:00Z",
+   "home_team": "Indianapolis Colts",
+   "id": "3d634649562df7c3b2b22d626162a9c9",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2024-10-20T14:00:38Z",
+  "previous_timestamp": "2024-10-20T13:50:38Z",
+  "timestamp": "2024-10-20T13:55:38Z"
+ }
+}

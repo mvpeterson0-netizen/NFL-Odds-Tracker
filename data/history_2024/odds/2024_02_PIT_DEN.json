@@ -1,0 +1,2566 @@
+{
+ "downloaded_utc": "2026-11-23T01:59:13Z",
+ "event_id": "3a300e2fb659ca896b5e60252f13150c",
+ "game_id": "2024_02_PIT_DEN",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2024-09-15T17:25:00Z",
+ "response": {
+  "data": {
+   "away_team": "Pittsburgh Steelers",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2024-09-15T17:19:56Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:20:18Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 20.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 20.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 12.5,
+         "price": 100
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 12.5,
+         "price": -130
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 6.5,
+         "price": -120
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 22.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:20:18Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2024-09-15T17:20:24Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:17:06Z",
+       "outcomes": [
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 21.5,
+         "price": -109
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -135
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -101
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -119
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 26.5,
+         "price": -127
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 26.5,
+         "price": -108
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 22.5,
+         "price": -119
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 17.5,
+         "price": -103
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 17.5,
+         "price": -133
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 12.5,
+         "price": 100
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 12.5,
+         "price": -137
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -103
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -133
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 49.5,
+         "price": -119
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:17:06Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 43.5,
+         "price": -117
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 43.5,
+         "price": -117
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 61.5,
+         "price": -129
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 61.5,
+         "price": -106
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 49.5,
+         "price": -127
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 49.5,
+         "price": -108
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -127
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -108
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -121
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": -113
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -106
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -129
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2024-09-15T17:19:57Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:20:09Z",
+       "outcomes": [
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 19.5,
+         "price": -109
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 19.5,
+         "price": -118
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -121
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -107
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 44.5,
+         "price": 108
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 44.5,
+         "price": -141
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 44.5,
+         "price": 260
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 44.5,
+         "price": -400
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 29.5,
+         "price": 188
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 29.5,
+         "price": -275
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 24.5,
+         "price": 135
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 24.5,
+         "price": -182
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 19.5,
+         "price": -195
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 19.5,
+         "price": 143
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 19.5,
+         "price": 175
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 19.5,
+         "price": -250
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 24.5,
+         "price": 220
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 24.5,
+         "price": -335
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 29.5,
+         "price": 110
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 29.5,
+         "price": -143
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 59.5,
+         "price": 220
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 59.5,
+         "price": -335
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 19.5,
+         "price": 143
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 19.5,
+         "price": -195
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 24.5,
+         "price": -130
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 24.5,
+         "price": 100
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 39.5,
+         "price": 200
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 39.5,
+         "price": -286
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 49.5,
+         "price": 138
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 49.5,
+         "price": -186
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 29.5,
+         "price": -225
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 29.5,
+         "price": 163
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 34.5,
+         "price": 260
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 34.5,
+         "price": -400
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 24.5,
+         "price": 295
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 24.5,
+         "price": -480
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 54.5,
+         "price": 175
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 54.5,
+         "price": -245
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 24.5,
+         "price": -335
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 24.5,
+         "price": 220
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 34.5,
+         "price": 148
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 34.5,
+         "price": -200
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 64.5,
+         "price": 275
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 64.5,
+         "price": -435
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 64.5,
+         "price": 143
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 64.5,
+         "price": -195
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 59.5,
+         "price": 117
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 59.5,
+         "price": -155
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 29.5,
+         "price": -435
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 29.5,
+         "price": 280
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 49.5,
+         "price": -136
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 49.5,
+         "price": 105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 39.5,
+         "price": 230
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 39.5,
+         "price": -345
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 54.5,
+         "price": -107
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 54.5,
+         "price": -121
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 39.5,
+         "price": -235
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 39.5,
+         "price": 165
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": -113
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 19.5,
+         "price": 117
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -155
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 34.5,
+         "price": -315
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 34.5,
+         "price": 215
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 44.5,
+         "price": -177
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 44.5,
+         "price": 132
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 19.5,
+         "price": -167
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 19.5,
+         "price": 128
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 34.5,
+         "price": 170
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 34.5,
+         "price": -240
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 29.5,
+         "price": 125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 29.5,
+         "price": -167
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 24.5,
+         "price": 170
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 24.5,
+         "price": -235
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -118
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 29.5,
+         "price": 240
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -360
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 79.5,
+         "price": 260
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 79.5,
+         "price": -400
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 74.5,
+         "price": 215
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 74.5,
+         "price": -315
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 69.5,
+         "price": 175
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 69.5,
+         "price": -245
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 14.5,
+         "price": -114
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 14.5,
+         "price": -114
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 26.5,
+         "price": -113
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 8.5,
+         "price": -114
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 8.5,
+         "price": -114
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 53.5,
+         "price": -113
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 53.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 40.5,
+         "price": -113
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 13.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 13.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:20:09Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 23.5,
+         "price": -109
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 24.5,
+         "price": -190
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 24.5,
+         "price": 140
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -108
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 39.5,
+         "price": -190
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 39.5,
+         "price": 140
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 49.5,
+         "price": 100
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 49.5,
+         "price": -130
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 54.5,
+         "price": -186
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 54.5,
+         "price": 138
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 44.5,
+         "price": -117
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -124
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -105
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -113
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 61.5,
+         "price": -112
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 61.5,
+         "price": -117
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 64.5,
+         "price": 110
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 64.5,
+         "price": -143
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 44.5,
+         "price": -136
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 44.5,
+         "price": 104
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 49.5,
+         "price": -278
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 49.5,
+         "price": 190
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 34.5,
+         "price": 117
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 34.5,
+         "price": -155
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 29.5,
+         "price": -455
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 29.5,
+         "price": 285
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 29.5,
+         "price": 138
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 29.5,
+         "price": -186
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 59.5,
+         "price": 250
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 59.5,
+         "price": -385
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 19.5,
+         "price": -315
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 19.5,
+         "price": 215
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 39.5,
+         "price": 163
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 39.5,
+         "price": -225
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 34.5,
+         "price": -275
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 34.5,
+         "price": 190
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 34.5,
+         "price": 200
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 34.5,
+         "price": -286
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 44.5,
+         "price": -435
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 44.5,
+         "price": 275
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 54.5,
+         "price": 180
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 54.5,
+         "price": -250
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 44.5,
+         "price": 220
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 44.5,
+         "price": -335
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 74.5,
+         "price": 200
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 74.5,
+         "price": -286
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 69.5,
+         "price": 148
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 69.5,
+         "price": -200
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 49.5,
+         "price": 130
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 49.5,
+         "price": -175
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 64.5,
+         "price": 220
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 64.5,
+         "price": -315
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 59.5,
+         "price": 170
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 59.5,
+         "price": -240
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 79.5,
+         "price": 270
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 79.5,
+         "price": -420
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 29.5,
+         "price": -420
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 29.5,
+         "price": 265
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 54.5,
+         "price": 132
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 54.5,
+         "price": -177
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 59.5,
+         "price": -129
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 59.5,
+         "price": -103
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 34.5,
+         "price": -265
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 34.5,
+         "price": 185
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 39.5,
+         "price": -167
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 39.5,
+         "price": 125
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -177
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": 130
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 69.5,
+         "price": 280
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 69.5,
+         "price": -435
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 39.5,
+         "price": 285
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 39.5,
+         "price": -455
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 47.5,
+         "price": -113
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 47.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 49.5,
+         "price": 300
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 49.5,
+         "price": -500
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2024-09-15T17:19:57Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:20:51Z",
+       "outcomes": [
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -125
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -105
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 29.5,
+         "price": 100
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 29.5,
+         "price": -130
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 24.5,
+         "price": 105
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 24.5,
+         "price": -135
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 19.5,
+         "price": -130
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 19.5,
+         "price": 100
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 14.5,
+         "price": -135
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 14.5,
+         "price": 105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:20:51Z",
+       "outcomes": [
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 69.5,
+         "price": 115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 69.5,
+         "price": -145
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 49.5,
+         "price": -105
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 44.5,
+         "price": 115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 44.5,
+         "price": -145
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 34.5,
+         "price": 105
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 34.5,
+         "price": -135
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -105
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2024-09-15T17:19:57Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:20:02Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -125
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 21.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 26.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 26.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 7.5,
+         "price": -125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 22.5,
+         "price": -125
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:20:02Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 28.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 43.5,
+         "price": -125
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 61.5,
+         "price": -120
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 61.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2024-09-15T17:19:58Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:19:27Z",
+       "outcomes": [
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 14.5,
+         "price": -110
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 6.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:19:27Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2024-09-15T17:19:58Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:20:14Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 49.5,
+         "price": -115
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 21.5,
+         "price": -120
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 21.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:20:14Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2024-09-15T17:19:57Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-09-15T17:20:39Z",
+       "outcomes": [
+        {
+         "description": "Greg Dulcich",
+         "name": "Over",
+         "point": 21.5,
+         "price": -105
+        },
+        {
+         "description": "Greg Dulcich",
+         "name": "Under",
+         "point": 21.5,
+         "price": -125
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Over",
+         "point": 26.5,
+         "price": -110
+        },
+        {
+         "description": "Josh Reynolds",
+         "name": "Under",
+         "point": 26.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Pat Freiermuth",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Over",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "George Pickens",
+         "name": "Under",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Van Jefferson",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Marvin Mims Jr.",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 9.5,
+         "price": -110
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-09-15T17:20:39Z",
+       "outcomes": [
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 43.5,
+         "price": -120
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Over",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Najee Harris",
+         "name": "Under",
+         "point": 61.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 28.5,
+         "price": -115
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Over",
+         "point": 49.5,
+         "price": -110
+        },
+        {
+         "description": "Justin Fields",
+         "name": "Under",
+         "point": 49.5,
+         "price": -120
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaylen Warren",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    }
+   ],
+   "commence_time": "2024-09-15T20:25:00Z",
+   "home_team": "Denver Broncos",
+   "id": "3a300e2fb659ca896b5e60252f13150c",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2024-09-15T17:25:38Z",
+  "previous_timestamp": "2024-09-15T17:15:38Z",
+  "timestamp": "2024-09-15T17:20:37Z"
+ }
+}

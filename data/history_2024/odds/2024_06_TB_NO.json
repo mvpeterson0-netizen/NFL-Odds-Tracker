@@ -1,0 +1,2254 @@
+{
+ "downloaded_utc": "2026-11-23T01:59:46Z",
+ "event_id": "ba1097486d1edb57bfe2bc22f5c4573e",
+ "game_id": "2024_06_TB_NO",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2024-10-13T14:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Tampa Bay Buccaneers",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2024-10-13T13:55:01Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 30.5,
+         "price": -115
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 33.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 64.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 64.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 50.5,
+         "price": -115
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 55.5,
+         "price": -120
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 55.5,
+         "price": -110
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 39.5,
+         "price": -120
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 39.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:55:28Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Over",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Under",
+         "point": 12.5,
+         "price": -115
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 62.5,
+         "price": -125
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 62.5,
+         "price": -105
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Under",
+         "point": 15.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2024-10-13T13:55:00Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:55:01Z",
+       "outcomes": [
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 22.5,
+         "price": -106
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 22.5,
+         "price": -129
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 54.5,
+         "price": -125
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 54.5,
+         "price": -109
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 38.5,
+         "price": -125
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 38.5,
+         "price": -109
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 50.5,
+         "price": -121
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 50.5,
+         "price": -113
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 62.5,
+         "price": -131
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 62.5,
+         "price": -104
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 32.5,
+         "price": -111
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 32.5,
+         "price": -123
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 19.5,
+         "price": -117
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 19.5,
+         "price": -117
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -119
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:55:01Z",
+       "outcomes": [
+        {
+         "description": "Spencer Rattler",
+         "name": "Over",
+         "point": 15.5,
+         "price": -117
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Under",
+         "point": 15.5,
+         "price": -117
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 62.5,
+         "price": -133
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 62.5,
+         "price": -103
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Over",
+         "point": 12.5,
+         "price": -123
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Under",
+         "point": 12.5,
+         "price": -111
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -111
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -123
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2024-10-13T13:55:01Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:55:18Z",
+       "outcomes": [
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 50.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 56.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 63.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:55:18Z",
+       "outcomes": [
+        {
+         "description": "Baker Mayfield",
+         "name": "Over",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 68.5,
+         "price": -110
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 62.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2024-10-13T13:55:31Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:55:19Z",
+       "outcomes": [
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 59.5,
+         "price": 102
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 59.5,
+         "price": -132
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 63.5,
+         "price": -113
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 64.5,
+         "price": -108
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 64.5,
+         "price": -121
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -117
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 49.5,
+         "price": -127
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 49.5,
+         "price": -103
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 39.5,
+         "price": -113
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 18.5,
+         "price": -113
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 7.5,
+         "price": -113
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 44.5,
+         "price": 240
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 44.5,
+         "price": -360
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 39.5,
+         "price": 170
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 39.5,
+         "price": -240
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 39.5,
+         "price": 285
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 39.5,
+         "price": -455
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 29.5,
+         "price": -121
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 29.5,
+         "price": -108
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 44.5,
+         "price": 165
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 44.5,
+         "price": -230
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 34.5,
+         "price": 210
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 34.5,
+         "price": -305
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 39.5,
+         "price": 123
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 39.5,
+         "price": -165
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 29.5,
+         "price": 155
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 29.5,
+         "price": -210
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -139
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 107
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 24.5,
+         "price": 108
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 24.5,
+         "price": -141
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 69.5,
+         "price": 155
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 69.5,
+         "price": -215
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 59.5,
+         "price": -137
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 59.5,
+         "price": 106
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 24.5,
+         "price": -245
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 24.5,
+         "price": 170
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 64.5,
+         "price": 125
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 64.5,
+         "price": -167
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 44.5,
+         "price": 115
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 44.5,
+         "price": -150
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 54.5,
+         "price": 102
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 54.5,
+         "price": -132
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 29.5,
+         "price": -159
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 29.5,
+         "price": 120
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 54.5,
+         "price": -180
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 54.5,
+         "price": 133
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 74.5,
+         "price": 188
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 74.5,
+         "price": -275
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 44.5,
+         "price": -167
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 44.5,
+         "price": 125
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 59.5,
+         "price": 128
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 59.5,
+         "price": -167
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 39.5,
+         "price": -225
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 39.5,
+         "price": 160
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 64.5,
+         "price": 155
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 64.5,
+         "price": -220
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 54.5,
+         "price": 185
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 54.5,
+         "price": -265
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 54.5,
+         "price": -127
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 54.5,
+         "price": -104
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 49.5,
+         "price": -240
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 49.5,
+         "price": 170
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 69.5,
+         "price": 118
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 69.5,
+         "price": -155
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 79.5,
+         "price": 230
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 79.5,
+         "price": -345
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 69.5,
+         "price": 195
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 69.5,
+         "price": -278
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 34.5,
+         "price": -305
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 34.5,
+         "price": 210
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 49.5,
+         "price": -165
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 49.5,
+         "price": 123
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 84.5,
+         "price": 280
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 84.5,
+         "price": -435
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 44.5,
+         "price": -335
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 44.5,
+         "price": 220
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 74.5,
+         "price": 145
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 74.5,
+         "price": -195
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 49.5,
+         "price": 145
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 49.5,
+         "price": -200
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 84.5,
+         "price": 220
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 84.5,
+         "price": -315
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 29.5,
+         "price": -435
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 29.5,
+         "price": 280
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 39.5,
+         "price": -295
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 39.5,
+         "price": 205
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 39.5,
+         "price": -455
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 39.5,
+         "price": 290
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 79.5,
+         "price": 175
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 79.5,
+         "price": -250
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 44.5,
+         "price": -220
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 44.5,
+         "price": 155
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 74.5,
+         "price": 235
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 74.5,
+         "price": -360
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 29.5,
+         "price": -225
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 29.5,
+         "price": 160
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 89.5,
+         "price": 270
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 89.5,
+         "price": -420
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 34.5,
+         "price": -400
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 34.5,
+         "price": 265
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 34.5,
+         "price": -157
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 34.5,
+         "price": 120
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 56.5,
+         "price": -114
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 56.5,
+         "price": -114
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 79.5,
+         "price": 290
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 79.5,
+         "price": -455
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 51.5,
+         "price": -114
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 21.5,
+         "price": -117
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 21.5,
+         "price": -112
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 64.5,
+         "price": 300
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 64.5,
+         "price": -480
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 7.5,
+         "price": -121
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 7.5,
+         "price": -108
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:55:19Z",
+       "outcomes": [
+        {
+         "description": "Baker Mayfield",
+         "name": "Over",
+         "point": 12.5,
+         "price": -112
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Under",
+         "point": 12.5,
+         "price": -117
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -114
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -114
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Over",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Under",
+         "point": 14.5,
+         "price": -109
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 60.5,
+         "price": -117
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 49.5,
+         "price": -420
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 49.5,
+         "price": 265
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 44.5,
+         "price": -360
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 44.5,
+         "price": 230
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 74.5,
+         "price": 180
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 74.5,
+         "price": -265
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 49.5,
+         "price": -240
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 49.5,
+         "price": 170
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 74.5,
+         "price": 114
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 74.5,
+         "price": -150
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 54.5,
+         "price": -286
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 54.5,
+         "price": 195
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 69.5,
+         "price": 140
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 69.5,
+         "price": -195
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 54.5,
+         "price": -167
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 54.5,
+         "price": 128
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 59.5,
+         "price": -124
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 59.5,
+         "price": -106
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 84.5,
+         "price": 300
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 84.5,
+         "price": -500
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 84.5,
+         "price": 180
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 84.5,
+         "price": -265
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 64.5,
+         "price": -152
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 64.5,
+         "price": 115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 59.5,
+         "price": -205
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 59.5,
+         "price": 148
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 89.5,
+         "price": 225
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 89.5,
+         "price": -345
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 79.5,
+         "price": 143
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 79.5,
+         "price": -200
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 79.5,
+         "price": 235
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 79.5,
+         "price": -360
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 64.5,
+         "price": 108
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 64.5,
+         "price": -141
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 94.5,
+         "price": 285
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 94.5,
+         "price": -455
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2024-10-13T13:55:00Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 46.5,
+         "price": -125
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 46.5,
+         "price": -120
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 8.5,
+         "price": -130
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 8.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 22.5,
+         "price": -125
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 22.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 7.5,
+         "price": -125
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 7.5,
+         "price": -115
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 38.5,
+         "price": -120
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 38.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:55:20Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Over",
+         "point": 12.5,
+         "price": -125
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Under",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Over",
+         "point": 15.5,
+         "price": -115
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Under",
+         "point": 15.5,
+         "price": -125
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2024-10-13T13:55:31Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 62.5,
+         "price": -120
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 62.5,
+         "price": -110
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 32.5,
+         "price": -105
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 32.5,
+         "price": -130
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 46.5,
+         "price": -130
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 46.5,
+         "price": 100
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 54.5,
+         "price": -120
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:55:32Z",
+       "outcomes": [
+        {
+         "description": "Baker Mayfield",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 59.5,
+         "price": -130
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 59.5,
+         "price": -105
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2024-10-13T13:55:32Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:55:36Z",
+       "outcomes": [
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 69.5,
+         "price": 110
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 69.5,
+         "price": -140
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 59.5,
+         "price": 100
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 59.5,
+         "price": -130
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 49.5,
+         "price": -125
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 49.5,
+         "price": -105
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 39.5,
+         "price": -115
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -120
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 34.5,
+         "price": 105
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 34.5,
+         "price": -135
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 19.5,
+         "price": -130
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 19.5,
+         "price": 100
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 19.5,
+         "price": -125
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 19.5,
+         "price": -105
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:55:36Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -105
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -125
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 59.5,
+         "price": -125
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 59.5,
+         "price": -105
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2024-10-13T13:55:03Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-13T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Chris Godwin",
+         "name": "Over",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Chris Godwin",
+         "name": "Under",
+         "point": 62.5,
+         "price": -115
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Cade Otton",
+         "name": "Under",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Over",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Rashid Shaheed",
+         "name": "Under",
+         "point": 38.5,
+         "price": -115
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Over",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Mike Evans",
+         "name": "Under",
+         "point": 54.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Over",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Juwan Johnson",
+         "name": "Under",
+         "point": 22.5,
+         "price": -115
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Over",
+         "point": 8.5,
+         "price": -120
+        },
+        {
+         "description": "Foster Moreau",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Over",
+         "point": 7.5,
+         "price": -120
+        },
+        {
+         "description": "Mason Tipton",
+         "name": "Under",
+         "point": 7.5,
+         "price": -110
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Over",
+         "point": 46.5,
+         "price": -130
+        },
+        {
+         "description": "Chris Olave",
+         "name": "Under",
+         "point": 46.5,
+         "price": 100
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-13T13:54:53Z",
+       "outcomes": [
+        {
+         "description": "Alvin Kamara",
+         "name": "Over",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Alvin Kamara",
+         "name": "Under",
+         "point": 69.5,
+         "price": -115
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Baker Mayfield",
+         "name": "Under",
+         "point": 12.5,
+         "price": -110
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Over",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "Spencer Rattler",
+         "name": "Under",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Over",
+         "point": 59.5,
+         "price": -125
+        },
+        {
+         "description": "Bucky Irving",
+         "name": "Under",
+         "point": 59.5,
+         "price": -105
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2024-10-13T17:00:00Z",
+   "home_team": "New Orleans Saints",
+   "id": "ba1097486d1edb57bfe2bc22f5c4573e",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2024-10-13T14:00:38Z",
+  "previous_timestamp": "2024-10-13T13:50:38Z",
+  "timestamp": "2024-10-13T13:55:38Z"
+ }
+}

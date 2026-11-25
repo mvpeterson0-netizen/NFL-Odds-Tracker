@@ -1,0 +1,3641 @@
+{
+ "downloaded_utc": "2026-11-23T02:00:12Z",
+ "event_id": "bba53e1026b6121c0255771479517a2f",
+ "game_id": "2024_08_CAR_DEN",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2024-10-27T17:25:00Z",
+ "response": {
+  "data": {
+   "away_team": "Carolina Panthers",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2024-10-27T17:20:21Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:50Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 42.5,
+         "price": -110
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 4.5,
+         "price": -130
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 4.5,
+         "price": 100
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:50Z",
+       "outcomes": [
+        {
+         "description": "Audric Estime",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 31.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 31.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 19.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 64.5,
+         "price": -125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 64.5,
+         "price": -105
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2024-10-27T17:19:31Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:19:27Z",
+       "outcomes": [
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 9.5,
+         "price": -113
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 9.5,
+         "price": -121
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 23.5,
+         "price": -119
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 42.5,
+         "price": -129
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 42.5,
+         "price": -106
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 23.5,
+         "price": -106
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 23.5,
+         "price": -129
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 13.5,
+         "price": -121
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 13.5,
+         "price": -113
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -129
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -106
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -121
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -121
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -113
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 17.5,
+         "price": -117
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 17.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -111
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -123
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Over",
+         "point": 13.5,
+         "price": -121
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Under",
+         "point": 13.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:19:27Z",
+       "outcomes": [
+        {
+         "description": "Audric Estime",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Under",
+         "point": 17.5,
+         "price": -119
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 0.5,
+         "price": 548
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 0.5,
+         "price": -1204
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -117
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -131
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 63.5,
+         "price": -104
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -109
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -139
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 18.5,
+         "price": 102
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -117
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 32.5,
+         "price": -129
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 32.5,
+         "price": -106
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2024-10-27T17:20:21Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:03Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 33.5,
+         "price": -110
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 8.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 25.5,
+         "price": -110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 43.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:03Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 63.5,
+         "price": -110
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Over",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Under",
+         "point": 18.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 61.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 30.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2024-10-27T17:20:21Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:16Z",
+       "outcomes": [
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -125
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 42.5,
+         "price": -125
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 42.5,
+         "price": -120
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 23.5,
+         "price": -125
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 24.5,
+         "price": -125
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 4.5,
+         "price": -125
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 13.5,
+         "price": -125
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Over",
+         "point": 13.5,
+         "price": -125
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Under",
+         "point": 13.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 27.5,
+         "price": -120
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 27.5,
+         "price": -125
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:16Z",
+       "outcomes": [
+        {
+         "description": "Audric Estime",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Under",
+         "point": 17.5,
+         "price": -125
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 29.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -130
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -125
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 18.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 63.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 0.5,
+         "price": 560
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 0.5,
+         "price": -1530
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -125
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2024-10-27T17:20:22Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:05Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 27.5,
+         "price": -135
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 27.5,
+         "price": 100
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 23.5,
+         "price": -120
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:05Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -130
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 63.5,
+         "price": 100
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 29.5,
+         "price": -135
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 29.5,
+         "price": 100
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -130
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 18.5,
+         "price": 100
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 0.5,
+         "price": 600
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 0.5,
+         "price": -1200
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2024-10-27T17:20:21Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:46Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 44.5,
+         "price": -117
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 25.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -114
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -114
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 24.5,
+         "price": -124
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 24.5,
+         "price": -105
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 69.5,
+         "price": 280
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 69.5,
+         "price": -435
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 49.5,
+         "price": 220
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 49.5,
+         "price": -315
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 19.5,
+         "price": -186
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 19.5,
+         "price": 138
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 24.5,
+         "price": -420
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 24.5,
+         "price": 270
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 44.5,
+         "price": 170
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 44.5,
+         "price": -240
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 34.5,
+         "price": 100
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 34.5,
+         "price": -129
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 59.5,
+         "price": 180
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 59.5,
+         "price": -265
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 44.5,
+         "price": 220
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 29.5,
+         "price": -286
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 29.5,
+         "price": 195
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 34.5,
+         "price": 155
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 34.5,
+         "price": -215
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 39.5,
+         "price": 250
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 39.5,
+         "price": -375
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 39.5,
+         "price": 130
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 39.5,
+         "price": -177
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 34.5,
+         "price": 185
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 34.5,
+         "price": -265
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -200
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 34.5,
+         "price": 148
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 64.5,
+         "price": 230
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 64.5,
+         "price": -335
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 19.5,
+         "price": -240
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 19.5,
+         "price": 170
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 29.5,
+         "price": 115
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 29.5,
+         "price": -152
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 24.5,
+         "price": -103
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 24.5,
+         "price": -127
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 24.5,
+         "price": -200
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 24.5,
+         "price": 145
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 19.5,
+         "price": -295
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 19.5,
+         "price": 205
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -139
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": 107
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 24.5,
+         "price": -159
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 24.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 29.5,
+         "price": 138
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 29.5,
+         "price": -186
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -148
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": 114
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 39.5,
+         "price": 210
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 39.5,
+         "price": -305
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 54.5,
+         "price": 145
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 54.5,
+         "price": -200
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 39.5,
+         "price": 165
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 39.5,
+         "price": -230
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 19.5,
+         "price": -150
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 19.5,
+         "price": 115
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 34.5,
+         "price": 125
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 34.5,
+         "price": -165
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 44.5,
+         "price": 280
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 44.5,
+         "price": -435
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 54.5,
+         "price": 280
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 54.5,
+         "price": -435
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 49.5,
+         "price": 116
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 49.5,
+         "price": -152
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 49.5,
+         "price": 285
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 49.5,
+         "price": -455
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 24.5,
+         "price": -108
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 19.5,
+         "price": -159
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 19.5,
+         "price": 120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 34.5,
+         "price": 175
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 34.5,
+         "price": -245
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 29.5,
+         "price": 128
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 29.5,
+         "price": -175
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 12.5,
+         "price": -109
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 39.5,
+         "price": 230
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 39.5,
+         "price": -345
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 44.5,
+         "price": 300
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 44.5,
+         "price": -500
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 23.5,
+         "price": -117
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 9.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:46Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 64.5,
+         "price": -114
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 64.5,
+         "price": -114
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 29.5,
+         "price": -109
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 60.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -108
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 18.5,
+         "price": -121
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -124
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 54.5,
+         "price": -167
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 54.5,
+         "price": 125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 54.5,
+         "price": -225
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 54.5,
+         "price": 160
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 49.5,
+         "price": -335
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 49.5,
+         "price": 220
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 79.5,
+         "price": 200
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 79.5,
+         "price": -295
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 84.5,
+         "price": 265
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 84.5,
+         "price": -420
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 64.5,
+         "price": 108
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 64.5,
+         "price": -141
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 79.5,
+         "price": 220
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 79.5,
+         "price": -335
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 39.5,
+         "price": 170
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 39.5,
+         "price": -240
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 19.5,
+         "price": 275
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 19.5,
+         "price": -435
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 74.5,
+         "price": 175
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 44.5,
+         "price": 230
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 44.5,
+         "price": -360
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 84.5,
+         "price": 280
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 84.5,
+         "price": -455
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 69.5,
+         "price": 138
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 69.5,
+         "price": -186
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": 155
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -215
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 59.5,
+         "price": -157
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 59.5,
+         "price": 120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -182
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": 135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 44.5,
+         "price": -345
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 44.5,
+         "price": 225
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 49.5,
+         "price": -235
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 49.5,
+         "price": 165
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 69.5,
+         "price": 118
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 69.5,
+         "price": -157
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -295
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": 200
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 9.5,
+         "price": -109
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2024-10-27T17:20:21Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:29Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -118
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 44.5,
+         "price": -112
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 44.5,
+         "price": -117
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 25.5,
+         "price": -115
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 25.5,
+         "price": -113
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -110
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -118
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -114
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -114
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 24.5,
+         "price": -124
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 24.5,
+         "price": -105
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 69.5,
+         "price": 280
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 69.5,
+         "price": -435
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 49.5,
+         "price": 220
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 49.5,
+         "price": -315
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 19.5,
+         "price": -186
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 19.5,
+         "price": 138
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 24.5,
+         "price": -420
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 24.5,
+         "price": 270
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 44.5,
+         "price": 170
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 44.5,
+         "price": -240
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 34.5,
+         "price": 100
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 34.5,
+         "price": -129
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 59.5,
+         "price": 180
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 59.5,
+         "price": -265
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 44.5,
+         "price": 220
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 44.5,
+         "price": -315
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 29.5,
+         "price": -286
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 29.5,
+         "price": 195
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 34.5,
+         "price": 155
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 34.5,
+         "price": -215
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 39.5,
+         "price": 250
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 39.5,
+         "price": -375
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 39.5,
+         "price": 130
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 39.5,
+         "price": -177
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 34.5,
+         "price": 185
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 34.5,
+         "price": -265
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 34.5,
+         "price": -200
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 34.5,
+         "price": 148
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 64.5,
+         "price": 230
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 64.5,
+         "price": -335
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 19.5,
+         "price": -240
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 19.5,
+         "price": 170
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 29.5,
+         "price": 115
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 29.5,
+         "price": -152
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 24.5,
+         "price": -103
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 24.5,
+         "price": -127
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 24.5,
+         "price": -200
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 24.5,
+         "price": 145
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 19.5,
+         "price": -295
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 19.5,
+         "price": 205
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 29.5,
+         "price": -139
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 29.5,
+         "price": 107
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 24.5,
+         "price": -159
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 24.5,
+         "price": 120
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 29.5,
+         "price": 138
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 29.5,
+         "price": -186
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 39.5,
+         "price": -148
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 39.5,
+         "price": 114
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 39.5,
+         "price": 210
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 39.5,
+         "price": -305
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 54.5,
+         "price": 145
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 54.5,
+         "price": -200
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 39.5,
+         "price": 165
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 39.5,
+         "price": -230
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 19.5,
+         "price": -150
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 19.5,
+         "price": 115
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 34.5,
+         "price": 125
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 34.5,
+         "price": -165
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 44.5,
+         "price": 280
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 44.5,
+         "price": -435
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 54.5,
+         "price": 280
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 54.5,
+         "price": -435
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 49.5,
+         "price": 116
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 49.5,
+         "price": -152
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 49.5,
+         "price": 285
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 49.5,
+         "price": -455
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 15.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 24.5,
+         "price": -108
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 19.5,
+         "price": -159
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 19.5,
+         "price": 120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 34.5,
+         "price": 175
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 34.5,
+         "price": -245
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 29.5,
+         "price": 128
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 29.5,
+         "price": -175
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 12.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 12.5,
+         "price": -109
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 39.5,
+         "price": 230
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 39.5,
+         "price": -345
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 44.5,
+         "price": 300
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 44.5,
+         "price": -500
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 23.5,
+         "price": -117
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 23.5,
+         "price": -112
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 9.5,
+         "price": -113
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:29Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 64.5,
+         "price": -114
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 64.5,
+         "price": -114
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 29.5,
+         "price": -109
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -114
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 60.5,
+         "price": -117
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 60.5,
+         "price": -112
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -108
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 18.5,
+         "price": -121
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -124
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 54.5,
+         "price": -167
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 54.5,
+         "price": 125
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 54.5,
+         "price": -225
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 54.5,
+         "price": 160
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 49.5,
+         "price": -335
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 49.5,
+         "price": 220
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 79.5,
+         "price": 200
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 79.5,
+         "price": -295
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 84.5,
+         "price": 265
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 84.5,
+         "price": -420
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 64.5,
+         "price": 108
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 64.5,
+         "price": -141
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 34.5,
+         "price": 123
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 34.5,
+         "price": -162
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 79.5,
+         "price": 220
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 79.5,
+         "price": -335
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 39.5,
+         "price": 170
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 39.5,
+         "price": -240
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 19.5,
+         "price": 275
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 19.5,
+         "price": -435
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 74.5,
+         "price": 175
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 74.5,
+         "price": -250
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 44.5,
+         "price": 230
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 44.5,
+         "price": -360
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 84.5,
+         "price": 280
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 84.5,
+         "price": -455
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 69.5,
+         "price": 138
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 69.5,
+         "price": -186
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 74.5,
+         "price": 155
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 74.5,
+         "price": -215
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 59.5,
+         "price": -157
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 59.5,
+         "price": 120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 24.5,
+         "price": -182
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 24.5,
+         "price": 135
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 44.5,
+         "price": -345
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 44.5,
+         "price": 225
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 49.5,
+         "price": -235
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 49.5,
+         "price": 165
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 69.5,
+         "price": 118
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 69.5,
+         "price": -157
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 19.5,
+         "price": -295
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 19.5,
+         "price": 200
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 30.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 30.5,
+         "price": -118
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 9.5,
+         "price": -109
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2024-10-27T17:20:22Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:42Z",
+       "outcomes": [
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 44.5,
+         "price": -105
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 44.5,
+         "price": -125
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 34.5,
+         "price": 100
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 34.5,
+         "price": -130
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 29.5,
+         "price": -125
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 29.5,
+         "price": -105
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 24.5,
+         "price": -110
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 24.5,
+         "price": -120
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 24.5,
+         "price": 100
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 24.5,
+         "price": -130
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 19.5,
+         "price": 105
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 19.5,
+         "price": -135
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 19.5,
+         "price": 110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 19.5,
+         "price": -140
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Over",
+         "point": 14.5,
+         "price": -105
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Under",
+         "point": 14.5,
+         "price": -125
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:42Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 59.5,
+         "price": -145
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 59.5,
+         "price": 115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 19.5,
+         "price": -110
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 19.5,
+         "price": -120
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 14.5,
+         "price": -135
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 14.5,
+         "price": 105
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 9.5,
+         "price": -120
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 9.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2024-10-27T17:20:22Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-10-27T17:20:53Z",
+       "outcomes": [
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Over",
+         "point": 13.5,
+         "price": -120
+        },
+        {
+         "description": "Lucas Krull",
+         "name": "Under",
+         "point": 13.5,
+         "price": -110
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Over",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Troy Franklin",
+         "name": "Under",
+         "point": 27.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Courtland Sutton",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Coker",
+         "name": "Under",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Over",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Ja'Tavion Sanders",
+         "name": "Under",
+         "point": 24.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 4.5,
+         "price": -120
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 4.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Over",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Xavier Legette",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Over",
+         "point": 23.5,
+         "price": -115
+        },
+        {
+         "description": "Devaughn Vele",
+         "name": "Under",
+         "point": 23.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-10-27T17:20:53Z",
+       "outcomes": [
+        {
+         "description": "Bryce Young",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Bryce Young",
+         "name": "Under",
+         "point": 10.5,
+         "price": -120
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Over",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Javonte Williams",
+         "name": "Under",
+         "point": 63.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Over",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Miles Sanders",
+         "name": "Under",
+         "point": 16.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Over",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Jaleel McLaughlin",
+         "name": "Under",
+         "point": 18.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Chuba Hubbard",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Over",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Audric Estime",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Over",
+         "point": 29.5,
+         "price": -120
+        },
+        {
+         "description": "Bo Nix",
+         "name": "Under",
+         "point": 29.5,
+         "price": -110
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Over",
+         "point": 0.5,
+         "price": 650
+        },
+        {
+         "description": "Jonathan Mingo",
+         "name": "Under",
+         "point": 0.5,
+         "price": -1100
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2024-10-27T20:25:00Z",
+   "home_team": "Denver Broncos",
+   "id": "bba53e1026b6121c0255771479517a2f",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2024-10-27T17:25:37Z",
+  "previous_timestamp": "2024-10-27T17:15:38Z",
+  "timestamp": "2024-10-27T17:20:37Z"
+ }
+}
