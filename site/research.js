@@ -133,6 +133,11 @@
     { id: "nlu20", n: 35, page: "ind", side: "under", label: "NL-U20", short: () => "Longest catch under 20 yards",
       title: "Over with no catch of 20+ yards → rec yds Under", why: "A game with no long catch means the Over came from steady volume the line may now overstate.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>His longest catch in that game was <b>under 20 yards</b>.</li></ul>` },
+    // ---- Weather indicator (2026-11-24, Michael): scored on the wind measured after the game, so it can only be scored on finished games ----
+    // A forecast version has not been tested. Historical replay picked after seeing results; tracked forward from the day it was added.
+    { id: "wx1", n: 36, page: "ind", side: "under", label: "WX1", short: () => "Outdoor game with observed wind 15+ mph",
+      title: "Outdoor game, observed wind 15+ mph → pass yds, receptions or rec yds Under", why: "Strong wind may hold down the passing game, and the line may not price it in.",
+      desc: () => `Bet a QB's <b>passing yards Under</b>, or a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b>, when both are true:<ul class="sg-ul"><li>The game is <b>outdoors</b> (an open-air stadium; domes and retractable roofs are left out).</li><li>The <b>observed wind</b> at kickoff was <b>15 mph or more</b>.</li></ul><div class="sg-sub"><b>Read this first:</b> the wind is measured <b>after</b> the game, so this rule cannot flag players before kickoff. It is scored on finished games only. A forecast version has not been tested.</div>` },
   ];
   const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 2, fh: 2 }; // QBRu avg 25; CM1 TE; GS RB; SY NL; 1H NL // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
@@ -343,6 +348,13 @@
     if (!g || g.spread == null) return null;
     return g.spread * (r.ha === "home" ? 1 : -1);
   }
+  // WX1: observed wind (mph at the kickoff hour) for an open-air game, or null (dome, retractable roof, or no observation yet; never a guess).
+  function obsWind(gid) {
+    const w = D.games[gid] && D.games[gid].wx;
+    if (!w || w.roof !== "open" || w.obs_wind_mph == null || w.obs_wind_mph === "") return null;
+    const v = +w.obs_wind_mph;
+    return Number.isFinite(v) ? v : null;
+  }
   const spreadTxt = (f) => (f > 0 ? `favored by ${num(f)}` : f < 0 ? `${num(-f)}-pt underdog` : "pick'em");
   const koMs = (c) => new Date(c.r.ko).getTime();
 
@@ -365,6 +377,10 @@
         const d = c.prev && c.prev.rd;
         cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, d ? `${d.rc} catches, ${num(c.pm.act, 0)} yds · 1st half ${num(d.h1, 0)} · longest ${num(d.lc, 0)}` : "—"];
         note = d ? `Last game: ${num(c.pm.act, 0)} yds vs ${num(pl)} line` : "";
+      } else if (ind && tab === "wx1") {
+        const wd = obsWind(c.r.gid);
+        cells = [`<b>${num(line)}</b>`, `${num(wd, 0)} mph`];
+        note = `Observed wind ${num(wd, 0)} mph`;
       } else if (ind) {
         const fb = favBy(c.r), last = c.played.slice(-3).map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).map((v) => num(v, 0)).join(", ");
         cells = [`<b>${num(line)}</b>`, fb != null && tab.startsWith("sp") ? esc(spreadTxt(fb)) : esc(last || "—")];
@@ -387,6 +403,7 @@
     sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
     sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
     fhr30: ["Line (last game → now)", "Last game"], fhnl: ["Line (last game → now)", "Last game"], bl200: ["Line (last game → now)", "Last game"], nlu20: ["Line (last game → now)", "Last game"],
+    wx1: ["Line", "Wind"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
   // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
@@ -596,6 +613,7 @@
     if (t.challenger && !D.challenger?.version) return h + `<p class="muted">Awaiting the first Tuesday-afternoon training run. Frozen signals continue unchanged.</p>`;
     if (t.frozen && !list.length) return h + `<p class="muted">No upcoming matches yet. Weekly snapshots populate a provisional watchlist; matches can change until the pregame capture locks the decision. Only locked decisions are scored.</p>`;
     if (t.spread && !Object.values(D.games).some((g) => g.spread != null)) return h + `<p class="muted">Point spreads (nflverse schedule) aren't in the app's data yet, so this rule can't be filled.</p>`;
+    if (t.id === "wx1" && !list.length) return h + `<p class="muted">WX1 uses the wind measured <b>after</b> the game, so it cannot flag upcoming players. It is scored on finished games only: see the results above and the Analysis tab.</p>`;
     if (!list.length && RL.gid) return h + `<p class="muted">No players in ${esc(gameLabel(RL.gid))} match rule ${t.n} right now.</p>`;
     if (!list.length) return h + `<p class="muted">No upcoming lines match right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do.</p>`;
     const heads = t.id === "qbru" && RL.opt.qbru === 3 ? ["Line (last game → now)", "Last 3"] : HEADS[MEM(t.id)];
@@ -649,10 +667,12 @@
     const x = STUDY[t.id] || (AUDIT[t.id] && (t.opts ? AUDIT[t.id][RL.opt[t.id]] : AUDIT[t.id]));
     return x && x.lo != null && x.hi != null ? { lo: x.lo, hi: x.hi } : null;
   }
+  const NO_REPLAY = "No historical replay is loaded for this signal yet. The tile scores it on finished 2026 games only. Wind is measured after the game, so a forecast version has not been tested.";
   function auditLine(t) {
     const st = STUDY[t.id];
     if (st) return `<b>Late-yardage study replay</b> (2025 weeks 1–18 + 2026 weeks 1–10)<br>2025: <b>${pc(st.yr[0])}</b> ROI<br>2026: <b>${pc(st.yr[1])}</b> ROI<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.`;
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
+    if (!x && t.id === "wx1") return NO_REPLAY;
     if (!x) return `The audit did not test this setting (${t.optFmt(RL.opt[t.id])}), so there is no interval for it.`;
     const y = AUDIT_YR[t.id], yr = y && (t.opts ? y[RL.opt[t.id]] : y);
     const seasons = yr ? `2025: <b>${pc(yr[0])}</b> ROI<br>2026: <b>${pc(yr[1])}</b> ROI<br>` : "";
@@ -683,6 +703,8 @@
 <symbol id="sgi-half" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="24" cy="24" r="15"/><path d="M24 24V9A15 15 0 0 0 24 39Z" fill="currentColor" fill-opacity=".35" stroke="none"/><path d="M24 15v9l6 4"/></g></symbol>
 <symbol id="sgi-beat" viewBox="0 0 48 48"><line x1="4" y1="34" x2="44" y2="34" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="25" y="8" width="17" height="32" rx="2.5" fill="currentColor"/><rect x="6" y="28" width="10" height="12" rx="2" fill="currentColor" fill-opacity=".4"/><path d="M20.5 10v22M17.5 13l3-3 3 3M17.5 29l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><text x="33.5" y="28" text-anchor="middle" font-size="12" font-weight="500" style="fill:var(--sgi-bg)">3x</text></symbol>
 <symbol id="sgi-u20" viewBox="0 0 48 48"><line x1="4" y1="38" x2="44" y2="38" stroke="currentColor" stroke-width="1.5" stroke-opacity=".5"/><line x1="35" y1="10" x2="35" y2="38" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="4" y="19" width="27" height="15" rx="2.5" fill="currentColor"/><text x="17.5" y="30" text-anchor="middle" font-size="11" font-weight="500" style="fill:var(--sgi-bg)">&lt;20</text></symbol>
+<symbol id="sgi-wind" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17h22a5 5 0 1 0-5-5"/><path d="M6 26h31a5 5 0 1 1-5 5"/><path d="M6 35h14"/></g></symbol>
+<symbol id="sgi-open" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 38c4-14 10-21 19-21s15 7 19 21"/><line x1="5" y1="38" x2="43" y2="38" stroke-opacity=".5"/><circle cx="24" cy="9" r="3" fill="currentColor"/></g></symbol>
 </defs></svg>`;
   // Gate pieces shared by the late-yardage rules (wording follows LY_* above).
   const GP = {
@@ -726,6 +748,7 @@
     fhnl: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.FH, GP.NOLONG] },
     bl200: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.BL] },
     nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
+    wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Observed at kickoff, measured after the game" }] },
   };
   // Positions in the popup header, best ROI first (Michael 2026-11-18). The last one is the position to drop first and is not bold.
   // Order = each position's historical-replay ROI (2025 wk 2-18 + 2026 wk 2-10); see claude/late-yardage-by-position-2026-11-17.md
@@ -753,6 +776,7 @@
   // Results chart: one shared, zero-centered axis (±40, widened in steps of 20 only if a value needs it).
   function sgpResults(t) {
     const d = sgpData(t);
+    if (!d && t.id === "wx1") return `<div class="sgp-res"><p class="small muted">${NO_REPLAY}</p></div>`;
     if (!d) return `<div class="sgp-res"><p class="small muted">${esc(`The audit did not test this setting (${t.optFmt ? t.optFmt(RL.opt[t.id]) : ""}), so there is no interval for it.`)}</p></div>`;
     const vals = [d.roi, d.lo, d.hi].concat(d.yr || []);
     const A = Math.max(40, Math.ceil(Math.max(...vals.map((v) => Math.abs(v))) / 20) * 20);
@@ -1157,7 +1181,7 @@
     const rows = playerRows(tabs, picked, false), live = liveHtml(tabs, picked) + doneHtml(tabs, picked);
     const lastV = sgView() === "last";
     const head = `<h3 class="sg-sec">${lastV ? `Still to play, week ${sgWk()}${picked.length ? ` · ${picked.length > 1 ? "fit all " + picked.length + " picked signals" : "fit this signal"}` : ""} (${rows.length})` : picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
-    if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
+    if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : picked.length === 1 && picked[0] && picked[0].id === "wx1" ? "WX1 uses wind measured after the game, so it can't flag upcoming players. It is scored on finished games only (see the tile and Week by week above)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
     const pages = Math.ceil(rows.length / PAGE), key = `bp|${sgWk() ?? ""}|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}|${tnfOn() ? "today" : ""}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
     (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
     let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
@@ -1302,6 +1326,9 @@
       if (p.pos === "QB" && mid === "pass_yds") { if (fb >= 10) hits.push("sp3"); if (fb <= -10) hits.push("sp4"); }
       if (fb <= -3 && fb >= -6.5 && (p.pos === "QB" || p.pos === "RB") && mid === "rush_yds") hits.push("sp5");
     }
+    // WX1: Under on QB passing yards, WR/TE/RB receptions and receiving yards in an open-air game with observed wind of 15+ mph.
+    const wind = obsWind(r.gid);
+    if (wind != null && wind >= 15 && ((p.pos === "QB" && mid === "pass_yds") || (["WR", "TE", "RB"].includes(p.pos) && (mid === "rec" || mid === "rec_yds")))) hits.push("wx1");
     // Late-yardage indicators: receiving yards Under for WR/TE/RB after an Over of 40+ yards with a higher line this week.
     // Needs his previous game's play-by-play detail (prev.rd, from data/rec_detail.json); no detail yet = no signal, never a guess.
     if (mid === "rec_yds" && ["WR", "TE", "RB"].includes(p.pos) && pm && pm.res === "over" && pl != null && line > pl && prev.rd && prev.rd.tot >= 40) {
@@ -1497,6 +1524,7 @@
     switch (x.rule.id) {
       case "qbru": return RL.opt.qbru === 3 ? `Line ${num(x.pl)} → ${line}` : "";
       case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
+      case "wx1": { const wd = obsWind(x.r.gid); return wd == null ? "" : `Wind ${num(wd, 0)} mph`; }
       case "qbch": return esc(x.note);
       case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
       case "cm1te": case "cm120": return `Line ${num(x.pl)} → ${line} · ${esc(x.note)}`;
