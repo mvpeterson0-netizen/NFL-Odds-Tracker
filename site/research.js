@@ -143,9 +143,9 @@
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>His longest catch in that game was <b>under 20 yards</b>.</li></ul>` },
     // ---- Weather indicator (2026-11-24, Michael): scored on the wind measured after the game, so it can only be scored on finished games ----
     // A forecast version has not been tested. Historical replay picked after seeing results; tracked forward from the day it was added.
-    { id: "wx1", n: 36, page: "ind", side: "under", label: "WX1", short: () => "Outdoor game with wind 15+ mph",
-      title: "Outdoor game, wind 15+ mph → pass yds, receptions or rec yds Under", why: "Strong wind may hold down the passing game, and the line may not price it in.",
-      desc: () => `Bet a QB's <b>passing yards Under</b>, or a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b>, when both are true:<ul class="sg-ul"><li>The game is <b>outdoors</b> (an open-air stadium; domes and retractable roofs are left out).</li><li>The <b>forecast wind</b> at kickoff is <b>15 mph or more</b>.</li></ul><div class="sg-sub"><b>Which wind:</b> the stadium's <b>forecast wind</b>, refreshed about every 3 hours until kickoff and then frozen, so on game day it is the reading from about 3 hours before. The same forecast is used to list players and to score the record. Observed wind is not used. This has <b>not been backtested</b>.</div>` },
+    { id: "wx1", n: 36, page: "ind", side: "under", label: "WX1", short: () => "Outdoor game, wind 15+ mph at 20 min before kickoff",
+      title: "Outdoor game, wind 15+ mph (read 20 min before kickoff) → pass yds, receptions or rec yds Under", why: "Strong wind may hold down the passing game, and the line may not price it in.",
+      desc: () => `Bet a QB's <b>passing yards Under</b>, or a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b>, when both are true:<ul class="sg-ul"><li>The game is <b>outdoors</b> (an open-air stadium; domes and retractable roofs are left out).</li><li>The <b>wind is 15 mph or more</b>, read about <b>20 minutes before kickoff</b>.</li></ul><div class="sg-sub"><b>How it works:</b> about 20 minutes before each kickoff the app takes one wind reading for the stadium (a weather-model forecast for the kickoff hour) and keeps it. The players show here from then until kickoff, you get an alert, and the record is scored on that same reading. A game with no reading does not count. The 2025 results use the wind measured after each game, which can't be known before kickoff, so they are a replay, not a test of this version.</div>` },
   ];
   const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 1, fh: 2 }; // QBRu avg 25; CM1 TE; GS RB; SY 40+ catches; 1H NL // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
@@ -356,13 +356,12 @@
     if (!g || g.spread == null) return null;
     return g.spread * (r.ha === "home" ? 1 : -1);
   }
-  // WX1: forecast wind (mph at the kickoff hour) for an open-air game, or null (dome, retractable roof, or no forecast; never a guess).
-  // Forecast wind only (Michael 2026-11-24: a forecast is all we will ever have before a game, so the record is scored on it too).
-  // The pipeline refreshes it every ~3 h until kickoff, then freezes it, so for a finished game it is the last pre-kickoff reading (~3 h out).
-  // Observed wind is not used. Not backtested.
+  // WX1 wind (Michael 2026-11-24): the one reading the pipeline stores about 20 minutes before kickoff (weather.csv pre_wind_mph, never changed
+  // afterwards). It lists upcoming players and scores finished games. Open-air stadiums only (retractable roofs are left out: roof position
+  // unknown). Games with no reading (before this existed, or a missed window) never fire; no guess, no fallback to the 3-hour forecast or observed wind.
   function obsWind(gid) {
     const w = D.games[gid] && D.games[gid].wx;
-    const raw = w && w.fc_wind_mph;
+    const raw = w && w.pre_wind_mph;
     if (!w || w.roof !== "open" || raw == null || raw === "") return null;
     const v = +raw;
     return Number.isFinite(v) ? v : null;
@@ -391,8 +390,8 @@
         note = d ? `Last game: ${num(c.pm.act, 0)} yds vs ${num(pl)} line` : "";
       } else if (ind && tab === "wx1") {
         const wd = obsWind(c.r.gid);
-        cells = [`<b>${num(line)}</b>`, `${num(wd, 0)} mph forecast`];
-        note = `Forecast wind ${num(wd, 0)} mph`;
+        cells = [`<b>${num(line)}</b>`, `${num(wd, 0)} mph`];
+        note = `Wind ${num(wd, 0)} mph (~20 min before kickoff)`;
       } else if (ind) {
         const fb = favBy(c.r), last = c.played.slice(-3).map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).map((v) => num(v, 0)).join(", ");
         cells = [`<b>${num(line)}</b>`, fb != null && tab.startsWith("sp") ? esc(spreadTxt(fb)) : esc(last || "—")];
@@ -675,15 +674,22 @@
     fhnl: { rec: "193–118", roi: 17.4, lo: 9.8, hi: 25.3, yr: [11.9, 26.0] }, bl200: { rec: "117–78", roi: 13.4, lo: 5.0, hi: 22.8, yr: [6.6, 22.3] },
     nlu20: { rec: "112–74", roi: 14.1, lo: 2.8, hi: 23.7, yr: [4.2, 25.6] },
   };
+  // WX1 replay (2026-11-24, research/signal_stacks props: 2025 weeks 1-18, nflverse post-game wind): Under on QB pass yds and WR/TE/RB rec and rec yds,
+  // open-air games with wind of 15+ mph, 1 unit at the saved price (kickoff-3h archive snapshot), pushes refunded, 19 games over 9 weeks, week-cluster
+  // 95% interval (20,000 resamples of weeks). The wind is the one measured AFTER the game, so this is a replay, not a bet that could be placed.
+  // The tile's own record uses only the stored ~20-minute pre-kickoff reading and starts empty. 2024 is not loaded yet.
+  STUDY.wx1 = { rec: "270–170", roi: 15.5, lo: 5.0, hi: 23.4, yr: [15.5], yrl: ["2025"], win: "2025 wk 1–18 · wind measured after the game (replay)" };
   // Back light for the tile run charts (Michael 2026-11-16): each signal's 95% ROI interval from the audit/study tables above, or null if untested.
   function roiBand(t) {
     t = memTab(t.id) || t;
+    if (t.id === "wx1") return null; // replay used a different wind (measured after the game): no back light on the live tile chart
     const x = STUDY[t.id] || (AUDIT[t.id] && (t.opts ? AUDIT[t.id][RL.opt[t.id]] : AUDIT[t.id]));
     return x && x.lo != null && x.hi != null ? { lo: x.lo, hi: x.hi } : null;
   }
-  const NO_REPLAY = "No historical replay is loaded for this signal yet. The tile scores finished 2026 games on the forecast wind (last reading before kickoff). It has not been backtested.";
+  const NO_REPLAY = "No historical replay is loaded for this signal yet. The tile scores finished games on the wind reading taken about 20 minutes before kickoff, and starts with no record.";
   function auditLine(t) {
     const st = STUDY[t.id];
+    if (st && t.id === "wx1") return `<b>Replay on wind measured after the game</b><br>2025 weeks 1–18: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>This is not a test of the 20-minute reading, which has no record yet. Picked after seeing results.`;
     if (st && st.yrl) return `<b>Three-season replay</b> (${st.win})<br>${st.yrl.map((y, i) => `${y}: <b>${pc(st.yr[i])}</b> ROI`).join("<br>")}<br>All seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>Found on 2025 and 2026 weeks 1–10, so 2024 is the only season not used to find it. Picked after seeing results; the interval does not account for the many versions tried.`;
     if (st) return `<b>Late-yardage study replay</b> (2025 weeks 1–18 + 2026 weeks 1–10)<br>2025: <b>${pc(st.yr[0])}</b> ROI<br>2026: <b>${pc(st.yr[1])}</b> ROI<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.`;
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
@@ -767,7 +773,7 @@
     fhnl: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.FH, GP.NOLONG] },
     bl200: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.BL] },
     nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
-    wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Forecast wind, last reading before kickoff (~3 h out)" }] },
+    wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Wind reading about 20 minutes before kickoff" }] },
   };
   // Positions in the popup header, best ROI first (Michael 2026-11-18). The last one is the position to drop first and is not bold.
   // Order = each position's historical-replay ROI (2025 wk 2-18 + 2026 wk 2-10); see claude/late-yardage-by-position-2026-11-17.md
@@ -1203,7 +1209,7 @@
     const rows = playerRows(tabs, picked, false), live = liveHtml(tabs, picked) + doneHtml(tabs, picked);
     const lastV = sgView() === "last";
     const head = `<h3 class="sg-sec">${lastV ? `Still to play, week ${sgWk()}${picked.length ? ` · ${picked.length > 1 ? "fit all " + picked.length + " picked signals" : "fit this signal"}` : ""} (${rows.length})` : picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
-    if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : picked.length === 1 && picked[0] && picked[0].id === "wx1" ? "No upcoming open-air game has a forecast wind of 15+ mph right now. The forecast refreshes about every 3 hours until kickoff." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
+    if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : picked.length === 1 && picked[0] && picked[0].id === "wx1" ? "No open-air game has a wind reading of 15+ mph right now. WX1 reads the wind about 20 minutes before each kickoff, so players show up only in that last stretch before a game (you also get an alert)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
     const pages = Math.ceil(rows.length / PAGE), key = `bp|${sgWk() ?? ""}|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}|${tnfOn() ? "today" : ""}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
     (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
     let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
@@ -1348,7 +1354,7 @@
       if (p.pos === "QB" && mid === "pass_yds") { if (fb >= 10) hits.push("sp3"); if (fb <= -10) hits.push("sp4"); }
       if (fb <= -3 && fb >= -6.5 && (p.pos === "QB" || p.pos === "RB") && mid === "rush_yds") hits.push("sp5");
     }
-    // WX1: Under on QB passing yards, WR/TE/RB receptions and receiving yards in an open-air game with forecast wind of 15+ mph.
+    // WX1: Under on QB passing yards, WR/TE/RB receptions and receiving yards in an open-air game with a ~20-minute pre-kickoff wind reading of 15+ mph.
     const wind = obsWind(r.gid);
     if (wind != null && wind >= 15 && ((p.pos === "QB" && mid === "pass_yds") || (["WR", "TE", "RB"].includes(p.pos) && (mid === "rec" || mid === "rec_yds")))) hits.push("wx1");
     // Late-yardage indicators: receiving yards Under for WR/TE/RB after an Over of 40+ yards with a higher line this week.

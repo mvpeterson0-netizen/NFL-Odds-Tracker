@@ -45,6 +45,8 @@ jobs:
       site_changed: ${{ steps.run.outputs.site_changed }}
       two_hr_title: ${{ steps.run.outputs.two_hr_title }}
       two_hr_body: ${{ steps.run.outputs.two_hr_body }}
+      wx_title: ${{ steps.run.outputs.wx_title }}
+      wx_body: ${{ steps.run.outputs.wx_body }}
     steps:
       - uses: actions/checkout@v4
 
@@ -147,3 +149,18 @@ jobs:
           sleep 30  # give the Pages cache a moment to serve the new data
           curl -fsS -X POST -H "Title: $TITLE" -H "Tags: football" -H "Click: https://www.sharpstix.com/#/search" \
             --data-binary "$BODY" "https://ntfy.sh/$NTFY_TOPIC" > /dev/null && echo "two-hour alert sent"
+
+  # WX1 wind alert (2026-11-24; decided in pipeline/notify.py wind_run): the stored pre-kickoff wind is 15+ mph at an open-air game.
+  wind_alert:
+    needs: [update, deploy]
+    if: always() && needs.update.outputs.wx_title != '' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send the wind alert to Michael's ntfy
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TITLE: ${{ needs.update.outputs.wx_title }}
+          BODY: ${{ needs.update.outputs.wx_body }}
+        run: |
+          curl -fsS -X POST -H "Title: $TITLE" -H "Tags: wind_face" -H "Click: https://www.sharpstix.com/#/search/indicators" \
+            --data-binary "$BODY" "https://ntfy.sh/$NTFY_TOPIC" > /dev/null && echo "wind alert sent"
