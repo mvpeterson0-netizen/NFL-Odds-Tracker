@@ -146,6 +146,14 @@
     { id: "wx1", n: 36, page: "ind", side: "under", label: "WX1", short: () => "Outdoor game, wind 15+ mph at 20 min before kickoff",
       title: "Outdoor game, wind 15+ mph (read 20 min before kickoff) → pass yds, receptions or rec yds Under", why: "Strong wind may hold down the passing game, and the line may not price it in.",
       desc: () => `Bet a QB's <b>passing yards Under</b>, or a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b>, when both are true:<ul class="sg-ul"><li>The game is <b>outdoors</b> (an open-air stadium; domes and retractable roofs are left out).</li><li>The <b>wind is 15 mph or more</b>, read about <b>20 minutes before kickoff</b>.</li></ul><div class="sg-sub"><b>How it works:</b> about 20 minutes before each kickoff the app takes one wind reading for the stadium (a weather-model forecast for the kickoff hour) and keeps it. The players show here from then until kickoff, you get an alert, and the record is scored on that same reading. A game with no reading does not count. The 2025 results use the wind measured after each game, which can't be known before kickoff, so they are a replay, not a test of this version.</div>` },
+    // ---- Pooled-split indicators (2026-11-24, Michael): found in the all-player situational-splits study on 2024 + 2025 + 2026 wk 1-11 props.
+    // Picked after seeing all three seasons, so none of them is a clean out-of-sample test; tracked forward from the day they were added. Definitions are frozen. ----
+    { id: "gr1", n: 39, page: "ind", side: "under", label: "GR1", short: () => "Rushing Under on a natural grass field",
+      title: "Game on natural grass → QB or RB rushing yards Under", why: "Rushers may gain more on turf than on grass, and the line may not price the surface in.",
+      desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when the game is played on <b>natural grass</b>.<ul class="sg-ul"><li>The surface is set by the <b>home team's stadium</b>. In 2026 the turf teams are ${[...TURF26].filter((t) => t !== "LAR").join(", ")}; every other home stadium (including Buffalo's new one) is grass.</li><li><b>Neutral-site and international games are left out</b> (no fixed surface).</li></ul><div class="sg-sub"><b>Where it comes from:</b> in 2024 to 2026 week 11, QB and RB rushing-yards Unders hit more on grass than on turf (55.7% vs 50.7%). The turf side loses at the saved prices, but it is not a tile: only the grass Under is tracked. The surface list is typed in by hand (nflverse's own field is out of date for some stadiums), so check it if a stadium changes.</div>` },
+    { id: "sp6", n: 40, page: "ind", side: "under", label: "SP6", short: () => "Team a 6.5+ point underdog → rec yds Under",
+      title: "Team a 6.5+ point underdog → rec yds Under", why: "Same idea as SP1 with a lower bar: it includes every SP1 game plus the 6.5 to under 10 point underdogs.",
+      desc: () => `Bet a WR's, TE's or RB's <b>receiving yards Under</b> when his team is a <b>6.5+ point underdog</b> (the opponent is favored by 6.5 or more). ${SPREAD_NOTE}<div class="sg-sub"><b>Overlap with SP1:</b> SP1 is the 10+ point subset of these games, so the two tiles share many of the same players. The 6.5 to under 10 band alone is the weaker part of this rule in the replay, and by position it holds for TE and RB but not WR.</div>` },
   ];
   const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 1, fh: 2 }; // QBRu avg 25; CM1 TE; GS RB; SY 40+ catches; 1H NL // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
@@ -366,6 +374,14 @@
     const v = +raw;
     return Number.isFinite(v) ? v : null;
   }
+  // GR1 surface (Michael 2026-11-24): set by the home team's stadium (nflverse's surface field is stale for several stadiums). 2026: the 7 World Cup stadiums
+  // went back to turf; Buffalo's new stadium is natural grass. Neutral-site games have no fixed surface and never fire.
+  const TURF26 = new Set(["ATL", "CAR", "CIN", "DAL", "DET", "HOU", "IND", "LAC", "LA", "LAR", "MIN", "NE", "NO", "NYG", "NYJ", "SEA", "TEN"]);
+  function surfaceOf(gid) {
+    const g = D.games[gid];
+    if (!g || !g.home || g.loc === "Neutral") return null;
+    return TURF26.has(g.home) ? "turf" : "grass";
+  }
   const spreadTxt = (f) => (f > 0 ? `favored by ${num(f)}` : f < 0 ? `${num(-f)}-pt underdog` : "pick'em");
   const koMs = (c) => new Date(c.r.ko).getTime();
 
@@ -388,6 +404,10 @@
         const d = c.prev && c.prev.rd;
         cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, d ? `${d.rc} catches, ${num(c.pm.act, 0)} yds · 1st half ${num(d.h1, 0)} · longest ${num(d.lc, 0)}` : "—"];
         note = d ? `Last game: ${num(c.pm.act, 0)} yds vs ${num(pl)} line` : "";
+      } else if (ind && tab === "gr1") {
+        const st = (D.games[c.r.gid] && D.games[c.r.gid].stadium) || "";
+        cells = [`<b>${num(line)}</b>`, esc(st) || "Grass"];
+        note = `Natural grass${st ? " · " + esc(st) : ""}`;
       } else if (ind && tab === "wx1") {
         const wd = obsWind(c.r.gid);
         cells = [`<b>${num(line)}</b>`, `${num(wd, 0)} mph`];
@@ -414,7 +434,7 @@
     sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
     sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syc40: ["Line (last game → now)", "Last game"], syl45: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
     fhr30: ["Line (last game → now)", "Last game"], fhnl: ["Line (last game → now)", "Last game"], bl200: ["Line (last game → now)", "Last game"], nlu20: ["Line (last game → now)", "Last game"],
-    wx1: ["Line", "Wind"],
+    wx1: ["Line", "Wind"], gr1: ["Line", "Stadium"], sp6: ["Line", "Spread"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
   // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
@@ -682,6 +702,11 @@
   // The wind is the one measured AFTER the game (nflverse), so this is a replay, not a bet that could be placed. The tile's own record uses only the
   // stored ~20-minute pre-kickoff reading and starts empty.
   STUDY.wx1 = { rec: "225–160", roi: 10.2, lo: 0.1, hi: 19.9, yr: [6.5, 13.5], yrl: ["2024", "2025"], win: "2024 + 2025 · receiving yards · wind measured after the game (replay)" };
+  // GR1 / SP6 replay (2026-11-24, situational-splits study): data/history_graded props_2024.csv + props_2025.csv + the app's 2026 wk 1-11 lines, DraftKings main line (FanDuel
+  // fallback), 1 unit at the saved Under price, pushes refunded, week-cluster 95% interval (20,000 resamples of weeks). Both rules were found on these same three seasons.
+  const F_SPLIT = "Found in the situational-splits study on all three seasons, so no season is a clean out-of-sample test.";
+  STUDY.gr1 = { rec: "953–757", roi: 4.8, lo: 0.5, hi: 9.0, yr: [5.3, 1.6, 8.8], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · QB + RB rushing yards · neutral sites left out", found: F_SPLIT };
+  STUDY.sp6 = { rec: "693–523", roi: 7.6, lo: 1.1, hi: 13.9, yr: [2.5, 14.4, 4.8], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · WR + TE + RB receiving yards", found: F_SPLIT, approx: " The point spread is a closing-type number from nflverse." };
   // Three-season replay for the audit and indicator tiles (Michael 2026-11-24), same source as the SY tiles above: claude/three-season-rerun-2026-11-22.md and its ledger
   // CSV (2024 + 2025 + 2026 wk 1-11, DraftKings main line, 1 unit at the saved price, week-cluster 95% intervals). Shown in each tile's info popup in place of the
   // 2025 + 2026 wk 1-9 audit figures; the tile's rule, list and live record are untouched. Not here, because the 2024 pull had no passing or receptions lines and
@@ -740,6 +765,7 @@
 <symbol id="sgi-risef" viewBox="0 0 48 48"><rect x="5" y="5" width="38" height="38" rx="4" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.5"/><g stroke="currentColor" stroke-opacity=".3"><line x1="6" y1="14.5" x2="42" y2="14.5"/><line x1="6" y1="24" x2="42" y2="24"/><line x1="6" y1="33.5" x2="42" y2="33.5"/></g><rect x="8" y="33" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="17" y="27" width="7" height="13" rx="1.5" fill="currentColor"/><rect x="26" y="20" width="7" height="20" rx="1.5" fill="currentColor"/><rect x="35" y="13" width="7" height="27" rx="1.5" fill="currentColor"/></symbol>
 <symbol id="sgi-sfav" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="16" font-size="14" font-weight="500">−10</text><text x="24" y="28" font-size="11" opacity=".6">vs</text><text x="24" y="43" font-size="14" font-weight="500" opacity=".4">+10</text></g><ellipse cx="24" cy="11" rx="16" ry="8.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="sgi-sdog" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="16" font-size="14" font-weight="500" opacity=".4">−10</text><text x="24" y="28" font-size="11" opacity=".6">vs</text><text x="24" y="43" font-size="14" font-weight="500">+10</text></g><ellipse cx="24" cy="38" rx="16" ry="8.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="sgi-sdog65" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="15" font-size="11.5" font-weight="500" opacity=".4">−6.5</text><text x="24" y="27" font-size="10" opacity=".6">vs</text><text x="24" y="41" font-size="11.5" font-weight="500">+6.5</text></g><ellipse cx="24" cy="37" rx="18" ry="8.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="sgi-sband" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="17" font-size="14" font-weight="500">+3</text><text x="24" y="28" font-size="11" opacity=".6">to</text><text x="24" y="42" font-size="14" font-weight="500">+6.5</text></g><rect x="5" y="3" width="38" height="42" rx="10" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="sgi-field" viewBox="0 0 48 48"><rect x="5" y="10" width="38" height="28" rx="4" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.5"/><g stroke="currentColor" stroke-opacity=".35"><line x1="16" y1="11" x2="16" y2="37"/><line x1="27" y1="11" x2="27" y2="37"/><line x1="38" y1="11" x2="38" y2="37"/></g><line x1="11" y1="14" x2="11" y2="34" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="11" cy="24" r="3" fill="currentColor"/><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="14" y1="24" x2="23" y2="24"/><path d="M24 24l-4-3.5M24 24l-4 3.5"/><line x1="29" y1="24" x2="40" y2="24" stroke-opacity=".4" stroke-width="2" stroke-dasharray="2 3"/></g></symbol>
 <symbol id="sgi-fluke" viewBox="0 0 48 48"><line x1="6" y1="40" x2="42" y2="40" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/><rect x="10" y="30" width="11" height="10" rx="2" fill="currentColor" fill-opacity=".4"/><rect x="28" y="9" width="11" height="31" rx="2" fill="currentColor"/><line x1="6" y1="22" x2="42" y2="22" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2.5"/><path d="M33.5 15l-3 6h5l-3 6" fill="none" style="stroke:var(--sgi-bg)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
@@ -796,6 +822,8 @@
     fhnl: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.FH, GP.NOLONG] },
     bl200: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.BL] },
     nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
+    gr1: { bet: "Under · rushing · QB RB", g: () => [{ i: "field", c: "gr", l: "Natural grass field", s: "Home stadium has grass (neutral-site games left out)" }] },
+    sp6: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "sdog65", c: "gr", l: "Team underdog by 6.5+", s: "Opponent favored by 6.5 or more" }] },
     wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Wind reading about 20 minutes before kickoff" }] },
   };
   // Positions in the popup header, best ROI first (Michael 2026-11-18). The last one is the position to drop first and is not bold.
@@ -804,7 +832,7 @@
   const POS_ORDER = {
     sy25: ["TE", "RB", "WR"], synl: ["WR", "TE", "RB"], syc40: ["TE", "RB", "WR"], syl45: ["TE", "WR", "RB"], syypc: ["WR", "TE", "RB"], fhr30: ["RB", "TE", "WR"], fhnl: ["WR", "TE", "RB"],
     bl200: ["TE", "WR", "RB"], nlu20: ["RB", "TE", "WR"],
-    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"],
+    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"], gr1: ["RB", "QB"], sp6: ["TE", "RB", "WR"],
   };
   function betText(id, sg) {
     const rest = sg.bet.slice(sg.bet.indexOf(" ") + 1), po = POS_ORDER[id];
@@ -1376,7 +1404,10 @@
       if (fb <= -10 && ["WR", "TE", "RB"].includes(p.pos)) { if (mid === "rec_yds") hits.push("sp1"); if (mid === "rec") hits.push("sp2"); }
       if (p.pos === "QB" && mid === "pass_yds") { if (fb >= 10) hits.push("sp3"); if (fb <= -10) hits.push("sp4"); }
       if (fb <= -3 && fb >= -6.5 && (p.pos === "QB" || p.pos === "RB") && mid === "rush_yds") hits.push("sp5");
+      if (fb <= -6.5 && ["WR", "TE", "RB"].includes(p.pos) && mid === "rec_yds") hits.push("sp6"); // SP6: 6.5+ point underdog -> rec yds Under (SP1 is the 10+ subset)
     }
+    // GR1: Under on QB/RB rushing yards in a game on natural grass (home team's stadium; neutral-site games never fire).
+    if ((p.pos === "QB" || p.pos === "RB") && mid === "rush_yds" && surfaceOf(r.gid) === "grass") hits.push("gr1");
     // WX1: Under on QB passing yards, WR/TE/RB receptions and receiving yards in an open-air game with a ~20-minute pre-kickoff wind reading of 15+ mph.
     const wind = obsWind(r.gid);
     if (wind != null && wind >= 15 && ((p.pos === "QB" && mid === "pass_yds") || (["WR", "TE", "RB"].includes(p.pos) && (mid === "rec" || mid === "rec_yds")))) hits.push("wx1");
@@ -1579,7 +1610,8 @@
       case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syc40": case "syl45": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
       case "wx1": { const wd = obsWind(x.r.gid); return wd == null ? "" : `Wind ${num(wd, 0)} mph`; }
       case "qbch": return esc(x.note);
-      case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
+      case "gr1": { const st = D.games[x.r.gid] && D.games[x.r.gid].stadium; return st ? `Grass · ${esc(st)}` : "Grass"; }
+      case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": case "sp6": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
       case "cm1te": case "cm120": return `Line ${num(x.pl)} → ${line} · ${esc(x.note)}`;
       default: return "";
     }
