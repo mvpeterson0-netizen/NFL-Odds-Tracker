@@ -1287,7 +1287,7 @@
     if (picked.length) inner += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
-    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY (40+ catches, Line 45+, Fluke), 1H and BL-200 now live on Signals; SY-R25 and SY-NL stay here. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><div class="sg-scope ps-tabs" role="tablist" aria-label="Signals pages"><a class="gchip on" href="#/search" role="tab" aria-selected="true">Signals</a><a class="gchip" href="#/search/players" role="tab">Player signals</a></div>`;
+    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY (40+ catches, Line 45+, Fluke), 1H and BL-200 now live on Signals; SY-R25 and SY-NL stay here. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
     return `<section id="rl" data-page="${SGPAGE}">${head}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
@@ -1809,75 +1809,75 @@
   // 20+ props in a market and 6+ games on each side of the split), kept if p < 0.05 on Fisher's exact test of Over/Under rate in vs out of the situation.
   // FROZEN on 2026-11-24: the list, each definition and its side never change. By a label-shuffling test about 100 splits would clear p < 0.05 by chance on this
   // many tests, so this is a watch list, not a set of proven edges. Each signal's own forward record counts games from week 12 on (none were in the study).
-  // Row: [id, player id, name, pos, market, situation, side (o/u), hits in situation, games in situation, % same side in his other games, those other games, p]
+  // Row: [id, player id, name, pos, market, situation, side (o/u), hits in situation, games in situation, % same side in his other games, those other games, p, same-side hits in those other games]
   const PS_FIRST_WK = 12, PS_TOP = 20, PS_FROZEN = "2026-11-24";
   const PS_COND = { home: "Home game", turf: "Turf field", dome: "Dome or roof (closed or retractable)", early: "Sunday 1 pm ET game", late: "Sunday 4 pm ET game", prime: "Prime time (night game)",
     thursday: "Thursday night", monday: "Monday night", division: "Division game", favorite: "Team favored", big_dog: "Team a 6.5+ point underdog", short_rest: "Short rest (5 days or less)",
     off_bye: "Off a bye", high_total: "Game total 47+", cold: "Cold (40°F or lower, outdoors)", windy: "Wind 15+ mph (outdoors)", west_early_away: "West Coast team, 1 pm ET road game" };
   const PS = [
-    ["PS01", "00-0039880", "Malik Washington", "WR", "rec_yds", "division", "u", 10, 10, 36, 22, 0.0013],
-    ["PS02", "00-0034827", "DJ Moore", "WR", "rec_yds", "early", "o", 16, 23, 21, 19, 0.0023],
-    ["PS03", "00-0030279", "Keenan Allen", "WR", "rec_yds", "high_total", "o", 6, 6, 29, 24, 0.0029],
-    ["PS04", "00-0033293", "Aaron Jones Sr.", "RB", "rush_yds", "prime", "u", 9, 10, 34, 29, 0.0033],
-    ["PS05", "00-0039064", "Zay Flowers", "WR", "rec_yds", "prime", "u", 11, 15, 25, 28, 0.0035],
-    ["PS06", "00-0039067", "Rashee Rice", "WR", "rec_yds", "division", "u", 6, 7, 15, 13, 0.0044],
-    ["PS07", "00-0036554", "Nico Collins", "WR", "rec_yds", "early", "o", 15, 20, 21, 14, 0.0045],
-    ["PS08", "00-0030564", "DeAndre Hopkins", "WR", "rec_yds", "home", "o", 11, 17, 13, 15, 0.0046],
-    ["PS09", "00-0039064", "Zay Flowers", "WR", "rec_yds", "early", "o", 17, 21, 36, 22, 0.0051],
-    ["PS10", "00-0030279", "Keenan Allen", "WR", "rec_yds", "division", "o", 11, 13, 33, 27, 0.0057],
-    ["PS11", "00-0034827", "DJ Moore", "WR", "rec_yds", "late", "u", 7, 7, 43, 35, 0.0092],
-    ["PS12", "00-0037838", "Isaiah Likely", "TE", "rec_yds", "division", "o", 10, 14, 27, 26, 0.0093],
-    ["PS13", "00-0035228", "Kyler Murray", "QB", "rush_yds", "late", "u", 11, 16, 17, 12, 0.0093],
-    ["PS14", "00-0038129", "Cade Otton", "TE", "rec_yds", "turf", "u", 15, 18, 41, 22, 0.0097],
-    ["PS15", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "prime", "u", 5, 6, 20, 20, 0.0097],
-    ["PS16", "00-0033293", "Aaron Jones Sr.", "RB", "rush_yds", "early", "o", 15, 21, 28, 18, 0.0104],
-    ["PS17", "00-0039738", "Blake Corum", "RB", "rush_yds", "prime", "u", 10, 13, 26, 19, 0.0105],
-    ["PS18", "00-0037248", "James Cook III", "RB", "rush_yds", "home", "u", 13, 21, 20, 20, 0.0109],
-    ["PS19", "00-0039910", "Jayden Daniels", "QB", "rush_yds", "home", "o", 10, 15, 19, 16, 0.0113],
-    ["PS20", "00-0038558", "Darnell Washington", "TE", "rec_yds", "home", "o", 11, 14, 29, 17, 0.0113],
-    ["PS21", "00-0036407", "Jerry Jeudy", "WR", "rec_yds", "big_dog", "u", 12, 15, 38, 29, 0.0114],
-    ["PS22", "00-0037261", "Khalil Shakir", "WR", "rec_yds", "cold", "u", 7, 8, 32, 22, 0.0121],
-    ["PS23", "00-0033106", "Jared Goff", "QB", "rush_yds", "division", "u", 9, 11, 35, 26, 0.0128],
-    ["PS24", "00-0036554", "Nico Collins", "WR", "rec_yds", "division", "o", 10, 12, 36, 22, 0.0129],
-    ["PS25", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "favorite", "o", 13, 15, 36, 11, 0.0135],
-    ["PS26", "00-0033090", "Hunter Henry", "TE", "rec_yds", "home", "o", 15, 20, 35, 23, 0.0139],
-    ["PS27", "00-0037291", "Jalen Nailor", "WR", "rec_yds", "late", "u", 11, 12, 52, 31, 0.0171],
-    ["PS28", "00-0037291", "Jalen Nailor", "WR", "rec_yds", "big_dog", "u", 8, 8, 54, 35, 0.0175],
-    ["PS29", "00-0038979", "Cedric Tillman", "WR", "rec_yds", "division", "o", 6, 8, 17, 12, 0.0194],
-    ["PS30", "00-0038544", "Quentin Johnston", "WR", "rec_yds", "home", "u", 13, 20, 24, 17, 0.0202],
-    ["PS31", "00-0033857", "JuJu Smith-Schuster", "WR", "rec_yds", "prime", "o", 6, 9, 13, 15, 0.0215],
-    ["PS32", "00-0039338", "Brock Bowers", "TE", "rec_yds", "home", "u", 13, 18, 32, 19, 0.0217],
-    ["PS33", "00-0036223", "Jonathan Taylor", "RB", "rush_yds", "high_total", "u", 8, 11, 26, 19, 0.0227],
-    ["PS34", "00-0035676", "A.J. Brown", "WR", "rec_yds", "turf", "o", 9, 11, 33, 21, 0.0233],
-    ["PS35", "00-0038606", "Parker Washington", "WR", "rec_yds", "late", "o", 7, 7, 48, 23, 0.0242],
-    ["PS36", "00-0030061", "Zach Ertz", "TE", "rec_yds", "dome", "u", 6, 7, 32, 25, 0.0265],
-    ["PS37", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "dome", "o", 14, 17, 33, 9, 0.0277],
-    ["PS38", "00-0036322", "Justin Jefferson", "WR", "rec_yds", "favorite", "o", 14, 24, 21, 19, 0.0281],
-    ["PS39", "00-0032211", "Tyler Lockett", "WR", "rec_yds", "favorite", "o", 6, 7, 33, 21, 0.0286],
-    ["PS40", "00-0040583", "Woody Marks", "RB", "rush_yds", "favorite", "u", 9, 14, 11, 9, 0.0288],
-    ["PS41", "00-0039338", "Brock Bowers", "TE", "rec_yds", "turf", "o", 8, 10, 37, 27, 0.0293],
-    ["PS42", "00-0037838", "Isaiah Likely", "TE", "rec_yds", "dome", "u", 6, 6, 50, 34, 0.0295],
-    ["PS43", "00-0035228", "Kyler Murray", "QB", "rush_yds", "favorite", "u", 10, 15, 23, 13, 0.0296],
-    ["PS44", "00-0037247", "George Pickens", "WR", "rec_yds", "division", "u", 8, 12, 25, 28, 0.0297],
-    ["PS45", "00-0037741", "Jahan Dotson", "WR", "rec_yds", "division", "o", 8, 11, 31, 29, 0.0305],
-    ["PS46", "00-0036358", "CeeDee Lamb", "WR", "rec_yds", "turf", "o", 18, 27, 25, 12, 0.0346],
-    ["PS47", "00-0032764", "Derrick Henry", "RB", "rush_yds", "turf", "o", 9, 11, 41, 34, 0.0351],
-    ["PS48", "00-0036139", "Rico Dowdle", "RB", "rec_yds", "division", "u", 9, 12, 35, 23, 0.0354],
-    ["PS49", "00-0039150", "Bryce Young", "QB", "rush_yds", "big_dog", "o", 8, 12, 28, 25, 0.036],
-    ["PS50", "00-0038559", "Michael Wilson", "WR", "rec_yds", "high_total", "o", 10, 14, 32, 19, 0.0366],
-    ["PS51", "00-0040122", "Ashton Jeanty", "RB", "rec_yds", "dome", "o", 13, 18, 25, 8, 0.0384],
-    ["PS52", "00-0037525", "Jordan Mason", "RB", "rush_yds", "prime", "u", 7, 8, 41, 22, 0.0395],
-    ["PS53", "00-0039040", "De'Von Achane", "RB", "rec_yds", "turf", "u", 10, 12, 46, 24, 0.0399],
-    ["PS54", "00-0026498", "Matthew Stafford", "QB", "rush_yds", "dome", "u", 15, 16, 56, 9, 0.0403],
-    ["PS55", "00-0038621", "DeMario Douglas", "WR", "rec_yds", "favorite", "o", 10, 13, 38, 26, 0.0407],
-    ["PS56", "00-0033923", "Kareem Hunt", "RB", "rec_yds", "late", "u", 6, 6, 43, 14, 0.0419],
-    ["PS57", "00-0036875", "Rhamondre Stevenson", "RB", "rush_yds", "cold", "o", 7, 8, 41, 29, 0.0422],
-    ["PS58", "00-0039165", "Zach Charbonnet", "RB", "rush_yds", "division", "o", 9, 13, 32, 22, 0.0425],
-    ["PS59", "00-0036309", "Darnell Mooney", "WR", "rec_yds", "division", "o", 9, 13, 33, 27, 0.0458],
-    ["PS60", "00-0031236", "Brandin Cooks", "WR", "rec_yds", "favorite", "u", 5, 6, 27, 15, 0.0464],
-    ["PS61", "00-0034829", "Mike Gesicki", "TE", "rec_yds", "home", "o", 11, 16, 32, 22, 0.0472],
-    ["PS62", "00-0039424", "Devaughn Vele", "WR", "rec_yds", "turf", "u", 9, 13, 23, 13, 0.0472],
-    ["PS63", "00-0039851", "Drake Maye", "QB", "rush_yds", "cold", "o", 7, 9, 33, 27, 0.0491]
+    ["PS01", "00-0039880", "Malik Washington", "WR", "rec_yds", "division", "u", 10, 10, 36, 22, 0.0013, 8],
+    ["PS02", "00-0034827", "DJ Moore", "WR", "rec_yds", "early", "o", 16, 23, 21, 19, 0.0023, 4],
+    ["PS03", "00-0030279", "Keenan Allen", "WR", "rec_yds", "high_total", "o", 6, 6, 29, 24, 0.0029, 7],
+    ["PS04", "00-0033293", "Aaron Jones Sr.", "RB", "rush_yds", "prime", "u", 9, 10, 34, 29, 0.0033, 10],
+    ["PS05", "00-0039064", "Zay Flowers", "WR", "rec_yds", "prime", "u", 11, 15, 25, 28, 0.0035, 7],
+    ["PS06", "00-0039067", "Rashee Rice", "WR", "rec_yds", "division", "u", 6, 7, 15, 13, 0.0044, 2],
+    ["PS07", "00-0036554", "Nico Collins", "WR", "rec_yds", "early", "o", 15, 20, 21, 14, 0.0045, 3],
+    ["PS08", "00-0030564", "DeAndre Hopkins", "WR", "rec_yds", "home", "o", 11, 17, 13, 15, 0.0046, 2],
+    ["PS09", "00-0039064", "Zay Flowers", "WR", "rec_yds", "early", "o", 17, 21, 36, 22, 0.0051, 8],
+    ["PS10", "00-0030279", "Keenan Allen", "WR", "rec_yds", "division", "o", 11, 13, 33, 27, 0.0057, 9],
+    ["PS11", "00-0034827", "DJ Moore", "WR", "rec_yds", "late", "u", 7, 7, 43, 35, 0.0092, 15],
+    ["PS12", "00-0037838", "Isaiah Likely", "TE", "rec_yds", "division", "o", 10, 14, 27, 26, 0.0093, 7],
+    ["PS13", "00-0035228", "Kyler Murray", "QB", "rush_yds", "late", "u", 11, 16, 17, 12, 0.0093, 2],
+    ["PS14", "00-0038129", "Cade Otton", "TE", "rec_yds", "turf", "u", 15, 18, 41, 22, 0.0097, 9],
+    ["PS15", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "prime", "u", 5, 6, 20, 20, 0.0097, 4],
+    ["PS16", "00-0033293", "Aaron Jones Sr.", "RB", "rush_yds", "early", "o", 15, 21, 28, 18, 0.0104, 5],
+    ["PS17", "00-0039738", "Blake Corum", "RB", "rush_yds", "prime", "u", 10, 13, 26, 19, 0.0105, 5],
+    ["PS18", "00-0037248", "James Cook III", "RB", "rush_yds", "home", "u", 13, 21, 20, 20, 0.0109, 4],
+    ["PS19", "00-0039910", "Jayden Daniels", "QB", "rush_yds", "home", "o", 10, 15, 19, 16, 0.0113, 3],
+    ["PS20", "00-0038558", "Darnell Washington", "TE", "rec_yds", "home", "o", 11, 14, 29, 17, 0.0113, 5],
+    ["PS21", "00-0036407", "Jerry Jeudy", "WR", "rec_yds", "big_dog", "u", 12, 15, 38, 29, 0.0114, 11],
+    ["PS22", "00-0037261", "Khalil Shakir", "WR", "rec_yds", "cold", "u", 7, 8, 32, 22, 0.0121, 7],
+    ["PS23", "00-0033106", "Jared Goff", "QB", "rush_yds", "division", "u", 9, 11, 35, 26, 0.0128, 9],
+    ["PS24", "00-0036554", "Nico Collins", "WR", "rec_yds", "division", "o", 10, 12, 36, 22, 0.0129, 8],
+    ["PS25", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "favorite", "o", 13, 15, 36, 11, 0.0135, 4],
+    ["PS26", "00-0033090", "Hunter Henry", "TE", "rec_yds", "home", "o", 15, 20, 35, 23, 0.0139, 8],
+    ["PS27", "00-0037291", "Jalen Nailor", "WR", "rec_yds", "late", "u", 11, 12, 52, 31, 0.0171, 16],
+    ["PS28", "00-0037291", "Jalen Nailor", "WR", "rec_yds", "big_dog", "u", 8, 8, 54, 35, 0.0175, 19],
+    ["PS29", "00-0038979", "Cedric Tillman", "WR", "rec_yds", "division", "o", 6, 8, 17, 12, 0.0194, 2],
+    ["PS30", "00-0038544", "Quentin Johnston", "WR", "rec_yds", "home", "u", 13, 20, 24, 17, 0.0202, 4],
+    ["PS31", "00-0033857", "JuJu Smith-Schuster", "WR", "rec_yds", "prime", "o", 6, 9, 13, 15, 0.0215, 2],
+    ["PS32", "00-0039338", "Brock Bowers", "TE", "rec_yds", "home", "u", 13, 18, 32, 19, 0.0217, 6],
+    ["PS33", "00-0036223", "Jonathan Taylor", "RB", "rush_yds", "high_total", "u", 8, 11, 26, 19, 0.0227, 5],
+    ["PS34", "00-0035676", "A.J. Brown", "WR", "rec_yds", "turf", "o", 9, 11, 33, 21, 0.0233, 7],
+    ["PS35", "00-0038606", "Parker Washington", "WR", "rec_yds", "late", "o", 7, 7, 48, 23, 0.0242, 11],
+    ["PS36", "00-0030061", "Zach Ertz", "TE", "rec_yds", "dome", "u", 6, 7, 32, 25, 0.0265, 8],
+    ["PS37", "00-0038618", "Xavier Hutchinson", "WR", "rec_yds", "dome", "o", 14, 17, 33, 9, 0.0277, 3],
+    ["PS38", "00-0036322", "Justin Jefferson", "WR", "rec_yds", "favorite", "o", 14, 24, 21, 19, 0.0281, 4],
+    ["PS39", "00-0032211", "Tyler Lockett", "WR", "rec_yds", "favorite", "o", 6, 7, 33, 21, 0.0286, 7],
+    ["PS40", "00-0040583", "Woody Marks", "RB", "rush_yds", "favorite", "u", 9, 14, 11, 9, 0.0288, 1],
+    ["PS41", "00-0039338", "Brock Bowers", "TE", "rec_yds", "turf", "o", 8, 10, 37, 27, 0.0293, 10],
+    ["PS42", "00-0037838", "Isaiah Likely", "TE", "rec_yds", "dome", "u", 6, 6, 50, 34, 0.0295, 17],
+    ["PS43", "00-0035228", "Kyler Murray", "QB", "rush_yds", "favorite", "u", 10, 15, 23, 13, 0.0296, 3],
+    ["PS44", "00-0037247", "George Pickens", "WR", "rec_yds", "division", "u", 8, 12, 25, 28, 0.0297, 7],
+    ["PS45", "00-0037741", "Jahan Dotson", "WR", "rec_yds", "division", "o", 8, 11, 31, 29, 0.0305, 9],
+    ["PS46", "00-0036358", "CeeDee Lamb", "WR", "rec_yds", "turf", "o", 18, 27, 25, 12, 0.0346, 3],
+    ["PS47", "00-0032764", "Derrick Henry", "RB", "rush_yds", "turf", "o", 9, 11, 41, 34, 0.0351, 14],
+    ["PS48", "00-0036139", "Rico Dowdle", "RB", "rec_yds", "division", "u", 9, 12, 35, 23, 0.0354, 8],
+    ["PS49", "00-0039150", "Bryce Young", "QB", "rush_yds", "big_dog", "o", 8, 12, 28, 25, 0.036, 7],
+    ["PS50", "00-0038559", "Michael Wilson", "WR", "rec_yds", "high_total", "o", 10, 14, 32, 19, 0.0366, 6],
+    ["PS51", "00-0040122", "Ashton Jeanty", "RB", "rec_yds", "dome", "o", 13, 18, 25, 8, 0.0384, 2],
+    ["PS52", "00-0037525", "Jordan Mason", "RB", "rush_yds", "prime", "u", 7, 8, 41, 22, 0.0395, 9],
+    ["PS53", "00-0039040", "De'Von Achane", "RB", "rec_yds", "turf", "u", 10, 12, 46, 24, 0.0399, 11],
+    ["PS54", "00-0026498", "Matthew Stafford", "QB", "rush_yds", "dome", "u", 15, 16, 56, 9, 0.0403, 5],
+    ["PS55", "00-0038621", "DeMario Douglas", "WR", "rec_yds", "favorite", "o", 10, 13, 38, 26, 0.0407, 10],
+    ["PS56", "00-0033923", "Kareem Hunt", "RB", "rec_yds", "late", "u", 6, 6, 43, 14, 0.0419, 6],
+    ["PS57", "00-0036875", "Rhamondre Stevenson", "RB", "rush_yds", "cold", "o", 7, 8, 41, 29, 0.0422, 12],
+    ["PS58", "00-0039165", "Zach Charbonnet", "RB", "rush_yds", "division", "o", 9, 13, 32, 22, 0.0425, 7],
+    ["PS59", "00-0036309", "Darnell Mooney", "WR", "rec_yds", "division", "o", 9, 13, 33, 27, 0.0458, 9],
+    ["PS60", "00-0031236", "Brandin Cooks", "WR", "rec_yds", "favorite", "u", 5, 6, 27, 15, 0.0464, 4],
+    ["PS61", "00-0034829", "Mike Gesicki", "TE", "rec_yds", "home", "o", 11, 16, 32, 22, 0.0472, 7],
+    ["PS62", "00-0039424", "Devaughn Vele", "WR", "rec_yds", "turf", "u", 9, 13, 23, 13, 0.0472, 3],
+    ["PS63", "00-0039851", "Drake Maye", "QB", "rush_yds", "cold", "o", 7, 9, 33, 27, 0.0491, 9]
   ];
   const PS_DIV = { BUF: "AE", MIA: "AE", NE: "AE", NYJ: "AE", BAL: "AN", CIN: "AN", CLE: "AN", PIT: "AN", HOU: "AS", IND: "AS", JAX: "AS", TEN: "AS", DEN: "AW", KC: "AW", LV: "AW", LAC: "AW",
     DAL: "NE", NYG: "NE", PHI: "NE", WAS: "NE", CHI: "NN", DET: "NN", GB: "NN", MIN: "NN", ATL: "NS", CAR: "NS", NO: "NS", TB: "NS", ARI: "NW", LA: "NW", LAR: "NW", SF: "NW", SEA: "NW" };
@@ -2017,11 +2017,11 @@
       return `<div class="rlrow sg-pr ps-row ${fire ? "ps-fire" : "ps-off"}"><div class="rlhead">${fire ? `<input type="checkbox" class="rl-ck" data-psck="${esc(key)}" aria-label="Select ${esc(s[2])} ${esc(label)} ${s[6] === "o" ? "Over" : "Under"}" ${sel.has(key) ? "checked" : ""} ${bk ? "" : "disabled"}>` : ""}${link}
         <span class="rlstat">${esc(label)}</span><span class="chip rl-side ${side}">${s[6] === "o" ? "Over" : "Under"}${x.cur ? " " + num(x.cur.line) : ""}</span></div>
         <div class="sg-m"><span class="small"><b>${esc(PS_COND[s[5]])}</b></span><span class="muted small">${esc(s[0])} · p ${s[11]}</span></div>
-        <div class="sg-m"><span class="muted small">Found: ${s[7]} of ${s[8]} went ${s[6] === "o" ? "Over" : "Under"} in this situation vs ${s[9]}% in his other ${s[10]} games</span></div>
+        <div class="sg-m"><span class="muted small">Found: ${s[7]} of ${s[8]} went ${s[6] === "o" ? "Over" : "Under"} in this situation vs ${s[9]}% (${s[12]}–${s[10] - s[12]}) in his other ${s[10]} games</span></div>
         <div class="sg-m">${status}<span class="muted small">Since week ${PS_FIRST_WK}: ${rec.n ? `${rec.W}–${rec.L} · ${rec.U >= 0 ? "+" : "−"}${Math.abs(100 * rec.U / rec.n).toFixed(1)}% ROI` : "no games yet"}</span></div></div>`;
     };
-    const tabs = `<div class="sg-scope ps-tabs" role="tablist" aria-label="Signals pages"><a class="gchip" href="#/search" role="tab">Signals</a><a class="gchip on" href="#/search/players" role="tab" aria-selected="true">Player signals</a></div>`;
-    const intro = `<p class="small">${PS.length} player-specific splits found in the 2026-11-24 study of rushing and receiving yards, 2024 to 2026 week 11. They are frozen: the list and each definition never change, and each one's record below counts only games from week ${PS_FIRST_WK} on. <b>Treat this as a watch list.</b> A label-shuffling test says about 100 splits this strong would show up by pure chance, so most of these are probably noise. The top ${PS_TOP} by strength are shown; the rest are under "Show all ${PS.length}".</p>`;
+    const tabs = "";
+    const intro = `<p class="small"><a href="#/search">← Signals</a> · ${PS.length} player-specific splits found in the 2026-11-24 study of rushing and receiving yards, 2024 to 2026 week 11. They are frozen: the list and each definition never change, and each one's record below counts only games from week ${PS_FIRST_WK} on. <b>Treat this as a watch list.</b> A label-shuffling test says about 100 splits this strong would show up by pure chance, so most of these are probably noise. The top ${PS_TOP} by strength are shown; the rest are under "Show all ${PS.length}".</p>`;
     const ctl = `<div class="sg-scope"><button type="button" class="gchip ${onlyFire ? "on" : ""}" data-psfire="1">Firing in week ${upWk} only (${all ? fires.length : nTop})</button><button type="button" class="gchip ${all ? "on" : ""}" data-psmore="1">${all ? `Showing all ${PS.length}` : `Show all ${PS.length}`}</button></div>`;
     const head = `<h3 class="sg-sec">${all ? `All ${PS.length} signals` : `Top ${PS_TOP} signals`} · ${all ? fires.length : nTop} firing in week ${upWk}${all ? "" : ` (${fires.length} of all ${PS.length})`}</h3>`;
     const rows = list.length ? list.map(rowH).join("") : `<p class="muted">None of these fire in week ${upWk}.</p>`;
