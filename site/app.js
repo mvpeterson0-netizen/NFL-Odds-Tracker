@@ -1016,7 +1016,7 @@ function render() {
   document.body.classList.toggle("rv-on", tab === "review"); // review queue: site footer shrinks to one line (review.js)
   document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "review" ? "picks" : tab)));
   // More+ menu (Results, Defense and the three Guide pages): the button is lit while one of those pages is open.
-  const moreTab = ({ leads: "leads", defense: "defense", guide: "guide", log: "guide", slots: "slots", account: "account" })[tab];
+  const moreTab = ({ leads: "leads", defense: "defense", team: "team", guide: "guide", log: "guide", slots: "slots", account: "account" })[tab];
   document.querySelectorAll("#more-menu a").forEach((a) => a.classList.toggle("on", a.dataset.tab === moreTab));
   const mb = document.getElementById("more-btn"); if (mb) mb.classList.toggle("on", !!moreTab);
   closeMore();
@@ -1037,6 +1037,10 @@ function render() {
   else if (tab === "slots") app.innerHTML = viewSlotsPage();
   else if (tab === "guide" || tab === "log") app.innerHTML = viewGuide();
   else if (tab === "defense") app.innerHTML = viewDefense();
+  else if (tab === "team") {
+    try { app.innerHTML = window.STIX_TEAM ? window.STIX_TEAM.view() : `<p class="pad">Team view didn't load. Try refreshing.</p>`; }
+    catch (e) { console.error(e); app.innerHTML = `<p class="pad">Team view hit an error. Try refreshing.</p>`; }
+  }
   else if (tab === "arb") {
     try { app.innerHTML = window.STIX_BOOKS ? window.STIX_BOOKS.view() : `<p class="pad">Arbitrage didn't load. Try refreshing.</p>`; }
     catch (e) { console.error(e); app.innerHTML = `<p class="pad">Arbitrage hit an error. Try refreshing.</p>`; }
