@@ -394,3 +394,67 @@ def two_hour_run(log: list[str]) -> bool:
     write_json(TWO_HR_STATE, {"alerted": {k: v for k, v in alerted.items() if v.get("ko", "9999") > stamp}})
     log.append(f"two-hour alert: queued for {', '.join(x['gid'] for x in due)} (sent after deploy)")
     return True
+
+
+# ---------- WX1 wind alert (Michael 2026-11-24) ----------
+# The pipeline stores one wind reading about 20 minutes before each kickoff (weather.py, pre_* columns). When an open-air game's
+# reading is 15 mph or more, Michael gets one ntfy so he can open the hidden Indicators page and see the WX1 players.
+# Like the 2-hour alert, this only decides and records; the workflow's "wind_alert" job sends it after the new data is deployed.
+# Retractable roofs are left out (roof position is unknown). Only Michael's ntfy (NTFY_TOPIC). State: data/wind_alert_state.json.
+WIND_STATE = DATA / "wind_alert_state.json"
+WIND_URL = "https://www.sharpstix.com/#/search/indicators"
+WIND_MPH = 15.0
+
+
+def wind_due(wx_rows: dict, games: dict, alerted: dict, now) -> list[dict]:
+    """Upcoming open-air games whose pre-kickoff wind reading is WIND_MPH or more and that have not been alerted yet."""
+    out = []
+    for gid, w in wx_rows.items():
+        g = games.get(gid)
+        if not g or gid in alerted or w.get("roof") != "open":
+            continue
+        try:
+            mph = float(w.get("pre_wind_mph", ""))
+        except (TypeError, ValueError):
+            continue
+        ko = parse_iso(g.get("ko", ""))
+        if not ko or ko <= now or mph < WIND_MPH:
+            continue
+        out.append({"gid": gid, "ko": ko, "mph": mph, "read": parse_iso(w.get("pre_fetched_utc", "")),
+                    "away": g.get("away", ""), "home": g.get("home", "")})
+    return sorted(out, key=lambda x: (x["ko"], x["gid"]))
+
+
+def wind_message(due: list[dict]) -> tuple[str, str]:
+    t = lambda x: x.astimezone(CT).strftime("%-I:%M %p")
+    games = ", ".join(f"{_abbr(x['away'])} @ {_abbr(x['home'])} {x['mph']:g} mph" for x in due)
+    body = "; ".join(f"{_abbr(x['away'])} @ {_abbr(x['home'])} (kickoff {t(x['ko'])} CT): wind {x['mph']:g} mph"
+                     + (f", read {t(x['read'])} CT" if x["read"] else "") for x in due)
+    return f"Stix WX1: wind 15+ at {games}", body + ". Open Indicators > WX1 to see the players."
+
+
+def wind_run(log: list[str]) -> bool:
+    """Returns True when the state file changed. Writes the alert for the workflow's wind_alert job to GITHUB_OUTPUT."""
+    from .weather import load as load_weather
+    gh_out = os.environ.get("GITHUB_OUTPUT")
+    if not os.environ.get("NTFY_TOPIC", "").strip() or not gh_out:
+        return False  # nowhere to send it from: do nothing, record nothing
+    d = read_json(SITE / "data" / "data.json", None)
+    if not d:
+        return False
+    now = utcnow()
+    state = read_json(WIND_STATE, {}) or {}
+    alerted = state.get("alerted", {})
+    due = wind_due(load_weather(), d.get("games", {}), alerted, now)
+    if not due:
+        return False
+    title, body = wind_message(due)
+    clean = lambda s: re.sub(r"[^\x20-\x7e]", " ", s)  # one line, ASCII (ntfy header values must be ASCII)
+    with open(gh_out, "a") as f:
+        f.write(f"wx_title={clean(title)}\nwx_body={clean(body)}\n")
+    stamp = iso(now)
+    for x in due:
+        alerted[x["gid"]] = {"utc": stamp, "ko": iso(x["ko"]), "mph": x["mph"]}
+    write_json(WIND_STATE, {"alerted": {k: v for k, v in alerted.items() if v.get("ko", "9999") > stamp}})
+    log.append(f"wind alert: queued for {', '.join(x['gid'] for x in due)} (sent after deploy)")
+    return True

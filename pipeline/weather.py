@@ -3,6 +3,8 @@
 For every outdoor or retractable-roof game:
 - Forecast: refreshed every few hours from 16 days out until kickoff, then frozen.
   This is the weather picture the market had when lines were set.
+- Pre-kickoff reading (Michael 2026-11-24): one more forecast read about 20 minutes before kickoff, stored once in the
+  pre_* columns and never changed afterwards. The WX1 indicator and its alert use only this reading.
 - Observed: once the game is old enough for Open-Meteo's historical archive
   (about 5 days delay), the observed values are fetched once and kept.
 
@@ -26,9 +28,14 @@ WEATHER_PATH = DATA / "weather.csv"
 FIELDS = ["game_id", "stadium", "roof",
           "fc_fetched_utc", "fc_temp_f", "fc_wind_mph", "fc_gust_mph", "fc_precip_in", "fc_precip_prob",
           "obs_fetched_utc", "obs_temp_f", "obs_wind_mph", "obs_gust_mph", "obs_precip_in",
-          "note"]
+          "note",
+          "pre_fetched_utc", "pre_temp_f", "pre_wind_mph", "pre_gust_mph", "pre_precip_in"]
 FORECAST_HORIZON = timedelta(days=15)  # Open-Meteo allows end_date up to ~16 days out
 FORECAST_REFRESH = timedelta(hours=3)
+# Pre-kickoff reading window: the first run 22 to 3 minutes before kickoff takes it (the workflow runs about every 5 minutes, so
+# that is usually 17 to 22 minutes out; the reading's own time is stored in pre_fetched_utc). If every run in the window fails
+# or is skipped, the game simply has no pre-kickoff reading and WX1 does not fire for it.
+PRE_FROM, PRE_TO = timedelta(minutes=22), timedelta(minutes=3)
 ARCHIVE_DELAY = timedelta(days=6)
 ARCHIVE_RETRY = timedelta(hours=20)
 GAME_HOURS = 4  # kickoff hour + next 3 hours
@@ -112,6 +119,11 @@ def _window(series, ko):
             "precip_prob": f(max(probs)) if probs else ""}
 
 
+def pre_due(ko, now, row) -> bool:
+    """True when this game still needs its pre-kickoff reading and now is inside the 22-to-3-minutes-before window."""
+    return not row.get("pre_wind_mph") and ko - PRE_FROM <= now < ko - PRE_TO
+
+
 def refresh(games, log) -> bool:
     """Update data/weather.csv. Returns True if anything changed. Never raises."""
     try:
@@ -125,7 +137,7 @@ def _refresh(games, log) -> bool:
     now = utcnow()
     old = {r["game_id"]: r for r in read_csv(WEATHER_PATH)}
     rows = {gid: dict(r) for gid, r in old.items()}
-    fc_due, obs_due = {}, {}
+    fc_due, obs_due, pre_due_by = {}, {}, {}
     for g in games:
         ko = parse_iso(g.get("kickoff_utc", ""))
         if ko is None:
@@ -141,6 +153,8 @@ def _refresh(games, log) -> bool:
         r["roof"], r["note"] = roof, ""
         if roof == "dome":
             continue
+        if pre_due(ko, now, r):
+            pre_due_by.setdefault(stadium, []).append((g, ko))
         if now < ko <= now + FORECAST_HORIZON:
             last = parse_iso(r.get("fc_fetched_utc", ""))
             if last is None or now - last >= FORECAST_REFRESH:
@@ -152,17 +166,17 @@ def _refresh(games, log) -> bool:
 
     calls = errors = 0
     dead = False
-    for kind, due, url in (("fc", fc_due, FORECAST_URL), ("obs", obs_due, ARCHIVE_URL)):
+    for kind, due, url in (("pre", pre_due_by, FORECAST_URL), ("fc", fc_due, FORECAST_URL), ("obs", obs_due, ARCHIVE_URL)):
         for stadium, items in due.items():
             if dead:
                 break
             lat, lon, _ = STADIUMS[stadium]
             start = min(ko for _, ko in items)
             end = max(ko for _, ko in items) + timedelta(hours=GAME_HOURS)
-            if kind == "fc":
+            if kind in ("fc", "pre"):
                 end = min(end, now + FORECAST_HORIZON)
             try:
-                series = _fetch(url, lat, lon, start, end, forecast=(kind == "fc"))
+                series = _fetch(url, lat, lon, start, end, forecast=(kind != "obs"))
                 calls += 1
             except Exception as e:
                 errors += 1
@@ -178,7 +192,7 @@ def _refresh(games, log) -> bool:
                 if w is None:
                     continue  # not available yet; retried later
                 for k, v in w.items():
-                    if kind == "obs" and k == "precip_prob":
+                    if kind in ("obs", "pre") and k == "precip_prob":
                         continue
                     r[f"{kind}_{k}"] = v
 

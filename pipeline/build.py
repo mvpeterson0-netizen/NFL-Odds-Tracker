@@ -797,7 +797,8 @@ def build(log):
         if not w:
             return None
         keys = ["roof", "note", "fc_fetched_utc", "fc_temp_f", "fc_wind_mph", "fc_gust_mph", "fc_precip_in",
-                "fc_precip_prob", "obs_temp_f", "obs_wind_mph", "obs_gust_mph", "obs_precip_in"]
+                "fc_precip_prob", "obs_temp_f", "obs_wind_mph", "obs_gust_mph", "obs_precip_in",
+                "pre_fetched_utc", "pre_temp_f", "pre_wind_mph", "pre_gust_mph", "pre_precip_in"]
         return {k: w.get(k, "") for k in keys if w.get(k, "") != ""}
 
     caps_all = read_csv(CAPTURES_PATH)
