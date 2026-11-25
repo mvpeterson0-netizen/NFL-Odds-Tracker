@@ -676,12 +676,12 @@
     fhnl: { rec: "305–233", roi: 7.1, lo: -1.1, hi: 14.8, yr: [-7.6, 11.9, 23.3], yrl: Y3, win: W3 }, bl200: { rec: "176–149", roi: 2.4, lo: -8.6, hi: 12.4, yr: [-20.6, 6.6, 26.0], yrl: Y3, win: W3 },
     nlu20: { rec: "158–147", roi: -2.2, lo: -14.3, hi: 8.7, yr: [-28.5, 4.2, 26.3], yrl: Y3, win: W3 },
   };
-  // WX1 replay (2026-11-24, research/signal_stacks props: 2025 weeks 1-18, nflverse post-game wind): Under on QB pass yds and WR/TE/RB rec and rec yds,
-  // open-air games with wind of 15+ mph, 1 unit at the saved price (kickoff-3h archive snapshot), pushes refunded, 19 games over 9 weeks, week-cluster
-  // 95% interval (20,000 resamples of weeks). The wind is the one measured AFTER the game, so this is a replay, not a bet that could be placed.
-  // The tile's own record uses only the stored ~20-minute pre-kickoff reading and starts empty.
-  // 2024 added 2026-11-24 (three-season rerun): the 2024 pull had rushing and receiving yards only, so 2024 is receiving yards props only; no 2026 wind is published yet.
-  STUDY.wx1 = { rec: "361–245", roi: 12.1, lo: 2.3, hi: 19.9, yr: [3.0, 15.5], yrl: ["2024", "2025"], win: "2024 + 2025 wk 1–18 · wind measured after the game (replay)" };
+  // WX1 replay (2026-11-24, data/history_graded props_2024.csv + props_2025.csv, nflverse results): Under on WR/TE/RB receiving yards, open-air games with
+  // wind of 15+ mph, 1 unit at the saved price (kickoff-3h snapshot), pushes refunded, 35 games, week-cluster 95% interval (20,000 resamples of weeks).
+  // Receiving yards only because the 2024 archive has no receptions or passing lines (2025 alone on all three markets: 270-170, +15.5%).
+  // The wind is the one measured AFTER the game (nflverse), so this is a replay, not a bet that could be placed. The tile's own record uses only the
+  // stored ~20-minute pre-kickoff reading and starts empty.
+  STUDY.wx1 = { rec: "225–160", roi: 10.2, lo: 0.1, hi: 19.9, yr: [6.5, 13.5], yrl: ["2024", "2025"], win: "2024 + 2025 · receiving yards · wind measured after the game (replay)" };
   // Three-season replay for the audit and indicator tiles (Michael 2026-11-24), same source as the SY tiles above: claude/three-season-rerun-2026-11-22.md and its ledger
   // CSV (2024 + 2025 + 2026 wk 1-11, DraftKings main line, 1 unit at the saved price, week-cluster 95% intervals). Shown in each tile's info popup in place of the
   // 2025 + 2026 wk 1-9 audit figures; the tile's rule, list and live record are untouched. Not here, because the 2024 pull had no passing or receptions lines and
@@ -712,7 +712,7 @@
   const NO_REPLAY = "No historical replay is loaded for this signal yet. The tile scores finished games on the wind reading taken about 20 minutes before kickoff, and starts with no record.";
   function auditLine(t) {
     const st = STUDY[t.id] || r3(t);
-    if (st && t.id === "wx1") return `<b>Replay on wind measured after the game</b> (2024 + 2025 weeks 1–18)<br>${st.yrl.map((y, i) => `${y}: <b>${pc(st.yr[i])}</b> ROI`).join("<br>")}<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>Found on 2025, so 2024 was not used to find it. The 2024 pull had rushing and receiving yards only, so 2024 is receiving-yards props; no 2026 wind is published yet. This is not a test of the 20-minute reading, which has no record yet. Picked after seeing results.`;
+    if (st && t.id === "wx1") return `<b>Replay on wind measured after the game</b><br>2024 + 2025, receiving yards Under (WR/TE/RB): <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>. 2024 alone: ${pc(st.yr[0])} (interval spans zero); 2025 alone: ${pc(st.yr[1])}.<br>Receptions and passing yards have no 2024 lines (2025 alone, all three markets: 270–170, +15.5%). This is not a test of the 20-minute reading, which has no record yet. Picked after seeing results.`;
     if (st && st.yrl) return `<b>Three-season replay</b> (${st.win})<br>${st.yrl.map((y, i) => `${y}: <b>${pc(st.yr[i])}</b> ROI`).join("<br>")}<br>All seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.<br>${st.found || "Found on 2025 and 2026 weeks 1–10, so 2024 is the only season not used to find it."}${st.approx || ""} Picked after seeing results; the interval does not account for the many versions tried.`;
     if (st) return `<b>Late-yardage study replay</b> (2025 weeks 1–18 + 2026 weeks 1–10)<br>2025: <b>${pc(st.yr[0])}</b> ROI<br>2026: <b>${pc(st.yr[1])}</b> ROI<br>Both seasons: <b>${st.rec}</b>, <b>${pc(st.roi)}</b> ROI, 95% interval <b>${pc(st.lo)} to ${pc(st.hi)}</b>.`;
     const a = AUDIT[t.id], x = a && (t.opts ? a[RL.opt[t.id]] : a);
