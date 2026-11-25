@@ -1,0 +1,1764 @@
+{
+ "downloaded_utc": "2026-11-23T02:01:38Z",
+ "event_id": "d91d050a1528e77a870d681bbe42f514",
+ "game_id": "2024_17_DAL_PHI",
+ "game_type": "REG",
+ "markets": [
+  "player_rush_yds",
+  "player_reception_yds"
+ ],
+ "requested_snapshot": "2024-12-29T15:00:00Z",
+ "response": {
+  "data": {
+   "away_team": "Dallas Cowboys",
+   "bookmakers": [
+    {
+     "key": "draftkings",
+     "last_update": "2024-12-29T14:54:58Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:56:04Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 70.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 42.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 34.5,
+         "price": -115
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:56:04Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 114.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 114.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "DraftKings"
+    },
+    {
+     "key": "williamhill_us",
+     "last_update": "2024-12-29T14:54:25Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:51:52Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 69.5,
+         "price": -133
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 69.5,
+         "price": -103
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 34.5,
+         "price": -121
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 34.5,
+         "price": -113
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 11.5,
+         "price": -113
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 11.5,
+         "price": -121
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 17.5,
+         "price": -121
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 15.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 15.5,
+         "price": -121
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -129
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -106
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 48.5,
+         "price": -117
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 48.5,
+         "price": -117
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:51:52Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 58.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 58.5,
+         "price": -121
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 112.5,
+         "price": -117
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 112.5,
+         "price": -117
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 10.5,
+         "price": -121
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 10.5,
+         "price": -113
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 17.5,
+         "price": -113
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 17.5,
+         "price": -121
+        }
+       ]
+      }
+     ],
+     "title": "Caesars"
+    },
+    {
+     "key": "fanduel",
+     "last_update": "2024-12-29T14:54:51Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:56:07Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 34.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 72.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 72.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 47.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 17.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:56:07Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 111.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 111.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 60.5,
+         "price": -110
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 10.5,
+         "price": -110
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 10.5,
+         "price": -110
+        }
+       ]
+      }
+     ],
+     "title": "FanDuel"
+    },
+    {
+     "key": "ballybet",
+     "last_update": "2024-12-29T14:55:12Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 15.5,
+         "price": -109
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 34.5,
+         "price": -117
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 40.5,
+         "price": -118
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 15.5,
+         "price": -117
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 46.5,
+         "price": -117
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 46.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 69.5,
+         "price": -117
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 49.5,
+         "price": 102
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 49.5,
+         "price": -132
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 143
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -195
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 99.5,
+         "price": 275
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 99.5,
+         "price": -435
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 24.5,
+         "price": 195
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 24.5,
+         "price": -278
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 74.5,
+         "price": 107
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 74.5,
+         "price": -139
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -385
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 255
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 24.5,
+         "price": 180
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 24.5,
+         "price": -250
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 24.5,
+         "price": -235
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 24.5,
+         "price": 165
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 49.5,
+         "price": 190
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 49.5,
+         "price": -275
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 49.5,
+         "price": -315
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 49.5,
+         "price": 220
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 10.5,
+         "price": -117
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 10.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:55:18Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 112.5,
+         "price": -113
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 112.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 59.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 9.5,
+         "price": -121
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 9.5,
+         "price": -108
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 99.5,
+         "price": -200
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 99.5,
+         "price": 148
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 49.5,
+         "price": -210
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 49.5,
+         "price": 150
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 74.5,
+         "price": 185
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 74.5,
+         "price": -265
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 124.5,
+         "price": 143
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 124.5,
+         "price": -195
+        }
+       ]
+      }
+     ],
+     "title": "Bally Bet"
+    },
+    {
+     "key": "betrivers",
+     "last_update": "2024-12-29T14:54:49Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:55:35Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 15.5,
+         "price": -109
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 34.5,
+         "price": -117
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 34.5,
+         "price": -112
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 40.5,
+         "price": -118
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 40.5,
+         "price": -110
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 15.5,
+         "price": -117
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 15.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 46.5,
+         "price": -117
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 46.5,
+         "price": -112
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 69.5,
+         "price": -117
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 69.5,
+         "price": -112
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 49.5,
+         "price": 102
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 49.5,
+         "price": -132
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 49.5,
+         "price": 143
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 49.5,
+         "price": -195
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 99.5,
+         "price": 275
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 99.5,
+         "price": -435
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 24.5,
+         "price": 195
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 24.5,
+         "price": -278
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 74.5,
+         "price": 107
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 74.5,
+         "price": -139
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 24.5,
+         "price": -385
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 24.5,
+         "price": 255
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 24.5,
+         "price": 180
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 24.5,
+         "price": -250
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 24.5,
+         "price": -235
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 24.5,
+         "price": 165
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 49.5,
+         "price": 190
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 49.5,
+         "price": -275
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 49.5,
+         "price": -315
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 49.5,
+         "price": 220
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 10.5,
+         "price": -117
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 10.5,
+         "price": -112
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:55:35Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 112.5,
+         "price": -113
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 112.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 59.5,
+         "price": -113
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 9.5,
+         "price": -121
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 9.5,
+         "price": -108
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 99.5,
+         "price": -200
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 99.5,
+         "price": 148
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 49.5,
+         "price": -210
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 49.5,
+         "price": 150
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 74.5,
+         "price": 185
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 74.5,
+         "price": -265
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 124.5,
+         "price": 143
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 124.5,
+         "price": -195
+        }
+       ]
+      }
+     ],
+     "title": "BetRivers"
+    },
+    {
+     "key": "fliff",
+     "last_update": "2024-12-29T14:55:12Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:55:57Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 67.5,
+         "price": -125
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 48.5,
+         "price": -125
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 48.5,
+         "price": -125
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -125
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 32.5,
+         "price": -125
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 16.5,
+         "price": -125
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 16.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 14.5,
+         "price": -130
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 14.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 11.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:55:57Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 114.5,
+         "price": -125
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 114.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 58.5,
+         "price": -125
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 58.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 17.5,
+         "price": -130
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 9.5,
+         "price": -125
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 9.5,
+         "price": -120
+        }
+       ]
+      }
+     ],
+     "title": "Fliff"
+    },
+    {
+     "key": "fanatics",
+     "last_update": "2024-12-29T14:55:32Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:55:28Z",
+       "outcomes": [
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 35.5,
+         "price": -105
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 35.5,
+         "price": -125
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 40.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 15.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 15.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 45.5,
+         "price": -125
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 45.5,
+         "price": -105
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 70.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 70.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 10.5,
+         "price": -125
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 10.5,
+         "price": -105
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 15.5,
+         "price": -125
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 15.5,
+         "price": -105
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "KaVontae Turpin",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Over",
+         "point": 20.5,
+         "price": -115
+        },
+        {
+         "description": "Jalen Tolbert",
+         "name": "Under",
+         "point": 20.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:55:28Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 60.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 110.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 110.5,
+         "price": -120
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 10.5,
+         "price": -115
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 10.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Fanatics"
+    },
+    {
+     "key": "betmgm",
+     "last_update": "2024-12-29T14:55:13Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:54:32Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 32.5,
+         "price": -120
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 32.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 67.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 67.5,
+         "price": -110
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -110
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -120
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 48.5,
+         "price": -115
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:54:32Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 114.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 114.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 17.5,
+         "price": -120
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "BetMGM"
+    },
+    {
+     "key": "espnbet",
+     "last_update": "2024-12-29T14:55:13Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:55:58Z",
+       "outcomes": [
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 69.5,
+         "price": -120
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 69.5,
+         "price": -110
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 49.5,
+         "price": 100
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 49.5,
+         "price": -130
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:55:58Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 99.5,
+         "price": -170
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 99.5,
+         "price": 135
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 59.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 59.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "ESPN BET"
+    },
+    {
+     "key": "hardrockbet",
+     "last_update": "2024-12-29T14:54:42Z",
+     "markets": [
+      {
+       "key": "player_reception_yds",
+       "last_update": "2024-12-29T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 11.5,
+         "price": -110
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 11.5,
+         "price": -120
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 14.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Over",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Brandin Cooks",
+         "name": "Under",
+         "point": 32.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Over",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "Jake Ferguson",
+         "name": "Under",
+         "point": 41.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Over",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "DeVonta Smith",
+         "name": "Under",
+         "point": 48.5,
+         "price": -115
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Over",
+         "point": 16.5,
+         "price": -120
+        },
+        {
+         "description": "Grant Calcaterra",
+         "name": "Under",
+         "point": 16.5,
+         "price": -110
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Over",
+         "point": 67.5,
+         "price": -115
+        },
+        {
+         "description": "AJ Brown",
+         "name": "Under",
+         "point": 67.5,
+         "price": -110
+        }
+       ]
+      },
+      {
+       "key": "player_rush_yds",
+       "last_update": "2024-12-29T14:55:24Z",
+       "outcomes": [
+        {
+         "description": "Rico Dowdle",
+         "name": "Over",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Rico Dowdle",
+         "name": "Under",
+         "point": 58.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Over",
+         "point": 114.5,
+         "price": -115
+        },
+        {
+         "description": "Saquon Barkley",
+         "name": "Under",
+         "point": 114.5,
+         "price": -115
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Over",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Kenny Pickett",
+         "name": "Under",
+         "point": 9.5,
+         "price": -115
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Over",
+         "point": 17.5,
+         "price": -110
+        },
+        {
+         "description": "Kenneth Gainwell",
+         "name": "Under",
+         "point": 17.5,
+         "price": -115
+        }
+       ]
+      }
+     ],
+     "title": "Hard Rock Bet"
+    }
+   ],
+   "commence_time": "2024-12-29T18:00:00Z",
+   "home_team": "Philadelphia Eagles",
+   "id": "d91d050a1528e77a870d681bbe42f514",
+   "sport_key": "americanfootball_nfl",
+   "sport_title": "NFL"
+  },
+  "next_timestamp": "2024-12-29T15:00:38Z",
+  "previous_timestamp": "2024-12-29T14:50:38Z",
+  "timestamp": "2024-12-29T14:55:38Z"
+ }
+}
