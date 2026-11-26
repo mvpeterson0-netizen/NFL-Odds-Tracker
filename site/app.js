@@ -642,17 +642,16 @@ function viewPlayer(pid) {
 // line (one test, not a guarantee). DraftKings slip links fail once DK changes the market, and DK's app ignores tab links,
 // so Michael chose FanDuel only.
 const FD_SLIP = /^https:\/\/sportsbook\.fanduel\.com\/addToBetslip\?/;
-// Better book (Michael 2026-11-19): for 4 hours after DraftKings' line was pulled, each of the Over / Under buttons goes to
-// whichever book has the better number for that side (Over: lower line; Under: higher line; same line: better odds; same
-// rule as the Signals popup) and says FD or DK. Same row, so the page is no taller. After 4 hours: FanDuel only, as before.
-// A DK slip link names one exact line, so it only works while DK still shows the pulled line; FanDuel's links follow moves.
+// Better book (Michael 2026-11-19; 4-hour limit removed 2026-11-26): each of the Over / Under buttons goes to whichever book
+// has the better number for that side (Over: lower line; Under: higher line; same line: better odds; same rule as the
+// Signals popup) and says FD or DK. Same row, so the page is no taller. Michael accepted that a DK slip link names one exact
+// line and may not work once DK moves it; FanDuel's links follow moves.
 const DK_SLIP = /^https:\/\/sportsbook\.draftkings\.com\/\?outcomes=[^&#]+$/;
-const DK_FRESH_MS = 4 * 3600 * 1000;
 function betBox(pid, mid) {
   const L = (((D.links || {})[pid] || {})[mid]) || {}, e = L.fanduel, k = L.draftkings;
   const gid = (e && e.gid) || (k && k.gid), g = gid && D.games[gid];
   if (!g || new Date(g.ko) <= new Date()) return "";
-  const dkOk = k && k.gid === gid && k.cap && Date.now() - new Date(k.cap).getTime() <= DK_FRESH_MS;
+  const dkOk = k && k.gid === gid;
   const pickSide = (side) => {
     const f = e && e[side] && FD_SLIP.test(e[side].url || "") ? { book: "fanduel", ent: e, x: e[side] } : null;
     const d = dkOk && k[side] && DK_SLIP.test(k[side].url || "") && k.point != null ? { book: "draftkings", ent: k, x: k[side] } : null;
