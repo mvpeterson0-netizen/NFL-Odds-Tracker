@@ -575,6 +575,7 @@ def build(log):
             r = {"wk": wk, "gid": gid, "opp": opp, "ha": ha, "ko": g["kickoff_utc"], "final": final,
                  "slot": s["slot"] if s else "", "team": team,
                  "snap": round(snap_pct, 1) if snap_pct is not None else None,
+                 "sn": int(off_snaps) if off_snaps is not None else None,
                  "snaps_avail": snaps_avail, "stats_avail": stats_avail,
                  "tgt": stat_value(st, "targets"),
                  "tshare": round(stat_value(st, "target_share"), 3) if stat_value(st, "target_share") is not None else None,
