@@ -272,7 +272,7 @@
       book: bet.book || "DraftKings", src: bet.src || "Bet on DK", cap: bet.cap, ko: r.ko, picked_utc: t, updated_utc: t };
   }
   function recordBet(pid, mid, side, bet) {
-    if (!enabled()) return;
+    if (!enabled()) { if (offer()) askSignIn(pid, mid, side); return; }
     const pick = betPick(pid, mid, side, bet);
     if (!pick) return;
     if (mode() === "acct") { acSave(pick, pick.src); return; }
@@ -353,7 +353,13 @@
   // Inside the "Bet on FanDuel" box (app.js betBox): checkbox "Save to My picks" (on by default, remembered per browser) and
   // the pick saved for this player/market, with a Remove link. Empty on devices without My picks.
   function fdOptions(pid, mid) {
-    if (!enabled()) return "";
+    // Free visitors (offer mode, not signed in / 21+ not done) get the same checkbox, so the Bet box is the one section for them
+    // too; a tap with it ticked remembers the pick and asks them to sign in (recordBet). No saved-pick note until they can save.
+    if (!enabled()) {
+      if (!offer()) return "";
+      let on0 = true; try { on0 = localStorage.getItem("stix_fd_save") !== "0"; } catch (e) { /* default on */ }
+      return `<label class="betsave"><input type="checkbox" id="fd-save" ${on0 ? "checked" : ""}> Save to My picks</label>`;
+    }
     const r = nextRow(pid);
     const id = r ? `${r.wk}|${pid}|${mid}` : null;
     const mine = id ? live().find((p) => p.id === id) : null;
@@ -526,7 +532,7 @@
   }
   const pickFor = (key) => (mode() === "acct" ? AC.picks.find((p) => p.id === key) || null : null);
   const acctReady = () => mode() === "acct" && AC.loaded;
-  window.STIX_PICKS = { list: live, held, grade, enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, fdOptions, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
+  window.STIX_PICKS = { list: live, held, grade, enabled, box, view: viewOuter, bind: bindOuter, sync, recordBet, recordBets, fdOptions, offer, wantedLabel, clearWanted, savePick, pickFor, acctReady, lineNow, nextRow };
   // Account changes (signed in / out, 21+ confirmed, unit size): reload picks and redraw.
   if (ACC()) ACC().onChange(() => {
     if (!ACC().signedIn()) { AC.picks = []; AC.loaded = false; AC.uid = null; }
