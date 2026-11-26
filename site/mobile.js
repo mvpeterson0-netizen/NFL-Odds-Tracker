@@ -243,6 +243,33 @@
     if (k && k.r && r) r.scrollTop = k.r;
   }
 
+  // ---------- Board scroll feel: a short haptic tick as each card crosses the middle band ----------
+  // Android Chrome: navigator.vibrate. iPhone Safari has no vibrate(); a hidden switch-checkbox is the known workaround on newer iOS
+  // (best effort: not verified on a real iPhone, and it may only fire from a real tap, not from scrolling). Skipped for reduced motion.
+  const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let hapEl = null, hapIO = null;
+  function tick() {
+    if (REDUCED.matches) return;
+    try {
+      if (navigator.vibrate) { navigator.vibrate(6); return; }
+      if (!hapEl) {
+        hapEl = document.createElement("label"); hapEl.setAttribute("aria-hidden", "true");
+        hapEl.style.cssText = "position:fixed;left:-99px;top:0;width:1px;height:1px;opacity:0;pointer-events:none";
+        const i = document.createElement("input"); i.type = "checkbox"; i.setAttribute("switch", ""); i.tabIndex = -1;
+        hapEl.appendChild(i); document.body.appendChild(hapEl);
+      }
+      hapEl.click();
+    } catch (e) { /* haptics are optional */ }
+  }
+  function flowBind() {
+    if (hapIO) { hapIO.disconnect(); hapIO = null; }
+    const cards = document.querySelectorAll(".mcard");
+    if (!cards.length || !("IntersectionObserver" in window) || document.body.classList.contains("duo-on")) return;
+    let ready = false; setTimeout(() => { ready = true; }, 600); // ignore the cards already on screen at load
+    hapIO = new IntersectionObserver((es) => { if (ready && es.some((e) => e.isIntersecting)) tick(); }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    cards.forEach((c) => { hapIO.observe(c); c.addEventListener("pointerdown", tick, { passive: true }); });
+  }
+
   window.STIX_MOBILE = {
     active: () => MQ.matches,
     duo: duoOn,
@@ -260,6 +287,7 @@
       const back = document.getElementById("m-back");
       if (back) back.addEventListener("click", (e) => { if (history.length > 1) { e.preventDefault(); history.back(); } });
       if (document.querySelector(".duo")) duoBind();
+      flowBind();
     },
   };
   // Re-render when crossing the phone/desktop breakpoint (e.g. rotating a tablet), or when duo mode is switched on/off / the fold opens.
