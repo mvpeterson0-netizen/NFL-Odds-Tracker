@@ -145,7 +145,7 @@
     // A forecast version has not been tested. Historical replay picked after seeing results; tracked forward from the day it was added.
     { id: "wx1", n: 36, page: "ind", side: "under", label: "WX1", short: () => "Outdoor game, wind 15+ mph at 20 min before kickoff",
       title: "Outdoor game, wind 15+ mph (read 20 min before kickoff) → pass yds, receptions or rec yds Under", why: "Strong wind may hold down the passing game, and the line may not price it in.",
-      desc: () => `Bet a QB's <b>passing yards Under</b>, or a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b>, when both are true:<ul class="sg-ul"><li>The game is <b>outdoors</b> (an open-air stadium; domes and retractable roofs are left out).</li><li>The <b>wind is 15 mph or more</b>, read about <b>20 minutes before kickoff</b>.</li></ul><div class="sg-sub"><b>How it works:</b> about 20 minutes before each kickoff the app takes one wind reading for the stadium (a weather-model forecast for the kickoff hour) and keeps it. The players show here from then until kickoff, you get an alert, and the record is scored on that same reading. A game with no reading does not count. The 2025 results use the wind measured after each game, which can't be known before kickoff, so they are a replay, not a test of this version.</div>` },
+      desc: () => `Bet a QB's <b>passing yards Under</b>, or a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b>, when both are true:<ul class="sg-ul"><li>The game is <b>outdoors</b> (an open-air stadium; domes and retractable roofs are left out).</li><li>The <b>wind is 15 mph or more</b>, read about <b>20 minutes before kickoff</b>.</li></ul><div class="sg-sub"><b>How it works:</b> before the 20-minute reading exists, players in an open-air game show here as <b>Projected</b> when the stadium's forecast wind (refreshed about every 3 hours) is 15 mph or more. About 20 minutes before each kickoff the app takes one wind reading for the stadium (a weather-model forecast for the kickoff hour) and keeps it. At 15+ the players are <b>locked in</b> (you get an alert) and the record is scored on that reading; under 15 they drop off. Projected players are never scored. A game with no reading does not count. The 2025 results use the wind measured after each game, which can't be known before kickoff, so they are a replay, not a test of this version.</div>` },
     // ---- Pooled-split indicators (2026-11-24, Michael): found in the all-player situational-splits study on 2024 + 2025 + 2026 wk 1-11 props.
     // Picked after seeing all three seasons, so none of them is a clean out-of-sample test; tracked forward from the day they were added. Definitions are frozen. ----
     { id: "gr1", n: 39, page: "ind", side: "under", label: "GR1", short: () => "Rushing Under on a natural grass field",
@@ -365,12 +365,25 @@
     return g.spread * (r.ha === "home" ? 1 : -1);
   }
   // WX1 wind (Michael 2026-11-24): the one reading the pipeline stores about 20 minutes before kickoff (weather.csv pre_wind_mph, never changed
-  // afterwards). It lists upcoming players and scores finished games. Open-air stadiums only (retractable roofs are left out: roof position
-  // unknown). Games with no reading (before this existed, or a missed window) never fire; no guess, no fallback to the 3-hour forecast or observed wind.
+  // afterwards). It is the ONLY wind that scores finished games and counts in the record. Open-air stadiums only (retractable roofs are left out:
+  // roof position unknown). Games with no reading (before this existed, or a missed window) are never scored; no guess, no fallback to the 3-hour
+  // forecast or observed wind.
   function obsWind(gid) {
     const w = D.games[gid] && D.games[gid].wx;
     const raw = w && w.pre_wind_mph;
     if (!w || w.roof !== "open" || raw == null || raw === "") return null;
+    const v = +raw;
+    return Number.isFinite(v) ? v : null;
+  }
+  // WX1 projected (Michael 2026-11-26): before the 20-minute reading exists, an open-air game that has not kicked off is LISTED (upcoming list only) when
+  // the stadium's 3-hour forecast wind (weather.csv fc_wind_mph) is 15+ mph. Never scored and never in any record: once the 20-minute reading lands it
+  // decides (15+ = locked in and later scored; under 15 = the players drop off). No reading by kickoff = never scored.
+  function projWind(gid, ko) {
+    const w = D.games[gid] && D.games[gid].wx;
+    if (!w || w.roof !== "open" || (w.pre_wind_mph != null && w.pre_wind_mph !== "")) return null;
+    if (!(new Date(ko).getTime() > Date.now())) return null;
+    const raw = w.fc_wind_mph;
+    if (raw == null || raw === "") return null;
     const v = +raw;
     return Number.isFinite(v) ? v : null;
   }
@@ -409,9 +422,9 @@
         cells = [`<b>${num(line)}</b>`, esc(st) || "Grass"];
         note = `Natural grass${st ? " · " + esc(st) : ""}`;
       } else if (ind && tab === "wx1") {
-        const wd = obsWind(c.r.gid);
-        cells = [`<b>${num(line)}</b>`, `${num(wd, 0)} mph`];
-        note = `Wind ${num(wd, 0)} mph (~20 min before kickoff)`;
+        const wd = obsWind(c.r.gid), pw = wd == null ? projWind(c.r.gid, c.r.ko) : null;
+        cells = pw != null ? [`<b>${num(line)}</b>`, `${num(pw, 0)} mph <span class="muted">proj.</span>`] : [`<b>${num(line)}</b>`, `${num(wd, 0)} mph`];
+        note = pw != null ? `Projected: forecast wind ${num(pw, 0)} mph. Locks in or drops at the reading ~20 min before kickoff; only a locked player is scored.` : `Locked: wind ${num(wd, 0)} mph (~20 min before kickoff)`;
       } else if (ind && tab === "tr3") {
         const tr = targetRate(c.played);
         cells = [`<b>${num(line)}</b>`, tr ? `${(100 * tr.rec).toFixed(1)}% vs ${(100 * tr.base).toFixed(1)}%` : "—"];
@@ -831,7 +844,7 @@
     nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
     gr1: { bet: "Under · rushing · QB RB", g: () => [{ i: "field", c: "gr", l: "Natural grass field", s: "Game is played on a grass field, home or away (neutral-site games left out)" }] },
     sp6: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "sdog65", c: "gr", l: "Team underdog by 6.5+", s: "Opponent favored by 6.5 or more" }] },
-    wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Wind reading about 20 minutes before kickoff" }] },
+    wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Forecast lists players as Projected; the reading about 20 minutes before kickoff locks them in (scored)" }] },
   };
   // Positions in the popup header, best ROI first (Michael 2026-11-18). The last one is the position to drop first and is not bold.
   // Order = each position's historical-replay ROI (2025 wk 2-18 + 2026 wk 2-10); see claude/late-yardage-by-position-2026-11-17.md
@@ -1169,6 +1182,8 @@
   // the toggle(s) that hit. Picking a tile narrows the list to the toggle it is set to. Display only: no rule, score or number changes.
   const togsOf = (t, picked) => (!t.opts ? [null] : picked.some((q) => q.id === t.id) ? (anyTog(t.id) ? t.opts : [RL.opt[t.id]]) : t.opts);
   const chipTxt = (t) => esc(t.label) + (t.tog && t.tog.length ? ` · ${t.tog.map(esc).join(", ")}` : "");
+  // WX1 chip on an upcoming row says Projected while only the forecast wind is behind it (display only).
+  const chipRow = (t, x) => chipTxt(t) + (t.id === "wx1" && x.c && obsWind(x.c.r.gid) == null && projWind(x.c.r.gid, x.c.r.ko) != null ? " · Projected" : "");
   const atToggle = (t, v, fn) => (v == null ? fn() : withOpt(t, v, fn));
   function addSig(entry, t, v) {
     let g = entry.sigs.find((y) => y.id === t.id);
@@ -1208,7 +1223,7 @@
       const { p, r, mid, cur } = x.c;
       h += `<div class="rlrow sg-pr"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
-        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipTxt(t)}</span>`).join("")}</span></div></div>`;
+        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipRow(t, x)}</span>`).join("")}</span></div></div>`;
     }
     return h + `</div>`;
   }
@@ -1259,7 +1274,7 @@
       const { p, r, mid } = x, line = x.m.line, act = x.m.act;
       h += `<div class="rlrow sg-pr"><div class="rlhead"><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(line)}</span><span class="pk-res ${x.out}">${x.out === "hit" ? "Hit" : x.out === "miss" ? "Miss" : "Push"}${act != null ? ` · ${num(act)}` : ""}</span></div>
-        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipTxt(t)}</span>`).join("")}</span></div></div>`;
+        <div class="sg-m"><span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span><span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipRow(t, x)}</span>`).join("")}</span></div></div>`;
     }
     return h + `</div>`;
   }
@@ -1267,7 +1282,7 @@
     const rows = playerRows(tabs, picked, false), live = liveHtml(tabs, picked) + doneHtml(tabs, picked);
     const lastV = sgView() === "last";
     const head = `<h3 class="sg-sec">${lastV ? `Still to play, week ${sgWk()}${picked.length ? ` · ${picked.length > 1 ? "fit all " + picked.length + " picked signals" : "fit this signal"}` : ""} (${rows.length})` : picked.length ? `Players who fit ${picked.length > 1 ? "all " + picked.length + " picked signals" : "this signal"} (${rows.length})` : `Players hitting the most signals (${rows.length})`}</h3>`;
-    if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : picked.length === 1 && picked[0] && picked[0].id === "wx1" ? "No open-air game has a wind reading of 15+ mph right now. WX1 reads the wind about 20 minutes before each kickoff, so players show up only in that last stretch before a game (you also get an alert)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
+    if (!rows.length) return head + `<p class="muted">${lastV ? "No players left to play from last week's games." : picked.length > 1 ? "No upcoming player fits all of those signals (they may also point opposite ways)." : picked.length === 1 && picked[0] && picked[0].id === "wx1" ? "No open-air game has a forecast or locked wind of 15+ mph right now. Players show as Projected while the forecast is 15+ mph, then lock in or drop at the wind reading about 20 minutes before kickoff (you get an alert when it locks in)." : "No upcoming players right now. Lines for most games arrive Monday night to Tuesday; this fills in as they do."}</p>` + live;
     const pages = Math.ceil(rows.length / PAGE), key = `bp|${sgWk() ?? ""}|${picked.map((t) => t.id).join("+")}|${RL.gid || ""}|${RL.mk || ""}|${RL.q}|${tnfOn() ? "today" : ""}`, pg = Math.min(Math.max(+(RL.pg || {})[key] || 0, 0), pages - 1);
     (RL.pg = RL.pg || {})[key] = pg; RL.curKey = key;
     let h = head + fdSlipBox(BP, rows) + `<div class="panel rlist">`;
@@ -1275,7 +1290,7 @@
       const { p, r, mid, cur } = x.c;
       h += `<div class="rlrow sg-pr"><div class="rlhead"><input type="checkbox" class="rl-ck" data-rlck="${esc(rowKey(x))}" aria-label="Add ${esc(p.name)} to the FanDuel slip" ${selOf(BP.id).has(rowKey(x)) ? "checked" : ""}><a class="pname" href="#/player/${p.id}" data-rpid="${esc(p.id)}" data-rmid="${esc(mid)}">${esc(p.name)}</a>
         <span class="rlstat">${esc(mkt[mid].label)}</span><span class="chip rl-side ${x.side}">${x.side === "over" ? "Over" : "Under"} ${num(cur.line)}</span></div>
-        ${(() => { const chips = `<span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipTxt(t)}</span>`).join("")}</span>`, meta = `<span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span>`;
+        ${(() => { const chips = `<span class="sg-chips">${x.sigs.map((t) => `<span class="chip ${RL.sigs.includes(t.id) ? "on" : ""}" role="button" tabindex="0" data-sig="${t.id}">${chipRow(t, x)}</span>`).join("")}</span>`, meta = `<span class="muted small">${esc(r.slot || p.pos)} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${fmtTime(r.ko)}</span>`;
           const notes = [...new Set([x.note, x.qbNote].filter(Boolean))];
           return notes.length ? `<div class="sg-m"><span class="small sg-gap">${esc(notes[0])}</span>${chips}</div>${notes.slice(1).map((n) => `<div class="sg-m"><span class="small sg-gap">${esc(n)}</span></div>`).join("")}<div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${chips}</div>`; })()}</div>`;
     }
@@ -1428,8 +1443,10 @@
     // GR1: Under on QB/RB rushing yards in a game on natural grass (home team's stadium; neutral-site games never fire).
     if ((p.pos === "QB" || p.pos === "RB") && mid === "rush_yds" && surfaceOf(r.gid) === "grass") hits.push("gr1");
     // WX1: Under on QB passing yards, WR/TE/RB receptions and receiving yards in an open-air game with a ~20-minute pre-kickoff wind reading of 15+ mph.
-    const wind = obsWind(r.gid);
-    if (wind != null && wind >= 15 && ((p.pos === "QB" && mid === "pass_yds") || (["WR", "TE", "RB"].includes(p.pos) && (mid === "rec" || mid === "rec_yds")))) hits.push("wx1");
+    // Locked = the 20-minute reading (scores). Projected = forecast wind, upcoming games with no reading yet; list only (the graded scan below only reads final rows,
+    // which never have a projection because a projection needs a kickoff in the future).
+    const wind = obsWind(r.gid), pwind = wind == null && !r.final ? projWind(r.gid, r.ko) : null;
+    if (((wind != null && wind >= 15) || (pwind != null && pwind >= 15)) && ((p.pos === "QB" && mid === "pass_yds") || (["WR", "TE", "RB"].includes(p.pos) && (mid === "rec" || mid === "rec_yds")))) hits.push("wx1");
     // Late-yardage indicators: receiving yards Under for WR/TE/RB after an Over of 40+ yards with a higher line this week.
     // Needs his previous game's play-by-play detail (prev.rd, from data/rec_detail.json); no detail yet = no signal, never a guess.
     if (mid === "rec_yds" && ["WR", "TE", "RB"].includes(p.pos) && pm && pm.res === "over" && pl != null && line > pl && prev.rd && prev.rd.tot >= 40) {
@@ -1627,7 +1644,7 @@
     switch (x.rule.id) {
       case "qbru": return RL.opt.qbru === 3 ? `Line ${num(x.pl)} → ${line}` : "";
       case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syc40": case "syl45": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
-      case "wx1": { const wd = obsWind(x.r.gid); return wd == null ? "" : `Wind ${num(wd, 0)} mph`; }
+      case "wx1": { const wd = obsWind(x.r.gid); if (wd != null) return `Wind ${num(wd, 0)} mph`; const pw = projWind(x.r.gid, x.r.ko); return pw == null ? "" : `Projected wind ${num(pw, 0)} mph`; }
       case "qbch": return esc(x.note);
       case "gr1": { const st = D.games[x.r.gid] && D.games[x.r.gid].stadium; return st ? `Grass · ${esc(st)}` : "Grass"; }
       case "sp1": case "sp2": case "sp3": case "sp4": case "sp5": case "sp6": { const fb = favBy(x.r); return fb == null ? "" : `Team ${spreadTxt(fb)}`; }
