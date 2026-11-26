@@ -688,8 +688,8 @@ document.addEventListener("click", (ev) => {
 // My picks box (picks.js). Empty unless this browser has the owner's picks key; never breaks the page.
 function pickBoxSafe(pid, mid) {
   try {
-    // The Bet on FanDuel box (with its Save to My picks checkbox) takes over when it is showing on a device with My picks.
-    if (window.STIX_PICKS && window.STIX_PICKS.enabled() && betBox(pid, mid)) return ""; return window.STIX_PICKS ? window.STIX_PICKS.box(pid, mid) : ""; } catch (e) { console.error("picks box failed", e); return ""; }
+    // The Bet box (with its Save to My picks checkbox) takes over when it is showing, for signed-in and free visitors alike.
+    if (window.STIX_PICKS && (window.STIX_PICKS.enabled() || (window.STIX_PICKS.offer && window.STIX_PICKS.offer())) && betBox(pid, mid)) return ""; return window.STIX_PICKS ? window.STIX_PICKS.box(pid, mid) : ""; } catch (e) { console.error("picks box failed", e); return ""; }
 }
 
 // ---------- Results tab: how graded pre-game lines finished, over vs under (pushes and voids left out) ----------
