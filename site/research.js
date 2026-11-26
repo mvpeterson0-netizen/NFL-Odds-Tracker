@@ -91,9 +91,9 @@
     { id: "l9", n: 21, page: "ind", side: "under", label: "L9",
       title: "WR rec yds Under after three straight Overs", why: "A run of Overs may be priced into the next line.",
       desc: () => `Bet a WR's <b>receiving yards Under</b> when each of his <b>last 3 games played</b> finished <b>Over</b> that game's graded pre-game receiving-yards line (a push or a missing line breaks the run).` },
-    { id: "l10", n: 22, page: "ind", side: "under", label: "L10",
-      title: "WR receptions Under after three rising games", why: "Steadily rising catch totals may overstate the next game's opportunity.",
-      desc: () => `Bet a WR's <b>receptions Under</b> when his catches rose in each of his <b>last 3 games played</b> (for example 2 → 4 → 6; ties do not count).` },
+    { id: "tr3", n: 22, page: "ind", side: "under", label: "TR-UP3", short: () => "Targets per snap jumped over his last 3 games",
+      title: "Target rate jumped over his last 3 games → receptions / rec yds Under", why: "A sharp, sustained jump in targets per snap tends to fade, while the line is raised to match it.",
+      desc: () => `Bet a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b> when both are true:<ul class="sg-ul"><li>His <b>targets per offensive snap</b> over his <b>last 3 games played</b> is well above his rate in his earlier games this season (a gap of at least <b>2 standard errors</b>: z = (targets in the last 3 − earlier rate × snaps in the last 3) ÷ √(earlier rate × (1 − earlier rate) × snaps in the last 3)).</li><li>He has at least <b>2 earlier games</b> this season and averaged <b>15+ offensive snaps</b> a game over the last 3.</li></ul><div class="sg-sub">The idea is that a short run of extra targets per snap usually fades (about 43% of the jump carried into the next game in the replay) while the book raises the line about 18% to match. Snap counts are nflverse offensive snaps, so the rule only fires once those are posted for his earlier games.</div>` },
     { id: "s03", n: 23, page: "ind", side: "under", label: "S03",
       title: "WR rec yds Under after three rising games", why: "Rising yardage may overshoot his true level.",
       desc: () => `Bet a WR's <b>receiving yards Under</b> when his receiving yards rose in each of his <b>last 3 games played</b> (strictly higher each game).` },
@@ -412,6 +412,10 @@
         const wd = obsWind(c.r.gid);
         cells = [`<b>${num(line)}</b>`, `${num(wd, 0)} mph`];
         note = `Wind ${num(wd, 0)} mph (~20 min before kickoff)`;
+      } else if (ind && tab === "tr3") {
+        const tr = targetRate(c.played);
+        cells = [`<b>${num(line)}</b>`, tr ? `${(100 * tr.rec).toFixed(1)}% vs ${(100 * tr.base).toFixed(1)}%` : "—"];
+        note = tr ? `Targets per snap: ${(100 * tr.rec).toFixed(1)}% in his last 3 games (${num(tr.ro, 0)} on ${num(tr.rs, 0)} snaps) vs ${(100 * tr.base).toFixed(1)}% before · z ${tr.z.toFixed(1)}` : "";
       } else if (ind) {
         const fb = favBy(c.r), last = c.played.slice(-3).map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).map((v) => num(v, 0)).join(", ");
         cells = [`<b>${num(line)}</b>`, fb != null && tab.startsWith("sp") ? esc(spreadTxt(fb)) : esc(last || "—")];
@@ -430,7 +434,7 @@
     cm1te: ["Line (last week → now)", "QB vs receivers"], cm120: ["Line (last week → now)", "QB vs receivers"],
     qbch: ["Line", "QB"],
     sc1: ["Line (last game → now)", "Last game"], sc2: ["Line (last game → now)", "Last game"],
-    l9: ["Line", "Last 3"], l10: ["Line", "Last 3"], s03: ["Line", "Last 3"],
+    l9: ["Line", "Last 3"], tr3: ["Line", "Target rate"], s03: ["Line", "Last 3"],
     sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
     sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syc40: ["Line (last game → now)", "Last game"], syl45: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
     fhr30: ["Line (last game → now)", "Last game"], fhnl: ["Line (last game → now)", "Last game"], bl200: ["Line (last game → now)", "Last game"], nlu20: ["Line (last game → now)", "Last game"],
@@ -668,7 +672,7 @@
     qbr1: { rec: "62–28", roi: 30.2, lo: 11.3, hi: 48.2 }, sc1: { rec: "187–132", roi: 10.9, lo: 1.9, hi: 19.6 },
     sc2: { rec: "50–26", roi: 24.2, lo: -0.2, hi: 44.3 }, cm1te: { rec: "32–14", roi: 31.4, lo: 8.8, hi: 53.6 },
     cm120: { rec: "67–36", roi: 23.2, lo: 9.3, hi: 38.3 }, qbch: { rec: "173–128", roi: 8.4, lo: -0.9, hi: 16.9 }, // QBCH: replay of the 2026-11-20 rule (1st-quarter QB); old rule was 182–126, +11.5%
-    l9: { rec: "91–56", roi: 17.1, lo: 2.9, hi: 31.4 }, l10: { rec: "106–72", roi: 10.1, lo: -2.8, hi: 22.8 }, s03: { rec: "159–119", roi: 8.3, lo: -1.1, hi: 18.6 },
+    l9: { rec: "91–56", roi: 17.1, lo: 2.9, hi: 31.4 }, s03: { rec: "159–119", roi: 8.3, lo: -1.1, hi: 18.6 },
     sp1: { rec: "126–80", roi: 15.9, lo: -1.5, hi: 31.3 }, sp2: { rec: "121–81", roi: 12.7, lo: -1.8, hi: 28.8 }, sp3: { rec: "24–17", roi: 10.9, lo: -23.2, hi: 44.4 },
     sp4: { rec: "23–16", roi: 11.7, lo: -20.3, hi: 40.9 }, sp5: { rec: "297–224", roi: 7.6, lo: 1.2, hi: 13.9 },
     qbr2: { 5: { rec: "29–12", roi: 33.8, lo: 14.5, hi: 54.9 } },
@@ -678,7 +682,7 @@
   const AUDIT_YR = {
     qbr1: [23.2, 46.6], sc1: [5.0, 20.3], sc2: [20.9, 30.7], cm1te: [29.8, 35.1], cm120: [24.7, 19.6], qbch: [11.5, 2.6],
     qbr2: { 5: [32.5, 37.1] }, qbr4: { 25: [6.2, 21.2], 40: [13.2, 51.3] },
-    l9: [20.0, 10.9], l10: [12.6, 3.7], s03: [7.5, 10.3], sp1: [17.8, 10.0], sp2: [16.6, 0.5], sp3: [9.0, 18.5], sp4: [22.2, -28.9], sp5: [7.5, 7.9],
+    l9: [20.0, 10.9], s03: [7.5, 10.3], sp1: [17.8, 10.0], sp2: [16.6, 0.5], sp3: [9.0, 18.5], sp4: [22.2, -28.9], sp5: [7.5, 7.9],
   };
   AUDIT.qbru = { 1: AUDIT.qbr4[25], 2: AUDIT.qbr1, 3: AUDIT.qbr2[5] }; // QBRu modes = the three old signals' audit rows
   AUDIT_YR.qbru = { 1: AUDIT_YR.qbr4[25], 2: AUDIT_YR.qbr1, 3: AUDIT_YR.qbr2[5] };
@@ -706,11 +710,14 @@
   // fallback), 1 unit at the saved Under price, pushes refunded, week-cluster 95% interval (20,000 resamples of weeks). Both rules were found on these same three seasons.
   const F_SPLIT = "Found in the situational-splits study on all three seasons, so no season is a clean out-of-sample test.";
   STUDY.gr1 = { rec: "953–757", roi: 4.8, lo: 0.5, hi: 9.0, yr: [5.3, 1.6, 8.8], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · QB + RB rushing yards · neutral sites left out", found: F_SPLIT };
+  // TR-UP3 replay (2026-11-26, claude/snap-rate-shift-study-2026-11-26.md): WR/TE/RB receptions + receiving yards, DraftKings main line (FanDuel fallback), 1 unit at the saved Under price,
+  // pushes refunded, 2024 + 2025 + 2026 wk 1-11, week-cluster 95% interval (2,000 resamples of weeks). Found on all three seasons, so no season is a clean out-of-sample test.
+  STUDY.tr3 = { rec: "509–357", roi: 10.1, lo: 3.0, hi: 17.0, yr: [4.0, 12.0, 14.0], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · WR + TE + RB receptions + receiving yards (receptions 2025–26 only)", found: "Found in the 2026-11-26 snap-rate study on all three seasons, so no season is a clean out-of-sample test." };
   STUDY.sp6 = { rec: "693–523", roi: 7.6, lo: 1.1, hi: 13.9, yr: [2.5, 14.4, 4.8], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · WR + TE + RB receiving yards", found: F_SPLIT, approx: " The point spread is a closing-type number from nflverse." };
   // Three-season replay for the audit and indicator tiles (Michael 2026-11-24), same source as the SY tiles above: claude/three-season-rerun-2026-11-22.md and its ledger
   // CSV (2024 + 2025 + 2026 wk 1-11, DraftKings main line, 1 unit at the saved price, week-cluster 95% intervals). Shown in each tile's info popup in place of the
   // 2025 + 2026 wk 1-9 audit figures; the tile's rule, list and live record are untouched. Not here, because the 2024 pull had no passing or receptions lines and
-  // there is nothing to show for 2024: CM1 (TE, All), L10, SP2, SP3, SP4. Those keep their audit figures.
+  // there is nothing to show for 2024: CM1 (TE, All), SP2, SP3, SP4. Those keep their audit figures.
   const F_AUD = "Found on 2025 and 2026 weeks 1–9 (the 2026-11-11 audit), so 2024 is the only full season not used to find it.";
   const F_LEAD = "Found on 2026 weeks 1–7, so 2024 and 2025 were both not used to find it.";
   const A_SLOT = " The 2024 depth slots are rebuilt from snap share, so they approximate the app's slots.";
@@ -806,7 +813,7 @@
     cm1te: { bet: "Under · rec yds · TE", g: () => [{ i: "down", c: "pu", t: "15+", tp: "tr", l: "QB pass line cut 15+", s: "vs last week" }, { i: "lag", c: "am", l: "Receiver lines lag 10+", s: "QB's line fell 10+ more than the receivers' lines combined" }] },
     cm120: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "down", c: "pu", t: "20+", tp: "tr", l: "QB pass line cut 20+", s: "vs last week" }, { i: "lag", c: "am", l: "Receiver lines lag 10+", s: "QB's line fell 10+ more than the receivers' lines combined" }] },
     l9: { bet: "Under · rec yds · WR", g: () => [{ i: "streak", c: "bl", l: "Three straight Overs", s: "His last 3 games played, receiving yards" }] },
-    l10: { bet: "Under · receptions · WR", g: () => [{ i: "rise", c: "bl", l: "Receptions rising", s: "Up in each of his last 3 games played" }] },
+    tr3: { bet: "Under · receptions + rec yds · WR TE RB", g: () => [{ i: "rise", c: "bl", l: "Target rate jumped", s: "Targets per snap, last 3 games played vs his earlier games (z ≥ 2)" }] },
     s03: { bet: "Under · rec yds · WR", g: () => [{ i: "risef", c: "bl", l: "Yards rising", s: "Strictly higher in each of his last 3 games played" }] },
     sp1: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "sdog", c: "gr", l: "Team underdog by 10+", s: "Opponent favored by 10 or more" }] },
     sp2: { bet: "Under · receptions · WR TE RB", g: () => [{ i: "sdog", c: "gr", l: "Team underdog by 10+", s: "Opponent favored by 10 or more" }] },
@@ -832,7 +839,7 @@
   const POS_ORDER = {
     sy25: ["TE", "RB", "WR"], synl: ["WR", "TE", "RB"], syc40: ["TE", "RB", "WR"], syl45: ["TE", "WR", "RB"], syypc: ["WR", "TE", "RB"], fhr30: ["RB", "TE", "WR"], fhnl: ["WR", "TE", "RB"],
     bl200: ["TE", "WR", "RB"], nlu20: ["RB", "TE", "WR"],
-    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"], gr1: ["RB", "QB"], sp6: ["TE", "RB", "WR"],
+    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"], gr1: ["RB", "QB"], sp6: ["TE", "RB", "WR"], tr3: ["TE", "WR", "RB"],
   };
   function betText(id, sg) {
     const rest = sg.bet.slice(sg.bet.indexOf(" ") + 1), po = POS_ORDER[id];
@@ -1372,6 +1379,17 @@
     const g = D.games[prev.gid], t = g && g.scr && g.scr.t && g.scr.t[g.home === prev.team ? "h" : "a"], v = t && t.s7;
     return v && v[0] ? { trail: v[1] / v[0], lead: v[2] / v[0] } : null;
   }
+  // Targets per offensive snap, last 3 games played vs his earlier games this season (all known pregame). null until row.sn (nflverse snap count) and targets are there.
+  function targetRate(played) {
+    const g = played.filter((x) => x.sn != null && x.sn > 0 && x.tgt != null);
+    if (g.length < 5) return null;
+    const rec = g.slice(-3), base = g.slice(0, -3);
+    const sum = (a, k) => a.reduce((t, x) => t + x[k], 0);
+    const rs = sum(rec, "sn"), ro = sum(rec, "tgt"), bs = sum(base, "sn"), bo = sum(base, "tgt");
+    if (bs <= 0 || rs / 3 < 15) return null;
+    const br = bo / bs, v = br * (1 - br) * rs;
+    return v > 0 ? { z: (ro - br * rs) / Math.sqrt(v), rec: ro / rs, base: br, ro, rs } : null;
+  }
   function ruleHits(r, mid, m, p, past, played, prev) {
     const pm = prev && prev.m ? prev.m[mid] : null;
     const pl = pm && pm.lstat === "ok" && pm.line != null ? pm.line : null;
@@ -1396,11 +1414,10 @@
         const a = l3.map((x) => (x.m && x.m.rec_yds ? x.m.rec_yds.act : null));
         if (a.every((v) => v != null) && a[0] < a[1] && a[1] < a[2]) hits.push("s03");
       }
-      if (mid === "rec") {
-        const a = l3.map((x) => (x.m && x.m.rec ? x.m.rec.act : null));
-        if (a.every((v) => v != null) && a[0] < a[1] && a[1] < a[2]) hits.push("l10");
-      }
     }
+    // TR-UP3 (replaces L10, 2026-11-26): WR/TE/RB receptions or receiving yards Under when his targets per offensive snap over his last 3 games played is
+    // z >= 2 above his rate in his earlier games this season (needs 2+ earlier games, 15+ snaps a game over the last 3). Snap counts come from data.json row.sn.
+    if (["WR", "TE", "RB"].includes(p.pos) && (mid === "rec" || mid === "rec_yds")) { const tr = targetRate(played); if (tr && tr.z >= 2) hits.push("tr3"); }
     const fb = favBy(r);
     if (fb != null) {
       if (fb <= -10 && ["WR", "TE", "RB"].includes(p.pos)) { if (mid === "rec_yds") hits.push("sp1"); if (mid === "rec") hits.push("sp2"); }
