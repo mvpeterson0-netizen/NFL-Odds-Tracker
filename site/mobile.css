@@ -133,3 +133,22 @@ main { padding: 10px 12px 32px; }
 .lmgrid .lmh > span { font-size: 11px; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
 .lmgrid .lmrow .chip { justify-self: start; }
 .lmgrid .lmrow .muted { font-size: 11px; white-space: nowrap; }
+
+/* Board scroll feel A (snap + depth): cards settle into place under the pinned header and ease in/out as they scroll.
+   Phone Board only (not duo mode); no motion for people who ask for reduced motion. Old browsers just get the normal list. */
+@media (prefers-reduced-motion: no-preference) {
+  html:has(body:not(.duo-on) .mcard) { scroll-snap-type: y proximity; }
+  body:not(.duo-on) .mcard { scroll-snap-align: start; scroll-margin-top: calc(var(--top-h, 89px) + 72px); }
+  @supports (animation-timeline: view()) {
+    body:not(.duo-on) .mcard { animation: mc-depth linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    @keyframes mc-depth {
+      0% { opacity: .25; transform: translateY(26px) scale(.94); }
+      22% { opacity: 1; transform: none; }
+      78% { opacity: 1; transform: none; }
+      100% { opacity: .25; transform: translateY(-14px) scale(.95); }
+    }
+  }
+}
+
+/* The current game's header (teams, kickoff, weather) pins right under the top bar until the next game starts. Phone Board only (not duo mode). */
+body:not(.duo-on) .mgame-h { top: var(--top-h, 89px); }
