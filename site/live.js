@@ -70,19 +70,31 @@
   const ymd = (ms) => new Date(ms).toISOString().slice(0, 10).replace(/-/g, "");
   async function loadMap(gids) {
     FEED.mapAt = Date.now();
-    // Ask ESPN for the scoreboard by date (kickoff days ±1) instead of its default "current week", which can miss a game
-    // ESPN files under another week (e.g. a Wednesday game).
-    const ks = (gids || []).map((g) => (D.games[g] && D.games[g].ko ? new Date(D.games[g].ko).getTime() : NaN)).filter(isFinite);
-    const sb = await getJson(ks.length ? `${SB}?dates=${ymd(Math.min(...ks) - 86400e3)}-${ymd(Math.max(...ks) + 86400e3)}` : SB);
-    for (const ev of sb.events || []) {
-      const comp = (ev.competitions || [{}])[0] || {};
-      const t = {}; for (const c of comp.competitors || []) t[c.homeAway] = fixTeam((c.team || {}).abbreviation);
-      const ms = new Date(ev.date).getTime();
-      const gid = Object.keys(D.games).find((g) => { const x = D.games[g]; return x.home === t.home && x.away === t.away && x.ko && Math.abs(new Date(x.ko).getTime() - ms) <= 36 * 3600e3; });
-      if (!gid) continue;
-      const cur = FEED.ev[gid] || (FEED.ev[gid] = {});
-      Object.assign(cur, { id: ev.id }, parseStatus({ header: { competitions: [{ status: ev.status || comp.status, competitors: comp.competitors }] } }));
+    // ESPN's default scoreboard is its "current week", which can miss a game ESPN files under the next week (e.g. a Wednesday
+    // game). Try the game's own week first, then its kickoff dates (±1 day), then the default; stop at the first that has every game.
+    const gs = (gids || []).map((g) => D.games[g]).filter(Boolean);
+    const ks = gs.map((x) => (x.ko ? new Date(x.ko).getTime() : NaN)).filter(isFinite);
+    const wks = [...new Set(gs.map((x) => x.wk).filter((w) => w != null))];
+    const urls = [];
+    if (wks.length === 1) urls.push(`${SB}?seasontype=${gs[0].type === "POST" ? 3 : 2}&week=${wks[0]}`);
+    if (ks.length) urls.push(`${SB}?dates=${ymd(Math.min(...ks) - 86400e3)}-${ymd(Math.max(...ks) + 86400e3)}`);
+    urls.push(SB);
+    let lastErr = null, gotAny = false;
+    for (const u of urls) {
+      let sb;
+      try { sb = await getJson(u); gotAny = true; } catch (e) { lastErr = e; continue; }
+      for (const ev of sb.events || []) {
+        const comp = (ev.competitions || [{}])[0] || {};
+        const t = {}; for (const c of comp.competitors || []) t[c.homeAway] = fixTeam((c.team || {}).abbreviation);
+        const ms = new Date(ev.date).getTime();
+        const gid = Object.keys(D.games).find((g) => { const x = D.games[g]; return x.home === t.home && x.away === t.away && x.ko && Math.abs(new Date(x.ko).getTime() - ms) <= 36 * 3600e3; });
+        if (!gid) continue;
+        const cur = FEED.ev[gid] || (FEED.ev[gid] = {});
+        Object.assign(cur, { id: ev.id }, parseStatus({ header: { competitions: [{ status: ev.status || comp.status, competitors: comp.competitors }] } }));
+      }
+      if ((gids || []).every((g) => FEED.ev[g])) return;
     }
+    if (!gotAny && lastErr) throw lastErr;
   }
 
   // ---------- which plays are tracked ----------
@@ -249,7 +261,7 @@
       if (!ps.length) return;
       const gids = [...new Set(ps.map((p) => p.gid))];
       if (gids.some((g) => !FEED.ev[g] || FEED.ev[g].state === "pre") && Date.now() - FEED.mapAt > MAP_MS) {
-        try { await loadMap(gids); if (gids.every((g) => !FEED.ev[g])) FEED.err = "game not found on ESPN"; else if (FEED.err === "game not found on ESPN") FEED.err = ""; } catch (e) { FEED.err = "ESPN unreachable"; }
+        try { await loadMap(gids); if (gids.every((g) => !FEED.ev[g])) FEED.err = "game not found on ESPN"; else if (FEED.err === "game not found on ESPN") FEED.err = ""; } catch (e) { FEED.err = "ESPN unreachable (" + (e && e.name === "AbortError" ? "timed out" : String((e && e.message) || e).slice(0, 40)) + ")"; }
       }
       // A game still marked pre-game (page opened before kickoff) re-reads the scoreboard at most once per MAP_MS so it flips to live on its own.
       // Games holding one of the user's own picks refresh every 30 s; games with only signal plays every 60 s (each summary is ~45 KB compressed).
