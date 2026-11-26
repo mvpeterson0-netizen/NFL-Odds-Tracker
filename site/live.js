@@ -229,19 +229,19 @@
     const by = (a, b) => room(a) - room(b) || a.x.name.localeCompare(b.x.name);
     const secs = [["Needs attention", alive.filter((r) => r.status === "risk").sort(by)], ["On track", alive.filter((r) => r.status === "ok").sort(by)],
       ["Settled", done.sort((a, b) => (a.status === "dead") - (b.status === "dead") || by(a, b))], ["No live stats yet", wait]];
-    const sum = (list) => list.reduce((s, r) => s + (r.units || 0), 0), pk = rows.filter((r) => r.x.pickId), sgn = rows.filter((r) => !r.x.pickId);
+    const sum = (list) => list.reduce((s, r) => s + (r.units || 0), 0), pk = rows.filter((r) => r.x.pickId); // totals count every play saved to My picks (a saved signal counts); unsaved signals stay listed but are not counted
     // W/L: settled = decided plays (pushes counted apart); on pace = settled + live plays counted by current lean (On track = W, At risk = L)
     const wl = (list, pace) => { let w = 0, l = 0, ps = 0; list.forEach((r) => { if (r.status === "hit" || (pace && r.status === "ok")) w++; else if (r.status === "dead" || (pace && r.status === "risk")) l++; else if (r.status === "push") ps++; }); const n = w + l;
       return { w, l, ps, n, txt: n ? `${w}–${l}${ps ? `–${ps}` : ""} (${Math.round((100 * w) / n)}%)` : "—" }; };
-    const sAll = wl(pk, false), pAll = wl(pk, true); // picks only
+    const sAll = wl(pk, false), pAll = wl(pk, true);
     const noOdds = rows.filter((r) => r.units == null && r.status !== "wait").length;
     const age = FEED.at ? Math.max(0, Math.round((Date.now() - FEED.at) / 1000)) : null;
     const stale = FEED.err || (age != null && age > 120);
     const h = secs.filter((s) => s[1].length).map(([t, l]) => `<h4 class="lv-h">${t}</h4>${l.map(rowHtml).join("")}`).join("");
     return `<div class="panel lv" id="lv-panel"><h3><span class="lv-dot${stale ? " stale" : ""}"></span>Live <span class="muted small">(${rows.length}) · ${FEED.err ? esc(FEED.err) : age == null ? "loading…" : `<span id="lv-age">updated ${age}s ago</span>`}</span></h3><div class="body">
-      <div class="lv-sum"><span>Est. net <b>${uTxt(sum(rows))}</b></span><span>${pk.length ? `My picks ${uTxt(sum(pk))}` : ""}${pk.length && sgn.length ? " · " : ""}${sgn.length ? `Signals ${uTxt(sum(sgn))}` : ""}</span></div>
-      ${pk.length ? `<div class="lv-sum lv-wl"><span>My picks settled <b>${sAll.txt}</b></span><span>On pace <b>${pAll.txt}</b></span></div>` : ""}${h}
-      <details class="lv-how small muted"><summary>How to read this</summary><p>Bar = stat so far against the line (white mark); grey tick = where an even pace would be. Live numbers come from ESPN and are provisional until the game is final. Units are a rough estimate (not validated): chance of winning from the stat so far and time left, at the odds saved with the pick (signals: the line's own quote, else −110). Decided plays show the real result. The W–L line is your picks only: Settled = picks already won or lost (a push is listed last); On pace also counts live picks by their current lean (On track as a win, At risk as a loss).${noOdds ? ` ${noOdds} play${noOdds === 1 ? "" : "s"} without saved odds show no units.` : ""}</p></details></div></div>`;
+      ${pk.length ? `<div class="lv-sum"><span>Est. net <b>${uTxt(sum(pk))}</b></span></div>
+      <div class="lv-sum lv-wl"><span>Settled <b>${sAll.txt}</b></span><span>On pace <b>${pAll.txt}</b></span></div>` : ""}${h}
+      <details class="lv-how small muted"><summary>How to read this</summary><p>Bar = stat so far against the line (white mark); grey tick = where an even pace would be. Live numbers come from ESPN and are provisional until the game is final. Units are a rough estimate (not validated): chance of winning from the stat so far and time left, at the odds saved with the pick (signals: the line's own quote, else −110). Decided plays show the real result. Est. net, Settled and On pace count every play you saved to My picks, whether or not it is also a signal; signals you have not saved are listed but not counted. Settled = plays already won or lost (a push is listed last); On pace also counts live plays by their current lean (On track as a win, At risk as a loss).${noOdds ? ` ${noOdds} play${noOdds === 1 ? "" : "s"} without saved odds show no units.` : ""}</p></details></div></div>`;
   }
   const pickIds = () => { try { return new Set(plays().filter((x) => x.pickId).map((x) => x.pickId)); } catch (e) { return new Set(); } };
   function redraw() {
