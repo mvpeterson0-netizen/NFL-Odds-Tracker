@@ -134,11 +134,9 @@ main { padding: 10px 12px 32px; }
 .lmgrid .lmrow .chip { justify-self: start; }
 .lmgrid .lmrow .muted { font-size: 11px; white-space: nowrap; }
 
-/* Board scroll feel A (snap + depth): cards settle into place under the pinned header and ease in/out as they scroll.
+/* Board scroll feel A (depth): cards ease in/out as they scroll. No page snapping, so you can rest anywhere (filters, game chips) .
    Phone Board only (not duo mode); no motion for people who ask for reduced motion. Old browsers just get the normal list. */
 @media (prefers-reduced-motion: no-preference) {
-  html:has(body:not(.duo-on) .mcard) { scroll-snap-type: y proximity; }
-  body:not(.duo-on) .mcard { scroll-snap-align: start; scroll-margin-top: calc(var(--top-h, 89px) + 72px); }
   @supports (animation-timeline: view()) {
     body:not(.duo-on) .mcard { animation: mc-depth linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
     @keyframes mc-depth {
