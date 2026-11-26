@@ -2015,7 +2015,7 @@
       if (c) { sN++; sH += w; } else { oN++; oH += w; }
     }
     const inH = s[7] + sH, inN = s[8] + sN, otH = s[12] + oH, otN = s[10] + oN;
-    return { inH, inN, otH, otN, pct: otN ? Math.round(100 * otH / otN) : null, add: sN + oN };
+    return { inH, inN, otH, otN, pct: otN ? Math.round(100 * otH / otN) : null };
   }
   function psDoneHtml() {
     const wk = psCurWeek(); if (wk == null || wk < PS_FIRST_WK) return "";
@@ -2034,11 +2034,11 @@
     const n = (o) => rows.filter((x) => x.out === o).length, push = n("push");
     let h = `<h3 class="sg-sec">Graded, week ${wk} (${rows.length})</h3><p class="muted small">${n("hit")} hit · ${n("miss")} missed${push ? ` · ${push} push` : ""}. Signals that fired this week, graded against the line saved before kickoff, once the game is over.</p><div class="panel rlist">`;
     for (const x of rows) {
-      const { s, r, m } = x, label = mkt[s[4]] ? mkt[s[4]].label : s[4], p = psPlayer(s[1]), u = psUpdated(s);
+      const { s, r, m } = x, label = mkt[s[4]] ? mkt[s[4]].label : s[4], p = psPlayer(s[1]), u = psUpdated(s), rec = psRecord(s);
       const link = p ? `<a class="pname" href="#/player/${esc(s[1])}">${esc(s[2])}</a>` : `<span class="pname">${esc(s[2])}</span>`;
       h += `<div class="rlrow sg-pr ps-row"><div class="rlhead" style="flex-wrap:wrap">${link}<span class="rlstat">${esc(label)}</span><span class="chip rl-side ${x.side}">${s[6] === "o" ? "Over" : "Under"} ${num(m.line)}</span><span class="pk-res ${x.out}">${x.out === "hit" ? "Hit" : x.out === "miss" ? "Miss" : "Push"} · ${num(m.act)}</span></div>
         <div class="sg-m"><span class="small"><b>${esc(PS_COND[s[5]])}</b></span><span class="muted small">${esc(s[0])}</span></div>
-        <div class="sg-m"><span class="muted small">Record now: ${s[6] === "o" ? "Over" : "Under"} ${u.inH}–${u.inN - u.inH} in this situation vs ${u.pct == null ? "n/a" : u.pct + "% (" + u.otH + "–" + (u.otN - u.otH) + ")"} in his other ${u.otN} games. Study ${s[7]}–${s[8] - s[7]} vs ${s[9]}%, plus ${u.add} game${u.add === 1 ? "" : "s"} since week ${PS_FIRST_WK}.</span></div>
+        <div class="sg-m"><span class="muted small">Record now: ${s[6] === "o" ? "Over" : "Under"} ${u.inH}–${u.inN - u.inH} in this situation vs ${u.pct == null ? "n/a" : u.pct + "% (" + u.otH + "–" + (u.otN - u.otH) + ")"} in his other ${u.otN} games. Record since tracking: ${rec.W}–${rec.L}${rec.P ? `–${rec.P}` : ""}</span></div>
         <div class="sg-m"><span class="muted small">${esc(r.slot || (p && p.pos) || s[3])} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${esc(fmtTime(r.ko))}</span></div></div>`;
     }
     return h + `</div>`;
