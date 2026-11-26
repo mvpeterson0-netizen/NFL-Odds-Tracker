@@ -250,4 +250,5 @@
 - 2026-11-25 · PR: Live totals use saved picks · Est. net, Settled and On pace in the Picks tab's Live panel now count every play saved to My picks (a saved signal counts); unsaved signals are listed but not counted. Removed the My picks / Signals split. UI only, NFL side.
 - 2026-11-25 · PR: Live panel hides unsaved signals · The Picks tab Live panel now lists only plays saved to My picks (a saved pick still shows a Signal tag if one applies). Signals not saved are no longer shown. UI only, NFL side.
 - 2026-11-26 · PR: Live panel idle label · When every play in the Live panel is already settled, the header says "No games in-progress" instead of staying on "loading…". UI only, NFL side.
+- 2026-11-26 · PR: Live panel title · The Picks tab Live panel is titled "Current week" when no play is in progress and "Live" while any is. UI only, NFL side.
 - 2026-11-26 · PR: player signals graded this week · Player signals page gets a "Graded, week N" section at the bottom: every signal that fired for a player in a finished game this week, marked Hit / Miss / Push against the saved pre-game line, with the actual result. UI only; no signal, list, record or data change.
