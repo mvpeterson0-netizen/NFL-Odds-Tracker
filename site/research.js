@@ -2018,21 +2018,22 @@
     return { inH, inN, otH, otN, pct: otN ? Math.round(100 * otH / otN) : null };
   }
   function psDoneHtml() {
-    const wk = psCurWeek(); if (wk == null || wk < PS_FIRST_WK) return "";
+    const today = tnfOn(), wk = today ? todayWk() : psCurWeek(); if (wk == null || wk < PS_FIRST_WK) return "";
     const rows = [];
     for (const s of PS) {
       if (s[5] === "high_total") continue;
       const r = (D.rows[s[1]] || []).find((x) => x.wk === wk && x.final && x.played === true); if (!r) continue;
+      if (today && !tnfGids().has(r.gid)) continue; // Today button: only games played today
       const m = r.m && r.m[s[4]]; if (!m || m.lstat !== "ok" || m.line == null || m.act == null) continue;
       if (psCond(s[5], r) !== true) continue;
       const side = s[6] === "o" ? "over" : "under", res = m.act > m.line ? "over" : m.act < m.line ? "under" : "push";
       rows.push({ s, r, m, side, out: res === "push" ? "push" : res === side ? "hit" : "miss" });
     }
-    if (!rows.length) return `<h3 class="sg-sec">Graded, week ${wk} (0)</h3><p class="muted small">No signal has a finished game yet this week. Results appear here once each game is over.</p>`;
+    if (!rows.length) return `<h3 class="sg-sec">Graded${today ? " today" : ""}, week ${wk} (0)</h3><p class="muted small">No signal has a finished game yet ${today ? "today" : "this week"}. Results appear here once each game is over.</p>`;
     const ord = { hit: 0, miss: 1, push: 2 };
     rows.sort((a, b) => ord[a.out] - ord[b.out] || new Date(a.r.ko) - new Date(b.r.ko) || a.s[2].localeCompare(b.s[2]));
     const n = (o) => rows.filter((x) => x.out === o).length, push = n("push");
-    let h = `<h3 class="sg-sec">Graded, week ${wk} (${rows.length})</h3><p class="muted small">${n("hit")} hit · ${n("miss")} missed${push ? ` · ${push} push` : ""}. Signals that fired this week, graded against the line saved before kickoff, once the game is over.</p><div class="panel rlist">`;
+    let h = `<h3 class="sg-sec">Graded${today ? " today" : ""}, week ${wk} (${rows.length})</h3><p class="muted small">${n("hit")} hit · ${n("miss")} missed${push ? ` · ${push} push` : ""}. Signals that fired this week, graded against the line saved before kickoff, once the game is over.</p><div class="panel rlist">`;
     for (const x of rows) {
       const { s, r, m } = x, label = mkt[s[4]] ? mkt[s[4]].label : s[4], p = psPlayer(s[1]), u = psUpdated(s), rec = psRecord(s);
       const link = p ? `<a class="pname" href="#/player/${esc(s[1])}">${esc(s[2])}</a>` : `<span class="pname">${esc(s[2])}</span>`;
@@ -2045,9 +2046,11 @@
   }
   function psHtml() {
     const upWk = psUpWeek(), all = !!RL.psAll, onlyFire = !!RL.psFire;
-    const stats = PS.map((s) => Object.assign({ s }, psStatus(s, upWk)));
+    const statsAll = PS.map((s) => Object.assign({ s }, psStatus(s, upWk)));
+    const today = tnfOn(), td = (x) => !today || (x.r && tnfGids().has(x.r.gid)); // Today button: only signals whose game is today
+    const stats = statsAll.filter(td);
     const fires = stats.filter((x) => x.st === "fire");
-    const top = stats.slice(0, PS_TOP), nTop = top.filter((x) => x.st === "fire").length;
+    const top = statsAll.slice(0, PS_TOP).filter(td), nTop = top.filter((x) => x.st === "fire").length;
     let list = all ? stats : top; if (onlyFire) list = list.filter((x) => x.st === "fire");
     const sel = psSel();
     for (const k of [...sel]) if (!fires.some((x) => psKey(x.s, x.r) === k)) sel.delete(k); // a signal that no longer fires (game started, line gone) drops out
@@ -2067,8 +2070,8 @@
     const tabs = "";
     const intro = `<p class="small"><a href="#/search">← Signals</a> · ${PS.length} player-specific splits found in the 2026-11-24 study of rushing and receiving yards, 2024 to 2026 week 11. They are frozen: the list and each definition never change, and each one's record below counts only games from week ${PS_FIRST_WK} on. <b>Treat this as a watch list.</b> A label-shuffling test says about 100 splits this strong would show up by pure chance, so most of these are probably noise. The top ${PS_TOP} by strength are shown; the rest are under "Show all ${PS.length}".</p>`;
     const ctl = `<div class="sg-scope"><button type="button" class="gchip ${onlyFire ? "on" : ""}" data-psfire="1">Firing in week ${upWk} only (${all ? fires.length : nTop})</button><button type="button" class="gchip ${all ? "on" : ""}" data-psmore="1">${all ? `Showing all ${PS.length}` : `Show all ${PS.length}`}</button></div>`;
-    const head = `<h3 class="sg-sec">${all ? `All ${PS.length} signals` : `Top ${PS_TOP} signals`} · ${all ? fires.length : nTop} firing in week ${upWk}${all ? "" : ` (${fires.length} of all ${PS.length})`}</h3>`;
-    const rows = list.length ? list.map(rowH).join("") : `<p class="muted">None of these fire in week ${upWk}.</p>`;
+    const head = `<h3 class="sg-sec">${all ? `All ${PS.length} signals` : `Top ${PS_TOP} signals`} · ${all ? fires.length : nTop} firing ${today ? "today" : "in week " + upWk}${all ? "" : ` (${fires.length} of all ${PS.length})`}</h3>`;
+    const rows = list.length ? list.map(rowH).join("") : `<p class="muted">None of these fire ${today ? "today" : "in week " + upWk}.</p>`;
     return `<section id="rl" data-page="ps">${gsecRow("Signals · Player signals")}${tabs}${intro}${ctl}${head}${psSlipBox(fires)}<div class="panel rlist">${rows}</div>${psDoneHtml()}</section>`;
   }
   document.addEventListener("click", (e) => {
@@ -2078,7 +2081,7 @@
     const a = t.closest("[data-psall]");
     if (a) {
       const s = psSel(); s.clear();
-      if (a.dataset.psall === "1") { const up = psUpWeek(); for (const q of (RL.psAll ? PS : PS.slice(0, PS_TOP))) { const x = psStatus(q, up); if (x.st === "fire" && psBook(q[1], q[4], q[6] === "o" ? "over" : "under", x.r.gid, q[2])) s.add(psKey(q, x.r)); } }
+      if (a.dataset.psall === "1") { const up = psUpWeek(); for (const q of (RL.psAll ? PS : PS.slice(0, PS_TOP))) { const x = psStatus(q, up); if (x.st === "fire" && (!tnfOn() || tnfGids().has(x.r.gid)) && psBook(q[1], q[4], q[6] === "o" ? "over" : "under", x.r.gid, q[2])) s.add(psKey(q, x.r)); } }
       redraw(); return;
     }
     const b = t.closest("[data-psbet]");
