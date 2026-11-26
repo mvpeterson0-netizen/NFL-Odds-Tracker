@@ -247,3 +247,4 @@
 - 2026-11-25 · PR: live tracker scoreboard fallback · Live panel tries ESPN's scoreboard by the game's week, then by kickoff dates, then the default, using the first that has the game; "ESPN unreachable" now shows the reason (e.g. HTTP code or timed out). UI only, NFL side.
 - 2026-11-25 · PR: live tracker diagnostics · "game not found on ESPN" now lists what each scoreboard request returned (wk/dt/def: number of events or the error). UI only, NFL side.
 - 2026-11-25 · PR: live tracker Rams fix · Live panel could not match any Rams game to ESPN (it converted ESPN's LAR to LA while the app shows LAR); now matches. UI only, NFL side.
+- 2026-11-25 · PR: Live totals use saved picks · Est. net, Settled and On pace in the Picks tab's Live panel now count every play saved to My picks (a saved signal counts); unsaved signals are listed but not counted. Removed the My picks / Signals split. UI only, NFL side.
