@@ -2002,6 +2002,21 @@
   // "Graded this week" (Michael 2026-11-26): the week now being played = the latest week with a game that has kicked off. Every signal whose situation held for its
   // player in a finished game of that week, graded hit / miss / push against the saved pre-game line (same rule as psRecord). Display only; no signal, list or record changes.
   function psCurWeek() { const now = Date.now(); let w = null; for (const g of Object.values(D.games)) { if (!g.ko || new Date(g.ko).getTime() > now) continue; if (w == null || g.wk > w) w = g.wk; } return w; }
+  // Updated "Found" record for the graded rows (Michael 2026-11-26): the frozen study counts (through week 11) plus every finished game since week 12, same grading as psRecord
+  // (saved pre-game line, pushes left out, games the situation can't be checked for left out). In situation = same-side wins vs losses; other = same-side wins in his other games.
+  function psUpdated(s) {
+    const side = s[6] === "o" ? "over" : "under"; let sH = 0, sN = 0, oH = 0, oN = 0;
+    for (const r of D.rows[s[1]] || []) {
+      if (!r.final || r.wk < PS_FIRST_WK || r.played !== true) continue;
+      const m = r.m && r.m[s[4]]; if (!m || m.lstat !== "ok" || m.line == null || m.act == null) continue;
+      const c = psCond(s[5], r); if (c == null) continue;
+      const res = m.act > m.line ? "over" : m.act < m.line ? "under" : "push"; if (res === "push") continue;
+      const w = res === side ? 1 : 0;
+      if (c) { sN++; sH += w; } else { oN++; oH += w; }
+    }
+    const inH = s[7] + sH, inN = s[8] + sN, otH = s[12] + oH, otN = s[10] + oN;
+    return { inH, inN, otH, otN, pct: otN ? Math.round(100 * otH / otN) : null, add: sN + oN };
+  }
   function psDoneHtml() {
     const wk = psCurWeek(); if (wk == null || wk < PS_FIRST_WK) return "";
     const rows = [];
@@ -2019,10 +2034,11 @@
     const n = (o) => rows.filter((x) => x.out === o).length, push = n("push");
     let h = `<h3 class="sg-sec">Graded, week ${wk} (${rows.length})</h3><p class="muted small">${n("hit")} hit · ${n("miss")} missed${push ? ` · ${push} push` : ""}. Signals that fired this week, graded against the line saved before kickoff, once the game is over.</p><div class="panel rlist">`;
     for (const x of rows) {
-      const { s, r, m } = x, label = mkt[s[4]] ? mkt[s[4]].label : s[4], p = psPlayer(s[1]);
+      const { s, r, m } = x, label = mkt[s[4]] ? mkt[s[4]].label : s[4], p = psPlayer(s[1]), u = psUpdated(s);
       const link = p ? `<a class="pname" href="#/player/${esc(s[1])}">${esc(s[2])}</a>` : `<span class="pname">${esc(s[2])}</span>`;
       h += `<div class="rlrow sg-pr ps-row"><div class="rlhead" style="flex-wrap:wrap">${link}<span class="rlstat">${esc(label)}</span><span class="chip rl-side ${x.side}">${s[6] === "o" ? "Over" : "Under"} ${num(m.line)}</span><span class="pk-res ${x.out}">${x.out === "hit" ? "Hit" : x.out === "miss" ? "Miss" : "Push"} · ${num(m.act)}</span></div>
         <div class="sg-m"><span class="small"><b>${esc(PS_COND[s[5]])}</b></span><span class="muted small">${esc(s[0])}</span></div>
+        <div class="sg-m"><span class="muted small">Record now: ${s[6] === "o" ? "Over" : "Under"} ${u.inH}–${u.inN - u.inH} in this situation vs ${u.pct == null ? "n/a" : u.pct + "% (" + u.otH + "–" + (u.otN - u.otH) + ")"} in his other ${u.otN} games. Study ${s[7]}–${s[8] - s[7]} vs ${s[9]}%, plus ${u.add} game${u.add === 1 ? "" : "s"} since week ${PS_FIRST_WK}.</span></div>
         <div class="sg-m"><span class="muted small">${esc(r.slot || (p && p.pos) || s[3])} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${esc(fmtTime(r.ko))}</span></div></div>`;
     }
     return h + `</div>`;
