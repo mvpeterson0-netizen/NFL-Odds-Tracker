@@ -246,3 +246,4 @@
 - 2026-11-25 · PR: live tracker finds games by date · Picks tab Live panel asks ESPN for the scoreboard by kickoff date (±1 day) instead of the default current week, so games ESPN files under another week (e.g. the Wednesday game) are found; shows "game not found on ESPN" instead of "loading…" when no game matches. UI only, NFL side.
 - 2026-11-25 · PR: live tracker scoreboard fallback · Live panel tries ESPN's scoreboard by the game's week, then by kickoff dates, then the default, using the first that has the game; "ESPN unreachable" now shows the reason (e.g. HTTP code or timed out). UI only, NFL side.
 - 2026-11-25 · PR: live tracker diagnostics · "game not found on ESPN" now lists what each scoreboard request returned (wk/dt/def: number of events or the error). UI only, NFL side.
+- 2026-11-25 · PR: live tracker Rams fix · Live panel could not match any Rams game to ESPN (it converted ESPN's LAR to LA while the app shows LAR); now matches. UI only, NFL side.

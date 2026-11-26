@@ -13,7 +13,7 @@
   const SB = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard";
   const SUM = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=";
   const POLL_MS = 30000, MAP_MS = 60000, FETCH_MS = 12000;
-  const TEAM_FIX = { LAR: "LA", WSH: "WAS" }; // ESPN abbreviations that differ from nflverse's
+  const TEAM_FIX = { LA: "LAR", WSH: "WAS" }; // ESPN codes -> the codes the app uses in the browser (app.js relabels nflverse "LA" to "LAR"; ESPN already says LAR)
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const FEED = { ev: {}, box: {}, mapAt: 0, at: 0, err: "", busy: false };
   let timer = null;
