@@ -1,6 +1,6 @@
 "use strict";
 // Live tracker on the Picks tab (Michael, 2026-11-22; NFL side).
-// Shows the user's locked picks and the signal plays (research.js livePlays) whose games are in progress, against live
+// Shows the user's saved picks (tagged Signal when research.js livePlays also flags them) whose games are in progress, against live
 // box-score numbers, sorted by how close each is to its line, with a rough unit estimate per play.
 //  • Live numbers: ESPN's public game summary, fetched by the browser itself every 30 s, only while the Picks tab is open and
 //    visible, and only for games that hold a tracked play. Unofficial endpoint (same one the pipeline uses for box scores):
@@ -115,15 +115,10 @@
           line: p.line, odds: p.odds == null ? null : Number(p.odds), pickId: p.id, codes: [], gr: P.grade ? P.grade(p) : null });
       }
     }
+    // Signals are only tagged onto picks the user saved; a signal they did not save is never listed here.
     const acc = window.STIX_ACCOUNT;
     if (window.STIX_RESEARCH && STIX_RESEARCH.livePlays && acc && acc.signedIn()) {
-      for (const s of STIX_RESEARCH.livePlays()) {
-        const k = key(s), have = out.get(k);
-        if (have) { have.codes = s.codes; continue; }
-        const odds = s.side === "o" ? s.op : s.up;
-        out.set(k, { pid: s.pid, name: s.name, pos: s.pos, team: s.team, opp: s.opp, ha: s.ha, gid: s.gid, mid: s.mid, side: s.side, line: s.line,
-          odds: odds != null && isFinite(Number(odds)) ? Number(odds) : -110, assumedOdds: odds == null, pickId: null, codes: s.codes });
-      }
+      for (const s of STIX_RESEARCH.livePlays()) { const have = out.get(key(s)); if (have) have.codes = s.codes; }
     }
     return [...out.values()].filter((x) => x.line != null && mkt[x.mid]);
   }
@@ -241,7 +236,7 @@
     return `<div class="panel lv" id="lv-panel"><h3><span class="lv-dot${stale ? " stale" : ""}"></span>Live <span class="muted small">(${rows.length}) · ${FEED.err ? esc(FEED.err) : age == null ? "loading…" : `<span id="lv-age">updated ${age}s ago</span>`}</span></h3><div class="body">
       ${pk.length ? `<div class="lv-sum"><span>Est. net <b>${uTxt(sum(pk))}</b></span></div>
       <div class="lv-sum lv-wl"><span>Settled <b>${sAll.txt}</b></span><span>On pace <b>${pAll.txt}</b></span></div>` : ""}${h}
-      <details class="lv-how small muted"><summary>How to read this</summary><p>Bar = stat so far against the line (white mark); grey tick = where an even pace would be. Live numbers come from ESPN and are provisional until the game is final. Units are a rough estimate (not validated): chance of winning from the stat so far and time left, at the odds saved with the pick (signals: the line's own quote, else −110). Decided plays show the real result. Est. net, Settled and On pace count every play you saved to My picks, whether or not it is also a signal; signals you have not saved are listed but not counted. Settled = plays already won or lost (a push is listed last); On pace also counts live plays by their current lean (On track as a win, At risk as a loss).${noOdds ? ` ${noOdds} play${noOdds === 1 ? "" : "s"} without saved odds show no units.` : ""}</p></details></div></div>`;
+      <details class="lv-how small muted"><summary>How to read this</summary><p>Bar = stat so far against the line (white mark); grey tick = where an even pace would be. Live numbers come from ESPN and are provisional until the game is final. Units are a rough estimate (not validated): chance of winning from the stat so far and time left, at the odds saved with the pick. Decided plays show the real result. Est. net, Settled and On pace count every play you saved to My picks, whether or not it is also a signal; signals you have not saved are not shown. Settled = plays already won or lost (a push is listed last); On pace also counts live plays by their current lean (On track as a win, At risk as a loss).${noOdds ? ` ${noOdds} play${noOdds === 1 ? "" : "s"} without saved odds show no units.` : ""}</p></details></div></div>`;
   }
   const pickIds = () => { try { return new Set(plays().filter((x) => x.pickId).map((x) => x.pickId)); } catch (e) { return new Set(); } };
   function redraw() {
