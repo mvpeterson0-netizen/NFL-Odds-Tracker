@@ -67,9 +67,13 @@
     for (const k of dup) delete idx[k];
     return { players, tt, idx };
   }
-  async function loadMap() {
+  const ymd = (ms) => new Date(ms).toISOString().slice(0, 10).replace(/-/g, "");
+  async function loadMap(gids) {
     FEED.mapAt = Date.now();
-    const sb = await getJson(SB);
+    // Ask ESPN for the scoreboard by date (kickoff days ±1) instead of its default "current week", which can miss a game
+    // ESPN files under another week (e.g. a Wednesday game).
+    const ks = (gids || []).map((g) => (D.games[g] && D.games[g].ko ? new Date(D.games[g].ko).getTime() : NaN)).filter(isFinite);
+    const sb = await getJson(ks.length ? `${SB}?dates=${ymd(Math.min(...ks) - 86400e3)}-${ymd(Math.max(...ks) + 86400e3)}` : SB);
     for (const ev of sb.events || []) {
       const comp = (ev.competitions || [{}])[0] || {};
       const t = {}; for (const c of comp.competitors || []) t[c.homeAway] = fixTeam((c.team || {}).abbreviation);
@@ -244,7 +248,9 @@
       const ps = plays();
       if (!ps.length) return;
       const gids = [...new Set(ps.map((p) => p.gid))];
-      if (gids.some((g) => !FEED.ev[g] || FEED.ev[g].state === "pre") && Date.now() - FEED.mapAt > MAP_MS) { try { await loadMap(); } catch (e) { FEED.err = "ESPN unreachable"; } }
+      if (gids.some((g) => !FEED.ev[g] || FEED.ev[g].state === "pre") && Date.now() - FEED.mapAt > MAP_MS) {
+        try { await loadMap(gids); if (gids.every((g) => !FEED.ev[g])) FEED.err = "game not found on ESPN"; else if (FEED.err === "game not found on ESPN") FEED.err = ""; } catch (e) { FEED.err = "ESPN unreachable"; }
+      }
       // A game still marked pre-game (page opened before kickoff) re-reads the scoreboard at most once per MAP_MS so it flips to live on its own.
       // Games holding one of the user's own picks refresh every 30 s; games with only signal plays every 60 s (each summary is ~45 KB compressed).
       const mine = new Set(ps.filter((p) => p.pickId).map((p) => p.gid)), now = Date.now();
