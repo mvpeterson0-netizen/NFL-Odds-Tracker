@@ -80,9 +80,11 @@
     if (ks.length) urls.push(`${SB}?dates=${ymd(Math.min(...ks) - 86400e3)}-${ymd(Math.max(...ks) + 86400e3)}`);
     urls.push(SB);
     let lastErr = null, gotAny = false;
+    const dbg = [];
     for (const u of urls) {
       let sb;
-      try { sb = await getJson(u); gotAny = true; } catch (e) { lastErr = e; continue; }
+      const lab = u.includes("week=") ? "wk" : u.includes("dates=") ? "dt" : "def";
+      try { sb = await getJson(u); gotAny = true; dbg.push(`${lab}:${(sb.events || []).length}ev`); } catch (e) { lastErr = e; dbg.push(`${lab}:${e && e.name === "AbortError" ? "timeout" : String((e && e.message) || e).slice(0, 18)}`); continue; }
       for (const ev of sb.events || []) {
         const comp = (ev.competitions || [{}])[0] || {};
         const t = {}; for (const c of comp.competitors || []) t[c.homeAway] = fixTeam((c.team || {}).abbreviation);
@@ -94,6 +96,7 @@
       }
       if ((gids || []).every((g) => FEED.ev[g])) return;
     }
+    FEED.dbg = dbg.join(" ");
     if (!gotAny && lastErr) throw lastErr;
   }
 
@@ -261,7 +264,7 @@
       if (!ps.length) return;
       const gids = [...new Set(ps.map((p) => p.gid))];
       if (gids.some((g) => !FEED.ev[g] || FEED.ev[g].state === "pre") && Date.now() - FEED.mapAt > MAP_MS) {
-        try { await loadMap(gids); if (gids.every((g) => !FEED.ev[g])) FEED.err = "game not found on ESPN"; else if (FEED.err === "game not found on ESPN") FEED.err = ""; } catch (e) { FEED.err = "ESPN unreachable (" + (e && e.name === "AbortError" ? "timed out" : String((e && e.message) || e).slice(0, 40)) + ")"; }
+        try { await loadMap(gids); if (gids.every((g) => !FEED.ev[g])) FEED.err = "game not found on ESPN [" + (FEED.dbg || "") + "]"; else if (String(FEED.err).startsWith("game not found on ESPN")) FEED.err = ""; } catch (e) { FEED.err = "ESPN unreachable (" + (e && e.name === "AbortError" ? "timed out" : String((e && e.message) || e).slice(0, 40)) + ")"; }
       }
       // A game still marked pre-game (page opened before kickoff) re-reads the scoreboard at most once per MAP_MS so it flips to live on its own.
       // Games holding one of the user's own picks refresh every 30 s; games with only signal plays every 60 s (each summary is ~45 KB compressed).
