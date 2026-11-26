@@ -1999,6 +1999,34 @@
     const left = sl.left.length ? `<p class="muted small">Left out: ${esc(sl.left.join("; "))}</p>` : "";
     return `<div class="betbox rl-fd" id="ps-box">${pick}${btns}${saveSwitch()}${det}${left}</div>`;
   }
+  // "Graded this week" (Michael 2026-11-26): the week now being played = the latest week with a game that has kicked off. Every signal whose situation held for its
+  // player in a finished game of that week, graded hit / miss / push against the saved pre-game line (same rule as psRecord). Display only; no signal, list or record changes.
+  function psCurWeek() { const now = Date.now(); let w = null; for (const g of Object.values(D.games)) { if (!g.ko || new Date(g.ko).getTime() > now) continue; if (w == null || g.wk > w) w = g.wk; } return w; }
+  function psDoneHtml() {
+    const wk = psCurWeek(); if (wk == null || wk < PS_FIRST_WK) return "";
+    const rows = [];
+    for (const s of PS) {
+      if (s[5] === "high_total") continue;
+      const r = (D.rows[s[1]] || []).find((x) => x.wk === wk && x.final && x.played === true); if (!r) continue;
+      const m = r.m && r.m[s[4]]; if (!m || m.lstat !== "ok" || m.line == null || m.act == null) continue;
+      if (psCond(s[5], r) !== true) continue;
+      const side = s[6] === "o" ? "over" : "under", res = m.act > m.line ? "over" : m.act < m.line ? "under" : "push";
+      rows.push({ s, r, m, side, out: res === "push" ? "push" : res === side ? "hit" : "miss" });
+    }
+    if (!rows.length) return `<h3 class="sg-sec">Graded, week ${wk} (0)</h3><p class="muted small">No signal has a finished game yet this week. Results appear here once each game is over.</p>`;
+    const ord = { hit: 0, miss: 1, push: 2 };
+    rows.sort((a, b) => ord[a.out] - ord[b.out] || new Date(a.r.ko) - new Date(b.r.ko) || a.s[2].localeCompare(b.s[2]));
+    const n = (o) => rows.filter((x) => x.out === o).length, push = n("push");
+    let h = `<h3 class="sg-sec">Graded, week ${wk} (${rows.length})</h3><p class="muted small">${n("hit")} hit · ${n("miss")} missed${push ? ` · ${push} push` : ""}. Signals that fired this week, graded against the line saved before kickoff, once the game is over.</p><div class="panel rlist">`;
+    for (const x of rows) {
+      const { s, r, m } = x, label = mkt[s[4]] ? mkt[s[4]].label : s[4], p = psPlayer(s[1]);
+      const link = p ? `<a class="pname" href="#/player/${esc(s[1])}">${esc(s[2])}</a>` : `<span class="pname">${esc(s[2])}</span>`;
+      h += `<div class="rlrow sg-pr ps-row"><div class="rlhead" style="flex-wrap:wrap">${link}<span class="rlstat">${esc(label)}</span><span class="chip rl-side ${x.side}">${s[6] === "o" ? "Over" : "Under"} ${num(m.line)}</span><span class="pk-res ${x.out}">${x.out === "hit" ? "Hit" : x.out === "miss" ? "Miss" : "Push"} · ${num(m.act)}</span></div>
+        <div class="sg-m"><span class="small"><b>${esc(PS_COND[s[5]])}</b></span><span class="muted small">${esc(s[0])}</span></div>
+        <div class="sg-m"><span class="muted small">${esc(r.slot || (p && p.pos) || s[3])} · ${esc(r.team)} ${r.ha === "home" ? "vs" : "@"} ${esc(r.opp)} · ${esc(fmtTime(r.ko))}</span></div></div>`;
+    }
+    return h + `</div>`;
+  }
   function psHtml() {
     const upWk = psUpWeek(), all = !!RL.psAll, onlyFire = !!RL.psFire;
     const stats = PS.map((s) => Object.assign({ s }, psStatus(s, upWk)));
@@ -2025,7 +2053,7 @@
     const ctl = `<div class="sg-scope"><button type="button" class="gchip ${onlyFire ? "on" : ""}" data-psfire="1">Firing in week ${upWk} only (${all ? fires.length : nTop})</button><button type="button" class="gchip ${all ? "on" : ""}" data-psmore="1">${all ? `Showing all ${PS.length}` : `Show all ${PS.length}`}</button></div>`;
     const head = `<h3 class="sg-sec">${all ? `All ${PS.length} signals` : `Top ${PS_TOP} signals`} · ${all ? fires.length : nTop} firing in week ${upWk}${all ? "" : ` (${fires.length} of all ${PS.length})`}</h3>`;
     const rows = list.length ? list.map(rowH).join("") : `<p class="muted">None of these fire in week ${upWk}.</p>`;
-    return `<section id="rl" data-page="ps">${gsecRow("Signals · Player signals")}${tabs}${intro}${ctl}${head}${psSlipBox(fires)}<div class="panel rlist">${rows}</div></section>`;
+    return `<section id="rl" data-page="ps">${gsecRow("Signals · Player signals")}${tabs}${intro}${ctl}${head}${psSlipBox(fires)}<div class="panel rlist">${rows}</div>${psDoneHtml()}</section>`;
   }
   document.addEventListener("click", (e) => {
     const t = e.target; if (!t || !t.closest) return;
