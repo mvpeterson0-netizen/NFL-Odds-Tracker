@@ -261,7 +261,11 @@
       hapEl.click();
     } catch (e) { /* haptics are optional */ }
   }
+  // Height of the pinned top bar, so each game's header can pin right under it (CSS --top-h).
+  function topH() { const t = document.querySelector(".top"); if (t) document.documentElement.style.setProperty("--top-h", Math.round(t.getBoundingClientRect().height) + "px"); }
+  window.addEventListener("resize", topH);
   function flowBind() {
+    topH();
     if (hapIO) { hapIO.disconnect(); hapIO = null; }
     const cards = document.querySelectorAll(".mcard");
     if (!cards.length || !("IntersectionObserver" in window) || document.body.classList.contains("duo-on")) return;
