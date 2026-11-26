@@ -249,3 +249,4 @@
 - 2026-11-25 · PR: live tracker Rams fix · Live panel could not match any Rams game to ESPN (it converted ESPN's LAR to LA while the app shows LAR); now matches. UI only, NFL side.
 - 2026-11-25 · PR: Live totals use saved picks · Est. net, Settled and On pace in the Picks tab's Live panel now count every play saved to My picks (a saved signal counts); unsaved signals are listed but not counted. Removed the My picks / Signals split. UI only, NFL side.
 - 2026-11-25 · PR: Live panel hides unsaved signals · The Picks tab Live panel now lists only plays saved to My picks (a saved pick still shows a Signal tag if one applies). Signals not saved are no longer shown. UI only, NFL side.
+- 2026-11-26 · PR: Live panel idle label · When every play in the Live panel is already settled, the header says "No games in-progress" instead of staying on "loading…". UI only, NFL side.
