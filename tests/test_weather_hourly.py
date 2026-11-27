@@ -108,5 +108,81 @@ class Refresh(unittest.TestCase):
             "obs_precip_in", "note", "pre_fetched_utc", "pre_temp_f", "pre_wind_mph", "pre_gust_mph", "pre_precip_in"])
 
 
+class ObservedFill(unittest.TestCase):
+    """Games observed before hourly detail existed get only the three new columns, once; stored values are never changed."""
+    PAST = datetime(2026, 11, 1, 18, 0, tzinfo=timezone.utc)
+    NOW = datetime(2026, 11, 27, 12, 0, tzinfo=timezone.utc)
+
+    def setup_file(self, tmp, **extra):
+        row = {"game_id": "2026_08_X_BUF", "stadium": "Highmark Stadium", "roof": "open", "obs_fetched_utc": "2026-11-08T00:00:00Z",
+               "obs_temp_f": "41", "obs_wind_mph": "9", "obs_gust_mph": "20", "obs_precip_in": "0.12", "note": ""}
+        row.update(extra)
+        path = Path(tmp) / "weather.csv"
+        write_csv(path, [row], weather.FIELDS)
+        return path
+
+    def run_refresh(self, path, series_by_call):
+        game = {"game_id": "2026_08_X_BUF", "kickoff_utc": iso(self.PAST), "stadium": "Highmark Stadium"}
+        with mock.patch.object(weather, "WEATHER_PATH", path), mock.patch.object(weather, "utcnow", return_value=self.NOW), \
+                mock.patch.object(weather, "_fetch", return_value=series_by_call) as f:
+            log = []
+            weather.refresh([game], log)
+        return f, log
+
+    def test_fills_new_columns_and_leaves_stored_values_alone(self):
+        s = series(self.PAST, [0.0, 0.02, 0.04, 0.03, 0.03, 0.0], snow=[0.0] * 6, codes=[3, 61, 61, 61, 3, 3])
+        for v in s.values():
+            v["temperature_2m"], v["wind_speed_10m"], v["precipitation"] = 99.0, 99.0, v["precipitation"]  # archive "revised"
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self.setup_file(tmp)
+            f, log = self.run_refresh(path, s)
+            r = read_csv(path)[0]
+            self.assertEqual((r["obs_temp_f"], r["obs_wind_mph"], r["obs_gust_mph"], r["obs_precip_in"]), ("41", "9", "20", "0.12"))
+            self.assertEqual(r["obs_fetched_utc"], "2026-11-08T00:00:00Z")
+            self.assertEqual(r["obs_precip_hrs"], "0.0;0.02;0.04;0.03;0.03;0.0")
+            self.assertEqual(r["obs_wcode_hrs"], "3;61;61;61;3;3")
+            self.assertEqual(r["obs_snow_in"], "0.0")
+            self.assertTrue(any("hourly detail filled for 1" in l for l in log))
+            self.assertEqual(f.call_count, 1)
+
+    def test_not_repeated_once_filled(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self.setup_file(tmp, obs_precip_hrs="0.0;0.0;0.0;0.0;0.0;0.0")
+            f, _ = self.run_refresh(path, {})
+            self.assertEqual(f.call_count, 0)
+
+    def test_unavailable_window_is_marked_and_not_retried(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self.setup_file(tmp)
+            self.run_refresh(path, {})  # archive returned nothing for the game
+            self.assertEqual(read_csv(path)[0]["obs_precip_hrs"], "na")
+            f, _ = self.run_refresh(path, {})
+            self.assertEqual(f.call_count, 0)
+
+    def test_not_filled_before_the_archive_delay(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self.setup_file(tmp)
+            game = {"game_id": "2026_08_X_BUF", "kickoff_utc": iso(self.NOW - timedelta(days=3)), "stadium": "Highmark Stadium"}
+            with mock.patch.object(weather, "WEATHER_PATH", path), mock.patch.object(weather, "utcnow", return_value=self.NOW), \
+                    mock.patch.object(weather, "_fetch", return_value={}) as f:
+                weather.refresh([game], [])
+            self.assertEqual(f.call_count, 0)
+
+    def test_at_most_ten_stadiums_per_run(self):
+        names = [n for n, v in weather.STADIUMS.items() if v[2] != "dome"][:14]
+        games = [{"game_id": f"2026_08_{i}", "kickoff_utc": iso(self.PAST), "stadium": n} for i, n in enumerate(names)]
+        rows = [{"game_id": g["game_id"], "stadium": g["stadium"], "roof": "open", "obs_temp_f": "50", "obs_wind_mph": "5",
+                 "obs_precip_in": "0.0", "obs_fetched_utc": "2026-11-08T00:00:00Z", "note": ""} for g in games]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "weather.csv"
+            write_csv(path, rows, weather.FIELDS)
+            with mock.patch.object(weather, "WEATHER_PATH", path), mock.patch.object(weather, "utcnow", return_value=self.NOW), \
+                    mock.patch.object(weather, "_fetch", return_value=series(self.PAST, [0.0] * 6)) as f:
+                weather.refresh(games, [])
+            self.assertEqual(f.call_count, 10)
+            left = [r for r in read_csv(path) if not r["obs_precip_hrs"]]
+            self.assertEqual(len(left), 4)  # the rest are filled on later runs
+
+
 if __name__ == "__main__":
     unittest.main()

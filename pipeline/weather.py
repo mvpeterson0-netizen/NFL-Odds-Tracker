@@ -47,6 +47,7 @@ FORECAST_REFRESH = timedelta(hours=3)
 PRE_FROM, PRE_TO = timedelta(minutes=22), timedelta(minutes=3)
 ARCHIVE_DELAY = timedelta(days=6)
 ARCHIVE_RETRY = timedelta(hours=20)
+FILL_MAX_STADIUMS = 10  # one-time hourly-detail fill for already-observed games: at most this many stadiums (calls) per run
 GAME_HOURS = 4  # kickoff hour + next 3 hours
 DETAIL_BEFORE, DETAIL_AFTER = 1, 4  # hourly detail kept from 1 hour before the kickoff hour to 4 hours after it
 
@@ -166,7 +167,7 @@ def _refresh(games, log) -> bool:
     now = utcnow()
     old = {r["game_id"]: r for r in read_csv(WEATHER_PATH)}
     rows = {gid: dict(r) for gid, r in old.items()}
-    fc_due, obs_due, pre_due_by = {}, {}, {}
+    fc_due, obs_due, pre_due_by, fill_due = {}, {}, {}, {}
     for g in games:
         ko = parse_iso(g.get("kickoff_utc", ""))
         if ko is None:
@@ -192,11 +193,15 @@ def _refresh(games, log) -> bool:
             last = parse_iso(r.get("obs_fetched_utc", ""))
             if last is None or now - last >= ARCHIVE_RETRY:
                 obs_due.setdefault(stadium, []).append((g, ko))
+        elif ko + timedelta(hours=GAME_HOURS) + ARCHIVE_DELAY <= now and not r.get("obs_precip_hrs"):
+            # observed before hourly detail existed (2026-11-27): fill only the three new columns, once
+            fill_due.setdefault(stadium, []).append((g, ko))
 
-    calls = errors = 0
+    calls = errors = filled = 0
     dead = False
-    for kind, due, url in (("pre", pre_due_by, FORECAST_URL), ("fc", fc_due, FORECAST_URL), ("obs", obs_due, ARCHIVE_URL)):
-        for stadium, items in due.items():
+    for kind, due, url in (("pre", pre_due_by, FORECAST_URL), ("fc", fc_due, FORECAST_URL), ("obs", obs_due, ARCHIVE_URL),
+                           ("fill", fill_due, ARCHIVE_URL)):
+        for stadium, items in (list(due.items())[:FILL_MAX_STADIUMS] if kind == "fill" else due.items()):
             if dead:
                 break
             lat, lon, _ = STADIUMS[stadium]
@@ -216,6 +221,14 @@ def _refresh(games, log) -> bool:
                 continue
             for g, ko in items:
                 r = rows[g["game_id"]]
+                if kind == "fill":
+                    # never touches the stored observed values, fetched time or note: only the three hourly-detail columns
+                    w = _window(series, ko)
+                    r["obs_precip_hrs"] = w["precip_hrs"] if w else "na"  # "na" = the archive had no complete window; not retried
+                    if w:
+                        r["obs_snow_in"], r["obs_wcode_hrs"] = w["snow_in"], w["wcode_hrs"]
+                    filled += 1
+                    continue
                 r[f"{kind}_fetched_utc"] = iso(now)
                 w = _window(series, ko)
                 if w is None:
@@ -231,7 +244,8 @@ def _refresh(games, log) -> bool:
     if changed or not WEATHER_PATH.exists():
         write_csv(WEATHER_PATH, out, FIELDS)
     if calls or errors:
-        log.append(f"weather: {calls} Open-Meteo calls" + (f", {errors} failed" if errors else ""))
+        log.append(f"weather: {calls} Open-Meteo calls" + (f", {errors} failed" if errors else "")
+                   + (f", hourly detail filled for {filled} observed games" if filled else ""))
     return changed
 
 
