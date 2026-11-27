@@ -1341,6 +1341,24 @@
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
     return h + `</div>${pager}` + live;
   }
+  // Indicators page (Michael 2026-11-27): the page is long, so the record panel + player list slide up to sit right under the picked tile's row,
+  // and the tile scrolls to the middle of the screen. Display only: no rule, list, score or number changes. Signals page is untouched.
+  function placeDetail() {
+    const root = document.getElementById("rl"), d = document.getElementById("sg-detail");
+    if (!root || !d || root.dataset.page !== "ind") return;
+    const id = RL.sigs[RL.sigs.length - 1], focus = RL.focus; RL.focus = null;
+    if (!id) return; // nothing picked: the list stays at the bottom
+    const tile = root.querySelector(`.sg-tile[data-sig="${id}"]`), cell = tile && tile.closest(".sg-cell"), grid = cell && cell.parentElement;
+    if (!cell || !grid || !grid.classList.contains("sg-grid")) return;
+    let last = cell; // the detail goes after the last tile on the same row (two tiles per row on a phone)
+    for (let n = cell.nextElementSibling; n && n.classList.contains("sg-cell") && n.offsetTop === cell.offsetTop; n = n.nextElementSibling) last = n;
+    grid.insertBefore(d, last.nextSibling);
+    if (focus === id) {
+      d.classList.add("sg-detail-in");
+      const calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      cell.scrollIntoView({ block: "center", behavior: calm ? "auto" : "smooth" });
+    }
+  }
   function html(page) {
     if (page === "ps") { SGPAGE = "ps"; return psHtml(); }
     if (page === undefined && SGPAGE === "ps") return psHtml();
@@ -1350,9 +1368,12 @@
     let inner = topSection(tabs); // also sets RL.unlocked
     RL.sigs = RL.sigs.filter((id) => RL.unlocked.has(id));
     const picked = RL.sigs.map((id) => tabs.find((t) => t.id === id));
-    if (picked.length) inner += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
-    inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
+    let det = "";
+    if (picked.length) det += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
+    det += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
+    inner += SGPAGE === "ind" ? `<div class="sg-detail" id="sg-detail">${det}</div>` : det; // Indicators: placeDetail() moves this block under the picked tile
     setTimeout(placeGate, 0);
+    setTimeout(placeDetail, 0);
     const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Six tiles live on Signals: Short yd, QB Rush, Line Lag, Big Dog, Lil Dog and Rec Up. Everything else is here, grouped by how it held up. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
     const fwdNote = RL.fwd ? `<p class="muted small sg-fwdnote">Since freeze: each tile counts only bets from the week its signal was frozen (Week ${FWD_WK0} for most; later for signals added after). Earlier weeks are discovery. Long-press the heading again to go back.</p>` : "";
     return `<section id="rl" data-page="${SGPAGE}">${head}${fwdNote}${sgToggleHtml()}${inner}</section>`;
@@ -1365,7 +1386,7 @@
     const o = e.target.closest && e.target.closest("[data-sgopt]");
     if (o) { const [k, v] = o.dataset.sgopt.split(":"); delete RL.any[k]; RL.opt[k] = +v; (RL.optTouched = RL.optTouched || {})[k] = true; redraw(); return; }
     const c = e.target.closest && e.target.closest("[data-sig]");
-    if (c) { const id = c.dataset.sig; delete RL.any[id]; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : multiSelect() ? [...RL.sigs, id] : [id]; redraw(); return; }
+    if (c) { const id = c.dataset.sig; delete RL.any[id]; RL.sigs = RL.sigs.includes(id) ? RL.sigs.filter((x) => x !== id) : multiSelect() ? [...RL.sigs, id] : [id]; RL.focus = RL.sigs.includes(id) ? id : null; redraw(); return; }
     if (e.target.closest && e.target.closest("[data-sgclear]")) { RL.sigs = []; RL.any = {}; redraw(); return; }
     if (e.target.closest && e.target.closest("[data-sgtnf]")) { RL.tnf = !tnfOn(); if (RL.tnf && sgToggleOn()) RL.sgView = todayWk() === curWk() ? "next" : "last"; redraw(); return; }
     const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; if (RL.tnf && todayWk() !== (RL.sgView === "last" ? curWk() - 1 : curWk())) RL.tnf = false; redraw(); return; }
@@ -1382,6 +1403,7 @@
       timer = setTimeout(() => {
         timer = 0; fired = true; RL.fwd = !RL.fwd;
         try { if (navigator.vibrate) navigator.vibrate(15); } catch (err) { /* not supported */ }
+        RL.focus = RL.sigs.includes(id) ? id : null;
         redraw();
       }, 600);
     });
@@ -1407,6 +1429,7 @@
         if (anyTog(id)) { RL.sigs = RL.sigs.filter((x) => x !== id); delete RL.any[id]; }
         else { RL.sigs = multiSelect() ? [...new Set([...RL.sigs, id])] : [id]; if (t.opts) RL.any[id] = true; else delete RL.any[id]; }
         try { if (navigator.vibrate) navigator.vibrate(15); } catch (err) { /* not supported */ }
+        RL.focus = RL.sigs.includes(id) ? id : null;
         redraw();
       }, 500);
     });
