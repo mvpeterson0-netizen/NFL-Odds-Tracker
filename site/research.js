@@ -982,9 +982,16 @@
     return { by, all, s: tally(all) };
   }
   const bkey = (x) => `${x.p.id}|${x.mid}|${x.r.gid}|${x.side}`;
+  // "Since freeze" view (Michael 2026-11-27): long-press the Signals heading to switch every tile to the record counted from the week each signal was frozen.
+  // Display only: no rule, list, score or stored data changes, and the tile order does not move. A freeze week is the first week whose bets are forward;
+  // FWD_WK is from claude/frozen-signal-register.md and the CHANGELOG (Wk 10 is a transition week, left out). tr3 (merged Thu 2026-11-26) starts Wk 13 to be safe.
+  const FWD_WK0 = 11, FWD_WK = { syc40: 12, syl45: 12, wx1: 12, gr1: 12, sp6: 12, tr3: 13 };
+  const fwdId = (t) => (t.members ? t.members[RL.opt[t.id]] : t.id);
+  const fwdWk = (t) => FWD_WK[fwdId(t)] ?? FWD_WK0;
+  const fwdList = (t, list) => (RL.fwd ? list.filter((x) => x.r.wk >= fwdWk(t)) : list);
   // bets for the picked signals: one signal = its bets; several = only bets that fit every picked signal (same player, stat, game, side)
   function betsFor(ts) {
-    const lists = ts.map((t) => sigRec(t).all);
+    const lists = ts.map((t) => fwdList(t, sigRec(t).all));
     if (lists.length === 1) return lists[0];
     let keep = new Set(lists[0].map(bkey));
     for (const l of lists.slice(1)) { const k2 = new Set(l.map(bkey)); keep = new Set([...keep].filter((k) => k2.has(k))); }
@@ -1020,13 +1027,13 @@
   function tileHtml(t, st, locked) {
     const on = RL.sigs.includes(t.id), s = st.s, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
     const cnt = sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length; // this week's players: upcoming + in progress + completed
-    const t3 = !!t.opts || !!t.front, ttl = t.tile || t.label, roiSpan = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span>`; // 3-way toggle tiles: ROI sits in the title row, toggles go under it
+    const t3 = !!t.opts || !!t.front, ttl = t.tile || t.label, roiSpan = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(Math.abs(s.roi) >= 100 ? 0 : 1)}%` : "—"}</span>`; // 3-way toggle tiles: ROI sits in the title row, toggles go under it
     const optN = (v) => withOpt(t, v, () => sgFilt(compute(t.id)).length + computeLiveCount(t.id) + doneBets(t.id).length); // this week's props for that toggle
     const tg = t.opts ? `<span class="sg-tg" role="group" aria-label="${esc(ttl)} threshold">${t.opts.map((v) => `<button type="button" class="${RL.opt[t.id] === v || anyTog(t.id) ? "on" : ""}" data-sgopt="${t.id}:${v}" ${locked ? "tabindex=\"-1\"" : ""}>${(t.optTile || t.optFmt)(v)} <span class="sg-n">${optN(v)}</span></button>`).join("")}</span>` : "";
     return `<div class="sg-cell${t.opts ? " sg-cell3" : t.front ? " sg-cell3 sg-ntg" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}${anyTog(t.id) ? " any" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b class="sg-ttl2" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}">${esc(ttl)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
       <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "today" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
-      ${st.by ? spark(st.by, roiBand(t), t.front && !t.opts ? 86 : 0) : ""}</button>${tg}</div>`;
+      ${st.by ? spark(st.by, RL.fwd ? null : roiBand(t), t.front && !t.opts ? 86 : 0) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
   // Toggle default (Michael 2026-11-12): a signal with a toggle (QB-R2, QB-R4) opens on whichever setting has the larger ROI so far this season.
@@ -1055,8 +1062,9 @@
     const scopeNow = SGPAGE === "ind" ? RL.scope : "season";
     const mWeeks = scopeNow === "month" ? new Set(Object.values(D.games).filter((g) => g.final && inMonth(g.ko)).map((g) => g.wk)) : null;
     const rows = tabs.map((t) => {
-      const r = sigRec(t), sc = r.all.filter(inScope);
-      const by = scopeNow === "last" ? r.by.filter((x) => x.w === curWk() - 1) : scopeNow === "month" ? r.by.filter((x) => mWeeks.has(x.w)).map((x) => ({ w: x.w, list: x.list.filter(inScope) })) : r.by;
+      const r = sigRec(t), fz = RL.fwd ? fwdWk(t) : 0, sc = r.all.filter(inScope).filter((x) => x.r.wk >= fz);
+      let by = scopeNow === "last" ? r.by.filter((x) => x.w === curWk() - 1) : scopeNow === "month" ? r.by.filter((x) => mWeeks.has(x.w)).map((x) => ({ w: x.w, list: x.list.filter(inScope) })) : r.by;
+      if (RL.fwd) by = by.filter((x) => x.w >= fz);
       return { t, by, s: tally(sc) };
     });
     const rk = new Map(tabs.map((t) => [t.id, rankStat(t)]));
@@ -1165,7 +1173,7 @@
   const tnfOn = () => !!RL.tnf && tnfShow();
   const sgFilt = (list) => { if (tnfOn()) { const g = tnfGids(); return list.filter((x) => g.has(x.c.r.gid)); } const w = sgWk(); return w == null ? list : list.filter((x) => x.c.r.wk === w); };
   const tnfBtn = () => (tnfShow() ? `<button type="button" class="sg-tnf ${tnfOn() ? "on" : ""}" data-sgtnf aria-pressed="${tnfOn()}" style="position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0;padding:4px 11px;font-size:12px;font-weight:700;line-height:1;border-radius:999px">Today</button>` : "");
-  const gsecRow = (t) => `<div class="sg-ttl" style="position:relative"><h2 class="gsec">${t}</h2>${tnfBtn()}</div>`;
+  const gsecRow = (t) => `<div class="sg-ttl" style="position:relative"><h2 class="gsec" data-sgfwd style="-webkit-user-select:none;user-select:none;-webkit-touch-callout:none">${t}${RL.fwd && SGPAGE !== "ps" ? ` <span class="muted small" style="font-weight:600">· since freeze</span>` : ""}</h2>${tnfBtn()}</div>`;
   function sgToggleHtml() {
     const v = sgView(); if (v == null) return "";
     return `<div class="sgview" role="tablist" aria-label="Week"><button type="button" role="tab" aria-selected="${v === "last"}" class="${v === "last" ? "on" : ""}" data-sgview="last">Last week · W${curWk() - 1}</button><button type="button" role="tab" aria-selected="${v === "next"}" class="${v === "next" ? "on" : ""}" data-sgview="next">Upcoming · W${curWk()}</button></div>`;
@@ -1310,7 +1318,8 @@
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
     const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY (40+ catches, Line 45+, Fluke), 1H and BL-200 now live on Signals; SY-R25 and SY-NL stay here. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
-    return `<section id="rl" data-page="${SGPAGE}">${head}${sgToggleHtml()}${inner}</section>`;
+    const fwdNote = RL.fwd ? `<p class="muted small sg-fwdnote">Since freeze: each tile counts only bets from the week its signal was frozen (Week ${FWD_WK0} for most; later for signals added after). Earlier weeks are discovery. Long-press the heading again to go back.</p>` : "";
+    return `<section id="rl" data-page="${SGPAGE}">${head}${fwdNote}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
     const el = document.getElementById("rl"); if (!el) return;
@@ -1326,6 +1335,26 @@
     const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; if (RL.tnf && todayWk() !== (RL.sgView === "last" ? curWk() - 1 : curWk())) RL.tnf = false; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
   });
+  // Long press (about 0.6 s) on the "Signals" heading of the Signals or Indicators page toggles the "since freeze" view for every tile.
+  (function headingLongPress() {
+    let timer = 0, sx = 0, sy = 0, swallowUntil = 0, fired = false;
+    const stop = () => { clearTimeout(timer); timer = 0; };
+    const inHead = (e) => e.target.closest && e.target.closest("#rl h2[data-sgfwd]") && e.target.closest('#rl[data-page="main"], #rl[data-page="ind"]');
+    document.addEventListener("pointerdown", (e) => {
+      if (!inHead(e) || (e.pointerType === "mouse" && e.button !== 0)) return;
+      stop(); sx = e.clientX; sy = e.clientY;
+      timer = setTimeout(() => {
+        timer = 0; fired = true; RL.fwd = !RL.fwd;
+        try { if (navigator.vibrate) navigator.vibrate(15); } catch (err) { /* not supported */ }
+        redraw();
+      }, 600);
+    });
+    document.addEventListener("pointermove", (e) => { if (timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) stop(); });
+    for (const ev of ["pointerup", "pointercancel", "scroll"]) document.addEventListener(ev, stop, true);
+    for (const ev of ["pointerup", "pointercancel"]) document.addEventListener(ev, () => { if (fired) { fired = false; swallowUntil = Date.now() + 80; } }, true);
+    document.addEventListener("click", (e) => { if (Date.now() < swallowUntil && inHead(e)) { e.stopImmediatePropagation(); e.preventDefault(); swallowUntil = 0; } }, true);
+    document.addEventListener("contextmenu", (e) => { if (inHead(e) && (fired || Date.now() < swallowUntil || timer || (window.matchMedia && matchMedia("(pointer: coarse)").matches))) e.preventDefault(); });
+  })();
   // Long press on a Signals tile (Michael 2026-11-22): pick it with ALL its toggles on (list = players matching any of them); long press again to unpick.
   // A tile with no toggles just gets picked. The click that follows the press is swallowed so it doesn't undo the pick.
   (function longPress() {
