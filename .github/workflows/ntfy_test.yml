@@ -1,0 +1,23 @@
+name: ntfy test (manual)
+
+# Manual one-click check that the NTFY_TOPIC repo secret reaches Michael's phone (2026-11-27).
+# Sends one clearly-labelled test message. Touches no data and no other workflow.
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a test message to ntfy
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          if [ -z "$NTFY_TOPIC" ]; then
+            echo "NTFY_TOPIC secret is empty or missing - nothing sent"; exit 1
+          fi
+          curl -fsS -X POST -H "Title: Stix ntfy test" -H "Tags: white_check_mark" -H "Click: https://www.sharpstix.com/" \
+            --data-binary "Test from GitHub Actions. If you can read this, Stix alerts will reach this phone." \
+            "https://ntfy.sh/$NTFY_TOPIC" > /dev/null && echo "test message sent"
