@@ -10,6 +10,13 @@ For every outdoor or retractable-roof game:
 
 Values are taken at the stadium: temperature and wind at the kickoff hour, and
 precipitation summed over the kickoff hour plus the next 3 hours.
+
+Hourly detail (added 2026-11-27, Michael): each reading also keeps the individual hourly values around the game, so rain
+rate and rain-vs-snow can be studied later: {fc,pre,obs}_precip_hrs (inches, 6 hourly values from the hour before the
+kickoff hour to 4 hours after it, ";"-separated, blank where unavailable), {fc,pre,obs}_snow_in (snowfall water-equivalent
+inches summed over the same 4-hour window as precip_in) and {fc,pre,obs}_wcode_hrs (WMO weather codes for the same 6
+hours). The hour labels are Open-Meteo's own; whether a label covers the hour ending or starting at that time is not
+verified here, which is why one hour either side of the window is kept. The existing columns are unchanged.
 Fixed-dome stadiums are labeled "dome" and not fetched.
 
 A weather failure never fails the run: errors are logged and retried next run.
@@ -29,7 +36,9 @@ FIELDS = ["game_id", "stadium", "roof",
           "fc_fetched_utc", "fc_temp_f", "fc_wind_mph", "fc_gust_mph", "fc_precip_in", "fc_precip_prob",
           "obs_fetched_utc", "obs_temp_f", "obs_wind_mph", "obs_gust_mph", "obs_precip_in",
           "note",
-          "pre_fetched_utc", "pre_temp_f", "pre_wind_mph", "pre_gust_mph", "pre_precip_in"]
+          "pre_fetched_utc", "pre_temp_f", "pre_wind_mph", "pre_gust_mph", "pre_precip_in",
+          "fc_precip_hrs", "fc_snow_in", "fc_wcode_hrs", "obs_precip_hrs", "obs_snow_in", "obs_wcode_hrs",
+          "pre_precip_hrs", "pre_snow_in", "pre_wcode_hrs"]
 FORECAST_HORIZON = timedelta(days=15)  # Open-Meteo allows end_date up to ~16 days out
 FORECAST_REFRESH = timedelta(hours=3)
 # Pre-kickoff reading window: the first run 22 to 3 minutes before kickoff takes it (the workflow runs about every 5 minutes, so
@@ -39,6 +48,7 @@ PRE_FROM, PRE_TO = timedelta(minutes=22), timedelta(minutes=3)
 ARCHIVE_DELAY = timedelta(days=6)
 ARCHIVE_RETRY = timedelta(hours=20)
 GAME_HOURS = 4  # kickoff hour + next 3 hours
+DETAIL_BEFORE, DETAIL_AFTER = 1, 4  # hourly detail kept from 1 hour before the kickoff hour to 4 hours after it
 
 # Stadium name as it appears in the nflverse schedule -> (lat, lon, roof)
 # roof: "open" (outdoors), "dome" (fixed roof), "retractable" (open/closed not known in advance)
@@ -85,16 +95,29 @@ STADIUMS = {
 }
 
 
+BASE_HOURLY = "temperature_2m,precipitation,wind_speed_10m,wind_gusts_10m"
+EXTRA_HOURLY = ",snowfall,weather_code"
+
+
 def _fetch(url, lat, lon, start, end, forecast):
-    hourly = "temperature_2m,precipitation,wind_speed_10m,wind_gusts_10m"
-    if forecast:
-        hourly += ",precipitation_probability"
-    params = {"latitude": lat, "longitude": lon, "hourly": hourly, "timezone": "GMT",
-              "temperature_unit": "fahrenheit", "wind_speed_unit": "mph", "precipitation_unit": "inch",
-              "start_date": start.strftime("%Y-%m-%d"), "end_date": end.strftime("%Y-%m-%d")}
-    body, _, status = http_get(url, params, timeout=30, retries=2)
-    if status != 200:
-        raise RuntimeError(f"Open-Meteo HTTP {status}: {body[:150]!r}")
+    """Hourly series keyed by time. Asks for snowfall and weather codes too; if Open-Meteo rejects those (HTTP 400), the
+    original variables are fetched alone so temperature, wind and precipitation keep working."""
+    def get(hourly):
+        if forecast:
+            hourly += ",precipitation_probability"
+        params = {"latitude": lat, "longitude": lon, "hourly": hourly, "timezone": "GMT",
+                  "temperature_unit": "fahrenheit", "wind_speed_unit": "mph", "precipitation_unit": "inch",
+                  "start_date": start.strftime("%Y-%m-%d"), "end_date": end.strftime("%Y-%m-%d")}
+        body, _, status = http_get(url, params, timeout=30, retries=2)
+        if status != 200:
+            raise RuntimeError(f"Open-Meteo HTTP {status}: {body[:150]!r}")
+        return body
+    try:
+        body = get(BASE_HOURLY + EXTRA_HOURLY)
+    except RuntimeError as e:
+        if "HTTP 400" not in str(e):
+            raise
+        body = get(BASE_HOURLY)
     h = json.loads(body).get("hourly") or {}
     times = h.get("time") or []
     return {t: {k: (h.get(k) or [None] * len(times))[i] for k in h if k != "time"} for i, t in enumerate(times)}
@@ -113,10 +136,16 @@ def _window(series, ko):
     precip = [r.get("precipitation") for r in rows]
     probs = [r.get("precipitation_probability") for r in rows if r.get("precipitation_probability") is not None]
     f = lambda v, d=0: "" if v is None else str(round(v, d)) if d else str(int(round(v)))
+    detail = [series.get((start + timedelta(hours=i)).strftime("%Y-%m-%dT%H:%M")) or {}
+              for i in range(-DETAIL_BEFORE, DETAIL_AFTER + 1)]
+    snow = [r.get("snowfall") for r in rows]
     return {"temp_f": f(k["temperature_2m"]), "wind_mph": f(k["wind_speed_10m"]),
             "gust_mph": f(k.get("wind_gusts_10m")),
             "precip_in": "" if any(p is None for p in precip) else f(sum(precip), 2),
-            "precip_prob": f(max(probs)) if probs else ""}
+            "precip_prob": f(max(probs)) if probs else "",
+            "precip_hrs": ";".join(f(r.get("precipitation"), 2) for r in detail),
+            "snow_in": "" if any(x is None for x in snow) else f(sum(snow), 2),
+            "wcode_hrs": ";".join(f(r.get("weather_code")) for r in detail)}
 
 
 def pre_due(ko, now, row) -> bool:
@@ -171,8 +200,8 @@ def _refresh(games, log) -> bool:
             if dead:
                 break
             lat, lon, _ = STADIUMS[stadium]
-            start = min(ko for _, ko in items)
-            end = max(ko for _, ko in items) + timedelta(hours=GAME_HOURS)
+            start = min(ko for _, ko in items) - timedelta(hours=DETAIL_BEFORE + 1)
+            end = max(ko for _, ko in items) + timedelta(hours=DETAIL_AFTER + 1)
             if kind in ("fc", "pre"):
                 end = min(end, now + FORECAST_HORIZON)
             try:
