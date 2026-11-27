@@ -1341,11 +1341,11 @@
     const pager = pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-rlpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(rows.length, pg * PAGE + PAGE)} of ${rows.length}</span><button type="button" class="linkbtn" data-rlpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "";
     return h + `</div>${pager}` + live;
   }
-  // Indicators page (Michael 2026-11-27): the page is long, so the record panel + player list slide up to sit right under the picked tile's row,
-  // and the tile scrolls to the middle of the screen. Display only: no rule, list, score or number changes. Signals page is untouched.
+  // Indicators and Signals pages (Michael 2026-11-27): the page is long, so the record panel + player list slide up to sit right under the picked tile's row,
+  // and the tile scrolls to the middle of the screen. Display only: no rule, list, score or number changes.
   function placeDetail() {
     const root = document.getElementById("rl"), d = document.getElementById("sg-detail");
-    if (!root || !d || root.dataset.page !== "ind") return;
+    if (!root || !d || (root.dataset.page !== "ind" && root.dataset.page !== "main")) return;
     const id = RL.sigs[RL.sigs.length - 1], focus = RL.focus; RL.focus = null;
     if (!id) return; // nothing picked: the list stays at the bottom
     const tile = root.querySelector(`.sg-tile[data-sig="${id}"]`), cell = tile && tile.closest(".sg-cell"), grid = cell && cell.parentElement;
@@ -1371,7 +1371,7 @@
     let det = "";
     if (picked.length) det += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
     det += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
-    inner += SGPAGE === "ind" ? `<div class="sg-detail" id="sg-detail">${det}</div>` : det; // Indicators: placeDetail() moves this block under the picked tile
+    inner += `<div class="sg-detail" id="sg-detail">${det}</div>`; // Signals + Indicators: placeDetail() moves this block under the picked tile
     setTimeout(placeGate, 0);
     setTimeout(placeDetail, 0);
     const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Six tiles live on Signals: Short yd, QB Rush, Line Lag, Big Dog, Lil Dog and Rec Up. Everything else is here, grouped by how it held up. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;

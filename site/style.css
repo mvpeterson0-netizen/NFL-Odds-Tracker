@@ -761,7 +761,7 @@ textarea.tp-in { resize: vertical; }
 .sg-sprd { font-size: 10px; line-height: 1.1; color: var(--muted); margin-top: 3px; }
 .sg-grp { display: flex; flex-direction: column; gap: 1px; margin: 14px 0 -2px; } .sg-grp b { font-size: 14px; }
 
-/* Indicators page (2026-11-27): the picked tile's record + player list sits under its row; slides up when a tile is tapped */
+/* Indicators and Signals pages (2026-11-27): the picked tile's record + player list sits under its row; slides up when a tile is tapped */
 .sg-grid > .sg-detail { grid-column: 1 / -1; min-width: 0; }
 .sg-detail.sg-detail-in { animation: sg-up .3s ease-out; }
 @keyframes sg-up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
