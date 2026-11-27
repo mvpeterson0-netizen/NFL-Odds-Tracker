@@ -47,6 +47,8 @@ jobs:
       two_hr_body: ${{ steps.run.outputs.two_hr_body }}
       wx_title: ${{ steps.run.outputs.wx_title }}
       wx_body: ${{ steps.run.outputs.wx_body }}
+      sev_title: ${{ steps.run.outputs.sev_title }}
+      sev_body: ${{ steps.run.outputs.sev_body }}
     steps:
       - uses: actions/checkout@v4
 
@@ -164,3 +166,19 @@ jobs:
         run: |
           curl -fsS -X POST -H "Title: $TITLE" -H "Tags: wind_face" -H "Click: https://www.sharpstix.com/#/search/indicators" \
             --data-binary "$BODY" "https://ntfy.sh/$NTFY_TOPIC" > /dev/null && echo "wind alert sent"
+
+  # Severe-weather candidate alert (2026-11-27; decided in pipeline/notify.py severe_run): provisional flag from the forecast
+  # a few hours before kickoff and again from the pre-kickoff reading, open-air games only.
+  severe_alert:
+    needs: [update, deploy]
+    if: always() && needs.update.outputs.sev_title != '' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send the severe-weather alert to Michael's ntfy
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TITLE: ${{ needs.update.outputs.sev_title }}
+          BODY: ${{ needs.update.outputs.sev_body }}
+        run: |
+          curl -fsS -X POST -H "Title: $TITLE" -H "Tags: cloud_with_rain" -H "Click: https://www.sharpstix.com/" \
+            --data-binary "$BODY" "https://ntfy.sh/$NTFY_TOPIC" > /dev/null && echo "severe weather alert sent"

@@ -458,3 +458,104 @@ def wind_run(log: list[str]) -> bool:
     write_json(WIND_STATE, {"alerted": {k: v for k, v in alerted.items() if v.get("ko", "9999") > stamp}})
     log.append(f"wind alert: queued for {', '.join(x['gid'] for x in due)} (sent after deploy)")
     return True
+
+
+# ---------- Severe-weather candidate alert (Michael 2026-11-27) ----------
+# Two ntfys per open-air game at most, both only for a "severe candidate" (see severe_candidate):
+#   early    - up to SEVERE_EARLY_HOURS before kickoff, from the latest forecast reading (fc_*, no older than SEVERE_FC_MAX_AGE)
+#   confirm  - from the frozen reading about 20 minutes before kickoff (pre_*); if an early alert went out and the reading
+#              no longer qualifies, one "cleared" note goes out instead.
+# The thresholds are PROVISIONAL (2026-11-27 study: only 4 games reached this level, chosen after seeing them; see
+# claude/weather-impact-exploration-2026-11-27.md). They are a flag to look at the game, not a validated edge.
+# Retractable roofs and domes are left out (roof position unknown). Same delivery as the wind alert: this only decides and
+# records; the workflow's "severe_alert" job sends it after deploy. State: data/severe_alert_state.json.
+SEVERE_STATE = DATA / "severe_alert_state.json"
+SEVERE_URL = "https://www.sharpstix.com/"
+SEVERE_EARLY_HOURS = 6
+SEVERE_FC_MAX_AGE = timedelta(hours=4)
+
+
+def severe_candidate(wind, gust, precip) -> bool:
+    """Provisional: 0.3 in or more of precipitation over the game window, or wind 18+ mph, or gusts 35+ mph with 0.1 in or more."""
+    return precip >= 0.3 or wind >= 18 or (gust >= 35 and precip >= 0.1)
+
+
+def _reading(w: dict, kind: str):
+    """(temp, wind, gust, precip) as floats for 'fc' or 'pre', or None if any value is missing."""
+    try:
+        return tuple(float(w.get(f"{kind}_{k}", "")) for k in ("temp_f", "wind_mph", "gust_mph", "precip_in"))
+    except (TypeError, ValueError):
+        return None
+
+
+def severe_due(wx_rows: dict, games: dict, state: dict, now) -> list[dict]:
+    """Alerts to send now: dicts with gid, ko, stage ('early' | 'confirm' | 'cleared'), the reading and the game's teams."""
+    out = []
+    for gid, w in wx_rows.items():
+        g = games.get(gid)
+        if not g or w.get("roof") != "open":
+            continue
+        ko = parse_iso(g.get("ko", ""))
+        if not ko or ko <= now:
+            continue
+        seen = state.get(gid, {})
+        item = {"gid": gid, "ko": ko, "away": g.get("away", ""), "home": g.get("home", "")}
+        pre = _reading(w, "pre")
+        if pre is not None:
+            hit = severe_candidate(*pre[1:])
+            if hit and "confirm" not in seen:
+                out.append({**item, "stage": "confirm", "wx": pre, "read": parse_iso(w.get("pre_fetched_utc", ""))})
+            elif not hit and "early" in seen and "cleared" not in seen and "confirm" not in seen:
+                out.append({**item, "stage": "cleared", "wx": pre, "read": parse_iso(w.get("pre_fetched_utc", ""))})
+            continue
+        fc = _reading(w, "fc")
+        fetched = parse_iso(w.get("fc_fetched_utc", ""))
+        if (fc is not None and fetched is not None and "early" not in seen and ko - now <= timedelta(hours=SEVERE_EARLY_HOURS)
+                and now - fetched <= SEVERE_FC_MAX_AGE and severe_candidate(*fc[1:])):
+            out.append({**item, "stage": "early", "wx": fc, "read": fetched})
+    return sorted(out, key=lambda x: (x["ko"], x["gid"]))
+
+
+def severe_message(due: list[dict]) -> tuple[str, str]:
+    t = lambda x: x.astimezone(CT).strftime("%-I:%M %p")
+    label = {"early": "forecast", "confirm": "pre-kickoff reading", "cleared": "pre-kickoff reading, no longer severe"}
+    games = ", ".join(f"{_abbr(x['away'])} @ {_abbr(x['home'])}" for x in due)
+    parts = []
+    for x in due:
+        tf, wind, gust, rain = x["wx"]
+        parts.append(f"{_abbr(x['away'])} @ {_abbr(x['home'])} (kickoff {t(x['ko'])} CT, {label[x['stage']]}"
+                     + (f" read {t(x['read'])} CT" if x["read"] else "") + f"): {tf:g}F, wind {wind:g} mph, gusts {gust:g}, "
+                     f"{rain:g} in precipitation over the game window")
+    lead = "cleared" if all(x["stage"] == "cleared" for x in due) else "candidate"
+    return (f"Stix severe weather {lead}: {games}",
+            "; ".join(parts) + ". Provisional flag (thresholds not validated); roof status not checked.")
+
+
+def severe_run(log: list[str]) -> bool:
+    """Returns True when the state file changed. Writes the alert for the workflow's severe_alert job to GITHUB_OUTPUT."""
+    from .weather import load as load_weather
+    d = read_json(SITE / "data" / "data.json", None)
+    if not d:
+        return False
+    now = utcnow()
+    state = read_json(SEVERE_STATE, {}) or {}
+    alerted = state.get("alerted", {})
+    due = severe_due(load_weather(), d.get("games", {}), alerted, now)
+    if not due:
+        return False
+    gh_out = os.environ.get("GITHUB_OUTPUT")
+    if not os.environ.get("NTFY_TOPIC", "").strip() or not gh_out:
+        # say so in the run log instead of failing silently; nothing is recorded, so it can still be sent once a topic exists
+        log.append(f"severe alert: due for {', '.join(x['gid'] for x in due)} but NTFY_TOPIC (repo secret) is empty or missing")
+        return False
+    title, body = severe_message(due)
+    clean = lambda s: re.sub(r"[^\x20-\x7e]", " ", s)  # one line, ASCII (ntfy header values must be ASCII)
+    with open(gh_out, "a") as f:
+        f.write(f"sev_title={clean(title)}\nsev_body={clean(body)}\n")
+    stamp = iso(now)
+    for x in due:
+        alerted.setdefault(x["gid"], {})[x["stage"]] = stamp
+        alerted[x["gid"]]["ko"] = iso(x["ko"])
+    write_json(SEVERE_STATE, {"alerted": {k: v for k, v in alerted.items() if v.get("ko", "9999") > stamp}})
+    log.append(f"severe alert: queued {', '.join(x['gid'] + ':' + x['stage'] for x in due)} (sent after deploy)")
+    return True
