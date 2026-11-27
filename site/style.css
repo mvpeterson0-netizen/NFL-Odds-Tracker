@@ -756,3 +756,7 @@ textarea.tp-in { resize: vertical; }
 .sg-tagrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: -6px 0 6px; } .sg-tagrow .sg-tag { margin: 0; flex: 1 1 auto; } .ps-link { flex: none; font-size: 12px; font-weight: 700; line-height: 1; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; color: inherit; text-decoration: none; white-space: nowrap; }
 .ps-row.ps-fire { border-left: 3px solid var(--accent); background: var(--chip); padding-left: 8px; } .ps-row.ps-off { opacity: .6; }
 .ps-ok { color: var(--accent); font-weight: 600; } .ps-det { flex: 1 1 100%; } .ps-det ul { margin: 6px 0 0; padding-left: 18px; }
+
+/* Signals layout 2026-11-27: spread-timing flag on a tile, group headings on the Indicators page */
+.sg-sprd { font-size: 10px; line-height: 1.1; color: var(--muted); margin-top: 3px; }
+.sg-grp { display: flex; flex-direction: column; gap: 1px; margin: 14px 0 -2px; } .sg-grp b { font-size: 14px; }

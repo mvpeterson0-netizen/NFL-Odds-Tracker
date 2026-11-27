@@ -56,11 +56,12 @@
     // grading and audit numbers); the tile just shows whichever one is toggled. Info (i) opens that signal's own explanation.
     ...[
       ["cm1", 6, "CM1", ["cm1te", "cm120"], ["TE", "All"], "QB line drop, receivers' lines don't follow", "Line Lag"],
-      ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script", "Prev Scr"],
+      ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script", "Prev Scr", null, "ind"],
       ["sy", 29, "SY", ["syc40", "syl45", "syypc"], ["40+", "L45+", "YPC"], "Short-yardage receiver after a big Over", "Short yd", ["40+ ct", "Line 45", "Fluke"]],
-      ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "NL"], "First-half Over, line raised", "1st Half", ["+30%", "No Long"]],
-    ].map(([id, n, label, mem, lbl, what, tile, lblT]) => ({
-      id, n, side: "under", label, tile, optTile: (v) => (lblT || lbl)[v - 1], opts: mem.map((_, i) => i + 1), optFmt: (v) => lbl[v - 1], members: Object.fromEntries(mem.map((m, i) => [i + 1, m])), cm: id === "cm1",
+      ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "NL"], "First-half Over, line raised", "1st Half", ["+30%", "No Long"], "ind"],
+      ["su", 41, "SU", ["sp1", "sp2", "sp4"], ["Yds", "Rec", "QB"], "Team a 10+ point underdog", "Big Dog", null, null, true],
+    ].map(([id, n, label, mem, lbl, what, tile, lblT, pg, spr]) => ({
+      id, n, side: "under", label, tile, page: pg || undefined, spread: !!spr, optTile: (v) => (lblT || lbl)[v - 1], opts: mem.map((_, i) => i + 1), optFmt: (v) => lbl[v - 1], members: Object.fromEntries(mem.map((m, i) => [i + 1, m])), cm: id === "cm1",
       short: () => memTab(id).short(), title: `${what} (${lbl.join(" / ")})`, why: "", desc: () => memTab(id).desc(),
     })),
     { id: "qbr1", page: "old", n: 1, side: "under", combo: true, label: "QB-R1", short: () => "L3 gm avg ≥25yd and line ≥25yd",
@@ -97,19 +98,19 @@
     { id: "s03", n: 23, page: "ind", side: "under", label: "S03",
       title: "WR rec yds Under after three rising games", why: "Rising yardage may overshoot his true level.",
       desc: () => `Bet a WR's <b>receiving yards Under</b> when his receiving yards rose in each of his <b>last 3 games played</b> (strictly higher each game).` },
-    { id: "sp1", n: 24, page: "ind", side: "under", label: "SP1",
+    { id: "sp1", hid: true, n: 24, page: "ind", side: "under", label: "SP1",
       title: "Team a 10+ point underdog → rec yds Under", why: "Big underdogs' passing games may underperform.",
       desc: () => `Bet a WR's, TE's or RB's <b>receiving yards Under</b> when his team is a <b>10+ point underdog</b> (the opponent is favored by 10 or more). ${SPREAD_NOTE}` },
-    { id: "sp2", n: 25, page: "ind", side: "under", label: "SP2",
+    { id: "sp2", hid: true, n: 25, page: "ind", side: "under", label: "SP2",
       title: "Team a 10+ point underdog → receptions Under", why: "Same idea as SP1, measured in catches (largely the same games).",
       desc: () => `Bet a WR's, TE's or RB's <b>receptions Under</b> when his team is a <b>10+ point underdog</b>. ${SPREAD_NOTE}` },
     { id: "sp3", n: 26, page: "ind", side: "over", label: "SP3",
       title: "Team favored by 10+ → QB pass yds Over", why: "A heavy favorite's QB may get more drives.",
       desc: () => `Bet a QB's <b>passing yards Over</b> when his team is <b>favored by 10 or more</b>. ${SPREAD_NOTE}` },
-    { id: "sp4", n: 27, page: "ind", side: "under", label: "SP4",
+    { id: "sp4", hid: true, n: 27, page: "ind", side: "under", label: "SP4",
       title: "Team a 10+ point underdog → QB pass yds Under", why: "The opposite of the trailing-teams-throw-more belief; it flips sign between seasons in the audit.",
       desc: () => `Bet a QB's <b>passing yards Under</b> when his team is a <b>10+ point underdog</b>. ${SPREAD_NOTE}` },
-    { id: "sp5", n: 28, page: "ind", side: "under", label: "SP5",
+    { id: "sp5", front: true, spread: true, n: 28, page: "ind", side: "under", label: "SP5", tile: "Lil Dog",
       title: "Team a 3 to 6.5 point underdog → rushing Under", why: "Small underdogs play from slightly behind and may run less.",
       desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when his team is a <b>3 to 6.5 point underdog</b>. ${SPREAD_NOTE}` },
     // ---- Catches Raised (2026-11-27): WR/TE receptions Under when this week's line is higher than his line at his previous game PLAYED. Slotted players (as in the replay). ----
@@ -139,7 +140,7 @@
     { id: "fhnl", hid: true, n: 33, page: "ind", side: "under", label: "FH-NL", short: () => "First half alone beat the line, Over without his longest catch",
       title: "First-half Over without his longest catch → rec yds Under", why: "He was Over early and across several catches, yet the line still went up.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}${LY_FH}${LY_NOLONG}</ul>` },
-    { id: "bl200", front: true, n: 34, page: "ind", side: "under", label: "BL-200", tile: "Big Beat", short: () => "Beat his line by 200%+",
+    { id: "bl200", n: 34, page: "ind", side: "under", label: "BL-200", tile: "Big Beat", short: () => "Beat his line by 200%+",
       title: "Beat his line by 200%+ → rec yds Under", why: "A huge game may be priced as a new normal.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>He <b>beat that line by 200% or more</b> (at least 3 times the line).</li></ul>` },
     { id: "nlu20", n: 35, page: "ind", side: "under", label: "NL-U20", short: () => "Longest catch under 20 yards",
@@ -159,7 +160,7 @@
       title: "Team a 6.5+ point underdog → rec yds Under", why: "Same idea as SP1 with a lower bar: it includes every SP1 game plus the 6.5 to under 10 point underdogs.",
       desc: () => `Bet a WR's, TE's or RB's <b>receiving yards Under</b> when his team is a <b>6.5+ point underdog</b> (the opponent is favored by 6.5 or more). ${SPREAD_NOTE}<div class="sg-sub"><b>Overlap with SP1:</b> SP1 is the 10+ point subset of these games, so the two tiles share many of the same players. The 6.5 to under 10 band alone is the weaker part of this rule in the replay, and by position it holds for TE and RB but not WR.</div>` },
   ];
-  const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 1, fh: 2 }; // QBRu avg 25; CM1 TE; GS RB; SY 40+ catches; 1H NL // default toggle values
+  const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 1, fh: 2, su: 1 }; // QBRu avg 25; CM1 TE; GS RB; SY 40+ catches; 1H NL // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
   // Front-end gate only: the data behind every rule is in data.json, which anyone can download.
   const FREE_RULES = 3;
@@ -918,7 +919,7 @@
     return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
   }
   // Info popup header (Michael 2026-11-21): the tile name and toggle spelled out in full words; tiles keep their short names.
-  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["40+ catches", "Line 45+", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null], rrwt: ["Rec Up", null] };
+  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["40+ catches", "Line 45+", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null], su: ["Big Underdog", ["Rec yards", "Receptions", "QB pass yards"]], sp5: ["Lil Dog", null], rrwt: ["Rec Up", null] };
   const popLabel = (t) => { const e = t && POPN[t.id]; if (!e) return null; const v = RL.opt[t.id], o = e[1] ? (Array.isArray(e[1]) ? e[1][v - 1] : e[1][v]) : null; return o ? `${e[0]} · ${o}` : e[0]; };
   const togLabel = (t) => (t.opts ? `${t.label} · ${t.optFmt(RL.opt[t.id])}` : t.label);
   function openInfo(id) {
@@ -1046,6 +1047,7 @@
     return `<div class="sg-cell${t.opts ? " sg-cell3" : t.front ? " sg-cell3 sg-ntg" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}${anyTog(t.id) ? " any" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b class="sg-ttl2" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}">${esc(ttl)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
       <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "today" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
+      ${t.spread ? `<div class="sg-sprd">⚠ spread timing unverified</div>` : ""}
       ${st.by ? spark(st.by, RL.fwd ? null : roiBand(t), t.front && !t.opts ? 86 : 0) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
@@ -1059,7 +1061,7 @@
   }
   const seasonTally = (t) => tally(sigRec(t).all);
   // Toggles that keep their OPT0 default instead of auto-picking the best season setting (Michael 2026-11-16: QB-R4 opens on 25+, not 40+).
-  const PINNED_OPT = { qbr4: true, qbru: true, cm1: true, gs: true, sy: true, fh: true }; // QBRu opens on avg 25 (Michael 2026-11-20)
+  const PINNED_OPT = { qbr4: true, qbru: true, cm1: true, gs: true, sy: true, fh: true, su: true }; // QBRu opens on avg 25 (Michael 2026-11-20)
   function initOpts(tabs) {
     RL.optInit = RL.optInit || {};
     if (RL.optInit[SGPAGE] || !laWeeks().length) return;
@@ -1070,6 +1072,12 @@
   // the last completed week (before the upcoming-lines week), using each toggle's better setting, so tapping a toggle never reorders them.
   const rankTally = (t) => tally(sigRec(t).all.filter((x) => x.r.wk < curWk()));
   function rankStat(t) { return t.opts ? withOpt(t, bestOpt(t, rankTally), () => rankTally(t)) : rankTally(t); }
+  const IND_GROUPS = [
+    ["Spread-based · timing unverified", "The spread is nflverse's closing-type number, which may differ from the one posted 3 hours before kickoff.", ["sp3", "sp6"]],
+    ["Found on all three seasons · no clean test", "Picked after seeing 2024, 2025 and 2026, so no season is a held-out test. Forward records only.", ["tr3", "gr1", "wx1"]],
+    ["Fading", "Much smaller on the 2024 hold-out than when found (L9 +4.5%, S03 −1%).", ["l9", "s03"]],
+    ["Did not hold up on 2024", "Negative on 2024, the season held out when these were found. Definitions stay frozen and forward logging continues.", ["gs", "qbch", "fh", "bl200", "nlu20", "sy25", "synl"]],
+  ];
   function topSection(tabs) {
     // Chart window: Prior week = just that week; This month / This season = every week in the window.
     const scopeNow = SGPAGE === "ind" ? RL.scope : "season";
@@ -1085,7 +1093,13 @@
     // Michael 2026-11-13: every Signals tile is open to everyone; no sign-in gate. (FREE_TILES / placeGate / the sign-in box stay in the file, unused.)
     const gate = false;
     RL.unlocked = new Set(rows.filter((x, i) => !gate || i < FREE_TILES).map((x) => x.t.id));
-    let h = `${SGPAGE === "ind" ? `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>` : ""}<div class="sg-wrap"><div class="sg-grid">${rows.map((x) => tileHtml(x.t, x, !RL.unlocked.has(x.t.id))).join("")}</div>`;
+    const gridOf = (rs) => `<div class="sg-grid">${rs.map((x) => tileHtml(x.t, x, !RL.unlocked.has(x.t.id))).join("")}</div>`;
+    let body = gridOf(rows);
+    if (SGPAGE === "ind") { // grouped by how each held up (2026-11-27); a tile not named in a group goes into a last "Other" group so none is lost
+      const used = new Set(), grp = (ttl, note, rs) => (rs.length ? `<div class="sg-grp"><b>${ttl}</b><span class="muted small">${note}</span></div>${gridOf(rs)}` : "");
+      body = IND_GROUPS.map(([ttl, note, ids]) => { const rs = rows.filter((x) => ids.includes(x.t.id)); rs.forEach((x) => used.add(x.t.id)); return grp(ttl, note, rs); }).join("") + grp("Other", "", rows.filter((x) => !used.has(x.t.id)));
+    }
+    let h = `${SGPAGE === "ind" ? `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>` : ""}<div class="sg-wrap">${body}`;
     if (gate && rows.length > FREE_TILES) h += `<div class="sg-gate" id="sg-gate">${ACCT() ? ACCT().googleBlock("sg") : ""}</div>`;
     return h + `</div>`;
   }
@@ -1330,7 +1344,7 @@
     if (picked.length) inner += picked.length === 1 && anyTog(picked[0].id) ? anyPanel(picked[0]) : recordPanel(picked);
     inner += `<div id="rl-body">${playersHtml(tabs, picked)}</div>`;
     setTimeout(placeGate, 0);
-    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Rules from the audit's tracked list, plus the NL-U20 late-yardage rule, covering every quoted player. SY (40+ catches, Line 45+, Fluke), 1H and BL-200 now live on Signals; SY-R25 and SY-NL stay here. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
+    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Six tiles live on Signals: Short yd, QB Rush, Line Lag, Big Dog, Lil Dog and Rec Up. Everything else is here, grouped by how it held up. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
     const fwdNote = RL.fwd ? `<p class="muted small sg-fwdnote">Since freeze: each tile counts only bets from the week its signal was frozen (Week ${FWD_WK0} for most; later for signals added after). Earlier weeks are discovery. Long-press the heading again to go back.</p>` : "";
     return `<section id="rl" data-page="${SGPAGE}">${head}${fwdNote}${sgToggleHtml()}${inner}</section>`;
   }
