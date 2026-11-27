@@ -112,6 +112,10 @@
     { id: "sp5", n: 28, page: "ind", side: "under", label: "SP5",
       title: "Team a 3 to 6.5 point underdog → rushing Under", why: "Small underdogs play from slightly behind and may run less.",
       desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when his team is a <b>3 to 6.5 point underdog</b>. ${SPREAD_NOTE}` },
+    // ---- Catches Raised (2026-11-27): WR/TE receptions Under when this week's line is higher than his line at his previous game PLAYED. Slotted players (as in the replay). ----
+    { id: "rrwt", front: true, n: 42, side: "under", label: "RR", tile: "Rec Up", short: () => "WR/TE receptions Under when the line is higher than his last game's",
+      title: "WR/TE receptions Under when his line went up from his last game", why: "A raised catches line may overshoot.",
+      desc: () => `Bet a WR's or TE's <b>receptions Under</b> when this week's receptions line is <b>higher</b> than his receptions line in his <b>previous game played</b>.<div class="sg-sub"><b>Where it comes from:</b> the position cut (WR and TE only; RBs left out) was chosen after seeing the 2025 and 2026 weeks 1 to 11 results, so those weeks are discovery, not a clean test. There are no 2024 receptions lines. The forward record starts at zero.</div>` },
     // ---- Late-yardage indicators (2026-11-16, Michael's picks from the 2026-11-15 late-yardage study; receiving yards, WR/TE/RB) ----
     // Historical replay picked after seeing results (see STUDY below); scored here on 2026 games, tracked forward from the day they were added.
     { id: "syc40", hid: true, n: 37, page: "ind", side: "under", label: "SY-c40", short: () => "Short-yardage receiver (40+ catches) after a big Over",
@@ -434,6 +438,11 @@
         cells = [`<b>${num(line)}</b>`, fb != null && tab.startsWith("sp") ? esc(spreadTxt(fb)) : esc(last || "—")];
         note = tab.startsWith("sp") ? `Team ${spreadTxt(fb)}` : `Last 3: ${last}`;
       }
+      else if (tab === "rrwt") {
+        const lpl = lastPlayedLine(c.played, c.mid), lg = c.played[c.played.length - 1], la = lg && lg.m && lg.m[c.mid] ? lg.m[c.mid].act : null;
+        cells = [`${num(lpl)} → <b>${num(line)}</b> <b>${signed(line - lpl)}</b>`, la != null ? `${num(la, 0)} catches` : "—"];
+        note = la != null ? `Last game: ${num(la, 0)} catches vs ${num(lpl)} line` : "";
+      }
       else if (tab === "qbr1" || tab === "qbr4" || (tab === "qbru" && RL.opt.qbru !== 3)) cells = [`<b>${num(line)}</b>`, l3t];
       else if (tab === "qbr2" || tab === "qbru") cells = [`${num(pl)} → <b>${num(line)}</b> <b>${signed(line - pl)}</b>`, l3t];
       else cells = [`${num(pl)} → <b>${num(line)}</b>`, `${num(c.pm.act)} vs ${num(pl)} · ${Math.round(100 * (tab === "sc1" ? sh.trail : sh.lead))}% of plays ${tab === "sc1" ? "trailing" : "leading"} 7+`];
@@ -451,7 +460,7 @@
     sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
     sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syc40: ["Line (last game → now)", "Last game"], syl45: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
     fhr30: ["Line (last game → now)", "Last game"], fhnl: ["Line (last game → now)", "Last game"], bl200: ["Line (last game → now)", "Last game"], nlu20: ["Line (last game → now)", "Last game"],
-    wx1: ["Line", "Wind"], gr1: ["Line", "Stadium"], sp6: ["Line", "Spread"],
+    wx1: ["Line", "Wind"], gr1: ["Line", "Stadium"], sp6: ["Line", "Spread"], rrwt: ["Line (last game → now)", "Last game"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
   // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
@@ -726,6 +735,9 @@
   // TR-UP3 replay (2026-11-26, claude/snap-rate-shift-study-2026-11-26.md): WR/TE/RB receptions + receiving yards, DraftKings main line (FanDuel fallback), 1 unit at the saved Under price,
   // pushes refunded, 2024 + 2025 + 2026 wk 1-11, week-cluster 95% interval (2,000 resamples of weeks). Found on all three seasons, so no season is a clean out-of-sample test.
   STUDY.tr3 = { rec: "509–357", roi: 10.1, lo: 3.0, hi: 17.0, yr: [4.0, 12.0, 14.0], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · WR + TE + RB receptions + receiving yards (receptions 2025–26 only)", found: "Found in the 2026-11-26 snap-rate study on all three seasons, so no season is a clean out-of-sample test." };
+  // RR (Catches Raised) replay (2026-11-27): WR + TE receptions Under, slotted players, DraftKings main line (FanDuel fallback), 1 unit at the saved Under price, pushes refunded,
+  // 2025 + 2026 wk 1-11 (no 2024 receptions lines), week-cluster 95% interval (4,000 resamples of weeks). The WR + TE cut was chosen after seeing the results (RBs were the weak group).
+  STUDY.rrwt = { rec: "405–233", roi: 10.8, lo: 4.8, hi: 16.7, yr: [9.4, 12.5], yrl: ["2025", "2026"], win: "2025 + 2026 wk 1–11 · WR + TE receptions · no 2024 receptions lines", found: "Found on these same two seasons, and the WR + TE cut was chosen after seeing them, so neither season is a clean test." };
   STUDY.sp6 = { rec: "693–523", roi: 7.6, lo: 1.1, hi: 13.9, yr: [2.5, 14.4, 4.8], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · WR + TE + RB receiving yards", found: F_SPLIT, approx: " The point spread is a closing-type number from nflverse." };
   // Three-season replay for the audit and indicator tiles (Michael 2026-11-24), same source as the SY tiles above: claude/three-season-rerun-2026-11-22.md and its ledger
   // CSV (2024 + 2025 + 2026 wk 1-11, DraftKings main line, 1 unit at the saved price, week-cluster 95% intervals). Shown in each tile's info popup in place of the
@@ -843,6 +855,7 @@
     bl200: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.BL] },
     nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
     gr1: { bet: "Under · rushing · QB RB", g: () => [{ i: "field", c: "gr", l: "Natural grass field", s: "Game is played on a grass field, home or away (neutral-site games left out)" }] },
+    rrwt: { bet: "Under · receptions · WR TE", g: () => [{ i: "up", c: "pu", l: "Catches line raised", s: "Higher than his receptions line at his previous game played" }] },
     sp6: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "sdog65", c: "gr", l: "Team underdog by 6.5+", s: "Opponent favored by 6.5 or more" }] },
     wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Forecast lists players as Projected; the reading about 20 minutes before kickoff locks them in (scored)" }] },
   };
@@ -852,7 +865,7 @@
   const POS_ORDER = {
     sy25: ["TE", "RB", "WR"], synl: ["WR", "TE", "RB"], syc40: ["TE", "RB", "WR"], syl45: ["TE", "WR", "RB"], syypc: ["WR", "TE", "RB"], fhr30: ["RB", "TE", "WR"], fhnl: ["WR", "TE", "RB"],
     bl200: ["TE", "WR", "RB"], nlu20: ["RB", "TE", "WR"],
-    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"], gr1: ["RB", "QB"], sp6: ["TE", "RB", "WR"], tr3: ["TE", "WR", "RB"],
+    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"], gr1: ["RB", "QB"], sp6: ["TE", "RB", "WR"], tr3: ["TE", "WR", "RB"], rrwt: ["TE", "WR"],
   };
   function betText(id, sg) {
     const rest = sg.bet.slice(sg.bet.indexOf(" ") + 1), po = POS_ORDER[id];
@@ -905,7 +918,7 @@
     return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
   }
   // Info popup header (Michael 2026-11-21): the tile name and toggle spelled out in full words; tiles keep their short names.
-  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["40+ catches", "Line 45+", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null] };
+  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["40+ catches", "Line 45+", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null], rrwt: ["Rec Up", null] };
   const popLabel = (t) => { const e = t && POPN[t.id]; if (!e) return null; const v = RL.opt[t.id], o = e[1] ? (Array.isArray(e[1]) ? e[1][v - 1] : e[1][v]) : null; return o ? `${e[0]} · ${o}` : e[0]; };
   const togLabel = (t) => (t.opts ? `${t.label} · ${t.optFmt(RL.opt[t.id])}` : t.label);
   function openInfo(id) {
@@ -985,7 +998,7 @@
   // "Since freeze" view (Michael 2026-11-27): long-press the Signals heading to switch every tile to the record counted from the week each signal was frozen.
   // Display only: no rule, list, score or stored data changes, and the tile order does not move. A freeze week is the first week whose bets are forward;
   // FWD_WK is from claude/frozen-signal-register.md and the CHANGELOG (Wk 10 is a transition week, left out). tr3 (merged Thu 2026-11-26) starts Wk 13 to be safe.
-  const FWD_WK0 = 11, FWD_WK = { syc40: 12, syl45: 12, wx1: 12, gr1: 12, sp6: 12, tr3: 13 };
+  const FWD_WK0 = 11, FWD_WK = { syc40: 12, syl45: 12, wx1: 12, gr1: 12, sp6: 12, tr3: 13, rrwt: 13 };
   const fwdId = (t) => (t.members ? t.members[RL.opt[t.id]] : t.id);
   const fwdWk = (t) => FWD_WK[fwdId(t)] ?? FWD_WK0;
   const fwdList = (t, list) => (RL.fwd ? list.filter((x) => x.r.wk >= fwdWk(t)) : list);
@@ -1434,6 +1447,7 @@
     const br = bo / bs, v = br * (1 - br) * rs;
     return v > 0 ? { z: (ro - br * rs) / Math.sqrt(v), rec: ro / rs, base: br, ro, rs } : null;
   }
+  const lastPlayedLine = (played, mid) => { const g = played.length ? played[played.length - 1] : null, x = g && g.m ? g.m[mid] : null; return x && x.lstat === "ok" && x.line != null ? x.line : null; };
   function ruleHits(r, mid, m, p, past, played, prev) {
     const pm = prev && prev.m ? prev.m[mid] : null;
     const pl = pm && pm.lstat === "ok" && pm.line != null ? pm.line : null;
@@ -1462,6 +1476,9 @@
     // TR-UP3 (replaces L10, 2026-11-26): WR/TE/RB receptions or receiving yards Under when his targets per offensive snap over his last 3 games played is
     // z >= 2 above his rate in his earlier games this season (needs 2+ earlier games, 15+ snaps a game over the last 3). Snap counts come from data.json row.sn.
     if (["WR", "TE", "RB"].includes(p.pos) && (mid === "rec" || mid === "rec_yds")) { const tr = targetRate(played); if (tr && tr.z >= 2) hits.push("tr3"); }
+    // RR (Catches Raised): WR/TE receptions Under when this week's line is higher than his line at his previous game PLAYED.
+    const lpl = lastPlayedLine(played, mid);
+    if ((p.pos === "WR" || p.pos === "TE") && mid === "rec" && lpl != null && line > lpl) hits.push("rrwt");
     const fb = favBy(r);
     if (fb != null) {
       if (fb <= -10 && ["WR", "TE", "RB"].includes(p.pos)) { if (mid === "rec_yds") hits.push("sp1"); if (mid === "rec") hits.push("sp2"); }
@@ -1491,7 +1508,7 @@
       if (pm.act != null && pm.act / pl - 1 >= 2) hits.push("bl200");
       if (d.lc < 20) hits.push("nlu20");
     }
-    return { hits, pm, pl, f: null };
+    return { hits, pm, pl, lpl, f: null };
   }
   // CM1 (correlated line movement): per team-game, the QB's passing-yards line change vs the previous week (his previous
   // game, which must be the week before) against the receiving-yards line changes of his WR/TE/RB teammates (matched = a line both weeks).
@@ -1672,6 +1689,7 @@
     const line = num(x.m.line);
     switch (x.rule.id) {
       case "qbru": return RL.opt.qbru === 3 ? `Line ${num(x.pl)} → ${line}` : "";
+      case "rrwt": return `Line ${num(x.lpl)} → ${line}`;
       case "qbr2": case "sc1": case "sc2": case "sy25": case "synl": case "syc40": case "syl45": case "syypc": case "fhr30": case "fhnl": case "bl200": case "nlu20": return `Line ${num(x.pl)} → ${line}`;
       case "wx1": { const wd = obsWind(x.r.gid); if (wd != null) return `Wind ${num(wd, 0)} mph`; const pw = projWind(x.r.gid, x.r.ko); return pw == null ? "" : `Projected wind ${num(pw, 0)} mph`; }
       case "qbch": return esc(x.note);
