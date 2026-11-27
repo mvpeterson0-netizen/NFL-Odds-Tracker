@@ -115,6 +115,10 @@ def main() -> int:
             notify.wind_run(log)
         except Exception as ex:
             log.append(f"wind alert: skipped ({type(ex).__name__}: {str(ex)[:80]})")
+        try:  # optional: severe-weather candidate alert (forecast, then pre-kickoff reading), sent by the workflow after deploy (never fails the run)
+            notify.severe_run(log)
+        except Exception as ex:
+            log.append(f"severe alert: skipped ({type(ex).__name__}: {str(ex)[:80]})")
         # 2025 research download stopped at Michael's request; preserve the saved archive.
     except Exception as e:  # logged, then the run fails so the next schedule retries
         status = "error"
