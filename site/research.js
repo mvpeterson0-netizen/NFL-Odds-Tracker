@@ -1047,7 +1047,6 @@
     return `<div class="sg-cell${t.opts ? " sg-cell3" : t.front ? " sg-cell3 sg-ntg" : ""}${locked ? " sg-locked" : ""}"${locked ? ' aria-hidden="true"' : ""}><button type="button" class="sg-tile ${on ? "on" : ""}${anyTog(t.id) ? " any" : ""}" data-sig="${t.id}" aria-pressed="${on}" ${locked ? "tabindex=\"-1\"" : ""}>
       <div class="sg-hd"><b class="sg-ttl2" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}">${esc(ttl)}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(ttl)}" ${locked ? "tabindex=\"-1\"" : ""}>i</span>${t3 ? roiSpan : ""}</div>
       <div class="sg-r2">${t3 ? "" : roiSpan}<span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${cnt}</b> ${tnfOn() ? "today" : (sgView() === "last" ? "last" : sgView() === "next" ? "next" : "this") + " wk"}</span></span></div>
-      ${t.spread ? `<div class="sg-sprd">⚠ spread timing unverified</div>` : ""}
       ${st.by ? spark(st.by, RL.fwd ? null : roiBand(t), t.front && !t.opts ? 86 : 0) : ""}</button>${tg}</div>`;
   }
   const sideTxt = (t) => (t.side === "over" ? "Over" : t.side === "under" ? "Under" : "Over / Under");
