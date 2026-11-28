@@ -45,7 +45,7 @@
   // Modes are numbered so the toggle (data-sgopt) stays numeric: 1 = 25+ (old QB-R4 at 25), 2 = avg 25 (old QB-R1), 3 = +5 (old QB-R2 at +5).
   const QBRU_LBL = { 1: "25+", 2: "avg 25", 3: "+5" };
   const TABS = [
-    { id: "qbru", n: 1, side: "under", label: "QBRu", tile: "QB Rush", optTile: (v) => ({ 1: "Line 25", 2: "avg 25", 3: "Line +5" })[v], opts: [1, 2, 3], optFmt: (v) => QBRU_LBL[v], short: () => ({ 1: "QB rush yd under when line is 25+yd", 2: "QB rush yd under when L3 gm avg ≥25yd and line ≥25yd", 3: "QB rush yd under when line is 5+yd above his last-game line" })[RL.opt.qbru],
+    { id: "qbru", n: 1, side: "under", label: "QBRu", tile: "QB Rush", optTile: (v) => ({ 1: "Line 25", 2: "avg 25", 3: "Line +5" })[v], opts: [1, 2, 3], optFmt: (v) => QBRU_LBL[v], short: () => ({ 1: "QB rushing yards Under when his line is 25 or higher", 2: "QB rushing yards Under when his line is 25+ and he averaged 25+ in his last 3 games", 3: "QB rushing yards Under when his line is 5+ above his last-game line" })[RL.opt.qbru],
       title: "QB rush Under (high line, really runs, or line jump)", why: "A QB's rushing line may be set too high after a few big games, a high-rushing stretch, or a sudden raise.",
       desc: () => ({
         1: `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>25 or higher</b>. The idea is that a few big games can inflate high QB rushing lines.`,
@@ -99,15 +99,18 @@
       title: "WR rec yds Under after three rising games", why: "Rising yardage may overshoot his true level.",
       desc: () => `Bet a WR's <b>receiving yards Under</b> when his receiving yards rose in each of his <b>last 3 games played</b> (strictly higher each game).` },
     { id: "sp1", hid: true, n: 24, page: "ind", side: "under", label: "SP1",
+      short: () => "WR/TE/RB receiving yards Under when his team is a 10+ point underdog",
       title: "Team a 10+ point underdog → rec yds Under", why: "Big underdogs' passing games may underperform.",
       desc: () => `Bet a WR's, TE's or RB's <b>receiving yards Under</b> when his team is a <b>10+ point underdog</b> (the opponent is favored by 10 or more). ${SPREAD_NOTE}` },
     { id: "sp2", hid: true, n: 25, page: "ind", side: "under", label: "SP2",
+      short: () => "WR/TE/RB receptions Under when his team is a 10+ point underdog",
       title: "Team a 10+ point underdog → receptions Under", why: "Same idea as SP1, measured in catches (largely the same games).",
       desc: () => `Bet a WR's, TE's or RB's <b>receptions Under</b> when his team is a <b>10+ point underdog</b>. ${SPREAD_NOTE}` },
     { id: "sp3", n: 26, page: "ind", side: "over", label: "SP3",
       title: "Team favored by 10+ → QB pass yds Over", why: "A heavy favorite's QB may get more drives.",
       desc: () => `Bet a QB's <b>passing yards Over</b> when his team is <b>favored by 10 or more</b>. ${SPREAD_NOTE}` },
     { id: "sp4", hid: true, n: 27, page: "ind", side: "under", label: "SP4",
+      short: () => "QB passing yards Under when his team is a 10+ point underdog",
       title: "Team a 10+ point underdog → QB pass yds Under", why: "The opposite of the trailing-teams-throw-more belief; it flips sign between seasons in the audit.",
       desc: () => `Bet a QB's <b>passing yards Under</b> when his team is a <b>10+ point underdog</b>. ${SPREAD_NOTE}` },
     { id: "sp5", front: true, spread: true, n: 28, page: "ind", side: "under", label: "SP5", tile: "Lil Dog",
@@ -945,6 +948,10 @@
   const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Game Script", ["RB", "WR/TE"]], sy: ["Low YPC", ["N=40", "45+", "Spike"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null], su: ["Big Underdog", ["Yds", "Catch", "Pass"]], sp5: ["Lil Dog", null], rrwt: ["Catch ↑", null] };
   const popLabel = (t) => { const e = t && POPN[t.id]; if (!e) return null; const v = RL.opt[t.id], o = e[1] ? (Array.isArray(e[1]) ? e[1][v - 1] : e[1][v]) : null; return o ? `${e[0]} · ${o}` : e[0]; };
   const togLabel = (t) => (t.opts ? `${t.label} · ${t.optFmt(RL.opt[t.id])}` : t.label);
+  // Panel under the tiles (Michael 2026-11-28): the tile's own name and toggle as printed on the tile, a one-line explanation, and the same (i).
+  const tileName = (t) => `${t.tile || t.label}${t.opts && t.optTile ? ` · ${t.optTile(RL.opt[t.id])}` : ""}`;
+  const tileOne = (t) => { try { return (t.short ? t.short() : t.title) || ""; } catch (e) { return t.title || ""; } };
+  const tileHead = (t) => `<b>${esc(tileName(t))}</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(tileName(t))}">i</span>`;
   function openInfo(id) {
     closePop();
     const tile = TABS.find((x) => x.id === id), disp = popLabel(tile) || (tile && tile.opts ? togLabel(tile) : null); // "SY · NL": tile name · toggle, as on the tiles
@@ -1171,8 +1178,8 @@
   // Record panel for the picked signal(s): summary, running hit rate, week by week (week = smallest level)
   function recordPanel(ts) {
     const bets = betsFor(ts), by = byWeek(bets), key0 = ts.map((t) => t.id).join("+");
-    const many = ts.length > 1, title = ts.map((t) => esc(togLabel(t))).join(" + ");
-    let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${many ? `Fits all of: ${title}` : title}</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>`;
+    const many = ts.length > 1;
+    let h = `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><span class="sg-rec-t">${many ? `<b>Fits all of:</b>` : tileHead(ts[0])}</span> <button type="button" class="linkbtn" data-sgclear>Clear</button></div>${many ? ts.map((t) => `<p class="muted small sg-rec-s"><span class="sg-rec-t">${tileHead(t)}</span> ${esc(tileOne(t))}</p>`).join("") : `<p class="muted small sg-rec-s">${esc(tileOne(ts[0]))}</p>`}`;
     if (!bets.length) return h + `<p class="muted small">${many ? "No graded bets fit all of these signals (or they point opposite ways)." : "No graded bets yet."}</p></div></div>`;
     const s = tally(bets), cls = s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "";
     const gapSort = ts.length === 1 && ts[0].cm;
@@ -1187,7 +1194,7 @@
       <details class="sg-weeks" data-wopen ${RL.wopen ? "open" : ""}><summary>Week by week (${by.filter((x) => x.list.length).length} weeks)</summary>${weeks}</details></div></div>`;
   }
   // Long-press view: the record panel is per toggle, so while a tile shows all its toggles this slim header stands in for it.
-  const anyPanel = (t) => `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><b>${esc(t.label)} · ${t.opts.map((v) => esc(t.optFmt(v))).join(" / ")} (any)</b> <button type="button" class="linkbtn" data-sgclear>Clear</button></div><p class="muted small">Players below fit any of this tile's toggles. Tap a toggle to see one setting's record.</p></div></div>`;
+  const anyPanel = (t) => `<div class="panel sg-rec"><div class="body"><div class="sg-rec-h"><span class="sg-rec-t"><b>${esc(t.tile || t.label)} · ${t.opts.map((v) => esc((t.optTile || t.optFmt)(v))).join(" / ")} (any)</b><span class="rinfo" role="button" tabindex="0" data-rinfo="${t.id}" aria-label="About ${esc(t.tile || t.label)}">i</span></span> <button type="button" class="linkbtn" data-sgclear>Clear</button></div><p class="muted small">Players below fit any of this tile's toggles. Tap a toggle to see one setting's record.</p></div></div>`;
   const BP = { id: "bp", n: 0, side: "mixed", title: "Players" };
   // Players who fit the picked signals. live=false: games not started yet (the main list). live=true: games that have started but
   // are not final (the "Game in progress" list). Same rules and sorting either way; only the games looked at differ.
