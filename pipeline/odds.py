@@ -69,6 +69,15 @@ RESERVE_CREDITS = 15
 MAX_ATTEMPTS = 4
 
 CT = ZoneInfo("America/Chicago")
+# Credit-saving week (Michael, 2026-11-27): games whose id starts with one of these get ONLY the ~3 h graded
+# pre-game pull. Snapshots (Mon/Thu/Sun), sweeps and line checks are skipped for them. Remove to restore.
+GRADED_ONLY_PREFIXES = ("2026_12_",)
+
+
+def graded_only(g):
+    return str(g.get("game_id", "")).startswith(GRADED_ONLY_PREFIXES)
+
+
 # pull type -> (label, days after the week's Monday, hour, minute) in Central time
 SNAPSHOTS = {"mon": ("Mon", 0, 8, 0), "thu": ("Thu", 3, 14, 0), "sun": ("Sun AM", 6, 8, 0)}
 SNAP_RETRY = timedelta(hours=1)
@@ -553,15 +562,15 @@ def run(keys, games, name_index_for_game, log):
         }], PULL_FIELDS)
         log.append(f"odds: {g['game_id']} kicked off with no pre-game line (logged as missed)")
         wrote = True
-    snaps = plan_snapshots(games, now)
+    snaps = [(g, t) for g, t in plan_snapshots(games, now) if not graded_only(g)]
     try:
-        sweeps = plan_sweeps(games, now)
+        sweeps = [(g, n) for g, n in plan_sweeps(games, now) if not graded_only(g)]
     except Exception as ex:  # a sweep problem must never block the main pre-game pull
         sweeps = []
         log.append(f"odds: sweep check skipped ({type(ex).__name__}: {str(ex)[:80]})")
     try:
         busy = {g["game_id"] for g in due} | {g["game_id"] for g, _t in snaps} | {g["game_id"] for g, _n in sweeps}
-        tracks = plan_tracking(games, now, skip=busy)
+        tracks = [g for g in plan_tracking(games, now, skip=busy) if not graded_only(g)]
     except Exception as ex:  # a line-check problem must never block the other pulls
         tracks = []
         log.append(f"odds: line check planning skipped ({type(ex).__name__}: {str(ex)[:80]})")
