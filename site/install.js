@@ -7,11 +7,11 @@
 //    "Open in Safari" (x-safari-https link; some apps may block it) and "Copy link". The Safari link carries
 //    ?install=1 so the guide opens by itself once Safari loads.
 //  • The bar appears after SHOW_AFTER_S seconds on any page except the Welcome tour, and not while a pop-up is open.
-//    ✕ hides it, but it comes back 10-15 s later (Michael, 2026-11-28); the 3rd ✕ (counted in this browser) hides it for HIDE_DAYS days,
+//    ✕ hides it, but it comes back 10-15 s later (Michael, 2026-11-28); the 3rd ✕ (counted in this browser) hides it for HIDE_HOURS hours,
 //    after which the count starts over. sharpstix.com/?install=1 opens the sheet right away (for posts, QR codes).
 //  • A "Add to Home Screen" item is added under Guide in the More+ menu (iPhone/iPad, not installed).
 (function () {
-  const SHOW_AFTER_S = 15, HIDE_DAYS = 14, KEY = "stix_install_hide", XKEY = "stix_install_x", MAX_X = 3, RESHOW_MIN_S = 10, RESHOW_MAX_S = 15;
+  const SHOW_AFTER_S = 15, HIDE_HOURS = 12, KEY = "stix_install_hide", XKEY = "stix_install_x", MAX_X = 3, RESHOW_MIN_S = 10, RESHOW_MAX_S = 15;
   const ua = navigator.userAgent || "";
   const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const standalone = window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches);
@@ -41,7 +41,7 @@
   function hidden() { try { return Number(localStorage.getItem(KEY) || 0) > Date.now(); } catch (e) { return !!window.__stixIgHide; } }
   const xCount = () => { try { return Number(localStorage.getItem(XKEY)) || 0; } catch (e) { return window.__stixIgX || 0; } };
   const setX = (n) => { window.__stixIgX = n; try { localStorage.setItem(XKEY, String(n)); } catch (e) { /* storage blocked: counted for this page load */ } };
-  function hideForDays() { window.__stixIgHide = true; try { localStorage.setItem(KEY, String(Date.now() + HIDE_DAYS * 864e5)); } catch (e) { /* storage blocked: hidden for this page load */ } }
+  function hideFor() { window.__stixIgHide = true; try { localStorage.setItem(KEY, String(Date.now() + HIDE_HOURS * 36e5)); } catch (e) { /* storage blocked: hidden for this page load */ } }
   const onWelcome = () => (location.hash || "").startsWith("#/welcome");
   const popupOpen = () => !!document.querySelector("#su-ov, #wn-ov, .share-ov, .rl-dkpop, #ig-ov");
 
@@ -141,7 +141,7 @@
     if (t.closest("#ig-bar .ig-x")) {
       removeBar();
       const n = xCount() + 1; setX(n);
-      if (n >= MAX_X) hideForDays(); else scheduleReshow();
+      if (n >= MAX_X) hideFor(); else scheduleReshow();
       return;
     }
     if (t.closest("#ig-bar .ig-open")) { openSheet(); return; }
@@ -179,7 +179,7 @@
       return;
     }
     if (!isIOS) return;
-    if (!hidden() && xCount() >= MAX_X) setX(0); // the 14 days are over: start counting ✕ again
+    if (!hidden() && xCount() >= MAX_X) setX(0); // the 12 hours are over: start counting ✕ again
     if (hidden()) return;
     // Visible seconds on a non-Welcome page; wait out any open pop-up.
     let secs = 0;
