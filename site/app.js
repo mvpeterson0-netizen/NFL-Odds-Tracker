@@ -1011,7 +1011,7 @@ function render() {
   document.querySelector(".foot-nfl").hidden = isCfb; document.querySelector(".foot-cfb").hidden = !isCfb;
   document.getElementById("brand-sub").textContent = isCfb ? "CFB props · 2026" : "NFL props · 2026";
   document.querySelectorAll(".sport a").forEach((a) => a.classList.toggle("on", (a.dataset.sport === "cfb") === isCfb));
-  document.querySelectorAll("#tabs-cfb a").forEach((a) => a.classList.toggle("on", a.dataset.ctab === (arg === "results" ? "results" : "board")));
+  document.querySelectorAll("#tabs-cfb a").forEach((a) => a.classList.toggle("on", a.dataset.ctab === (arg === "results" || arg === "signals" ? arg : "board")));
   document.body.classList.toggle("rv-on", tab === "review"); // review queue: site footer shrinks to one line (review.js)
   document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === (tab === "player" ? "board" : tab === "review" ? "picks" : tab)));
   // More+ menu (Results, Defense and the three Guide pages): the button is lit while one of those pages is open.
