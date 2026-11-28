@@ -1019,7 +1019,7 @@
     return { by, all, s: tally(all) };
   }
   const bkey = (x) => `${x.p.id}|${x.mid}|${x.r.gid}|${x.side}`;
-  // "Since freeze" view (Michael 2026-11-27): long-press the Signals heading to switch every tile to the record counted from the week each signal was frozen.
+  // "Since freeze" view (Michael 2026-11-27): swipe right on the Signals heading to switch every tile to the record counted from the week each signal was frozen.
   // Display only: no rule, list, score or stored data changes, and the tile order does not move. A freeze week is the first week whose bets are forward;
   // FWD_WK is from claude/frozen-signal-register.md and the CHANGELOG (Wk 10 is a transition week, left out). tr3 (merged Thu 2026-11-26) starts Wk 13 to be safe.
   const FWD_WK0 = 11, FWD_WK = { syc40: 12, syl45: 12, wx1: 12, gr1: 12, gr1d: 13, sp6: 12, tr3: 13, rrwt: 13, rp1: 13 };
@@ -1222,7 +1222,7 @@
   const tnfOn = () => !!RL.tnf && tnfShow();
   const sgFilt = (list) => { if (tnfOn()) { const g = tnfGids(); return list.filter((x) => g.has(x.c.r.gid)); } const w = sgWk(); return w == null ? list : list.filter((x) => x.c.r.wk === w); };
   const tnfBtn = () => (tnfShow() ? `<button type="button" class="sg-tnf ${tnfOn() ? "on" : ""}" data-sgtnf aria-pressed="${tnfOn()}" style="position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0;padding:4px 11px;font-size:12px;font-weight:700;line-height:1;border-radius:999px">Today</button>` : "");
-  const gsecRow = (t) => `<div class="sg-ttl" style="position:relative"><h2 class="gsec" data-sgfwd style="-webkit-user-select:none;user-select:none;-webkit-touch-callout:none">${t}${RL.fwd && SGPAGE !== "ps" ? ` <span class="muted small" style="font-weight:600">· since freeze</span>` : ""}</h2>${tnfBtn()}</div>`;
+  const gsecRow = (t) => `<div class="sg-ttl" style="position:relative"><h2 class="gsec" data-sgfwd style="-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:pan-y">${t}${RL.fwd && SGPAGE !== "ps" ? ` <span class="muted small" style="font-weight:600">· since freeze</span>` : ""}</h2>${tnfBtn()}</div>`;
   function sgToggleHtml() {
     const v = sgView(); if (v == null) return "";
     return `<div class="sgview" role="tablist" aria-label="Week"><button type="button" role="tab" aria-selected="${v === "last"}" class="${v === "last" ? "on" : ""}" data-sgview="last">Last week · W${curWk() - 1}</button><button type="button" role="tab" aria-selected="${v === "next"}" class="${v === "next" ? "on" : ""}" data-sgview="next">Upcoming · W${curWk()}</button></div>`;
@@ -1388,7 +1388,7 @@
     setTimeout(placeGate, 0);
     setTimeout(placeDetail, 0);
     const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Six tiles live on Signals: Short yd, QB Rush, Line Lag, Big Dog, Lil Dog and Rec Up. Everything else is here, grouped by how it held up. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
-    const fwdNote = RL.fwd ? `<p class="muted small sg-fwdnote">Since freeze: each tile counts only bets from the week its signal was frozen (Week ${FWD_WK0} for most; later for signals added after). Earlier weeks are discovery. Long-press the heading again to go back.</p>` : "";
+    const fwdNote = RL.fwd ? `<p class="muted small sg-fwdnote">Since freeze: each tile counts only bets from the week its signal was frozen (Week ${FWD_WK0} for most; later for signals added after). Earlier weeks are discovery. Swipe left on the heading to go back.</p>` : "";
     return `<section id="rl" data-page="${SGPAGE}">${head}${fwdNote}${sgToggleHtml()}${inner}</section>`;
   }
   function redraw() {
@@ -1405,26 +1405,28 @@
     const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; if (RL.tnf && todayWk() !== (RL.sgView === "last" ? curWk() - 1 : curWk())) RL.tnf = false; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
   });
-  // Long press (about 0.6 s) on the "Signals" heading of the Signals or Indicators page toggles the "since freeze" view for every tile.
-  (function headingLongPress() {
-    let timer = 0, sx = 0, sy = 0, swallowUntil = 0, fired = false;
-    const stop = () => { clearTimeout(timer); timer = 0; };
+  // Swipe right (Michael 2026-11-27) starting on the "Signals" heading of the Signals or Indicators page shows the "since freeze" view for every tile; swipe left goes back.
+  // Replaces the earlier long-press on the heading. Vertical scrolling is untouched (the heading allows pan-y only).
+  (function headingSwipe() {
+    let sx = 0, sy = 0, live = false;
     const inHead = (e) => e.target.closest && e.target.closest("#rl h2[data-sgfwd]") && e.target.closest('#rl[data-page="main"], #rl[data-page="ind"]');
     document.addEventListener("pointerdown", (e) => {
       if (!inHead(e) || (e.pointerType === "mouse" && e.button !== 0)) return;
-      stop(); sx = e.clientX; sy = e.clientY;
-      timer = setTimeout(() => {
-        timer = 0; fired = true; RL.fwd = !RL.fwd;
-        try { if (navigator.vibrate) navigator.vibrate(15); } catch (err) { /* not supported */ }
-        RL.focus = RL.sigs.includes(id) ? id : null;
-        redraw();
-      }, 600);
+      sx = e.clientX; sy = e.clientY; live = true;
     });
-    document.addEventListener("pointermove", (e) => { if (timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) stop(); });
-    for (const ev of ["pointerup", "pointercancel", "scroll"]) document.addEventListener(ev, stop, true);
-    for (const ev of ["pointerup", "pointercancel"]) document.addEventListener(ev, () => { if (fired) { fired = false; swallowUntil = Date.now() + 80; } }, true);
-    document.addEventListener("click", (e) => { if (Date.now() < swallowUntil && inHead(e)) { e.stopImmediatePropagation(); e.preventDefault(); swallowUntil = 0; } }, true);
-    document.addEventListener("contextmenu", (e) => { if (inHead(e) && (fired || Date.now() < swallowUntil || timer || (window.matchMedia && matchMedia("(pointer: coarse)").matches))) e.preventDefault(); });
+    document.addEventListener("pointermove", (e) => {
+      if (!live) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (Math.abs(dy) > 30 && Math.abs(dy) > Math.abs(dx)) { live = false; return; } // a vertical move is a scroll, not a swipe
+      if (Math.abs(dx) < 50 || Math.abs(dx) < 2 * Math.abs(dy)) return;
+      live = false;
+      const want = dx > 0; // right = since freeze, left = back
+      if (!!RL.fwd === want) return;
+      RL.fwd = want;
+      try { if (navigator.vibrate) navigator.vibrate(15); } catch (err) { /* not supported */ }
+      redraw();
+    });
+    for (const ev of ["pointerup", "pointercancel"]) document.addEventListener(ev, () => { live = false; }, true);
   })();
   // Long press on a Signals tile (Michael 2026-11-22): pick it with ALL its toggles on (list = players matching any of them); long press again to unpick.
   // A tile with no toggles just gets picked. The click that follows the press is swallowed so it doesn't undo the pick.
