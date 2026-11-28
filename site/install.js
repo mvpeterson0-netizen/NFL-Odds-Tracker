@@ -7,10 +7,11 @@
 //    "Open in Safari" (x-safari-https link; some apps may block it) and "Copy link". The Safari link carries
 //    ?install=1 so the guide opens by itself once Safari loads.
 //  • The bar appears after SHOW_AFTER_S seconds on any page except the Welcome tour, and not while a pop-up is open.
-//    ✕ hides it for HIDE_DAYS days in this browser. sharpstix.com/?install=1 opens the sheet right away (for posts, QR codes).
+//    ✕ hides it, but it comes back 10-15 s later (Michael, 2026-11-28); the 3rd ✕ (counted in this browser) hides it for HIDE_HOURS hours,
+//    after which the count starts over. sharpstix.com/?install=1 opens the sheet right away (for posts, QR codes).
 //  • A "Add to Home Screen" item is added under Guide in the More+ menu (iPhone/iPad, not installed).
 (function () {
-  const SHOW_AFTER_S = 15, HIDE_DAYS = 14, KEY = "stix_install_hide";
+  const SHOW_AFTER_S = 15, HIDE_HOURS = 12, KEY = "stix_install_hide", XKEY = "stix_install_x", MAX_X = 3, RESHOW_MIN_S = 10, RESHOW_MAX_S = 15;
   const ua = navigator.userAgent || "";
   const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const standalone = window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches);
@@ -38,7 +39,9 @@
   const logo = '<img src="icons/icon-64.png" alt="" width="34" height="34" class="ig-logo">';
 
   function hidden() { try { return Number(localStorage.getItem(KEY) || 0) > Date.now(); } catch (e) { return !!window.__stixIgHide; } }
-  function hideForDays() { window.__stixIgHide = true; try { localStorage.setItem(KEY, String(Date.now() + HIDE_DAYS * 864e5)); } catch (e) { /* storage blocked: hidden for this page load */ } }
+  const xCount = () => { try { return Number(localStorage.getItem(XKEY)) || 0; } catch (e) { return window.__stixIgX || 0; } };
+  const setX = (n) => { window.__stixIgX = n; try { localStorage.setItem(XKEY, String(n)); } catch (e) { /* storage blocked: counted for this page load */ } };
+  function hideFor() { window.__stixIgHide = true; try { localStorage.setItem(KEY, String(Date.now() + HIDE_HOURS * 36e5)); } catch (e) { /* storage blocked: hidden for this page load */ } }
   const onWelcome = () => (location.hash || "").startsWith("#/welcome");
   const popupOpen = () => !!document.querySelector("#su-ov, #wn-ov, .share-ov, .rl-dkpop, #ig-ov");
 
@@ -104,6 +107,16 @@
   }
   function removeBar() { if (bar) { bar.remove(); bar = null; } document.body.classList.remove("ig-has-bar"); }
 
+  // After ✕ (1st and 2nd time): bring the bar back in 10-15 s, waiting out the Welcome tour or any open pop-up.
+  function scheduleReshow() {
+    const wait = (RESHOW_MIN_S + Math.random() * (RESHOW_MAX_S - RESHOW_MIN_S)) * 1000;
+    setTimeout(function again() {
+      if (bar || hidden()) return;
+      if (document.hidden || onWelcome() || popupOpen()) { setTimeout(again, 2000); return; }
+      showBar();
+    }, wait);
+  }
+
   // ---------- sheet ----------
   function openSheet() {
     if (document.getElementById("ig-ov")) return;
@@ -125,7 +138,12 @@
     const t = e.target;
     if (!t.closest) return;
     if (t.closest("[data-install]")) { e.preventDefault(); closeMenu(); openSheet(); return; }
-    if (t.closest("#ig-bar .ig-x")) { hideForDays(); removeBar(); return; }
+    if (t.closest("#ig-bar .ig-x")) {
+      removeBar();
+      const n = xCount() + 1; setX(n);
+      if (n >= MAX_X) hideFor(); else scheduleReshow();
+      return;
+    }
     if (t.closest("#ig-bar .ig-open")) { openSheet(); return; }
     if (t.closest("#ig-copy")) {
       const done = () => { const b = document.getElementById("ig-copy"); if (b) b.textContent = "Link copied"; };
@@ -160,7 +178,9 @@
       setTimeout(openSheet, 400);
       return;
     }
-    if (!isIOS || hidden()) return;
+    if (!isIOS) return;
+    if (!hidden() && xCount() >= MAX_X) setX(0); // the 12 hours are over: start counting ✕ again
+    if (hidden()) return;
     // Visible seconds on a non-Welcome page; wait out any open pop-up.
     let secs = 0;
     const tick = setInterval(() => {
