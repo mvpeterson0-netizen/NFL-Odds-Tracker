@@ -120,6 +120,77 @@ class OddsTests(unittest.TestCase):
         cfb_odds.run(self.store, ["k"], [dict(self.g)], [], KO + timedelta(minutes=1), self.fake())
         self.assertEqual(self.calls, [])
 
+    # ---- bet-slip links (2026-11-28) ----
+    def linked(self, fail_with_links=None):
+        def get(url, params):
+            self.calls.append((url, dict(params)))
+            h = {"x-requests-remaining": "19000", "x-requests-last": "1"}
+            if url.endswith("/events"):
+                return json.dumps([{"id": "oe1", "home_team": "Alpha Tigers", "away_team": "Beta Bears",
+                                    "commence_time": KO.strftime("%Y-%m-%dT%H:%M:%SZ")}]).encode(), h, 200
+            if fail_with_links and params.get("includeLinks"):
+                return b"{}", h, fail_with_links
+            outs = lambda n, pt, ol, ul: [{"name": "Over", "description": n, "price": -115, "point": pt, "link": ol},
+                                          {"name": "Under", "description": n, "price": -105, "point": pt, "link": ul}]
+            body = {"id": "oe1", "bookmakers": [
+                {"key": "fanduel", "markets": [{"key": "player_pass_yds", "outcomes": outs("QB One", 250.5, "https://sportsbook.fanduel.com/addToBetslip?marketId[0]=1&selectionId[0]=2", "https://sportsbook.fanduel.com/addToBetslip?marketId[0]=1&selectionId[0]=3")}]},
+                {"key": "draftkings", "markets": [{"key": "player_pass_yds", "outcomes": outs("QB One", 249.5, "https://sportsbook.draftkings.com/?outcomes=0QA1", "")}]},
+                {"key": "betmgm", "markets": [{"key": "player_pass_yds", "outcomes": outs("QB One", 251.5, "https://x.example/a", "https://x.example/b")}]}]}
+            if not params.get("includeLinks"):    # the book only sends links when asked
+                for b in body["bookmakers"]:
+                    for m in b["markets"]:
+                        for o in m["outcomes"]:
+                            o.pop("link", None)
+            return json.dumps(body).encode(), h, 200
+        return get
+
+    def test_links_requested_and_saved_for_fanduel_and_draftkings_only(self):
+        self.calls = []
+        cfb_odds.run(self.store, ["k"], [dict(self.g)], [], KO - timedelta(minutes=60), self.linked())
+        odds_call = [c for c in self.calls if c[0].endswith("/odds")][0]
+        self.assertEqual(odds_call[1].get("includeLinks"), "true")
+        rows = {(r["book"], r["side"]): r for r in self.store.t["cfb_links"]}
+        self.assertEqual(set(rows), {("fanduel", "over"), ("fanduel", "under"), ("draftkings", "over")})   # DK under has no link; betmgm is not kept
+        self.assertEqual(rows[("fanduel", "over")]["line"], 250.5)
+        self.assertEqual(rows[("draftkings", "over")]["line"], 249.5)
+        self.assertEqual(len(self.store.t["cfb_lines"]), 3)    # the stored lines are the same as without links
+
+    def test_newer_pull_overwrites_the_link_for_the_same_bet(self):
+        cfb_odds.run(self.store, ["k"], [dict(self.g)], [], KO - timedelta(minutes=60), self.linked())
+        n = len(self.store.t["cfb_links"])
+        for r in self.store.t["cfb_links"]:
+            r["link"] = "old"
+        self.store.t["cfb_pull_state"][0]["pregame_ok_utc"] = None
+        cfb_odds.run(self.store, ["k"], [dict(self.g)], [], KO - timedelta(minutes=50), self.linked())
+        self.assertEqual(len(self.store.t["cfb_links"]), n)
+        self.assertNotIn("old", [r["link"] for r in self.store.t["cfb_links"]])
+
+    def test_request_with_links_rejected_is_retried_without_and_lines_still_saved(self):
+        self.calls = []
+        log = []
+        cfb_odds.run(self.store, ["k"], [dict(self.g)], log, KO - timedelta(minutes=60), self.linked(fail_with_links=422))
+        odds_calls = [c for c in self.calls if c[0].endswith("/odds")]
+        self.assertEqual(len(odds_calls), 2)
+        self.assertIn("includeLinks", odds_calls[0][1])
+        self.assertNotIn("includeLinks", odds_calls[1][1])
+        self.assertEqual(len(self.store.t["cfb_lines"]), 3)
+        self.assertNotIn("cfb_links", self.store.t)
+
+    def test_link_saving_failure_never_stops_the_lines(self):
+        self.store.fail_on.add("cfb_links")
+        log = []
+        cfb_odds.run(self.store, ["k"], [dict(self.g)], log, KO - timedelta(minutes=60), self.linked())
+        self.assertEqual(len(self.store.t["cfb_lines"]), 3)
+        self.assertTrue(self.store.t["cfb_pull_state"][0]["pregame_ok_utc"])
+        self.assertTrue(any("links not saved" in x for x in log))
+
+    def test_links_off_switch(self):
+        with patch.object(cfb_odds, "LINKS_ENABLED", False):
+            self.calls = []
+            cfb_odds.run(self.store, ["k"], [dict(self.g)], [], KO - timedelta(minutes=60), self.linked())
+        self.assertNotIn("includeLinks", [c for c in self.calls if c[0].endswith("/odds")][0][1])
+        self.assertNotIn("cfb_links", self.store.t)
+
 
 def iso_(d):
     return d.strftime("%Y-%m-%dT%H:%M:%SZ")

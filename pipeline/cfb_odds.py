@@ -31,6 +31,11 @@ MATCH_TOLERANCE = timedelta(hours=6)
 WEEKEND_FROM = datetime(2026, 11, 28, 0, 0, tzinfo=timezone.utc)
 WEEKEND_UNTIL = datetime(2026, 11, 29, 12, 0, tzinfo=timezone.utc)
 WEEKEND_FLOOR = 1000
+# Bet-slip links (Michael, 2026-11-28): ask The Odds API for each outcome's bookmaker link and keep the latest FanDuel and
+# DraftKings ones in cfb_links (supabase/018_cfb_links.sql), so the CFB Signals page can open a book with the bet on the slip.
+# This never changes what goes into cfb_lines. Set LINKS_ENABLED = False to stop asking for links.
+LINKS_ENABLED = True
+LINK_BOOKS = ("fanduel", "draftkings")
 
 
 def weekend_mode(now) -> bool:
@@ -81,6 +86,25 @@ def parse_lines(event: dict, game_id: str, pull_type: str, captured, mins: int) 
                              "under_price": sides.get("under"), "book_last_update": m.get("last_update") or None,
                              "source": "The Odds API"})
     return rows
+
+
+def parse_links(event: dict, game_id: str, captured) -> list[dict]:
+    """One cfb_links row per (book, market, player, side): FanDuel and DraftKings outcomes that came with a link."""
+    rows = {}
+    for bk in event.get("bookmakers") or []:
+        if bk.get("key") not in LINK_BOOKS:
+            continue
+        for m in bk.get("markets") or []:
+            if m.get("key") not in MARKETS:
+                continue
+            for o in m.get("outcomes") or []:
+                player, point, link = (o.get("description") or "").strip(), o.get("point"), o.get("link") or ""
+                side = (o.get("name") or "").lower()
+                if player and point is not None and link and side in ("over", "under"):
+                    rows[(bk["key"], m["key"], player, side)] = {
+                        "game_id": game_id, "book": bk["key"], "market": m["key"], "player_name": player, "side": side,
+                        "line": point, "price": o.get("price"), "link": link, "captured_utc": iso(captured)}
+    return list(rows.values())
 
 
 def choose_pull(game: dict, state: dict, now) -> tuple[str, int] | None:
@@ -148,8 +172,15 @@ def run(store: Store, keys: list[str], games: list[dict], log: list[str], now, g
         if left <= credit_floor(now) + 3:
             log.append("cfb odds: stopped at the credit floor")
             break
-        body, h, status = get(f"{API}/sports/{SPORT}/events/{ev['id']}/odds", {
-            "apiKey": key, "bookmakers": books, "markets": ",".join(MARKETS), "oddsFormat": "american", "dateFormat": "iso"})
+        params = {"apiKey": key, "bookmakers": books, "markets": ",".join(MARKETS), "oddsFormat": "american", "dateFormat": "iso"}
+        if LINKS_ENABLED:
+            params.update({"includeLinks": "true", "includeSids": "true"})
+        body, h, status = get(f"{API}/sports/{SPORT}/events/{ev['id']}/odds", params)
+        if LINKS_ENABLED and status not in (200, 401, 403, 429):
+            # The link options must never cost us a line: if the request fails with them, ask again without.
+            log.append(f"cfb odds: request with link options failed (HTTP {status}); retrying without links")
+            params = {k: v for k, v in params.items() if k not in ("includeLinks", "includeSids")}
+            body, h, status = get(f"{API}/sports/{SPORT}/events/{ev['id']}/odds", params)
         captured = now
         if status in (401, 403, 429):
             log.append(f"cfb odds: stopped (HTTP {status})")
@@ -159,7 +190,8 @@ def run(store: Store, keys: list[str], games: list[dict], log: list[str], now, g
             store.insert("cfb_pulls", [{"game_id": g["game_id"], "pull_type": ptype, "status": "error", "attempted_utc": iso(now),
                                         "minutes_before_kickoff": mins, "note": f"HTTP {status}"}])
             continue
-        rows = parse_lines(json.loads(body), g["game_id"], ptype, captured, mins)
+        doc = json.loads(body)
+        rows = parse_lines(doc, g["game_id"], ptype, captured, mins)
         checked += 1
         try:
             left = int(remaining)
@@ -171,6 +203,13 @@ def run(store: Store, keys: list[str], games: list[dict], log: list[str], now, g
                                              "updated_at": iso(now)}], "game_id")
             continue
         store.insert_ignore("cfb_lines", rows, "game_id,pull_type,captured_utc,book,market,player_name,line")
+        if LINKS_ENABLED:
+            try:    # links are optional: a problem here must never stop the lines from being recorded
+                links = parse_links(doc, g["game_id"], captured)
+                if links:
+                    store.upsert("cfb_links", links, "game_id,book,market,player_name,side")
+            except Exception as ex:
+                log.append(f"cfb odds: links not saved ({type(ex).__name__}: {str(ex)[:80]})")
         store.insert("cfb_pulls", [{"game_id": g["game_id"], "pull_type": ptype, "status": "ok", "attempted_utc": iso(now),
                                     "minutes_before_kickoff": mins, "outcomes": len(rows),
                                     "credits_last": int(used) if used.isdigit() else None,
