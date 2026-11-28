@@ -2,8 +2,7 @@ name: cfb-research-export
 # Throwaway research branch only (never merged). Read-only Supabase SELECT + free public data; no Odds API credits.
 # Output is encrypted to a key held only by the research session; the log shows counts only.
 on:
-  push:
-    branches: [research/cfb-signals]
+  workflow_dispatch:   # already ran once (run 46098181456); not re-run on push
 permissions:
   contents: read
   actions: write

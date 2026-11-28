@@ -1,0 +1,35 @@
+name: cfb-research-commit
+# Copies the already-encrypted export artifact of run 46098181456 onto this throwaway branch (the research
+# session cannot reach artifact storage). Ciphertext only; the key exists only in that session.
+on:
+  push:
+    branches: [research/cfb-signals]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  commit:
+    if: ${{ !contains(github.event.head_commit.message, '[skip-commit-job]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: cfb-export-encrypted
+          run-id: 46098181456
+          github-token: ${{ github.token }}
+          path: enc
+      - name: Commit ciphertext in parts
+        run: |
+          set -euo pipefail
+          ls -l enc
+          mkdir -p encrypted
+          split -b 40m -d enc/bundle.enc encrypted/bundle.enc.part
+          cp enc/k.enc encrypted/k.enc
+          rm -rf enc
+          ls -l encrypted
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add encrypted
+          git commit -m "Encrypted CFB export (ciphertext only) [skip-commit-job]"
+          git push
