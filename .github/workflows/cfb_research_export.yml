@@ -1,0 +1,34 @@
+name: cfb-research-export
+# Throwaway research branch only (never merged). Read-only Supabase SELECT + free public data; no Odds API credits.
+# Output is encrypted to a key held only by the research session; the log shows counts only.
+on:
+  push:
+    branches: [research/cfb-signals]
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export (read only)
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python3 research_cfb_export/export.py out
+      - name: Encrypt
+        run: |
+          set -euo pipefail
+          tar -czf bundle.tgz out
+          openssl rand -out k.bin 32
+          openssl enc -aes-256-cbc -pbkdf2 -iter 100000 -salt -in bundle.tgz -out bundle.enc -pass file:k.bin
+          openssl pkeyutl -encrypt -pubin -inkey research_cfb_export/pub.pem -pkeyopt rsa_padding_mode:oaep -in k.bin -out k.enc
+          mkdir up && mv bundle.enc k.enc up/
+          rm -rf out bundle.tgz k.bin
+          ls -l up
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cfb-export-encrypted
+          path: up/
+          retention-days: 1
