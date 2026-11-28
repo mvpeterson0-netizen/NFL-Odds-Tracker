@@ -164,6 +164,11 @@
     { id: "gr1d", n: 41, page: "ind", side: "under", label: "GR1-D", short: () => "Rushing Under on natural grass, team an underdog",
       title: "Game on natural grass and his team an underdog → QB or RB rushing yards Under", why: "The grass edge in GR1 was concentrated in underdogs; grass favorites were flat in the replay.",
       desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when both are true:<ul class="sg-ul"><li>The game is played on <b>natural grass</b>, home or away for the player (same surface list as GR1: in 2026 the turf stadiums are ${[...TURF26].filter((t) => t !== "LAR").join(", ")}; every other stadium, including Buffalo's new one, is grass). <b>Neutral-site and international games are left out.</b></li><li>His team is an <b>underdog</b> in the game (the opponent is favored by more than 0; a pick'em never fires). ${SPREAD_NOTE}</li></ul><div class="sg-sub"><b>Where it comes from:</b> GR1 with an underdog filter. It was added <b>after</b> seeing that grass favorites were flat in the same replay, so it is a split chosen from results, on top of a rule that was itself found on these three seasons. Expect the real edge to be smaller than the replay. <b>Overlap with GR1:</b> every GR1-D bet is also a GR1 bet; the two records are not additive. All underdog rushing Unders returned about +2.3% in the replay, so that is the baseline to beat, not zero.</div>` },
+    // ---- RP1 (Michael 2026-11-27): receptions Under when the Under itself is priced -130 to -149. A price band, not a line move. Found on 2025 + 2026 wk 1-11 after a price-bucket split
+    // of every receptions prop; the band edges were picked after seeing the results (the -115 to -129 band was +3.5% and -150 to -164 was -1.7%). Tracked forward only. ----
+    { id: "rp1", n: 43, page: "ind", side: "under", label: "RP1", short: () => "Receptions Under priced −130 to −149",
+      title: "Receptions Under priced −130 to −149 → receptions Under", why: "At this price the book already leans Under; the replay says it still paid, while heavier juice (−150 or worse) did not.",
+      desc: () => `Bet a WR's, TE's or RB's <b>receptions Under</b> when the <b>Under price is between −130 and −149</b> (both ends included).<ul class="sg-ul"><li>The price is the Under price on the line being scored (the graded pre-game line, about 3 hours before kickoff). Until that line is captured, the list uses the latest price showing, so a player can join or leave the list when the price moves across the band.</li><li>No line-move, game or player-type condition. The odds are the only trigger.</li></ul><div class="sg-sub"><b>Where it comes from:</b> a price-bucket split of every receptions prop on 2025 and 2026 weeks 1 to 11 (no 2024 receptions lines exist). The band was chosen <b>after</b> seeing that split, so those weeks are discovery, not a clean test. The neighbors in the same replay: Unders priced −115 to −129 returned about +3.5% and −150 to −164 about −1.7%, so the edge is not smooth across prices and part of it is probably noise. <b>Break-even:</b> 56.5% at −130 up to 59.8% at −149. <b>By position (also seen after the fact):</b> WR did the work (+13.6%), TE about +1.6% and RB about −0.5%. <b>Overlap:</b> a bet can also be a Rec Up, SP2 or WX1 bet.</div>` },
   ];
   const OPT0 = { qbr2: 5, qbr4: 25, qbru: 2, cm1: 1, gs: 1, sy: 1, fh: 2, su: 1 }; // QBRu avg 25; CM1 TE; GS RB; SY 40+ catches; 1H NL // default toggle values
   // Rules 1–3 for everyone; 4–8 only for people signed in to a Stix account (Google), Michael 2026-10-29.
@@ -180,8 +185,8 @@
   // ---------- helpers ----------
   function curLine(m) {
     if (!m) return null;
-    if (m.lstat === "ok" && m.line != null) return { line: m.line, label: "pre-game", cap: m.cap };
-    if (m.lstat === "pending") { const sn = latestSnap(m); if (sn) return { line: sn.line, label: sn.label, cap: sn.cap }; }
+    if (m.lstat === "ok" && m.line != null) return { line: m.line, up: m.up, label: "pre-game", cap: m.cap };
+    if (m.lstat === "pending") { const sn = latestSnap(m); if (sn) return { line: sn.line, up: sn.up, label: sn.label, cap: sn.cap }; }
     return null;
   }
   function sd(xs) {
@@ -417,7 +422,7 @@
     const indTab = TABS.find((t) => t.id === tab)?.page === "ind"; // Indicator rules cover every quoted player (as the audit did), not just slotted ones
     for (const c of candidates(indTab)) {
       const pl = prevLine(c), line = c.cur.line;
-      if (!ruleHits(c.r, c.mid, { line }, c.p, c.past, c.played, c.prev).hits.includes(tab)) continue;
+      if (!ruleHits(c.r, c.mid, { line, up: c.cur.up }, c.p, c.past, c.played, c.prev).hits.includes(tab)) continue;
       const l3 = c.played.map((x) => (x.m && x.m[c.mid] ? x.m[c.mid].act : null)).filter((v) => v != null).slice(-3);
       const l3t = l3.length ? l3.map((v) => num(v, 0)).join(", ") : `<span class="muted">—</span>`;
       const sh = sharesOf(c.prev);
@@ -435,6 +440,9 @@
         const wd = obsWind(c.r.gid), pw = wd == null ? projWind(c.r.gid, c.r.ko) : null;
         cells = pw != null ? [`<b>${num(line)}</b>`, `${num(pw, 0)} mph <span class="muted">proj.</span>`] : [`<b>${num(line)}</b>`, `${num(wd, 0)} mph`];
         note = pw != null ? `Projected: forecast wind ${num(pw, 0)} mph. Locks in or drops at the reading ~20 min before kickoff; only a locked player is scored.` : `Locked: wind ${num(wd, 0)} mph (~20 min before kickoff)`;
+      } else if (ind && tab === "rp1") {
+        cells = [`<b>${num(line)}</b>`, `Under ${odds(c.cur.up)}`];
+        note = `Under priced ${odds(c.cur.up)} (${c.cur.label})`;
       } else if (ind && tab === "tr3") {
         const tr = targetRate(c.played);
         cells = [`<b>${num(line)}</b>`, tr ? `${(100 * tr.rec).toFixed(1)}% vs ${(100 * tr.base).toFixed(1)}%` : "—"];
@@ -466,7 +474,7 @@
     sp1: ["Line", "Spread"], sp2: ["Line", "Spread"], sp3: ["Line", "Spread"], sp4: ["Line", "Spread"], sp5: ["Line", "Spread"],
     sy25: ["Line (last game → now)", "Last game"], synl: ["Line (last game → now)", "Last game"], syc40: ["Line (last game → now)", "Last game"], syl45: ["Line (last game → now)", "Last game"], syypc: ["Line (last game → now)", "Last game"],
     fhr30: ["Line (last game → now)", "Last game"], fhnl: ["Line (last game → now)", "Last game"], bl200: ["Line (last game → now)", "Last game"], nlu20: ["Line (last game → now)", "Last game"],
-    wx1: ["Line", "Wind"], gr1: ["Line", "Stadium"], gr1d: ["Line", "Stadium"], sp6: ["Line", "Spread"], rrwt: ["Line (last game → now)", "Last game"],
+    wx1: ["Line", "Wind"], gr1: ["Line", "Stadium"], gr1d: ["Line", "Stadium"], sp6: ["Line", "Spread"], rrwt: ["Line (last game → now)", "Last game"], rp1: ["Line", "Under price"],
   };
   const sideChip = (t) => `<span class="chip rl-side ${t.side}">${t.side === "model" ? "Over / Under" : `Bet ${t.side === "over" ? "Over" : "Under"}`}</span>`;
   // Season record for original leads 1–8: every graded week so far (weeks 1 through the latest week with a final game),
@@ -743,6 +751,9 @@
   STUDY.tr3 = { rec: "509–357", roi: 10.1, lo: 3.0, hi: 17.0, yr: [4.0, 12.0, 14.0], yrl: ["2024", "2025", "2026"], win: "2024 + 2025 + 2026 wk 1–11 · WR + TE + RB receptions + receiving yards (receptions 2025–26 only)", found: "Found in the 2026-11-26 snap-rate study on all three seasons, so no season is a clean out-of-sample test." };
   // RR (Catches Raised) replay (2026-11-27): WR + TE receptions Under, slotted players, DraftKings main line (FanDuel fallback), 1 unit at the saved Under price, pushes refunded,
   // 2025 + 2026 wk 1-11 (no 2024 receptions lines), week-cluster 95% interval (4,000 resamples of weeks). The WR + TE cut was chosen after seeing the results (RBs were the weak group).
+  // RP1 replay (2026-11-27, claude/rec-price-split-2026-11-27.md): WR + TE + RB receptions Under priced -130 to -149 (inclusive), DraftKings main line (FanDuel fallback), 1 unit at the saved Under price,
+  // 2025 + 2026 wk 1-11 (no 2024 receptions lines), week-cluster 95% interval (4,000 resamples of weeks). The price band was chosen after seeing the price-bucket split.
+  STUDY.rp1 = { rec: "543–321", roi: 8.0, lo: 3.6, hi: 12.0, yr: [8.0, 7.9], yrl: ["2025", "2026"], win: "2025 + 2026 wk 1–11 · WR + TE + RB receptions · Under priced −130 to −149 · no 2024 receptions lines", found: "Found on these same two seasons: the −130 to −149 band was picked after seeing every price bucket, so neither season is a clean test. −115 to −129 returned about +3.5% and −150 to −164 about −1.7%." };
   STUDY.rrwt = { rec: "405–233", roi: 10.8, lo: 4.8, hi: 16.7, yr: [9.4, 12.5], yrl: ["2025", "2026"], win: "2025 + 2026 wk 1–11 · WR + TE receptions · no 2024 receptions lines", found: "Found on these same two seasons, and the WR + TE cut was chosen after seeing them, so neither season is a clean test." };
   // GR1-D replay (2026-11-27): the GR1 universe (QB + RB rushing yards, grass, neutral sites left out) with his team an underdog (nflverse spread_line, pick'em left out), same source,
   // price rule and week-cluster interval (20,000 resamples) as GR1, 2024 + 2025 + 2026 wk 1-11 (the window before the 2026-11-27 freeze). Underdog filter chosen after seeing the results.
@@ -808,6 +819,7 @@
 <symbol id="sgi-sdog" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="16" font-size="14" font-weight="500" opacity=".4">−10</text><text x="24" y="28" font-size="11" opacity=".6">vs</text><text x="24" y="43" font-size="14" font-weight="500">+10</text></g><ellipse cx="24" cy="38" rx="16" ry="8.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="sgi-sdogany" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="15" font-size="12" font-weight="500" opacity=".4">fav</text><text x="24" y="27" font-size="10" opacity=".6">vs</text><text x="24" y="41" font-size="12" font-weight="500">dog</text></g><ellipse cx="24" cy="37" rx="15" ry="8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="sgi-sdog65" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="15" font-size="11.5" font-weight="500" opacity=".4">−6.5</text><text x="24" y="27" font-size="10" opacity=".6">vs</text><text x="24" y="41" font-size="11.5" font-weight="500">+6.5</text></g><ellipse cx="24" cy="37" rx="18" ry="8.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="sgi-rprice" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="17" font-size="13" font-weight="500">−130</text><text x="24" y="28" font-size="11" opacity=".6">to</text><text x="24" y="42" font-size="13" font-weight="500">−149</text></g><rect x="3" y="3" width="42" height="42" rx="10" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="sgi-sband" viewBox="0 0 48 48"><g text-anchor="middle" fill="currentColor"><text x="24" y="17" font-size="14" font-weight="500">+3</text><text x="24" y="28" font-size="11" opacity=".6">to</text><text x="24" y="42" font-size="14" font-weight="500">+6.5</text></g><rect x="5" y="3" width="38" height="42" rx="10" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="sgi-field" viewBox="0 0 48 48"><rect x="5" y="10" width="38" height="28" rx="4" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.5"/><g stroke="currentColor" stroke-opacity=".35"><line x1="16" y1="11" x2="16" y2="37"/><line x1="27" y1="11" x2="27" y2="37"/><line x1="38" y1="11" x2="38" y2="37"/></g><line x1="11" y1="14" x2="11" y2="34" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="11" cy="24" r="3" fill="currentColor"/><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="14" y1="24" x2="23" y2="24"/><path d="M24 24l-4-3.5M24 24l-4 3.5"/><line x1="29" y1="24" x2="40" y2="24" stroke-opacity=".4" stroke-width="2" stroke-dasharray="2 3"/></g></symbol>
 <symbol id="sgi-fluke" viewBox="0 0 48 48"><line x1="6" y1="40" x2="42" y2="40" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/><rect x="10" y="30" width="11" height="10" rx="2" fill="currentColor" fill-opacity=".4"/><rect x="28" y="9" width="11" height="31" rx="2" fill="currentColor"/><line x1="6" y1="22" x2="42" y2="22" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2.5"/><path d="M33.5 15l-3 6h5l-3 6" fill="none" style="stroke:var(--sgi-bg)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
@@ -866,6 +878,7 @@
     nlu20: { bet: "Under · rec yds · WR TE RB", g: () => [GP.PREV, GP.UP, GP.U20] },
     gr1: { bet: "Under · rushing · QB RB", g: () => [{ i: "field", c: "gr", l: "Natural grass field", s: "Game is played on a grass field, home or away (neutral-site games left out)" }] },
     gr1d: { bet: "Under · rushing · QB RB", g: () => [{ i: "field", c: "gr", l: "Natural grass field", s: "Game is played on a grass field, home or away (neutral-site games left out)" }, { i: "sdogany", c: "gr", l: "Team an underdog", s: "Opponent favored by more than 0 (pick'em never fires)" }] },
+    rp1: { bet: "Under · receptions · WR TE RB", g: () => [{ i: "rprice", c: "pu", l: "Under priced −130 to −149", s: "Under price on this line, both ends included" }] },
     rrwt: { bet: "Under · receptions · WR TE", g: () => [{ i: "up", c: "pu", l: "Catches line raised", s: "Higher than his receptions line at his previous game played" }] },
     sp6: { bet: "Under · rec yds · WR TE RB", g: () => [{ i: "sdog65", c: "gr", l: "Team underdog by 6.5+", s: "Opponent favored by 6.5 or more" }] },
     wx1: { bet: "Under · pass yds QB · receptions, rec yds WR TE RB", g: () => [{ i: "open", c: "gr", l: "Outdoor game", s: "Open-air stadium (domes and retractable roofs left out)" }, { i: "wind", c: "am", t: "15+", tp: "br", l: "Wind 15+ mph", s: "Forecast lists players as Projected; the reading about 20 minutes before kickoff locks them in (scored)" }] },
@@ -876,7 +889,7 @@
   const POS_ORDER = {
     sy25: ["TE", "RB", "WR"], synl: ["WR", "TE", "RB"], syc40: ["TE", "RB", "WR"], syl45: ["TE", "WR", "RB"], syypc: ["WR", "TE", "RB"], fhr30: ["RB", "TE", "WR"], fhnl: ["WR", "TE", "RB"],
     bl200: ["TE", "WR", "RB"], nlu20: ["RB", "TE", "WR"],
-    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"], gr1: ["RB", "QB"], gr1d: ["RB", "QB"], sp6: ["TE", "RB", "WR"], tr3: ["TE", "WR", "RB"], rrwt: ["TE", "WR"],
+    sc1: ["TE", "WR"], qbch: ["TE", "WR"], cm120: ["TE", "RB", "WR"], sp1: ["TE", "RB", "WR"], sp2: ["TE", "WR", "RB"], sp5: ["RB", "QB"], gr1: ["RB", "QB"], gr1d: ["RB", "QB"], sp6: ["TE", "RB", "WR"], tr3: ["TE", "WR", "RB"], rrwt: ["TE", "WR"], rp1: ["WR", "TE", "RB"],
   };
   function betText(id, sg) {
     const rest = sg.bet.slice(sg.bet.indexOf(" ") + 1), po = POS_ORDER[id];
@@ -1009,7 +1022,7 @@
   // "Since freeze" view (Michael 2026-11-27): long-press the Signals heading to switch every tile to the record counted from the week each signal was frozen.
   // Display only: no rule, list, score or stored data changes, and the tile order does not move. A freeze week is the first week whose bets are forward;
   // FWD_WK is from claude/frozen-signal-register.md and the CHANGELOG (Wk 10 is a transition week, left out). tr3 (merged Thu 2026-11-26) starts Wk 13 to be safe.
-  const FWD_WK0 = 11, FWD_WK = { syc40: 12, syl45: 12, wx1: 12, gr1: 12, gr1d: 13, sp6: 12, tr3: 13, rrwt: 13 };
+  const FWD_WK0 = 11, FWD_WK = { syc40: 12, syl45: 12, wx1: 12, gr1: 12, gr1d: 13, sp6: 12, tr3: 13, rrwt: 13, rp1: 13 };
   const fwdId = (t) => (t.members ? t.members[RL.opt[t.id]] : t.id);
   const fwdWk = (t) => FWD_WK[fwdId(t)] ?? FWD_WK0;
   const fwdList = (t, list) => (RL.fwd ? list.filter((x) => x.r.wk >= fwdWk(t)) : list);
@@ -1525,6 +1538,8 @@
     // RR (Catches Raised): WR/TE receptions Under when this week's line is higher than his line at his previous game PLAYED.
     const lpl = lastPlayedLine(played, mid);
     if ((p.pos === "WR" || p.pos === "TE") && mid === "rec" && lpl != null && line > lpl) hits.push("rrwt");
+    // RP1: receptions Under when the Under price is -130 to -149 (graded: the saved pre-game Under price; upcoming: the price showing).
+    if (["WR", "TE", "RB"].includes(p.pos) && mid === "rec" && m.up != null && m.up <= -130 && m.up >= -149) hits.push("rp1");
     const fb = favBy(r);
     if (fb != null) {
       if (fb <= -10 && ["WR", "TE", "RB"].includes(p.pos)) { if (mid === "rec_yds") hits.push("sp1"); if (mid === "rec") hits.push("sp2"); }
