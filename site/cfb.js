@@ -537,7 +537,7 @@
     const first = r.kind === "first" ? ` · <span title="First-posted line: the line about 1 hour before kickoff wasn't captured, so this bet doesn't count in the record">1st line</span>` : "";
     const meta = `<span class="muted small">${c.pos ? esc(c.pos) + " · " : ""}${esc(abbr(r.g, c.side))} ${c.side === "home" ? "vs" : "@"} ${esc(opp)} · ${r.g.status === "final" ? `Final ${esc(abbr(r.g, "away"))} ${r.g.away_score}–${r.g.home_score} ${esc(abbr(r.g, "home"))}` : esc(fmtKo(r.g.kickoff))}${first}</span>`;
     const ch = chips ? `<span class="sg-chips">${chips}</span>` : "";
-    return `<div class="rlrow sg-pr"><div class="rlhead">${pLink(r)}<span class="rlstat">${{ player_pass_yds: "Pass yds", player_rush_yds: "Rush yds", player_reception_yds: "Rec yds" }[r.mk.id]}</span><span class="chip rl-side ${b.side}">${b.side === "over" ? "Over" : "Under"} ${num(L)}</span>${res}</div>
+    return `<div class="rlrow sg-pr"><div class="rlhead">${pLink(r)}<span class="muted small sg-tm">${esc(abbr(r.g, c.side))}</span><span class="rlstat">${{ player_pass_yds: "Pass yds", player_rush_yds: "Rush yds", player_reception_yds: "Rec yds" }[r.mk.id]}</span><span class="chip rl-side ${b.side}">${b.side === "over" ? "Over" : "Under"} ${num(L)}</span>${res}</div>
       ${why ? `<div class="sg-m"><span class="small sg-gap">${esc(why)}</span>${ch}</div><div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${ch}</div>`}</div>`;
   }
   const SG_SHORT = { bigbeat: "Beat", jump: "Jump", qbfade: "QB Fade" };

@@ -767,3 +767,4 @@ textarea.tp-in { resize: vertical; }
 .sg-detail.sg-detail-in { animation: sg-up .3s ease-out; }
 @keyframes sg-up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .sg-detail.sg-detail-in { animation: none; } }
+.sg-pr .sg-tm { flex: none; }
