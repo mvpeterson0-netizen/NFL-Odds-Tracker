@@ -768,3 +768,9 @@ textarea.tp-in { resize: vertical; }
 @keyframes sg-up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .sg-detail.sg-detail-in { animation: none; } }
 .sg-pr .sg-tm { flex: none; }
+
+.pk-intro-p { margin: 12px 0 10px; line-height: 1.45; }
+.pk-intro-shot { max-height: 46vh; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; }
+.pk-intro-shot img { border: 0; border-radius: 0; }
+.pk-intro-cap { margin: 6px 0 0; }
+.pk-intro-l { margin: 0 0 12px; }

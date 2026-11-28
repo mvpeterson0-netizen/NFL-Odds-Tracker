@@ -456,6 +456,47 @@
     const rows = old.map((p) => ({ p, g: grade(p) })).sort((a, b) => (b.p.ko || "").localeCompare(a.p.ko || "")).map((x) => row(x.p, x.g, true)).join("");
     return `<details class="panel ac-legacy"><summary><b>Earlier picks saved to GitHub (${old.length})</b> <span class="muted small">· not in your account yet; importing them is the next update</span></summary><div class="body">${rows}</div></details>`;
   }
+  // Picks tab for visitors who aren't signed in (Michael, 2026-11-28): an empty record, a short "what is this tab" pop-up (shown once per
+  // browser, and from the "What is this tab?" link), then the sign-in screen. No one's real picks are shown here.
+  const INTRO_KEY = "stix_picks_intro";
+  const introSeen = () => { try { return localStorage.getItem(INTRO_KEY) === "1"; } catch (e) { return !!window.__stixPkIntro; } };
+  function closeIntro() {
+    const ov = document.getElementById("pk-intro-ov"); if (ov) ov.remove();
+    document.body.classList.remove("wn-lock"); window.__stixPkIntro = true;
+    try { localStorage.setItem(INTRO_KEY, "1"); } catch (e) { /* once per page load */ }
+  }
+  function openIntro() {
+    if (document.getElementById("pk-intro-ov")) return;
+    const ov = document.createElement("div");
+    ov.id = "pk-intro-ov"; ov.className = "share-ov";
+    ov.innerHTML = `<div class="share-box wn-box su-box" role="dialog" aria-modal="true" aria-labelledby="pk-intro-t">
+      <div class="wn-h"><b id="pk-intro-t">What's the Picks tab?</b><button type="button" class="nw-x wn-x" aria-label="Close">✕</button></div>
+      <p class="small pk-intro-p"><b>Test a signal before you put real money on it.</b> Tap <b>Over</b> or <b>Under</b> on any player page to save a pick, then see how it does with no money at risk.</p>
+      <ul class="su-list pk-intro-l"><li><b>Live tracking:</b> once the games start, each pick shows its stat as it happens and whether it's on pace to hit.</li>
+        <li>Picks lock at kickoff and are graded for you; your record and profit (in units) build up here.</li>
+        <li>Only you can see your picks.</li></ul>
+      <div class="pk-intro-shot"><img src="welcome/picks-inprogress.jpg" alt="Example Picks tab on game day: record, hit rate, profit, and settled picks marked Hit" loading="lazy"></div>
+      <p class="small muted pk-intro-cap">Example: the Picks tab on game day, with live and settled picks and the running record.</p>
+      <button type="button" class="wn-ok pk-intro-go">Got it</button>
+    </div>`;
+    document.body.appendChild(ov); document.body.classList.add("wn-lock");
+    ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest(".wn-x") || e.target.closest(".pk-intro-go")) closeIntro(); });
+  }
+  function signedOutView(acc) {
+    // Waits while another pop-up (What's new, sign-in) is open, so two never stack; gives up if they leave the Picks tab.
+    if (!introSeen() && !window.__stixPkIntroWait) {
+      let tries = 0;
+      window.__stixPkIntroWait = setInterval(() => {
+        const gone = ++tries > 120 || introSeen() || ACC().signedIn() || !document.querySelector("#pk-whatis");
+        if (gone) { clearInterval(window.__stixPkIntroWait); window.__stixPkIntroWait = null; return; }
+        if (document.querySelector(".share-ov, #wn-ov, #su-ov")) return;
+        clearInterval(window.__stixPkIntroWait); window.__stixPkIntroWait = null; openIntro();
+      }, 700);
+    }
+    return `<div class="pk-stats"><div class="pk-stat"><span>Record (W–L–P)</span><b>0–0–0</b></div><div class="pk-stat"><span>Hit rate</span><b>—</b></div>
+      <div class="pk-stat"><span>Profit / loss</span><b>—</b></div></div>
+      <p class="small"><a href="#/picks" id="pk-whatis">What is this tab?</a></p>` + (acc.gate() || "");
+  }
   function view() {
     const acc = ACC();
     if (acc && acc.signedIn()) {
@@ -465,6 +506,7 @@
       const st = AC.saving ? "Saving…" : AC.err ? `<span class="pk-err">${esc(AC.err)}</span> <button id="pk-retry">Retry</button>` : "Saved to your account";
       return picksView(AC.picks, st, "Locks are enforced by the Stix server at the scheduled kickoff, so a device's clock can't change them.") + ghLegacy();
     }
+    if (acc && !acc.signedIn()) return signedOutView(acc);
     if (cfg()) return (acc ? `<div class="panel ac"><div class="body"><p class="small"><b>New:</b> sign in with your email to keep your picks in a Stix account, on every device. <a href="#/picks" id="pk-goacct">Sign in</a></p></div></div>` : "") + ghView();
     return acc ? acc.gate() || "" : setupView();
   }
@@ -492,6 +534,8 @@
         .map((x) => Object.assign({}, x.p, { locked: x.g.st === "locked" }));
       try { window.STIX_SHARE.openPicks(list); } catch (err) { console.error("picks share failed", err); }
     });
+    const wi = document.getElementById("pk-whatis");
+    if (wi) wi.addEventListener("click", (e) => { e.preventDefault(); openIntro(); });
     const ga = document.getElementById("pk-goacct");
     if (ga) ga.addEventListener("click", (e) => { e.preventDefault(); signInWanted = true; rerender(); });
     const off = document.getElementById("pk-off");
