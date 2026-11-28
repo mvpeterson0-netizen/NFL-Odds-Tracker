@@ -56,10 +56,10 @@
     // grading and audit numbers); the tile just shows whichever one is toggled. Info (i) opens that signal's own explanation.
     ...[
       ["cm1", 6, "CM1", ["cm1te", "cm120"], ["TE", "All"], "QB line drop, receivers' lines don't follow", "Line Lag"],
-      ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script", "Prev Scr", null, "ind"],
-      ["sy", 29, "SY", ["syc40", "syl45", "syypc"], ["40+", "L45+", "YPC"], "Short-yardage receiver after a big Over", "Short yd", ["40+ ct", "Line 45", "Fluke"]],
-      ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "NL"], "First-half Over, line raised", "1st Half", ["+30%", "No Long"], "ind"],
-      ["su", 41, "SU", ["sp1", "sp2", "sp4"], ["Yds", "Rec", "QB"], "Team a 10+ point underdog", "Big Dog", null, null, true],
+      ["gs", 2, "GS", ["sc2", "sc1"], ["RB", "WR/TE"], "Over after a lopsided game script", "Game Script", null, "ind"],
+      ["sy", 29, "↓YPC", ["syc40", "syl45", "syypc"], ["N=40", "45+", "Spike"], "Short-yardage receiver after a big Over", "Low YPC"],
+      ["fh", 32, "1H", ["fhr30", "fhnl"], ["+30%", "No Long"], "First-half Over, line raised", "1st Half", null, "ind"],
+      ["su", 41, "DOG", ["sp1", "sp2", "sp4"], ["Yds", "Catch", "Pass"], "Team a 10+ point underdog", "Big Dog", null, null, true],
     ].map(([id, n, label, mem, lbl, what, tile, lblT, pg, spr]) => ({
       id, n, side: "under", label, tile, page: pg || undefined, spread: !!spr, optTile: (v) => (lblT || lbl)[v - 1], opts: mem.map((_, i) => i + 1), optFmt: (v) => lbl[v - 1], members: Object.fromEntries(mem.map((m, i) => [i + 1, m])), cm: id === "cm1",
       short: () => memTab(id).short(), title: `${what} (${lbl.join(" / ")})`, why: "", desc: () => memTab(id).desc(),
@@ -89,13 +89,13 @@
       title: "QB rush Under on high lines", why: "High QB rushing lines may be inflated by a few big games.",
       desc: () => `Bet a QB's <b>rushing yards Under</b> when this week's rushing-yards line is <b>${RL.opt.qbr4} or higher</b>. The toggle changes the minimum line. The idea is that a few big games can inflate high QB rushing lines.` },
     // ---- Indicator page (#/search/indicators, long-press the Signals tab): the audit's tracked indicator rules, same format ----
-    { id: "l9", n: 21, page: "ind", side: "under", label: "L9",
+    { id: "l9", n: 21, page: "ind", side: "under", label: "3 Overs",
       title: "WR rec yds Under after three straight Overs", why: "A run of Overs may be priced into the next line.",
       desc: () => `Bet a WR's <b>receiving yards Under</b> when each of his <b>last 3 games played</b> finished <b>Over</b> that game's graded pre-game receiving-yards line (a push or a missing line breaks the run).` },
     { id: "tr3", n: 22, page: "ind", side: "under", label: "TR-UP3", short: () => "Targets per snap jumped over his last 3 games",
       title: "Target rate jumped over his last 3 games → receptions / rec yds Under", why: "A sharp, sustained jump in targets per snap tends to fade, while the line is raised to match it.",
       desc: () => `Bet a WR's, TE's or RB's <b>receptions Under</b> or <b>receiving yards Under</b> when both are true:<ul class="sg-ul"><li>His <b>targets per offensive snap</b> over his <b>last 3 games played</b> is well above his rate in his earlier games this season (a gap of at least <b>2 standard errors</b>: z = (targets in the last 3 − earlier rate × snaps in the last 3) ÷ √(earlier rate × (1 − earlier rate) × snaps in the last 3)).</li><li>He has at least <b>2 earlier games</b> this season and averaged <b>15+ offensive snaps</b> a game over the last 3.</li></ul><div class="sg-sub">The idea is that a short run of extra targets per snap usually fades (about 43% of the jump carried into the next game in the replay) while the book raises the line about 18% to match. Snap counts are nflverse offensive snaps, so the rule only fires once those are posted for his earlier games.</div>` },
-    { id: "s03", n: 23, page: "ind", side: "under", label: "S03",
+    { id: "s03", n: 23, page: "ind", side: "under", label: "Rising 3",
       title: "WR rec yds Under after three rising games", why: "Rising yardage may overshoot his true level.",
       desc: () => `Bet a WR's <b>receiving yards Under</b> when his receiving yards rose in each of his <b>last 3 games played</b> (strictly higher each game).` },
     { id: "sp1", hid: true, n: 24, page: "ind", side: "under", label: "SP1",
@@ -114,7 +114,7 @@
       title: "Team a 3 to 6.5 point underdog → rushing Under", why: "Small underdogs play from slightly behind and may run less.",
       desc: () => `Bet a QB's or RB's <b>rushing yards Under</b> when his team is a <b>3 to 6.5 point underdog</b>. ${SPREAD_NOTE}` },
     // ---- Catches Raised (2026-11-27): WR/TE receptions Under when this week's line is higher than his line at his previous game PLAYED. Slotted players (as in the replay). ----
-    { id: "rrwt", front: true, n: 42, side: "under", label: "RR", tile: "Rec Up", short: () => "WR/TE receptions Under when the line is higher than his last game's",
+    { id: "rrwt", front: true, n: 42, side: "under", label: "Rec ↑", tile: "Catch ↑", short: () => "WR/TE receptions Under when the line is higher than his last game's",
       title: "WR/TE receptions Under when his line went up from his last game", why: "A raised catches line may overshoot.",
       desc: () => `Bet a WR's or TE's <b>receptions Under</b> when this week's receptions line is <b>higher</b> than his receptions line in his <b>previous game played</b>.<div class="sg-sub"><b>Where it comes from:</b> the position cut (WR and TE only; RBs left out) was chosen after seeing the 2025 and 2026 weeks 1 to 11 results, so those weeks are discovery, not a clean test. There are no 2024 receptions lines. The forward record starts at zero.</div>` },
     // ---- Late-yardage indicators (2026-11-16, Michael's picks from the 2026-11-15 late-yardage study; receiving yards, WR/TE/RB) ----
@@ -140,7 +140,7 @@
     { id: "fhnl", hid: true, n: 33, page: "ind", side: "under", label: "FH-NL", short: () => "First half alone beat the line, Over without his longest catch",
       title: "First-half Over without his longest catch → rec yds Under", why: "He was Over early and across several catches, yet the line still went up.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}${LY_FH}${LY_NOLONG}</ul>` },
-    { id: "bl200", n: 34, page: "ind", side: "under", label: "BL-200", tile: "Big Beat", short: () => "Beat his line by 200%+",
+    { id: "bl200", n: 34, page: "ind", side: "under", label: "BL-3x", tile: "Big Beat", short: () => "Beat his line by 200%+",
       title: "Beat his line by 200%+ → rec yds Under", why: "A huge game may be priced as a new normal.",
       desc: () => `${LY_WHO}<ul class="sg-ul">${LY_PREV}${LY_UP()}<li>He <b>beat that line by 200% or more</b> (at least 3 times the line).</li></ul>` },
     { id: "nlu20", n: 35, page: "ind", side: "under", label: "NL-U20", short: () => "Longest catch under 20 yards",
@@ -942,7 +942,7 @@
     return `<div class="sgp-res"><div class="muted small">${esc(d.win)}</div><div class="sgp-hero"><b style="color:${col(d.roi)}">${pc(d.roi)}</b><b>${esc(d.rec)}</b></div>${h}</div>`;
   }
   // Info popup header (Michael 2026-11-21): the tile name and toggle spelled out in full words; tiles keep their short names.
-  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Previous Script", ["RB", "WR/TE"]], sy: ["Short yardage", ["40+ catches", "Line 45+", "Fluke"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null], su: ["Big Underdog", ["Rec yards", "Receptions", "QB pass yards"]], sp5: ["Lil Dog", null], rrwt: ["Rec Up", null] };
+  const POPN = { qbru: ["QB Rush", { 1: "Line 25+", 2: "Average 25", 3: "Line up 5+" }], cm1: ["Line Lag", ["TE", "All receivers"]], gs: ["Game Script", ["RB", "WR/TE"]], sy: ["Low YPC", ["N=40", "45+", "Spike"]], fh: ["First Half", ["Line +30%", "No longest catch"]], bl200: ["Big Beat", null], su: ["Big Underdog", ["Yds", "Catch", "Pass"]], sp5: ["Lil Dog", null], rrwt: ["Catch ↑", null] };
   const popLabel = (t) => { const e = t && POPN[t.id]; if (!e) return null; const v = RL.opt[t.id], o = e[1] ? (Array.isArray(e[1]) ? e[1][v - 1] : e[1][v]) : null; return o ? `${e[0]} · ${o}` : e[0]; };
   const togLabel = (t) => (t.opts ? `${t.label} · ${t.optFmt(RL.opt[t.id])}` : t.label);
   function openInfo(id) {
@@ -965,7 +965,7 @@
       ${id === "syypc" ? `<div class="small muted sgp-why">${bulb}<span>Fluke long catches tend not to repeat.</span></div>` : ""}
       ${id === "syc40" ? `<div class="small muted sgp-why">${bulb}<span>A receiver with a long record of short catches who just had a big game may be priced for a repeat.</span></div>` : ""}
       ${id === "syl45" ? `<div class="small muted sgp-why">${bulb}<span>A big line after a big game for a short-catch receiver may overshoot.</span></div>` : ""}
-      ${id === "syc40" || id === "syl45" || id === "syypc" ? `<div class="small muted">These three signals overlap: in the replay, about 70% of Fluke and Line 45+ bets were also 40+ catches bets.</div>` : ""}
+      ${id === "syc40" || id === "syl45" || id === "syypc" ? `<div class="small muted">These three signals overlap: in the replay, about 70% of Spike and 45+ bets were also 40+ catches bets.</div>` : ""}
       ${sgpResults(t)}
       <details class="sgp-how"><summary>How we measured this</summary><p class="small">${auditLine(t)}</p>
       <p class="small"><b>What the interval means:</b> the range of ROI you would plausibly get if the same rule were run on other weeks (made by resampling whole weeks 4,000 times). If it reaches below 0%, the result could be luck.${STUDY[t.id] || r3(t) ? "" : " It does not account for picking the best rules out of many tried, so it is likely optimistic."}</p></details></div>`;
@@ -1387,7 +1387,7 @@
     inner += `<div class="sg-detail" id="sg-detail">${det}</div>`; // Signals + Indicators: placeDetail() moves this block under the picked tile
     setTimeout(placeGate, 0);
     setTimeout(placeDetail, 0);
-    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Six tiles live on Signals: Short yd, QB Rush, Line Lag, Big Dog, Lil Dog and Rec Up. Everything else is here, grouped by how it held up. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
+    const head = SGPAGE === "ind" ? `${gsecRow("Signals · Indicators")}<p class="small"><a href="#/search" data-ind-back>← Back to Signals</a> <span class="muted">Six tiles live on Signals: Low YPC, QB Rush, Line Lag, Big Dog, Lil Dog and Catch ↑. Everything else is here, grouped by how it held up. Same tiles, charts and lists as Signals.</span></p>` : `${gsecRow("Signals")}<div class="sg-tagrow"><p class="muted small sg-tag">Claude's Fable 5.2 highest ROI Signals</p><a class="ps-link" href="#/search/players">Player signals ›</a></div>`;
     const fwdNote = RL.fwd ? `<p class="muted small sg-fwdnote">Since freeze: each tile counts only bets from the week its signal was frozen (Week ${FWD_WK0} for most; later for signals added after). Earlier weeks are discovery. Swipe left on the heading to go back.</p>` : "";
     return `<section id="rl" data-page="${SGPAGE}">${head}${fwdNote}${sgToggleHtml()}${inner}</section>`;
   }
