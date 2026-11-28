@@ -760,6 +760,7 @@ textarea.tp-in { resize: vertical; }
 /* Signals layout 2026-11-27: spread-timing flag on a tile, group headings on the Indicators page */
 .sg-sprd { font-size: 10px; line-height: 1.1; color: var(--muted); margin-top: 3px; }
 .sg-grp { display: flex; flex-direction: column; gap: 1px; margin: 14px 0 -2px; } .sg-grp b { font-size: 14px; }
+.sg-grp-btn { width: 100%; background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; } .sg-grp-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; } .sg-grp-car { font-size: 14px; opacity: .7; }
 
 /* Indicators and Signals pages (2026-11-27): the picked tile's record + player list sits under its row; slides up when a tile is tapped */
 .sg-grid > .sg-detail { grid-column: 1 / -1; min-width: 0; }
