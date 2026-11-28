@@ -1098,7 +1098,7 @@
     ["Spread-based · timing unverified", "The spread is nflverse's closing-type number, which may differ from the one posted 3 hours before kickoff.", ["sp3", "sp6", "gr1d"]],
     ["Found on all three seasons · no clean test", "Picked after seeing 2024, 2025 and 2026 (Price 130-149 has only 2025 and 2026: there are no 2024 receptions lines), so no season is a held-out test. Forward records only.", ["tr3", "gr1", "wx1", "rp1"]],
     ["Fading", "Much smaller on the 2024 hold-out than when found (L9 +4.5%, S03 −1%).", ["l9", "s03"]],
-    ["Did not hold up on 2024", "Negative on 2024, the season held out when these were found. Definitions stay frozen and forward logging continues.", ["gs", "qbch", "fh", "bl200", "nlu20", "sy25", "synl"]],
+    ["Did not hold up on 2024", "Negative on 2024, the season held out when these were found. Definitions stay frozen and forward logging continues.", ["gs", "qbch", "fh", "bl200", "nlu20", "sy25", "synl"], "fold"], // "fold": starts closed, opened with its header button (Michael 2026-11-27)
   ];
   function topSection(tabs) {
     // Chart window: Prior week = just that week; This month / This season = every week in the window.
@@ -1118,8 +1118,13 @@
     const gridOf = (rs) => `<div class="sg-grid">${rs.map((x) => tileHtml(x.t, x, !RL.unlocked.has(x.t.id))).join("")}</div>`;
     let body = gridOf(rows);
     if (SGPAGE === "ind") { // grouped by how each held up (2026-11-27); a tile not named in a group goes into a last "Other" group so none is lost
-      const used = new Set(), grp = (ttl, note, rs) => (rs.length ? `<div class="sg-grp"><b>${ttl}</b><span class="muted small">${note}</span></div>${gridOf(rs)}` : "");
-      body = IND_GROUPS.map(([ttl, note, ids]) => { const rs = rows.filter((x) => ids.includes(x.t.id)); rs.forEach((x) => used.add(x.t.id)); return grp(ttl, note, rs); }).join("") + grp("Other", "", rows.filter((x) => !used.has(x.t.id)));
+      const used = new Set(), grp = (ttl, note, rs, fold) => {
+        if (!rs.length) return "";
+        if (!fold) return `<div class="sg-grp"><b>${ttl}</b><span class="muted small">${note}</span></div>${gridOf(rs)}`;
+        const open = !!(RL.grpOpen && RL.grpOpen[ttl]); // closed until tapped; the choice survives redraws
+        return `<button type="button" class="sg-grp sg-grp-btn" data-sggrp="${esc(ttl)}" aria-expanded="${open}"><span class="sg-grp-row"><b>${ttl} (${rs.length})</b><span class="sg-grp-car" aria-hidden="true">${open ? "▴" : "▾"}</span></span><span class="muted small">${note}</span></button>${open ? gridOf(rs) : ""}`;
+      };
+      body = IND_GROUPS.map(([ttl, note, ids, fold]) => { const rs = rows.filter((x) => ids.includes(x.t.id)); rs.forEach((x) => used.add(x.t.id)); return grp(ttl, note, rs, fold); }).join("") + grp("Other", "", rows.filter((x) => !used.has(x.t.id)));
     }
     let h = `${SGPAGE === "ind" ? `<div class="sg-scope" role="tablist" aria-label="Time">${SCOPES.map(([k, l]) => `<button class="gchip ${RL.scope === k ? "on" : ""}" data-rscope="${k}">${l}</button>`).join("")}</div>` : ""}<div class="sg-wrap">${body}`;
     if (gate && rows.length > FREE_TILES) h += `<div class="sg-gate" id="sg-gate">${ACCT() ? ACCT().googleBlock("sg") : ""}</div>`;
@@ -1404,6 +1409,7 @@
     if (e.target.closest && e.target.closest("[data-sgtnf]")) { RL.tnf = !tnfOn(); if (RL.tnf && sgToggleOn()) RL.sgView = todayWk() === curWk() ? "next" : "last"; redraw(); return; }
     const sv = e.target.closest && e.target.closest("[data-sgview]"); if (sv) { RL.sgView = sv.dataset.sgview; if (RL.tnf && todayWk() !== (RL.sgView === "last" ? curWk() - 1 : curWk())) RL.tnf = false; redraw(); return; }
     const sc = e.target.closest && e.target.closest("[data-rscope]"); if (sc) { RL.scope = sc.dataset.rscope; redraw(); return; }
+    const gb = e.target.closest && e.target.closest("[data-sggrp]"); if (gb) { const k = gb.dataset.sggrp; RL.grpOpen = RL.grpOpen || {}; RL.grpOpen[k] = !RL.grpOpen[k]; redraw(); return; }
   });
   // Swipe right (Michael 2026-11-27) starting on the "Signals" heading of the Signals or Indicators page shows the "since freeze" view for every tile; swipe left goes back.
   // Replaces the earlier long-press on the heading. Vertical scrolling is untouched (the heading allows pan-y only).
