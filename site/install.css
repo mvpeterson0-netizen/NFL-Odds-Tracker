@@ -1,0 +1,42 @@
+/* "Add Stix to your Home Screen" guide (install.js). */
+.ig-bar { position: fixed; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 30; width: min(calc(100% - 16px), 460px); box-sizing: border-box;
+  display: flex; align-items: center; gap: 4px; padding: 8px 6px 8px 10px; background: var(--panel); color: var(--ink);
+  border: 1px solid var(--accent); border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.28); animation: ig-up .35s ease-out; }
+.ig-bar[hidden] { display: none; }
+.ig-bar .ig-open { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 2px 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; }
+.ig-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 14px; line-height: 1.25; }
+.ig-sub { font-size: 13px; color: var(--muted); }
+.ig-sub b { color: var(--ink); font-weight: 600; }
+.ig-logo { border-radius: 8px; flex: none; }
+.ig-x { flex: none; order: 3; border: 0; background: none; color: var(--muted); font-size: 16px; padding: 8px 10px; cursor: pointer; }
+.ig-arrow { flex: none; order: 2; font-size: 22px; font-weight: 700; color: var(--accent); padding: 0 2px; animation: ig-bob 1.1s ease-in-out infinite; }
+.ig-safari .ig-arrow { order: -1; }
+.ig-ic { display: inline-flex; align-items: center; justify-content: center; vertical-align: -4px; width: 24px; height: 22px; margin: 0 1px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.ig-ic svg { fill: currentColor; stroke: currentColor; }
+.ig-ic svg[fill="none"] { fill: none; }
+body.ig-has-bar #app { padding-bottom: 84px; }
+
+.ig-ov { position: fixed; inset: 0; z-index: 55; background: rgba(0,0,0,.55); display: flex; align-items: flex-end; justify-content: center; }
+.ig-sheet { width: min(100%, 460px); box-sizing: border-box; max-height: 90vh; overflow: auto; background: var(--panel); color: var(--ink);
+  border-radius: 16px 16px 0 0; padding: 16px 18px calc(18px + env(safe-area-inset-bottom)); animation: ig-up .3s ease-out; }
+@media (min-width: 700px) { .ig-ov { align-items: center; } .ig-sheet { border-radius: 16px; } }
+.ig-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.ig-hd h3 { flex: 1; margin: 0; font-size: 17px; }
+.ig-close { border: 0; background: none; color: var(--muted); font-size: 18px; padding: 6px 8px; }
+.ig-steps { list-style: none; margin: 6px 0 10px; padding: 0; }
+.ig-steps li { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.45; }
+.ig-steps li:last-child { border-bottom: 0; }
+.ig-n { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--panel); font-weight: 700; font-size: 14px;
+  display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+.ig-acts { display: flex; gap: 8px; margin: 12px 0 8px; }
+.ig-btn { display: inline-flex; align-items: center; justify-content: center; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer; }
+.ig-acts .ig-btn { flex: 1; }
+.ig-main { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+.ig-done { width: 100%; margin-top: 8px; }
+@keyframes ig-up { from { transform: translate(-50%, 24px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+.ig-sheet { animation-name: ig-sheet-up; }
+@keyframes ig-sheet-up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes ig-bob { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .ig-bar, .ig-sheet, .ig-arrow { animation: none; } }
