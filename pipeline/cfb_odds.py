@@ -13,9 +13,9 @@ from __future__ import annotations
 
 import json
 from collections import defaultdict
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 
-from .common import http_get, iso, norm_name, parse_iso
+from .common import http_get, iso, norm_name, parse_iso, utcnow
 from .cfb_store import Store
 from .odds import API, BOOKS, EXTRA_BOOKS
 
@@ -25,6 +25,20 @@ CHECK_HORIZON = timedelta(days=3, hours=18)
 PREGAME_MIN, PREGAME_MAX = 45, 75            # minutes before kickoff in which the graded pull is made
 CREDIT_FLOOR = 3000                          # never spend below this on any key (the monthly allowance is 20,000)
 MATCH_TOLERANCE = timedelta(hours=6)
+# Credit-saving weekend (Michael, 2026-11-27): until this time CFB makes ONLY the graded pregame pull (45-75 min before
+# kickoff, no early "first" pull) and its credit floor is lowered, so one pull per game fits the small balance left
+# before the monthly reset. After it, the normal rules and the 3,000 floor apply again automatically.
+WEEKEND_FROM = datetime(2026, 11, 28, 0, 0, tzinfo=timezone.utc)
+WEEKEND_UNTIL = datetime(2026, 11, 29, 12, 0, tzinfo=timezone.utc)
+WEEKEND_FLOOR = 1000
+
+
+def weekend_mode(now) -> bool:
+    return WEEKEND_FROM <= now < WEEKEND_UNTIL
+
+
+def credit_floor(now) -> int:
+    return WEEKEND_FLOOR if weekend_mode(now) else CREDIT_FLOOR
 
 
 class Stop(Exception):
@@ -76,6 +90,8 @@ def choose_pull(game: dict, state: dict, now) -> tuple[str, int] | None:
     if game["status"] != "scheduled" or mins < 5 or ko - now > CHECK_HORIZON:
         return None
     in_window = PREGAME_MIN <= mins <= PREGAME_MAX
+    if weekend_mode(now):
+        return ("pregame", mins) if in_window and not state.get("pregame_ok_utc") else None
     if not state.get("first_ok_utc"):
         return ("pregame" if in_window else "first"), mins
     if in_window and not state.get("pregame_ok_utc"):
@@ -83,7 +99,7 @@ def choose_pull(game: dict, state: dict, now) -> tuple[str, int] | None:
     return None
 
 
-def pick_key(keys: list[str], get=_get):
+def pick_key(keys: list[str], get=_get, now=None):
     """First key (free ones first) whose balance is above the floor. Returns (key, events, remaining)."""
     last_err = None
     for k in keys:
@@ -95,7 +111,7 @@ def pick_key(keys: list[str], get=_get):
             left = int(h.get("x-requests-remaining", ""))
         except ValueError:
             continue    # unknown balance never authorises spending
-        if left > CREDIT_FLOOR:
+        if left > credit_floor(now or utcnow()):
             return k, json.loads(body), left
     raise Stop(last_err or "no key above the credit floor")
 
@@ -112,7 +128,7 @@ def run(store: Store, keys: list[str], games: list[dict], log: list[str], now, g
     if not plans:
         return 0
     try:
-        key, events, left = pick_key(keys, get)
+        key, events, left = pick_key(keys, get, now)
     except Stop as ex:
         log.append(f"cfb odds: no pull ({ex})")
         return 0
@@ -129,7 +145,7 @@ def run(store: Store, keys: list[str], games: list[dict], log: list[str], now, g
         if g.get("odds_event_id") != ev["id"]:
             g["odds_event_id"] = ev["id"]
             store.upsert("cfb_games", [{k: v for k, v in g.items()}], "game_id")
-        if left <= CREDIT_FLOOR + 3:
+        if left <= credit_floor(now) + 3:
             log.append("cfb odds: stopped at the credit floor")
             break
         body, h, status = get(f"{API}/sports/{SPORT}/events/{ev['id']}/odds", {
