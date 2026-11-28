@@ -25,7 +25,7 @@ from concurrent.futures import ThreadPoolExecutor
 OUT = sys.argv[1] if len(sys.argv) > 1 else "out"
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://hewbbugkbycdkazlwspq.supabase.co").rstrip("/")
 KEY = os.environ["SUPABASE_SERVICE_KEY"]
-UA = "Mozilla/5.0 (compatible; StixResearch/1.0)"
+UA = "nfl-odds-tracker/1.0 (+github actions)"  # Supabase refuses secret keys from browser-like agents
 ESPN = "https://site.api.espn.com/apis/site/v2/sports/football/college-football"
 SUMMARY = "https://site.web.api.espn.com/apis/site/v2/sports/football/college-football/summary?event={}"
 ATHLETE = "https://site.web.api.espn.com/apis/common/v3/sports/football/college-football/athletes/{}/stats"
