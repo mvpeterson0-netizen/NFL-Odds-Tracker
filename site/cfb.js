@@ -142,7 +142,7 @@
     C.loading = true; C.err = "";
     try {
       if (!C.games) await loadGames();
-      if (/^#\/cfb\/(results|player-)/.test(location.hash || "")) await loadAllWeeks();
+      if (/^#\/cfb\/(results|signals|player-)/.test(location.hash || "")) await loadAllWeeks();
       if (C.wk == null && C.games.length) {
         const weeks = weeksList();
         const up = weeks.find((w) => C.games.some((g) => g.week === w && g.status !== "final"));
@@ -155,7 +155,7 @@
         }
         C.wk = pick;
       } else if (C.wk != null) await loadWeek(C.wk);
-      if (/^#\/cfb\/(results|player-)/.test(location.hash || "")) await loadAllWeeks();
+      if (/^#\/cfb\/(results|signals|player-)/.test(location.hash || "")) await loadAllWeeks();
     } catch (e) { C.err = `Couldn't load college football data: ${e.message}`; }
     C.loading = false;
     rerender();
@@ -401,6 +401,187 @@
     return chartSVG(rows, "x", phone ? { W: 400, H: 230, L: 30, R: 26, T: 26, B: 24, fs: 12 } : {});
   }
 
+  // ---------- Signals (CFB side, Michael 2026-11-27): the "big game, line raised, now Under" variants and the QB passing line-move
+  // fade from the 2026-11-27 CFB study (claude/cfb-signal-port-2026-11-27.md). Frozen 2026-11-27: definitions never change; records
+  // through week 12 are discovery (the rules were picked after seeing them), week 13 on is forward ("Since freeze").
+  // Computed in the browser from the same rows as the Board and Results. Records count only lines captured ~1 h before kickoff
+  // (as the study did); a first-posted line can show a player in "this week" but never counts in a record.
+  // Only players on Power 4 teams (teams with 5+ stored games) qualify: every game of theirs is stored, so "previous game" is exact.
+  const SG_FREEZE_WK = 13;
+  const SGT = [
+    { id: "bigbeat", tile: "Big Beat", opts: [
+      { v: "bl50", tg: "50%+", lbl: "Beat by 50%+", side: "under", mk: "player_reception_yds", def: "Receiving yards Under (WR/TE/RB) when last game he went Over his receiving-yards line by 50% or more with 40+ yards, and this week's line is higher.", disc: { rec: "65–40", roi: 17.1, lo: 0.3, hi: 34.4 } },
+      { v: "resid", tg: "1.5–2×", lbl: "1.5–2× last line", side: "under", mk: "player_reception_yds", def: "WR receiving yards Under when last game he finished at 1.5 to 2 times his receiving-yards line (no line-raise needed).", disc: { rec: "28–12", roi: 32.1, lo: 7.2, hi: 58.0 } },
+      { v: "bg", tg: "Big", lbl: "Big game", side: "under", mk: "player_reception_yds", def: "WR/TE receiving yards Under when last game he finished 50%+ over his receiving-yards line with 40+ yards (no line-raise needed).", disc: { rec: "70–46", roi: 14.2, lo: -1.4, hi: 29.4 } } ] },
+    { id: "jump", tile: "Line Jump", opts: [
+      { v: "up25", tg: "+25%", lbl: "Line up 25%+", side: "under", mk: "player_reception_yds", def: "WR receiving yards Under when this week's line is 25%+ higher than his line in his team's previous game.", disc: { rec: "34–13", roi: 36.5, lo: 15.1, hi: 58.3 } },
+      { v: "rise3", tg: "Rise 3", lbl: "Rising 3 + raised", side: "under", mk: "player_reception_yds", def: "WR receiving yards Under when his receiving yards rose in each of his last 3 games played and this week's line is higher than last game's (NFL combo C2).", disc: { rec: "26–14", roi: 22.8, lo: -3.0, hi: 48.2 } } ] },
+    { id: "qbfade", tile: "QB Fade", opts: [
+      { v: "both", tg: "Both", lbl: "Both directions", side: "both", mk: "player_pass_yds", def: "QB passing yards: Under when this week's line is 10%+ higher than his line in his team's previous game; Over when it is 10%+ lower. Found after looking at the data (the NFL version lost), so treat it as a lead.", disc: { rec: "129–79", roi: 17.4, lo: 5.0, hi: 29.7 } },
+      { v: "up", tg: "Up", lbl: "Line up 10%+ → Under", side: "under", mk: "player_pass_yds", def: "QB passing yards Under when this week's line is 10%+ higher than his line in his team's previous game.", disc: { rec: "69–43", roi: 16.6, lo: -1.2, hi: 34.3 } },
+      { v: "down", tg: "Down", lbl: "Line down 10%+ → Over", side: "over", mk: "player_pass_yds", def: "QB passing yards Over when this week's line is 10%+ lower than his line in his team's previous game.", disc: { rec: "60–36", roi: 18.2, lo: -0.3, hi: 35.9 } } ] },
+  ];
+  const SG = { sel: "", opt: { bigbeat: "bl50", jump: "up25", qbfade: "both" }, fwd: false, key: "", idx: null };
+  // index: every row with its player's team, previous team game and that game's row / result, built once per data load
+  function sgIndex() {
+    const weeks = weeksList(), key = `${C.games.length}|${C.games.filter((g) => g.status === "final").length}|${weeks.filter((w) => C.weekData[w]).length}`;
+    if (SG.key === key && SG.idx) return SG.idx;
+    const cnt = new Map();
+    for (const g of C.games) for (const t of [g.home_team, g.away_team]) cnt.set(t, (cnt.get(t) || 0) + 1);
+    const p4 = new Set([...cnt].filter(([, n]) => n >= 5).map(([t]) => t));
+    const tgames = new Map();
+    for (const g of C.games.slice().sort((a, b) => a.kickoff.localeCompare(b.kickoff))) for (const t of [g.home_team, g.away_team]) (tgames.get(t) || tgames.set(t, []).get(t)).push(g);
+    const all = weeks.flatMap((w) => rowsFor(w)), byGame = new Map(), resBy = new Map(), team = new Map(), aid = new Map();
+    for (const r of all) byGame.set(`${r.g.game_id}|${r.mk.id}|${r.key}`, r);
+    for (const w of weeks) for (const x of (C.weekData[w] || { results: [] }).results) {
+      const k = norm(x.player_name); resBy.set(`${x.game_id}|${k}`, x); team.set(k, x.team_name); aid.set(k, x.athlete_id); // latest week wins
+    }
+    SG.idx = { p4, tgames, all, byGame, resBy, team, aid };
+    SG.key = key;
+    return SG.idx;
+  }
+  // context for one row: team, previous team game, his row and result there, recent receiving yards in games played
+  function sgCtx(r) {
+    const I = sgIndex(), team = r.team || I.team.get(r.key) || "";
+    if (!team || !I.p4.has(team) || !sideOf(r.g, team)) return null;
+    const gl = I.tgames.get(team) || [], i = gl.findIndex((g) => g.game_id === r.g.game_id);
+    const prior = gl.slice(0, Math.max(i, 0)).filter((g) => g.status === "final");
+    if (i < 1 || !prior.length) return null;
+    const pg = prior[prior.length - 1], pr = I.byGame.get(`${pg.game_id}|${r.mk.id}|${r.key}`) || null;
+    const pres = I.resBy.get(`${pg.game_id}|${r.key}`) || null;
+    const played = prior.map((g) => I.resBy.get(`${g.game_id}|${r.key}`)).filter(Boolean);
+    const pos = r.pos || C.pos[I.aid.get(r.key)] || "";
+    const pl = pr && pr.kind === "pregame" ? Number(pr.main.line) : null; // as in the study: the previous ~1 h line only
+    const pact = pl != null && pres && graded(pr) ? pr.act : null;
+    return { team, side: sideOf(r.g, team), pos, pg, pr, pl, pact, recy: played.map((x) => (x.rec_yds == null ? 0 : Number(x.rec_yds))) };
+  }
+  // which side a row bets for a tile + toggle (null = no bet). Frozen 2026-11-27.
+  function sgSide(tid, v, r, c) {
+    if (!c) return null;
+    const L = Number(r.main.line), pl = c.pl, pact = c.pact;
+    if (r.mk.id === "player_reception_yds") {
+      if (tid === "bigbeat" && v === "bl50") return ["WR", "TE", "RB"].includes(c.pos) && pact != null && pact > pl && pact >= 40 && pact / pl - 1 >= 0.5 && L > pl ? "under" : null;
+      if (tid === "bigbeat" && v === "resid") return c.pos === "WR" && pact != null && pact / pl >= 1.5 && pact / pl < 2 ? "under" : null;
+      if (tid === "bigbeat" && v === "bg") return ["WR", "TE"].includes(c.pos) && pact != null && pact >= 1.5 * pl && pact >= 40 ? "under" : null;
+      if (tid === "jump" && v === "up25") return c.pos === "WR" && pl != null && L / pl - 1 >= 0.25 ? "under" : null;
+      if (tid === "jump" && v === "rise3") { const a = c.recy, n = a.length; return c.pos === "WR" && n >= 3 && a[n - 3] < a[n - 2] && a[n - 2] < a[n - 1] && pl != null && L > pl ? "under" : null; }
+    }
+    if (r.mk.id === "player_pass_yds" && tid === "qbfade" && pl != null) {
+      const mv = L / pl - 1;
+      if (mv >= 0.10 && v !== "down") return "under";
+      if (mv <= -0.10 && v !== "up") return "over";
+    }
+    return null;
+  }
+  const sgOpt = (t, v) => t.opts.find((o) => o.v === (v || SG.opt[t.id])) || t.opts[0];
+  // every bet for a tile + toggle: { r, c, side, u, out } ; u = units at the saved price (null when the row isn't graded or not ~1 h)
+  function sgBets(t, v) {
+    const I = sgIndex(), o = sgOpt(t, v), out = [];
+    for (const r of I.all) {
+      if (r.mk.id !== o.mk) continue;
+      const c = sgCtx(r), side = sgSide(t.id, o.v, r, c);
+      if (!side) continue;
+      const price = side === "over" ? r.main.over_price : r.main.under_price;
+      const counts = r.kind === "pregame" && graded(r) && r.main.over_price != null && r.main.under_price != null;
+      const res = counts ? (r.outcome === "push" ? "push" : r.outcome === side ? "hit" : "miss") : null;
+      out.push({ r, c, side, price, counts, out: res, u: res === "hit" ? payout(price) : res === "miss" ? -1 : res === "push" ? 0 : null });
+    }
+    return out;
+  }
+  const sgCurWk = () => { const w = weeksList(); return w.find((x) => C.games.some((g) => g.week === x && g.status !== "final")) ?? w[w.length - 1]; };
+  function sgRec(t, v) {
+    const bs = sgBets(t, v).filter((b) => b.counts && (!SG.fwd || b.r.wk >= SG_FREEZE_WK));
+    const s = tally(bs.map((b) => ({ out: b.out, u: b.u })));
+    const first = bs.length ? Math.min(...bs.map((b) => b.r.wk)) : sgCurWk();
+    const by = weeksList().filter((w) => w >= (SG.fwd ? SG_FREEZE_WK : first) && w <= sgCurWk()).map((w) => ({ w, list: bs.filter((b) => b.r.wk === w) }));
+    return { s, by, bets: bs };
+  }
+  const sgThisWk = (t, v) => sgBets(t, v).filter((b) => b.r.wk === sgCurWk());
+  function sgSpark(by, band) {
+    const pts = []; let W = 0, U = 0;
+    for (const { w, list } of by) { const s = tally(list); U += s.U; W += s.n; pts.push({ w, n: s.n, roi: s.n ? s.roi : null, cum: W ? (100 * U) / W : null }); }
+    if (!pts.some((q) => q.n)) return `<div class="sg-nospark muted small">no graded bets${SG.fwd ? " since the freeze yet" : ""}</div>`;
+    const w = 170, h = 70, l = 30, r = 11, tp = 6, bt = 13, n = pts.length, base = h - bt;
+    const vals = pts.flatMap((q) => [q.roi, q.cum]).filter((v) => v != null).concat(0, band ? [band.lo, band.hi] : []);
+    let mn = Math.min(...vals), mx = Math.max(...vals); if (mx - mn < 20) { mx += 10; mn -= 10; }
+    const rg = mx - mn, X = (i) => (n < 2 ? (l + w - r) / 2 : l + (i * (w - l - r)) / (n - 1)), Y = (v) => tp + ((mx - v) / rg) * (base - tp);
+    const fmt = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(Math.round(v))}%`;
+    const ticks = []; let prevY = -99;
+    for (const v of [...new Set([mx, 0, mn])].sort((a, b) => b - a)) { if (Y(v) - prevY >= 11) { ticks.push(v); prevY = Y(v); } }
+    const every = n > 9 ? 2 : 1, cp = pts.map((q, i) => [i, q]).filter(([, q]) => q.cum != null), last = cp.length ? cp[cp.length - 1][1].cum : 0;
+    return `<svg class="sg-spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Weekly ROI and running ROI by week, now ${fmt(last)}${band ? `. Shaded band: 95% interval from the study, ${fmt(band.lo)} to ${fmt(band.hi)}` : ""}">
+      <g class="sg-ax"><line x1="${l}" x2="${l}" y1="${tp}" y2="${base}"/><line x1="${l}" x2="${w - r}" y1="${base}" y2="${base}"/>
+      ${ticks.map((v) => `<line class="sg-gl" x1="${l}" x2="${w - r}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${l - 3}" y="${(Y(v) + 2.8).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`).join("")}
+      ${pts.map((q, i) => ((n - 1 - i) % every ? "" : `<text x="${X(i).toFixed(1)}" y="${h - 3}" text-anchor="middle">W${q.w}</text>`)).join("")}</g>
+      ${band ? `<rect class="sg-band" x="${l}" y="${Y(band.hi).toFixed(1)}" width="${w - r - l}" height="${Math.max(1, Y(band.lo) - Y(band.hi)).toFixed(1)}"><title>95% interval from the study ${fmt(band.lo)} to ${fmt(band.hi)}</title></rect>${(() => { const yh = Y(band.hi), yl = Y(band.lo), tall = yl - yh >= 17; return `<g class="sg-bl"><text x="${l + 2}" y="${Math.max(tp + 6, tall ? yh + 6.5 : yh - 1.5).toFixed(1)}">${fmt(band.hi)}</text><text x="${l + 2}" y="${Math.min(base - 1.5, tall ? yl - 1.5 : yl + 6.5).toFixed(1)}">${fmt(band.lo)}</text></g>`; })()}` : ""}
+      <line x1="${l}" x2="${w - r}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" style="stroke:var(--line)" stroke-dasharray="3 3"/>
+      <path d="${cp.map(([i, q], k) => `${k ? "L" : "M"}${X(i).toFixed(1)},${Y(q.cum).toFixed(1)}`).join(" ")}" fill="none" style="stroke:var(${last >= 0 ? "--over" : "--under"})" stroke-width="1.6" stroke-linejoin="round"/>
+      ${pts.filter((q) => q.n).map((q) => `<circle cx="${X(pts.indexOf(q)).toFixed(1)}" cy="${Y(q.roi).toFixed(1)}" r="2.3" style="fill:var(${q.roi >= 0 ? "--over" : "--under"})"><title>Week ${q.w}: ${fmt(q.roi)} ROI (${q.n} bets) · running ${fmt(q.cum)}</title></circle>`).join("")}</svg>`;
+  }
+  function sgTile(t) {
+    const o = sgOpt(t), st = sgRec(t), s = st.s, on = SG.sel === t.id, cls = s.n ? (s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : "") : "";
+    const roi = `<span class="sg-roi ${cls}">${s.n ? `${s.roi > 0 ? "+" : s.roi < 0 ? "−" : ""}${Math.abs(s.roi).toFixed(1)}%` : "—"}</span>`;
+    const tg = `<span class="sg-tg" role="group" aria-label="${esc(t.tile)} version">${t.opts.map((x) => `<button type="button" class="${x.v === o.v ? "on" : ""}" data-csgopt="${t.id}:${x.v}">${esc(x.tg)} <span class="sg-n">${sgThisWk(t, x.v).length}</span></button>`).join("")}</span>`;
+    return `<div class="sg-cell sg-cell3"><button type="button" class="sg-tile ${on ? "on" : ""}" data-csig="${t.id}" aria-pressed="${on}">
+      <div class="sg-hd"><b class="sg-ttl2">${esc(t.tile)}</b>${roi}</div>
+      <div class="sg-r2"><span class="small sg-st">${s.n ? recTxt(s) : `<span class="muted">no bets</span>`}<br><span class="sg-wk"><b>${sgThisWk(t).length}</b> this wk</span></span></div>
+      ${sgSpark(st.by, SG.fwd ? null : { lo: o.disc.lo, hi: o.disc.hi })}</button>${tg}</div>`;
+  }
+  // one player row, same markup as the NFL Signals page: name, market, the bet, result when final, why it fired, game
+  function sgRow(b, chips) {
+    const r = b.r, c = b.c, opp = abbr(r.g, c.side === "home" ? "away" : "home"), L = Number(r.main.line);
+    const why = r.mk.id === "player_pass_yds" ? `Line ${num(L)} vs ${num(c.pl)} last game (${sgn(100 * (L / c.pl - 1))}%)`
+      : c.pact != null ? `Last game: ${num(c.pact)} yds vs ${num(c.pl)} line` : c.pl != null ? `Line ${num(L)} vs ${num(c.pl)} last game` : "";
+    const res = b.counts ? `<span class="pk-res ${b.out}">${b.out === "hit" ? "Hit" : b.out === "miss" ? "Miss" : "Push"} · ${num(r.act)}</span>`
+      : r.g.status === "final" && r.act != null ? `<span class="pk-res" title="Graded on the first-posted line, so it is not counted in the record">Act ${num(r.act)} · uncounted</span>` : "";
+    const first = r.kind === "first" ? ` · <span title="First-posted line: the line about 1 hour before kickoff wasn't captured, so this bet doesn't count in the record">1st line</span>` : "";
+    const meta = `<span class="muted small">${c.pos ? esc(c.pos) + " · " : ""}${esc(abbr(r.g, c.side))} ${c.side === "home" ? "vs" : "@"} ${esc(opp)} · ${r.g.status === "final" ? `Final ${esc(abbr(r.g, "away"))} ${r.g.away_score}–${r.g.home_score} ${esc(abbr(r.g, "home"))}` : esc(fmtKo(r.g.kickoff))}${first}</span>`;
+    const ch = chips ? `<span class="sg-chips">${chips}</span>` : "";
+    return `<div class="rlrow sg-pr"><div class="rlhead">${pLink(r)}<span class="rlstat">${{ player_pass_yds: "Pass yds", player_rush_yds: "Rush yds", player_reception_yds: "Rec yds" }[r.mk.id]}</span><span class="chip rl-side ${b.side}">${b.side === "over" ? "Over" : "Under"} ${num(L)}</span>${res}</div>
+      ${why ? `<div class="sg-m"><span class="small sg-gap">${esc(why)}</span>${ch}</div><div class="sg-m">${meta}</div>` : `<div class="sg-m">${meta}${ch}</div>`}</div>`;
+  }
+  const SG_SHORT = { bigbeat: "Beat", jump: "Jump", qbfade: "QB Fade" };
+  const sgChip = (t, o) => `<span class="chip" role="button" tabindex="0" data-csgopt="${t.id}:${o.v}">${esc(SG_SHORT[t.id])} · ${esc(o.tg)}</span>`;
+  function sgPanel(t) {
+    const o = sgOpt(t), st = sgRec(t), now = sgThisWk(t), up = now.filter((b) => b.r.g.status !== "final"), done = now.filter((b) => b.r.g.status === "final");
+    const d = o.disc, ds = `${d.rec}, ${d.roi > 0 ? "+" : ""}${d.roi}% ROI, 95% interval ${d.lo > 0 ? "+" : ""}${d.lo}% to +${d.hi}%`;
+    let h = `<div class="panel sg-pan"><div class="body"><p><b>${esc(t.tile)} · ${esc(o.lbl)}</b> <a href="#" data-csig-clear class="small" style="float:right">Clear</a></p>
+      <p class="small">${esc(o.def)}</p>
+      <p class="muted small">Frozen 2026-11-27. Study record (weeks 1–12, found on these same games, so it overstates the edge): ${esc(ds)}. Only games from week ${SG_FREEZE_WK} on are a fair test.</p>
+      <details><summary><b>Week by week</b> (${st.by.filter((x) => x.list.length).length} weeks)</summary><table class="ctable inner"><thead><tr><th>Wk</th><th class="num">Record</th><th class="num">Units</th></tr></thead><tbody>` +
+      st.by.filter((x) => x.list.length).slice().reverse().map((x) => { const s = tally(x.list); return `<tr><td>${x.w}${x.w >= SG_FREEZE_WK ? ` <span class="muted small">fwd</span>` : ""}</td><td class="num">${recTxt(s)}</td><td class="num ${s.U > 0 ? "la-pos" : s.U < 0 ? "la-neg" : ""}">${unitsTxt(s.U)}</td></tr>`; }).join("") + `</tbody></table></details></div></div>`;
+    h += `<h3 class="sg-sec">Players who fit this signal (${up.length})</h3>` + (up.length ? `<div class="panel rlist">${up.map((b) => sgRow(b)).join("")}</div>` : `<p class="muted small">None for week ${sgCurWk()} yet.</p>`);
+    if (done.length) h += `<h3 class="sg-sec">Completed this week (${done.length})</h3><p class="muted small">${(() => { const c = done.filter((b) => b.counts), t = tally(c); return c.length ? `${t.W} hit · ${t.L} missed. ` : ""; })()}Graded against the line the signal used; first-posted lines are shown but not counted.</p><div class="panel rlist">${done.map((b) => sgRow(b)).join("")}</div>`;
+    return h;
+  }
+  function signals() {
+    const cw = sgCurWk();
+    let h = `<div class="sg-ttl"><h2 class="gsec">Signals${SG.fwd ? ` <span class="muted small" style="font-weight:600">· since freeze</span>` : ""}</h2></div>
+      <div class="mtabs"><button class="gchip ${SG.fwd ? "" : "on"}" data-csgfwd="0"><b>Season</b></button><button class="gchip ${SG.fwd ? "on" : ""}" data-csgfwd="1"><b>Since freeze</b></button></div>
+      <p class="muted small">From the 2026-11-27 CFB study: "big game, line raised, now Under" and the QB line-move fade. Tap a tile for its players; the small buttons pick the version. Week ${cw} is the current week.</p>`;
+    const rows = [SGT.slice(0, 2), SGT.slice(2)];
+    for (const row of rows) {
+      h += `<div class="sg-grid">${row.map(sgTile).join("")}</div>`;
+      const sel = row.find((t) => t.id === SG.sel);
+      if (sel) h += sgPanel(sel);
+    }
+    if (!SG.sel) { // every player who fits any version this week, most signals first; completed games listed after
+      const m = new Map();
+      for (const t of SGT) for (const o of t.opts) for (const b of sgThisWk(t, o.v)) {
+        const k = `${b.r.g.game_id}|${b.r.mk.id}|${b.r.key}|${b.side}`;
+        const e = m.get(k) || m.set(k, { b, tags: [] }).get(k); e.tags.push(sgChip(t, o));
+      }
+      const all = [...m.values()].sort((a, b) => b.tags.length - a.tags.length || a.b.r.g.kickoff.localeCompare(b.b.r.g.kickoff) || a.b.r.name.localeCompare(b.b.r.name));
+      const up = all.filter((e) => e.b.r.g.status !== "final"), done = all.filter((e) => e.b.r.g.status === "final");
+      const PAGE = 25, pages = Math.max(1, Math.ceil(up.length / PAGE)), pg = Math.min(Math.max(SG.pg || 0, 0), pages - 1); SG.pg = pg;
+      h += `<h3 class="sg-sec">Players hitting the most signals (${up.length})</h3>` + (up.length ? `<div class="panel rlist">${up.slice(pg * PAGE, pg * PAGE + PAGE).map((e) => sgRow(e.b, e.tags.join(""))).join("")}</div>` +
+        (pages > 1 ? `<div class="rl-pager small"><button type="button" class="linkbtn" data-csgpg="-1" ${pg === 0 ? "disabled" : ""}>‹ Prev</button><span class="muted">Page ${pg + 1} of ${pages} · ${pg * PAGE + 1}–${Math.min(up.length, pg * PAGE + PAGE)} of ${up.length}</span><button type="button" class="linkbtn" data-csgpg="1" ${pg === pages - 1 ? "disabled" : ""}>Next ›</button></div>` : "")
+        : `<p class="muted small">No upcoming players for week ${cw} yet. Players show up once their lines are posted.</p>`);
+      if (done.length) h += `<h3 class="sg-sec">Completed this week (${done.length})</h3><div class="panel rlist">${done.map((e) => sgRow(e.b, e.tags.join(""))).join("")}</div>`;
+    }
+    return h + `<p class="muted small">Records: 1 unit per bet at the saved price, graded only on lines captured about 1 hour before kickoff (FanDuel first, then other books; there are no DraftKings CFB lines). "1st" = first-posted line: the player is shown, but the bet never counts in a record. Players on Power 4 teams only. Study details: weeks 9–12 for receiving signals, 1–12 for QB Fade; nothing in the study cleared a multiple-testing check. Research tool only.</p>`;
+  }
+
   function view(arg) {
     arg = arg || "board";
     const acc = ACC();
@@ -413,10 +594,10 @@
     if (!C.games && !C.loading && !C.err) setTimeout(start, 0);
     if (C.err) return head + `<p class="pad pk-err">${esc(C.err)} <button id="c-retry">Retry</button></p>`;
     if (!C.games || C.wk == null) return head + (C.games && !C.games.length ? `<p class="muted pad">No college football games collected yet.</p>` : `<p class="muted pad">Loading college football…</p>`);
-    const needAll = arg === "results" || arg.startsWith("player-");
+    const needAll = arg === "results" || arg === "signals" || arg.startsWith("player-");
     if (!C.weekData[C.wk] || (needAll && !allLoaded())) { setTimeout(start, 0); return head + `<p class="muted pad">Loading…</p>`; }
     if (arg.startsWith("player-")) return playerCard(arg.slice(7).replace(/_/g, " "));
-    return head + (C.note && arg === "board" ? `<p class="callout">${esc(C.note)}</p>` : "") + (arg === "results" ? results() : board());
+    return head + (C.note && arg === "board" ? `<p class="callout">${esc(C.note)}</p>` : "") + (arg === "results" ? results() : arg === "signals" ? signals() : board());
   }
   function bind() {
     const $ = (id) => document.getElementById(id);
@@ -428,6 +609,11 @@
     document.querySelectorAll("[data-cm]").forEach((b) => b.addEventListener("click", () => { C.mk = b.dataset.cm; rerender(); }));
     document.querySelectorAll("[data-rb]").forEach((b) => b.addEventListener("click", () => { C.rBy = b.dataset.rb; rerender(); }));
     document.querySelectorAll("[data-pm]").forEach((b) => b.addEventListener("click", () => { C.pMk = b.dataset.pm; rerender(); }));
+    document.querySelectorAll("[data-csig]").forEach((b) => b.addEventListener("click", () => { SG.sel = SG.sel === b.dataset.csig ? "" : b.dataset.csig; rerender(); }));
+    document.querySelectorAll("[data-csgopt]").forEach((b) => b.addEventListener("click", () => { const [t, v] = b.dataset.csgopt.split(":"); SG.opt[t] = v; SG.sel = t; rerender(); }));
+    document.querySelectorAll("[data-csgpg]").forEach((b) => b.addEventListener("click", () => { SG.pg = (SG.pg || 0) + Number(b.dataset.csgpg); rerender(); }));
+    document.querySelectorAll("[data-csgfwd]").forEach((b) => b.addEventListener("click", () => { SG.fwd = b.dataset.csgfwd === "1"; rerender(); }));
+    document.querySelectorAll("[data-csig-clear]").forEach((b) => b.addEventListener("click", (e) => { e.preventDefault(); SG.sel = ""; rerender(); }));
     on("c-q", "input", (e) => {
       C.q = e.target.value; clearTimeout(bind.t);
       bind.t = setTimeout(() => { rerender(); const el = $("c-q"); if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); } }, 200);
@@ -437,7 +623,7 @@
   // remember which groups are open across redraws (toggle doesn't bubble, so listen in the capture phase)
   document.addEventListener("toggle", (e) => { const d = e.target; if (d && d.classList && d.classList.contains("la-wk") && d.dataset.cwk) { if (d.open) C.open[d.dataset.cwk] = true; else delete C.open[d.dataset.cwk]; } }, true);
   if (ACC()) ACC().onChange(() => {
-    if (!ACC().signedIn()) { C.games = null; C.wk = null; C.weekData = {}; C.pos = {}; C.gen++; RC.clear(); DEF.key = ""; C.err = ""; C.note = ""; }
+    if (!ACC().signedIn()) { C.games = null; C.wk = null; C.weekData = {}; C.pos = {}; C.gen++; RC.clear(); DEF.key = ""; SG.key = ""; SG.idx = null; C.err = ""; C.note = ""; }
     rerender();
   });
   window.STIX_CFB = { view, bind, norm, rowsFor, _state: C };
